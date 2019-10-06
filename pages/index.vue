@@ -1,13 +1,14 @@
 <template>
   <div class="container">
     <div>
-      <logo />
       <h1 class="title">
         reubenson
       </h1>
       <h2 class="subtitle">
         reuben son
       </h2>
+      <about />
+      <music />
       <div class="links">
         <a
           href="https://nuxtjs.org/"
@@ -29,17 +30,31 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import About from '~/components/About.vue'
+import Music from '~/components/Music.vue'
 
 export default {
   components: {
-    Logo
+    About,
+    Music
   }
 }
 </script>
 
 <style>
-.container {
+  .container {
+    background-color: #f0f0e6;
+    border: solid black 2px;
+    box-sizing: border-box;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 100vh;
+    max-width: 560px;
+    padding: 20px;
+    position: relative;
+    width: calc(100vw - 40px);
+  }
+/* .container {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -68,5 +83,5 @@ export default {
 
 .links {
   padding-top: 15px;
-}
+} */
 </style>
