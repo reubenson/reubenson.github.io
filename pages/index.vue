@@ -1,39 +1,43 @@
 <template>
   <div class="container">
-    <div>
-      <h1 class="title">
-        reubenson
-      </h1>
-      <h2 class="subtitle">
-        reuben son
-      </h2>
-      <about />
-      <music />
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+    <div class="main">
+      <div>
+        <h1 class="title">
+          reubenson
+        </h1>
+        <h2 class="subtitle">
+          reuben son
+        </h2>
+        <about />
+        <music />
+        <div class="links">
+          <a
+            href="https://nuxtjs.org/"
+            target="_blank"
+            class="button--green"
+          >
+            Documentation
+          </a>
+          <a
+            href="https://github.com/nuxt/nuxt.js"
+            target="_blank"
+            class="button--grey"
+          >
+            GitHub
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
 import About from '~/components/About.vue'
 import Music from '~/components/Music.vue'
 
 export default {
+  layout: 'primary',
   components: {
     About,
     Music
@@ -43,6 +47,21 @@ export default {
 
 <style>
   .container {
+    background-image: url("https://reubenson-portfolio.s3.amazonaws.com/imgs/studio.jpg");
+    background-position: 75% 50%;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: scroll;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+  }
+
+  .main {
     background-color: #f0f0e6;
     border: solid black 2px;
     box-sizing: border-box;
@@ -54,6 +73,7 @@ export default {
     position: relative;
     width: calc(100vw - 40px);
   }
+
 /* .container {
   margin: 0 auto;
   min-height: 100vh;
