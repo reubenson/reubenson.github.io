@@ -11,15 +11,16 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "split": "git subtree split --prefix dist -b gh-pages",
+    "pre-deploy": "npm run generate && git add . && git commit -m 'pre-deploy commit' && npm version patch",
     "post-deploy": "git branch -D gh-pages",
-    "deploy": "npm version patch && git push origin dev && npm run generate && npm run split && git push -f origin gh-pages:master && npm run post-deploy"
+    "deploy": "npm run pre-deploy && git push origin dev && npm run split --prefix dist -b gh-pages && git push -f origin gh-pages:master && npm run post-deploy"
   },
   "dependencies": {
     "nuxt": "^2.0.0",
     "cross-env": "^5.2.0",
     "express": "^4.16.4"
   },
-  "devDependencies": {
+  "devDependencies": { 
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^1.0.0",
     "babel-eslint": "^10.0.1",
