@@ -13,7 +13,7 @@
     "split": "git subtree split --prefix dist -b gh-pages",
     "pre-deploy": "npm run generate && git add . && git commit -m 'pre-deploy commit' && npm version patch",
     "post-deploy": "git branch -D gh-pages",
-    "deploy": "npm run pre-deploy && git push origin dev && npm run split --prefix dist -b gh-pages && git push -f origin gh-pages:master && npm run post-deploy"
+    "deploy": "npm run pre-deploy && git push origin dev && git subtree split --prefix dist -b gh-pages && git push -f origin gh-pages:master && npm run post-deploy"
   },
   "dependencies": {
     "nuxt": "^2.0.0",
