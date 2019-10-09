@@ -91,7 +91,7 @@
             is the final release on Private Chronology, and consists of electronic music
             made with a Eurorack modular synthesizer. Although much of the sound design
             was executed using traditional analogue techniques, control signals were generated
-            digitally using simple algorithms programmed on the <a href="/projects/QCVG">QCVG</a>.
+            digitally using simple algorithms programmed on the <a href="/private-chronology/qcvg">QCVG</a>.
           </p>
           <div class="soundcloud-embed">
             <iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/195872118&amp;amp;color=666666&amp;amp;show_artwork=false&amp;amp;auto_play=false&amp;amp;hide_related=false&amp;amp;visual=false&amp;amp;show_user=false&amp;amp;show_reposts=false" scrolling="auto" width="100%" height="20px" />
