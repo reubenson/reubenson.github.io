@@ -1,32 +1,36 @@
 <template>
-  <section class="music">
+  <section id="sound">
     <h3>
-      <a href="#music">
-        Music
+      <a href="/#sound">
+        Sound
       </a>
     </h3>
+
+    <p>
+      As a sound artist, he explores the notion of composition as the deployment of strategies for dealing with the propositional materiality of sound. Drawing from the origins of computing within the history of textile production, his current body of work attempts to formalize this idea of sonic materiality by abstracting principles of weaving and textile design into a generative framework for electronic music production.
+    </p>
 
     <div class="subsection discography">
       <h4>Selected Discography</h4>
       <ul>
         <li>
           <p>
-            <em>Days Gone By</em> (2012)<br>7" record on Wagtail Recordings
+            <a href="https://wagtailrecordings.bandcamp.com/album/reuben-son-days-gone-by">Days Gone By</a> (2012)<br>7" record on Wagtail Recordings
           </p>
         </li>
         <li>
           <p>
-            <em>Asleep at the Drawing Board</em> (2014)<br>7" record on Private Chronology
+            <a href="/private-chronology/07">Asleep at the Drawing Board</a> (2014)<br>7" record on Private Chronology
           </p>
         </li>
         <li>
           <p>
-            <em>Still Sleeping</em> (2015)<br>Digital-only on Private Chronology
+            <a href="/private-chronology/07">Still Sleeping</a> (2015)<br>Digital-only on Private Chronology
           </p>
         </li>
         <li>
           <p>
-            <em>Untitled Maquette</em> (2015)<br>7"/CD on Estuary Ltd.
+            <a href="http://estuary-ltd.com/releases/est5007/">Untitled Maquette</a> (2015)<br>7"/CD on Estuary Ltd.
           </p>
         </li>
       </ul>
@@ -41,9 +45,9 @@
         <li>
           Developed an app for <a href="http://www.callicoonfinearts.com/artists/james-hoff/">James Hoff</a> entitled <em class="collaboration-project-name">Hobo UFO</em>, in which navigation and camera movement in <em>Google Maps Street View</em> is made to respond to live audio and MIDI control in real-time. <em>Hobo UFO</em> was premiered at the <em>London ICA</em> in 2016, and presented at the <em>Unsound Festival</em> in Krakow in 2017.
         </li>
-        <li>
+        <!-- <li>
           Served as recording engineer for the American Primitive guitarist Glenn Jones on his album <a href="http://www.thrilljockey.com/products/the-wanting">The Wanting</a> for <em>Thrill Jockey</em>, published 2011.
-        </li>
+        </li> -->
       </ul>
     </div>
 
@@ -105,11 +109,18 @@
   </section>
 </template>
 
-<style>
-  .discography ul {
-    padding-left: 0;
-  }
-  .discography li {
-    list-style: none;
+<style lang="scss">
+  .discography {
+    a {
+      font-style: italic;
+    }
+
+    ul {
+      padding-left: 0;
+    }
+
+    li {
+      list-style: none;
+    }
   }
 </style>

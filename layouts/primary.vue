@@ -8,7 +8,7 @@
 $font-family: Raleway, Helvetica, Arial, sans-serif;
 
 html {
-  font: 18px/22px $font-family;
+  font: 17px/22px $font-family;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -28,13 +28,17 @@ em {
   font-weight: 700;
 }
 
+h1 {
+  margin-bottom: 20px;
+}
+
 section {
-  min-width: 450px;
-  margin: 0px 20px 50px 20px;
+  max-width: 500px;
+  margin-left: 20px;
 
   a {
     color: black;
-    font-weight: 500;
+    font-weight: 700;
     text-decoration: none;
 
     &:hover {
@@ -61,14 +65,19 @@ section {
 
 section h3 {
   border-bottom: solid black 2px;
-  font-weight: 700;
-  margin: auto auto 10px;
+  margin: auto auto 10px -20px;
   letter-spacing: 0.5px;
 
   a {
     color: black;
+    font-weight: 700;
     text-decoration: none;
   }
+}
+
+section h4 {
+  border-bottom: solid black 2px;
+  font-size: 18px;
 }
 
 section .header-image {
@@ -95,4 +104,14 @@ section .read-more {
 .soundcloud-embed iframe {
   border: none;
 }
+
+figure {
+  margin-bottom: 10px;
+
+  figcaption {
+    font-size: 14px;
+    margin: -15px 0 0 10px;
+  }
+}
+
 </style>

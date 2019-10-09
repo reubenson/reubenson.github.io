@@ -5,15 +5,17 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Reuben Son',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { name: 'keywords', content: 'reuben son, nyc, software engineer, private chronology, electronic music' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Raleway:200,300,400,700' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Raleway:200,300,400,700|Poiret+One|Permanent+Marker&display=swap' }
+      // <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Poiret+One&display=swap" rel="stylesheet">
     ]
   },
   /*
