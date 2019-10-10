@@ -1,1 +1,1 @@
-#### Personal Homepage Builder, made with Nuxt.js
+#### Personal Homepage, built with Nuxt.js
