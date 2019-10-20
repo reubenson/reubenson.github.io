@@ -8,7 +8,7 @@
 $font-family: Raleway, Helvetica, Arial, sans-serif;
 
 html {
-  font: 17px/22px $font-family;
+  font: 14px/18px $font-family;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -33,8 +33,8 @@ h1 {
 }
 
 section {
-  max-width: 500px;
-  margin-left: 20px;
+  margin-bottom: 40px;
+  max-width: 520px;
 
   a {
     color: black;
@@ -65,7 +65,7 @@ section {
 
 section h3 {
   border-bottom: solid black 2px;
-  margin: auto auto 10px -20px;
+  margin: auto auto 10px;
   letter-spacing: 0.5px;
 
   a {
@@ -81,7 +81,7 @@ section h4 {
 }
 
 section .header-image {
-  border: 3px solid black;
+  border: 2px solid black;
   margin: 10px auto;
   height: auto;
   width: 100%;
@@ -110,7 +110,14 @@ figure {
 
   figcaption {
     font-size: 14px;
-    margin: -15px 0 0 10px;
+    margin: -8px 0 0 10px;
+  }
+}
+
+@media screen and (min-width:768px) {
+  html {
+    font-size: 17px;
+    line-height: 22px;
   }
 }
 

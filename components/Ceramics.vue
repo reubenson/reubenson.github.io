@@ -6,8 +6,8 @@
       </a>
     </h3>
     <figure>
-      <img src="https://reubenson-portfolio.s3.amazonaws.com/imgs/bud.jpg" alt="Bud Vessel" class="header-image">
-      <figcaption>Untitled bud vase</figcaption>
+      <img src="https://reubenson-portfolio.s3.amazonaws.com/imgs/Balthazar.jpg" alt="Bud Vessel" class="header-image">
+      <figcaption>Balthazar (2019)</figcaption>
     </figure>
     <figure>
       <img src="https://reubenson-portfolio.s3.amazonaws.com/imgs/ceramics+sample+1.jpg" alt="Ceramic Vessels" class="header-image">

@@ -40,10 +40,10 @@
       <h4>In Collaboration</h4>
       <ul>
         <li>
-          Worked with <a href="http://www.elikeszler.com/">Eli Keszler</a> in both instrumental and technical capacities for a number of installations and performances at sites such as <em>The Boston Center for the Arts</em>, <em>Eyebeam</em>, and the <em>MIT List Center</em>.
+          Worked with <a href="http://www.elikeszler.com/">Eli Keszler</a> in both instrumental and technical capacities for a number of installations and performances at sites such as <a href="https://www.whitney.org/events/eli-keszler" target="_blank">The Whitney Museum of American Art</a>, <em>The Boston Center for the Arts</em>, <em>Eyebeam</em>, and the <em>MIT List Center</em>.
         </li>
         <li>
-          Developed an app for <a href="http://www.callicoonfinearts.com/artists/james-hoff/">James Hoff</a> entitled <em class="collaboration-project-name">Hobo UFO</em>, in which navigation and camera movement in <em>Google Maps Street View</em> is made to respond to live audio and MIDI control in real-time. <em>Hobo UFO</em> was premiered at the <em>London ICA</em> in 2016, and presented at the <em>Unsound Festival</em> in Krakow in 2017.
+          Developed a standalone application for <a href="http://www.callicoonfinearts.com/artists/james-hoff/">James Hoff</a> entitled <em class="collaboration-project-name">Hobo UFO</em>, in which navigation and camera movement in <em>Google Maps Street View</em> responds to live audio and MIDI control in real-time. <em>Hobo UFO</em> was premiered at the <em>London ICA</em> in 2016, and presented at various other venues and festivals between 2016 and 2019. Most recently, a video edition was produced for <a href="https://p-a-n.org">PAN</a>.
         </li>
         <!-- <li>
           Served as recording engineer for the American Primitive guitarist Glenn Jones on his album <a href="http://www.thrilljockey.com/products/the-wanting">The Wanting</a> for <em>Thrill Jockey</em>, published 2011.
