@@ -58,7 +58,10 @@
         <p>
           The QCVG (Quad Control Voltage Generator) is a hardware and software package
           designed and developed for computerized
-          control of an analogue modular synthesizer. On the hardware side, the QCVG is
+          control of an analogue modular synthesizer.
+        </p>
+        <p>
+          On the hardware side, the QCVG is
           comprised of an Arduino Nano microcontroller interfaced to a pair of dual-DAC
           chips, which provide four channels of 0-4V CV (control voltage), and four
           trigger outputs (for triggering envelope generators in the synthesizer). Each

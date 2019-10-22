@@ -30,21 +30,7 @@ export default {
   .title {
     margin: 0;
     visibility: hidden;
-  }
-
-  .container {
-    /* background-image: url("https://reubenson-portfolio.s3.amazonaws.com/imgs/studio.jpg");
-    background-position: 75% 50%;
-    background-size: cover;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    height: 100vh;
-    overflow-y: scroll;
-    right: 0;
-    top: 0;
-    width: 100vw;
-    z-index: -1; */
+    line-height: 0;
   }
 
   .background {
@@ -55,7 +41,6 @@ export default {
     left: 0;
     position: fixed;
     height: 100vh;
-    /* overflow-y: scroll; */
     right: 0;
     top: 0;
     width: 100vw;
@@ -66,43 +51,17 @@ export default {
     background-color: #f0f0e6;
     border: solid black 2px;
     box-sizing: border-box;
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 100vh;
-    max-width: 560px;
+    margin: 10px;
+    max-width: 460px;
     padding: 20px;
     position: relative;
-    width: calc(100vw - 40px);
+    width: calc(100vw - 20px);
   }
 
-/* .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-} */
+  @media screen and (min-width: 768px) {
+    .main {
+      margin: 20px;
+      width: calc(100vw - 40px);
+    }
+  }
 </style>

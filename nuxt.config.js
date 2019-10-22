@@ -14,7 +14,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Raleway:200,300,400,700|Poiret+One|Permanent+Marker&display=swap' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Raleway:200,300,400,5000&display=swap' }
     ]
   },
   /*

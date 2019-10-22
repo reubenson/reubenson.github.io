@@ -15,6 +15,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  font-weight: 300;
+  letter-spacing: .1px;
 }
 
 *,
@@ -25,7 +27,7 @@ html {
 }
 
 em {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 h1 {
@@ -38,7 +40,7 @@ section {
 
   a {
     color: black;
-    font-weight: 700;
+    font-weight: 500;
     text-decoration: none;
 
     &:hover {
@@ -59,18 +61,18 @@ section {
   }
 
   .subsection {
-    margin-bottom: 20px;
+    margin: 25px auto;
   }
 }
 
 section h3 {
   border-bottom: solid black 2px;
+  font-weight: 500;
   margin: auto auto 10px;
   letter-spacing: 0.5px;
 
   a {
     color: black;
-    font-weight: 700;
     text-decoration: none;
   }
 }
@@ -78,6 +80,8 @@ section h3 {
 section h4 {
   border-bottom: solid black 2px;
   font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 section .header-image {
@@ -91,7 +95,7 @@ section .read-more {
   border-top: solid black 2px;
   color: black;
   display: block;
-  font-weight: 700;
+  font-weight: 500;
   margin-top: 10px;
   text-decoration: none;
   width: 100%;
