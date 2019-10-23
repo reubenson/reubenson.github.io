@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style>
+  .container {
+    padding-bottom: 100vh;
+  }
   .title {
     margin: 0;
     visibility: hidden;
