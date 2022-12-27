@@ -1,0 +1,12 @@
+{
+    "name": "Reuben Son",
+    "scripts": {
+        "build-frog": "tsc frogus/scripts/main.ts",
+        "dev": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run build-frog\""
+
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20",
+        "ts-node": "^10.9.1"
+    }
+}
