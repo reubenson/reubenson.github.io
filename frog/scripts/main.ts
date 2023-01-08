@@ -1,33 +1,52 @@
+/**
+ * This is a browser-based implementation of an art installation by the Dutch sound artist Felix Hess.
+ * The first such installation was developed in 1982, and involved developing a set of fifty robots,
+ * each outfitted with a microphone, speaker, and circuitry to allow each robot to listen to its environment
+ * and make sounds in the manner of a frog in a "frog chorus". Hess' designs for doing so are relatively straightfoward,
+ * in which the robot-frog's sounding behavior is predicated on "eagerness" and "shyness". When eagerness is high relative to
+ * shyness, the robot will emit a chirping sound, which is then interpreted by the other robots. Each robot will increase its
+ * eagerness when it hears another chirp, and will increase its shyness when it hears non-chirping sounds. Through
+ * this simple set of rules, a dynamic chorus of sounds emerges, which is highly sensitive to environmental dynamics,
+ * much like if one were encountering a group of frogs in the wild.
+ * 
+ * Some historical documentation can be read here (https://bldgblog.com/2008/04/space-as-a-symphony-of-turning-off-sounds/),
+ * but the best resource for understanding Hess' work is his monograph, "Light as Air", published by Kehrer Verlag.
+ * 
+ * The following implementation utilizes the Web Audio API to make a browser-based translation of Hess' robot-frogs,
+ * allowing a set of users in physical, acoustic proximity to have their mobile phones or laptops "sing" to each other
+ * as if they were frogs.
+ */
+
 import { FFTConvolution } from 'ml-convolution';
 import _ from 'lodash';
 
-const fftSize = 256;
+const FFT_SIZE = 256;
 const frogs: Frog[] = [];
+const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 
 /**
- * calculate the total amplitude of the input FFT
- * @param data FFT array
- * @returns number
+ * initialize application
+ * note: needs to wait for user interaction first due to microphone utilization
  */
-function calculateAmplitude(data: Float32Array) {
-  const fftSum = _.sum(_.map(data, item => {
-    return Math.pow(10, item);
-  }));
+function startApp() {
+  const button = document.querySelector('button');
+  
+  button?.addEventListener('click', function () {
+    const audio = new AudioConfig();
+  
+    const frog = new Frog(audio);
+    frogs.push(frog);
 
-  console.log('fftSum', fftSum);
-
-  return Math.log10(fftSum); // convert back to log decibel scale;
+    button.style.opacity = '0';
+  });
 }
 
-function processFFT(data: Float32Array) {
-  const max = data.reduce((item, acc) => Math.max(item, acc), -Infinity);
-
-  return data.map(item => Math.pow(10, item - max)); // normalize to 0->1
-}
+startApp();
 
 class Frog {
   audioConfig: AudioConfig;
   shyness: number; // 0. - 1.
+  eagerness: number; // 0. - 1.
   shynessInterval = 100;
   audioImprint: Float32Array;
   audioElement: HTMLAudioElement;
@@ -35,31 +54,28 @@ class Frog {
   fft: FFTConvolution;
   fftNormalizationFactor: number;
   id: number; // id registered with AudioConfig
-  lastUpdated: number; // timestamp of last update
+  lastUpdated: number; // timestamp of last update (ms)
+  currentTimestamp: number // timestamp of current moment (ms)
+  matchBaseline: number // manually-calibrated number used to calculate degree of match between audioImprint and audio input
 
   constructor(audioConfig: AudioConfig) {
     this.audioConfig = audioConfig;
     this.shyness = 1.0; // initiaize to 1 (maximum shyness)
-    this.audioImprint = new Float32Array(fftSize / 2); // make dynamic
+    this.eagerness = 0.0; // initialize to 0 (minimum eagerness)
+    this.audioImprint = new Float32Array(FFT_SIZE / 2); // make dynamic
     this.isInitialized = false;
     this.lastUpdated = Date.now();
-
+    this.currentTimestamp = Date.now();
+    this.matchBaseline = 1.1; // an emperical value determined by FFT_SIZE and calibrated to taste
     this.id = this.audioConfig.register(this);
 
-    // load in sample
     this.loadSample();
 
     this.initialize();
-    
-    
-    // alternately, set timeout for updating shyness, instead of executing during sing
-    // set interval for updating shyness, potentially with an integrator to apply some latency/smoothing
-    // setTimeout(this.updateShyness.bind(this), this.shynessInterval);
-    this.setTimeout();
-  }
+      }
 
   async initialize() {
-    let result = new Float32Array(fftSize / 2); // make fftSize dynamic
+    let result = new Float32Array(FFT_SIZE / 2);
 
     // measure audio imprint (FFT signature) of sample
     this.audioImprint = await this.audioConfig.analyseSample(this.id, this.audioElement, result);
@@ -67,16 +83,17 @@ class Frog {
     const minBefore = result.reduce((item, acc) => Math.min(item, acc), Infinity);
     console.log('maxbefore', maxBefore);
     console.log('minbefore', minBefore);
-    // const maxValue = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
-    // console.log('maxValue', maxValue);
-    // this.fftNormalizationFactor = Math.exp(Math.max.apply(null, this.audioImprint));
+  
     this.audioImprint = processFFT(this.audioImprint);
 
     console.log('audioImprint', this.audioImprint);
 
-    this.fft = new FFTConvolution(fftSize / 2, this.audioImprint.subarray(0, fftSize / 2 - 1));
+    this.fft = new FFTConvolution(FFT_SIZE / 2, this.audioImprint.subarray(0, FFT_SIZE / 2 - 1));
     this.isInitialized = true;
     console.log('frog initialized!', this.audioImprint);
+
+    // evaluate whether to sing or not on every tick
+    setInterval(this.trySinging, 100);
   }
 
   /**
@@ -84,8 +101,8 @@ class Frog {
    */
   loadSample() {
     this.audioElement = new Audio();
-    // this.audioElement.src = 'https://reubenson.com/frogus/audio/Anaxyrus_punctatus2.mp3';
-    this.audioElement.src = 'https://reubenson.com/frogus/audio/Aneides_lugubris90.mp3';
+    // this.audioElement.src = `#{AUDIO_SRC_DIRECTORY}/Anaxyrus_punctatus2.mp3`;
+    this.audioElement.src = `${AUDIO_SRC_DIRECTORY}/Aneides_lugubris90.mp3`;
     this.audioElement.controls = false;
     this.audioElement.loop = false;
     this.audioElement.autoplay = false;
@@ -93,31 +110,28 @@ class Frog {
   }
 
   /**
-   * manage timer that determines how often the frog will sing
+   * periodically update frog's shyness and eagerness
    */
-  setTimeout() {
-    setTimeout(this.sing.bind(this), this.getIntervalLength());
-  }
-
-  /**
-   * periodically update frog's shyness
-   */
-  updateShyness(amplitude: number, inputData: Float32Array) {
-    // each frog should register an audio imprint with the Audio class
-    // Audio class is responsible for regularly sampling the acoustic environment and
-    // comparing the spectrum against each registered sample
-    // updating a 'time since last matching event' property
+  updateState(amplitude: number, inputData: Float32Array) {
+    this.currentTimestamp = Date.now();
 
     const conv = this.fft.convolve(inputData);
 
     // console.log('inputData', inputData);
 
-    const convolutionSum = conv.reduce((item, acc) => acc + item, 0);
-    // console.log('summ', convolutionSum);
+    let convolutionSum = conv.reduce((item, acc) => acc + item, 0);
+    if (Number.isNaN(convolutionSum)) {
+      console.error('convolution sum is NaN');
+      convolutionSum = 0;
+    }
+    console.log('summ', convolutionSum);
     
-    this.shyness = this.determineShyness(amplitude, convolutionSum); // most basic linear implementation
+    this.updateShyness(amplitude, convolutionSum); // most basic linear implementation
+    this.updateEagerness(amplitude, convolutionSum); // most basic linear implementation
 
     console.log('shyness', this.shyness);
+    console.log('eagerness', this.eagerness);
+    this.lastUpdated = this.currentTimestamp;
   }
 
   /**
@@ -129,7 +143,22 @@ class Frog {
    * @param match input signal match (with frog)
    * @returns number
    */
-  determineShyness(amplitude: number, match: number) {
+  updateShyness(amplitude: number, match: number) {
+    // increase shyness if the degree of match between its audioImprint and the audio input is low
+    const matchDegree = (match - this.matchBaseline) / this.matchBaseline;
+
+    if (matchDegree < 0) {
+      const velocity = Math.abs(matchDegree); // needs tweaking
+      this.shyness += velocity * this.timeSinceLastUpdate();
+    } else {
+      // monotonically decrease shyness in the absence
+      this.shyness -= 0.1 * this.timeSinceLastUpdate(); // needs tweaking
+    }
+
+    this.shyness = Math.max(0, Math.min(1, this.shyness)); // restrict to value between 0 and 1
+
+    return;
+
     const relativeAmplitude = amplitude - this.audioConfig.minimumAmplitude;
     
     // 0 yields 0 | 500 yields 1
@@ -145,7 +174,30 @@ class Frog {
     console.log('amplitudeFactor', amplitudeFactor);
     // console.log('timeFactor', timeFactor);
 
-    return Math.max(0, Math.min(1, this.shyness + amplitudeFactor * timeFactor)); // coerce value to range between 0 and 1;
+    this.shyness = Math.max(0, Math.min(1, this.shyness + amplitudeFactor * timeFactor)); // coerce value to range between 0 and 1;
+  }
+
+  updateEagerness(amplitude: number, match: number) {
+    let magnitude; // measure of degree of match in frog sound compared to audio input
+    console.log('match', match);
+
+    magnitude = 1 + (match - this.matchBaseline) / this.matchBaseline;
+    magnitude = Math.max(1, magnitude); // magnitude is fixed to at least 1
+    const velocity = magnitude * 0.1; // amount of change in eagerness per second
+
+    // console.log('velocity', velocity);
+    this.eagerness += velocity * this.timeSinceLastUpdate();
+
+    // limit eagerness to a max of 1
+    this.eagerness = Math.min(1, this.eagerness);
+  }
+
+  /**
+   * determine time since the last update, in units of seconds
+   * @returns number
+   */
+  timeSinceLastUpdate() {
+    return (this.currentTimestamp - this.lastUpdated) / 1000.;
   }
 
   /**
@@ -162,7 +214,7 @@ class Frog {
   }
 
   /**
-   * trigger play on the audio element
+   * play audio sample
    */
   playSample() {
     console.log('croak');
@@ -172,14 +224,14 @@ class Frog {
   /**
    * as the frog detects other frogs, it will be emboldened to sing more loudly and frequently
    */
-  sing() {
-    // lazily evaluate shyness
-    // this.updateShyness();
+  trySinging() {
+    if (this.eagerness > this.shyness || this.eagerness === 1) {
+      this.playSample();
 
-    // play sample at variable amplitude based on attributes that are set by properties (shyness?)?
-    // or at sing-runtime, read fromt fft analysis?
-    this.playSample();
-    this.setTimeout();
+      // reset eagerness to 0 so that the frog does not immediately sing at the next invocation
+      this.eagerness = 0;
+    }
+    // this.setTimeout();
   }
 }
 
@@ -188,10 +240,6 @@ class AudioConfig {
   ctx: AudioContext;
   deviceId: string;
   groupId: string;
-  freqLimit = 5000; // can parameterize later if needed
-  freqBandwidth = 10; // can parameterize later if needed
-  sampleRate = 44100;
-  // fftSize: number;
   inputSamplingInterval = 50; // time (ms) between FFT analysis events
   idCounter = 0; // tracks with global frogs array
   minimumAmplitude = 0;
@@ -199,10 +247,8 @@ class AudioConfig {
   constructor() {
     // this.ctx = new (window.AudioContext || window.webkitAudioContext)();
     this.ctx = new (window.AudioContext);
-    // this.fftSize = Math.pow( 2 , Math.ceil( Math.log2(this.sampleRate / this.freqBandwidth)) );
-    this.setDeviceId().then(() => {
-      this.initializeAudio();
-    });
+    this.setDeviceId()
+      .then(() => this.initializeAudio);
   }
 
   register(listener: Frog) {
@@ -212,15 +258,6 @@ class AudioConfig {
 
     return id;
   }
-
-  // getMicrophoneFFT() {
-  //   const data = new Float32Array(fftSize); // make fftSize dynamic
-  //   this.analyser.getFloatFrequencyData(data);
-
-  //   console.log('data', data);
-
-  //   return data;
-  // }
 
   setDeviceId() {
     const eligibleDevices = [
@@ -268,7 +305,7 @@ class AudioConfig {
       .then(function(this: AudioConfig, stream: any){
         const input = ctx.createMediaStreamSource(stream);
         this.analyser = ctx.createAnalyser();
-        this.analyser.fftSize = fftSize;
+        this.analyser.fftSize = FFT_SIZE;
         this.analyser.smoothingTimeConstant = 0.9;
         this.analyser.maxDecibels = -30;
         input.connect(this.analyser);
@@ -280,7 +317,7 @@ class AudioConfig {
   }
 
   sampleAudio() {
-    const data = new Float32Array(fftSize / 2);
+    const data = new Float32Array(FFT_SIZE / 2);
     this.analyser.getFloatFrequencyData(data);
 
     const amplitude = calculateAmplitude(data);
@@ -289,7 +326,7 @@ class AudioConfig {
     this.minimumAmplitude = Math.min(this.minimumAmplitude, amplitude);
 
     frogs.forEach(frog => {
-      frog.updateShyness(amplitude, processFFT(data));
+      frog.updateState(amplitude, processFFT(data));
     });
   }
 
@@ -305,7 +342,7 @@ class AudioConfig {
     
     //Create analyser node
     const analyserNode = this.ctx.createAnalyser();
-    analyserNode.fftSize = fftSize;
+    analyserNode.fftSize = FFT_SIZE;
     analyserNode.smoothingTimeConstant = 0.96;
     analyserNode.maxDecibels = -30;
     const bufferLength = analyserNode.frequencyBinCount;
@@ -356,20 +393,23 @@ class AudioConfig {
   }
 }
 
-
 /**
- * initialize application
- * note: needs to wait for user interaction first due to microphone utilization
+ * calculate the total amplitude of the input FFT
+ * @param data FFT array
+ * @returns number
  */
-function init() {
-  const button = document.querySelector('button');
-  
-  button?.addEventListener('click', function () {
-    const audio = new AudioConfig();
-  
-    const frog = new Frog(audio);
-    frogs.push(frog);
-  });
+function calculateAmplitude(data: Float32Array) {
+  const fftSum = _.sum(_.map(data, item => {
+    return Math.pow(10, item);
+  }));
+
+  console.log('fftSum', fftSum);
+
+  return Math.log10(fftSum); // convert back to log decibel scale;
 }
 
-init();
+function processFFT(data: Float32Array) {
+  const max = data.reduce((item, acc) => Math.max(item, acc), -Infinity);
+
+  return data.map(item => Math.pow(10, item - max)); // normalize to 0->1
+}
