@@ -22,7 +22,7 @@ import _ from 'lodash';
 
 const DEBUG_MODE = true;
 const FFT_SIZE = 256;
-const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frogus/audio';
+const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 
 /**
  * initialize application
@@ -30,14 +30,14 @@ const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frogus/audio';
  */
 function startApp() {
   const button = document.querySelector('button');
-  
-  button?.addEventListener('click', function () {
-    const audio = new AudioConfig();
-  
+  const onClick = (button: HTMLButtonElement) => {
+    const audio = new AudioConfig();  
     new Frog(audio);
-
     button.style.opacity = '0';
-  });
+  };
+  
+  button?.addEventListener('click', () => onClick(button));
+  button?.addEventListener('touchend', () => onClick(button));
 }
 
 startApp();
