@@ -11,7 +11,7 @@ module.exports = {
 
   // output bundles (location)
   output: {
-    path: path.resolve( __dirname, 'frogus/scripts' ),
+    path: path.resolve( __dirname, 'frog/scripts' ),
     filename: 'main.js',
   },
 

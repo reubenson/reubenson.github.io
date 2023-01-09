@@ -20,9 +20,9 @@
 import { FFTConvolution } from 'ml-convolution';
 import _ from 'lodash';
 
+const DEBUG_MODE = false;
 const FFT_SIZE = 256;
-const frogs: Frog[] = [];
-const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
+const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frogus/audio';
 
 /**
  * initialize application
@@ -34,8 +34,7 @@ function startApp() {
   button?.addEventListener('click', function () {
     const audio = new AudioConfig();
   
-    const frog = new Frog(audio);
-    frogs.push(frog);
+    new Frog(audio);
 
     button.style.opacity = '0';
   });
@@ -55,8 +54,9 @@ class Frog {
   fftNormalizationFactor: number;
   id: number; // id registered with AudioConfig
   lastUpdated: number; // timestamp of last update (ms)
-  currentTimestamp: number // timestamp of current moment (ms)
-  matchBaseline: number // manually-calibrated number used to calculate degree of match between audioImprint and audio input
+  currentTimestamp: number; // timestamp of current moment (ms)
+  matchBaseline: number; // manually-calibrated number used to calculate degree of match between audioImprint and audio input
+  sampleDuration: number;
 
   constructor(audioConfig: AudioConfig) {
     this.audioConfig = audioConfig;
@@ -67,33 +67,63 @@ class Frog {
     this.lastUpdated = Date.now();
     this.currentTimestamp = Date.now();
     this.matchBaseline = 1.1; // an emperical value determined by FFT_SIZE and calibrated to taste
-    this.id = this.audioConfig.register(this);
+
+    this.audioConfig.register(this);
 
     this.loadSample();
 
     this.initialize();
-      }
+  }
 
+
+  /**
+   * determine length of sample (in seconds)
+   * @returns Promise
+   */
+  async setSampleDuration(): Promise<number> {
+    return await new Promise(async resolve => {
+      const req = new XMLHttpRequest();
+      
+      req.open('GET', this.audioElement.src, true);
+      req.responseType = 'arraybuffer';
+      req.onload = () => {
+        const data = req.response;
+
+        this.audioConfig.ctx.decodeAudioData(data, buffer => {
+          return resolve(buffer.duration);
+        });
+      };
+
+      req.send();
+    });
+  }
+
+  /**
+   * calculate the audioImprint, which will be used to compare against realtime audio
+   * in order to determine the level of match in the frequency spectrum and calcuate
+   * the frog's shyness and eagerness
+   */
   async initialize() {
-    let result = new Float32Array(FFT_SIZE / 2);
+    this.sampleDuration = await this.setSampleDuration();
+    log('this.sampleDuration', this.sampleDuration)
 
     // measure audio imprint (FFT signature) of sample
-    this.audioImprint = await this.audioConfig.analyseSample(this.id, this.audioElement, result);
-    const maxBefore = result.reduce((item, acc) => Math.max(item, acc), -Infinity);
-    const minBefore = result.reduce((item, acc) => Math.min(item, acc), Infinity);
-    console.log('maxbefore', maxBefore);
-    console.log('minbefore', minBefore);
+    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, this.sampleDuration);
+    const maxBefore = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
+    const minBefore = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
+    log('maxbefore', maxBefore);
+    log('minbefore', minBefore);
   
     this.audioImprint = processFFT(this.audioImprint);
 
-    console.log('audioImprint', this.audioImprint);
+    log('audioImprint', this.audioImprint);
 
     this.fft = new FFTConvolution(FFT_SIZE / 2, this.audioImprint.subarray(0, FFT_SIZE / 2 - 1));
     this.isInitialized = true;
-    console.log('frog initialized!', this.audioImprint);
+    log('frog initialized!', this.audioImprint);
 
     // evaluate whether to sing or not on every tick
-    setInterval(this.trySinging, 100);
+    setInterval(this.trySinging.bind(this), 100);
   }
 
   /**
@@ -101,7 +131,7 @@ class Frog {
    */
   loadSample() {
     this.audioElement = new Audio();
-    // this.audioElement.src = `#{AUDIO_SRC_DIRECTORY}/Anaxyrus_punctatus2.mp3`;
+    // this.audioElement.src = `${AUDIO_SRC_DIRECTORY}/Anaxyrus_punctatus2.mp3`;
     this.audioElement.src = `${AUDIO_SRC_DIRECTORY}/Aneides_lugubris90.mp3`;
     this.audioElement.controls = false;
     this.audioElement.loop = false;
@@ -117,20 +147,20 @@ class Frog {
 
     const conv = this.fft.convolve(inputData);
 
-    // console.log('inputData', inputData);
+    // log('inputData', inputData);
 
     let convolutionSum = conv.reduce((item, acc) => acc + item, 0);
     if (Number.isNaN(convolutionSum)) {
       console.error('convolution sum is NaN');
       convolutionSum = 0;
     }
-    console.log('summ', convolutionSum);
+    log('summ', convolutionSum);
     
     this.updateShyness(amplitude, convolutionSum); // most basic linear implementation
     this.updateEagerness(amplitude, convolutionSum); // most basic linear implementation
 
-    console.log('shyness', this.shyness);
-    console.log('eagerness', this.eagerness);
+    log('shyness', this.shyness);
+    log('eagerness', this.eagerness);
     this.lastUpdated = this.currentTimestamp;
   }
 
@@ -179,7 +209,7 @@ class Frog {
 
   updateEagerness(amplitude: number, match: number) {
     let magnitude; // measure of degree of match in frog sound compared to audio input
-    console.log('match', match);
+    log('match', match);
 
     magnitude = 1 + (match - this.matchBaseline) / this.matchBaseline;
     magnitude = Math.max(1, magnitude); // magnitude is fixed to at least 1
@@ -217,8 +247,9 @@ class Frog {
    * play audio sample
    */
   playSample() {
-    console.log('croak');
+    log('croak');
     this.audioElement.play();
+    // TODO: while sample is playing, pause any sampling of audio so the frog does not listen to itself
   }
 
   /**
@@ -231,10 +262,12 @@ class Frog {
       // reset eagerness to 0 so that the frog does not immediately sing at the next invocation
       this.eagerness = 0;
     }
-    // this.setTimeout();
   }
 }
 
+/**
+ * the AudioConfig class is responsible for managing audio input and output
+ */
 class AudioConfig {
   analyser: AnalyserNode;
   ctx: AudioContext;
@@ -243,56 +276,50 @@ class AudioConfig {
   inputSamplingInterval = 50; // time (ms) between FFT analysis events
   idCounter = 0; // tracks with global frogs array
   minimumAmplitude = 0;
+  frogs: Array<Frog>;
 
   constructor() {
+    this.frogs = [];
     // this.ctx = new (window.AudioContext || window.webkitAudioContext)();
     this.ctx = new (window.AudioContext);
-    this.setDeviceId()
-      .then(() => this.initializeAudio);
+    this.setInputDeviceId()
+      .then(this.initializeAudio.bind(this));
   }
 
-  register(listener: Frog) {
-    const id = this.idCounter;
-    
-    this.idCounter++;
-
-    return id;
+  /**
+   * populate array of frogs that have been initalized
+   * @param frog
+   */
+  register(frog: Frog) {
+    this.frogs.push(frog);
   }
 
-  setDeviceId() {
-    const eligibleDevices = [
-      '',
-      'Built-in Microphone'
-    ];
-
-    function deviceFound(label: any) {
-      for (var i = 0; i < eligibleDevices.length; i++) {
-        if (label == eligibleDevices[i]) {
-          return true
-        }
-      }
-      return false
-    }
-
+  /**
+   * determine the audio input device id
+   * @returns Promise
+   */
+  setInputDeviceId() {
     return navigator.mediaDevices.enumerateDevices()
-      .then( (devices) => {
-        var deviceFound = false;
-        for (var i = 0; i < eligibleDevices.length; i++) {
-          var regex = new RegExp(eligibleDevices[i],'ig');
-          for (var j = 0; j < devices.length; j++) {
-            if (!deviceFound && devices[j].kind == 'audioinput' && devices[j].label.match(regex)) {
-              this.deviceId = devices[j].deviceId
-              this.groupId = devices[j].groupId;
-              console.log('devices', devices[j]);
-              deviceFound = true;
-            }
-          }
+      .then(devices => {
+        const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
+        const audioInputDevice = audioInputDevices[0];
+
+        if (!audioInputDevice) {
+          console.error('no audio input device found');
+          return;
+        } else if (audioInputDevices.length > 1) {
+          console.warn(`multiple audio devices found - selecting ${audioInputDevice}`);
         }
 
-      this.deviceId = this.deviceId || 'default';
+        this.deviceId = audioInputDevice.deviceId;
+        this.groupId = audioInputDevice.groupId;
     });
   }
 
+  /**
+   * connect audio input to webAudio analyser and set up
+   * an interval timer to measure FFT of realtime audio
+   */
   initializeAudio() {
     var ctx = this.ctx;
     let constraints = {audio: {}};
@@ -302,21 +329,25 @@ class AudioConfig {
       constraints.audio = {groupId: {exact: this.groupId}};
   
     navigator.mediaDevices.getUserMedia(constraints)
-      .then(function(this: AudioConfig, stream: any){
+      .then((stream: any) => {
         const input = ctx.createMediaStreamSource(stream);
         this.analyser = ctx.createAnalyser();
         this.analyser.fftSize = FFT_SIZE;
-        this.analyser.smoothingTimeConstant = 0.9;
+        this.analyser.smoothingTimeConstant = 0.8;
         this.analyser.maxDecibels = -30;
         input.connect(this.analyser);
-        setInterval(this.sampleAudio.bind(this), this.inputSamplingInterval);
-      }.bind(this))
+
+        setInterval(this.updateFrogs.bind(this), this.inputSamplingInterval);
+      })
       .catch(function(error){
-        // debugger
+        console.error('Error initializing audio input', error.message);
       });
   }
 
-  sampleAudio() {
+  /**
+   * measure FFT from audio input and update the state of each frog
+   */
+  updateFrogs() {
     const data = new Float32Array(FFT_SIZE / 2);
     this.analyser.getFloatFrequencyData(data);
 
@@ -325,7 +356,7 @@ class AudioConfig {
     // establish a baseline value for the minimum amplitude signal
     this.minimumAmplitude = Math.min(this.minimumAmplitude, amplitude);
 
-    frogs.forEach(frog => {
+    this.frogs.forEach(frog => {
       frog.updateState(amplitude, processFFT(data));
     });
   }
@@ -335,45 +366,53 @@ class AudioConfig {
    * to compare against other signals
    * Note: see https://stackoverflow.com/questions/14169317/interpreting-web-audio-api-fft-results
    * @param audio AudioElement
+   * @param duration number (seconds)
    * @returns Float32Array
    */
-  async analyseSample(id: number, audio: HTMLAudioElement, averagedFFT: Float32Array) {
+  async analyseSample(audio: HTMLAudioElement, duration: number): Promise<Float32Array> {
     const sourceNode = this.ctx.createMediaElementSource(audio);
     
     //Create analyser node
     const analyserNode = this.ctx.createAnalyser();
     analyserNode.fftSize = FFT_SIZE;
-    analyserNode.smoothingTimeConstant = 0.96;
+    analyserNode.smoothingTimeConstant = 0.97; // this can be tweaked
     analyserNode.maxDecibels = -30;
-    const bufferLength = analyserNode.frequencyBinCount;
-    const dataArray = new Float32Array(bufferLength);
 
-    function iterate(numberOfSteps: number, result: Float32Array) {
-      analyserNode.getFloatFrequencyData(dataArray);
+    // function iterate(numberOfSteps: number, result: Float32Array) {
+    //   analyserNode.getFloatFrequencyData(dataArray);
 
-      dataArray.forEach((value, index) => {
-        averagedFFT[index] = value;
-        // result[index] += value === -Infinity ? -Infinity : value * 1.0 / numberOfSteps;
-      });
-    return averagedFFT;
-    }
+    //   dataArray.forEach((value, index) => {
+    //     averagedFFT[index] = value;
+    //     // result[index] += value === -Infinity ? -Infinity : value * 1.0 / numberOfSteps;
+    //   });
+    // return averagedFFT;
+    // }
 
-    async function getAveragedFFT(): Promise<Float32Array> {
-      const numberOfSteps = 20;
-      let stepCount = 0;
+    // async function getAveragedFFT(): Promise<Float32Array> {
+      // const numberOfSteps = 20;
+      // const intervalLength = Math.floor(duration * 1000 / numberOfSteps);
+      // let stepCount = 0;
 
-      return await new Promise(async resolve => {
-        while (stepCount < numberOfSteps) {
-          // TODO: simplify average FFT calculation since smoothing automatically accounts for this, sort of
-          averagedFFT = iterate(numberOfSteps, averagedFFT);
-          await new Promise(resolve => setTimeout(resolve, 50));
-          stepCount++;
-        }
+      // console.log('intervalLength', intervalLength);
 
-        audio.pause();
-        resolve(averagedFFT);
-      });
-    }
+      // return await new Promise(async resolve => {
+      //   while (stepCount < numberOfSteps) {
+      //     // TODO: simplify average FFT calculation since smoothing automatically accounts for this, sort of
+      //     // averagedFFT = iterate(numberOfSteps, averagedFFT);
+      //     analyserNode.getFloatFrequencyData(dataArray);
+
+      //     // dataArray.forEach((value, index) => {
+      //     //   averagedFFT[index] = value;
+      //     //   // result[index] += value === -Infinity ? -Infinity : value * 1.0 / numberOfSteps;
+      //     // });
+      //     await new Promise(resolve => setTimeout(resolve, intervalLength));
+      //     stepCount++;
+      //   }
+
+      //   audio.pause();
+      //   resolve(dataArray);
+      // });
+    // }
     
     //Set up audio node network
     sourceNode.connect(analyserNode);
@@ -382,14 +421,45 @@ class AudioConfig {
     audio.loop = true;
     audio.play();
 
-    averagedFFT = await getAveragedFFT();
+    const bufferLength = analyserNode.frequencyBinCount;
+    const dataArray = new Float32Array(bufferLength);
+    const numberOfSteps = 20;
+    const intervalLength = Math.floor(duration * 1000 / numberOfSteps);
+    let stepCount = 0;
 
-    audio.loop = false;
-    audio.pause();
+    return await new Promise(async resolve => {
+      while (stepCount < numberOfSteps) {
+        // TODO: simplify average FFT calculation since smoothing automatically accounts for this, sort of
+        // averagedFFT = iterate(numberOfSteps, averagedFFT);
+        await new Promise(resolve => setTimeout(resolve, intervalLength));
+        analyserNode.getFloatFrequencyData(dataArray);
 
-    analyserNode.connect(this.ctx.destination); // connect to audio output now that analysis is complete
+        // dataArray.forEach((value, index) => {
+        //   averagedFFT[index] = value;
+        //   // result[index] += value === -Infinity ? -Infinity : value * 1.0 / numberOfSteps;
+        // });
+        stepCount++;
+      }
 
-    return averagedFFT;
+      if (_.max(dataArray) === -Infinity)
+        console.warn(`issue occurred analysing sample on step ${stepCount}`);
+
+      audio.pause();
+      resolve(dataArray);
+    });
+  }
+}
+
+// putting some general utility functions down here
+
+/**
+ * wrapper function around console.log
+ * @param message string
+ * @param additionalMessage string
+ */
+function log(message: string, additionalMessage?: any) {
+  if (DEBUG_MODE) {
+    console.log(message, additionalMessage || '');
   }
 }
 
@@ -403,7 +473,7 @@ function calculateAmplitude(data: Float32Array) {
     return Math.pow(10, item);
   }));
 
-  console.log('fftSum', fftSum);
+  log('fftSum', fftSum);
 
   return Math.log10(fftSum); // convert back to log decibel scale;
 }
