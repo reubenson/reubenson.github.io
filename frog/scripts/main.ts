@@ -20,7 +20,7 @@
 import { FFTConvolution } from 'ml-convolution';
 import _ from 'lodash';
 
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 const FFT_SIZE = 256;
 const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frogus/audio';
 
