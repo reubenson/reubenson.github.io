@@ -280,8 +280,9 @@ class AudioConfig {
 
   constructor() {
     this.frogs = [];
-    // this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-    this.ctx = new (window.AudioContext);
+    (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
+    this.ctx = new AudioContext(); 
+    // this.ctx = new (window.AudioContext);
     this.setInputDeviceId()
       .then(this.initializeAudio.bind(this));
   }
