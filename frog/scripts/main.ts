@@ -33,7 +33,7 @@
 import { FFTConvolution } from 'ml-convolution';
 import _ from 'lodash';
 
-const DEBUG_MODE = true;
+const PRINT_LOGS = true;
 const FFT_SIZE = 256;
 const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 const AUDIO_FILES = [
@@ -46,11 +46,15 @@ const AUDIO_FILES = [
  * note: needs to wait for user interaction first due to microphone utilization
  */
 function startApp() {
+  let hasInitialized = false;
   const button = document.querySelector('button');
   const onClick = (button: HTMLButtonElement) => {
-    const audio = new AudioConfig();  
-    new Frog(audio, `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`);
-    button.style.opacity = '0';
+    if (!hasInitialized) {
+      const audio = new AudioConfig();  
+      new Frog(audio, `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`);
+      button.style.opacity = '0';
+      hasInitialized = true;
+    }
   };
   
   button?.addEventListener('click', () => onClick(button));
@@ -94,9 +98,7 @@ class Frog {
     this.rateOfStateChange = 2.0; // to be tweaked
 
     this.audioConfig.register(this);
-
     this.loadSample();
-
     this.initialize();
   }
 
@@ -129,6 +131,8 @@ class Frog {
    * the frog's shyness and eagerness
    */
   async initialize() {
+    const attemptRate = 100; // evaluate whether to try singing every 100 ms
+
     this.sampleDuration = await this.setSampleDuration();
     log('this.sampleDuration', this.sampleDuration)
 
@@ -145,13 +149,14 @@ class Frog {
     log('audioImprint', this.audioImprint);
 
     this.fft = new FFTConvolution(FFT_SIZE / 2, this.audioImprint.subarray(0, FFT_SIZE / 2 - 1));
-    log('frog initialized!', this.audioImprint);
-
+    
     // connect audio to destination device
     sourceNode.connect(this.audioConfig.ctx.destination); // uncomment to debug move elsewhere
-
+    
     // evaluate whether to sing or not on every tick
-    setInterval(this.trySinging.bind(this), 100);
+    setInterval(this.trySinging.bind(this), attemptRate);
+    
+    log('frog initialized!', this);
   }
 
   /**
@@ -203,6 +208,8 @@ class Frog {
    * @returns number
    */
   updateShyness(amplitude: number, match: number) {
+    const rateOfLosingShyness = 0.1; // tweak
+
     // increase shyness if the degree of match between its audioImprint and the audio input is low
     const matchDegree = (match - this.matchBaseline) / this.matchBaseline;
 
@@ -211,7 +218,7 @@ class Frog {
       this.shyness += velocity * this.timeSinceLastUpdate();
     } else {
       // monotonically decrease shyness in the absence
-      this.shyness -= 0.1 * this.timeSinceLastUpdate(); // needs tweaking
+      this.shyness -= rateOfLosingShyness * this.timeSinceLastUpdate();
     }
 
     this.shyness = Math.max(0, Math.min(1, this.shyness)); // restrict to value between 0 and 1
@@ -484,7 +491,7 @@ class AudioConfig {
  * @param additionalMessage string
  */
 function log(message: string, additionalMessage?: any) {
-  if (DEBUG_MODE) {
+  if (PRINT_LOGS) {
     console.log(message, additionalMessage || '');
   }
 }
