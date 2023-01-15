@@ -49,7 +49,7 @@ function startApp() {
   const button = document.querySelector('button');
   const onClick = (button: HTMLButtonElement) => {
     const audio = new AudioConfig();  
-    new Frog(audio, `${AUDIO_SRC_DIRECTORY}/AUDIO_FILES[0]`);
+    new Frog(audio, `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`);
     button.style.opacity = '0';
   };
   
@@ -79,6 +79,7 @@ class Frog {
   lastUpdated: number; // timestamp of last update (ms)
   currentTimestamp: number; // timestamp of current moment (ms)
   matchBaseline: number; // manually-calibrated number used to calculate degree of match between audioImprint and audio input
+  rateOfStateChange: number; // manually-calibrated value used to determine rate of change in eagerness and shyness
   sampleDuration: number;
 
   constructor(audioConfig: AudioConfig, audioFilename: string) {
@@ -90,6 +91,7 @@ class Frog {
     this.lastUpdated = Date.now();
     this.currentTimestamp = Date.now();
     this.matchBaseline = 1.1; // an emperical value determined by FFT_SIZE and calibrated to taste
+    this.rateOfStateChange = 2.0; // to be tweaked
 
     this.audioConfig.register(this);
 
@@ -131,7 +133,8 @@ class Frog {
     log('this.sampleDuration', this.sampleDuration)
 
     // measure audio imprint (FFT signature) of sample
-    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, this.sampleDuration);
+    const sourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
+    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, sourceNode, this.sampleDuration);
     const maxBefore = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
     const minBefore = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
     log('maxbefore', maxBefore);
@@ -143,6 +146,9 @@ class Frog {
 
     this.fft = new FFTConvolution(FFT_SIZE / 2, this.audioImprint.subarray(0, FFT_SIZE / 2 - 1));
     log('frog initialized!', this.audioImprint);
+
+    // connect audio to destination device
+    sourceNode.connect(this.audioConfig.ctx.destination); // uncomment to debug move elsewhere
 
     // evaluate whether to sing or not on every tick
     setInterval(this.trySinging.bind(this), 100);
@@ -179,12 +185,12 @@ class Frog {
       console.error('convolution sum is NaN');
       convolutionSum = 0;
     }
-    log('summ', convolutionSum);
+    // log('summ', convolutionSum);
     
     this.updateShyness(amplitude, convolutionSum); // most basic linear implementation
     this.updateEagerness(amplitude, convolutionSum); // most basic linear implementation
 
-    log('shyness', this.shyness);
+    // log('shyness', this.shyness);
     log('eagerness', this.eagerness);
     this.lastUpdated = this.currentTimestamp;
   }
@@ -201,7 +207,7 @@ class Frog {
     const matchDegree = (match - this.matchBaseline) / this.matchBaseline;
 
     if (matchDegree < 0) {
-      const velocity = Math.abs(matchDegree); // needs tweaking
+      const velocity = Math.abs(matchDegree) * this.rateOfStateChange; // needs tweaking
       this.shyness += velocity * this.timeSinceLastUpdate();
     } else {
       // monotonically decrease shyness in the absence
@@ -242,9 +248,8 @@ class Frog {
 
     magnitude = 1 + (match - this.matchBaseline) / this.matchBaseline;
     magnitude = Math.max(1, magnitude); // magnitude is fixed to at least 1
-    const velocity = magnitude * 0.1; // amount of change in eagerness per second
+    const velocity = magnitude * 0.1 * this.rateOfStateChange; // amount of change in eagerness per second
 
-    // console.log('velocity', velocity);
     this.eagerness += velocity * this.timeSinceLastUpdate();
 
     // limit eagerness to a max of 1
@@ -252,7 +257,7 @@ class Frog {
   }
 
   /**
-   * Determine time since the last update, in units of seconds
+   * Determine time since the last state update, in units of seconds
    * @returns number
    */
   timeSinceLastUpdate() {
@@ -271,8 +276,14 @@ class Frog {
   /**
    * Determine whether the frog should sing, or not
    */
-  trySinging() {
-    const shouldSing = this.eagerness > this.shyness || this.eagerness === 1;
+  trySinging(simplifiedModel = false) {
+    let shouldSing;
+
+    if (simplifiedModel) {
+      shouldSing = this.eagerness > 0.99999; // simplified model
+    } else {
+      shouldSing = this.eagerness > this.shyness || this.eagerness > 0.999;
+    }
 
     if (shouldSing) {
       this.playSample();
@@ -384,12 +395,11 @@ class AudioConfig {
    * to compare against other signals
    * Note: see https://stackoverflow.com/questions/14169317/interpreting-web-audio-api-fft-results
    * @param audio AudioElement
+   * @param sourceNode MediaElementAudioSourceNode
    * @param duration number (seconds)
    * @returns Float32Array
    */
-  async analyseSample(audio: HTMLAudioElement, duration: number): Promise<Float32Array> {
-    const sourceNode = this.ctx.createMediaElementSource(audio);
-    
+  async analyseSample(audio: HTMLAudioElement, sourceNode: MediaElementAudioSourceNode, duration: number): Promise<Float32Array> {    
     //Create analyser node
     const analyserNode = this.ctx.createAnalyser();
     analyserNode.fftSize = FFT_SIZE;
@@ -434,9 +444,6 @@ class AudioConfig {
     
     //Set up audio node network
     sourceNode.connect(analyserNode);
-    // analyserNode.connect(this.ctx.destination); // uncomment to debug
-    
-    audio.loop = true;
     audio.play();
 
     const bufferLength = analyserNode.frequencyBinCount;
@@ -462,7 +469,6 @@ class AudioConfig {
       if (_.max(dataArray) === -Infinity)
         console.warn(`issue occurred analysing sample on step ${stepCount}`);
 
-      audio.pause();
       resolve(dataArray);
     });
   }
@@ -493,7 +499,7 @@ function calculateAmplitude(data: Float32Array) {
     return Math.pow(10, item);
   }));
 
-  log('fftSum', fftSum);
+  // log('fftSum', fftSum);
 
   return Math.log10(fftSum); // convert back to log decibel scale;
 }
