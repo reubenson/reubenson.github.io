@@ -2,8 +2,8 @@
  * This is a browser-based implementation of an art installation by the Dutch sound artist Felix Hess.
  * The first such installation was developed in 1982, and involved developing a set of fifty robots,
  * each outfitted with a microphone, speaker, and circuitry to allow each robot to listen to its environment
- * and make sounds in the manner of a frog in a 'frog chorus'. Hess' designs for doing so are relatively straightfoward,
- * in which the robot-frog's sounding behavior is predicated on 'eagerness' and 'shyness'. 
+ * and make sounds in the manner of a frog in a frog chorus. Hess' designs for doing so are relatively straightfoward,
+ * in which the robot-frog's sounding behavior is predicated on "eagerness" and "shyness". 
  * 
  * When eagerness is high relative to shyness, the robot will emit a chirping sound, which is then "heard" by the other 
  * robots. Each robot  will increase its eagerness when it hears another's chirp, and will increase its shyness when it 
@@ -14,7 +14,7 @@
  * but the best resource for understanding Hess' work is his monograph, 'Light as Air', published by Kehrer Verlag.
  * 
  * The following implementation utilizes the Web Audio API to make a browser-based translation of Hess' robot-frogs,
- * allowing a set of users in physical, acoustic proximity to have their mobile phones or laptops 'sing' to each other
+ * allowing a set of users in physical, acoustic proximity to have their mobile phones or laptops "sing" to each other
  * as if they were frogs. The implementation of "hearing" is predicated here on relatively unsophisticated FFT (fast 
  * fourier transform) analysis via the [Web Audio AnalyserNode](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode).
  * 
@@ -82,6 +82,7 @@ class Frog {
   matchBaseline: number; // used to calculate degree of match between audioImprint and audio input
   rateOfStateChange: number; // manually-calibrated value used to determine rate of change in eagerness and shyness
   sampleDuration: number;
+  amplitudeThreshold: number; // relative threshold between a quiet vs noisy environment
 
   constructor(audioConfig: AudioConfig, audioFilename: string) {
     this.audioConfig = audioConfig;
@@ -93,6 +94,7 @@ class Frog {
     this.currentTimestamp = Date.now();
     this.matchBaseline = -30; // an emperical value, calibrated to taste
     this.rateOfStateChange = 2.0; // to be tweaked
+    this.amplitudeThreshold = -45; // to be tweaked
 
     this.audioConfig.register(this);
     this.loadSample();
@@ -133,23 +135,11 @@ class Frog {
     log('this.sampleDuration', this.sampleDuration);
 
     // measure audio imprint (FFT signature) of sample
-    const sourceNode = this.audioConfig.ctx.createMediaElementSource(
-      this.audioElement
-    );
+    const sourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
 
-    this.audioImprint = await this.audioConfig.analyseSample(
-      this.audioElement,
-      sourceNode,
-      this.sampleDuration
-    );
-    const maxBefore = this.audioImprint.reduce(
-      (item, acc) => Math.max(item, acc),
-      -Infinity
-    );
-    const minBefore = this.audioImprint.reduce(
-      (item, acc) => Math.min(item, acc),
-      Infinity
-    );
+    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, sourceNode, this.sampleDuration);
+    const maxBefore = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
+    const minBefore = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
 
     log('maxbefore', maxBefore);
     log('minbefore', minBefore);
@@ -158,10 +148,7 @@ class Frog {
 
     log('audioImprint', this.audioImprint);
 
-    this.fft = new FFTConvolution(
-      FFT_SIZE / 2,
-      this.audioImprint.subarray(0, FFT_SIZE / 2 - 1)
-    );
+    this.fft = new FFTConvolution(FFT_SIZE / 2, this.audioImprint.subarray(0, FFT_SIZE / 2 - 1));
 
     // connect audio to destination device
     sourceNode.connect(this.audioConfig.ctx.destination); // uncomment to debug move elsewhere
@@ -217,6 +204,7 @@ class Frog {
   }
 
   /**
+   * Shyness: the aversion of the frog to make a sound
    * Calculate and set shyness based on a sum of the convolution between the audioImprint
    * and the incoming audio
    * @param amplitude - input (mic) signal amplitude
@@ -225,20 +213,28 @@ class Frog {
    */
   private updateShyness(amplitude: number, match: number) {
     const rateOfLosingShyness = 0.1; // tweak
-    const amplitudeThreshold = -65;
+    const amplitudeFactor = 1;
+    const matchFactor = 1;
+    const relativeAmplitude = (amplitudeFactor * amplitude) / this.amplitudeThreshold;
+    const relativeMatch = (matchFactor * match) / this.matchBaseline;
 
     // increase shyness if the degree of match between its audioImprint and the audio input is low
     const matchDegree = (match - this.matchBaseline) / Math.abs(this.matchBaseline);
 
     console.log('matchdegree', matchDegree);
 
-    if (matchDegree > 0 || amplitude < amplitudeThreshold) {
+    if (amplitude < this.amplitudeThreshold) {
       console.log('decreasing shyness');
-      // monotonically decrease shyness if other frogs are detected, or things are quiet
+      // monotonically decrease shyness if the environment is quiet
       this.shyness -= rateOfLosingShyness * this.timeSinceLastUpdate();
     } else {
-      // increase shyness if other frogs are not detected
-      const velocity = Math.abs(matchDegree) * this.rateOfStateChange; // needs tweaking
+      // increase shyness if the environment is loud
+
+      // velocity to range from 0 to ?
+      // has lower value if matchDegree is high and ampltiude is relatively low
+      // has a higher value if matchDegree is low and amplitude is high
+      // const velocity = Math.abs(matchDegree) * this.rateOfStateChange; // needs tweaking
+      const velocity = (1 / relativeMatch) * relativeAmplitude * this.rateOfStateChange;
 
       console.log('velocity', velocity);
 
@@ -252,16 +248,16 @@ class Frog {
   }
 
   /**
+   * Eagerness: the tendency of the frog to make a sound
    * Calculate and set eagerness based on a sum of the convolution between the audioImprint
    * and the incoming audio
    * @param amplitude - input audio amplitude
    * @param match - degree of match between audioImprint and input audio
    */
   private updateEagerness(amplitude: number, match: number) {
-    const amplitudeThreshold = -50;
     let magnitude; // measure of degree of match in frog sound compared to audio input
 
-    if (amplitude < amplitudeThreshold) {
+    if (amplitude < this.amplitudeThreshold) {
       // increase eagerness if the environment is quiet
       magnitude = 1 + (match - this.matchBaseline) / Math.abs(this.matchBaseline);
       magnitude = Math.max(0.1, magnitude); // magnitude is fixed to at least 0.1
@@ -327,8 +323,7 @@ class AudioConfig {
 
   constructor() {
     this.frogs = [];
-    (window as any).AudioContext =
-      (window as any).AudioContext || (window as any).webkitAudioContext;
+    (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
     this.ctx = new AudioContext();
     this.setInputDeviceId().then(this.initializeAudio.bind(this));
   }
@@ -347,18 +342,14 @@ class AudioConfig {
    */
   private setInputDeviceId() {
     return navigator.mediaDevices.enumerateDevices().then(devices => {
-      const audioInputDevices = devices.filter(
-        device => device.kind === 'audioinput'
-      );
+      const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
       const audioInputDevice = audioInputDevices[0];
 
       if (!audioInputDevice) {
         console.error('no audio input device found');
         return;
       } else if (audioInputDevices.length > 1) {
-        console.warn(
-          `multiple audio devices found - selecting ${audioInputDevice}`
-        );
+        console.warn(`multiple audio devices found - selecting ${audioInputDevice}`);
       }
 
       this.deviceId = audioInputDevice.deviceId;
@@ -374,10 +365,8 @@ class AudioConfig {
     const ctx = this.ctx;
     const constraints = { audio: {} };
 
-    if (this.deviceId)
-      constraints.audio = { deviceId: { exact: this.deviceId } };
-    else if (this.groupId)
-      constraints.audio = { groupId: { exact: this.groupId } };
+    if (this.deviceId) constraints.audio = { deviceId: { exact: this.deviceId } };
+    else if (this.groupId) constraints.audio = { groupId: { exact: this.groupId } };
 
     navigator.mediaDevices
       .getUserMedia(constraints)
@@ -445,8 +434,7 @@ class AudioConfig {
       await new Promise(resolve => setTimeout(resolve, intervalLength));
       analyserNode.getFloatFrequencyData(fft);
 
-      if (_.max(fft) === -Infinity)
-        console.warn(`issue occurred analysing sample on step ${index}`);
+      if (_.max(fft) === -Infinity) console.warn(`issue occurred analysing sample on step ${index}`);
     }
 
     return fft;
@@ -493,9 +481,9 @@ function calculateAmplitude(data: Float32Array) {
  */
 function processFFT(data: Float32Array, opts: { normalize: boolean }) {
   const { normalize } = opts;
-  const max = normalize
-    ? data.reduce((item, acc) => Math.max(item, acc), -Infinity)
-    : -30; // default to normalizing to -30 db
+
+  // default to normalizing to -30 db
+  const max = normalize ? data.reduce((item, acc) => Math.max(item, acc), -Infinity) : -30;
 
   console.log('max', max);
 
