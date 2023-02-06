@@ -14,7 +14,7 @@
  * but the best resource for understanding Hess' work is his monograph, 'Light as Air', published by Kehrer Verlag.
  * 
  * The following implementation utilizes the Web Audio API to make a browser-based translation of Hess' robot-frogs,
- * allowing a set of users in physical, acoustic proximity to have their mobile phones or laptops "sing" to each other
+ * allowing a set of users in physical, acoustic proximity to have their mobile devices "sing" to each other
  * as if they were frogs. The implementation of "hearing" is predicated here on relatively unsophisticated FFT (fast 
  * fourier transform) analysis via the [Web Audio AnalyserNode](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode).
  * 
@@ -47,13 +47,13 @@ function startApp() {
   let hasInitialized = false;
   const button = document.querySelector('button');
   const onClick = (button: HTMLButtonElement) => {
-    if (!hasInitialized) {
-      const audio = new AudioConfig();
+    if (hasInitialized) return;
 
-      new Frog(audio, `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`);
-      button.style.opacity = '0';
-      hasInitialized = true;
-    }
+    const audio = new AudioConfig();
+
+    new Frog(audio, `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`);
+    button.style.opacity = '0';
+    hasInitialized = true;
   };
 
   button?.addEventListener('click', () => onClick(button));
@@ -124,8 +124,8 @@ class Frog {
   }
 
   /**
-   * Calculate the audioImprint, which will be used to compare against realtime audio
-   * in order to determine the level of match in the frequency spectrum and calcuate
+   * Calculate the audioImprint, which will be used to compare against the microphone's audio
+   * feed in order to determine the level of match in the frequency spectrum and thereby calcuate
    * the frog's shyness and eagerness
    */
   private async initialize() {
@@ -195,8 +195,8 @@ class Frog {
     log('convolution sum:', convolutionSum);
     log('amplitude:', amplitude);
 
-    this.updateShyness(amplitude, convolutionSum); // most basic linear implementation
-    this.updateEagerness(amplitude, convolutionSum); // most basic linear implementation
+    this.updateShyness(amplitude, convolutionSum);
+    this.updateEagerness(amplitude, convolutionSum);
 
     log('shyness', this.shyness);
     log('eagerness', this.eagerness);
@@ -218,30 +218,19 @@ class Frog {
     const relativeAmplitude = (amplitudeFactor * amplitude) / this.amplitudeThreshold;
     const relativeMatch = (matchFactor * match) / this.matchBaseline;
 
-    // increase shyness if the degree of match between its audioImprint and the audio input is low
-    const matchDegree = (match - this.matchBaseline) / Math.abs(this.matchBaseline);
-
-    console.log('matchdegree', matchDegree);
-
     if (amplitude < this.amplitudeThreshold) {
-      console.log('decreasing shyness');
       // monotonically decrease shyness if the environment is quiet
       this.shyness -= rateOfLosingShyness * this.timeSinceLastUpdate();
     } else {
-      // increase shyness if the environment is loud
-
-      // velocity to range from 0 to ?
+      // increase shyness if the degree of match between its audioImprint and the audio input is low
+      // and if the environment is loud
       // has lower value if matchDegree is high and ampltiude is relatively low
       // has a higher value if matchDegree is low and amplitude is high
-      // const velocity = Math.abs(matchDegree) * this.rateOfStateChange; // needs tweaking
       const velocity = (1 / relativeMatch) * relativeAmplitude * this.rateOfStateChange;
-
-      console.log('velocity', velocity);
 
       this.shyness += velocity * this.timeSinceLastUpdate();
     }
 
-    console.log('this.shyness', this.shyness);
     this.shyness = Math.max(0, Math.min(1, this.shyness)); // restrict to value between 0 and 1
 
     return;
@@ -265,7 +254,8 @@ class Frog {
 
       this.eagerness += velocity * this.timeSinceLastUpdate();
     } else {
-      // shyness will increase if the environment is loud
+      // do nothing; shyness will increase if the environment is loud
+      // eagerness will only monotonically increase, and not decrease
     }
 
     // limit eagerness to a max of 1
@@ -273,7 +263,7 @@ class Frog {
   }
 
   /**
-   * Determine time since the last state update, in units of seconds
+   * Calculate time since the last state update, in units of seconds
    * @returns number
    */
   private timeSinceLastUpdate() {
@@ -311,7 +301,7 @@ class Frog {
 }
 
 /**
- * The AudioConfig class is responsible for managing audio input and output
+ * The AudioConfig class is responsible for managing audio input and output devices
  */
 class AudioConfig {
   analyser: AnalyserNode;
@@ -462,13 +452,7 @@ function log(message: string, additionalMessage?: any) {
  * @returns number
  */
 function calculateAmplitude(data: Float32Array) {
-  const fftSum = _.sum(
-    _.map(data, item => {
-      return Math.pow(10, item);
-    })
-  );
-
-  // log('fftSum', fftSum);
+  const fftSum = _.sum(_.map(data, item => Math.pow(10, item)));
 
   return Math.log10(fftSum); // convert back to log decibel scale;
 }
@@ -483,9 +467,7 @@ function processFFT(data: Float32Array, opts: { normalize: boolean }) {
   const { normalize } = opts;
 
   // default to normalizing to -30 db
-  const max = normalize ? data.reduce((item, acc) => Math.max(item, acc), -Infinity) : -30;
-
-  console.log('max', max);
+  const max = normalize ? _.max(data) || -30 : -30;
 
   return data.map(item => Math.pow(10, item - max));
 }
