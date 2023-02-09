@@ -38,6 +38,10 @@ const PRINT_LOGS = true;
 const FFT_SIZE = 256;
 const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3'];
+const DEBUG_ON = !!window.location.search.match(/debug=/);
+let SHYNESS_ELEMENT: HTMLElement | null;
+let EAGERNESS_ELEMENT: HTMLElement | null;
+let AUDIO_IMPRINT_ELEMENT: HTMLCanvasElement;
 
 /**
  * Initialize application
@@ -54,10 +58,24 @@ function startApp() {
     new Frog(audio, `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`);
     button.style.opacity = '0';
     hasInitialized = true;
+
+    const canvas = document.getElementById('fft-canvas') as HTMLCanvasElement;
+
+    if (canvas) audio.setCanvas(canvas);
   };
 
   button?.addEventListener('click', () => onClick(button));
   button?.addEventListener('touchend', () => onClick(button));
+
+  // turn on debug display
+  const debugDisplay = document.querySelector('.debug-display');
+
+  if (DEBUG_ON && debugDisplay) {
+    debugDisplay.classList.add('unhide');
+    SHYNESS_ELEMENT = document.getElementById('shyness');
+    EAGERNESS_ELEMENT = document.getElementById('eagerness');
+    AUDIO_IMPRINT_ELEMENT = document.getElementById('audio-imprint') as HTMLCanvasElement;
+  }
 }
 
 startApp();
@@ -183,7 +201,7 @@ class Frog {
 
     const conv = this.fft.convolve(inputData);
 
-    log('inputData', inputData);
+    // log('inputData', inputData);
 
     let convolutionSum = Math.log10(conv.reduce((item, acc) => acc + item, 0));
 
@@ -198,8 +216,14 @@ class Frog {
     this.updateShyness(amplitude, convolutionSum);
     this.updateEagerness(amplitude, convolutionSum);
 
-    log('shyness', this.shyness);
-    log('eagerness', this.eagerness);
+    // log('shyness', this.shyness);
+    // log('eagerness', this.eagerness);
+
+    if (DEBUG_ON) {
+      if (SHYNESS_ELEMENT) SHYNESS_ELEMENT.innerHTML = `${_.round(this.shyness, 2)}`;
+      if (EAGERNESS_ELEMENT) EAGERNESS_ELEMENT.innerHTML = `${_.round(this.eagerness, 2)}`;
+    }
+
     this.lastUpdated = this.currentTimestamp;
   }
 
@@ -306,10 +330,11 @@ class Frog {
 class AudioConfig {
   analyser: AnalyserNode;
   ctx: AudioContext;
+  canvas: HTMLCanvasElement;
   deviceId: string;
-  groupId: string;
   inputSamplingInterval = 50; // time (ms) between FFT analysis events
   frogs: Array<Frog>;
+  groupId: string;
 
   constructor() {
     this.frogs = [];
@@ -388,6 +413,8 @@ class AudioConfig {
     this.frogs.forEach(frog => {
       frog.updateState(amplitude, processFFT(data, { normalize: false }));
     });
+
+    if (DEBUG_ON) this.drawFFT(data, this.canvas);
   }
 
   /**
@@ -406,17 +433,30 @@ class AudioConfig {
   ): Promise<Float32Array> {
     // create analyser node
     const analyserNode = this.ctx.createAnalyser();
+    const highpassFilter = this.ctx.createBiquadFilter();
+    const lowpassFilter = this.ctx.createBiquadFilter();
 
     analyserNode.fftSize = FFT_SIZE;
     analyserNode.smoothingTimeConstant = 0.97; // this can be tweaked
 
     // set up audio node network
-    sourceNode.connect(analyserNode);
+    sourceNode.connect(highpassFilter);
+    highpassFilter.connect(lowpassFilter);
+    lowpassFilter.connect(analyserNode);
+
+    // configure filter units
+    // TODO: what is typical frqeuency range of interest for frogs?
+    highpassFilter.type = 'highpass';
+    highpassFilter.frequency.value = 300;
+    highpassFilter.Q.value = 1;
+    lowpassFilter.type = 'lowpass';
+    lowpassFilter.frequency.value = 1000;
+    lowpassFilter.Q.value = 1;
 
     // measure the FFT of the audio sample n times, at equal time intervals across the duration of the sample
     const bufferLength = analyserNode.frequencyBinCount;
     const fft = new Float32Array(bufferLength);
-    const numberOfSteps = 20; // can be tweaked
+    const numberOfSteps = 5; // can be tweaked
     const intervalLength = Math.floor((duration * 1000) / numberOfSteps);
 
     audio.play();
@@ -427,7 +467,46 @@ class AudioConfig {
       if (_.max(fft) === -Infinity) console.warn(`issue occurred analysing sample on step ${index}`);
     }
 
+    if (DEBUG_ON) {
+      this.drawFFT(fft, AUDIO_IMPRINT_ELEMENT);
+    }
+
     return fft;
+  }
+
+  public setCanvas(canvas: HTMLCanvasElement) {
+    this.canvas = canvas;
+  }
+
+  /**
+   * plot FFT histogram (helps with debugging)
+   * @param dataArray - fft data to be plotted
+   * @param canvasElement - canvas element to plot onto
+   */
+  private drawFFT(dataArray: Float32Array, canvasElement: HTMLCanvasElement) {
+    const canvasCtx = canvasElement.getContext('2d');
+
+    if (!canvasCtx) {
+      console.error('error getting canvas context');
+      return;
+    }
+
+    //Draw black background
+    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+    canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    //Draw spectrum
+    const bufferLength = FFT_SIZE / 2;
+    const barWidth = (this.canvas.width / bufferLength) * 2.5;
+    let posX = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+      const barHeight = (dataArray[i] + 140) * 2;
+
+      canvasCtx.fillStyle = 'rgb(' + Math.floor(barHeight + 100) + ', 50, 50)';
+      canvasCtx.fillRect(posX, this.canvas.height - barHeight / 2, barWidth, barHeight / 2);
+      posX += barWidth + 1;
+    }
   }
 }
 
