@@ -41,6 +41,7 @@ const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3'];
 const DEBUG_ON = !!window.location.search.match(/debug=/);
 let SHYNESS_ELEMENT: HTMLElement | null;
 let EAGERNESS_ELEMENT: HTMLElement | null;
+let AMPLITUDE_ELEMENT: HTMLElement | null;
 let AUDIO_IMPRINT_ELEMENT: HTMLCanvasElement;
 
 /**
@@ -74,6 +75,7 @@ function startApp() {
     debugDisplay.classList.add('unhide');
     SHYNESS_ELEMENT = document.getElementById('shyness');
     EAGERNESS_ELEMENT = document.getElementById('eagerness');
+    AMPLITUDE_ELEMENT = document.getElementById('amplitude');
     AUDIO_IMPRINT_ELEMENT = document.getElementById('audio-imprint') as HTMLCanvasElement;
   }
 }
@@ -164,7 +166,7 @@ class Frog {
 
     this.audioImprint = processFFT(this.audioImprint, { normalize: true });
 
-    log('audioImprint', this.audioImprint);
+    // log('audioImprint', this.audioImprint);
 
     this.fft = new FFTConvolution(FFT_SIZE / 2, this.audioImprint.subarray(0, FFT_SIZE / 2 - 1));
 
@@ -211,7 +213,7 @@ class Frog {
     }
 
     log('convolution sum:', convolutionSum);
-    log('amplitude:', amplitude);
+    // log('amplitude:', amplitude);
 
     this.updateShyness(amplitude, convolutionSum);
     this.updateEagerness(amplitude, convolutionSum);
@@ -222,6 +224,7 @@ class Frog {
     if (DEBUG_ON) {
       if (SHYNESS_ELEMENT) SHYNESS_ELEMENT.innerHTML = `${_.round(this.shyness, 2)}`;
       if (EAGERNESS_ELEMENT) EAGERNESS_ELEMENT.innerHTML = `${_.round(this.eagerness, 2)}`;
+      if (AMPLITUDE_ELEMENT) AMPLITUDE_ELEMENT.innerHTML = `${_.round(amplitude, 2)}`;
     }
 
     this.lastUpdated = this.currentTimestamp;

@@ -16,18 +16,23 @@
       <button>START</button>
     </div>
     <section class="debug-display">
-      <ul class="debug-display-item">
-        Basic Metrics
-        <li>Shyness: <span id="shyness"></span></li>
-        <li>Eagerness: <span id="eagerness"></span></li>
-      </ul>
       <div class="debug-display-item">
-        Audio Imprint
+        <header>Basic Metrics</header>
+        <ul>
+          <li>Shyness: <span id="shyness"></span></li>
+          <li>Eagerness: <span id="eagerness"></span></li>
+        </ul>
+      </div>
+      <div class="debug-display-item">
+        <header>Audio Imprint</header>
         <canvas id="audio-imprint"></canvas>
       </div>
       <div class="debug-display-item">
-        FFT
+        <header>FFT</header>
         <canvas id="fft-canvas"></canvas>
+        <ul>
+          <li>Amplitude: <span id="amplitude"></span></li>
+        </ul>
       </div>
     </section>
     <script src="///Users/reubenson/Projects/reubenson.github.io/frog/scripts/main.js"></script>
@@ -81,7 +86,6 @@
 
     .debug-display {
       display: none;
-      margin-top: 30px;
       opacity: 0;
       padding: 20px;
     }
