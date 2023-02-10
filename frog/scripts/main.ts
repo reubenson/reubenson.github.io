@@ -35,7 +35,7 @@ import _ from 'lodash';
 import { FFTConvolution } from 'ml-convolution';
 
 const PRINT_LOGS = true;
-const FFT_SIZE = 256;
+const FFT_SIZE = 512;
 const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3'];
 const DEBUG_ON = !!window.location.search.match(/debug=/);
