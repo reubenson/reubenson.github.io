@@ -150,6 +150,8 @@ class Frog {
    */
   private async initialize() {
     const attemptRate = 100; // evaluate whether to try singing every 100 ms
+    const highpassFilter = this.audioConfig.ctx.createBiquadFilter();
+    const lowpassFilter = this.audioConfig.ctx.createBiquadFilter();
 
     this.sampleDuration = await this.setSampleDuration();
     log('this.sampleDuration', this.sampleDuration);
@@ -157,7 +159,21 @@ class Frog {
     // measure audio imprint (FFT signature) of sample
     const sourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
 
-    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, sourceNode, this.sampleDuration);
+    // set up audio node network
+    sourceNode.connect(highpassFilter);
+    highpassFilter.connect(lowpassFilter);
+    // lowpassFilter.connect(analyserNode);
+
+    // configure filter units
+    // TODO: what is typical frqeuency range of interest for frogs?
+    highpassFilter.type = 'highpass';
+    highpassFilter.frequency.value = 3000;
+    highpassFilter.Q.value = 1;
+    lowpassFilter.type = 'lowpass';
+    lowpassFilter.frequency.value = 1000;
+    lowpassFilter.Q.value = 10;
+
+    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, lowpassFilter, this.sampleDuration);
     const maxBefore = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
     const minBefore = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
 
@@ -171,7 +187,7 @@ class Frog {
     this.fft = new FFTConvolution(FFT_SIZE / 2, this.audioImprint.subarray(0, FFT_SIZE / 2 - 1));
 
     // connect audio to destination device
-    sourceNode.connect(this.audioConfig.ctx.destination); // uncomment to debug move elsewhere
+    lowpassFilter.connect(this.audioConfig.ctx.destination); // uncomment to debug move elsewhere
 
     // evaluate whether to sing or not on every tick
     setInterval(this.trySinging.bind(this), attemptRate);
@@ -431,30 +447,17 @@ class AudioConfig {
    */
   public async analyseSample(
     audio: HTMLAudioElement,
-    sourceNode: MediaElementAudioSourceNode,
+    sourceNode: BiquadFilterNode,
     duration: number
   ): Promise<Float32Array> {
     // create analyser node
     const analyserNode = this.ctx.createAnalyser();
-    const highpassFilter = this.ctx.createBiquadFilter();
-    const lowpassFilter = this.ctx.createBiquadFilter();
 
     analyserNode.fftSize = FFT_SIZE;
     analyserNode.smoothingTimeConstant = 0.97; // this can be tweaked
 
     // set up audio node network
-    sourceNode.connect(highpassFilter);
-    highpassFilter.connect(lowpassFilter);
-    lowpassFilter.connect(analyserNode);
-
-    // configure filter units
-    // TODO: what is typical frqeuency range of interest for frogs?
-    highpassFilter.type = 'highpass';
-    highpassFilter.frequency.value = 300;
-    highpassFilter.Q.value = 1;
-    lowpassFilter.type = 'lowpass';
-    lowpassFilter.frequency.value = 1000;
-    lowpassFilter.Q.value = 1;
+    sourceNode.connect(analyserNode);
 
     // measure the FFT of the audio sample n times, at equal time intervals across the duration of the sample
     const bufferLength = analyserNode.frequencyBinCount;
