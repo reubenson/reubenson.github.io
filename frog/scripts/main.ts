@@ -11,7 +11,8 @@
  * sensitive to environmental dynamics, much like if one were encountering a group of frogs in the wild.
  * 
  * Some historical documentation can be read here (https://bldgblog.com/2008/04/space-as-a-symphony-of-turning-off-sounds/),
- * but the best resource for understanding Hess' work is his monograph, 'Light as Air', published by Kehrer Verlag.
+ * but the best resource for understanding Hess' work is his monograph, 'Light as Air', published by Kehrer Verlag,
+ * as well as an artist talk from the 2010s on [YouTube](https://www.youtube.com/watch?v=rMnFKYHzm2k).
  * 
  * The following implementation utilizes the Web Audio API to make a browser-based translation of Hess' robot-frogs,
  * allowing a set of users in physical, acoustic proximity to have their mobile devices "sing" to each other
