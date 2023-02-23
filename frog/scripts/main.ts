@@ -51,14 +51,21 @@ let AUDIO_IMPRINT_ELEMENT: HTMLCanvasElement;
  */
 function startApp() {
   let hasInitialized = false;
-  const button = document.querySelector('button');
-  const onClick = (button: HTMLButtonElement) => {
+  const startButton = document.querySelector('.start-button');
+  const onStartClick = (startButton: Element) => {
     if (hasInitialized) return;
 
     const audio = new AudioConfig();
+    const containerEl = startButton.parentElement;
+    const debugContainer = document.querySelector('.debug-display');
 
     new Frog(audio, `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`);
-    button.style.opacity = '0';
+
+    containerEl?.classList.add('hidden');
+    containerEl?.classList.add('opacity-0');
+    debugContainer?.classList.add('opacity-100');
+    debugContainer?.classList.remove('opacity-0');
+    debugContainer?.classList.remove('hidden');
     hasInitialized = true;
 
     const canvas = document.getElementById('fft-canvas') as HTMLCanvasElement;
@@ -66,14 +73,14 @@ function startApp() {
     if (canvas) audio.setCanvas(canvas);
   };
 
-  button?.addEventListener('click', () => onClick(button));
-  button?.addEventListener('touchend', () => onClick(button));
+  startButton?.addEventListener('click', () => onStartClick(startButton));
+  startButton?.addEventListener('touchend', () => onStartClick(startButton));
 
   // turn on debug display
   const debugDisplay = document.querySelector('.debug-display');
 
   if (DEBUG_ON && debugDisplay) {
-    debugDisplay.classList.add('unhide');
+    debugDisplay.classList.remove('hidden');
     SHYNESS_ELEMENT = document.getElementById('shyness');
     EAGERNESS_ELEMENT = document.getElementById('eagerness');
     AMPLITUDE_ELEMENT = document.getElementById('amplitude');
