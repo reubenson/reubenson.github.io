@@ -1,0 +1,71 @@
+import _ from 'lodash';
+import { PRINT_LOGS } from './store';
+
+/**
+ * Wrapper function around console.log
+ * @param message - first string
+ * @param additionalMessage - optional string
+ */
+export function log(message: string, additionalMessage?: any) {
+  if (PRINT_LOGS) {
+    console.log(message, additionalMessage || '');
+  }
+}
+
+/**
+ * Calculate the total amplitude of the input FFT
+ * @param data - fft array
+ * @returns number
+ */
+export function calculateAmplitude(data: Float32Array) {
+  const fftSum = _.sum(_.map(data, item => Math.pow(10, item)));
+
+  return Math.log10(fftSum); // convert back to log decibel scale;
+}
+
+/**
+ * Normalize FFT and translate from logarithmic to linear scale
+ * @param data - FFT array
+ * @param opts - options
+ * @returns array
+ */
+export function processFFT(data: Float32Array, opts: { normalize: boolean }) {
+  const { normalize } = opts;
+
+  // default to normalizing to -30 db
+  const max = normalize ? _.max(data) || -30 : -30;
+
+  return data.map(item => Math.pow(10, item - max));
+}
+
+/**
+ * plot FFT histogram (helps with debugging)
+ * @param dataArray - fft data to be plotted
+ * @param canvasElement - canvas element to plot onto
+ */
+export function drawFFT(dataArray: Float32Array, canvasElement: HTMLCanvasElement) {
+  console.log('canvasElement', canvasElement);
+  const canvasCtx = canvasElement.getContext('2d');
+
+  if (!canvasCtx) {
+    console.error('error getting canvas context');
+    return;
+  }
+
+  //Draw black background
+  canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+  canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+  //Draw spectrum
+  const bufferLength = dataArray.length;
+  const barWidth = (canvasElement.width / bufferLength) * 2.5;
+  let posX = 0;
+
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = (dataArray[i] + 140) * 2;
+
+    canvasCtx.fillStyle = 'rgb(' + Math.floor(barHeight + 100) + ', 50, 50)';
+    canvasCtx.fillRect(posX, canvasElement.height - barHeight / 2, barWidth, barHeight / 2);
+    posX += barWidth + 1;
+  }
+}
