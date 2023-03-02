@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import type { Frog } from './Frog';
-import { FFT_SIZE, DEBUG_ON } from './store';
-import { calculateAmplitude, processFFT } from './utils';
+import { FFT_SIZE } from './store';
+import { log } from './utils';
 
 /**
  * The AudioConfig class is responsible for managing audio input and output devices
@@ -12,30 +11,15 @@ export class AudioConfig {
   ctx: AudioContext;
   canvas: HTMLCanvasElement;
   deviceId: string;
-  inputSamplingInterval = 50; // time (ms) between FFT analysis events
-  frogs: Array<Frog>;
   groupId: string;
-
-  constructor() {
-    this.frogs = [];
-    // (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
-    // this.ctx = new AudioContext();
-    // this.setInputDeviceId().then(this.initializeAudio.bind(this));
-  }
+  sampleRate: number;
 
   public start() {
     (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
     this.ctx = new AudioContext();
+    this.sampleRate = this.ctx.sampleRate;
+    log('Audio Sample Rate:', this.sampleRate);
     return this.setInputDeviceId().then(this.initializeAudio.bind(this));
-    // console.log('audio start completed');
-  }
-
-  /**
-   * Populate array of frogs that have been initalized
-   * @param frog - instance of Frog class
-   */
-  public register(frog: Frog) {
-    this.frogs.push(frog);
   }
 
   /**
@@ -51,7 +35,7 @@ export class AudioConfig {
         console.error('no audio input device found');
         return;
       } else if (audioInputDevices.length > 1) {
-        console.warn(`multiple audio devices found - selecting ${audioInputDevice}`);
+        console.warn(`multiple audio devices found - selecting ${JSON.stringify(audioInputDevice)}`);
       }
 
       this.deviceId = audioInputDevice.deviceId;
@@ -76,38 +60,15 @@ export class AudioConfig {
         const input = ctx.createMediaStreamSource(stream);
 
         this.input = input;
-        console.log('inpupt', input);
-
         this.analyser = ctx.createAnalyser();
         this.analyser.fftSize = FFT_SIZE;
         this.analyser.smoothingTimeConstant = 0.8; // to be tweaked
         input.connect(this.analyser);
-
-        console.log('initializeAudio complete');
-
-        // setInterval(this.updateFrogs.bind(this), this.inputSamplingInterval);
       })
       .catch(function (error) {
         console.error('Error initializing audio input', error.message);
       });
   }
-
-  /**
-   * Measure FFT from audio input and update the state of each frog
-   */
-  // private updateFrogs() {
-  //   const data = new Float32Array(FFT_SIZE / 2);
-
-  //   this.analyser.getFloatFrequencyData(data);
-
-  //   const amplitude = calculateAmplitude(data);
-
-  //   this.frogs.forEach(frog => {
-  //     frog.updateState(amplitude, processFFT(data, { normalize: false }));
-  //   });
-
-  //   // if (DEBUG_ON) this.drawFFT(data, this.canvas);
-  // }
 
   /**
    * Analyze incoming audio and generate an FFT signature to be used
@@ -152,35 +113,4 @@ export class AudioConfig {
   public setCanvas(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
   }
-
-  /**
-   * plot FFT histogram (helps with debugging)
-   * @param dataArray - fft data to be plotted
-   * @param canvasElement - canvas element to plot onto
-   */
-//   private drawFFT(dataArray: Float32Array, canvasElement: HTMLCanvasElement) {
-//     const canvasCtx = canvasElement.getContext('2d');
-
-//     if (!canvasCtx) {
-//       console.error('error getting canvas context');
-//       return;
-//     }
-
-//     //Draw black background
-//     canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-//     canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-//     //Draw spectrum
-//     const bufferLength = FFT_SIZE / 2;
-//     const barWidth = (this.canvas.width / bufferLength) * 2.5;
-//     let posX = 0;
-
-//     for (let i = 0; i < bufferLength; i++) {
-//       const barHeight = (dataArray[i] + 140) * 2;
-
-//       canvasCtx.fillStyle = 'rgb(' + Math.floor(barHeight + 100) + ', 50, 50)';
-//       canvasCtx.fillRect(posX, this.canvas.height - barHeight / 2, barWidth, barHeight / 2);
-//       posX += barWidth + 1;
-//     }
-//   }
 }

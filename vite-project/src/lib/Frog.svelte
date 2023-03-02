@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { Frog } from './Frog';
   import { onMount } from "svelte";
   import { draw } from "svelte/transition";
-  import { drawFFT } from "./utils";
+  import { drawFFT, drawHistogram } from "./utils";
   import { hasStarted, audio, audioFile } from './store';
   
   export let id;
@@ -11,31 +10,29 @@
   export let shyness;
   export let eagerness;
   export let inputFFT;
-  let imprintEl;
-  let fftEl;
-  let frog;
+  export let convolutionResult;
+  let imprintEl, fftEl, convolutionEl;
+
 
   function plotInputFFT(data) {
     if (!fftEl) return;
 
     drawFFT(data, fftEl);
   }
+
+  function plotConvolution(data) {
+    if (!convolutionEl) return;
+
+    drawFFT(data, convolutionEl);
+  }
   
   $: {
     plotInputFFT(inputFFT);
+    plotConvolution(convolutionResult);
   }
 
-  hasStarted.subscribe(value => {
-    // if (value) {
-    //   frog = new Frog(audio, audioFile);
-    //   frog.initialize().then(() => {
-    //     console.log('audioIMprint', frog.audioImprint);
-    //     drawFFT(frog.audioImprint, imprintEl);
-    //   });
-    // }
-  });
-
   // this component is expected to mount only after initialization
+  // which is handled in store.js
   onMount(() => {
     drawFFT(audioImprint, imprintEl);
   });
@@ -63,6 +60,10 @@
     <ul>
       <li>Amplitude: {amplitude}</li>
     </ul>
+  </div>
+  <div class="debug-display-item">
+    <header>Convolution</header>
+    <canvas bind:this={convolutionEl}></canvas>
   </div>
 </div>
 

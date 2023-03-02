@@ -8,22 +8,12 @@
   import INTRO from './lib/Intro.svelte';
   import FROG from './lib/Frog.svelte';
   import { hasStarted, FROGS } from './lib/store';
-  import { AudioConfig } from './lib/AudioManager';
-  import { Frog } from './lib/Frog';
 
-  const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
-  const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3'];
   let showInfo = false;
   let showIntro = true;
-  const frogsCount = 2;
-  const audio = new AudioConfig();
-  const audioFile = `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`;
   
   hasStarted.subscribe(value => {
     if (value) {
-      // const audio = new AudioConfig();
-      // audio.start();
-      
       showIntro = false;
     }
   });
