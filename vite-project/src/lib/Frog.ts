@@ -41,6 +41,7 @@
  * within acoustic proximity
  */
 
+import _ from 'lodash';
 import { FFTConvolution } from 'ml-convolution';
 import type { AudioConfig } from './AudioManager';
 import { DEBUG_ON, FFT_SIZE, inputSamplingInterval, inputSourceNode, inputSourceNode2 } from './store';
@@ -95,7 +96,7 @@ export class Frog {
   // experimenting with different option, to convolve audio input directly
   private async setAnalyserReverb() {
     this.convolver = this.audioConfig.ctx.createConvolver();
-    this.convolver.normalize = false;
+    this.convolver.normalize = true;
 
     // load impulse response from file
     const response = await fetch(this.audioFilepath);
@@ -117,7 +118,7 @@ export class Frog {
     this.inputAnalyser.smoothingTimeConstant = 0.8; // this can be tweaked
 
     // create a second analyser, for unprocessed input
-    this.directInputAnalyser = this.audioConfig.ctx2.createAnalyser();
+    this.directInputAnalyser = this.audioConfig.ctx.createAnalyser();
     this.directInputAnalyser.fftSize = FFT_SIZE;
     this.directInputAnalyser.smoothingTimeConstant = 0.8; // this can be tweaked
 
@@ -139,17 +140,13 @@ export class Frog {
       inputSourceNode.connect(this.convolver);
       this.convolver.connect(this.inputAnalyser);
 
-      console.log('convolver', this.convolver);
-
       // connect to second analyser
-      inputSourceNode2.connect(this.directInputAnalyser);
-      console.log('first source node', inputSourceNode);
-      console.log('second source node', inputSourceNode2);
+      inputSourceNode.connect(this.directInputAnalyser);
+      // console.log('first source node', inputSourceNode);
+      // console.log('second source node', inputSourceNode2);
 
-      console.log('ctx1', this.audioConfig.ctx);
-      console.log('ctx2', this.audioConfig.ctx2);
-
-      this.convolver.disconnect();
+      // this.convolver.disconnect();
+      // inputSourceNode2.disconnect();
 
       // connect input to analyser directly
       // inputSourceNode.connect(this.inputAnalyser);
@@ -331,7 +328,7 @@ export class Frog {
 
     this.currentTimestamp = Date.now();
 
-    const inputData = processFFT(fftData, { normalize: true, forceMax: -10 });
+    // const inputData = processFFT(fftData, { normalize: true, forceMax: -10 });
 
     // log('fftData', fftData);
     // log('inputData', inputData);
@@ -341,17 +338,17 @@ export class Frog {
 
     // both the convolver and the data getting convolved are translated to linear scale by processFFT
     // to simplify analysis, since values will range from 0 to 1.
-    let conv = this.fft.convolve(inputData);
+    // let conv = this.fft.convolve(inputData);
 
     // console.log('conv raw', conv);
     // convolution function sometimes generates unexpected negative values, which need to be accounted for
-    conv = conv.map(Math.abs);
+    // conv = conv.map(Math.abs);
 
     // this.convolutionResult = linearToLog(conv);
     this.convolutionResult = fftData;
     this.inputFFT = directFFT;
-    this.diffFFT = fftData.map((item, i) => {
-      return Math.abs(directFFT[i] - item) - 50;
+    this.diffFFT = _.clone(fftData).map((item, i) => {
+      return Math.abs(directFFT[i] - item) - 70;
     });
 
     // console.log('diff', this.diffFFT);
@@ -361,7 +358,7 @@ export class Frog {
     // logMinMax(conv, 'convolution');
 
     // what metric to calculate from convolution?
-    let convolutionSum = Math.log10(this.diffFFT.reduce((item, acc) => acc + item, 0));
+    let convolutionSum = Math.log10(this.convolutionResult.reduce((item, acc) => acc + item, 0));
 
     console.log('convolutionSum', convolutionSum);
 
@@ -388,7 +385,7 @@ export class Frog {
 
     this.updateShyness(amplitude, convolutionSum);
     this.updateEagerness(amplitude, convolutionSum);
-    this.inputFFT = fftData;
+    // this.inputFFT = fftData;
 
     this.lastUpdated = this.currentTimestamp;
   }
@@ -465,7 +462,7 @@ export class Frog {
    */
   private playSample() {
     log('croak');
-    this.audioElement.play();
+    // this.audioElement.play();
     // TODO: while sample is playing, pause "listening" so the frog does not hear to itself
   }
 

@@ -20,13 +20,13 @@
 
     drawFFT(data, fftEl);
   }
-
+  
   function plotConvolution(data) {
     if (!convolutionEl) return;
-
+    
     drawFFT(data, convolutionEl);
   }
-
+  
   function plotDifference(data) {
     if (!differenceEl) return;
 
