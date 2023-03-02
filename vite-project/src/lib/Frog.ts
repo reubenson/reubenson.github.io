@@ -43,20 +43,21 @@
 
 import { FFTConvolution } from 'ml-convolution';
 import type { AudioConfig } from './AudioManager';
-import { DEBUG_ON, FFT_SIZE, inputSamplingInterval, inputSourceNode } from './store';
+import { DEBUG_ON, FFT_SIZE, inputSamplingInterval, inputSourceNode, inputSourceNode2 } from './store';
 import { log, processFFT, calculateAmplitude, logMinMax, linearToLog } from './utils';
 
 let idCounter = 0;
 
 export class Frog {
   id: number;
-  audioFilename: string;
+  audioFilepath: string;
   audioConfig: AudioConfig;
   shyness: number; // 0. - 1.
   eagerness: number; // 0. - 1.
   audioImprint: Float32Array;
   inputFFT: Float32Array;
-  convolutionResult: number[];
+  convolutionResult: Float32Array;
+  diffFFT: Float32Array;
   audioElement: HTMLAudioElement;
   fft: FFTConvolution;
   fftNormalizationFactor: number;
@@ -68,12 +69,14 @@ export class Frog {
   amplitudeThreshold: number; // relative threshold between a quiet vs noisy environment
   hasInitialized: boolean;
   inputAnalyser: AnalyserNode;
+  directInputAnalyser: AnalyserNode;
   amplitude: number;
+  convolver: ConvolverNode;
 
-  constructor(audioConfig: AudioConfig, audioFilename: string) {
+  constructor(audioConfig: AudioConfig, audioFilepath: string) {
     this.id = ++idCounter;
     this.audioConfig = audioConfig;
-    this.audioFilename = audioFilename;
+    this.audioFilepath = audioFilepath;
     this.shyness = 1.0; // initiaize to 1 (maximum shyness)
     this.eagerness = 0.0; // initialize to 0 (minimum eagerness)
     this.audioImprint = new Float32Array(FFT_SIZE / 2);
@@ -84,7 +87,76 @@ export class Frog {
     this.amplitudeThreshold = -45; // to be tweaked
     this.hasInitialized = false;
     this.inputAnalyser = null;
+    this.directInputAnalyser = null;
+    this.convolver = null;
     this.loadSample();
+  }
+
+  // experimenting with different option, to convolve audio input directly
+  private async setAnalyserReverb() {
+    this.convolver = this.audioConfig.ctx.createConvolver();
+    this.convolver.normalize = false;
+
+    // load impulse response from file
+    const response = await fetch(this.audioFilepath);
+    const arraybuffer = await response.arrayBuffer();
+
+    console.log('response', response);
+    // log error if response is not valid
+
+    this.convolver.buffer = await this.audioConfig.ctx.decodeAudioData(arraybuffer);
+    console.log('arraybuff', arraybuffer);
+    console.log('this.convolver.buffer', this.convolver.buffer);
+    console.log('this.audioFilepath', this.audioFilepath);
+
+    // connect convolver to analyser signal path
+    const testfilter = false;
+
+    this.inputAnalyser = this.audioConfig.ctx.createAnalyser();
+    this.inputAnalyser.fftSize = FFT_SIZE;
+    this.inputAnalyser.smoothingTimeConstant = 0.8; // this can be tweaked
+
+    // create a second analyser, for unprocessed input
+    this.directInputAnalyser = this.audioConfig.ctx2.createAnalyser();
+    this.directInputAnalyser.fftSize = FFT_SIZE;
+    this.directInputAnalyser.smoothingTimeConstant = 0.8; // this can be tweaked
+
+    console.log('conv input', this.inputAnalyser);
+    console.log('direct input', this.directInputAnalyser);
+
+    if (testfilter) {
+      const filter = this.audioConfig.ctx.createBiquadFilter();
+
+      filter.type = 'bandpass';
+      filter.frequency.value = 1000;
+      filter.Q.value = 10;
+
+      inputSourceNode.connect(filter);
+      filter.connect(this.convolver);
+      this.convolver.connect(this.inputAnalyser);
+    } else {
+      // inputSourceNode.connect(this.inputAnalyser);
+      inputSourceNode.connect(this.convolver);
+      this.convolver.connect(this.inputAnalyser);
+
+      console.log('convolver', this.convolver);
+
+      // connect to second analyser
+      inputSourceNode2.connect(this.directInputAnalyser);
+      console.log('first source node', inputSourceNode);
+      console.log('second source node', inputSourceNode2);
+
+      console.log('ctx1', this.audioConfig.ctx);
+      console.log('ctx2', this.audioConfig.ctx2);
+
+      this.convolver.disconnect();
+
+      // connect input to analyser directly
+      // inputSourceNode.connect(this.inputAnalyser);
+    }
+
+    // temporarily wire input through convolver to output
+    // this.inputAnalyser.connect(this.audioConfig.ctx.destination);
   }
 
   /**
@@ -154,10 +226,10 @@ export class Frog {
     await this.setSampleDuration();
 
     // measure audio imprint (FFT signature) of sample
-    const sourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
+    const frogSourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
 
     // set up audio node network
-    sourceNode.connect(highpassFilter);
+    frogSourceNode.connect(highpassFilter);
     highpassFilter.connect(lowpassFilter);
 
     // configure filter units
@@ -165,14 +237,14 @@ export class Frog {
     // ref: https://www.sonova.com/en/story/frogs-hearing-no-ears
     highpassFilter.type = 'highpass';
     highpassFilter.frequency.value = 2000;
-    highpassFilter.Q.value = 40;
+    highpassFilter.Q.value = 1;
     lowpassFilter.type = 'lowpass';
     lowpassFilter.frequency.value = 2000;
-    lowpassFilter.Q.value = 40;
+    lowpassFilter.Q.value = 1;
 
     // audioImprint is the result of the getFloatFrequencyData function in the web audio API
     // ref: https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getFloatFrequencyData
-    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, lowpassFilter, this.sampleDuration);
+    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, frogSourceNode, this.sampleDuration);
     const imprintMin = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
     const imprintMax = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
 
@@ -190,9 +262,19 @@ export class Frog {
     this.fft = new FFTConvolution(FFT_SIZE / 2, linearAudioImprint.subarray(0, FFT_SIZE / 2 - 1));
 
     // connect audio to destination device
-    lowpassFilter.connect(this.audioConfig.ctx.destination); // uncomment to debug move elsewhere
+    frogSourceNode.connect(this.audioConfig.ctx.destination);
+    // frogSourceNode.connect(this.inputAnalyser);
+    // lowpassFilter.connect(this.convolver);
+    // OR connect to analyser directly instead;
+    // console.log('help', frogSourceNode);
+    // frogSourceNode.connect(this.inputAnalyser);
+    // this.convolver.connect(this.inputAnalyser);
+    // console.log('ctx', this.audioConfig.ctx);
+    // lowpassFilter.connect(this.audioConfig.ctx.destination); // uncomment to debug move elsewhere
 
-    this.setAnalyser();
+    // this.setAnalyser();
+    await this.setAnalyserReverb();
+    // console.log('this.convolver', this.convolver);
 
     // evaluate whether to sing or not on every tick
     setInterval(this.trySinging.bind(this), attemptRate);
@@ -208,7 +290,7 @@ export class Frog {
    */
   private loadSample() {
     this.audioElement = new Audio();
-    this.audioElement.src = this.audioFilename;
+    this.audioElement.src = this.audioFilepath;
     this.audioElement.controls = false;
     this.audioElement.loop = false;
     this.audioElement.autoplay = false;
@@ -218,19 +300,22 @@ export class Frog {
   /**
    * Use web audio analyser to calculate frequency spectrum
    * on audio input, giving the frog the ability to "hear".
+   * To Do: try extracting more audio features (https://meyda.js.org/audio-features)
    * @returns object - these properties will be used to determine behavior
    */
   private analyseInputSignal() {
     // todo: don't re-instantiate
     const data = new Float32Array(FFT_SIZE / 2);
+    const directFFT = new Float32Array(FFT_SIZE / 2);
 
     this.inputAnalyser.getFloatFrequencyData(data);
+    this.directInputAnalyser.getFloatFrequencyData(directFFT);
 
     const amplitude = calculateAmplitude(data);
 
     this.amplitude = amplitude;
 
-    return { amplitude, fftData: data };
+    return { amplitude, fftData: data, directFFT: directFFT };
   }
 
   /**
@@ -242,14 +327,14 @@ export class Frog {
   public updateState() {
     if (!this.hasInitialized) return;
 
-    const { amplitude, fftData } = this.analyseInputSignal();
+    const { amplitude, fftData, directFFT } = this.analyseInputSignal();
 
     this.currentTimestamp = Date.now();
 
     const inputData = processFFT(fftData, { normalize: true, forceMax: -10 });
 
-    log('fftData', fftData);
-    log('inputData', inputData);
+    // log('fftData', fftData);
+    // log('inputData', inputData);
     // logMinMax(fftData, 'fftData');
     // logMinMax(inputData, 'inputData');
     // console.log('inputData', inputData);
@@ -262,19 +347,37 @@ export class Frog {
     // convolution function sometimes generates unexpected negative values, which need to be accounted for
     conv = conv.map(Math.abs);
 
-    this.convolutionResult = linearToLog(conv);
-    logMinMax(this.convolutionResult, 'conv result');
+    // this.convolutionResult = linearToLog(conv);
+    this.convolutionResult = fftData;
+    this.inputFFT = directFFT;
+    this.diffFFT = fftData.map((item, i) => {
+      return Math.abs(directFFT[i] - item) - 50;
+    });
+
+    // console.log('diff', this.diffFFT);
+    // logMinMax(this.convolutionResult, 'conv result');
     // console.log('conv result', this.convolutionResult);
 
     // logMinMax(conv, 'convolution');
 
     // what metric to calculate from convolution?
-    let convolutionSum = Math.log10(conv.reduce((item, acc) => acc + item, 0));
+    let convolutionSum = Math.log10(this.diffFFT.reduce((item, acc) => acc + item, 0));
+
+    console.log('convolutionSum', convolutionSum);
 
     if (Number.isNaN(convolutionSum)) {
       console.error('convolution sum is NaN');
       convolutionSum = 0;
     }
+
+    // ideas for detecting frog signal from input
+    // - multiply histograms together and compare to input signal
+    // - try frog sound that is longer, less squeak
+    // - detect what is NOT a frog by detecting general changes in volume and comparing against imprint spectrum
+    // - compare convolution FFT with direct FFT (convolution should emphasize frog spectrum)
+    // - specify frequency range of interest (~3kHz) and calculate degree of match
+    // - use some sort of masking algorithm to compare the two FFT curves?
+    // - metrics: total amplitude sum,
 
     // todo: debug convolution sum (currently too high)
     // log('convolution sum:', convolutionSum);

@@ -11,7 +11,8 @@
   export let eagerness;
   export let inputFFT;
   export let convolutionResult;
-  let imprintEl, fftEl, convolutionEl;
+  export let diffFFT;
+  let imprintEl, fftEl, convolutionEl, differenceEl;
 
 
   function plotInputFFT(data) {
@@ -25,10 +26,17 @@
 
     drawFFT(data, convolutionEl);
   }
+
+  function plotDifference(data) {
+    if (!differenceEl) return;
+
+    drawFFT(data, differenceEl);
+  }
   
   $: {
     plotInputFFT(inputFFT);
     plotConvolution(convolutionResult);
+    plotDifference(diffFFT);
   }
 
   // this component is expected to mount only after initialization
@@ -64,6 +72,10 @@
   <div class="debug-display-item">
     <header>Convolution</header>
     <canvas bind:this={convolutionEl}></canvas>
+  </div>
+  <div class="debug-display-item">
+    <header>FFT Differential</header>
+    <canvas bind:this={differenceEl}></canvas>
   </div>
 </div>
 
