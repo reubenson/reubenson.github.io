@@ -5,11 +5,12 @@ import { Frog } from './Frog';
 
 export const frogsCount = 1;
 export const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
-export const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3'];
+// peeper downloaded from https://www.umesc.usgs.gov/terrestrial/amphibians/armi/frog_calls/spring_peeper.mp3
+export const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3', 'spring-peeper.mp3'];
 export const audio = new AudioConfig();
-export const audioFile = `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[0]}`;
+export const audioFile = `${AUDIO_SRC_DIRECTORY}/${AUDIO_FILES[2]}`;
 export const hasStarted = writable(false);
-export const FFT_SIZE = 512;
+export const FFT_SIZE = 1024;
 export const DEBUG_ON = writable(true);
 export const FROGS = writable([]);
 export const PRINT_LOGS = writable(true);

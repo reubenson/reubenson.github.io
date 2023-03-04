@@ -64,9 +64,9 @@
   <div class="debug-display-item">
     <header>Basic Metrics</header>
     <ul>
-      <li>Shyness: {shyness}</li>
-      <li>Eagerness: {eagerness}</li>
-      <li>Amplitude: {Math.round(amplitude)}</li>
+      <li>Shyness: {_.round(shyness, 3)}</li>
+      <li>Eagerness: {_.round(eagerness, 3)}</li>
+      <li>Amplitude: {_.round(amplitude, 2)}</li>
       <li>Convolution Amplitude: {Math.round(convolutionAmplitude)}</li>
     </ul>
   </div>
