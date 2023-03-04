@@ -10,7 +10,6 @@ export class AudioConfig {
   input2: MediaStreamAudioSourceNode;
   analyser: AnalyserNode;
   ctx: AudioContext;
-  ctx2: AudioContext;
   canvas: HTMLCanvasElement;
   deviceId: string;
   groupId: string;
@@ -19,7 +18,6 @@ export class AudioConfig {
   public start() {
     (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
     this.ctx = new AudioContext();
-    this.ctx2 = new AudioContext();
     this.sampleRate = this.ctx.sampleRate;
     log('Audio Sample Rate:', this.sampleRate);
     return this.setInputDeviceId().then(this.initializeAudio.bind(this));
@@ -61,12 +59,6 @@ export class AudioConfig {
       .getUserMedia(constraints)
       .then((stream: any) => {
         const input = ctx.createMediaStreamSource(stream);
-        const stream2 = stream.clone();
-
-        this.input2 = this.ctx2.createMediaStreamSource(stream2);
-
-        console.log('stream', stream);
-        console.log('stream2', stream2);
 
         this.input = input;
         this.analyser = ctx.createAnalyser();

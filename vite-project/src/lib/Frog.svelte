@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import _ from 'lodash';
   import { draw } from "svelte/transition";
   import { drawFFT, drawHistogram } from "./utils";
   import { hasStarted, audio, audioFile } from './store';
@@ -7,12 +8,14 @@
   export let id;
   export let audioImprint;
   export let amplitude;
+  export let convolutionAmplitude;
   export let shyness;
   export let eagerness;
-  export let inputFFT;
-  export let convolutionResult;
+  export let directInputFFT;
+  export let convolutionFFT;
   export let diffFFT;
-  let imprintEl, fftEl, convolutionEl, differenceEl;
+  export let ambientFFT;
+  let imprintEl, fftEl, convolutionEl, differenceEl, ambientEl;
 
 
   function plotInputFFT(data) {
@@ -32,11 +35,18 @@
 
     drawFFT(data, differenceEl);
   }
+
+  function plotBaseline(data) {
+    if (!ambientEl || !data) return;
+
+    drawFFT(data, ambientEl);
+  }
   
   $: {
-    plotInputFFT(inputFFT);
-    plotConvolution(convolutionResult);
+    plotInputFFT(directInputFFT);
+    plotConvolution(convolutionFFT);
     plotDifference(diffFFT);
+    plotBaseline(ambientFFT);
   }
 
   // this component is expected to mount only after initialization
@@ -56,6 +66,8 @@
     <ul>
       <li>Shyness: {shyness}</li>
       <li>Eagerness: {eagerness}</li>
+      <li>Amplitude: {Math.round(amplitude)}</li>
+      <li>Convolution Amplitude: {Math.round(convolutionAmplitude)}</li>
     </ul>
   </div>
   <div class="debug-display-item">
@@ -66,8 +78,11 @@
     <header>FFT</header>
     <canvas bind:this={fftEl}></canvas>
     <ul>
-      <li>Amplitude: {amplitude}</li>
     </ul>
+  </div>
+  <div class="debug-display-item">
+    <header>Ambient Baseline</header>
+    <canvas bind:this={ambientEl}></canvas>
   </div>
   <div class="debug-display-item">
     <header>Convolution</header>
