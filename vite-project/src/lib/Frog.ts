@@ -1,37 +1,38 @@
 /**
- * This file exports a single class (Frog), which is intended to be used in a browser-based translation of a sound art installation by Felix Hess.
- * It relies heavily on the web audio API to perform FFT (Fast Fourier Transform) analysis to determine the frequency content of the audio
- * signal picked up by the device's microphone.
- * 
- * The class exported in this file encapsulates the frog-like behavior modeled in a larger webapp. Multiple instances of frogs may run within the runtime
- * environment on a single device, but the intent is to only have one
- * instatiated per device, and to iteract with other frogs running on other devices
- * within acoustic proximity. To see a diagram of the general data flow, see https://reubenson.com/frog/frog-diagram.png
- * 
- * For the purposes of pairing, the following to-do tasks may be implemented:
- * 1. Pause audio analysis while a frog is singing, so that its "hearing" is limited only to other frogs, and not to itself
- * 2. Improve the accuracy of the detectFrogSignal fn
- * 
- * 
- * Historical Context:
- * Felix Hess began developing his frog-based installation work in 1982, which involved developing a set of fifty robots,
- * each outfitted with a microphone, speaker, and circuitry to allow each robot to listen to its environment
- * and make sounds in the manner of a frog in a frog chorus. Hess' designs for doing so are relatively straightfoward,
- * in which the robot-frog's sounding behavior is predicated on "eagerness" and "shyness". 
+ * This file exports a single class (Frog), which is intended to be used in a browser-based
+ * translation of a sound art installation by Felix Hess. It relies on the web audio API
+ * to perform FFT (Fast Fourier Transform) analysis to determine the frequency content of
+ * the audio signal picked up by the device's microphone. The underlying behavior for a 'frog'
+ * is relatively straightfoward, in which the frog will listen to its audio environmnent (mediated
+ * by the microphone and frequency spectrum analaysis), and will chirp based on its "eagerness"
+ * and "shyness".
  *
- * When eagerness is high relative to shyness, the robot will emit a chirping sound, which is then "heard" by the other 
- * robots. Each robot will increase its eagerness when it hears another's chirp, and will increase its shyness when it 
- * hears loud non-chirping sounds. Through this simple set of rules, a dynamic chorus of sounds emerges, which is highly 
- * sensitive to environmental dynamics, similar to if one were encountering a group of frogs in the wild.
+ * When eagerness is high relative to shyness, the robot will emit a chirping sound, which is then
+ * "heard" by the other robots. Each robot will become more "eager" when it hears another's chirp,
+ * and will become more "shy" when it hears loud non-chirping sounds. Through a simple set of
+ * behavioral rules, a dynamic chorus of chirping emerges, which is highly sensitive to environmental
+ * dynamics, similar to if one were encountering a frog chorus in the wild.
+ *
+ * Multiple instances of this class may run within the runtime environment on a single device,
+ * but the ultimate intent is to only have one instatiated per device, and to have it "interact"
+ * with other frogs running on other devices within acoustic proximity.
+ *
+ * To see a diagram of the general logic flow, see https://reubenson.com/frog/frog-diagram.png
+ *
+ * For the purposes of pairing, the following to-do tasks may be implemented:
+ * 1. Pause audio analysis while a frog is chirping, so that its "hearing" is limited only to
+ * other frogs, and does not listen to itself (fn: playSample)
+ * 2. Improve the accuracy of frog signal detection (fn: detectFrogSignal).
+ * 3. Apply a probabalistic model for whether the frog should chirp or not (fn: tryChirp).
+ *
+ * Historical Context:
+ * Felix Hess began developing his frog-based installation work in 1982, which involved developing
+ * a set of fifty robots, each outfitted with a microphone, speaker, and circuitry to allow each
+ * robot to listen to its environment and make sounds in the manner of a frog in a frog chorus.
  *
  * Some historical documentation can be read here (https://bldgblog.com/2008/04/space-as-a-symphony-of-turning-off-sounds/),
  * but the best resource for understanding Hess' work is his monograph, 'Light as Air', published by Kehrer Verlag,
  * as well as an artist talk from the 2010s on [YouTube](https://www.youtube.com/watch?v=rMnFKYHzm2k).
- *
- * The following implementation utilizes the Web Audio API to make a browser-based translation of Hess' robot-frogs,
- * allowing a set of users in physical, acoustic proximity to have their mobile devices "sing" to each other
- * as if they were frogs. The implementation of "hearing" is predicated here on relatively unsophisticated FFT (fast 
- * fourier transform) analysis via the [Web Audio AnalyserNode](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode).
  *
  * Additional references:
  * On how frogs hear: https://www.sonova.com/en/story/frogs-hearing-no-ears
@@ -40,8 +41,8 @@
 import _ from 'lodash';
 import { FFTConvolution } from 'ml-convolution';
 import type { AudioConfig } from './AudioManager';
-import { FFT_SIZE, inputSamplingInterval, inputSourceNode } from './store';
-import { log, processFFT, calculateAmplitude, logMinMax, linearToLog } from './utils';
+import { FFT_SIZE, frogsCount, inputSourceNode } from './store';
+import { log, processFFT, calculateAmplitude } from './utils';
 
 let idCounter = 0;
 
@@ -83,15 +84,65 @@ export class Frog {
     this.rateOfStateChange = 0.2; // to be tweaked
     this.amplitudeThreshold = -80; // to be tweaked
     this.hasInitialized = false;
-    this.convolutionAnalyser = null;
-    this.directInputAnalyser = null;
-    this.convolver = null;
     this.frogSignalDetected = false;
-    this.loadSample();
+    this.createAudioElement();
   }
 
-  // experimenting with different option, to convolve audio input directly
-  private async setUpAnalysers() {
+  /**
+   * Calculate the audioImprint, which will be used to compare against the microphone's audio
+   * feed in order to determine the level of match in the frequency spectrum and thereby calcuate
+   * the frog's shyness and eagerness
+   */
+  public async initialize() {
+    const attemptRate = 100; // evaluate whether to chirp every 100 ms
+
+    await this.setSampleDuration();
+
+    // measure audio imprint (FFT signature) of sample
+    const frogSourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
+
+    await this.createAudioImprint(frogSourceNode);
+
+    // connect audio to destination device
+    frogSourceNode.connect(this.audioConfig.ctx.destination);
+
+    this.setUpAnalysers();
+
+    // evaluate whether to chirp or not on every tick
+    setInterval(this.tryChirp.bind(this), attemptRate);
+
+    this.hasInitialized = true;
+
+    log('frog initialized!', this);
+  }
+
+  /**
+   * Periodically update frog's shyness and eagerness
+   * Hearing other frogs will increase eagerness.
+   * A loud environment with non-frog sounds will increase shyness.
+   */
+  public updateState() {
+    if (!this.hasInitialized) return;
+
+    this.analyseInputSignal();
+
+    this.currentTimestamp = Date.now();
+
+    // To Do: move this to initialize fn instead?
+    this.establishAmbientFFT();
+
+    this.detectFrogSignal();
+    this.updateShyness();
+    this.updateEagerness();
+
+    this.lastUpdated = this.currentTimestamp;
+  }
+
+  /**
+   * Set up the convolver node, which will use the audio sample of the frog
+   * chirp to process incoming audio from the microphone
+   */
+  private async createConvolver() {
     this.convolver = this.audioConfig.ctx.createConvolver();
     this.convolver.normalize = false;
 
@@ -100,35 +151,45 @@ export class Frog {
     const arraybuffer = await response.arrayBuffer();
 
     this.convolver.buffer = await this.audioConfig.ctx.decodeAudioData(arraybuffer);
+  }
 
-    // connect convolver to analyser signal path
-    const smoothingConstant = 0.8;
+  /**
+   * Configure the Web Audio analyser nodes, which are responsible for measuring
+   * FFT data on the microphone input. One of these analysers is responsible for
+   * measuring the mic input directly, and the other is responsible for measuring
+   * the mic input convolved with the frog's chirp itself. The latter is used to
+   * perform operations to detect frog chirping in the mic input
+   *
+   * Ref: https://www.w3.org/TR/2013/WD-webaudio-20131010/convolution.html
+   */
+  private setUpAnalysers() {
+    const smoothingConstant = 0.8; // value to be tweaked
 
-    this.convolutionAnalyser = this.audioConfig.ctx.createAnalyser();
-    this.convolutionAnalyser.fftSize = FFT_SIZE;
-    this.convolutionAnalyser.smoothingTimeConstant = smoothingConstant; // this can be tweaked
-
-    // create a second analyser, for unprocessed input
+    // set up direct input analyser
     this.directInputAnalyser = this.audioConfig.ctx.createAnalyser();
     this.directInputAnalyser.fftSize = FFT_SIZE;
     this.directInputAnalyser.smoothingTimeConstant = smoothingConstant; // this can be tweaked
 
+    inputSourceNode.connect(this.directInputAnalyser);
+
+    // set up convolved input analyser
+    this.createConvolver();
+    this.convolutionAnalyser = this.audioConfig.ctx.createAnalyser();
+    this.convolutionAnalyser.fftSize = FFT_SIZE;
+    this.convolutionAnalyser.smoothingTimeConstant = smoothingConstant; // this can be tweaked
+
     inputSourceNode.connect(this.convolver);
     this.convolver.connect(this.convolutionAnalyser);
 
-    // connect to second analyser
-    inputSourceNode.connect(this.directInputAnalyser);
-
-    // Debug: wire input through convolver to output
+    // Debug: send convolved input through audio output
     // this.convolutionAnalyser.connect(this.audioConfig.ctx.destination);
   }
 
   /**
    * Determine length of audio sample, in seconds
-   * @returns Promise
    */
-  private async setSampleDuration(): Promise<number> {
-    return await new Promise(resolve => {
+  private async setSampleDuration() {
+    await new Promise<void>(resolve => {
       const req = new XMLHttpRequest();
 
       req.open('GET', this.audioElement.src, true);
@@ -139,7 +200,7 @@ export class Frog {
         this.audioConfig.ctx.decodeAudioData(data, buffer => {
           this.sampleDuration = buffer.duration;
           log('Sample Duration:', this.sampleDuration);
-          resolve(null);
+          resolve();
         });
       };
 
@@ -148,21 +209,13 @@ export class Frog {
   }
 
   /**
-   * Calculate the audioImprint, which will be used to compare against the microphone's audio
-   * feed in order to determine the level of match in the frequency spectrum and thereby calcuate
-   * the frog's shyness and eagerness
+   * The audio imprint is a vestige of a previous attempt to detect frog chirping
+   * using a more manual convolution approach. This is no longer being used, but
+   * the audio imprint is still helpful to visualize in the development process
+   * @param sourceNode - audio node representing the chirp audio sample
    */
-  public async initialize() {
-    const attemptRate = 100; // evaluate whether to try singing every 100 ms
-
-    await this.setSampleDuration();
-
-    // measure audio imprint (FFT signature) of sample
-    const frogSourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
-
-    // audioImprint is the result of the getFloatFrequencyData function in the web audio API
-    // ref: https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getFloatFrequencyData
-    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, frogSourceNode, this.sampleDuration);
+  private async createAudioImprint(sourceNode) {
+    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, sourceNode, this.sampleDuration);
     const imprintMin = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
     const imprintMax = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
 
@@ -178,26 +231,12 @@ export class Frog {
 
     // convolution is executed with the linearized audio imprint, such that values of the result range from 0 to 1
     this.fft = new FFTConvolution(FFT_SIZE / 2, linearAudioImprint.subarray(0, FFT_SIZE / 2 - 1));
-
-    // connect audio to destination device
-    frogSourceNode.connect(this.audioConfig.ctx.destination);
-
-    // this.setAnalyser();
-    await this.setUpAnalysers();
-
-    // evaluate whether to sing or not on every tick
-    setInterval(this.trySinging.bind(this), attemptRate);
-
-    this.hasInitialized = true;
-
-    log('frog initialized!', this);
   }
 
   /**
-   * Create audio element
-   * This is the audio sample that will be play when the frog 'sings'
+   * Create the audio element, which will play when the frog chirps
    */
-  private loadSample() {
+  private createAudioElement() {
     this.audioElement = new Audio();
     this.audioElement.src = this.audioFilepath;
     this.audioElement.controls = false;
@@ -207,8 +246,13 @@ export class Frog {
   }
 
   /**
-   * Use web audio analyser to calculate frequency spectrum
-   * on audio input, giving the frog the ability to "hear".
+   * Use web audio analyser to calculate the frequency spectrum of the mic input,
+   * giving the frog the ability to "hear". The main 'trick' with this is that
+   * convolutionFFT emphasizes the frequency spectrum of the microphone input
+   * that matches the frog chirp, and can be used to roughly determine whether
+   * a sound present in the mic input matches the frog
+   *
+   * Ref: ref: https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getFloatFrequencyData
    * To Do: try extracting more audio features (https://meyda.js.org/audio-features)
    */
   private analyseInputSignal() {
@@ -225,15 +269,24 @@ export class Frog {
 
     this.convolutionFFT = convolutionFFT;
     this.directInputFFT = directInputFFT;
-    this.diffFFT = _.clone(convolutionFFT).map((item, i) => {
+    this.diffFFT = convolutionFFT.map((item, i) => {
+      // To Do: resolve the arbitary -60 value
       return this.ambientFFT ? item - this.ambientFFT[i] - 60 : -Infinity;
     });
   }
 
+  /**
+   * Set the FFT data corrresponding to the convolved mic input when the
+   * environment is quiet. This provides the baseline measurement to detect
+   * other frogs in the acoustic environment
+   *
+   * To Do: make this measurement after the amplitude of the environment
+   * is held below a threshold value for a number of seconds
+   */
   private establishAmbientFFT() {
-    // if (this.ambientFFT) return;
-
-    this.ambientFFT = this.convolutionFFT;
+    if (this.amplitude < this.amplitudeThreshold) {
+      this.ambientFFT = this.convolutionFFT;
+    }
   }
 
   /**
@@ -242,12 +295,12 @@ export class Frog {
    * @param arr - expects an array of FFT values
    * @returns object
    */
-  private findPeakBin(arr) {
+  private findPeakBin(arr: Float32Array) {
     const defaultValue = { index: 0, value: -Infinity };
 
     if (!arr) return defaultValue;
 
-    return arr.reduce((acc, item, i) => {
+    return arr.reduce((acc: { index: number; value: number }, item: number, i: number) => {
       if (item > acc.value) {
         return { index: i, value: item };
       } else {
@@ -257,64 +310,41 @@ export class Frog {
   }
 
   /**
-   * Perform analysis using FFT data to determine whether another frog is being heard.
-   * The convolutionFFT data is a way of representing the degree of match between the microphone input and the sound of the frog
-   * The ambientFFT data is a snapshot of the convolutionFFT data taken when the environment is very quiet, and therefore represents a baseline set of values to detect when there are sounds in the environment.
-   * By comparing these two arrays, we can get make an approximate determination of whether there are detectable sounds, whether those sounds correspond to the frequency range we would associated with the frog
-   * 
+   * Perform frequency analysis using FFT data to determine whether another frog is being heard.
+   * The convolutionFFT data is a way of representing the degree of match between the microphone
+   * input and the sound of the frog. The ambientFFT data is a snapshot of the convolutionFFT
+   * data taken when the environment is very quiet, and therefore represents a baseline measurement
+   * to detect when there are sounds in the environment above ambient noise. By comparing these two
+   * FFT arrays, we can get make an approximate determination of detectable sounds, whether those
+   * sounds correspond to the frequency range we would associated with the frog.
+   *
    * TO DO: Ideas for improving signal detection
    * - Use a weighted average calculation instead of analysing frequency bins in the FFT individually
    * - Use a library like Meyda to extract more complex audio features (https://meyda.js.org/audio-features)
    */
   private detectFrogSignal() {
-    // simple calculation: determine whether the peak frequency bin is similar,
-    // between convolutionFFT and ambientFFT
     const convolutionPeakBin = this.findPeakBin(this.convolutionFFT);
     const ambientPeakBin = this.findPeakBin(this.ambientFFT);
 
     log('convolution peak bin', convolutionPeakBin);
     log('ambient peak bin', ambientPeakBin);
 
-    const binsAreSimilar = Math.abs(convolutionPeakBin.index - ambientPeakBin.index) < 4;
+    // simple calculation: determine whether the peak frequency bin is similar,
+    // between convolutionFFT and ambientFFT
+    const peaksAreSimilar = Math.abs(convolutionPeakBin.index - ambientPeakBin.index) < 4;
     const convolutionIsLouder = convolutionPeakBin.value > ambientPeakBin.value;
 
-    this.frogSignalDetected = binsAreSimilar && convolutionIsLouder;
+    this.frogSignalDetected = peaksAreSimilar && convolutionIsLouder;
   }
 
   /**
-   * Periodically update frog's shyness and eagerness
-   *   - Hearing other frogs will increase eagerness
-   *   - A loud environment with non-frog sounds will increase shyness
-   */
-  public updateState() {
-    if (!this.hasInitialized) return;
-
-    // FFT data will provide the basis for updating eagerness/shyness
-    // The main 'trick' with this is that convolutionFFT emphasizes the frequency spectrum of the microphone input most relevant to the frog chirp, and is therefore useful for determining whether a sound that is heard is similar to the frog's chirp
-    this.analyseInputSignal();
-
-    this.currentTimestamp = Date.now();
-
-    // TO DO: make it wait for the threshold to be held for x amount of time
-    if (this.amplitude < this.amplitudeThreshold) {
-      this.establishAmbientFFT();
-    }
-
-    this.detectFrogSignal();
-    this.updateShyness();
-    this.updateEagerness();
-
-    this.lastUpdated = this.currentTimestamp;
-  }
-
-  /**
-   * Update the frog's "shyness",
-   * which is the frog's tendency to be silent
+   * Update the frog's "shyness", which is the frog's tendency to be silent
    */
   private updateShyness() {
     const rateOfLosingShyness = 0.1; // value to be tweaked
+    const environmentIsQuiet = this.amplitude < this.amplitudeThreshold;
 
-    if (this.amplitude < this.amplitudeThreshold) {
+    if (environmentIsQuiet) {
       const velocity = rateOfLosingShyness;
 
       // monotonically decrease shyness if the environment is quiet
@@ -323,7 +353,7 @@ export class Frog {
       const velocity = this.rateOfStateChange;
 
       // increase shyness if environment is loud
-      // todo: also make a function of this.frogSignalDetected
+      // To Do: also make a function of this.frogSignalDetected?
       this.shyness += velocity * this.timeSinceLastUpdate();
     }
 
@@ -331,8 +361,7 @@ export class Frog {
   }
 
   /**
-   * Update the frog's "eagerness",
-   * which is the tendency of the frog to make its call
+   * Update the frog's "eagerness", which is the tendency of the frog to chirp
    */
   private updateEagerness() {
     if (this.frogSignalDetected) {
@@ -342,7 +371,8 @@ export class Frog {
       this.eagerness += velocity * this.timeSinceLastUpdate();
     } else {
       // do nothing; shyness will increase if the environment is loud
-      // eagerness will only monotonically increase, and not decrease
+      // eagerness will only monotonically increase, and will only decrease
+      // to 0 immediately after it makes a chirp
     }
 
     // limit eagerness to a max of 1
@@ -358,30 +388,27 @@ export class Frog {
   }
 
   /**
-   * Play audio sample
+   * Make the frog chirp, by playing audio sample
    */
   private playSample() {
-    log('croak');
-    this.audioElement.play();
     // TODO: while sample is playing, pause "listening" so the frog does not hear to itself
+
+    this.audioElement.play();
   }
 
   /**
-   * Determine whether the frog should sing, or not
+   * Determine whether the frog should chirp, or not
+   *
+   * To Do: use a probabalistic model based on eagerness and shyness, instead of a simple
+   * deterministic model
    */
-  private trySinging(simplifiedModel = false) {
-    let shouldSing;
+  private tryChirp() {
+    const shouldChirp = this.eagerness > Math.max(0.5, this.shyness) || this.eagerness > 0.999;
 
-    if (simplifiedModel) {
-      shouldSing = this.eagerness > 0.99999; // simplified model
-    } else {
-      shouldSing = this.eagerness > Math.max(0.5, this.shyness) || this.eagerness > 0.999;
-    }
-
-    if (shouldSing) {
+    if (shouldChirp) {
       this.playSample();
 
-      // reset eagerness to 0 so that the frog does not immediately sing at the next invocation
+      // reset eagerness to 0 so that the frog does not immediately chirp at the next invocation
       this.eagerness = 0;
     }
   }

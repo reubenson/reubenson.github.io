@@ -131,7 +131,12 @@ export function drawHistogram(dataArray: number[], canvasElement: HTMLCanvasElem
   }
 }
 
-export function logMinMax(data, label) {
+/**
+ * Log the min and max of input data
+ * @param data - array of data to operate on
+ * @param label - string to label log with
+ */
+export function logMinMax(data: Array<number>, label: string) {
   const min = _.min(data);
   const max = _.max(data);
 

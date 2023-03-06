@@ -17,7 +17,7 @@ export const PRINT_LOGS = writable(true);
 export const inputSamplingInterval = 50; // time (ms) between FFT analysis events
 export let inputSourceNode;
 
-function handleUpdate(frog) {
+function handleUpdates(frog: Frog) {
   FROGS.update(val => [...val, frog]);
   setInterval(() => {
     frog.updateState();
@@ -38,7 +38,7 @@ export const handleStart = () => {
       const frog = new Frog(audio, audioFile);
 
       frog.initialize().then(() => {
-        handleUpdate(frog);
+        handleUpdates(frog);
       });
     });
   });
