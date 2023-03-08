@@ -36,12 +36,14 @@
  *
  * Additional references:
  * On how frogs hear: https://www.sonova.com/en/story/frogs-hearing-no-ears
+ * Autocorrelation for pitch detection: https://alexanderell.is/posts/tuner/
+ * Convolution vs correlation: https://towardsdatascience.com/convolution-vs-correlation-af868b6b4fb5
+ * Pitchy lib: https://www.npmjs.com/package/pitchy
  */
 
-import _ from 'lodash';
 import { FFTConvolution } from 'ml-convolution';
 import type { AudioConfig } from './AudioManager';
-import { FFT_SIZE, frogsCount, inputSourceNode } from './store';
+import { FFT_SIZE, inputSourceNode } from './store';
 import { log, processFFT, calculateAmplitude } from './utils';
 
 let idCounter = 0;
