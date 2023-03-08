@@ -1,16 +1,11 @@
 <script lang="ts">
   import _ from 'lodash';
-  import { createEventDispatcher } from 'svelte';
   import { fade } from 'svelte/transition';
-  import svelteLogo from './assets/svelte.svg';
-  import Counter from './lib/Counter.svelte';
+  import Tailwind from './lib/Tailwind.svelte';
   import NAV from './lib/Nav.svelte';
-  import NAVITEM from './lib/Nav.svelte';
   import INTRO from './lib/Intro.svelte';
   import FROG from './lib/Frog.svelte';
-  import { hasStarted, FROGS, handleUrlUpdate, showInfo } from './lib/store';
-
-  let showIntro = true;
+  import { hasStarted, FROGS, handleUrlUpdate, showInfo, showIntro } from './lib/store';
   
   hasStarted.subscribe(value => {
     if (value) {
@@ -21,13 +16,12 @@
   window.addEventListener('hashchange', handleUrlUpdate);
 </script>
 
-<main>
-  <NAV>
-    <!-- On click, info screen will render on top -->
-    <NAVITEM>INFO</NAVITEM>
-  </NAV>
+<Tailwind />
 
-  <div class="info {$showInfo ? '' : 'hidden'}">
+<main class="bg-emerald-100 h-screen text-center">
+  <NAV />
+
+  <div class="info {$showInfo ? '' : 'hidden'}" transition:fade>
     <p transition:fade>
       TK TK Info to come
     </p>

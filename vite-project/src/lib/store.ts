@@ -5,6 +5,7 @@ import { Frog } from './Frog';
 
 // UI state
 export const showInfo = writable(false);
+export const showIntro = writable(true);
 export const showCloseIcon = writable(false);
 
 export const frogsCount = 1;
@@ -26,10 +27,12 @@ const historyState = { foo: 'bar' };
 
 export const handleUrlUpdate = () => {
   const hash = window.document.location.hash;
+  const matchesInfo = hash === '#info';
 
-  showInfo.set(hash === '#info');
+  showInfo.set(matchesInfo);
+  showIntro.set(!matchesInfo);
 
-  showCloseIcon.set(hash === '#info');
+  showCloseIcon.set(matchesInfo);
   console.log('hash', hash);
 };
 
