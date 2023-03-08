@@ -1,6 +1,6 @@
 <script lang="ts">
   // import { fade } from 'svelte/transition';
-  import { hasStarted } from "./store";
+  import { hasStarted, showCloseIcon, handleClose } from "./store";
 
   // let count: number = 0
   const startApp = () => {
@@ -42,7 +42,9 @@
       <li>
         <a href="#info">INFO</a>
       </li>
-      <!-- <slot></slot> -->
+      {#if $showCloseIcon}
+      <button on:click={handleClose}>x</button>
+      {/if}
     </ul>
       
    </nav>

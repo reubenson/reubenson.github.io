@@ -1,15 +1,15 @@
 <script lang="ts">
   import _ from 'lodash';
   import { createEventDispatcher } from 'svelte';
+  import { fade } from 'svelte/transition';
   import svelteLogo from './assets/svelte.svg';
   import Counter from './lib/Counter.svelte';
   import NAV from './lib/Nav.svelte';
   import NAVITEM from './lib/Nav.svelte';
   import INTRO from './lib/Intro.svelte';
   import FROG from './lib/Frog.svelte';
-  import { hasStarted, FROGS } from './lib/store';
+  import { hasStarted, FROGS, handleUrlUpdate, showInfo } from './lib/store';
 
-  let showInfo = false;
   let showIntro = true;
   
   hasStarted.subscribe(value => {
@@ -18,16 +18,7 @@
     }
   });
 
-  /**
-   * What things might live in the store?
-   * - Audio device configuration
-   * - FFT size
-   * - application start-state
-   * - Info render state
-   * - Debug mode state
-   *   - And which metrics to plot?
-   * - the audio sample to be used?
-  */
+  window.addEventListener('hashchange', handleUrlUpdate);
 </script>
 
 <main>
@@ -36,10 +27,12 @@
     <NAVITEM>INFO</NAVITEM>
   </NAV>
 
-  {#if showInfo}
-    TK TK Info to come
-  {/if}
-
+  <div class="info {$showInfo ? '' : 'hidden'}">
+    <p transition:fade>
+      TK TK Info to come
+    </p>
+  </div>
+  
   <!-- this is the loading screen, which will fade away on start -->
   {#if showIntro}
     <INTRO/>

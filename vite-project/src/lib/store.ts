@@ -3,6 +3,10 @@ import { writable } from 'svelte/store';
 import { AudioConfig } from './AudioManager';
 import { Frog } from './Frog';
 
+// UI state
+export const showInfo = writable(false);
+export const showCloseIcon = writable(false);
+
 export const frogsCount = 1;
 export const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 // peeper downloaded from https://www.umesc.usgs.gov/terrestrial/amphibians/armi/frog_calls/spring_peeper.mp3
@@ -15,7 +19,24 @@ export const DEBUG_ON = writable(true);
 export const FROGS = writable([]);
 export const PRINT_LOGS = writable(true);
 export const inputSamplingInterval = 50; // time (ms) between FFT analysis events
+export const url = writable('');
 export let inputSourceNode;
+
+const historyState = { foo: 'bar' };
+
+export const handleUrlUpdate = () => {
+  const hash = window.document.location.hash;
+
+  showInfo.set(hash === '#info');
+
+  showCloseIcon.set(hash === '#info');
+  console.log('hash', hash);
+};
+
+export const handleClose = () => {
+  history.pushState(historyState, null, '/');
+  handleUrlUpdate(); // update UI to url sta
+};
 
 function handleUpdates(frog: Frog) {
   FROGS.update(val => [...val, frog]);
