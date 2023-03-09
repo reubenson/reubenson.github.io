@@ -145,3 +145,9 @@ export function logMinMax(data: Array<number>, label: string) {
 
   // if (!min || !max) console.error('Error processing data', data);
 }
+
+export function matchToHash(str) {
+  const hash = window.document.location.hash;
+
+  return hash === `#${str}`;
+}

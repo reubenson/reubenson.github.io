@@ -2,17 +2,16 @@
   import _ from 'lodash';
   import { fade } from 'svelte/transition';
   import Tailwind from './lib/Tailwind.svelte';
+  import Section from './lib/Section.svelte';
   import NAV from './lib/Nav.svelte';
-  import INTRO from './lib/Intro.svelte';
   import FROG from './lib/Frog.svelte';
-  import { hasStarted, FROGS, handleUrlUpdate, showInfo, showIntro } from './lib/store';
+  import {
+    handleStart,
+    hasStarted,
+    FROGS,
+    handleUrlUpdate
+  } from './lib/store';
   
-  hasStarted.subscribe(value => {
-    if (value) {
-      showIntro = false;
-    }
-  });
-
   window.addEventListener('hashchange', handleUrlUpdate);
 </script>
 
@@ -21,34 +20,52 @@
 <main class="bg-emerald-100 h-screen text-center">
   <NAV />
 
-  <div class="info {$showInfo ? '' : 'hidden'}" transition:fade>
-    <p transition:fade>
+  <Section hashString=''>
+    {#if !$hasStarted}
+      <h1 class="text-4xl mt-4">
+        Frog Chorus
+      </h1>
+      <p class="mt-4 text-base">
+        TK TK Description of app to come
+      </p>
+      <button
+        class="bg-grey-100 border-2 rounded-lg p-2 mt-4"
+        on:click|once={handleStart}>
+          Start
+      </button>
+    {:else}
+      <!--
+
+      on start, the audio device will initialize, and a number of frogs
+      will be instantiated. Each frog will register itself with the audio device.
+      At an interval, the audio device will update the behavior of each frog.
+      When a frog makes a call, the audio device microphone needs to be disabled,
+      such that a frog does not listen to itself.
+
+      Each frog will also have its own debug state, which can be toggled on and off,
+      in order to print some basic metrics, and plot FFT histograms
+
+      -->
+      <div class="flex flex-row p-4">
+        {#each $FROGS as frog}<FROG {...frog}/>{/each}
+      </div>
+
+      <!-- TO DO: don't wait for audioImprint to calculate to start frog-->
+    {/if}
+  </Section>
+
+  <Section hashString='#info'>
+  <div class="text-base">
+    <p>
       TK TK Info to come
     </p>
   </div>
+  </Section>
   
   <!-- this is the loading screen, which will fade away on start -->
-  {#if showIntro}
+  <!-- {#if showIntro}
     <INTRO/>
-  {/if}
-
-  <!-- 
-    
-  on start, the audio device will initialize, and a number of frogs
-  will be instantiated. Each frog will register itself with the audio device.
-  At an interval, the audio device will update the behavior of each frog.
-  When a frog makes a call, the audio device microphone needs to be disabled,
-  such that a frog does not listen to itself. 
-
-  Each frog will also have its own debug state, which can be toggled on and off,
-  in order to print some basic metrics, and plot FFT histograms
-
-  -->
-  <div class="frogs-container">
-    {#each $FROGS as frog}
-      <FROG {...frog}/>
-    {/each}
-  </div>
+  {/if} -->
 
   <!-- todo: error panel, when app fails to start -->
 

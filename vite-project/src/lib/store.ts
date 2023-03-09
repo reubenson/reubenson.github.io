@@ -4,11 +4,9 @@ import { AudioConfig } from './AudioManager';
 import { Frog } from './Frog';
 
 // UI state
-export const showInfo = writable(false);
-export const showIntro = writable(true);
 export const showCloseIcon = writable(false);
 
-export const frogsCount = 1;
+export const frogsCount = 2;
 export const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 // peeper downloaded from https://www.umesc.usgs.gov/terrestrial/amphibians/armi/frog_calls/spring_peeper.mp3
 export const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3', 'spring-peeper.mp3'];
@@ -22,18 +20,17 @@ export const PRINT_LOGS = writable(true);
 export const inputSamplingInterval = 50; // time (ms) between FFT analysis events
 export const url = writable('');
 export let inputSourceNode;
+export const hash = writable('');
 
 const historyState = { foo: 'bar' };
 
 export const handleUrlUpdate = () => {
-  const hash = window.document.location.hash;
-  const matchesInfo = hash === '#info';
+  const h = window.document.location.hash;
 
-  showInfo.set(matchesInfo);
-  showIntro.set(!matchesInfo);
-
-  showCloseIcon.set(matchesInfo);
-  console.log('hash', hash);
+  hash.set(h);
+  // show a close icon when hash content is being rendered
+  showCloseIcon.set(h.includes('#'));
+  console.log('hash in store', hash);
 };
 
 export const handleClose = () => {
@@ -67,3 +64,6 @@ export const handleStart = () => {
     });
   });
 };
+
+// on initialization
+handleUrlUpdate();
