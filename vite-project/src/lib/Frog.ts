@@ -19,12 +19,6 @@
  *
  * To see a diagram of the general logic flow, see https://reubenson.com/frog/frog-diagram.png
  *
- * For the purposes of pairing, the following to-do tasks may be implemented:
- * 1. Pause audio analysis while a frog is chirping, so that its "hearing" is limited only to
- * other frogs, and does not listen to itself (fn: playSample)
- * 2. Improve the accuracy of frog signal detection (fn: detectFrogSignal).
- * 3. Apply a probabalistic model for whether the frog should chirp or not (fn: tryChirp).
- *
  * Historical Context:
  * Felix Hess began developing his frog-based installation work in 1982, which involved developing
  * a set of fifty robots, each outfitted with a microphone, speaker, and circuitry to allow each
@@ -41,10 +35,12 @@
  * Pitchy lib: https://www.npmjs.com/package/pitchy
  */
 
+import type { MeydaAnalyzer } from 'meyda';
+import Meyda from 'meyda';
 import { FFTConvolution } from 'ml-convolution';
 import type { AudioConfig } from './AudioManager';
 import { FFT_SIZE, inputSourceNode } from './store';
-import { log, processFFT, calculateAmplitude } from './utils';
+import { log, processFFT, calculateAmplitude, testProbability } from './utils';
 
 let idCounter = 0;
 
@@ -68,11 +64,14 @@ export class Frog {
   hasInitialized: boolean;
   convolutionAnalyser: AnalyserNode;
   directInputAnalyser: AnalyserNode;
+  meydaAnalyser: MeydaAnalyzer;
   amplitude: number;
   convolutionAmplitude: number;
   convolver: ConvolverNode;
   ambientFFT: Float32Array;
   frogSignalDetected: boolean;
+  isCurrentlySinging: boolean;
+  audioFeatures: object;
 
   constructor(audioConfig: AudioConfig, audioFilepath: string) {
     this.id = ++idCounter;
@@ -87,6 +86,7 @@ export class Frog {
     this.amplitudeThreshold = -80; // to be tweaked
     this.hasInitialized = false;
     this.frogSignalDetected = false;
+    this.isCurrentlySinging = false;
     this.createAudioElement();
   }
 
@@ -125,6 +125,11 @@ export class Frog {
    */
   public updateState() {
     if (!this.hasInitialized) return;
+
+    if (this.isCurrentlySinging) {
+      // log('pausing update state while chirping');
+      // return;
+    }
 
     this.analyseInputSignal();
 
@@ -183,6 +188,20 @@ export class Frog {
     inputSourceNode.connect(this.convolver);
     this.convolver.connect(this.convolutionAnalyser);
 
+    // create Meyda analyser
+    this.meydaAnalyser = Meyda.createMeydaAnalyzer({
+      audioContext: this.audioConfig.ctx,
+      sampleRate: this.audioConfig.ctx.sampleRate,
+      source: inputSourceNode,
+      bufferSize: 512,
+      featureExtractors: ['loudness', 'perceptualSpread', 'spectralSlope'],
+      callback: features => {
+        this.audioFeatures = Object.assign(features);
+      }
+    });
+
+    this.meydaAnalyser.start();
+
     // Debug: send convolved input through audio output
     // this.convolutionAnalyser.connect(this.audioConfig.ctx.destination);
   }
@@ -221,15 +240,15 @@ export class Frog {
     const imprintMin = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
     const imprintMax = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
 
-    log('imprintMin', imprintMin);
-    log('imprintMax', imprintMax);
+    // log('imprintMin', imprintMin);
+    // log('imprintMax', imprintMax);
 
     const linearAudioImprint = processFFT(this.audioImprint, { normalize: true });
     const imprintMinLinear = linearAudioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
     const imprintMaxLinear = linearAudioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
 
-    log('imprintMinLinear', imprintMinLinear);
-    log('imprintMaxLinear', imprintMaxLinear);
+    // log('imprintMinLinear', imprintMinLinear);
+    // log('imprintMaxLinear', imprintMaxLinear);
 
     // convolution is executed with the linearized audio imprint, such that values of the result range from 0 to 1
     this.fft = new FFTConvolution(FFT_SIZE / 2, linearAudioImprint.subarray(0, FFT_SIZE / 2 - 1));
@@ -328,14 +347,15 @@ export class Frog {
     const convolutionPeakBin = this.findPeakBin(this.convolutionFFT);
     const ambientPeakBin = this.findPeakBin(this.ambientFFT);
 
-    log('convolution peak bin', convolutionPeakBin);
-    log('ambient peak bin', ambientPeakBin);
+    // log('convolution peak bin', convolutionPeakBin);
+    // log('ambient peak bin', ambientPeakBin);
 
     // simple calculation: determine whether the peak frequency bin is similar,
     // between convolutionFFT and ambientFFT
     const peaksAreSimilar = Math.abs(convolutionPeakBin.index - ambientPeakBin.index) < 4;
     const convolutionIsLouder = convolutionPeakBin.value > ambientPeakBin.value;
 
+    // To Do: incorporate logic around audioFeatures?
     this.frogSignalDetected = peaksAreSimilar && convolutionIsLouder;
   }
 
@@ -393,9 +413,23 @@ export class Frog {
    * Make the frog chirp, by playing audio sample
    */
   private playSample() {
-    // TODO: while sample is playing, pause "listening" so the frog does not hear to itself
+    const shouldPauseWhilePlaying = true;
+
+    if (shouldPauseWhilePlaying) {
+      this.isCurrentlySinging = true;
+      this.meydaAnalyser.stop();
+
+      setTimeout(() => {
+        this.isCurrentlySinging = false;
+        this.meydaAnalyser.start();
+      }, this.sampleDuration * 1000);
+    }
 
     this.audioElement.play();
+  }
+
+  private determineChirpProbability() {
+    return this.eagerness * (1 - this.shyness);
   }
 
   /**
@@ -405,7 +439,8 @@ export class Frog {
    * deterministic model
    */
   private tryChirp() {
-    const shouldChirp = this.eagerness > Math.max(0.5, this.shyness) || this.eagerness > 0.999;
+    const chirpProbability = this.determineChirpProbability();
+    const shouldChirp = testProbability(chirpProbability);
 
     if (shouldChirp) {
       this.playSample();

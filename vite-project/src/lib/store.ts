@@ -6,7 +6,7 @@ import { Frog } from './Frog';
 // UI state
 export const showCloseIcon = writable(false);
 
-export const frogsCount = 2;
+export const frogsCount = 1;
 export const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
 // peeper downloaded from https://www.umesc.usgs.gov/terrestrial/amphibians/armi/frog_calls/spring_peeper.mp3
 export const AUDIO_FILES = ['Aneides_lugubris90.mp3', 'Anaxyrus_punctatus2.mp3', 'spring-peeper.mp3'];

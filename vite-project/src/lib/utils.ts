@@ -151,3 +151,16 @@ export function matchToHash(str) {
 
   return hash === `#${str}`;
 }
+
+/**
+ * Evaluate probability
+ * @param probability - number between 0 and 1
+ * @returns boolean
+ */
+export function testProbability(probability = 0) {
+  const r = Math.random();
+
+  console.log('probability', probability);
+  console.log('r', r);
+  return probability >= Math.random();
+}

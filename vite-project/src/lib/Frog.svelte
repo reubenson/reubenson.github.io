@@ -15,6 +15,8 @@
   export let convolutionFFT;
   export let diffFFT;
   export let ambientFFT;
+  export let audioFeatures;
+  export let isCurrentlySinging;
   let imprintEl, fftEl, convolutionEl, differenceEl, ambientEl;
 
 
@@ -56,7 +58,7 @@
   });
 </script>
 
-<div class="frog-item max-w-lg m-auto border-black border-4 p-4 rounded-md">
+<div class="frog-item max-w-lg m-auto border-black border-4 p-4 rounded-md transition-colors duration-500 {isCurrentlySinging ? 'bg-lime-800' : ''}">
   <div class="frog-item-state">
     <!-- to flash colors when singing and detecting other frogs -->
   </div>
@@ -70,6 +72,9 @@
         <li class="basis-2/4">Amplitude: {_.round(amplitude, 2)}</li>
         <li class="basis-2/4">Convolution Amplitude: {Math.round(convolutionAmplitude)}</li>
       </ul>
+      Loudness: {_.round(audioFeatures?.loudness?.total, 2)}
+      Spread: {_.round(audioFeatures?.perceptualSpread, 2)}
+      Slope: {audioFeatures?.spectralSlope}
     </div>
     <header class="text-xl mb-2">Figures</header>
     <div class="flex flex-wrap flex-row">

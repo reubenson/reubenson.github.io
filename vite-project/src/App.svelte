@@ -17,7 +17,7 @@
 
 <Tailwind />
 
-<main class="bg-emerald-100 h-screen text-center">
+<main class="bg-emerald-100 h-screen text-center tracking-widest">
   <NAV />
 
   <Section hashString=''>
@@ -26,12 +26,12 @@
         Frog Chorus
       </h1>
       <p class="mt-4 text-base">
-        TK TK Description of app to come
+        <!-- TK TK Description of app to come -->
       </p>
       <button
-        class="bg-grey-100 border-2 rounded-lg p-2 mt-4"
+        class="border-black border-2 bg-white rounded-lg p-2 mt-4 tracking-wider"
         on:click|once={handleStart}>
-          Start
+          START
       </button>
     {:else}
       <!--
