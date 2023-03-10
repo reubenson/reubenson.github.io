@@ -428,15 +428,18 @@ export class Frog {
     this.audioElement.play();
   }
 
+  /**
+   * Determine the likelihood that the frog should chirp.
+   * Currently a simple calculation, but curves can be adjusted
+   * to yield different frog chorus behaviors
+   * @returns number - between 0 and 1
+   */
   private determineChirpProbability() {
     return this.eagerness * (1 - this.shyness);
   }
 
   /**
    * Determine whether the frog should chirp, or not
-   *
-   * To Do: use a probabalistic model based on eagerness and shyness, instead of a simple
-   * deterministic model
    */
   private tryChirp() {
     const chirpProbability = this.determineChirpProbability();

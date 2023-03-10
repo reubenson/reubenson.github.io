@@ -66,17 +66,28 @@
     <header class="text-2xl">Frog {id}</header>
     <div class="mt-2">
       <header class="text-xl mb-2">Basic Metrics</header>
-      <ul class="flex">
-        <li class="basis-2/4">Shyness: {_.round(shyness, 3)}</li>
-        <li class="basis-2/4">Eagerness: {_.round(eagerness, 3)}</li>
-        <li class="basis-2/4">Amplitude: {_.round(amplitude, 2)}</li>
-        <li class="basis-2/4">Convolution Amplitude: {Math.round(convolutionAmplitude)}</li>
+      <ul class="flex flex-row flex-wrap">
+        <li class="h-14 p-2 basis-2/4">Shyness: {_.round(shyness, 3)}</li>
+        <li class="h-14 p-2 basis-2/4">Eagerness: {_.round(eagerness, 3)}</li>
+        <li class="h-14 p-2 basis-2/4">Amplitude: {_.round(amplitude, 2)}</li>
+        <li class="h-14 p-2 basis-2/4">Conv Amp: {Math.round(convolutionAmplitude)}</li>
       </ul>
-      Loudness: {_.round(audioFeatures?.loudness?.total, 2)}
-      Spread: {_.round(audioFeatures?.perceptualSpread, 2)}
-      Slope: {audioFeatures?.spectralSlope}
+      <header class="mt-4 text-xl">
+        Audio Features
+      </header>
+      <ul>
+        <li>
+          Loudness: {_.round(audioFeatures?.loudness?.total, 2)}
+        </li>
+        <li>
+          Spread: {_.round(audioFeatures?.perceptualSpread, 2)}
+        </li>
+        <li>
+          Slope: {audioFeatures?.spectralSlope}
+        </li>
+      </ul>
     </div>
-    <header class="text-xl mb-2">Figures</header>
+    <header class="text-xl mt-8 mb-2">Figures</header>
     <div class="flex flex-wrap flex-row">
       <div class="basis-2/4 p-2 shrink">
         <header>Audio Imprint</header>

@@ -158,9 +158,5 @@ export function matchToHash(str) {
  * @returns boolean
  */
 export function testProbability(probability = 0) {
-  const r = Math.random();
-
-  console.log('probability', probability);
-  console.log('r', r);
   return probability >= Math.random();
 }
