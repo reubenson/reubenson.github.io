@@ -22,8 +22,6 @@ export class AudioConfig {
   public start() {
     try {
       (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
-      throw new Error('test');
-      // window.AudioContext = window.AudioContext;
       this.ctx = new AudioContext();
       this.sampleRate = this.ctx.sampleRate;
       log('Audio Sample Rate:', this.sampleRate);
