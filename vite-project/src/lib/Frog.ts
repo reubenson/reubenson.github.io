@@ -342,6 +342,7 @@ export class Frog {
    * TO DO: Ideas for improving signal detection
    * - Use a weighted average calculation instead of analysing frequency bins in the FFT individually
    * - Use a library like Meyda to extract more complex audio features (https://meyda.js.org/audio-features)
+   * - Try statistical measurements https://www.npmjs.com/package/stat-fns
    */
   private detectFrogSignal() {
     const convolutionPeakBin = this.findPeakBin(this.convolutionFFT);

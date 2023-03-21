@@ -5,6 +5,8 @@ import { Frog } from './Frog';
 
 // UI state
 export const showCloseIcon = writable(false);
+export const showError = writable(false);
+export const errorMessage = writable('');
 
 export const frogsCount = 1;
 export const AUDIO_SRC_DIRECTORY = 'https://reubenson.com/frog/audio';
@@ -50,19 +52,26 @@ function handleUpdates(frog: Frog) {
 }
 
 export const handleStart = () => {
-  return audio.start().then(() => {
-    inputSourceNode = audio.input;
+  return audio
+    .start()
+    .then(() => {
+      inputSourceNode = audio.input;
 
-    hasStarted.set(true);
+      hasStarted.set(true);
 
-    _.times(frogsCount, () => {
-      const frog = new Frog(audio, audioFile);
+      _.times(frogsCount, () => {
+        const frog = new Frog(audio, audioFile);
 
-      frog.initialize().then(() => {
-        handleUpdates(frog);
+        frog.initialize().then(() => {
+          handleUpdates(frog);
+        });
       });
+    })
+    .catch(errorMsg => {
+      console.error('here', errorMsg);
+      showError.set(true);
+      errorMessage.set(errorMsg);
     });
-  });
 };
 
 // on initialization

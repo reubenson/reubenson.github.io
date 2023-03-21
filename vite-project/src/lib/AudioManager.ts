@@ -15,12 +15,24 @@ export class AudioConfig {
   groupId: string;
   sampleRate: number;
 
+  /**
+   * Initialize Audio class instance
+   * @returns Promise
+   */
   public start() {
-    (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
-    this.ctx = new AudioContext();
-    this.sampleRate = this.ctx.sampleRate;
-    log('Audio Sample Rate:', this.sampleRate);
-    return this.setInputDeviceId().then(this.initializeAudio.bind(this));
+    try {
+      (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
+      throw new Error('test');
+      // window.AudioContext = window.AudioContext;
+      this.ctx = new AudioContext();
+      this.sampleRate = this.ctx.sampleRate;
+      log('Audio Sample Rate:', this.sampleRate);
+      return this.setInputDeviceId().then(this.initializeAudio.bind(this));
+    } catch (error) {
+      console.error('error here', error.message);
+      // throw new Error(' okayyy');
+      return Promise.reject(error.message);
+    }
   }
 
   /**

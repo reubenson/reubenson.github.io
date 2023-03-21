@@ -9,7 +9,9 @@
     handleStart,
     hasStarted,
     FROGS,
-    handleUrlUpdate
+    handleUrlUpdate,
+    showError,
+    errorMessage
   } from './lib/store';
   
   window.addEventListener('hashchange', handleUrlUpdate);
@@ -17,7 +19,7 @@
 
 <Tailwind />
 
-<main class="bg-emerald-100 h-screen text-center tracking-widest">
+<main class="font-serif bg-emerald-100 h-screen text-center tracking-widest">
   <NAV />
 
   <Section hashString=''>
@@ -25,14 +27,23 @@
       <h1 class="text-4xl mt-4">
         Frog Chorus
       </h1>
-      <p class="mt-4 text-base">
-        <!-- TK TK Description of app to come -->
-      </p>
-      <button
-        class="border-black border-2 bg-white rounded-lg p-2 mt-4 tracking-wider"
-        on:click|once={handleStart}>
-          START
-      </button>
+      {#if !$showError}
+        <p class="mt-4 text-base">
+          <!-- TK TK Description of app to come -->
+        </p>
+        <button
+          class="border-black border-2 bg-white rounded-lg p-2 mt-4 tracking-wider"
+          on:click|once={handleStart}>
+            START
+        </button>
+      {:else}
+        <div>
+          <!-- <header>Error</header> -->
+          <p class="mt-4 text-base">
+            There was an error setting up your frog: "{$errorMessage}". Please try on a newer version of the Chrome browser.
+          </p>
+        </div>
+      {/if}
     {:else}
       <!--
 
@@ -66,8 +77,6 @@
   <!-- {#if showIntro}
     <INTRO/>
   {/if} -->
-
-  <!-- todo: error panel, when app fails to start -->
 
   <!-- potentially use slider to determine number of frogs instantiated 
   https://svelte.dev/tutorial/local-transitions -->
