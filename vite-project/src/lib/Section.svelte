@@ -10,6 +10,6 @@
   });
 </script>
 
-<section transition:fade class="{showSection ? '' : 'hidden'}">
+<section transition:fade class="{showSection ? '' : 'hidden'} max-w-xl m-auto pl-6 pr-6 text-left">
   <slot></slot>
 </section>

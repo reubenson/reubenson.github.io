@@ -9,14 +9,16 @@
       class:open
     >
       <li>
+        {#if !$showCloseIcon}
         <a href="#info">INFO</a>
+        {/if}
       </li>
       
     </ul>
     {#if $showCloseIcon}
       <button 
-        class="absolute right-4 top-4"
-        on:click={handleClose}>x</button>
+        class="absolute left-6 top-4"
+        on:click={handleClose}>&#10008</button>
     {/if}
    </nav>
 </header>

@@ -12,27 +12,35 @@
     handleUrlUpdate,
     showError,
     errorMessage
-  } from './lib/store';
+  } from './lib/store'
+  import './app.css'
+  import hess_diagram from './assets/hess_diagram.jpeg';
   
   window.addEventListener('hashchange', handleUrlUpdate);
 </script>
 
 <Tailwind />
 
-<main class="font-serif bg-emerald-100 h-screen text-center tracking-widest">
+<main class="font-serif bg-emerald-100 h-screen text-center tracking-wider overflow-y-scroll pb-6">
   <NAV />
 
   <Section hashString=''>
     {#if !$hasStarted}
-      <h1 class="text-4xl mt-4">
+      <h1 class="text-4xl mt-4 text-center">
         Frog Chorus
       </h1>
       {#if !$showError}
-        <p class="mt-4 text-base">
-          <!-- TK TK Description of app to come -->
+        <p>
+          Frog Chorus is a simple application that allows your mobile device or computer to sing in a “chorus” of other devices, as if they were a chorus of frogs in the wild. This application uses your device's built-in speaker and microphone to operate, and does not require that devices be connected on a common Wi-Fi network.
+        </p>
+        <p>
+          If you'd like to learn more about actual frog choruses, see TK TK.
+        </p>
+        <p>
+          This project is dedicated to the memory of the Dutch sound artist, <a href="https://simple.wikipedia.org/wiki/Felix_Hess">Felix Hess</a> (1941 - 2022). To learn more about his installation work and the origins of this project, see <a href="#info">info</a>.
         </p>
         <button
-          class="border-black border-2 bg-white rounded-lg p-2 mt-4 tracking-wider"
+          class="border-black border-2 bg-white rounded-lg p-2 mt-4 tracking-wider m-auto block"
           on:click|once={handleStart}>
             START
         </button>
@@ -68,57 +76,33 @@
   <Section hashString='#info'>
   <div class="text-base">
     <p>
-      TK TK Info to come
+      This project is a translation of a series of art installations by the late Dutch sound artist Felix Hess. The first such installation was developed in 1982, with a set of fifty robots,each outfitted with a microphone, speaker, and circuitry to allow each robot to listen to its environment and make sounds in the manner of a frog in a frog chorus. 
     </p>
-  </div>
+    <!-- blockquote -->
+    <!-- The acoustic communications between animals like frogs, cicadas, or grasshoppers often give rise to group concerts or choruses. Both order and chaos appear to be present in the resulting sound patterns, and one may notice various rhythms and wavelike movements. Similar group processes can be realised with machines built specifically for such a purpose. - Felix Hess -->
+    <p>
+      Hess' original designs for accomplishing this were are relatively straightfoward, in which the robot-frog's sounding behavior is predicated on "eagerness" and "shyness". When eagerness is high relative to shyness, the robot will emit a chirp, which is then "heard" by the other robots. Each robot will increase its eagerness when it hears another's chirp, and will increase its shyness when it hears non-chirping sounds. Through this simple set of rules, a dynamic chorus of sounds emerges, which is highly sensitive to environmental dynamics, much like if one were encountering a group of frogs in the wild.
+    </p>
+    <figure>
+      <img src="{hess_diagram}" alt="Flow diagram of the frog behavior">
+      <figcaption class="text-sm text-center">
+        Flow diagram of the frog behavior excerpted from Hess' <a href="https://isea-archives.siggraph.org/art-events/electronic-sound-creatures-by-felix-hess/" class="italic">Electronic Sound Creatures</a>
+      </figcaption>
+    </figure>
+    <p>
+      The project presented here utilizes the Web Audio API to make a browser-based translation of Hess' robot-frogs, allowing a set of users in physical, acoustic proximity to have their mobile devices "sing" to each other as if they were frogs. The implementation of "hearing" is predicated here on relatively unsophisticated FFT (fast fourier transform) analysis via the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode">Web Audio AnalyserNode</a>.
+    </p>
+    <p>For more information about the developer of this project, visit <a href="https://reubenson.com">https://reubenson.com</a>.</p>
+    <h6 class="mt-4 text-lg">References</h6>
+    <ol class="list-disc">
+      <li class="list-inside"><a href="https://bldgblog.com/2008/04/space-as-a-symphony-of-turning-off-sounds/" target="_blank" rel="noreferrer">A brief historical introduction on BLDG Blog</a></li>
+      <li class="list-inside"><a href="https://www.youtube.com/watch?v=rMnFKYHzm2k" target="_blank" rel="noreferrer">Artist talk by Felix Hess in 2010 (YouTube)</a></li>
+      <li class="list-inside"><a href="https://www.kehrerverlag.com/en/felix-hess-light-as-air-978-3-933257-65-9" target="_blank" rel="noreferrer">"Light as Air"</a> monograph published by Kehrer Verlag</li>
+      <li class="list-inside"><a href="https://isea-archives.siggraph.org/art-events/electronic-sound-creatures-by-felix-hess/" target="_blank" rel="noreferrer" class="italic">Electronic Sound Creatures by Felix Hess</a></li>
+      <li class="list-inside"><a href="https://basicfunction-releases.bandcamp.com/album/frog-night" target="_blank" rel="noreferrer">Felix's audio recordings, recently reissued by Basic Function</a></li>
+    </ol>
   </Section>
-  
-  <!-- this is the loading screen, which will fade away on start -->
-  <!-- {#if showIntro}
-    <INTRO/>
-  {/if} -->
 
   <!-- potentially use slider to determine number of frogs instantiated 
   https://svelte.dev/tutorial/local-transitions -->
-  
-
-  <!-- <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer"> 
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p> -->
 </main>
-
-<!-- <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style> -->

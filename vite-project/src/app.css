@@ -1,3 +1,15 @@
+section p {
+  margin-top: 1em;
+}
+
+section figure {
+  margin-top: 1em;
+}
+
+section a {
+  text-decoration: underline;
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
