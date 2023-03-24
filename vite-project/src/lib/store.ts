@@ -40,6 +40,12 @@ export const handleClose = () => {
   handleUrlUpdate(); // update UI to url sta
 };
 
+export const handleError = (msg) => {
+  console.error('Rendering error to user:', msg);
+  showError.set(true);
+  errorMessage.set(msg);
+}
+
 function handleUpdates(frog: Frog) {
   FROGS.update(val => [...val, frog]);
   setInterval(() => {
@@ -54,22 +60,24 @@ function handleUpdates(frog: Frog) {
 export const handleStart = () => {
   return audio
     .start()
-    .then((res) => {
-      console.log('res after start', res);
+    .then(() => {
       inputSourceNode = audio.input;
 
-      hasStarted.set(true);
-
-      _.times(frogsCount, () => {
+      const promises = _.times(frogsCount, async () => {
         const frog = new Frog(audio, audioFile);
 
-        frog.initialize().then(() => {
-          handleUpdates(frog);
-        });
+        await frog.initialize()
+          .then(() => {
+            handleUpdates(frog);
+          });
       });
+
+      return Promise.all(promises);
+    })
+    .then(() => {
+      hasStarted.set(true);
     })
     .catch(errorMsg => {
-      console.error('here', errorMsg);
       showError.set(true);
       errorMessage.set(errorMsg);
     });

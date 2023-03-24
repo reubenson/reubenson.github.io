@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FFT_SIZE } from './store';
+import { FFT_SIZE, handleError } from './store';
 import { log } from './utils';
 
 /**
@@ -113,7 +113,13 @@ export class AudioConfig {
     const numberOfSteps = 5; // can be tweaked
     const intervalLength = Math.floor((duration * 1000) / numberOfSteps);
 
-    audio.play();
+    // render error if there is an issue on playback
+    await audio.play()
+      .catch(e => {
+        handleError(e);
+        throw new Error(e);
+      });
+
     for (let index = 0; index < numberOfSteps; index++) {
       await new Promise(resolve => setTimeout(resolve, intervalLength));
       analyserNode.getFloatFrequencyData(fft);

@@ -89,7 +89,7 @@ export class Frog {
     this.isCurrentlySinging = false;
     this.createAudioElement();
 
-    this.playSample();
+    // this.playSample();
   }
 
   /**
@@ -105,7 +105,11 @@ export class Frog {
     // measure audio imprint (FFT signature) of sample
     const frogSourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
 
-    await this.createAudioImprint(frogSourceNode);
+    try {
+      await this.createAudioImprint(frogSourceNode);
+    } catch (error) {
+      return Promise.reject(error);
+    }
 
     // connect audio to destination device
     frogSourceNode.connect(this.audioConfig.ctx.destination);
@@ -428,7 +432,10 @@ export class Frog {
       }, this.sampleDuration * 1000);
     }
 
-    this.audioElement.play();
+    this.audioElement.play()
+      .catch(e => {
+        console.log('e', e);
+      });
   }
 
   /**
@@ -446,7 +453,7 @@ export class Frog {
    */
   private tryChirp() {
     const chirpProbability = this.determineChirpProbability();
-    const shouldChirp = testProbability(chirpProbability);
+    const shouldChirp = testProbability(chirpProbability) || true;
 
     if (shouldChirp) {
       this.playSample();
