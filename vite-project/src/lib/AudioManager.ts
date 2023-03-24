@@ -33,7 +33,6 @@ export class AudioConfig {
         });
     } catch (error) {
       console.error('error here', error.message);
-      // throw new Error(' okayyy');
       return Promise.reject(error.message);
     }
   }

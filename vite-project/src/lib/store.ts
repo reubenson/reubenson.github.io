@@ -54,7 +54,8 @@ function handleUpdates(frog: Frog) {
 export const handleStart = () => {
   return audio
     .start()
-    .then(() => {
+    .then((res) => {
+      console.log('res after start', res);
       inputSourceNode = audio.input;
 
       hasStarted.set(true);
