@@ -83,7 +83,6 @@ export class AudioConfig {
     else if (this.groupId) constraints.audio = { groupId: { exact: this.groupId } };
 
     try {
-      throw "testing exception in initialize";
       return navigator.mediaDevices
         .getUserMedia(constraints)
         .then((stream: any) => {
@@ -95,8 +94,9 @@ export class AudioConfig {
           this.analyser.smoothingTimeConstant = 0.5; // to be tweaked
           // input.connect(this.analyser); // why is this here??
         })
-        .catch(function (error) {
-          console.error('Error initializing audio input', error.message);
+        .catch(err => {
+          console.error('Error initializing audio input', err);
+          return Promise.reject(err);
         });
     } catch (error) {
       console.error('try failed:', error);
