@@ -48,7 +48,13 @@
         <div>
           <!-- <header>Error</header> -->
           <p class="mt-4 text-base">
-            There was an error setting up your frog: "{$errorMessage}". If you did not see a prompt to give permissions for this website to access your microphone, please go to your browser settings and make sure you don't have it set to always deny microphone access permissions.
+            There was an error setting up your frog:
+          </p>
+          <p>
+            "{$errorMessage}"
+          </p>
+          <p>
+            If you did not see a prompt to give permissions for this website to access your microphone, please go to your browser settings and make sure you don't have it set to always deny microphone access permissions.
           </p>
         </div>
       {/if}

@@ -20,24 +20,19 @@ export class AudioConfig {
    * @returns Promise
    */
   public start() {
-    try {
-      (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
-      this.ctx = new AudioContext();
-      this.sampleRate = this.ctx.sampleRate;
-      log('Audio Sample Rate:', this.sampleRate);
-      return this.setInputDeviceId()
-        .then(this.initializeAudio.bind(this))
-        .then(() => {
-          console.log('audio start complete');
-        })
-        .catch(err => {
-          console.error('error up', err);
-          return Promise.reject(err.message);
-        });
-    } catch (error) {
-      console.error('error here', error.message);
-      return Promise.reject(error.message);
-    }
+    (window as any).AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
+    this.ctx = new AudioContext();
+    this.sampleRate = this.ctx.sampleRate;
+    log('Audio Sample Rate:', this.sampleRate);
+
+    return this.setInputDeviceId()
+      .then(this.initializeAudio.bind(this))
+      .then(() => {
+        console.log('audio start complete');
+      })
+      // .catch(err => {
+      //   return Promise.reject(err.message);
+      // });
   }
 
   /**
@@ -45,30 +40,24 @@ export class AudioConfig {
    * @returns Promise
    */
   private setInputDeviceId() {
-    try {
-      return navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-          const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
-          const audioInputDevice = audioInputDevices[0];
-  
-          if (!audioInputDevice) {
-            console.error('no audio input device found');
-            return;
-          } else if (audioInputDevices.length > 1) {
-            console.warn(`multiple audio devices found - selecting ${JSON.stringify(audioInputDevice)}`);
-          }
-  
-          this.deviceId = audioInputDevice.deviceId;
-          this.groupId = audioInputDevice.groupId;
-        })
-        .catch(err => {
-          console.error('setInputDeviceId error:', err);
-          return Promise.reject(err);
-        });
-    } catch (error) {
-      console.error('setInputDeviceId:', error);
-      return Promise.reject(error);
-    }
+    return navigator.mediaDevices.enumerateDevices()
+      .then(devices => {
+        const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
+        const audioInputDevice = audioInputDevices[0];
+
+        if (!audioInputDevice) {
+          console.error('no audio input device found');
+          return;
+        } else if (audioInputDevices.length > 1) {
+          console.warn(`multiple audio devices found - selecting ${JSON.stringify(audioInputDevice)}`);
+        }
+
+        this.deviceId = audioInputDevice.deviceId;
+        this.groupId = audioInputDevice.groupId;
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      });
   }
 
   /**
@@ -82,26 +71,20 @@ export class AudioConfig {
     if (this.deviceId) constraints.audio = { deviceId: { exact: this.deviceId } };
     else if (this.groupId) constraints.audio = { groupId: { exact: this.groupId } };
 
-    try {
-      return navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then((stream: any) => {
-          const input = ctx.createMediaStreamSource(stream);
-  
-          this.input = input;
-          this.analyser = ctx.createAnalyser();
-          this.analyser.fftSize = FFT_SIZE;
-          this.analyser.smoothingTimeConstant = 0.5; // to be tweaked
-          // input.connect(this.analyser); // why is this here??
-        })
-        .catch(err => {
-          console.error('Error initializing audio input', err);
-          return Promise.reject(err);
-        });
-    } catch (error) {
-      console.error('try failed:', error);
-      return Promise.reject(error);
-    }
+    return navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then((stream: any) => {
+        const input = ctx.createMediaStreamSource(stream);
+
+        this.input = input;
+        this.analyser = ctx.createAnalyser();
+        this.analyser.fftSize = FFT_SIZE;
+        this.analyser.smoothingTimeConstant = 0.5; // to be tweaked
+        // input.connect(this.analyser); // why is this here??
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      });
   }
 
   /**
