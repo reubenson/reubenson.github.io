@@ -79,7 +79,7 @@ export class Frog {
     this.lastUpdated = Date.now();
     this.currentTimestamp = Date.now();
     this.rateOfStateChange = 0.2; // to be tweaked
-    this.amplitudeThreshold = -80; // to be tweaked
+    this.amplitudeThreshold = -70; // to be tweaked
     this.hasInitialized = false;
     this.frogSignalDetected = false;
     this.isCurrentlySinging = false;
