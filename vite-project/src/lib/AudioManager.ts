@@ -27,6 +27,9 @@ export class AudioConfig {
       log('Audio Sample Rate:', this.sampleRate);
       return this.setInputDeviceId()
         .then(this.initializeAudio.bind(this))
+        .then(() => {
+          console.log('audio start complete');
+        })
         .catch(err => {
           console.error('error up', err.message);
           return Promise.reject(err.message);
@@ -42,20 +45,21 @@ export class AudioConfig {
    * @returns Promise
    */
   private setInputDeviceId() {
-    return navigator.mediaDevices.enumerateDevices().then(devices => {
-      const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
-      const audioInputDevice = audioInputDevices[0];
+    return navigator.mediaDevices.enumerateDevices()
+      .then(devices => {
+        const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
+        const audioInputDevice = audioInputDevices[0];
 
-      if (!audioInputDevice) {
-        console.error('no audio input device found');
-        return;
-      } else if (audioInputDevices.length > 1) {
-        console.warn(`multiple audio devices found - selecting ${JSON.stringify(audioInputDevice)}`);
-      }
+        if (!audioInputDevice) {
+          console.error('no audio input device found');
+          return;
+        } else if (audioInputDevices.length > 1) {
+          console.warn(`multiple audio devices found - selecting ${JSON.stringify(audioInputDevice)}`);
+        }
 
-      this.deviceId = audioInputDevice.deviceId;
-      this.groupId = audioInputDevice.groupId;
-    });
+        this.deviceId = audioInputDevice.deviceId;
+        this.groupId = audioInputDevice.groupId;
+      });
   }
 
   /**
