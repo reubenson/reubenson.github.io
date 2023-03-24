@@ -80,6 +80,7 @@ export class AudioConfig {
     else if (this.groupId) constraints.audio = { groupId: { exact: this.groupId } };
 
     try {
+      throw "testing exception in initialize";
       return navigator.mediaDevices
         .getUserMedia(constraints)
         .then((stream: any) => {
