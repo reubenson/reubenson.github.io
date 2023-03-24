@@ -29,10 +29,7 @@ export class AudioConfig {
       .then(this.initializeAudio.bind(this))
       .then(() => {
         console.log('audio start complete');
-      })
-      // .catch(err => {
-      //   return Promise.reject(err.message);
-      // });
+      });
   }
 
   /**
