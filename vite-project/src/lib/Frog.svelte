@@ -1,12 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import _ from 'lodash';
-  import { draw } from "svelte/transition";
-  import { drawFFT, drawHistogram } from "./utils";
-  import { hasStarted, audio, audioFile } from './store';
+  import { drawFFT } from "./utils";
   
   export let id;
-  export let audioImprint;
   export let amplitude;
   export let convolutionAmplitude;
   export let shyness;
@@ -17,7 +13,7 @@
   export let ambientFFT;
   export let audioFeatures;
   export let isCurrentlySinging;
-  let imprintEl, fftEl, convolutionEl, differenceEl, ambientEl;
+  let fftEl, convolutionEl, differenceEl, ambientEl;
 
 
   function plotInputFFT(data) {
@@ -50,18 +46,9 @@
     plotDifference(diffFFT);
     plotBaseline(ambientFFT);
   }
-
-  // this component is expected to mount only after initialization
-  // which is handled in store.js
-  onMount(() => {
-    drawFFT(audioImprint, imprintEl);
-  });
 </script>
 
 <div class="frog-item max-w-lg m-auto border-black border-4 p-4 rounded-md transition-colors duration-500 {isCurrentlySinging ? 'bg-lime-800' : ''}">
-  <div class="frog-item-state">
-    <!-- to flash colors when singing and detecting other frogs -->
-  </div>
   <div class="frog-debug-panel mt-2">
     <header class="text-2xl">Frog {id}</header>
     <div class="mt-2">
@@ -89,10 +76,6 @@
     </div>
     <header class="text-xl mt-8 mb-2">Figures</header>
     <div class="flex flex-wrap flex-row">
-      <div class="basis-2/4 p-2 shrink">
-        <header>Audio Imprint</header>
-        <canvas bind:this={imprintEl} class="w-full"></canvas>
-      </div>
       <div class="basis-2/4 p-2 shrink">
         <header>FFT</header>
         <canvas bind:this={fftEl} class="w-full"></canvas>

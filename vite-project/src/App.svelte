@@ -41,7 +41,7 @@
         </p>
         <button
           class="border-black border-2 bg-white rounded-lg p-2 mt-4 tracking-wider m-auto block"
-          on:click|once|capture={handleStart}>
+          on:click|once|capture|trusted={handleStart}>
             START
         </button>
       {:else}

@@ -114,11 +114,11 @@ export class AudioConfig {
     const intervalLength = Math.floor((duration * 1000) / numberOfSteps);
 
     // render error if there is an issue on playback
-    await audio.play()
-      .catch(e => {
-        handleError(e);
-        throw new Error(e);
-      });
+    // await audio.play()
+    //   .catch(e => {
+    //     handleError(e);
+    //     throw new Error(e);
+    //   });
 
     for (let index = 0; index < numberOfSteps; index++) {
       await new Promise(resolve => setTimeout(resolve, intervalLength));

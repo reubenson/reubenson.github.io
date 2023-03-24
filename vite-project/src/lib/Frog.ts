@@ -37,7 +37,6 @@
 
 import type { MeydaAnalyzer } from 'meyda';
 import Meyda from 'meyda';
-import { FFTConvolution } from 'ml-convolution';
 import type { AudioConfig } from './AudioManager';
 import { FFT_SIZE, inputSourceNode } from './store';
 import { log, processFFT, calculateAmplitude, testProbability } from './utils';
@@ -50,12 +49,9 @@ export class Frog {
   audioConfig: AudioConfig;
   shyness: number; // 0. - 1.
   eagerness: number; // 0. - 1.
-  audioImprint: Float32Array;
   directInputFFT: Float32Array;
   convolutionFFT: Float32Array;
   diffFFT: Float32Array;
-  audioElement: HTMLAudioElement;
-  fft: FFTConvolution;
   lastUpdated: number;
   currentTimestamp: number;
   rateOfStateChange: number; // manually-calibrated value used to determine rate of change in eagerness and shyness
@@ -72,6 +68,7 @@ export class Frog {
   frogSignalDetected: boolean;
   isCurrentlySinging: boolean;
   audioFeatures: object;
+  buffer: AudioBuffer;
 
   constructor(audioConfig: AudioConfig, audioFilepath: string) {
     this.id = ++idCounter;
@@ -79,7 +76,6 @@ export class Frog {
     this.audioFilepath = audioFilepath;
     this.shyness = 1.0; // initiaize to 1 (maximum shyness)
     this.eagerness = 0.0; // initialize to 0 (minimum eagerness)
-    this.audioImprint = new Float32Array(FFT_SIZE / 2);
     this.lastUpdated = Date.now();
     this.currentTimestamp = Date.now();
     this.rateOfStateChange = 0.2; // to be tweaked
@@ -87,9 +83,6 @@ export class Frog {
     this.hasInitialized = false;
     this.frogSignalDetected = false;
     this.isCurrentlySinging = false;
-    this.createAudioElement();
-
-    // this.playSample();
   }
 
   /**
@@ -100,19 +93,7 @@ export class Frog {
   public async initialize() {
     const attemptRate = 100; // evaluate whether to chirp every 100 ms
 
-    await this.setSampleDuration();
-
-    // measure audio imprint (FFT signature) of sample
-    const frogSourceNode = this.audioConfig.ctx.createMediaElementSource(this.audioElement);
-
-    try {
-      await this.createAudioImprint(frogSourceNode);
-    } catch (error) {
-      return Promise.reject(error);
-    }
-
-    // connect audio to destination device
-    frogSourceNode.connect(this.audioConfig.ctx.destination);
+    await this.fetchAudioBuffer();
 
     this.setUpAnalysers();
 
@@ -215,61 +196,26 @@ export class Frog {
   /**
    * Determine length of audio sample, in seconds
    */
-  private async setSampleDuration() {
+  private async fetchAudioBuffer() {
     await new Promise<void>(resolve => {
       const req = new XMLHttpRequest();
 
-      req.open('GET', this.audioElement.src, true);
+      req.open('GET', this.audioFilepath, true);
       req.responseType = 'arraybuffer';
       req.onload = () => {
         const data = req.response;
 
         this.audioConfig.ctx.decodeAudioData(data, buffer => {
+          this.buffer = buffer;
           this.sampleDuration = buffer.duration;
           log('Sample Duration:', this.sampleDuration);
+
           resolve();
         });
       };
 
       req.send();
     });
-  }
-
-  /**
-   * The audio imprint is a vestige of a previous attempt to detect frog chirping
-   * using a more manual convolution approach. This is no longer being used, but
-   * the audio imprint is still helpful to visualize in the development process
-   * @param sourceNode - audio node representing the chirp audio sample
-   */
-  private async createAudioImprint(sourceNode) {
-    this.audioImprint = await this.audioConfig.analyseSample(this.audioElement, sourceNode, this.sampleDuration);
-    const imprintMin = this.audioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
-    const imprintMax = this.audioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
-
-    // log('imprintMin', imprintMin);
-    // log('imprintMax', imprintMax);
-
-    const linearAudioImprint = processFFT(this.audioImprint, { normalize: true });
-    const imprintMinLinear = linearAudioImprint.reduce((item, acc) => Math.max(item, acc), -Infinity);
-    const imprintMaxLinear = linearAudioImprint.reduce((item, acc) => Math.min(item, acc), Infinity);
-
-    // log('imprintMinLinear', imprintMinLinear);
-    // log('imprintMaxLinear', imprintMaxLinear);
-
-    // convolution is executed with the linearized audio imprint, such that values of the result range from 0 to 1
-    this.fft = new FFTConvolution(FFT_SIZE / 2, linearAudioImprint.subarray(0, FFT_SIZE / 2 - 1));
-  }
-
-  /**
-   * Create the audio element, which will play when the frog chirps
-   */
-  private createAudioElement() {
-    this.audioElement = new Audio();
-    this.audioElement.src = this.audioFilepath;
-    this.audioElement.controls = false;
-    this.audioElement.loop = false;
-    this.audioElement.autoplay = false;
-    this.audioElement.crossOrigin = 'anonymous';
   }
 
   /**
@@ -432,10 +378,12 @@ export class Frog {
       }, this.sampleDuration * 1000);
     }
 
-    this.audioElement.play()
-      .catch(e => {
-        console.log('e', e);
-      });
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode
+    const source = this.audioConfig.ctx.createBufferSource();
+
+    source.buffer = this.buffer;
+    source.connect(this.audioConfig.ctx.destination);
+    source.start();
   }
 
   /**
@@ -453,7 +401,7 @@ export class Frog {
    */
   private tryChirp() {
     const chirpProbability = this.determineChirpProbability();
-    const shouldChirp = testProbability(chirpProbability) || true;
+    const shouldChirp = testProbability(chirpProbability);
 
     if (shouldChirp) {
       this.playSample();
