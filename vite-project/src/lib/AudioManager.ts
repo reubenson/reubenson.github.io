@@ -73,20 +73,25 @@ export class AudioConfig {
     if (this.deviceId) constraints.audio = { deviceId: { exact: this.deviceId } };
     else if (this.groupId) constraints.audio = { groupId: { exact: this.groupId } };
 
-    return navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then((stream: any) => {
-        const input = ctx.createMediaStreamSource(stream);
-
-        this.input = input;
-        this.analyser = ctx.createAnalyser();
-        this.analyser.fftSize = FFT_SIZE;
-        this.analyser.smoothingTimeConstant = 0.5; // to be tweaked
-        // input.connect(this.analyser); // why is this here??
-      })
-      .catch(function (error) {
-        console.error('Error initializing audio input', error.message);
-      });
+    try {
+      return navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then((stream: any) => {
+          const input = ctx.createMediaStreamSource(stream);
+  
+          this.input = input;
+          this.analyser = ctx.createAnalyser();
+          this.analyser.fftSize = FFT_SIZE;
+          this.analyser.smoothingTimeConstant = 0.5; // to be tweaked
+          // input.connect(this.analyser); // why is this here??
+        })
+        .catch(function (error) {
+          console.error('Error initializing audio input', error.message);
+        });
+    } catch (error) {
+      console.error('try failed:', error);
+      return Promise.reject(error);
+    }
   }
 
   /**
