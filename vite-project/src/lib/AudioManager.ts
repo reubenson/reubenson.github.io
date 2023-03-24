@@ -46,6 +46,7 @@ export class AudioConfig {
    */
   private setInputDeviceId() {
     try {
+      throw "testing exception";
       return navigator.mediaDevices.enumerateDevices()
         .then(devices => {
           const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
