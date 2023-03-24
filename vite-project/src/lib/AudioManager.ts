@@ -31,7 +31,7 @@ export class AudioConfig {
           console.log('audio start complete');
         })
         .catch(err => {
-          console.error('error up', err.message);
+          console.error('error up', err);
           return Promise.reject(err.message);
         });
     } catch (error) {
@@ -46,7 +46,6 @@ export class AudioConfig {
    */
   private setInputDeviceId() {
     try {
-      throw "testing exception";
       return navigator.mediaDevices.enumerateDevices()
         .then(devices => {
           const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
@@ -61,6 +60,10 @@ export class AudioConfig {
   
           this.deviceId = audioInputDevice.deviceId;
           this.groupId = audioInputDevice.groupId;
+        })
+        .catch(err => {
+          console.error('setInputDeviceId error:', err);
+          return Promise.reject(err);
         });
     } catch (error) {
       console.error('setInputDeviceId:', error);
