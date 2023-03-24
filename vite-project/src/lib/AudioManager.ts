@@ -45,21 +45,26 @@ export class AudioConfig {
    * @returns Promise
    */
   private setInputDeviceId() {
-    return navigator.mediaDevices.enumerateDevices()
-      .then(devices => {
-        const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
-        const audioInputDevice = audioInputDevices[0];
-
-        if (!audioInputDevice) {
-          console.error('no audio input device found');
-          return;
-        } else if (audioInputDevices.length > 1) {
-          console.warn(`multiple audio devices found - selecting ${JSON.stringify(audioInputDevice)}`);
-        }
-
-        this.deviceId = audioInputDevice.deviceId;
-        this.groupId = audioInputDevice.groupId;
-      });
+    try {
+      return navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+          const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
+          const audioInputDevice = audioInputDevices[0];
+  
+          if (!audioInputDevice) {
+            console.error('no audio input device found');
+            return;
+          } else if (audioInputDevices.length > 1) {
+            console.warn(`multiple audio devices found - selecting ${JSON.stringify(audioInputDevice)}`);
+          }
+  
+          this.deviceId = audioInputDevice.deviceId;
+          this.groupId = audioInputDevice.groupId;
+        });
+    } catch (error) {
+      console.error('setInputDeviceId:', error);
+      return Promise.reject(error);
+    }
   }
 
   /**
