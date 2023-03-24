@@ -25,7 +25,12 @@ export class AudioConfig {
       this.ctx = new AudioContext();
       this.sampleRate = this.ctx.sampleRate;
       log('Audio Sample Rate:', this.sampleRate);
-      return this.setInputDeviceId().then(this.initializeAudio.bind(this));
+      return this.setInputDeviceId()
+        .then(this.initializeAudio.bind(this))
+        .catch(err => {
+          console.error('error up', err.message);
+          return Promise.reject(err.message);
+        });
     } catch (error) {
       console.error('error here', error.message);
       // throw new Error(' okayyy');
