@@ -88,6 +88,8 @@ export class Frog {
     this.frogSignalDetected = false;
     this.isCurrentlySinging = false;
     this.createAudioElement();
+
+    this.playSample();
   }
 
   /**
