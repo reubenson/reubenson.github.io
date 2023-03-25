@@ -341,10 +341,12 @@ export class Frog {
   private updateEagerness() {
     if (this.frogSignalDetected) {
       // increase eagerness if other frogs are heard
+      // TODO: make a function of amount of signal detected?
       const velocity = this.rateOfStateChange; // amount of change in eagerness per second
 
       this.eagerness += velocity * this.timeSinceLastUpdate();
     } else {
+      // TODO: consider monotonically increasing as a function of quietness
       // do nothing; shyness will increase if the environment is loud
       // eagerness will only monotonically increase, and will only decrease
       // to 0 immediately after it makes a chirp
