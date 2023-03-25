@@ -47,9 +47,9 @@
           <p class="mt-4 text-base">
             There was an error setting up your frog:
           </p>
-          <p>
+          <blockquote class="font-mono mt-4 text-sm">
             "{$errorMessage}"
-          </p>
+          </blockquote>
           <p>
             If you did not see a prompt to give permissions for this website to access your microphone, please go to your browser settings and make sure you don't have it set to always deny microphone access permissions.
           </p>
