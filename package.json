@@ -4,7 +4,8 @@
         "build-frog": "webpack && npx tailwindcss -i ./frog/pre-compiled.css -o ./frog/main.css --watch",
         "dev": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run build-frog\"",
         "lint": "eslint \"**/*.ts\"",
-        "lint-fix": "eslint \"**/*.ts\" --fix"
+        "lint-fix": "eslint \"**/*.ts\" --fix",
+        "upload-to-s3": "aws s3 cp ./assets s3://reubenson-portfolio/assets --recursive"
     },
     "devDependencies": {
         "@types/lodash": "^4.14.191",
