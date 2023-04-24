@@ -1,0 +1,41 @@
+---
+title: Reuben Son portfolio
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <style type="text/css">
+      body {
+        font-family: monospace;
+        letter-spacing: .5px;
+        margin: 40px;
+      }
+
+      a {
+        color: black;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0px;
+      }
+
+      li {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    {{ content | safe }}
+    {% renderFile "./src/_includes/residencies.md" %}
+    {% renderFile "./src/_includes/selected_projects.md" %}
+    {% renderFile "./src/_includes/selected_performances.md" %}
+    {% renderFile "./src/_includes/selected_discography.md" %}
+  </body>
+</html>

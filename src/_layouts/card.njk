@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="description" content="mobile-friendly quick links for Reuben Son">
+    <meta name="keywords" content="reuben son, nyc, software engineer, electronic music, ceramics">
+    <style type="text/css">
+      body {
+        background-color: #f0f0e6;
+        display: inline;
+        font-family: sans-serif;
+        font-weight: 200;
+        letter-spacing: 2px;
+        margin: 0;
+        overflow-x: hidden;
+        padding: 0 10px;
+        text-align: center;
+        width: 100vw;
+      }
+
+      h1, h2 {
+        font-weight: 300;
+        padding: 0 30px;
+      }
+
+      ul {
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+        margin: 25px auto;
+        padding: 0 30px;
+        text-decoration: none;
+      }
+
+      a, a:visited {
+        border-color: #000;
+        border-style: solid;
+        box-shadow: 2px 1px black;
+        color: #000;
+        display: inline-block;
+        max-width: 500px;
+        padding: 10px;
+        text-decoration: none;
+        width: calc(100% - 30px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      {{ content | safe }}
+    </div>
+    <div class="background-image"></div>
+  </body>
+</html>

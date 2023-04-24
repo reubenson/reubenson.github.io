@@ -1,0 +1,109 @@
+/* currently just the css for the index page */
+
+body {
+  margin: 0;
+  padding-bottom: 100vh;
+  scroll-behavior: smooth;
+}
+.content {
+  background-color: #f0f0e6;
+  border: 2px solid #000;
+  font-family: sans-serif;
+  font-weight: 300;
+  letter-spacing: .7px;
+  line-height: 1.4em;
+  margin: 20px;
+  padding: 40px;
+  text-align: justify;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+h2 {
+  border-bottom: 2px solid #000;
+  font-weight: 300;
+  letter-spacing: .15em;
+  margin: 0 auto 10px;
+}
+
+h3 {
+  border-bottom: 1px solid #000;
+  font-weight: 300;
+  letter-spacing: .1em;
+}
+
+figure {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+figure figcaption {
+  /* min-width: 100%; */
+  flex-basis: 100%;
+  font-size: .8em;
+  letter-spacing: .8px;
+  line-height: 1.1em;
+  padding: 10px 10px 0;
+}
+
+figure img {
+  flex-basis: 1;
+  flex-grow: 1;
+  border: 2px solid #000;
+  height: auto;
+  margin-top: 10px;
+  width: 100%;
+}
+
+figure .flex-half {
+  flex-basis: 48%;
+  flex-shrink: 1;
+  flex-grow: 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  padding: 0 0 10px 0;
+}
+
+li::before {
+  content: '✺';
+  padding-right: 10px;
+}
+
+a {
+  color: #000;
+}
+
+.background-image {
+  background-image: url(https://reubenson-portfolio.s3.amazonaws.com/imgs/studio.jpg);
+  background-position: 75% 50%;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+}
+
+.soundcloud-embed iframe {
+  border: none;
+}
+
+@media screen and (min-width: 600px) {
+  .content {
+    max-width: 480px;
+  }
+}

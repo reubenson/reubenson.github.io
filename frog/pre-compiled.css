@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  font-family: sans-serif;
-  font-weight: 200;
-  letter-spacing: 2px;
-}
