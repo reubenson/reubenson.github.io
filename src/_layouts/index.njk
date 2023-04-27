@@ -15,6 +15,17 @@ title: Reuben Son Homepage
   </head>
   <body>
     <div class="content">
+      <section>
+        <h2>
+          Bio
+        </h2>
+        {% renderFile "./src/_includes/short-bio.md" %}
+        <figure>
+          <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/Reuben%2BSon.jpeg" alt="Reuben Son studio portrait">
+          <figcaption>Studio self-portrait, 2019</figcaption>
+        </figure>
+      </section>
+
       {{ content | safe }}
     </div>
     

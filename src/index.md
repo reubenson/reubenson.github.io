@@ -2,16 +2,6 @@
 layout: index.njk
 title: Reuben Son
 ---
-<section id="bio">
-  <h2>Bio</h2>
-  Reuben Son (b. 1986) makes <a href="#software">software</a>, <a href="#sound">sound</a>, and <a href="#ceramics">ceramics</a>.
-  
-  He is currently based on NYC and available for short-term contracts and collaborations.
-  <figure>
-    <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/Reuben%2BSon.jpeg" alt="Reuben Son studio portrait">
-    <figcaption>Studio self-portrait, 2019</figcaption>
-  </figure>
-</section>
 <section id="software">
   <h2>Software</h2>
 

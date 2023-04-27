@@ -1,1 +1,3 @@
-Reuben Son (born 1986, lives in Brooklyn, NY) makes software, sound, and ceramics. Across these different media, he approach works towards balances of form and function. His work is non-conceptual, priviliging instead, the embodied experience, which may be composed of sub-disciplines around UX (in the case of the software), time (in the case of sound), and space (in the case of ceramics).
+Reuben Son (born 1986, lives in New York) makes [software](/#software), [sound](/#sound), and [ceramics](/#ceramics).
+
+Across these different media, he approaches his work as balancing form and function. While often conceptually motivated, he ultimately priviliges embodied experience, which may take into consideration facets such as UX (in the case of the software), time (in the case of sound), and space (in the case of ceramics).
