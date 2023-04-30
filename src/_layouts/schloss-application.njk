@@ -1,5 +1,6 @@
 ---
-title: Reuben Son portfolio
+title: Reuben Son - application to Akademie Schloss Solitude Web Residency No. 19
+url: https://www.akademie-solitude.de/de/web-residencies/call-for-web-residencies-no-19-algorithmic-poetry/
 ---
 
 <!doctype html>
@@ -50,13 +51,14 @@ title: Reuben Son portfolio
         background-image: url(https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frog03.gif);
         background-size: cover;
         background-position: 50% 75%;
-        opacity: 0.3;
+        opacity: 0.7;
         position: absolute;
         width: 100%;
         height: 100px;
         top: 0;
         left: 0;
-        filter: blur(10px);
+        filter: blur(15px);
+        z-index: -1;
       }
 
       .relative {
@@ -93,7 +95,13 @@ title: Reuben Son portfolio
     <h1>
       Frog Chorus : Algorithms Made Audible
     </h1>
-    {{ content | safe }}
+    {# {{ content | safe }} #}
+    <h2>Project Description</h2>
+    {% renderFile "./src/_includes/frog-chorus-brief.md" %}
+    <h2>Project Format</h2>
+      <p>
+        I wish to present this project in two main parts: (1) a web-app, which may be self-hosted or embedded onto an Akademie Schloss Solitude webpage; and (2) an essay, which contextualizes the project at the intersection of post-war European sound art, cybernetics and machine learning, and the metaphysics of attention. Additionally, I will be living in Berlin in August and September of this year, and would enjoy leading performances/happenings in Germany using this project.
+      </p>
     <h2>Bio</h2>
     {% renderFile "./src/_includes/short-bio.md" %}
     <section>
