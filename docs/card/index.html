@@ -9,7 +9,7 @@
     <style type="text/css">
       body {
         background-color: #f0f0e6;
-        display: inline;
+        
         font-family: sans-serif;
         font-weight: 200;
         letter-spacing: 2px;
@@ -25,7 +25,12 @@
         max-width: 600px;
       }
 
-      h1, h2 {
+      h3 {
+        margin-top: 30px;
+      }
+  
+
+      h1, h2, h3 {
         font-weight: 300;
         padding: 0 30px;
       }
@@ -38,7 +43,13 @@
         list-style: none;
         margin: 25px auto;
         padding: 0 30px;
+        
         text-decoration: none;
+      }
+
+      li::before {
+        content: '◉';
+        margin-right: 10px;
       }
 
       img {
@@ -59,6 +70,7 @@
     <div class="content">
       <h1>Reuben Son</h1>
 <h2>makes software, sound, and ceramics</h2>
+<h3>Some recent and ongoing projects</h3>
 <ul>
 <li><a href="/weaving">Weaving Music</a></li>
 <li><a href="https://sonceramics.etsy.com">Ceramics for sale</a></li>
