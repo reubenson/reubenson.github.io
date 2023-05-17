@@ -20,6 +20,11 @@
         width: 100vw;
       }
 
+      .content {
+        margin: auto;
+        max-width: 600px;
+      }
+
       h1, h2 {
         font-weight: 300;
         padding: 0 30px;
@@ -36,7 +41,17 @@
         text-decoration: none;
       }
 
-      a, a:visited {
+      img {
+        padding: 20px;
+        width: 100%;
+        max-width: 450px;
+      }
+
+      a:not(.mail) {
+        font-size: 18px;
+      }
+
+      {# a, a:visited {
         border-color: #000;
         border-style: solid;
         box-shadow: 2px 1px black;
@@ -46,13 +61,21 @@
         padding: 10px;
         text-decoration: none;
         width: calc(100% - 30px);
-      }
+      } #}
     </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
   <body>
     <div class="content">
       {{ content | safe }}
     </div>
     <div class="background-image"></div>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-120208217-1');
+    </script>
   </body>
 </html>
