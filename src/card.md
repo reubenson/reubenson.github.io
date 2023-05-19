@@ -3,7 +3,7 @@ layout: card.njk
 title: Reuben Son
 ---
 # ↫ [{{ title }}](/) ↬
-## makes software, sound, and ceramics
+## [makes software, sound, and ceramics](/)
 
 ### Some recent and ongoing things:
 
