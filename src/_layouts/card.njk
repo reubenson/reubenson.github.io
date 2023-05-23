@@ -71,8 +71,10 @@
       }
 
       li::before {
+        {# https://www.compart.com/en/unicode/category/So #}
         content: '❍';
-        margin-right: 10px;
+        position: absolute;
+        left: 25px;
       }
 
       li:nth-child(1)::before {
