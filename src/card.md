@@ -12,7 +12,11 @@ title: Reuben Son
 - [Radio program for WFMU](https://wfmu.org/playlists/shows/119916)
 - [Homepage](https://reubenson.com)
 
+<br />
+<br />
+✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺
+
 <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frogmail.gif" alt="animated gif of a frog retrieving the mail" class="mail-gif" />
 <!-- gif courtesy of https://frogina.tripod.com -->
 
-Get in touch with any professional or creative inquries at <a href="mailto:reubenson@gmail.com" class="mail">reubenson@gmail.com</a>
+Currently pursuing freelance and creative opportunities, gimme a shout at <a href="mailto:reubenson@gmail.com" class="mail">reubenson@gmail.com</a>
