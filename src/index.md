@@ -18,12 +18,12 @@ title: Reuben Son
   {% renderFile "./src/_includes/selected_discography.md" %}
 </section>
 <section id="ceramics">
-  <h2>Ceramics</h2>
-    
-  A selection of Reuben's ceramics are currently available for sale on <a href="https://sonceramics.etsy.com">Etsy</a>. 
+  <h2><a href="./ceramics">Ceramics</a></h2>
+
+  Image gallery [here](/ceramics), and a selection of Reuben's ceramics are currently available for sale on <a href="https://sonceramics.etsy.com">Etsy</a>. 
 
   <figure>
-    <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/casa-mug.jpg" alt="mug in shape of a dwelling">
+    <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_casa-mug.jpg" alt="mug in shape of a dwelling">
     <figcaption>From a series of "casa mugs", produced with a kurinuki carving technique, in which the vessel and door-like handle is carved out, and the surface is left jagged and rough, largely untouched by any surface intervention.</figcaption>
   </figure>
 </section>

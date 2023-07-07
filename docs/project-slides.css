@@ -1,39 +1,43 @@
-/* currently just the css for the index page */
+/* CSS for the project-slides layout */
 
 body {
   margin: 0;
-  padding-bottom: 100vh;
+  padding: 0;
   scroll-behavior: smooth;
 }
 .content {
   background-color: #f0f0e6;
   border: 2px solid #000;
   font-family: sans-serif;
-  font-weight: 300;
+  font-weight: 100;
+  height: calc(100vh - 80px);
   letter-spacing: .7px;
   line-height: 1.4em;
-  margin: 10px;
+  margin: 20px 20px;
+  overflow-y: scroll;
   padding: 20px;
 }
 
 section {
-  margin-bottom: 30px;
+  padding-bottom: 60px;
+}
+
+h1 {
+  font-weight: 200;
+  text-align: center;
 }
 
 h2 {
   border-bottom: 2px solid #000;
-  font-weight: 300;
+  font-weight: 100;
   letter-spacing: .15em;
   margin: 0 auto 10px;
-}
 
-h2 a {
-  text-decoration: none;
 }
 
 h3 {
   border-bottom: 1px solid #000;
-  font-weight: 300;
+  font-weight: 100;
   letter-spacing: .1em;
 }
 
@@ -52,14 +56,15 @@ figure figcaption {
   letter-spacing: .8px;
   line-height: 1.1em;
   padding: 10px 10px 0;
+  text-align: justify;
 }
 
 figure img {
   flex-basis: 1;
   flex-grow: 1;
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
   height: auto;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   width: 100%;
 }
 
@@ -78,35 +83,31 @@ li {
   padding: 0 0 10px 0;
 }
 
-li::before {
-  content: '✺';
-  padding-right: 10px;
-}
-
 a {
   color: #000;
 }
 
-.background-image {
-  background-image: url(https://reubenson-portfolio.s3.amazonaws.com/imgs/studio.jpg);
-  background-position: 75% 50%;
-  background-size: cover;
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  height: 100vh;
-  right: 0;
-  top: 0;
-  width: 100vw;
-  z-index: -1;
+.splide {
+  margin: auto;
+  max-width: 680px;
 }
 
-.soundcloud-embed iframe {
-  border: none;
+li.splide__slide {
+  border: solid black 2px;
+  /* box-sizing: content-box; */
+  margin: 0;
+}
+
+.splide__arrow--prev {
+  left: 20px !important;
+}
+
+.splide__arrow--next {
+  right:  20px !important;
 }
 
 @media screen and (min-width: 600px) {
   .content {
-    max-width: 480px;
+    max-width: 1280px;
   }
 }
