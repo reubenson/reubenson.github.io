@@ -7,15 +7,16 @@ body {
 }
 .content {
   background-color: #f0f0e6;
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
   font-family: sans-serif;
   font-weight: 100;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 40px);
+  /* height: 100vh; */
   letter-spacing: .7px;
   line-height: 1.4em;
-  margin: 20px 20px;
+  /* margin: 20px 20px; */
   overflow-y: scroll;
-  padding: 20px;
+  padding: 20px 40px;
 }
 
 section {
@@ -24,6 +25,7 @@ section {
 
 h1 {
   font-weight: 200;
+  margin-bottom: 40px;
   text-align: center;
 }
 
@@ -47,6 +49,7 @@ figure {
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 20px;
 }
 
 figure figcaption {
@@ -62,9 +65,8 @@ figure figcaption {
 figure img {
   flex-basis: 1;
   flex-grow: 1;
-  /* border: 2px solid #000; */
+  border-radius: 20px 20px;
   height: auto;
-  /* margin-top: 10px; */
   width: 100%;
 }
 
@@ -79,10 +81,6 @@ ul {
   padding-left: 0;
 }
 
-li {
-  padding: 0 0 10px 0;
-}
-
 a {
   color: #000;
 }
@@ -94,16 +92,15 @@ a {
 
 li.splide__slide {
   border: solid black 2px;
-  /* box-sizing: content-box; */
   margin: 0;
 }
 
 .splide__arrow--prev {
-  left: 20px !important;
+  left: -35px !important;
 }
 
 .splide__arrow--next {
-  right:  20px !important;
+  right: -35px !important;
 }
 
 @media screen and (min-width: 600px) {
