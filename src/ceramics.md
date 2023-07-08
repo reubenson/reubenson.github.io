@@ -4,14 +4,14 @@ title: Selected Ceramic Works
 ---
 # {{ title }}
 
-<section class="splide" aria-label="Splide Basic HTML Example">
+<section class="splide" aria-label="{{ title }}">
   <div class="splide__track">
 		<ul class="splide__list">
 			<li class="splide__slide">
         <figure class="splide__slide">
           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_casa-mug.jpg" alt="mug in shape of a dwelling">
           <figcaption>
-            From a series of "casa mugs", produced with a kurinuki carving technique, in which the vessel and door-like handle is carved out, and the surface is left jagged and rough, largely untouched by any surface intervention.
+            From a series of "casa mugs", produced with a kurinuki carving technique, in which the vessel and door-like handle is carved out, and the surface is left untouched by further interventions, bearing the marks of how it has been stored and handled in the industrial plastic bag the clay was obtained from.
           </figcaption>
         </figure>
       </li>
@@ -27,7 +27,7 @@ title: Selected Ceramic Works
         <figure>
           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_tiny-cup.jpg" alt="small cup with handle">
           <figcaption>
-            Another exploration of the interplay of forms in a miniature vessel.
+            Another exploration of the balance of form in a miniature vessel, roughly the dimensions of a quarter.
           </figcaption>
         </figure>
       </li>
@@ -35,7 +35,7 @@ title: Selected Ceramic Works
         <figure>
           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_small-creamer.jpg" alt="small creamer">
           <figcaption>
-            A small creamer commissioned by a friend. Japanese sake cups were the original point of inspiration, but as I experimented with the surface, the piece ended up taking on an appearance more like the titular character from Jan Svankmajer's film, <em>Little Otik</em>, featuring an infant child in the form of small tree.
+            A small creamer commissioned by a friend. Japanese tea wares were the original point of inspiration, but as I experimented with the surface, the piece ended up taking on an appearance more like the titular character from Jan Svankmajer's 2000 film, <em>Little Otik</em>, featuring an infant in the form of small tree.
           </figcaption>
         </figure>
       </li>
@@ -43,7 +43,15 @@ title: Selected Ceramic Works
         <figure>
           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_rock-rattle.jpg" alt="rock-shaped rattle">
           <figcaption>
-            Developing a theme around organic forms, this is a rattle, with small clay beads enclosed within a pinch-pot. The goal of this sculptural form was inspired by the idea of rocks.
+            Developing a theme around organic forms, rocks in this case, this pinch-pot rattle encloses a number of small clay beads.
+          </figcaption>
+        </figure>
+      </li>
+      <li class="splide__slide">
+        <figure>
+          <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_bud-vase.jpg" alt="rock-shaped bud vase">
+          <figcaption>
+            Another closed-form pinch pot, also evocative of a natural form, with a small aperture for use as a weed pot.
           </figcaption>
         </figure>
       </li>
@@ -51,7 +59,7 @@ title: Selected Ceramic Works
         <figure>
           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_udu_1b.jpg" alt="udu">
           <figcaption>
-            The most recent in a series of udus I've been prototyping. Unlike a traditional Nigerian udu, which is formed through coil-building, this is produced more like a moon jar. It is intended for use as a percussion instrument, though I've not yet been able to achieve quite the desired acoustic properties.
+            The most recent in a series of udus (clay drum) I've been prototyping. Unlike a traditional Nigerian udu, which is formed through coil-building, this is produced more like a moon jar, with two wheelthrown vessels attached at the rim.
           </figcaption>
         </figure>
       </li>
@@ -59,7 +67,7 @@ title: Selected Ceramic Works
         <figure>
           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_cylinder-painting.jpg" alt="cylinder etched with painting">
           <figcaption>
-            Like the previous piece, this vessel explores the use of engobe, but also experiments with introducing a subtle pictorial element.
+            An experiment with surface, instead of form. Crudely marbled engobe, etched with a subtle pictorial element.
           </figcaption>
         </figure>
       </li>

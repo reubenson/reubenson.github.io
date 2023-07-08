@@ -1,24 +1,28 @@
+---
+layout: project-slides.njk
+title: Selected Works
+---
+# {{ title }}
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selected Ceramic Works</title>
-    <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
-    <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
-    <link rel="stylesheet" href="/project-slides.css">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    
-    <script src="../splide.min.js"></script>
-    <link rel="stylesheet" href="../splide.min.css">
-  </head>
-  <body>
-    <div class="content">
-      <h1>Selected Ceramic Works</h1>
-<section class="splide" aria-label="Selected Ceramic Works">
+<section class="splide" aria-label="{{ title }}">
   <div class="splide__track">
 		<ul class="splide__list">
+      <li class="splide__slide">
+        <figure class="splide__slide">
+          <iframe width="560" height="400" src="https://www.youtube-nocookie.com/embed/ERbfczLUr-A?controls=0&amp;start=483" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <figcaption>
+            Software developed for a project by the artist James Hoff, utlizing algorithmic control of Google Maps Street View to animate audio-responsive site-specific work, in this case at Chernobyl. 
+          </figcaption>
+        </figure>
+      </li>
+      <li class="splide__slide">
+        <figure class="splide__slide">
+           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/weaving-music-screenshot.jpg" alt="screen shot of weaving notation as musical score" style="padding: 20px;">
+          <figcaption>
+            Music software developed at a residency at EMS in Stockholm, in which textile weaving notation was used as the inspiration for algorithmic music generation. <a href="https://reubenson.com/weaving" target="_blank">https://reubenson.com/weaving</a>
+          </figcaption>
+        </figure>
+      </li>
 			<li class="splide__slide">
         <figure class="splide__slide">
           <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_casa-mug.jpg" alt="mug in shape of a dwelling">
@@ -86,17 +90,19 @@
 		</ul>
   </div>
 </section>
+
 <!-- Insert Balthasar -->
+
 <!-- Insert Udu -->
+
 <!-- Insert Spoon -->
+
 <!-- Insert Rock Rattle -->
+
 <!-- Insert Small Creamer -->
+
 <!-- Insert Cup -->
+
 <!-- Insert Rock breast vase -->
+
 <!-- Insert Small Sweden bud vase -->
-    </div>
-    <script>
-      new Splide( '.splide' ).mount();
-    </script>
-  </body>
-</html>
