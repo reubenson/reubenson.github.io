@@ -1,17 +1,22 @@
-/* currently just the css for the index page */
+/* currently just the css for the index and project pages */
 
 body {
   margin: 0;
-  padding-bottom: 100vh;
-  scroll-behavior: smooth;
-}
-.content {
-  background-color: #f0f0e6;
-  border: 2px solid #000;
   font-family: sans-serif;
   font-weight: 300;
   letter-spacing: .7px;
   line-height: 1.4em;
+  /* padding-bottom: 100vh; */
+  scroll-behavior: smooth;
+}
+
+.index {
+  padding-bottom: 100vh;
+}
+
+.index .content {
+  background-color: #f0f0e6;
+  border: 2px solid #000;
   margin: 10px;
   padding: 20px;
 }
@@ -20,11 +25,15 @@ section {
   margin-bottom: 30px;
 }
 
+h1 {
+  line-height: 28px;
+}
+
 h2 {
   border-bottom: 2px solid #000;
   font-weight: 300;
   letter-spacing: .15em;
-  margin: 0 auto 10px;
+  margin: 30px auto 10px;
 }
 
 h2 a {
@@ -103,6 +112,15 @@ a {
 
 .soundcloud-embed iframe {
   border: none;
+}
+
+.project .content {
+  background-color: #f0f0e6;
+  border: 2px solid #000;
+  margin: 10px;
+  padding: 20px;
+  max-width: 728px;
+  /* width: 100%; */
 }
 
 @media screen and (min-width: 600px) {

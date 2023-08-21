@@ -4,7 +4,8 @@
     "dev": "npx @11ty/eleventy --serve",
     "lint": "eslint \"**/*.ts\"",
     "lint-fix": "eslint \"**/*.ts\" --fix",
-    "upload-to-s3": "aws s3 cp ./assets s3://reubenson-portfolio/assets --recursive"
+    "upload-to-s3": "aws s3 cp ./assets s3://reubenson-portfolio/assets --recursive",
+    "upload-file-to-s3": "aws s3 cp $1 s3://reubenson-portfolio/assets/$2"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",

@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frog Chorus: Application to Web Sound Art Open Call</title>
+    <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
+    <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
+    <link rel="stylesheet" href="/bundle.css">
+    <link rel="icon" type="image/png" href="/favicon.png">
+  </head>
+  <body class="project">
+    <div class="content">
+      <h1 style="text-align: center">Frog Chorus: Application to Web Sound Art Open Call</h1>
+<h3><img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frog-chorus-header.png" alt="frog chorus logo" height="60"></h3>
+<figure>
+  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frogcomp_riso.png" alt="frog logging onto the world wide web">
+  <figcaption>Stylized adaptation of an image borrowed from <a href="https://frogina.tripod.com/">frogina.tripod.com</a></figcaption>
+</figure>
+<h2>Project Description</h2>
+<p>In 1982, the Dutch physicist and sound artist, Felix Hess, began producing sound installations based on frogs, whose entrancing song he first encountered in the hillsides of Adelaide in Australia. On returning to the Netherlands, he began developing frog-robots, each outfitted with a microphone, speaker, and circuitry, enabling them to listen for and sing to each each other to produce choruses of frog-song like those he had heard in Australia.</p>
+<p>The project I propose is to translate Felix's original work with frog-robots into a web-app, allowing a group of participants to summon their own frog chorus using their phones, an act of making algorithm audible. This work is intended to exist partly as social performance - a single phone running the app will make very little sound on its own. Instead, when a group of people runs this app on their phones together, what will emerge is a dynamic and responsive sound environment that is spatially distributed and self-interacting. In having each phone as a frog within the chorus, the participant-listeners are invited to put their phones down and join in an exercise of active listening as they walk around their phones as ephemeral sound sculpture. While participants will require internet access in order to load the app in the browser, no other networking will be involved. Instead of using using standard networking protocols like http or bluetooth to interact with each other, these devices will interact only acoustically.</p>
+<hr>
+<section style="margin: 20px 30px">
+<h4>Suggestion for a listening-performance</h4>
+In a gathering of five or more people (ideally, many more) with smartphones running this page in a browser, consider the following actions.
+<ul>
+  <li>
+    Walk in a slow, undirected manner with your frog (phone) until you find a good place to set it down.
+  </li>
+  <li>
+    Notice how the other participants are setting down their frogs (phones) too, and remain quiet as the frogs settle into their environment, slowly beginning to make their calls.
+  </li>
+  <li>
+    Focus on the sound of your frog, apart from the other frogs. Wander further away from your frog, until you can no longer distinguish which which frog is yours.
+  </li>
+  <li>
+    Notice how it feels to be separated from your frog (phone), absorbed in the act of listening and singing.
+  </li>
+  <li>
+    After a while, consider leaving the frog chorus, either bringing your phone with you, or not.
+  </li>
+</ul>
+</section>
+<hr>
+<p>While the idea for this project originally occurred to me nearly a decade ago, I was saddened to learn of <a href="https://www.aviationanalysis.net/physicist-and-installation-artist-felix-hess-81-has-died/">Felix's passing late last year</a>, and I had the realization that I have been sitting on this project for too long. His body of work is one that I've found inspiring for many years, and unfortunately seems to be little known within the larger histories of post-war European sound art, and even within his native country of the the Netherlands. But while remaining faithful to Felix's original work, this project also aims to extend it with an investigation of what it means to live in a world increasingly of machines talking to each other. In nature, frog behavior can by characterized by <a href="https://www.oxfordreference.com/display/10.1093/oi/authority.20110803100323792;jsessionid=B3CD8ED4F256F338961508B97BB9BD3E#:~:text=The%20movement%20of%20an%20organism,predator%20(i.e.%20negative%20phonotaxis).">phonotaxis</a> (the movement of an organism with respect to sound), which I take as a poetic metaphor for how we might navigate algorithmically-determined environments. In an age where machines give increasingly convincing impressions of &quot;aliveness&quot;, the simple act of listening may serve as an act of resistance, a place from which to understand how our own aliveness is not like that of a machine.</p>
+<p>This project is also imagined to be the first phase of a larger project that explores the usage of smartphone devices for algorithmically-based composition and listening. Ultimately, I would like to build a platform that allows contributors to compose music for this sort of system, in which a number of smartphones within acoustic proximity respond to each other sonically. This system is also inherently limited by the quality of the built-in speaker and microphone, which is acoustically low-tech relative to now standard consumer products developed for music listening (like Bluetooth speakers). However, my hope is that the listening experience is heightened by the social component of a shared listening experience, which may be a helpful reminder to audiences that the hermetic listening practices fostered by the likes of Spotify and virtual reality cannot presume to circumscribe all of what it means for us to listen, to and with our devices.</p>
+<h2>Technical Description</h2>
+<p>This project will be entirely web-based and optimized for mobile devices (though laptops and desktop computers will not be excluded). The project can either be self-hosted, or hosted on a domain provided by websoundart.org. It will consist of open-source JavaScript/TypeScript, CSS, and HTML, and may contain additional dependencies to third-party libraries such as <a href="https://meyda.js.org/">meyda.js</a>. Depending on the deployment architecture, it will likely be a single-page application built with a simple reactive framework such as Svelte (and not a heavier framework, such as React). GitHub and git versioning will be used to share code and updates as the project progresses, and documentation for the project will be written to allow audiences to imagine building projects themselves.</p>
+<p>This project relies entirely on the Web Audio API built into standard web browsers, which will provide the basis of how each device listens to its environment and makes frog sounds. The basic operation of the app is to apply real-time audio analysis operations to the device's microphone input, and determine whether frog sounds are being heard, or not.</p>
+<figure>
+  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/hess_diagram.jpeg" alt="flow diagram for Felix Hess's frog behavior">
+  <figcaption>Felix Hess's original flow diagram of robot-frog behavior; source: <a href="https://isea-archives.siggraph.org/art-events/electronic-sound-creatures-by-felix-hess/" target="_blank">Electronic Sound Creatures</a></figcaption>
+</figure>
+<p>I've used the Web Audio API before to build creative software projects before, like the one powering <a href="https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/">Hobo UFO</a>, in which camera movements with Google Maps Street View are controlled dynamically by analysizing audio in real-time. I'm confident that the Web Audio API will provide all the functionality required to power this application (<a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform#:~:text=A%20fast%20Fourier%20transform%20(FFT,frequency%20domain%20and%20vice%20versa.)">fast fourier transform</a> analysis of an incoming audio signals, and playback of pre-defined audio files). The trickiness of this project, however, will be in dialing in the behavior, to be neither too sensitive nor too coarse. It would be cool to use machine learning to improve the capacity to detect frog sounds from the microphone, but its usefulness is not guaranteed and may detract from other critical aspects of the project's development.</p>
+<p>For this reason, I would aim to have the bulk of the programming finished at least halfway through the allotted timeline, so that sufficient time can be devoted to field-testing the app, and if time permits, to explore incorporating machine learning at a later point. I would like to note, however, that QA for this project will always be necessarily incomplete, due to the wide range of devices and environments possible. But even in the event that a group of participants fails to get their devices to sing to each other, the poetic capacity for such an event occuring is sufficient to consider any given performance to be successful. According to Felix himself, his frog-robots were so sensitive that in order for his installations to work, <a href="https://bldgblog.com/2008/04/space-as-a-symphony-of-turning-off-sounds/">he would sometimes need to go around turning off every possible thing that was making sound</a>, such as HVAC systems and other electrical appliances. In this sense, every technical failure is a creative opportunity and poetic action.</p>
+<h2>Timeline</h2>
+<ul>
+<li>10/2023 | Develop general framework and bare-bones proof-of-concept</li>
+<li>11/2023 | Develop working prototype, and confirm that the project is feasible and appropriately scoped</li>
+<li>12/2023 | Complete functional working prototype</li>
+<li>01/2024 | Iterate on UI/UX (input from Olia L will be highly valuable and desirable)</li>
+<li>02/2024 | Begin field-testing and QA</li>
+<li>03/2024 | Conclude testing and plan for code to be complete at least two weeks before April 10 (so that last-minute bugs are not introduced)</li>
+<li>04/2024 | Code freeze and official launch, no further deployments unless critical bugs have been found</li>
+</ul>
+
+    </div>
+    
+    
+  </body>
+</html>

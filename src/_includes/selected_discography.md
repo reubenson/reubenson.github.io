@@ -1,5 +1,5 @@
 ### Selected Discography
-- [Hobo UFO v Chernobyl](https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/) (2019)<br/>Digital release on PAN, working as software developer
+- *[Hobo UFO v Chernobyl](https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/)* (2019)<br/>Digital release on PAN, working as software developer
 - *[Asleep at the Drawing Board](/private-chronology/07)* (2014)<br/>7" record on Private Chronology
 - *[Still Sleeping](/private-chronology/10)* (2015)<br/>
 Digital release on Private Chronology
