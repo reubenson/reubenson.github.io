@@ -5,7 +5,7 @@ title: "Frog Chorus: Application to Web Sound Art Open Call"
 
 <h1 style="text-align: center">{{title}}</h1>
 
-This application contains a [project description](#project-description), [technical description](#technical-description), and proposed [timeline](#timeline) for the development of a web-app called *Frog Chorus*.
+This application contains a [project description](#project-description), [technical description](#technical-description), and proposed [timeline](#timeline) for the development of a web-app called *Frog Chorus* in response to the [2023 Web Sound Art Open Call](https://websoundart.org/call).
 
 <figure>
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frog-chorus-title.png" alt="frog logging onto the world wide web">
