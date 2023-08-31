@@ -26,7 +26,8 @@ section {
 }
 
 h1 {
-  line-height: 28px;
+  line-height: 34px;
+  font-weight: 300;
 }
 
 h2 {
@@ -114,17 +115,29 @@ a {
   border: none;
 }
 
-.project .content {
+.project {
   background-color: #f0f0e6;
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
+  /* margin: 20px; */
+}
+
+.project .content {
   margin: 10px;
   padding: 20px;
   max-width: 728px;
   /* width: 100%; */
 }
 
+.project figure {
+  max-width: 600px;
+}
+
 @media screen and (min-width: 600px) {
-  .content {
+  .index .content {
     max-width: 480px;
+  }
+
+  .project .content {
+    margin: 10px auto;
   }
 }
