@@ -1,0 +1,50 @@
+---
+title: Reuben Son Homepage
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
+    <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/bundle.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-120208217-1');
+    </script>
+  </head>
+  <body class="index">
+    <div class="content">
+      <section>
+        {# {%renderFile "./src/card.md" %} #}
+        {# <h2>
+          Bio
+        </h2>
+        <p>Reuben Son (born 1986, lives in New York) makes <a href="/#software">software</a>, <a href="/#sound">sound</a>, and <a href="/#ceramics">ceramics</a>.</p> #}
+        {# {% renderFile "./src/_includes/short-bio.md" %} #}
+        {# <figure>
+          <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/Reuben%2BSon.jpeg" alt="Reuben Son studio portrait">
+          <figcaption>Studio self-portrait, 2019</figcaption>
+        </figure> #}
+      </section>
+
+      {{ content | safe }}
+    </div>
+
+    {# <div class="background"> #}
+      {# {% renderFile "./src/concrete-poetry/line-falling.md" %} #}
+    {# </div> #}
+    
+    <div class="background-image"></div>
+    {# {% renderFile "./src/_includes/residencies.md" %} #}
+  </body>
+</html>

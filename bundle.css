@@ -1,12 +1,9 @@
-/* currently just the css for the index and project pages */
-
 body {
   margin: 0;
   font-family: sans-serif;
   font-weight: 300;
   letter-spacing: .7px;
   line-height: 1.4em;
-  /* padding-bottom: 100vh; */
   scroll-behavior: smooth;
 }
 
@@ -56,7 +53,6 @@ figure {
 }
 
 figure figcaption {
-  /* min-width: 100%; */
   flex-basis: 100%;
   font-size: .8em;
   letter-spacing: .8px;
@@ -107,35 +103,18 @@ a {
   z-index: -1;
 }
 
-/* .background-image {
-  background-image: url(https://reubenson-portfolio.s3.amazonaws.com/imgs/studio.jpg);
-  background-position: 75% 50%;
-  background-size: cover;
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  height: 100vh;
-  right: 0;
-  top: 0;
-  width: 100vw;
-  z-index: -1;
-} */
-
 .soundcloud-embed iframe {
   border: none;
 }
 
 .project {
   background-color: #f0f0e6;
-  /* border: 2px solid #000; */
-  /* margin: 20px; */
 }
 
 .project .content {
   margin: 10px;
   padding: 20px;
   max-width: 728px;
-  /* width: 100%; */
 }
 
 .project figure {
@@ -150,4 +129,18 @@ a {
   .project .content {
     margin: 10px auto;
   }
+}
+
+.background-image {
+  background-image: url(https://reubenson-portfolio.s3.amazonaws.com/imgs/studio.jpg);
+  background-position: 75% 50%;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
 }

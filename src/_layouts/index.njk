@@ -1,7 +1,3 @@
----
-title: Reuben Son Homepage
----
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,9 +7,251 @@ title: Reuben Son Homepage
     <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="/bundle.css">
-    <!-- Google tag (gtag.js) -->
+    <style type="text/css">
+      body {
+        background-color: #f0f0e6;
+        font-family: sans-serif;
+        font-weight: 100;
+        letter-spacing: 1.15px;
+        margin: 0;
+        {# padding: 10px; #}
+        text-align: center;
+        width: 100%;
+      }
+
+      .content {
+        margin: auto;
+        max-width: 600px;
+        position: relative;
+        overflow-x: hidden;
+        padding: 0 20px;
+      }
+
+      p {
+        line-height: 1.3em;
+        text-align: justify;
+      }
+
+      h1 a {
+        font-weight: 500;
+        font-family: serif;
+        letter-spacing: 10.1px;
+        text-transform: uppercase;
+      }
+
+      h1 a, h2 a {
+        color: black;
+        text-decoration: none;
+      }
+
+      h2 {
+        display: block;
+        padding: 15px;
+        font-size: 20px;
+      }
+
+      h3 {
+        margin-top: 20px;
+        font-size: 18px;
+        text-align: left;
+      }
+  
+
+      h1, h2, h3 {
+        font-weight: 300;
+      }
+
+      ul {
+        padding: 0;
+      }
+
+      li {
+        font-weight: 100;
+        font-size: 12px;
+        {# font-family: monospace; #}
+        list-style: none;
+        margin: 25px auto;
+        padding: 0 35px;
+        text-align: left;
+        text-decoration: none;
+      }
+
+      li::before {
+        {# https://www.compart.com/en/unicode/category/So #}
+        {# content: '✈'; #}
+        content: '✺';
+        position: absolute;
+        left: 15px;
+        text-align: center;
+        width: 20px;
+      }
+
+      {# li:nth-child(3)::before {
+        content: '▦';
+      } #}
+
+      {# li:nth-child(2)::before {
+        content: '⚱';
+      } #}
+
+      {# li:nth-child(4)::before {
+        content: '❀';
+      } #}
+
+      {# li:nth-child(1)::before {
+        content: '✈';
+      } #}
+
+      {# card styling #}
+      .cards {
+        left: 0;
+        position: absolute;
+        right: 0;
+      }
+
+      .card {
+        border: solid black 2px;
+        width: 400px;
+        padding-bottom: 228px;
+        margin: 10px auto;
+        position: relative;
+        {# max-width: 500px; #}
+        {# max-height: 50%; #}
+        {# 3.5"  #}
+        {# width: 336px; 
+        height: 192px; #}
+      }
+
+      .card.back {
+        margin-top: 40px;
+      }
+
+      .card h1 {
+        background-color: #f0f0e6;
+        display: inline;
+        font-size: 24px;
+        height: 28px;
+        position: absolute;
+        width: auto;
+        z-index: 1;
+      }
+
+      .card.front h1 {
+        left: -76px;
+        text-align: center;
+        transform: rotateZ(-90deg);
+        top: 35%;
+      }
+
+      .card.back h1 {
+        right: -78px;
+        top: 82px;
+        transform: rotateZ(90deg) scaleX(-1);
+      }
+
+      .card .container {
+        font-size: 14px;
+        line-height: 15px;
+        margin: 15px;
+        padding: 20px;
+        height: calc(100% - 70px);
+        position: absolute;
+      }
+
+      .container-background {
+        border: solid black 1px;
+        position: absolute;
+        height: calc(100% - 20px);
+        margin: 10px;
+        width: calc(100% - 20px);
+        z-index: -1;
+      }
+
+      .card p {
+        margin-top: 0;
+      }
+
+      .container a {
+        border-bottom: dotted black 1px;
+        color: black;
+        text-decoration: none;
+        {# font-weight: bold; #}
+      }
+
+      .card ul {
+        margin-top: 0;
+      }
+
+      .card li {
+        line-height: 18px;
+        margin: 5px;
+        padding-left: 20px;
+        {# font-family: monospace;
+        font-style: italic; #}
+      }
+
+      .social {
+        display: inline;
+        font-size: 10px;
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        margin: auto;
+        right: 0;
+        z-index: 1;
+      }
+
+      .social p {
+        background: #f0f0e6;;
+        display: inline-block;
+        margin: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+        width: auto;
+      }
+
+      .card .social a {
+        color: black;
+        text-decoration: none;
+      }
+
+      @media screen and (min-height: 550px) {
+        .cards {
+          top: 50%;
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+      }
+    </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
+  </head>
+  <body>
+    <div class="cards">
+      <div class="card front">
+        <h1>Reuben Son</h1>
+        <div class="container">
+          {% renderFile './src/_includes/tiny-bio.md' %}
+        </div>
+        <div class="social">
+          {% renderFile './src/_includes/social.md' %}
+        </div>
+        <div class="container-background"></div>
+      </div>
+      <div class="card back">
+        <h1>Reuben Son</h1>
+        <div class="container">
+          <p>Some recent things I've made or been a primary contributor to ...</p>
+          {% renderFile './src/_includes/latest.md' %}
+        </div>
+        <div class="social">
+          <p>
+            Last updated {{ page.date.toTimeString() }}
+          </p>
+        </div>
+        <div class="container-background"></div>
+      </div>
+    </div>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -21,31 +259,5 @@ title: Reuben Son Homepage
 
       gtag('config', 'UA-120208217-1');
     </script>
-  </head>
-  <body class="index">
-    <div class="content">
-      <section>
-        <span class='timestamp'>Last updated {{ page.date.toString() }}</span>
-        {# {%renderFile "./src/card.md" %} #}
-        {# <h2>
-          Bio
-        </h2>
-        <p>Reuben Son (born 1986, lives in New York) makes <a href="/#software">software</a>, <a href="/#sound">sound</a>, and <a href="/#ceramics">ceramics</a>.</p> #}
-        {# {% renderFile "./src/_includes/short-bio.md" %} #}
-        {# <figure>
-          <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/Reuben%2BSon.jpeg" alt="Reuben Son studio portrait">
-          <figcaption>Studio self-portrait, 2019</figcaption>
-        </figure> #}
-      </section>
-
-      {{ content | safe }}
-    </div>
-
-    <div class="background">
-      {# {% renderFile "./src/concrete-poetry/line-falling.md" %} #}
-    </div>
-    
-    {# <div class="background-image"></div> #}
-    {# {% renderFile "./src/_includes/residencies.md" %} #}
   </body>
 </html>

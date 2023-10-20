@@ -1,4 +1,4 @@
-Makes [software](/software), [sound](/sound), and [ceramics](/ceramics).
+Makes [software](/more/#software), [sound](/more/#sound), and [ceramics](/more/#ceramics).
 
 Currently in residence at [Recurse Center](https://www.recurse.com/) and looking for freelance software engineering projects for 2024.
 
