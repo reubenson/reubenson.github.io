@@ -3,9 +3,12 @@ layout: card.njk
 title: Reuben Son
 ---
 # ↫ [{{ title }}](/) ↬
-## [makes software, sound, and ceramics](/)
+<!-- ## makes [software](/software), [sound](/sound), and [ceramics](/ceramics) -->
+(b. 1986, lives in New York City), is an interdisciplinary technology and sculptor who makes [software](/software), [sound](/sound), and [ceramics](/ceramics).
 
-### Some recent and ongoing things:
+He is currently taking a "gap year" while surveying the current techno-social landscape and searching for the appropriate containers for his upcoming professional and creative projects. In the final months of 2023, he'll be attending the Winter I batch at [Recurse Center](https://www.recurse.com/), and actively looking for freelance software development opportunities.
+
+### Some links to recent and ongoing
 
 - [Airports for Music](https://hubs.ninaprotocol.com/airportsformusic)
 - [3D printing ceramics at Haystack](https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd)

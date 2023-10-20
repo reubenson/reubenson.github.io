@@ -11,11 +11,12 @@
         background-color: #f0f0e6;
         
         font-family: sans-serif;
-        font-weight: 200;
-        letter-spacing: 2px;
+        font-weight: 100;
+        letter-spacing: 1.15px;
         margin: 0;
         
         
+        padding: 10px;
         text-align: center;
         width: 100%;
       }
@@ -29,8 +30,16 @@
         padding: 0 20px;
       }
 
+      p {
+        line-height: 1.3em;
+        text-align: justify;
+      }
+
       h1 a {
         font-weight: 500;
+        font-family: serif;
+        letter-spacing: 10.1px;
+        text-transform: uppercase;
       }
 
       h1 a, h2 a {
@@ -39,7 +48,7 @@
       }
 
       h2 {
-        border: dotted black 2px;
+        
         display: block;
         
         padding: 15px;
@@ -63,6 +72,9 @@
       }
 
       li {
+        font-weight: 100;
+        font-size: 12px;
+        
         list-style: none;
         margin: 25px auto;
         padding: 0 35px;
@@ -72,33 +84,21 @@
 
       li::before {
         
-        content: '❍';
+        
+        content: '✺';
         position: absolute;
-        left: 25px;
+        left: 15px;
         text-align: center;
         width: 20px;
       }
 
-      li:nth-child(3)::before {
-        
-        content: '▦';
-      }
+      
 
-      li:nth-child(2)::before {
-        content: '⚱';
-        
-      }
+      
 
-      li:nth-child(4)::before {
-        content: '❀';
-        
-      }
+      
 
-      li:nth-child(1)::before {
-        content: '✈';
-        
-        
-      }
+      
 
       .mail-gif {
         margin-top: 10px;
@@ -111,30 +111,181 @@
       }
 
       
+
+      svg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+      }
+
+      
+      .card {
+        border: solid black 2px;
+        width: 400px;
+        padding-bottom: 228px;
+        margin: 10px auto;
+        position: relative;
+        
+        
+        
+        
+      }
+
+      .card.back {
+        margin-top: 40px;
+      }
+
+      .card h1 {
+        background-color: #f0f0e6;
+        display: inline;
+        font-size: 24px;
+        height: 28px;
+        
+        position: absolute;
+        width: auto;
+        z-index: 1;
+      }
+
+      .card.front h1 {
+        
+        left: -76px;
+        text-align: center;
+        transform: rotateZ(-90deg);
+        top: 35%;
+        
+      }
+
+      .card.back h1 {
+        
+        
+        
+        right: -78px;
+        top: 82px;
+        
+        
+        transform: rotateZ(90deg) scaleX(-1);
+      }
+
+      .card .container {
+        
+        font-size: 14px;
+        line-height: 15px;
+        margin: 15px;
+        
+        padding: 20px;
+        height: calc(100% - 70px);
+        position: absolute;
+      }
+
+      .container-background {
+        
+        border: solid black 1px;
+        position: absolute;
+        height: calc(100% - 20px);
+        margin: 10px;
+        width: calc(100% - 20px);
+        z-index: -1;
+      }
+
+      .card p {
+        margin-top: 0;
+      }
+
+      .container a {
+        border-bottom: dotted black 1px;
+        color: black;
+        text-decoration: none;
+        
+      }
+
+      .card ul {
+        margin-top: 0;
+      }
+
+      .card li {
+        line-height: 18px;
+        margin: 5px;
+        padding-left: 20px;
+      }
+
+      .social {
+        display: inline;
+        font-size: 10px;
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        margin: auto;
+        right: 0;
+        z-index: 1;
+      }
+
+      .social p {
+        background: #f0f0e6;;
+        display: inline-block;
+        
+        margin: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+        width: auto;
+      }
+
+      .card .social a {
+        color: black;
+        text-decoration: none;
+      }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
   <body>
-    <div class="content">
-      <h1>↫ <a href="/">Reuben Son</a> ↬</h1>
-<h2><a href="/">makes software, sound, and ceramics</a></h2>
-<h3>Some recent and ongoing things:</h3>
-<ul>
+    <div class="card front">
+      <h1>Reuben Son</h1>
+      <div class="container">
+        <p>Makes <a href="/software">software</a>, <a href="/sound">sound</a>, and <a href="/ceramics">ceramics</a>.</p>
+<p>Currently in residence at <a href="https://www.recurse.com/">Recurse Center</a> and looking for freelance software engineering projects for 2024.</p>
+<!-- <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frogmail.gif" alt="animated gif of a frog retrieving the mail" class="mail-gif" /> -->
+<!-- gif courtesy of https://frogina.tripod.com -->
+      </div>
+      <div class="social">
+        <p><a href="mailto:reubenson@gmail.com">E-mail</a> ~ <a href="https://www.instagram.com/not_not_reuben">Instagram</a> ~ <a href="https://mastodon.social/@sonanze">Mastodon</a> ~ <a href="https://www.are.na/reuben-son">Are.na</a> ~ <a href="https://twitter.com/not_not_reuben">X</a> ~ <a href="https://sonceramics.etsy.com/">Etsy</a></p>
+
+      </div>
+      <div class="container-background"></div>
+    </div>
+    <div class="card back">
+      <h1>Reuben Son</h1>
+      <div class="container">
+        <p>Some things I've made or been a primary contributor to ...</p>
+        <ul>
 <li><a href="https://hubs.ninaprotocol.com/airportsformusic">Airports for Music</a></li>
 <li><a href="https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd">3D printing ceramics at Haystack</a></li>
 <li><a href="/weaving">Weaving Music</a></li>
-<li><a href="https://sonceramics.etsy.com">Ceramics for sale</a></li>
+<li><a href="https://nymag.com/strategist">The Strategist</a></li>
+<li><a href="https://www.youtube.com/watch?v=ERbfczLUr-A">Hobo UFO</a></li>
 </ul>
+<!-- - [Ceramics for sale](https://sonceramics.etsy.com) -->
 <!-- - [Radio program for WFMU](https://wfmu.org/playlists/shows/119916) -->
 <!-- - [Homepage](https://reubenson.com) -->
-<br />
-<br />
-✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺
-<img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frogmail.gif" alt="animated gif of a frog retrieving the mail" class="mail-gif" />
-<!-- gif courtesy of https://frogina.tripod.com -->
-<p>Currently pursuing freelance and creative opportunities, gimme a shout at <a href="mailto:reubenson@gmail.com" class="mail">reubenson@gmail.com</a></p>
-
+        
+        <!-- gif courtesy of https://frogina.tripod.com -->
+      </div>
+      <div class="social">
+        <p>
+          Last updated 16:30:59 GMT-0400 (Eastern Daylight Time)
+        </p>
+      </div>
+      <div class="container-background"></div>
     </div>
+
+    
+      
+      
+      
+      
+    
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
