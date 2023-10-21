@@ -104,15 +104,18 @@
       {# card styling #}
       .cards {
         left: 0;
+        margin: auto;
         position: absolute;
         right: 0;
+        width: calc(100% - 40px);
       }
 
       .card {
         border: solid black 2px;
-        width: 400px;
+        width: 100%;
         padding-bottom: 228px;
         margin: 10px auto;
+        max-width: 400px;
         position: relative;
         {# max-width: 500px; #}
         {# max-height: 50%; #}
@@ -194,7 +197,7 @@
 
       .social {
         display: inline;
-        font-size: 10px;
+        font-size: 8px;
         {# font-family: Courier New, monospace; #}
         position: absolute;
         bottom: -2px;
