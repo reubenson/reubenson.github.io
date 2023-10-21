@@ -149,7 +149,10 @@
       }
 
       .card .container {
-        font-size: 14px;
+        font-family: Courier New;
+        font-size: 12px;
+        letter-spacing: -1px;
+        font-style: italic;
         line-height: 15px;
         margin: 15px;
         padding: 20px;
@@ -192,6 +195,7 @@
       .social {
         display: inline;
         font-size: 10px;
+        {# font-family: Courier New, monospace; #}
         position: absolute;
         bottom: -2px;
         left: 0;
@@ -201,7 +205,7 @@
       }
 
       .social p {
-        background: #f0f0e6;;
+        background: #f0f0e6;
         display: inline-block;
         margin: 5px;
         padding-left: 5px;
@@ -213,6 +217,16 @@
       .card .social a {
         color: black;
         text-decoration: none;
+      }
+
+      .glyph {
+        bottom: 40px;
+        line-height: 40px;
+        right: 20px;
+        margin: auto;
+        position: absolute;
+        font-size: 40px;
+        z-index: 1;
       }
 
       @media screen and (min-height: 550px) {
@@ -229,6 +243,7 @@
     <div class="cards">
       <div class="card front">
         <h1>Reuben Son</h1>
+        <div class="glyph">𓆏</div>
         <div class="container">
           {% renderFile './src/_includes/tiny-bio.md' %}
         </div>
@@ -245,6 +260,7 @@
         </div>
         <div class="social">
           <p>
+            {# https://www.11ty.dev/docs/dates/ #}
             Last updated {{ page.date.toLocaleString() }}
           </p>
         </div>
