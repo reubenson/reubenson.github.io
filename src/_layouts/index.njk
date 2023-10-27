@@ -1,3 +1,7 @@
+---
+title: Reuben Son Homepage
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -232,6 +236,11 @@
         z-index: 1;
       }
 
+      .glyph a {
+        text-decoration: none;
+        color: black;
+      }
+
       @media screen and (min-height: 550px) {
         .cards {
           top: 50%;
@@ -246,7 +255,7 @@
     <div class="cards">
       <div class="card front">
         <h1>Reuben Son</h1>
-        <div class="glyph">𓆏</div>
+        <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
         <div class="container">
           {% renderFile './src/_includes/tiny-bio.md' %}
         </div>
@@ -263,7 +272,7 @@
         </div>
         <div class="social">
           <p>
-            Last updated {{ page.date.toLocaleString() }}
+            Website last updated {{ timestamp }}
           </p>
         </div>
         <div class="container-background"></div>

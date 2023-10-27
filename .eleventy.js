@@ -8,6 +8,15 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("bundle.css");
   eleventyConfig.addPassthroughCopy({ "favicon.png": "/" });
 
+  eleventyConfig.addGlobalData("myStatic", "static");
+  // https://www.stefanjudis.com/snippets/how-to-display-the-build-date-in-eleventy/
+  eleventyConfig.addGlobalData('timestamp', () => {
+    let now = new Date();
+    return new Intl.DateTimeFormat(
+      'en-US', { dateStyle: 'full', timeStyle: 'long' }
+    ).format(now);
+  });
+
   return {
     dir: {
       input: "src",
