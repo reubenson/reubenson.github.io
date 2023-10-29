@@ -1,6 +1,5 @@
 Makes [software](/more/#software), [sound](/more/#sound), and [ceramics](/more/#ceramics).
 
-Soon to be in residence at [Recurse Center](https://www.recurse.com/) and looking for freelance software engineering projects and creative collaborators for 2024.
+[Based in NYC](https://www.instagram.com/p/Cy_XTm-RzNt/), and currently in residence at [Recurse Center](https://www.recurse.com/).
 
-<!-- <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/frogmail.gif" alt="animated gif of a frog retrieving the mail" class="mail-gif" /> -->
-<!-- gif courtesy of https://frogina.tripod.com -->
+Looking for freelance software engineering projects and creative collaborators for 2024!
