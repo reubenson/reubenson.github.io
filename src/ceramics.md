@@ -65,9 +65,9 @@ title: Selected Ceramic Works
       </li>
       <li class="splide__slide">
         <figure>
-          <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_cylinder-painting.jpg" alt="cylinder etched with painting">
+          <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/3D-printing.jpeg" alt="3D printing">
           <figcaption>
-            An experiment with surface, instead of form. Crudely marbled engobe, etched with a subtle pictorial element.
+            WASP printer in action
           </figcaption>
         </figure>
       </li>
