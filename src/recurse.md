@@ -1,0 +1,9 @@
+---
+layout: project.njk
+title: Reflections on my time at Recurse Center
+---
+# {{ title }}
+
+Currently attending a residency at [Recurse Center](https://www.recurse.com/) (Winter 1, 2023) through the end of the year. Aiming to write a new reflection weekly.
+
+Week 1: [Learning to paddleboard](/recurse/week-one)

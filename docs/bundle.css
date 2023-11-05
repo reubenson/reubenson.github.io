@@ -144,3 +144,10 @@ a {
   width: 100vw;
   z-index: -1;
 }
+
+.divider-line {
+  text-align: center;
+  margin: 20px auto;
+  letter-spacing: 20px;
+  font-weight: bold;
+}
