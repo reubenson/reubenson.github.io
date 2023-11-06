@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Week 1 at Recurse Center
+tags: posts
 ---
 ## {{ title }}
 Twice this year, I've had the good fortune to find myself in spaces filled with people aligned to a common purpose: earlier this year at [Haystack Mountain Schoool of Craft](https://www.haystack-mtn.org/), and now at [Recurse Center](https://www.recurse.com/). These environments foster a regime of expansion and change, and have the power to focus, broaden, and alter one's sense of purpose. These environments can be quite intense to adjust and recalibrate to, as they involve large changes to the core substrates and infrastructures that compose of one's daily existence: time, geography, architecture, and community. Much of this is self-evident and not particularly profound to point out, but its lived experience can most immediately be felt in the constellation of affective states that manifest throughout the transition: overhwelm, nervous excitement, disorientation, decision paralysis, fight-or-flight, hyperactivity, dissociation.

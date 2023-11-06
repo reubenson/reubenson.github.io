@@ -1,4 +1,5 @@
 const { EleventyRenderPlugin } = require("@11ty/eleventy");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -16,6 +17,9 @@ module.exports = function(eleventyConfig) {
       'en-US', { dateStyle: 'full', timeStyle: 'long' }
     ).format(now);
   });
+
+  // add RSS
+  eleventyConfig.addPlugin(pluginRss);
 
   return {
     dir: {
