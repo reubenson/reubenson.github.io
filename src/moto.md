@@ -20,3 +20,8 @@ title: Bookmarklet for motorcycle digest
   </ul>
   After a few seconds, a white overlay will appear with your results.
 </p>
+
+<section>
+  <h4>Demo of bookmarklet</h4>
+  <img style="width:100%" src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/moto-bookmarklet-demo.gif" alt="">
+</section>
