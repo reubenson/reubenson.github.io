@@ -1,22 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="en">
-  <title>Reuben Son | Reflections at Recurse Center</title>
-  <subtitle></subtitle>
+  <title>Reuben Son | Recurse Center</title>
+  <subtitle>Weekly writings from my time at Recurse Center</subtitle>
   <link href="https://reubenson.com/feed.xml" rel="self"/>
-  <link href="https://reubenson.com"/>
-  <updated>2023-11-05T17:23:18Z</updated>
-  <id>https://reubenson.com</id>
+  <link href="https://reubenson.com/"/>
+  <updated>2023-11-11T18:30:32Z</updated>
+  <id>https://reubenson.com/</id>
   <author>
     <name>Reuben Son</name>
     <email>reubenson@gmail.com</email>
   </author>
   
   <entry>
-    <title>Week 1 at Recurse Center</title>
+    <title>Gradually, Then Suddenly</title>
+    <link href="https://reubenson.com/recurse/week-2/"/>
+    <updated>2023-11-11T18:30:32Z</updated>
+    <id>https://reubenson.com/recurse/week-2/</id>
+    <content type="html">&lt;h2&gt;Gradually, Then Suddenly&lt;/h2&gt;
+&lt;h3&gt;Week 2 at Recurse Center&lt;/h3&gt;
+&lt;p&gt;Earlier this week, at an informal dinner centered around the theme of AI Safety, I saw Rob Nail of Singularity University quote &lt;em&gt;&amp;quot;gradually, then suddenly&amp;quot;&lt;/em&gt; (attribution often asigned to Ernest Hemingway, on going bankrupt) in a presentation. It feels equally apt describing the subjective experience of time while at Recurse Center as it does exponential technologies. While I&#39;d been vaguely familiar with AI Safety, this week has gone a long ways towards concretizing my understanding of this emerging field of research and development (thanks in no small part to &lt;a href=&quot;https://github.com/changlinli&quot;&gt;Changlin Li&lt;/a&gt;&#39;s generous efforts to bring me and my cohorts at Recurse up to speed!).&lt;/p&gt;
+&lt;p&gt;As of right now, I&#39;ve made it through 4 of the 7 &lt;a href=&quot;https://karpathy.ai/zero-to-hero.html&quot;&gt;videos in Andrej Karpathy&#39;s lecture series on neural nets&lt;/a&gt;, and the first two chapters of the &lt;a href=&quot;https://github.com/fastai/fastbook&quot;&gt;fastbook notebooks&lt;/a&gt;. The majority of my effort is still towards getting up to speed on fundamentals. But that said, it seems worthwhile to think through some of my current questions, assumptions, and intuitions here, if only for my future benefit in tracking how my views shift over time.&lt;/p&gt;
+&lt;h3&gt;On AGI&lt;/h3&gt;
+&lt;p&gt;AGI (Artificial General Intelligence) seems like a rather squishy term that is dependant on significant, fundamental vagaries: around the nature of our own intelligence, and the question of interpreting/measuring intelligence of an AI system. But it does seem plausible (and probable even) that if we &lt;em&gt;do&lt;/em&gt; build an AGI, we&#39;ll do so before fully understanding how that emergent behavior was achieved. And it will be even longer still, before any meaningful consensus is developed around whether AGI has actually been achieved.&lt;/p&gt;
+&lt;p&gt;So given the long arc of developing and recognizing systems that approach AGI, I wonder what it would mean to give space to such systems?&lt;/p&gt;
+&lt;!-- In the longer arc of developing systems toward AGI , I wonder what it would mean to give space to such systems --&gt;
+&lt;!-- As funding and development of AI outpace AI Safety,  --&gt;
+&lt;!-- 
+So ... will we reach AGI or what
+
+I have inclinations to debate some of the terminology involved here; ground truth on words that are routinely used to describe current and future technology is fundamentally impossible to pin down. Shortlist of such words: learning, intelligence, artificial, human | machine. And to answer this question is truly beyond me, and I&#39;m happy enough in this case to defer to experts. In some ways, I&#39;m not really interested to address this question at all. But I do wonder what it means to give space to such systems? --&gt;
+&lt;p&gt;From what I&#39;ve learned of ML systems thus far, they&#39;re tightly bounded by two constraints: data and computing resources. Model architectures optimize across these two constraints, and the success of current state of the art (LLMs like GPT) relies on transformer-based architecture which rapidly advanced such optimizations. While current transformer-based models may be transient (and there are reasons to hope that they&#39;ll be replaced by architectures that are easier to evaluate according to AI Safety standards), all future architectures will continue to be constrained by data and computing resources on some fundamental level. As these systems scale up in capability, the bottlenecks between subsequent developments will come from doing the most with what data these systems have access to, maximizing the latent knowledge built up from data inflows.&lt;/p&gt;
+&lt;!-- As of right now, images and text are the richest sources of data that we have, due to their representational efficiency. --&gt;
+&lt;p&gt;Given this, what happens in the limit as we approach AGI? We may currently be in the regime of low-hanging fruit as current state of the art is trained on the internet as its corpus, but richer data-mining would come from greater interaction between models and humans. Heterogeneous systems comprised of humans and AIs interacting would therefore be incentivized from both a training and utility perspective.&lt;/p&gt;
+&lt;p&gt;Such heterogeneous systems might perhaps start out being more human-centric. For example, let&#39;s say Apple deploys a new OS that has an AI agent that can automatically answer your emails upon prompting you with a simple question here and there. Much like no one wants an email signature that reads &lt;code&gt;Sent from Reuben&#39;s iPad&lt;/code&gt;, users typically won&#39;t want to send emails that obviously read as being AI-generated. Therefore, in this heterogeneous system, the user will spend time training the AI properly, in order to maintain consistency of tone. Along this path, there will be a tipping point in which it is much easier to give the AI full control over writing one&#39;s emails, than to shut it off and go back to writing your own.&lt;/p&gt;
+&lt;p&gt;This in itself doesn&#39;t seem like such a bad thing, but as heterogeneous systems increase in scale, breadth, and interconnectivity, a tendency will exist to make interfaces more and more uniform, to be accessible to both human and AI agents. For example, a new housing development may design an apartment layout that optimizes for human preference and AI inferrability, or a municipalities may decide to revamp its roadways in a way that accomodates driverless cars alongside human drivers.&lt;/p&gt;
+&lt;p&gt;The more we increase the surface area of interconnected complex heterogeneous systems (AI augmenting each layer of &lt;a href=&quot;https://thestack.org/&quot;&gt;&lt;em&gt;The Stack&lt;/em&gt; as defined by Benjamin Bratton&lt;/a&gt;), the more difficult it may be to unplug a given set of AI technologies without risking cascading failures across many systems. &lt;a href=&quot;https://ourworldindata.org/ai-timelines&quot;&gt;Many AI researchers seem to be reaching consensus about human-level AI being achieved within 100 years&lt;/a&gt;, but trends towards uniform interfaces will happen long before AGI&#39;s arrival.&lt;/p&gt;
+&lt;!-- Such heterogeneous systems might then be characterized in the following ways: --&gt;
+&lt;!-- - More uniform interfaces, to be accessible to both humans and AI agents. For example, a new housing development may design an apartment layout that optimizes for human preference and AI inferrability --&gt;
+&lt;!-- As a result, I would speculate some of the following to be the case, in the optimization of AGI (along the constraints of compute and data) within the context of increasingly large surface areas of heterogeneous systems inb which humans and actively-training models coexist --&gt;
+&lt;!-- - More uniform interfaces (e.g. changing roadway infrastructure to balance the requirements of machine vision and human vision) --&gt;
+&lt;!-- - Terminology seems like a fundamentally contentious complex issue when talking about AI. I&#39;m still hesitant to even describe the current technology as AI, as opposed to Machine Learning. At the asymptote of the current development, I&#39;d be more inclined to describe the resulting technology as Machine Intelligence, as opposed to Artificial Intelligence.  --&gt;
+&lt;!-- -  --&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Week 1 at Recurse Center (Learning to Paddleboard)</title>
     <link href="https://reubenson.com/recurse/week-1/"/>
     <updated>2023-11-05T17:23:18Z</updated>
     <id>https://reubenson.com/recurse/week-1/</id>
-    <content type="html">&lt;h2&gt;Week 1 at Recurse Center&lt;/h2&gt;
+    <content type="html">&lt;h2&gt;Week 1 at Recurse Center (Learning to Paddleboard)&lt;/h2&gt;
 &lt;p&gt;Twice this year, I&#39;ve had the good fortune to find myself in spaces filled with people aligned to a common purpose: earlier this year at &lt;a href=&quot;https://www.haystack-mtn.org/&quot;&gt;Haystack Mountain Schoool of Craft&lt;/a&gt;, and now at &lt;a href=&quot;https://www.recurse.com/&quot;&gt;Recurse Center&lt;/a&gt;. These environments foster a regime of expansion and change, and have the power to focus, broaden, and alter one&#39;s sense of purpose. These environments can be quite intense to adjust and recalibrate to, as they involve large changes to the core substrates and infrastructures that compose of one&#39;s daily existence: time, geography, architecture, and community. Much of this is self-evident and not particularly profound to point out, but its lived experience can most immediately be felt in the constellation of affective states that manifest throughout the transition: overhwelm, nervous excitement, disorientation, decision paralysis, fight-or-flight, hyperactivity, dissociation.&lt;/p&gt;
 &lt;p&gt;This summer, at Haystack, in addition to learning the &lt;a href=&quot;https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd&quot;&gt;workflows and processes of ceramic 3D printing&lt;/a&gt;, I went paddleboarding for the very first time. On my initial attempts to stand up and paddle about, I was quickly tossed into the water. The Haystack campus is built on a granite island off the Maine coast, and faces out directly to the ocean. After falling a couple times into the rocking waves, I decided to paddle sitting down instead for a while, but before finally returning to shore, I decided to just stand on the board for a bit, without paddling. I then sat back down again and rowed back to shore. The next day, and each subsequent day on the beach, I found myself immediately able to paddleboard standing up without any further issue. The last time I watched my body in the process of learning was when I began taking ceramics classes in 2019, and it struck me, more or less for the first time, how quickly, and quietly, embodied intelligence is set into motion.&lt;/p&gt;
 &lt;p&gt;I think of acclimating to environments like Recurse in a similar way, that the transition still passes through the body, even for something as heady as Recurse&#39;s guiding mission to enable its participants to become radically better programmers over the duration of the residency.&lt;/p&gt;

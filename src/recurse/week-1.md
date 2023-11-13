@@ -1,6 +1,6 @@
 ---
 layout: project.njk
-title: Week 1 at Recurse Center
+title: Week 1 at Recurse Center (Learning to Paddleboard)
 tags: posts
 ---
 ## {{ title }}
