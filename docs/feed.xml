@@ -4,12 +4,27 @@
   <subtitle>Weekly writings from my time at Recurse Center</subtitle>
   <link href="https://reubenson.com/feed.xml" rel="self"/>
   <link href="https://reubenson.com/"/>
-  <updated>2023-11-11T18:30:32Z</updated>
+  <updated>2023-11-19T15:33:19Z</updated>
   <id>https://reubenson.com/</id>
   <author>
     <name>Reuben Son</name>
     <email>reubenson@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Alignment Is All You Need</title>
+    <link href="https://reubenson.com/recurse/week-3/"/>
+    <updated>2023-11-19T15:33:19Z</updated>
+    <id>https://reubenson.com/recurse/week-3/</id>
+    <content type="html">&lt;h2&gt;Alignment Is All You Need&lt;/h2&gt;
+&lt;h3&gt;Week 3 at Recurse Center&lt;/h3&gt;
+&lt;p&gt;I&#39;ve just finished my third week at Recurse Center, which means I&#39;m already halfway through my residency here. Although I&#39;m still digesting the material in &lt;a href=&quot;https://karpathy.ai/zero-to-hero.html&quot;&gt;Andrej Karpathy&#39;s Neural Net series&lt;/a&gt;, I&#39;ve finished working through the videos, and in the coming week, I&#39;ll be continuing to implement my own model system to improve my understanding and intuition about these systems.&lt;/p&gt;
+&lt;p&gt;The last video in the series is centered around the pivotal &lt;a href=&quot;https://reubenson.com/recurse/week-3/&quot;&gt;Attention is All You Need&lt;/a&gt; paper, which presents the &lt;em&gt;transformer&lt;/em&gt; architecture central to OpenAI&#39;s GPT models. In working through Karpathy&#39;s lecture series, I&#39;m struck by the elegance of neural net architecture, their composition through the repetition of simple elements. And I&#39;m struck too by the degree to which much of the &amp;quot;art&amp;quot; of designing these systems relies on simple arithmetic operations that nudge the state of the system within a regime of being &amp;quot;well-behaved&amp;quot;. Scale is the main thing, which led Rich Sutton to conclude in his &lt;a href=&quot;http://www.incompleteideas.net/IncIdeas/BitterLesson.html&quot;&gt;&lt;em&gt;Bitter Lesson&lt;/em&gt;&lt;/a&gt;: &amp;quot;We have to learn the bitter lesson that building in how we think we think does not work in the long run.&amp;quot;&lt;/p&gt;
+&lt;p&gt;Meanwhile ... OpenAI continues to make dramatic headlines, with the sudden firing of Sam Altman. At the time of this writing, conflicts within the board around the speed and safety of the development of their products seem to be at the core of this rift.&lt;/p&gt;
+&lt;p&gt;The question of social disalignment around the topic of &lt;em&gt;AI Alignment&lt;/em&gt; within the leadership team at OpenAI is poignant, provocative, and perhaps all too predictable ... disalignment around what it means to build in how we think. Institutions have emergent behaviors and a kind of artificial intelligence too. It seems worth pondering how theories around the problem of alignment in both technologic and social domains emerged at a similar time, as is explored by Orit Halpern in a &lt;a href=&quot;https://www.journals.uchicago.edu/doi/10.1086/717313&quot;&gt;recent paper on the conjoined histories of neural nets and Hayekian neoliberal economics&lt;/a&gt;. Which is to say, &lt;a href=&quot;https://www.reddit.com/r/singularity/comments/17yxl1x/the_head_of_applied_research_at_openai_seems_to/&quot;&gt;e/acc&lt;/a&gt; is nothing new, and alignment has perhaps been out of vogue for nearly a century.&lt;/p&gt;
+&lt;p&gt;In my own microcosm of space-time at Recurse, the question of alignment (on a personal scale) feels like a desire for the reassertion of control: in optimizing my time here, having finished projects, the setting and completion of goals. Alignment presumes there&#39;s a reward or loss function at the heart of the model/subject (as is the case for both neural nets and neoliberal economics), but the archetype of the &lt;a href=&quot;https://miguelabreugallery.com/wp-content/uploads/2016/12/GroundingVision_MAG_2017_Sequence_06-1-1024x276.jpg&quot;&gt;meandering line&lt;/a&gt; still feels more appropriate to me. And I wonder, too, about the inverse of Sutton&#39;s &lt;em&gt;Bitter Lesson&lt;/em&gt;, of how the things we build changes how we think, how the logic embedded in formal systems become heuristics for our own sense-making.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Gradually, Then Suddenly</title>
