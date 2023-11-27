@@ -8,3 +8,5 @@ Currently attending a residency at [Recurse Center](https://www.recurse.com/) (W
 
 - Week 1: [Learning to paddleboard](/recurse/week-1)
 - Week 2: [Gradually, then suddenly](/recurse/week-2)
+- Week 3: [Alignment is all you need](/recurse/week-3)
+- Week 4: [Goldberg Variations Variations](/recurse/week-4)
