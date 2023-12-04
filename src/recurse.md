@@ -10,3 +10,6 @@ Currently attending a residency at [Recurse Center](https://www.recurse.com/) (W
 - Week 2: [Gradually, then suddenly](/recurse/week-2)
 - Week 3: [Alignment is all you need](/recurse/week-3)
 - Week 4: [Goldberg Variations Variations](/recurse/week-4)
+- Week 5: [On deploying a neural net to AWS Lambda](/recurse/week-5)
+
+<!-- Add Recurse Center blogring! -->
