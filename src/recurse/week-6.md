@@ -10,7 +10,9 @@ tags: posts
 
 It's been such a fast six weeks at Recurse, and all the more so for getting so absorbed in getting my MIDI Archive project into shape. It's been a journey ... which I think I'll need some time to sit with before writing out a proper reflection of my wonderful and expansive time here.
 
-For now, I'm still figuring out a path to an MVP version of this project, which I'm hoping to chip away at the next few weeks as I adjust to a new post-RC equilibrium. I'm also struggling with uncertainty and doubt about the technical and cultural value of this project, and whether it makes sense to put much more effort into an MVP, but for the moment, I'll just limit my scope to documenting and preserving the groundwork I've laid out thus far. And while still in very skeletal form, the project has at least been shipped to prod! [http://reubenson.com/midi-archive/](http://reubenson.com/midi-archive/)
+For now, I'm still figuring out a path to an MVP version of this project, which I'm hoping to chip away at the next few weeks as I adjust to a new post-RC equilibrium. I'm also struggling with uncertainty and doubt about the technical and cultural value of this project, and whether it makes sense to put much more effort into an MVP. At worst, it feels unclear to me whether I'm just re-enacting the algorithmic instrumentalization of music (a lá Spotify) in a more amateur way, on a more campy substrate.
+
+But for the moment, I'll just limit my scope to documenting and preserving the groundwork I've laid out thus far. And while still in very skeletal form, the project has at least been shipped to prod! [http://reubenson.com/midi-archive/](http://reubenson.com/midi-archive/)
 
 #### THE PROJECT
 At the core of this project, I've been driven by two broad questions:
