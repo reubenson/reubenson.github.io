@@ -4,12 +4,43 @@
   <subtitle>Weekly writings from my time at Recurse Center</subtitle>
   <link href="https://reubenson.com/feed.xml" rel="self"/>
   <link href="https://reubenson.com/"/>
-  <updated>2023-12-04T01:08:10Z</updated>
+  <updated>2023-12-10T20:20:13Z</updated>
   <id>https://reubenson.com/</id>
   <author>
     <name>Reuben Son</name>
     <email>reubenson@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Wrapping up</title>
+    <link href="https://reubenson.com/recurse/week-6/"/>
+    <updated>2023-12-10T20:20:13Z</updated>
+    <id>https://reubenson.com/recurse/week-6/</id>
+    <content type="html">&lt;h2&gt;Wrapping up&lt;/h2&gt;
+&lt;h3&gt;Week 6 at Recurse Center&lt;/h3&gt;
+&lt;p&gt;It&#39;s been such a fast six weeks at Recurse, and all the more so for getting so absorbed in getting my MIDI Archive project into shape. It&#39;s been a journey ... which I think I&#39;ll need some time to sit with before writing out a proper reflection of my wonderful and expansive time here.&lt;/p&gt;
+&lt;p&gt;For now, I&#39;m still figuring out a path to an MVP version of this project, which I&#39;m hoping to chip away at the next few weeks as I adjust to a new post-RC equilibrium. I&#39;m also struggling with uncertainty and doubt about the technical and cultural value of this project, and whether it makes sense to put much more effort into an MVP, but for the moment, I&#39;ll just limit my scope to documenting and preserving the groundwork I&#39;ve laid out thus far.&lt;/p&gt;
+&lt;h4&gt;THE PROJECT&lt;/h4&gt;
+&lt;p&gt;At the core of this project, I&#39;ve been driven by two broad questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What, if anything, does the pre-MP3 history of music on the web say about the present moment? Or its future?&lt;/li&gt;
+&lt;li&gt;How the heck does machine learning actually work?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the six weeks of my residency at Recurse, I feel like I&#39;m still just scratching the surface of these questions. But as I&#39;ve heard writers say, you write a story in order to figure out how it ends.&lt;/p&gt;
+&lt;p&gt;In my approach to these two questions, I&#39;ve been building a neural net model alongside an archive, in which the model informs my curation of the archive, and the curation of the archive influences how the model behaves. In more straightforward terms, what I&#39;ve been doing is the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Explore MIDI websites on the early web, and scraping ones that feel culturally/aesthetically interesting and/or representative. I&#39;ve eschewed using canonical datasets like &lt;a href=&quot;https://magenta.tensorflow.org/datasets/maestro&quot;&gt;Maestro&lt;/a&gt; or large existing archives like the &lt;a href=&quot;https://archive.org/details/archiveteam-geocities-midi-collection-2009&quot;&gt;Geocities MIDI collection&lt;/a&gt;. Thus far, I&#39;ve scraped together ~3000 MIDI files, which is not a lot. In some sense, I&#39;ve been loosely following principles described by Everest Pipkin in their &lt;a href=&quot;https://www.youtube.com/watch?v=IYNKs8vfocc&quot;&gt;&amp;quot;Corpora as Medium&amp;quot; talk&lt;/a&gt; on the importance of curation in working with large language models. Given that, I&#39;ve been taking a more iterative approach to building up the archive.&lt;/li&gt;
+&lt;li&gt;Use these MIDI files to train a neural net model built on PyTorch in order to generate new MIDI files. My main goal with this model is to be of educational use, not necessarily trying to make it as sophisticated as possible, so I&#39;ve been pretty happy with the relatively naive results I&#39;ve gotten thus far. I find the results amusing, but I&#39;m probably biased. It reminds me a bit of the main plot-point in &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Fly_(1986_film)&quot;&gt;The Fly&lt;/a&gt;, in which Jeff Goldblum fuses with a housefly ...&lt;/li&gt;
+&lt;li&gt;The MIDI Archive and the ML output is featured alongside each other on the &lt;a href=&quot;https://reubenson.com/midi-archive&quot;&gt;MIDI Archive website&lt;/a&gt;. I had originally planned on having the ML output presented as a &#39;daily broadcast/performance&#39;, but haven&#39;t gotten around to implementing that bit yet. At the moment, the loosely prototyped website allows visitors to see and listen to all the MIDI files that were used for training and validating the model, as well as listen to MIDI music generated (daily) by the model.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As for what&#39;s next for this project ... the main thing that feels lacking at the moment is a sense for what visitors, who may or may not be familiar with music on the early web, should expect to find here. I&#39;m not particularly interested in just exploring the nostalgic valence of this work, but want to dig deeper into why I may have been drawn to this project in the first place ...&lt;/p&gt;
+&lt;p&gt;But for now, feel free to take a look at the two repositories I&#39;ve spun up for this project, but be warned that documentation and cleanup is still in a messy state&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/reubenson/midi-archive&quot;&gt;https://github.com/reubenson/midi-archive&lt;/a&gt; contains the scraper and 11ty sit generator&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/reubenson/midi-archive-lambda&quot;&gt;https://github.com/reubenson/midi-archive-lambda&lt;/a&gt; contains the lambda functions used for deployed model, and the notebook used to train the model&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   
   <entry>
     <title>On deploying a neural net to AWS Lambda</title>
