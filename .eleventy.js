@@ -8,6 +8,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("project-slides.css");
   eleventyConfig.addPassthroughCopy("bundle.css");
   eleventyConfig.addPassthroughCopy({ "favicon.png": "/" });
+  
+  // chrome-extension versions
+  eleventyConfig.addPassthroughCopy('extensions');
 
   eleventyConfig.addGlobalData("myStatic", "static");
   // https://www.stefanjudis.com/snippets/how-to-display-the-build-date-in-eleventy/
