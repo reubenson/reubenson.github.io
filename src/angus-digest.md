@@ -7,7 +7,9 @@ title: Chrome Extension for Angus
 ## Source Code
 [version 0.2 download](/extensions/extension_v0_2.zip) [12.18.2023]
 - This version runs through the three "Large Area" options listed by SearchTempest in the "Group Links By" filter
+
 [version 0.1 download](/extensions/extension_v0_1.zip) [12.12.2023]
+- this version can be ignored now, it was just a proof of concept
 
 ## Installation
 - Download the bundled source code for this extension above and unzip it. You'll probably want to save it to your Documents folder, or wherever is easy to keep track of it.
