@@ -3,8 +3,12 @@ layout: project.njk
 title: Chrome Extension for Angus
 ---
 # {{ title }}
+For a more comprehensive document on this project's details, see [https://docs.google.com/document/d/1RjRnJIjkyPl6uC9Z3opkGyDu06oviXyZvfpIfjY4jAU](https://docs.google.com/document/d/1RjRnJIjkyPl6uC9Z3opkGyDu06oviXyZvfpIfjY4jAU)
 
 ## Source Code
+[version 0.4 download](/extensions/extension_v0_4.zip) [12.30.2023]
+- adding Facebook Marketplace listings, using the 8 locales (with 500 mile radius) used by SearchTemepest
+
 [version 0.3 download](/extensions/extension_v0_3.zip) [12.22.2023]
 - extends previous version (0.2) with bugfixes, better filtering, and most importantly, displays results in reverse-chronological order, which makes it much easier to QA and compare against the email digest, or in manually searching Craigslist
 
