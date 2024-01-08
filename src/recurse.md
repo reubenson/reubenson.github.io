@@ -12,6 +12,7 @@ Currently attending a residency at [Recurse Center](https://www.recurse.com/) (W
 - Week 4: [Goldberg Variations Variations](/recurse/week-4)
 - Week 5: [On deploying a neural net to AWS Lambda](/recurse/week-5)
 - Week 6: [Wrapping up!](/recurse/week-6)
+- [Reflections on my time at Recurse Center](/recurse/reflections)
 
 <!-- Recurse Center webring below! -->
 <script src="https://ring.recurse.com/ring.js" type="text/javascript"></script>
