@@ -17,7 +17,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addGlobalData('timestamp', () => {
     let now = new Date();
     return new Intl.DateTimeFormat(
-      'en-US', { dateStyle: 'full', timeStyle: 'long' }
+      'en-US', { dateStyle: 'full' }
     ).format(now);
   });
 
