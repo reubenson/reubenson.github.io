@@ -35,3 +35,6 @@ title: Quotes
 - "Because, in Freud's view, desire is always in excess of he object's ability to satisfy, desire enlivens us by endangering us"
 - "In one tradition of psychoanalysis, so-called sexual perversions are considered to be an individual's self-cure for traumas of early maternal care"
 - "Conversion here doesn't merely replace one reality with another; it redeems an existing reality: conversion as psychic alchemy. Conversion turns up when something deemed to be unmodificable and intolerable has to be transformed"
+
+### Carl Jung, _Memories, Dreams, Reflections_
+- “We rush impetuously into novelty, driven by a mounting sense of insufficiency, dissatisfaction, and restlessness.  We no longer live on what we have, but on promises…We refuse to recognize that everything better is purchased at the price of something worse.…new methods or gadgets, are of course impressive at first, but in the long run they are dubious and…dearly paid for.  They, by no means, increase the contentment or happiness of people on the whole.  Mostly they are deceptive sweetenings of existence, like speedier communications which unpleasantly accelerate the tempo of life and leave us with less time than ever before.” [(MDR, p 236)](https://reinventinghome.org/the-house-as-mirror-of-the-psyche/#:~:text=%E2%80%9CWe%20rush%20impetuously,MDR%2C%20p%20236))
