@@ -1,5 +1,6 @@
 const { EleventyRenderPlugin } = require("@11ty/eleventy");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const markdownIt = require('markdown-it');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -20,6 +21,16 @@ module.exports = function(eleventyConfig) {
       'en-US', { dateStyle: 'full' }
     ).format(now);
   });
+
+  // better customization of markdown parsing
+  // https://markdown-it.github.io/markdown-it/
+  let options = {
+    html: true,
+    linkify: true,
+    typographer: true
+  };
+
+  eleventyConfig.setLibrary('md', markdownIt(options));
 
   // add RSS
   eleventyConfig.addPlugin(pluginRss);

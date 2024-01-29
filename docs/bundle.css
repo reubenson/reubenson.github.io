@@ -109,12 +109,61 @@ a {
 
 .project {
   background-color: #f0f0e6;
+  /* max-width: 780px; */
+  padding: 20px;
+  margin: 10px auto;
+  max-width: 980px;
 }
 
-.project .content {
-  margin: 10px;
-  padding: 20px;
-  max-width: 728px;
+.project header {
+  border-bottom: solid black 10px;
+  position: relative;
+}
+
+.project header h1 {
+  display: inline-block;
+  font-family: cursive;
+  /* padding-bottom: 20px; */
+}
+
+.project header nav a {
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.project header li::before {
+  content: none;
+}
+
+.project header li a::after {
+  content: ↗;
+}
+
+.project h2 {
+  border: none;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.project .figure-medium {
+  /* float: left; */
+  margin: auto auto 20px;
+  width: 100%;
+}
+
+.project p {
+  /* display: inline-block; */
+  /* max-width: 280px; */
+}
+
+.project blockquote {
+  margin: auto;
+  border-bottom: solid black 1px;
+  border-top: solid black 1px;
+  /* display: flex; */
+  /* text-align: center; */
+  font-style: italic;
+  overflow: auto;
 }
 
 .project figure {
@@ -126,8 +175,20 @@ a {
     max-width: 480px;
   }
 
+  .project header nav {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
   .project .content {
     margin: 10px auto;
+  }
+
+  .project .figure-medium {
+    float: left;
+    margin-right: 100px;
+    width: 300px;
   }
 }
 

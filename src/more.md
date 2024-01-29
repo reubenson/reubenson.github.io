@@ -16,8 +16,8 @@ title: Reuben Son
 
   During a previous [studio residency at EMS](https://elektronmusikstudion.se/composers/2019/1013-reuben-son-ems-10-19-june-2019) in Stockholm, he began developing the [Weaving Music](/weaving) web application. In this project, he explores the notion of composition as the deployment of strategies for dealing with the propositional materiality of sound. Drawing from the origins of computing within the history of textile production, his forthcoming work attempts to formalize this idea of sonic materiality by abstracting principles of weaving and textile design into a generative framework for electronic music production.
 
-  {% renderFile "./src/_includes/selected_performances.md" %}
-  {% renderFile "./src/_includes/selected_discography.md" %}
+  {% renderFile "./src/_includes/resume/selected_performances.md" %}
+  {% renderFile "./src/_includes/resume/selected_discography.md" %}
 </section>
 <section id="ceramics">
   <h2><a href="./ceramics">Ceramics</a></h2>

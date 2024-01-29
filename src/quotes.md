@@ -36,5 +36,38 @@ title: Quotes
 - "In one tradition of psychoanalysis, so-called sexual perversions are considered to be an individual's self-cure for traumas of early maternal care"
 - "Conversion here doesn't merely replace one reality with another; it redeems an existing reality: conversion as psychic alchemy. Conversion turns up when something deemed to be unmodificable and intolerable has to be transformed"
 
+### Adam Phillips, _On Getting Better_
+- "When getting better doesn't only mean getting safer, it means being able to risk feeling more alive, to risk taking risks, to risk learning and not learning from experience ..."
+- "Why does the ego, bureaucratically, have to enlarge its 'organisation' in order to free itself?"
+- "[...] we have always been curing ourselves, and that what we suffer from are our self-cures, which are called symptoms."
+- "I believe cure at its root means care. About 1700 it started to degenerate into a name for medical treatment."
+- "When it comes to pleasure and satisfaction we are prone to take the path of least resistance; we are prone to getting it wrong."
+- "We have to consider the possibility that a society obsessed by satisfaction may be very unsatisfied, may even have the wrong ideas about what satisfaction might be."
+- "We may be at our most omniscent in our assumptions about pleasure and satisfaction; and we are at our most omniscent when we are most fearful of our curiosity."
+- "Sexuality, Freud discovers - whatever else it is - is a way of talking about what people want from each other."
+- "[...] truths are illusions we have forgotten are illusions; they are metaphors which have become habitual, and drained of sensory force"
+- "It is the wish that takes us from the past into possible futures."
+- "[...] that so-called methods for the pursuit of truth - of something called truth in religion, or philosophy, or science - could be merely a form of over-simplification, as though truth as an object of desire is akin to what psychoanalysis describes as a sexual perversion or a fetish, construed to narrow the mind and coerce feeling."
+- "If the precondition for a concept of truth is the use of language, then language can mislead us with its truth."
+- "Wishing is a problem because of its intrinsic omniscience."
+- "People trapped in a vocabulary need to get out more."
+
 ### Carl Jung, _Memories, Dreams, Reflections_
-- “We rush impetuously into novelty, driven by a mounting sense of insufficiency, dissatisfaction, and restlessness.  We no longer live on what we have, but on promises…We refuse to recognize that everything better is purchased at the price of something worse.…new methods or gadgets, are of course impressive at first, but in the long run they are dubious and…dearly paid for.  They, by no means, increase the contentment or happiness of people on the whole.  Mostly they are deceptive sweetenings of existence, like speedier communications which unpleasantly accelerate the tempo of life and leave us with less time than ever before.” [(MDR, p 236)](https://reinventinghome.org/the-house-as-mirror-of-the-psyche/#:~:text=%E2%80%9CWe%20rush%20impetuously,MDR%2C%20p%20236))
+- “We rush impetuously into novelty, driven by a mounting sense of insufficiency, dissatisfaction, and restlessness.  We no longer live on what we have, but on promises…We refuse to recognize that everything better is purchased at the price of something worse.…new methods or gadgets, are of course impressive at first, but in the long run they are dubious and…dearly paid for.  They, by no means, increase the contentment or happiness of people on the whole.  Mostly they are deceptive sweetenings of existence, like speedier communications which unpleasantly accelerate the tempo of life and leave us with less time than ever before.” [(MDR, p 236)](https://reinventinghome.org/the-house-as-mirror-of-the-psyche/#:~:text=%E2%80%9CWe%20rush%20impetuously,MDR%2C%20p%20236)
+
+### D.W. Winnicott, _Reality and Playing_
+- "The finished creation never heals the underlying lack of sense of self."
+- "Compliance carries with it a sense of futility for the individual and is associated with the idea that nothing matters and life is not worth living."
+- "We do not need to think that human nature has altered. What we need to do is look for the everlasting in the ephemeral."
+
+### Michael Hamel, _Through Music to the Self_
+- "But do we listen to music? Hardly ever. Yet away it plays ..."
+- "Our ear is impaired; the noise of our environment renders our ears dull and insensitive [...] Our listening capacity is conditioned."
+- "[...] most music reflects and bolsters up the state of its clientele, their inner chaos, their private insecurity and lonelines"
+- "On meeting a stranger it is immediately possible to detect both personality and level of consciousness by the sound of the voice."
+
+### Ian Penman, _Thousands of Mirrors_
+- "There may have been a post-economic miracle but it was bought with the lives and souls of many unwitting victims. At the expense of basic humanity: a dreaming, desiring, demanding humanity."
+- "A troubling feeling of not being entirely at home in the body. Unmoored, adrift, a feather of an image."
+- "What sticks in the memory are small sounds, looks, gestures."
+- "I remember waking at a certain point and feeling as if the four walls of books around me were like my very own Egyptian tomb; that I was, in a sense, already dead. So many collected and archived things snug in their designated places. Not so much a space for dreaming or reverie, as one limned by regret, curdled concupiscence, and increasingly, Niagras of sudden unexpected tears. A librarian of my own timidity, withdrawal, and discontent"

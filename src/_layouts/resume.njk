@@ -41,7 +41,7 @@ title: Reuben Son
       }
 
       a {
-        color: black;
+        color: blue;
       }
 
       ul {
@@ -54,6 +54,31 @@ title: Reuben Son
       li {
         list-style-position: inside;
         padding-left: 10px;
+      }
+      
+      li a {
+        color: black;
+      }
+
+      .resume-contact-list li a {
+        text-decoration: none;
+      }
+
+      .resume-content {
+        li a {
+          {# color: blue; #}
+        }
+
+        li a::after {
+          color: black;
+        }
+        
+        li a::after {
+          content: "↝";
+          display: inline-block;
+          margin-left: 5px;
+          {# transform: scaleX(-1); #}
+        }
       }
 
       .resume-item-date {
@@ -100,23 +125,36 @@ title: Reuben Son
     <ul class="resume-contact-list">
       <li>reubenson@gmail.com</li>
       <li>(206) 245-8892</li>
-      <li>https://reubenson.com</li>
-      <li>https://github.com/reubenson/</li>
+      <li><a href="https://reubenson.com" target="_blank">https://reubenson.com</a></li>
+      <li><a href="https://github.com/reubenson/" target="_blank">https://github.com/reubenson/</a></li>
     </ul>
-    {{ content | safe }}
+    <section class="resume-content">
+      {{ content | safe }}
 
-    {# {% if includeBiography %}
-      {% renderFile "./src/_includes/short-bio.md" %}  
-    {% endif %}
-    {% renderFile "./src/_includes/residencies.md" %}
-    {% renderFile "./src/_includes/selected_projects.md" %}
-    {% renderFile "./src/_includes/selected_performances.md" %}
-    {% renderFile "./src/_includes/selected_discography.md" %}
-    {% if includeEmployment %}
-      {% renderFile "./src/_includes/employment.md" %}  
-    {% endif %}
-    {% if includeEducation %}
-      {% renderFile "./src/_includes/education.md" %}  
-    {% endif %} #}
+      {# {% if includeBiography %} #}
+        {# {% renderFile "./src/_includes/short-bio.md" %}   #}
+      {# {% endif %} #}
+      {% if includeProjects %}
+        {% renderFile "./src/_includes/resume/selected_projects.md" %}
+      {% endif %}
+      {% if includePerformances %}
+        {% renderFile "./src/_includes/resume/selected_performances.md" %}
+      {% endif %}
+      {% if includeDiscography %}
+        {% renderFile "./src/_includes/resume/selected_discography.md" %}
+      {% endif %}
+      {% if includeEmployment %}
+        {% renderFile "./src/_includes/resume/employment.md" %}  
+      {% endif %}
+      {% if includeResidencies %}
+        {% renderFile "./src/_includes/resume/residencies.md" %}
+      {% endif %}
+      {% if includeEducation %}
+        {% renderFile "./src/_includes/resume/education.md" %}  
+      {% endif %}
+      {% if includeEngProjects %}
+        {% renderFile "./src/_includes/resume/eng-projects.md" %}  
+      {% endif %}
+    </section>
   </body>
 </html>
