@@ -2,7 +2,6 @@
 layout: project.njk
 title: Weaving Music
 ---
-# {{ title }}
 ## An algorithmic music sequencer
 
 **[Weaving Music](/weaving)** is an exploration of the materiality of sound through the metaphor of weaving, with the weaving loom re-imagined as a music sequencer. The seeds of this project were formed when first encountering grid notation for weaving patterns in Anni Albers' *On Weaving*, which gave the immediate impression of rhythmic music notation.
@@ -29,6 +28,6 @@ In sharing this software, my hope is that you too may find it useful for harmoni
     <source src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/buchla-clip.mp4" type="video/mp4">
   </video>
   <figcaption>
-    Video by the artist of the Buchla synthesizer at EMS playing a simple melody produced with [Weaving Music](/weaving)
+    Video by the artist of the Buchla synthesizer at EMS playing a simple melody produced with <em>Weaving</em>
   </figcaption>
 </figure>

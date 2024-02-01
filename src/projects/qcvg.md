@@ -2,12 +2,9 @@
 layout: project.njk
 title: QCVG
 ---
-# {{ title }}
-## Quad Control Voltage Generator
-
 The QCVG (Quad Control Voltage Generator) is a hardware and software package designed and developed for computerized control of an analogue modular synthesizer.
 
-<figure>
+<figure class="figure-medium">
   <img src="https://s3.amazonaws.com/privatechronology/assets/QCVG_1.jpg" alt="front view of QCVG module" class="flex-half">
   <img src="https://s3.amazonaws.com/privatechronology/assets/QCVG_2.jpg" alt="side view of QCVG module" class="flex-half">
   <figcaption>Custom synthesizer module designed, soldered, and produced by Reuben Son</figcaption>

@@ -16,10 +16,10 @@ Along a different paradigm, Jana Winderen and Felix Hess use non-traditional rec
 
 Perhaps more so than other works of music and sound art, these pieces seem to suggest something about _how_ to listen to sounds, through listening to the composers' own act of listening.
 
-<!-- <div class="figure-medium"> -->
 <blockquote>
 
   **Program Notes**
+
   0’00” — Sam Kidel, _Disruptive Muzak_
 
   5’50” — Jana Winderen, _Out of Range_
@@ -48,8 +48,3 @@ Perhaps more so than other works of music and sound art, these pieces seem to su
 
   56’42” — **Last voice break**
 </blockquote>
-<!-- </div> -->
-
-<!-- “Please choose, for each piece, the volume settings of your sound system so as to just barely mask the ambient sounds in the room”, and Luc Ferrari's _Presque Rien No. 1_ 
-
-reconstructs a quiet morning in a remote fishing village from  -->

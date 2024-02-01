@@ -44,6 +44,10 @@ title: Reuben Son
         color: blue;
       }
 
+      p {
+        font-size: 14px;
+      }
+
       ul {
         {# list-style: none; #}
         font-size: 14px;
@@ -131,9 +135,9 @@ title: Reuben Son
     <section class="resume-content">
       {{ content | safe }}
 
-      {# {% if includeBiography %} #}
-        {# {% renderFile "./src/_includes/short-bio.md" %}   #}
-      {# {% endif %} #}
+      {# {% if includeBiography %}
+        {% renderFile "./src/_includes/short-bio.md" %}  
+      {% endif %} #}
       {% if includeProjects %}
         {% renderFile "./src/_includes/resume/selected_projects.md" %}
       {% endif %}
@@ -143,11 +147,11 @@ title: Reuben Son
       {% if includeDiscography %}
         {% renderFile "./src/_includes/resume/selected_discography.md" %}
       {% endif %}
-      {% if includeEmployment %}
-        {% renderFile "./src/_includes/resume/employment.md" %}  
-      {% endif %}
       {% if includeResidencies %}
         {% renderFile "./src/_includes/resume/residencies.md" %}
+      {% endif %}
+      {% if includeEmployment %}
+        {% renderFile "./src/_includes/resume/employment.md" %}  
       {% endif %}
       {% if includeEducation %}
         {% renderFile "./src/_includes/resume/education.md" %}  
