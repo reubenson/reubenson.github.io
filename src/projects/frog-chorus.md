@@ -7,9 +7,9 @@ url: https://frogchor.us
 <!-- ## {{ subtitle }} -->
 
 <figure class="figure-medium">
-  <!-- <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/frog-chorus.gif" alt="screen capture of frog chorus app"> -->
-  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/frog-chorus-devices.jpg" alt="photo of mobile devices engaged in frog chorus">
-  <figcaption>Mobile devices engaged in <em>Frog Chorus</em></figcaption>
+  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/Frog-Chorus-video-capture.gif" alt="screen capture of frog chorus app">
+  <!-- <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/frog-chorus-devices.jpg" alt="photo of mobile devices engaged in frog chorus"> -->
+  <figcaption>Screen capture of <em>Frog Chorus</em></figcaption>
 </figure>
 
 _**[Frog Chorus]({{ url }})**_ is an audio-based web application that allows your mobile device or laptop to chirp in a "chorus" of other devices, as if they were a [chorus of frogs in the wild](https://www.youtube.com/watch?v=aPAchkz76c8). 
