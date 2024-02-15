@@ -32,7 +32,7 @@ title: Reuben Son Homepage
 
       p {
         line-height: 1.3em;
-        text-align: justify;
+        text-align: left;
       }
 
       h1 a {
@@ -54,9 +54,10 @@ title: Reuben Son Homepage
       }
 
       h3 {
-        margin-top: 20px;
-        font-size: 18px;
+        margin-top: 0;
+        font-size: 13px;
         text-align: left;
+        font-style: italic;
       }
   
 
@@ -70,11 +71,11 @@ title: Reuben Son Homepage
 
       li {
         font-weight: 100;
-        font-size: 12px;
+        font-size: 13px;
         {# font-family: monospace; #}
         list-style: none;
         margin: 25px auto;
-        padding: 0 35px;
+        {# padding: 0 35px; #}
         text-align: left;
         text-decoration: none;
       }
@@ -83,10 +84,12 @@ title: Reuben Son Homepage
         {# https://www.compart.com/en/unicode/category/So #}
         {# content: '✈'; #}
         content: '✺';
+        font-size: 12px;
+        font-family: serif;
         position: absolute;
-        left: 15px;
-        text-align: center;
-        width: 20px;
+        left: 10px;
+        {# text-align: center; #}
+        width: 10px;
       }
 
       {# li:nth-child(3)::before {
@@ -157,12 +160,11 @@ title: Reuben Son Homepage
 
       .card .container {
         font-family: Courier New;
-        font-size: 12px;
+        font-size: 13px;
         letter-spacing: -1px;
-        font-style: italic;
         line-height: 15px;
         margin: 15px;
-        padding: 10px;
+        padding: 8px;
         height: calc(100% - 70px);
         position: absolute;
       }
@@ -181,10 +183,14 @@ title: Reuben Son Homepage
       }
 
       .container a {
-        border-bottom: dotted black 1px;
+        {# border-bottom: solid black 3px; #}
         color: black;
         text-decoration: none;
         {# font-weight: bold; #}
+      }
+
+      .container p a {
+        border-bottom: solid black 1px;
       }
 
       .card ul {
@@ -227,9 +233,9 @@ title: Reuben Son Homepage
       }
 
       .glyph {
-        bottom: 40px;
+        bottom: 27px;
         line-height: 40px;
-        right: 20px;
+        right: 16px;
         margin: auto;
         position: absolute;
         font-size: 40px;
@@ -267,7 +273,7 @@ title: Reuben Son Homepage
       <div class="card back">
         <h1>Reuben Son</h1>
         <div class="container">
-          <p>Some recent things I've made or been a primary contributor to ...</p>
+          <h3>Selected Projects</h3>
           {% renderFile './src/_includes/latest.md' %}
         </div>
         <div class="social">

@@ -71,3 +71,15 @@ title: Quotes
 - "A troubling feeling of not being entirely at home in the body. Unmoored, adrift, a feather of an image."
 - "What sticks in the memory are small sounds, looks, gestures."
 - "I remember waking at a certain point and feeling as if the four walls of books around me were like my very own Egyptian tomb; that I was, in a sense, already dead. So many collected and archived things snug in their designated places. Not so much a space for dreaming or reverie, as one limned by regret, curdled concupiscence, and increasingly, Niagras of sudden unexpected tears. A librarian of my own timidity, withdrawal, and discontent"
+
+### Christopher Bollas, _The Shadow of the Object_
+- "In adult life, the quest is not to possess the object; rather the object is pursued in order to surrender to it as a medium that alters the self, where the subject-as-supplicant now feels himself to be the recipient of enviro-somatic caring, identified with metamorphoses of the self."
+- "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object."
+- "The transformational object seems to promise the beseeching subject an experience where self fragmentations will be integrated through a processing form."
+- "Transformational-object-seeking is an endless memorial search for something in the future that resides in the past"
+- "[...] there is no adult who, in relation to himself as an object, is not existentially through self management, or representationally through self objectification, managing certain aspects of himself as a mother or father does a child."
+- "As it is, this relation to himself as an object re-creates his mother's own narcissistic uses of him, which he found quite pleasurable in many ways, and it biases his own way of handling himself as an object in his life."
+- "In a generative mood the person goes into himself to contact the cute, unknown child self and thus has a greater chance of genreating some knowing of what has been part of the unthought known."
+- "Moods are complex self states that may establish a mnemic environment in which the individual re-experiences and recreates former infant-child experiences and states of being."
+- "Some people have annhiliated the creative element by developing an alternate mentality, one that aims to be objective, a mind that is characterized less by the psychic (by the representational symbolization of feelings, sensations and intersubjective perceptions) than by the objective. This mentality is not determined to represent the object, but to be the echo of thingness inherent in material objects, to be a commodity object in the world of human production."
+- "To collect facts is ultimately to be identified with that which is collected: to be come a fact in one's person."
