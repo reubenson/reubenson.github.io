@@ -80,13 +80,10 @@
       li::before {
         
         
-        content: '✺';
         font-size: 12px;
         font-family: serif;
         position: absolute;
-        left: 10px;
         
-        width: 10px;
       }
 
       
@@ -171,14 +168,13 @@
       }
 
       .container a {
-        
         color: black;
         text-decoration: none;
         
       }
 
-      .container p a {
-        border-bottom: solid black 1px;
+      .container a {
+        border-bottom: solid grey 1px;
       }
 
       .card ul {
@@ -186,10 +182,18 @@
       }
 
       .card li {
-        line-height: 18px;
-        margin: 5px;
-        padding-left: 20px;
+        line-height: 15px;
+        margin: 0px 0 6px 0;
         
+        
+      }
+
+      .card li a {
+        
+      }
+
+      .card .project-description {
+        font-style: italic;
       }
 
       .social {
@@ -231,7 +235,7 @@
 
       .glyph a {
         text-decoration: none;
-        color: black;
+        color: #003000;
       }
 
       @media screen and (min-height: 550px) {
@@ -265,16 +269,16 @@
       <div class="card back">
         <h1>Reuben Son</h1>
         <div class="container">
-          <h3>Selected Projects</h3>
+          
           <ul>
-<li><a href="https://frogchor.us">Frog Chorus</a></li>
-<li><a href="/midi-archive">MIDI Archive</a></li>
-<li><a href="https://hubs.ninaprotocol.com/airportsformusic">Airports for Music</a></li>
-<li><a href="https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd">3D printing ceramics at Haystack</a></li>
-<li><a href="/weaving">Weaving Music</a></li>
-<li><a href="https://nymag.com/strategist">The Strategist</a></li>
-<li><a href="https://www.youtube.com/watch?v=ERbfczLUr-A">Hobo UFO</a></li>
+<li><a href="https://frogchor.us">Frog Chorus</a> — <span class="project-description">summon a chorus of frogs from your phone</span></li>
+<li><a href="/midi-archive">MIDI Archive</a> — <span class="project-description">machine learning and music on the early web</span></li>
+<li><a href="https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd">Meander</a> — <span class="project-description">3D printing ceramics at Haystack</span></li>
+<li><a href="https://hubs.ninaprotocol.com/airportsformusic">Airports for Music</a> — <span class="project-description">ambient music</span></li>
+<li><a href="/weaving">Weaving Music</a> — <span class="project-description">music sequencer based on weaving patterns</span></li>
+<li><a href="https://www.youtube.com/watch?v=ERbfczLUr-A">Hobo UFO</a> — <span class="project-description">audio-responsive Street View visualizer</span></li>
 </ul>
+<!-- - [The Strategist](https://nymag.com/strategist) <span class="project-description">summon a chorus of frogs from your phone</span> -->
 <!-- - [Ceramics for sale](https://sonceramics.etsy.com) -->
 <!-- - [Radio program for WFMU](https://wfmu.org/playlists/shows/119916) -->
 <!-- - [Homepage](https://reubenson.com) -->

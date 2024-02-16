@@ -82,14 +82,12 @@ title: Reuben Son Homepage
 
       li::before {
         {# https://www.compart.com/en/unicode/category/So #}
-        {# content: '✈'; #}
-        content: '✺';
+        {# content: '✺'; #}
         font-size: 12px;
         font-family: serif;
         position: absolute;
-        left: 10px;
-        {# text-align: center; #}
-        width: 10px;
+        {# left: 10px;
+        width: 10px; #}
       }
 
       {# li:nth-child(3)::before {
@@ -183,14 +181,13 @@ title: Reuben Son Homepage
       }
 
       .container a {
-        {# border-bottom: solid black 3px; #}
         color: black;
         text-decoration: none;
         {# font-weight: bold; #}
       }
 
-      .container p a {
-        border-bottom: solid black 1px;
+      .container a {
+        border-bottom: solid grey 1px;
       }
 
       .card ul {
@@ -198,11 +195,19 @@ title: Reuben Son Homepage
       }
 
       .card li {
-        line-height: 18px;
-        margin: 5px;
-        padding-left: 20px;
+        line-height: 15px;
+        margin: 0px 0 6px 0;
+        {# padding-left: 20px; #}
         {# font-family: monospace;
         font-style: italic; #}
+      }
+
+      .card li a {
+        {# border-bottom: solid black 1px; #}
+      }
+
+      .card .project-description {
+        font-style: italic;
       }
 
       .social {
@@ -244,7 +249,7 @@ title: Reuben Son Homepage
 
       .glyph a {
         text-decoration: none;
-        color: black;
+        color: #003000;
       }
 
       @media screen and (min-height: 550px) {
@@ -273,7 +278,7 @@ title: Reuben Son Homepage
       <div class="card back">
         <h1>Reuben Son</h1>
         <div class="container">
-          <h3>Selected Projects</h3>
+          {# <h3>Selected Projects</h3> #}
           {% renderFile './src/_includes/latest.md' %}
         </div>
         <div class="social">
