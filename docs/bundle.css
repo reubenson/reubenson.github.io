@@ -1,8 +1,10 @@
 body {
   margin: 0;
   font-family: sans-serif;
+  font-family: Courier New;
   font-weight: 300;
-  letter-spacing: .7px;
+  letter-spacing: -1.7px;
+  /* letter-spacing: .7px; */
   line-height: 1.4em;
   scroll-behavior: smooth;
 }
@@ -116,13 +118,16 @@ a {
 }
 
 .project header {
-  border-bottom: solid black 10px;
+  border-bottom: solid black 2px;
   position: relative;
 }
 
 .project header h1 {
   display: inline-block;
   font-family: cursive;
+  /* font-family: Courier New; */
+  /* font-family: sans-serif; */
+  letter-spacing: normal;
   /* padding-bottom: 20px; */
 }
 
