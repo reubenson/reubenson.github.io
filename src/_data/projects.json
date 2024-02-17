@@ -30,12 +30,12 @@
     "index": 2
   },
   {
-    "title": "Meander",
+    "title": "Ceramics",
     "description": "",
     "year": 2023,
     "url": "https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd",
-    "path": "/projects/meander",
-    "tagline": "3d printing ceramics at Haystack",
+    "path": "/projects/ceramics",
+    "tagline": "Material explorations into surface and form",
     "selected": true,
     "index": 3
   },
@@ -60,12 +60,12 @@
     "index": 5
   },
   {
-    "title": "Hobo UFO",
+    "title": "HOBO UFO",
     "description": "",
     "year": 2019,
     "url": "https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/",
     "path": "/projects/hobo-ufo",
-    "tagline": "Audio-reactive Street View built for James Hoff",
+    "tagline": "Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a>",
     "selected": true,
     "index": 6
   },

@@ -120,6 +120,12 @@
         margin-top: 40px;
       }
 
+      .card.back .container {
+        display: flex;
+        align-items: center;
+        
+      }
+
       .card h1 {
         background-color: #f0f0e6;
         display: inline;
@@ -150,8 +156,9 @@
         line-height: 15px;
         margin: 15px;
         padding: 8px;
-        height: calc(100% - 70px);
         position: absolute;
+        height: calc(100% - 70px);
+        width: calc(100% - 40px);
       }
 
       .container-background {
@@ -194,6 +201,19 @@
 
       .card .project-description {
         font-style: italic;
+      }
+
+      .card-quote {
+        display: block;
+        font-style: italic;
+        margin: auto;
+        text-align: justify;
+        width: 177px;
+      }
+
+      .card-quote a {
+        border: none;
+        text-decoration: none;
       }
 
       .social {
@@ -252,11 +272,11 @@
     <div class="cards">
       <div class="card front">
         <h1>Reuben Son</h1>
-        <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
+        
         <div class="container">
-          <h3>Makes <a href="/more/#software">software</a>, <a href="/more/#sound">sound</a>, and <a href="/more/#ceramics">ceramics</a></h3>
-<p><a href="https://www.instagram.com/p/Cy_XTm-RzNt/">Based in NYC</a>, and recently combined machine learning with music from the early web during <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">a residency at Recurse Center</a>.</p>
-<p>Currently looking for freelance and full-time employment as a creative technologist!</p>
+          <h3>Makes software, sound, and ceramics</h3>
+<p><a href="https://www.instagram.com/p/Cy_XTm-RzNt/">Based in NYC</a>, and recently combined machine learning with music from the early web during <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">a residency at Recurse Center</a> — see <a href="/projects">/projects</a> for various creative projects I’ve undertaken over the years.</p>
+<p>Currently looking for freelance or full-time employment as a creative technologist!</p>
 
         </div>
         <div class="social">
@@ -268,20 +288,13 @@
       </div>
       <div class="card back">
         <h1>Reuben Son</h1>
+        <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
         <div class="container">
           
-          <ul>
-<li><a href="https://frogchor.us">Frog Chorus</a> — <span class="project-description">summon a chorus of frogs from your phone</span></li>
-<li><a href="/midi-archive">MIDI Archive</a> — <span class="project-description">machine learning and music on the early web</span></li>
-<li><a href="https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd">Meander</a> — <span class="project-description">3D printing ceramics at Haystack</span></li>
-<li><a href="https://hubs.ninaprotocol.com/airportsformusic">Airports for Music</a> — <span class="project-description">sound as fragrance</span></li>
-<li><a href="/weaving">Weaving Music</a> — <span class="project-description">sound as woven textile</span></li>
-<li><a href="https://www.youtube.com/watch?v=ERbfczLUr-A">Hobo UFO</a> — <span class="project-description">audio-responsive Street View visualizer</span></li>
-</ul>
-<!-- - [The Strategist](https://nymag.com/strategist) <span class="project-description">summon a chorus of frogs from your phone</span> -->
-<!-- - [Ceramics for sale](https://sonceramics.etsy.com) -->
-<!-- - [Radio program for WFMU](https://wfmu.org/playlists/shows/119916) -->
-<!-- - [Homepage](https://reubenson.com) -->
+          
+          <span class="card-quote">
+            <a href="https://www.goodreads.com/review/show/785097402" target="_blank">Left blank for a work expressing modern feeling.</a>
+          </span>
         </div>
         <div class="social">
           <p>

@@ -27,9 +27,8 @@
         justify-content: space-between;
         letter-spacing: -.3px;
         position: relative;
-        border-bottom: 2px dotted black;
         font-size: 14px;
-        margin: 50px 0 20px;
+        margin: 20px 0 20px;
       }
 
       .project-title {
@@ -56,9 +55,18 @@
         top: -3px;
       }
 
+      .project-line {
+        border-bottom: 2px dotted black;
+        display: block;
+        position: absolute;
+        top: 10px;
+        width: 100%;
+      }
+
       .project-tagline {
         font-style: italic;
-        position: absolute;
+        margin-top: 20px;
+        
         top: 20px;
       }
 
@@ -84,60 +92,69 @@
       <h1>Project Directory</h1>
     </header>
     <div class="content">
-      
+      <!-- I'm a pretty project-oriented person. Here's a handful of creative projects I've done over the years ... -->
       <ul class="projects-list">
       
         <li class="project-item">
           <span class="project-title"><a href="/projects/midi-archive">MIDI Archive</a></span>
           <span class="project-index">1</span>
+          <span class="project-line"></span>
           <span class="project-tagline">ML model and archive of music on the early web</span>
         </li>
       
         <li class="project-item">
           <span class="project-title"><a href="/projects/frog-chorus">Frog Chorus</a></span>
           <span class="project-index">2</span>
+          <span class="project-line"></span>
           <span class="project-tagline">Summon a chorus of frogs from your phone</span>
         </li>
       
         <li class="project-item">
           <span class="project-title"><a href="/projects/airports-for-music">Airports for Music</a></span>
           <span class="project-index">3</span>
+          <span class="project-line"></span>
           <span class="project-tagline">Sound as fragrance</span>
         </li>
       
         <li class="project-item">
-          <span class="project-title"><a href="/projects/meander">Meander</a></span>
+          <span class="project-title"><a href="/projects/ceramics">Ceramics</a></span>
           <span class="project-index">4</span>
-          <span class="project-tagline">3d printing ceramics at Haystack</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Material explorations into surface and form</span>
         </li>
       
         <li class="project-item">
           <span class="project-title"><a href="/projects/composing-through-listening">Composing Through Listening</a></span>
           <span class="project-index">5</span>
+          <span class="project-line"></span>
           <span class="project-tagline">Radio broadcast for WFMU</span>
         </li>
       
         <li class="project-item">
           <span class="project-title"><a href="/projects/weaving-music">Weaving Music</a></span>
           <span class="project-index">6</span>
+          <span class="project-line"></span>
           <span class="project-tagline">Sound as a woven textile</span>
         </li>
       
         <li class="project-item">
-          <span class="project-title"><a href="/projects/hobo-ufo">Hobo UFO</a></span>
+          <span class="project-title"><a href="/projects/hobo-ufo">HOBO UFO</a></span>
           <span class="project-index">7</span>
-          <span class="project-tagline">Audio-reactive Street View built for James Hoff</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a></span>
         </li>
       
         <li class="project-item">
           <span class="project-title"><a href="/projects/qcvg">QCVG</a></span>
           <span class="project-index">8</span>
+          <span class="project-line"></span>
           <span class="project-tagline">Programmable modular synthesizer</span>
         </li>
       
         <li class="project-item">
           <span class="project-title"><a href="/projects/private-chronology">Private Chronology</a></span>
           <span class="project-index">9</span>
+          <span class="project-line"></span>
           <span class="project-tagline">DIY music label, exclusively distributed by Mimaroglu Music Sales</span>
         </li>
       

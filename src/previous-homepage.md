@@ -2,6 +2,8 @@
 layout: more.njk
 title: Reuben Son
 ---
+[This is a previous version of my homepage, updated and tweaked sporadically from 2015 to 2023]
+
 <section id="software">
   <h2>Software</h2>
 

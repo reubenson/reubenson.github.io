@@ -33,9 +33,8 @@ title: Project Title
         justify-content: space-between;
         letter-spacing: -.3px;
         position: relative;
-        border-bottom: 2px dotted black;
         font-size: 14px;
-        margin: 50px 0 20px;
+        margin: 20px 0 20px;
       }
 
       .project-title {
@@ -62,9 +61,18 @@ title: Project Title
         top: -3px;
       }
 
+      .project-line {
+        border-bottom: 2px dotted black;
+        display: block;
+        position: absolute;
+        top: 10px;
+        width: 100%;
+      }
+
       .project-tagline {
         font-style: italic;
-        position: absolute;
+        margin-top: 20px;
+        {# position: absolute; #}
         top: 20px;
       }
 
@@ -96,7 +104,8 @@ title: Project Title
         <li class="project-item">
           <span class="project-title"><a href="{{ project.path}}">{{ project.title }}</a></span>
           <span class="project-index">{{ project.index + 1 }}</span>
-          <span class="project-tagline">{{ project.tagline }}</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">{{ project.tagline | safe }}</span>
         </li>
       {% endfor %}
       </ul>

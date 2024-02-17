@@ -1,5 +1,4 @@
 ---
-layout: index.njk
+layout: homepage.njk
 title: Reuben Son
-test: {{ new Date() }}
 ---

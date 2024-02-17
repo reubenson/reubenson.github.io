@@ -133,6 +133,12 @@ title: Reuben Son Homepage
         margin-top: 40px;
       }
 
+      .card.back .container {
+        display: flex;
+        align-items: center;
+        {# justify-content: center; /* for horizontal alignment */ #}
+      }
+
       .card h1 {
         background-color: #f0f0e6;
         display: inline;
@@ -163,8 +169,9 @@ title: Reuben Son Homepage
         line-height: 15px;
         margin: 15px;
         padding: 8px;
-        height: calc(100% - 70px);
         position: absolute;
+        height: calc(100% - 70px);
+        width: calc(100% - 40px);
       }
 
       .container-background {
@@ -208,6 +215,19 @@ title: Reuben Son Homepage
 
       .card .project-description {
         font-style: italic;
+      }
+
+      .card-quote {
+        display: block;
+        font-style: italic;
+        margin: auto;
+        text-align: justify;
+        width: 177px;
+      }
+
+      .card-quote a {
+        border: none;
+        text-decoration: none;
       }
 
       .social {
@@ -266,7 +286,7 @@ title: Reuben Son Homepage
     <div class="cards">
       <div class="card front">
         <h1>Reuben Son</h1>
-        <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
+        {# <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div> #}
         <div class="container">
           {% renderFile './src/_includes/tiny-bio.md' %}
         </div>
@@ -277,9 +297,13 @@ title: Reuben Son Homepage
       </div>
       <div class="card back">
         <h1>Reuben Son</h1>
+        <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
         <div class="container">
           {# <h3>Selected Projects</h3> #}
-          {% renderFile './src/_includes/latest.md' %}
+          {# {% renderFile './src/_includes/latest.md' %} #}
+          <span class="card-quote">
+            <a href="https://www.goodreads.com/review/show/785097402" target="_blank">Left blank for a work expressing modern feeling.</a>
+          </span>
         </div>
         <div class="social">
           <p>

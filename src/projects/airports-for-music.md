@@ -1,7 +1,6 @@
 ---
 layout: project.njk
 title: Airports for Music
-# subtitle: Web-app for summoning a chorus of frogs with your phone
 url: https://hubs.ninaprotocol.com/airportsformusic
 ---
 <!-- ## {{ subtitle }} -->
