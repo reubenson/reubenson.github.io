@@ -6,8 +6,7 @@
     "url": "/midi-archive/",
     "path": "/projects/midi-archive",
     "tagline": "ML model and archive of music on the early web",
-    "selected": true,
-    "index": 0
+    "selected": true
   },
   {
     "title": "Frog Chorus",
@@ -16,8 +15,7 @@
     "url": "https://frogchor.us/",
     "path": "/projects/frog-chorus",
     "tagline": "Summon a chorus of frogs from your phone",
-    "selected": true,
-    "index": 1
+    "selected": true
   },
   {
     "title": "Airports for Music",
@@ -26,8 +24,7 @@
     "url": "https://hubs.ninaprotocol.com/airportsformusic",
     "path": "/projects/airports-for-music",
     "tagline": "Sound as fragrance",
-    "selected": true,
-    "index": 2
+    "selected": true
   },
   {
     "title": "Ceramics",
@@ -36,8 +33,7 @@
     "url": "https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd",
     "path": "/projects/ceramics",
     "tagline": "Material explorations into surface and form",
-    "selected": true,
-    "index": 3
+    "selected": true
   },
   {
     "title": "Composing Through Listening",
@@ -46,8 +42,7 @@
     "url": "https://wfmu.org/playlists/shows/119916",
     "path": "/projects/composing-through-listening",
     "tagline": "Radio broadcast for WFMU",
-    "selected": true,
-    "index": 4
+    "selected": true
   },
   {
     "title": "Weaving Music",
@@ -56,8 +51,7 @@
     "url": "https://reubenson.com/weaving",
     "path": "/projects/weaving-music",
     "tagline": "Sound as a woven textile",
-    "selected": true,
-    "index": 5
+    "selected": true
   },
   {
     "title": "HOBO UFO",
@@ -66,8 +60,7 @@
     "url": "https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/",
     "path": "/projects/hobo-ufo",
     "tagline": "Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a>",
-    "selected": true,
-    "index": 6
+    "selected": true
   },
   {
     "title": "QCVG",
@@ -76,8 +69,7 @@
     "url": "",
     "path": "/projects/qcvg",
     "tagline": "Programmable modular synthesizer",
-    "selected": true,
-    "index": 7
+    "selected": true
   },
   {
     "title": "Private Chronology",
@@ -86,7 +78,6 @@
     "url": "https://reubenson.com/private-chronology",
     "path": "/projects/private-chronology",
     "tagline": "DIY music label, exclusively distributed by Mimaroglu Music Sales",
-    "selected": true,
-    "index": 8
+    "selected": true
   }
 ]

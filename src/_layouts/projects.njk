@@ -15,15 +15,11 @@ title: Project Title
     <style>
       body {
         font-family: Courier New;
-        {# font-size: 16px;
-        line-height: 1.5;
-        margin: 0;
-        padding: 0; #}
         background-color: #f0f0e6;
       }
 
       .project {
-        max-width: 400px;
+        max-width: 600px;
       }
 
       .project-item {
@@ -65,15 +61,18 @@ title: Project Title
         border-bottom: 2px dotted black;
         display: block;
         position: absolute;
-        top: 10px;
+        top: 9px;
         width: 100%;
       }
 
       .project-tagline {
         font-style: italic;
         margin-top: 20px;
-        {# position: absolute; #}
         top: 20px;
+      }
+
+      .project-tagline a {
+        text-decoration: none;
       }
 
       .project-tagline::after {
@@ -102,10 +101,10 @@ title: Project Title
       <ul class="projects-list">
       {% for project in projects %}
         <li class="project-item">
-          <span class="project-title"><a href="{{ project.path}}">{{ project.title }}</a></span>
-          <span class="project-index">{{ project.index + 1 }}</span>
+          <span class="project-title"><a href="{{ project.path }}" target="_blank">{{ project.title }}</a></span>
+          <span class="project-index">{{ loop.index }}</span>
           <span class="project-line"></span>
-          <span class="project-tagline">{{ project.tagline | safe }}</span>
+          <span class="project-tagline"><a href="{{ project.path }}" target="_blank">{{ project.tagline | safe }}</a></span>
         </li>
       {% endfor %}
       </ul>
