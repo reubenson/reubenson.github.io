@@ -69,30 +69,17 @@
       li {
         font-weight: 100;
         font-size: 13px;
-        
         list-style: none;
         margin: 25px auto;
-        
         text-align: left;
         text-decoration: none;
       }
 
       li::before {
-        
-        
         font-size: 12px;
         font-family: serif;
         position: absolute;
-        
       }
-
-      
-
-      
-
-      
-
-      
 
       
       .cards {
@@ -105,15 +92,12 @@
 
       .card {
         border: solid black 2px;
+        box-sizing: border-box;
         width: 100%;
         padding-bottom: 228px;
         margin: 10px auto;
         max-width: 400px;
         position: relative;
-        
-        
-        
-        
       }
 
       .card.back {
@@ -123,7 +107,6 @@
       .card.back .container {
         display: flex;
         align-items: center;
-        
       }
 
       .card h1 {
@@ -177,7 +160,6 @@
       .container a {
         color: black;
         text-decoration: none;
-        
       }
 
       .container a {
@@ -191,12 +173,6 @@
       .card li {
         line-height: 15px;
         margin: 0px 0 6px 0;
-        
-        
-      }
-
-      .card li a {
-        
       }
 
       .card .project-description {
@@ -257,6 +233,13 @@
         text-decoration: none;
         color: #003000;
       }
+      .broider {
+        border-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAIxJREFUOE/tlFEKwCAMQ+v9D+1QVqmx1Qj9GuvPJoRnGqtFRKokV3mh7ZtV1UI9x7vNIv0CRcguGk/bTaJTXWsUrNOJE0FvMm7d0FBmKlxTePq6a2vf/nuTEWmnTBH0Q/upRvWxTJchJl6Y45wilGB2CX2j0u++dZjySmHLp5Hy9Ms1ZXPc6QY0AzYYD9BXaAEvLtuQAAAAAElFTkSuQmCC") 7 /  7px / 0 round;
+        border-width:  7px;
+        border-style:  solid;
+      }
+
+      
 
       @media screen and (min-height: 550px) {
         .cards {
@@ -268,14 +251,13 @@
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
-  <body>
+  <body class="">
     <div class="cards">
-      <div class="card front">
+      <div class="card front broider">
         <h1>Reuben Son</h1>
-        
         <div class="container">
-          <h3>Makes software, sound, and ceramics</h3>
-<p><a href="https://www.instagram.com/p/Cy_XTm-RzNt/">Based in NYC</a>, and recently combined machine learning with music from the early web during <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">a residency at Recurse Center</a> — see <a href="/projects">/projects</a> for various creative projects I’ve undertaken over the years.</p>
+          <h3>Makes <a href="/projects">software, sound, and ceramics</a>.</h3>
+<p>Based in NYC, and recently combined machine learning with music from the early web during <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">a residency at Recurse Center</a>.</p>
 <p>Currently looking for freelance or full-time employment as a creative technologist!</p>
 
         </div>
@@ -286,7 +268,7 @@
         </div>
         <div class="container-background"></div>
       </div>
-      <div class="card back">
+      <div class="card back broider">
         <h1>Reuben Son</h1>
         <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
         <div class="container">
@@ -296,7 +278,7 @@
         </div>
         <div class="social">
           <p>
-            Website last updated Saturday, February 17, 2024
+            Website last updated Sunday, February 18, 2024
           </p>
         </div>
         <div class="container-background"></div>

@@ -1,9 +1,8 @@
 ---
 layout: project.njk
 title: Weaving Music
+url: https://reubenson.com/weaving
 ---
-## An algorithmic music sequencer
-
 **[Weaving Music](/weaving)** is an exploration of the materiality of sound through the metaphor of weaving, with the weaving loom re-imagined as a music sequencer. The seeds of this project were formed when first encountering grid notation for weaving patterns in Anni Albers' *On Weaving*, which gave the immediate impression of rhythmic music notation.
 
 <figure>

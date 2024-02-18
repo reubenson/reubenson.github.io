@@ -4,6 +4,7 @@ body {
   font-family: Courier New;
   font-weight: 300;
   letter-spacing: -1px;
+  /* letter-spacing: .7px; */
   line-height: 1.4em;
   scroll-behavior: smooth;
 }
@@ -112,7 +113,7 @@ a {
   background-color: #f0f0e6;
   /* max-width: 780px; */
   padding: 20px;
-  margin: 10px auto 40px;
+  margin: 10px;
   max-width: 980px;
 }
 
@@ -132,7 +133,6 @@ a {
 
 .project header nav a {
   font-size: 12px;
-  letter-spacing: normal;
   word-break: break-all;
 }
 
@@ -148,6 +148,10 @@ a {
   border: none;
   margin: 40px 0;
   text-align: center;
+}
+
+.project .content {
+  padding: 10px;
 }
 
 .project .figure-medium {
@@ -175,9 +179,19 @@ a {
   max-width: 600px;
 }
 
+.broider {
+  border-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAIxJREFUOE/tlFEKwCAMQ+v9D+1QVqmx1Qj9GuvPJoRnGqtFRKokV3mh7ZtV1UI9x7vNIv0CRcguGk/bTaJTXWsUrNOJE0FvMm7d0FBmKlxTePq6a2vf/nuTEWmnTBH0Q/upRvWxTJchJl6Y45wilGB2CX2j0u++dZjySmHLp5Hy9Ms1ZXPc6QY0AzYYD9BXaAEvLtuQAAAAAElFTkSuQmCC") 7 /  7px / 0 round;
+  border-width:  7px;
+  border-style:  solid;
+}
+
 @media screen and (min-width: 600px) {
   .index .content {
     max-width: 480px;
+  }
+
+  .project {
+    margin: 20px auto;
   }
 
   .project header nav {
