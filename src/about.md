@@ -11,4 +11,4 @@ When I was younger, I wanted to be a filmmaker, furniture designer, or a guitari
 
 > "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." - Christopher Bollas, _The Shadow of the Object_
 
-I'm still figuring things out, but I'm happy you're here and I hope you enjoy perusing some of the things I've made along the way.
+I'm still figuring things out, but I'm happy you're here and I hope you enjoy perusing some of the things I've made along the way. While none of these projects are really _finished_, I do feel like this body of work has connecting throughlines, and have given me the space to think, process, and dream of a better world.
