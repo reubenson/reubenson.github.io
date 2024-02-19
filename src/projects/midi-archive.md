@@ -3,10 +3,10 @@ layout: project.njk
 title: MIDI Archive
 url: https://reubenson.com/midi-archive/
 ---
-<!-- <figure class="figure-medium">
-  <img src="https://reubenson.com/midi-archive/assets/images/midi-ring.gif" alt="" style="height: 120px; width: auto; flex-grow: 0">
-  <figcaption></figcaption>
-</figure> -->
+<figure class="figure-medium">
+  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/midi-archive-screenshot.jpg" alt="screenshot of MIDI Archive website">
+  <!-- <figcaption></figcaption> -->
+</figure>
 
 MIDI Archive uses machine learning and archiving to give the visitor various entrypoints into the world of music on the early web.
 

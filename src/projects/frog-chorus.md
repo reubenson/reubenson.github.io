@@ -4,11 +4,8 @@ title: Frog Chorus
 subtitle: Web-app for summoning a chorus of frogs with your phone
 url: https://frogchor.us
 ---
-<!-- ## {{ subtitle }} -->
-
 <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/Frog-Chorus-video-capture.gif" alt="screen capture of frog chorus app">
-  <!-- <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/frog-chorus-devices.jpg" alt="photo of mobile devices engaged in frog chorus"> -->
   <figcaption>Screen capture of <em>Frog Chorus</em></figcaption>
 </figure>
 

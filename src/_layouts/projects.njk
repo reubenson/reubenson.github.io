@@ -18,6 +18,10 @@ title: Project Title
         background-color: #f0f0e6;
       }
 
+      .projects-list {
+        clear: both;
+      }
+
       .project {
         max-width: 600px;
       }
@@ -98,6 +102,7 @@ title: Project Title
     </header>
     <div class="content">
       {{ content | safe }}
+      <h2 class="projects-list-header">Selected Projects</h2>
       <ul class="projects-list">
       {% for project in projects %}
         <li class="project-item">
