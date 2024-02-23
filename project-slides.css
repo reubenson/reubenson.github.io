@@ -8,7 +8,7 @@ body {
 .content {
   background-color: #f0f0e6;
   /* border: 2px solid #000; */
-  font-family: sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   font-weight: 100;
   height: calc(100vh - 40px);
   /* height: 100vh; */
@@ -27,6 +27,8 @@ h1 {
   font-weight: 200;
   margin-bottom: 40px;
   text-align: center;
+  border-bottom: solid black 2px;
+  padding: 10px 10px 30px;
 }
 
 h2 {
@@ -63,12 +65,23 @@ figure figcaption {
 }
 
 figure img {
-  flex-basis: 1;
+  flex-basis: 30vw;
   flex-grow: 1;
   border-radius: 20px 20px;
   height: auto;
-  width: 100%;
+  padding: 10px;
+  max-height: 350px;
+  /* height: 40vh; */
+  /* width: 45%; */
+  min-width: 40%;
+  height: auto;
+  object-fit: cover;
+  /* max-height: 300px; */
 }
+
+/* figure img.double { */
+  /* flex-grow: 2; */
+/* } */
 
 figure .flex-half {
   flex-basis: 48%;
@@ -93,6 +106,7 @@ a {
 li.splide__slide {
   border: solid black 2px;
   margin: 0;
+  /* height: 100vh; */
 }
 
 .splide__arrow--prev {

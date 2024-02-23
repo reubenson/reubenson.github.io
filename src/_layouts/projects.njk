@@ -12,7 +12,17 @@ title: Project Title
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="stylesheet" href="/bundle.css">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Gaegu&family=Grandiflora+One&family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&family=Joan&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Luxurious+Roman&family=Manjari:wght@100;400;700&family=Metal&family=Nova+Cut&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Rakkas&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
     <style>
+      h1 {
+        font-family: "Ibarra Real Nova" !important;
+        font-size: 24px;
+      }
+
       body {
         font-family: Courier New;
         background-color: #f0f0e6;
@@ -98,18 +108,18 @@ title: Project Title
   </head>
   <body class="project broider">
     <header>
-      <h1>{{ title }}</h1>
+      <h1><a href="/">{{ title }}</a></h1>
     </header>
     <div class="content">
       {{ content | safe }}
-      <h2 class="projects-list-header">Selected Projects</h2>
+      <h2 class="projects-list-header .josefin-slab">Selected Projects</h2>
       <ul class="projects-list">
       {% for project in projects %}
         <li class="project-item">
-          <span class="project-title"><a href="{{ project.path }}" target="_blank">{{ project.title }}</a></span>
-          <span class="project-index">{{ loop.index }}</span>
+          <span class="project-title"><a href="{{ project.path }}">{{ project.title }}</a></span>
+          <span class="project-index"><a href="{{ project.path }}">{{ loop.index }}</a></span>
           <span class="project-line"></span>
-          <span class="project-tagline"><a href="{{ project.path }}" target="_blank">{{ project.tagline | safe }}</a></span>
+          <span class="project-tagline"><a href="{{ project.path }}">{{ project.tagline | safe }}</a></span>
         </li>
       {% endfor %}
       </ul>

@@ -11,7 +11,15 @@ title: Reuben Son Homepage
     <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="icon" type="image/png" href="/favicon.png">
+
+    {% include "open-font.njk" %}
+
+  
     <style type="text/css">
+      {# h1 {
+        font-family: "Ibarra Real Nova" !important;
+      } #}
+
       body {
         background-color: #f0f0e6;
         font-family: sans-serif;
@@ -117,21 +125,22 @@ title: Reuben Son Homepage
         display: inline;
         font-size: 24px;
         height: 28px;
+        padding: 0 5px;
         position: absolute;
         width: auto;
         z-index: 1;
       }
 
       .card.front h1 {
-        left: -76px;
+        left: -81px;
         text-align: center;
         transform: rotateZ(-90deg);
-        top: 35%;
+        top: 81px;
       }
 
       .card.back h1 {
-        right: -78px;
-        top: 82px;
+        right: -81px;
+        top: 81px;
         transform: rotateZ(90deg) scaleX(-1);
       }
 
