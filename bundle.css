@@ -3,7 +3,6 @@ body {
   font-family: sans-serif;
   font-family: Courier New;
   font-weight: 300;
-  /* letter-spacing: .7px; */
   line-height: 1.4em;
   scroll-behavior: smooth;
 }
@@ -21,11 +20,6 @@ body {
 
 section {
   margin-bottom: 30px;
-}
-
-header, h1, h2, h3 {
-  font-family: "Ibarra Real Nova", serif;
-  letter-spacing: normal;
 }
 
 h1, .project h1 > a {
@@ -66,10 +60,13 @@ figure {
 
 figure figcaption {
   flex-basis: 100%;
-  font-size: .8em;
-  letter-spacing: .8px;
-  line-height: 1.1em;
+  font-size: 10px;
+  line-height: 12px;
   padding: 10px 10px 0;
+}
+
+figure figcaption a {
+  font-size: 10px;
 }
 
 figure img {
@@ -122,7 +119,6 @@ a {
 .projects-list-header {
   text-align: center;
   margin: 20px auto;
-  letter-spacing: -1px;
 }
 
 .project {
@@ -148,15 +144,11 @@ a {
 .project header h1 {
   display: inline-block;
   font-family: cursive;
-  /* font-family: Courier New; */
-  /* font-family: sans-serif; */
-  letter-spacing: normal;
   margin: 0;
-  /* padding-bottom: 20px; */
 }
 
 .project a {
-  font-size: 14px;
+  /* font-size: 14px; */
   margin: 0;
   word-break: break-all;
 }
@@ -176,6 +168,7 @@ a {
 }
 
 .project .content {
+  overflow: auto;
   /* padding: 10px 10px 100px; */
 }
 

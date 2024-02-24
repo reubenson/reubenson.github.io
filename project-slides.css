@@ -59,29 +59,26 @@ figure figcaption {
   flex-basis: 100%;
   font-size: .8em;
   letter-spacing: .8px;
-  line-height: 1.1em;
+  line-height: 1.5em;
   padding: 10px 10px 0;
   text-align: justify;
 }
 
+figure figcaption a {
+  word-break: break-all;
+}
+
 figure img {
-  flex-basis: 30vw;
+  flex-basis: 45%;
   flex-grow: 1;
   border-radius: 20px 20px;
   height: auto;
   padding: 10px;
   max-height: 350px;
-  /* height: 40vh; */
-  /* width: 45%; */
   min-width: 40%;
   height: auto;
   object-fit: cover;
-  /* max-height: 300px; */
 }
-
-/* figure img.double { */
-  /* flex-grow: 2; */
-/* } */
 
 figure .flex-half {
   flex-basis: 48%;
