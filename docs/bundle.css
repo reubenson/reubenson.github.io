@@ -36,7 +36,6 @@ header a {
 h2 {
   border-bottom: 2px solid #000;
   font-weight: 300;
-  letter-spacing: .15em;
   margin: 30px auto 10px;
 }
 
@@ -47,7 +46,6 @@ h2 a {
 h3 {
   border-bottom: 1px solid #000;
   font-weight: 300;
-  letter-spacing: .1em;
 }
 
 figure {
@@ -123,15 +121,15 @@ a {
 
 .project {
   background-color: #f0f0e6;
-  /* max-width: 780px; */
-  padding: 20px;
   margin: 20px;
-  max-width: 980px;
+  max-width: 768px;
+  min-height: calc(100vh - 100px);
+  padding: 20px;
 }
 
 .project header {
   align-items: flex-end;
-  border-bottom: solid black 2px;
+  border-bottom: solid black 1px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -141,25 +139,15 @@ a {
   position: relative;
 }
 
-.project header h1 {
-  display: inline-block;
-  font-family: cursive;
-  margin: 0;
-}
-
 .project a {
-  /* font-size: 14px; */
+  /* font-size: 1px; */
   margin: 0;
-  word-break: break-all;
+  /* word-break: break-all; */
 }
 
-/* .project header li::before {
-  content: none;
+.project h1 {
+  margin: 0 20px 0 0;
 }
-
-.project header li a::after {
-  content: ↗;
-} */
 
 .project h2 {
   border: none;
@@ -169,11 +157,9 @@ a {
 
 .project .content {
   overflow: auto;
-  /* padding: 10px 10px 100px; */
 }
 
 .project .figure-medium {
-  /* float: left; */
   margin: auto auto 20px;
   width: 100%;
 }
@@ -187,11 +173,12 @@ a {
   margin: auto;
   border-bottom: solid black 1px;
   border-top: solid black 1px;
-  /* display: flex; */
+  display: flex;
   /* text-align: center; */
   font-style: italic;
   /* overflow: auto; */
-  margin: 0 30px;
+  /* margin: auto; */
+  padding: 0 20px;
   text-align: justify;
 }
 
@@ -216,7 +203,7 @@ a {
 
   .project {
     margin: 20px auto;
-    max-width: calc(100vw - 100px);
+    /* max-width: calc(100vw - 100px); */
   }
 
   .project .content {

@@ -1,6 +1,6 @@
 ---
 layout: project.njk
-title: Composing Through Listening (2022)
+title: Composing Through Listening
 url: https://wfmu.org/playlists/shows/119916
 ---
 <figure class="figure-medium">
@@ -16,7 +16,7 @@ Along a different paradigm, Jana Winderen and Felix Hess use non-traditional rec
 
 Perhaps more so than other works of music and sound art, these pieces seem to suggest something about _how_ to listen to sounds, through listening to the composers' own act of listening.
 
-<blockquote>
+<blockquote style="display: block">
 
   **Program Notes**
 

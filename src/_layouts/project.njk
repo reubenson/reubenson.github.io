@@ -12,31 +12,15 @@ title: Project Title
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="stylesheet" href="/bundle.css">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Gaegu&family=Grandiflora+One&family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&family=Joan&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Luxurious+Roman&family=Manjari:wght@100;400;700&family=Metal&family=Nova+Cut&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Rakkas&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <style>
-      h1 {
-        font-family: "Ibarra Real Nova" !important;
-        font-size: 24px;
-      }
-      </style>
+    {% include "open-font.njk" %}  
   </head>
   <body class="project broider">
     <header>
       <h1>{{ title }}</h1>
       <a href="{{ url }}">{{ url }}</a>
-      {# <nav>
-        <ul>
-          {% if url %}
-            <li>
-              <a href="{{ url }}" target="_blank">{{ url }}</a>
-            </li>
-          {% endif %}
-        </ul>
-      </nav> #}
     </header>
     <div class="content">
       {{ content | safe }}
     </div>
-    <ul>
   </body>
 </html>

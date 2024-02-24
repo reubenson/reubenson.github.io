@@ -11,15 +11,8 @@ title: Reuben Son Homepage
     <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="icon" type="image/png" href="/favicon.png">
-
-    {% include "open-font.njk" %}
-
-  
+    {% include "open-font.njk" %}  
     <style type="text/css">
-      {# h1 {
-        font-family: "Ibarra Real Nova" !important;
-      } #}
-
       body {
         background-color: #f0f0e6;
         font-family: sans-serif;
@@ -43,35 +36,10 @@ title: Reuben Son Homepage
         text-align: left;
       }
 
-      h1 a {
-        font-weight: 500;
-        font-family: serif;
-        letter-spacing: 10.1px;
-        text-transform: uppercase;
-      }
-
       h1 a, h2 a {
         color: black;
         text-decoration: none;
-      }
-
-      h2 {
-        display: block;
-        padding: 15px;
-        font-size: 20px;
-      }
-
-      h3 {
-        margin-top: 0;
-        font-size: 13px;
-        text-align: left;
-        font-style: italic;
-      }
-  
-
-      h1, h2, h3 {
-        font-weight: 300;
-      }
+      }  
 
       ul {
         padding: 0;
@@ -252,12 +220,6 @@ title: Reuben Son Homepage
         border-style:  solid;
       }
 
-      {# .broider {
-          border-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAALtJREFUOE+1VEEOwCAM0v8/2sVlXSqFVpPNyxJnESmlt9ZG+3j1B3R+T9YkomqGB91ljER83f0PQSvGxtAzxb2UqV2IsjCmCzmlKWPkwVGqY1DVQJTqJaKeaECZxqFBjyMWTZFRZpt5NjSIgaqb1fO3QU8s9juo7wE1f2UnA1CaS9DT7i+6VxpmeSAHh4GyaVF2YxKkmqIXVQb4fZlSWQJlmRvGFMfVxtM7YSfEA1NWVI0qrakCZYddOHMB3yJuAeatxG0AAAAASUVORK5CYII=") 7 /  7px / 0 round;
-          border-width:  7px;
-          border-style:  solid;
-      } #}
-
       @media screen and (min-height: 550px) {
         .cards {
           top: 50%;
@@ -271,7 +233,7 @@ title: Reuben Son Homepage
   <body class="">
     <div class="cards">
       <div class="card front broider">
-        <h1>Reuben Son</h1>
+        <h1><a href="/about">Reuben Son</a></h1>
         <div class="container">
           {% renderFile './src/_includes/tiny-bio.md' %}
         </div>
@@ -281,7 +243,7 @@ title: Reuben Son Homepage
         <div class="container-background"></div>
       </div>
       <div class="card back broider">
-        <h1>Reuben Son</h1>
+        <h1><a href="/about">Reuben Son</a></h1>
         <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
         <div class="container">
           <span class="card-quote">

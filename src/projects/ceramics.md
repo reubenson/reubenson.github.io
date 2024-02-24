@@ -1,7 +1,7 @@
 ---
 layout: project.njk
 title: Ceramics
-# url: https://reubenson.com/midi-archive/
+url: https://reubenson.com/portfolio/ceramics/
 ---
 <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_casa-mug.jpg" alt="photo of a carved mug">

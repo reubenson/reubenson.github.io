@@ -101,7 +101,7 @@ a {
 }
 
 li.splide__slide {
-  border: solid black 2px;
+  /* border: solid black 2px; */
   margin: 0;
   /* height: 100vh; */
 }

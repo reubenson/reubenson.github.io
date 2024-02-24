@@ -19,6 +19,15 @@
 <style>
   h1, h2, h3, h4, h5, h6 {
     font-family: "Ibarra Real Nova", serif;
+    font-weight: 300;
+  }
+</style>
+
+    <style>
+  .broider {
+    border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAIxJREFUOE/tlFEKwCAMQ+v9D+1QVqmx1Qj9GuvPJoRnGqtFRKokV3mh7ZtV1UI9x7vNIv0CRcguGk/bTaJTXWsUrNOJE0FvMm7d0FBmKlxTePq6a2vf/nuTEWmnTBH0Q/upRvWxTJchJl6Y45wilGB2CX2j0u++dZjySmHLp5Hy9Ms1ZXPc6QY0AzYYD9BXaAEvLtuQAAAAAElFTkSuQmCC") 7 /  7px / 0 round;
+    border-width: 7px;
+    border-style: solid;
   }
 </style>
 
@@ -38,6 +47,10 @@
           height: calc(100vh - 20px);
         }
 
+        div.splide__slide {
+          border: none;
+        }
+
         figure.splide__slide {
           height: 100%;
           width: 100%;
@@ -51,14 +64,13 @@
   </head>
   <body>
     <div class="content">
-      
       <section class="splide" aria-label="Reuben Son">
-          <div class="splide__track">
-            <ul class="splide__list">
-              
-            </ul>
-          </div>
-        </section>
+        <div class="splide__track">
+          <ul class="splide__list">
+            
+          </ul>
+        </div>
+      </section>
     </div>
     <script>
       new Splide( '.splide' ).mount();

@@ -9,19 +9,22 @@
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="stylesheet" href="/bundle.css">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Gaegu&family=Grandiflora+One&family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&family=Joan&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Luxurious+Roman&family=Manjari:wght@100;400;700&family=Metal&family=Nova+Cut&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Rakkas&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <style>
-      h1 {
-        font-family: "Ibarra Real Nova" !important;
-        font-size: 24px;
-      }
-      </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+<style>
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Ibarra Real Nova", serif;
+    font-weight: 300;
+  }
+</style>
+  
   </head>
   <body class="project broider">
     <header>
       <h1>On deploying a neural net to AWS Lambda</h1>
       <a href=""></a>
-      
     </header>
     <div class="content">
       <h2>On deploying a neural net to AWS Lambda</h2>
@@ -40,6 +43,5 @@
 <p>At the same time, it was interesting to me that torchlambda used something called <a href="https://pytorch.org/tutorials/beginner/Intro_to_TorchScript_tutorial.html">torchscript</a> to compile a model to C++, and vastly minimize the size of source code and dependencies to be deployed to Lambda. But as I was considering going further down this path, <a href="https://github.com/kenjinp">Kenny</a>, a fellow Recurse resident suggested that I look into <a href="https://onnx.ai/">https://onnx.ai/</a>, which aims to bring interoperability to the growing ecosystem of various ML libraries and runtime environments. The Onnx runtime, unlikely PyTorch, is relatively small (~45 MB), and falls within Lambda’s filesize restrictions. After a quick test run, loosely following suggestions <a href="https://becominghuman.ai/onnx-inference-with-python-in-aws-lambda-f09d08530e87">here</a>, I’ve set up a toy model deployed to Lambda using the Onnx runtime packaged into a Lambda layer, and happy to report that it’s functioning as expected!</p>
 
     </div>
-    <ul>
   </body>
 </html>

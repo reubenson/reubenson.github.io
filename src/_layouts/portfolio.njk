@@ -16,6 +16,7 @@ title: Portfolio
     <script src="/splide.min.js"></script>
     <link rel="stylesheet" href="/splide.min.css">
     {% include "open-font.njk" %}
+    {% include "broider.njk" %}
     <style>
       @media print {
         .content {
@@ -32,6 +33,10 @@ title: Portfolio
           height: calc(100vh - 20px);
         }
 
+        div.splide__slide {
+          border: none;
+        }
+
         figure.splide__slide {
           height: 100%;
           width: 100%;
@@ -45,28 +50,20 @@ title: Portfolio
   </head>
   <body>
     <div class="content">
-      {# {{ content | safe }} #}
       <section class="splide" aria-label="{{ title }}">
-          <div class="splide__track">
-            <ul class="splide__list">
-              {% for item in items %}
-              <li class="splide__slide">
-                <div class="splide__slide">
-                  <h1>{{ item.title }}</h1>
-                  {# <iframe width="100%" height="480px" src="https://www.youtube-nocookie.com/embed/ERbfczLUr-A?controls=0&amp;start=483" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> #}
-                  {# <figcaption> #}
-                    {% renderFile "./src/" ~ item.path ~ ".md" %}
-                    {# Software developed for a project by the artist James Hoff, utlizing algorithmic control of Google Maps Street View to animate audio-responsive site-specific work, in this case at Chernobyl.  #}
-                    {# {% renderFile "./src/projects/hobo-ufo.md" %} #}
-                  {# </figcaption> #}
-                </div>
-              </li>
-              {# <p>{{ item.title }} </p>  #}
-              {# {% renderFile "./src/" ~ item.path ~ ".md" %} #}
-              {% endfor %}
-            </ul>
-          </div>
-        </section>
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for item in items %}
+            <li class="splide__slide">
+              <div class="splide__slide broider">
+                <h1>{{ item.title }}</h1>
+                  {% renderFile "./src/" ~ item.path ~ ".md" %}
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
     </div>
     <script>
       new Splide( '.splide' ).mount();
