@@ -176,7 +176,6 @@ title: Reuben Son Homepage
       .social {
         display: inline;
         font-size: 8px;
-        {# font-family: Courier New, monospace; #}
         position: absolute;
         bottom: -2px;
         left: 0;
@@ -206,7 +205,7 @@ title: Reuben Son Homepage
         right: 16px;
         margin: auto;
         position: absolute;
-        font-size: 40px;
+        height: 50px;
         z-index: 1;
       }
 
@@ -214,11 +213,15 @@ title: Reuben Son Homepage
         text-decoration: none;
         color: #003000;
       }
-      {# .broider {
-        border-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAIxJREFUOE/tlFEKwCAMQ+v9D+1QVqmx1Qj9GuvPJoRnGqtFRKokV3mh7ZtV1UI9x7vNIv0CRcguGk/bTaJTXWsUrNOJE0FvMm7d0FBmKlxTePq6a2vf/nuTEWmnTBH0Q/upRvWxTJchJl6Y45wilGB2CX2j0u++dZjySmHLp5Hy9Ms1ZXPc6QY0AzYYD9BXaAEvLtuQAAAAAElFTkSuQmCC") 7 /  7px / 0 round;
-        border-width:  7px;
-        border-style:  solid;
-      } #}
+
+      .glyph img {
+        height: 100%;
+        display:inline-block;
+        background: #003000;
+        -webkit-mask:url("/public/transparent.png") center/contain;
+        mask:url("/public/transparent.png") center/contain;
+
+      }
 
       @media screen and (min-height: 550px) {
         .cards {
@@ -244,7 +247,11 @@ title: Reuben Son Homepage
       </div>
       <div class="card back broider">
         <h1><a href="/about">Reuben Son</a></h1>
-        <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
+        <div class="glyph">
+          <a href="https://frogchor.us" target="_blank">
+            <img src="/public/transparent.png">
+          </a>
+        </div>
         <div class="container">
           <span class="card-quote">
             Left blank for a work expressing modern feeling. {# https://www.goodreads.com/review/show/785097402 #}

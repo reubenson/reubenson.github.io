@@ -23,7 +23,7 @@
   
   
 .broider {
-  border-image: url('/pixilart-drawing.png') 9 9 round;
+  border-image: url('/public/pixilart-drawing.png') 9 9 round;
   border-width:  9px;
   border-style:  solid;
 }
@@ -193,7 +193,6 @@
       .social {
         display: inline;
         font-size: 8px;
-        
         position: absolute;
         bottom: -2px;
         left: 0;
@@ -223,7 +222,7 @@
         right: 16px;
         margin: auto;
         position: absolute;
-        font-size: 40px;
+        height: 50px;
         z-index: 1;
       }
 
@@ -231,7 +230,15 @@
         text-decoration: none;
         color: #003000;
       }
-      
+
+      .glyph img {
+        height: 100%;
+        display:inline-block;
+        background: #003000;
+        -webkit-mask:url("/public/transparent.png") center/contain;
+        mask:url("/public/transparent.png") center/contain;
+
+      }
 
       @media screen and (min-height: 550px) {
         .cards {
@@ -262,7 +269,11 @@
       </div>
       <div class="card back broider">
         <h1><a href="/about">Reuben Son</a></h1>
-        <div class="glyph"><a href="https://frogchor.us" target="_blank">𓆏</a></div>
+        <div class="glyph">
+          <a href="https://frogchor.us" target="_blank">
+            <img src="/public/transparent.png">
+          </a>
+        </div>
         <div class="container">
           <span class="card-quote">
             Left blank for a work expressing modern feeling. 
@@ -270,7 +281,7 @@
         </div>
         <div class="social">
           <p>
-            Website last updated Wednesday, February 28, 2024
+            Website last updated Thursday, February 29, 2024
           </p>
         </div>
         <div class="container-background"></div>

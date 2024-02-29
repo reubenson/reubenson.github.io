@@ -1,0 +1,88 @@
+---
+<!-- title: Frog Chorus -->
+layout: poster.njk
+backgroundImageUrl: https://frogchor.us/assets/spring-p-f64eb9b5.png
+---
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: Overlock;
+  }
+
+  h1 {
+    font-size: 120px;
+    position: relative;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  h1 .header-frog {
+    font-size: 30px;
+    font-size: 20px;
+    margin: 20px 0;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-family: cursive;
+  }
+
+  .details-item {
+    flex-basis: 40%;
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .frog {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .description {
+    background: white;
+    z-index: 1;
+    display: block;
+    position: relative;
+    padding: 10px;
+    text-align: justify;
+    margin: 40px 40px 80px;
+  }
+
+  .content {
+    /* background-image: url('https://frogchor.us/assets/spring-p-f64eb9b5.png'); */
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
+  }
+</style>
+
+
+<div class="details">
+  <h3 class="details-item">Vernal Equinox 2024</h3>
+  <h3 class="details-item">Location TBD</h3>
+  <h3 class="details-item">A Listening Event</h3>
+</div>
+
+<!-- <img class="frog" src="https://frogchor.us/assets/spring-p-f64eb9b5.png"> -->
+<!-- </img> -->
+
+<h1>ḟԻ✺❡ ḉℏ✺Ի<span class="header-frog">&#78223;</span>ṳṧ</h1>
+<p class="description">
+  Walk in a slow, undirected manner with your phone (frog) until you find a good place to set it down.
+  Notice how the other participants are setting down their phones (frogs) too, and remain quiet as the frogs (phones) settle into their environment, slowly beginning to make their calls.
+  Focus on the sound of your frog, apart from the other frogs. Wander further away from your frog, until you can no longer distinguish which which frog is yours.
+  Consider what it feels like to be separated from your frog (phone), witnessing it absorbed in the act of listening and singing?
+  After a while, leave the frog chorus, either bringing your phone with you, or not.
+</p>
