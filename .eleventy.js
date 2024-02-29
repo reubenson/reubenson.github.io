@@ -8,6 +8,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("splide.min.css");
   eleventyConfig.addPassthroughCopy("project-slides.css");
   eleventyConfig.addPassthroughCopy("bundle.css");
+  eleventyConfig.addPassthroughCopy("pixilart-drawing.png");
   eleventyConfig.addPassthroughCopy({ "favicon.png": "/" });
   
   // chrome-extension versions

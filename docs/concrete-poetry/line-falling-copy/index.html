@@ -1,0 +1,57 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>line falling</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <style type="text/css">
+      body {
+        font-family: monospace;
+        padding: 20px;
+      }
+
+      .container {
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <header>line falling</header>
+    <!-- <header>HTML AS CONCRETE POETRY</header> -->
+    <div class="container">
+      <div class="line">
+        <p>L I N E  F A L L I N G</p>
+ <script>
+  const body = document.querySelector('body');
+  const line = document.querySelector('.line');
+
+  for (let index = 0; index < 180; index+=1) {
+    const el = line.cloneNode(true);
+
+    el.setAttribute('style', `transform: rotate(${index}deg)`);
+    
+    body.appendChild(el);
+  }
+</script>
+<style>
+
+</style>
+      </div>
+    </div>
+  </body>
+  <!-- <script>
+    const body = document.querySelector('body');
+    const line = document.querySelector('.line');
+
+    for (let index = 0; index < 90; index++) {
+      const el = line.cloneNode(true);
+
+      el.setAttribute('style', `transform: rotate(${index}deg)`);
+      
+      body.appendChild(el);
+    }
+  </script> -->
+</html>
