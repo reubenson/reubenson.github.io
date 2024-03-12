@@ -11,13 +11,47 @@ layout: poster.njk
 <style>
   body {
     font-family: Overlock;
+    font-size: 18px;
+    margin: 0;
+    padding: 40px;
+  }
+
+  .content {
+    background-color: #eeb044;
+    background-color: rgba(238, 176, 68, 0.2);
+    border: solid #367b3d 4px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: calc(100vh - 80px);
+    max-height: 100%;
+    height: auto;
+    width: 100%;
+  }
+
+  .background-image {
+    width: 40vh;
+    height: 40vh;
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  @media print {
+    body {
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+    }
   }
 
   h1 {
     color: #d77754;
-    font-size: 80px;
+    font-size: 100px;
     font-weight: 400;
     letter-spacing: -5px;
+    margin: 0 auto;
     position: relative;
     text-align: center;
   }
@@ -64,18 +98,11 @@ layout: poster.njk
   }
 
   .description {
-    background: white;
-    z-index: 1;
     display: block;
     position: relative;
-    padding: 10px;
-    margin: 40px 40px 80px;
-  }
-
-  .content {
-    /* background-image: url('https://frogchor.us/assets/spring-p-f64eb9b5.png'); */
-    /* background-size: cover; */
-    /* background-repeat: no-repeat; */
+    margin: 40px auto;
+    max-width: 340px;
+    width: 100%;
   }
 
   .calendar {
@@ -94,46 +121,33 @@ layout: poster.njk
 
   .frogs span:nth-child(1) {
     color: #367b3d;
-    font-size: 120px;
+    font-size: 100px;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 18px;
+    right: 24px;
   }
 
   .frogs span:nth-child(2) {
     color: #367b3d;
-    font-size: 140px;
+    font-size: 110px;
     transform: scaleX(-1);
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 18px;
+    left: 24px;
   }
 
   .frog-labels span:nth-child(1) {
-    bottom: 152px;
+    bottom: 150px;
     color: #367b3d;
     position: absolute;
-    right: 10px;
+    right: 30px;
   }
 
   .frog-labels span:nth-child(2) {
-    bottom: 170px;
+    bottom: 150px;
     color: #367b3d;
-    left: 36px;
+    left: 35px;
     position: absolute;
-  }
-
-  .square {
-    background-image: url(https://f4.bcbits.com/img/a3647274627_65);
-    width: 390px;
-    height: 469px;
-    background-position: center -215px;
-    background-size: auto;
-    margin: auto;
-  }
-
-  .square img {
-    width: 100%;
   }
 
   p {
@@ -147,13 +161,6 @@ layout: poster.njk
 <!-- <h1>ḟԻ✺❡ ḉℏ✺Ի<span class="header-frog">&#78223;</span>ṳṧ</h1> -->
 <h1>ḟԻ✺❡ ḉℏ✺Իṳṧ</h1>
 <h2>VERNAL EQUINOX</h2>
-
-
-<div class="details">
-  <!-- <h3 class="details-item">Vernal Equinox 2024</h3> -->
-  <!-- <h3 class="details-item">Location TBD</h3> -->
-  <!-- <h3 class="details-item">A Listening Event</h3> -->
-</div>
 
 <div class="calendar">
   <img src="/public/vernal-equinox-2024.svg" />
