@@ -1,8 +1,6 @@
 ---
 title: Frog Chorus - Vernal Equinox 2024
 layout: poster.njk
-# backgroundImageUrl: https://frogchor.us/assets/spring-p-f64eb9b5.png
-# backgroundImageUrl: https://f4.bcbits.com/img/a3647274627_65
 ---
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +11,7 @@ layout: poster.njk
     font-family: Overlock;
     font-size: 18px;
     margin: 0;
-    padding: 40px;
+    padding: 20px;
   }
 
   .content {
@@ -24,6 +22,7 @@ layout: poster.njk
     position: relative;
     min-height: calc(100vh - 80px);
     max-height: 100%;
+    padding: 20px;
     height: auto;
     width: 100%;
   }
@@ -48,7 +47,7 @@ layout: poster.njk
 
   h1 {
     color: #d77754;
-    font-size: 100px;
+    font-size: 55px;
     font-weight: 400;
     letter-spacing: -5px;
     margin: 0 auto;
@@ -56,13 +55,6 @@ layout: poster.njk
     text-align: center;
   }
   
-  h1 .header-frog {
-    color: #2b4727;
-    font-size: 30px;
-    font-size: 20px;
-    margin: 20px 0;
-  }
-
   h2 {
     color: #367b3d;
     font-size: 18px;
@@ -75,7 +67,7 @@ layout: poster.njk
     font-size: 30px;
   }
 
-  .details {
+  /* .details {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -87,7 +79,7 @@ layout: poster.njk
     flex-grow: 1;
     padding: 0;
     margin: 0;
-  }
+  } */
 
   .frog {
     position: absolute;
@@ -108,7 +100,9 @@ layout: poster.njk
   .calendar {
     margin: auto;
     position: relative;
-    width: 400px;
+    /* width: 400px; */
+    width: 100%;
+    max-width: 400px;
   }
 
   .calendar img {
@@ -121,7 +115,7 @@ layout: poster.njk
 
   .frogs span:nth-child(1) {
     color: #367b3d;
-    font-size: 100px;
+    font-size: 50px;
     position: absolute;
     bottom: 18px;
     right: 24px;
@@ -129,33 +123,80 @@ layout: poster.njk
 
   .frogs span:nth-child(2) {
     color: #367b3d;
-    font-size: 110px;
+    font-size: 60px;
     transform: scaleX(-1);
     position: absolute;
     bottom: 18px;
     left: 24px;
   }
 
-  .frog-labels span:nth-child(1) {
-    bottom: 150px;
+  .frog-labels .frog-label:nth-child(1) {
+    bottom: 91px;
     color: #367b3d;
     position: absolute;
-    right: 30px;
+    right: 25px;
   }
 
-  .frog-labels span:nth-child(2) {
-    bottom: 150px;
+  .frog-labels .frog-label:nth-child(2) {
+    bottom: 101px;
     color: #367b3d;
-    left: 35px;
+    left: 24px;
     position: absolute;
   }
 
-  p {
+  p, a {
     color: #367b3d;
   }
 
   .description header p {
+    font-style: italic;
     margin: 0 auto;
+  }
+
+  a {
+    font-style: italic;
+    text-decoration: none;
+  }
+
+  @media screen and (min-width: 600px) {
+    body {
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 100px;
+    }
+
+    .frogs span:nth-child(1) {
+      color: #367b3d;
+      font-size: 100px;
+      position: absolute;
+      bottom: 18px;
+      right: 24px;
+    }
+
+    .frogs span:nth-child(2) {
+      color: #367b3d;
+      font-size: 110px;
+      transform: scaleX(-1);
+      position: absolute;
+      bottom: 18px;
+      left: 24px;
+    }
+
+    .frog-labels .frog-label:nth-child(1) {
+      bottom: 150px;
+      color: #367b3d;
+      position: absolute;
+      right: 30px;
+    }
+
+    .frog-labels .frog-label:nth-child(2) {
+      bottom: 150px;
+      color: #367b3d;
+      left: 35px;
+      position: absolute;
+    }
   }
 </style>
 <!-- <h1>ḟԻ✺❡ ḉℏ✺Ի<span class="header-frog">&#78223;</span>ṳṧ</h1> -->
@@ -169,17 +210,10 @@ layout: poster.njk
     <span>𓆏</span>
   </div>
   <div class="frog-labels">
-    <span>ʄཞųıɬʄųƖ ʂƈɧơơƖ</span>
-    <span>ཞɛųცɛŋ ʂơŋ</span>
+    <a class="frog-label" href="https://fruitful.school/" target="_blank">ʄཞųıɬʄųƖ ʂƈɧơơƖ</a>
+    <a class="frog-label" href="https://reubenson.com/" target="_blank">ཞɛųცɛŋ ʂơŋ</a>
   </div>
 </div>
-
-<!-- <div class="square"> -->
-  <!-- <img src="https://f4.bcbits.com/img/a3647274627_65" /> -->
-<!-- </div> -->
-
-<!-- <img class="frog" src="https://frogchor.us/assets/spring-p-f64eb9b5.png"> -->
-<!-- </img> -->
 
 <section class="description">
   <header>
@@ -187,21 +221,21 @@ layout: poster.njk
       Wednesday, March 20, 2024
     </p>
     <p>
-      6:30pm
+      6:30pm til sundown
     </p>
     <p>
-      Pier 3 Plaza, Brooklyn Bridge Park
+      <a href="https://maps.app.goo.gl/bsWruvJthmBE1XF9A" target="_blank"> Pier 3 Plaza Brooklyn Bridge Park</a>
     </p>
   </header>
   <p>
     Dear everyone,
   </p>
   <p>
-    You are invited to a special event following the vernal equinox, activating and celebrating Reuben Son’s web-based work, <em>Frog Chorus</em>. Please bring your smartphones to join in the chorus.
+    You are invited to a special event following the vernal equinox, activating and celebrating Reuben Son’s web-based work, <a href="https://frogchor.us" target="_blank">Frog Chorus</a>. Please bring your smartphones to join in the chorus.
     See you there!
   </p>
   <p>
-    🥭
+    🥭 × 🐸
   </p>
 </section>
 
