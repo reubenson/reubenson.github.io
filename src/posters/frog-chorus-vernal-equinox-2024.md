@@ -1,6 +1,7 @@
 ---
 title: Frog Chorus - Vernal Equinox 2024
 layout: poster.njk
+socialImage: /public/frog-chorus-vernal-equinox-2024-mobile.jpeg
 ---
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -232,6 +233,8 @@ layout: poster.njk
   </p>
   <p>
     You are invited to a special event following the vernal equinox, activating and celebrating Reuben Son’s web-based work, <a href="https://frogchor.us" target="_blank">Frog Chorus</a>. Please bring your smartphones to join in the chorus.
+  </p>
+  <p>
     See you there!
   </p>
   <p>
