@@ -22,7 +22,11 @@
     <style>
   
   
-
+.broider {
+  border-image: url('/public/pixilart-drawing.png') 9 9 round;
+  border-width:  9px;
+  border-style:  solid;
+}
 
 @media print {
   .broider {
@@ -302,7 +306,7 @@
         <div class="container-background"></div>
       </div>
     </div>
-    <div class="project-border broider"></div>
+    <div class="project-border"></div>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
