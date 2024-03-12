@@ -97,11 +97,11 @@ title: Project Title
       }
     </style>
   </head>
-  <body class="project broider">
-    <header>
-      <h1><a href="/">{{ title }}</a></h1>
-    </header>
+  <body class="project">
     <div class="content">
+      <header>
+        <h1><a href="/">{{ title }}</a></h1>
+      </header>
       {{ content | safe }}
       <h2 class="projects-list-header">Selected Projects</h2>
       <ul class="projects-list">
@@ -115,6 +115,6 @@ title: Project Title
       {% endfor %}
       </ul>
     </div>
-    <ul>
+    <div class="project-border broider"></div>
   </body>
 </html>

@@ -24,6 +24,19 @@ title: Reuben Son Homepage
         width: 100%;
       }
 
+      .project-border {
+        height: calc(100vh - 20px);
+        width: calc(100vw - 20px);
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
+        margin: 10px;
+      }
+
       .content {
         margin: auto;
         max-width: 600px;
@@ -67,7 +80,7 @@ title: Reuben Son Homepage
         margin: auto;
         position: absolute;
         right: 0;
-        width: calc(100% - 40px);
+        width: calc(100% - 30px);
       }
 
       .card {
@@ -220,7 +233,6 @@ title: Reuben Son Homepage
         background: #003000;
         -webkit-mask:url("/public/transparent.png") center/contain;
         mask:url("/public/transparent.png") center/contain;
-
       }
 
       @media screen and (min-height: 550px) {
@@ -233,9 +245,9 @@ title: Reuben Son Homepage
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
-  <body class="">
+  <body>
     <div class="cards">
-      <div class="card front broider">
+      <div class="card front broider-cancel">
         <h1><a href="/about">Reuben Son</a></h1>
         <div class="container">
           {% renderFile './src/_includes/tiny-bio.md' %}
@@ -245,11 +257,11 @@ title: Reuben Son Homepage
         </div>
         <div class="container-background"></div>
       </div>
-      <div class="card back broider">
+      <div class="card back broider-cancel">
         <h1><a href="/about">Reuben Son</a></h1>
         <div class="glyph">
           <a href="https://frogchor.us" target="_blank">
-            <img src="/public/transparent.png">
+            <img src="/public/frog-glyph.png">
           </a>
         </div>
         <div class="container">
@@ -265,6 +277,7 @@ title: Reuben Son Homepage
         <div class="container-background"></div>
       </div>
     </div>
+    <div class="project-border broider"></div>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

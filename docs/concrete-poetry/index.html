@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Concrete Poetry</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Concrete Poetry</h1>
+        <a href=""></a>
+      </header>
       <h1>Concrete Poetry</h1>
 <p>Some playful attempts at writing <a href="https://en.wikipedia.org/wiki/Concrete_poetry">concrete poetry</a></p>
 <ul>
@@ -46,5 +54,6 @@
 </ul>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

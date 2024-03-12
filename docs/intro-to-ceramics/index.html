@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Quick intro to ceramics</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Quick intro to ceramics</h1>
+        <a href=""></a>
+      </header>
       <h1>Quick intro to ceramics</h1>
 <h2>What is ceramics ???</h2>
 <ul>
@@ -65,5 +73,6 @@
 <p>… an open-ended question that I’m thinking about …</p>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

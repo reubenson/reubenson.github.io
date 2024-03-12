@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>QCVG</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>QCVG</h1>
+        <a href=""></a>
+      </header>
       <p>The QCVG (Quad Control Voltage Generator) is a hardware and software package designed and developed for computerized control of an analogue modular synthesizer.</p>
 <figure class="figure-medium">
   <img src="https://s3.amazonaws.com/privatechronology/assets/QCVG_1.jpg" alt="front view of QCVG module" class="flex-half">
@@ -51,5 +59,6 @@
   </iframe>
 </div>
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

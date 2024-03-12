@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Wrapping up</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Wrapping up</h1>
+        <a href=""></a>
+      </header>
       <h2>Wrapping up</h2>
 <h3>Week 6 at Recurse Center</h3>
 <p>It’s been such a fast six weeks at Recurse, and all the more so for getting so absorbed in getting my MIDI Archive project into shape. It’s been a journey … which I think I’ll need some time to sit with before writing out a proper reflection of my wonderful and expansive time here.</p>
@@ -64,5 +72,6 @@
 </ul>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

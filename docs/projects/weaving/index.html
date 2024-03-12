@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Weaving Music</h1>
-      <a href="https://reubenson.com/weaving">https://reubenson.com/weaving</a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Weaving Music</h1>
+        <a href="https://reubenson.com/weaving">https://reubenson.com/weaving</a>
+      </header>
       <p><strong><a href="/weaving">Weaving Music</a></strong> is an exploration of the materiality of sound through the metaphor of weaving, with the weaving loom re-imagined as a music sequencer. The seeds of this project were formed when first encountering grid notation for weaving patterns in Anni Albers’ <em>On Weaving</em>, which gave the immediate impression of rhythmic music notation.</p>
 <figure>
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/on-weaving.jpeg" alt="weaving notation from Anni Albers" class="">
@@ -61,5 +69,6 @@
 </figure>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

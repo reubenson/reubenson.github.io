@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>MIDI Archive</h1>
-      <a href="https://reubenson.com/midi-archive/">https://reubenson.com/midi-archive/</a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>MIDI Archive</h1>
+        <a href="https://reubenson.com/midi-archive/">https://reubenson.com/midi-archive/</a>
+      </header>
       <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/midi-archive-screenshot.jpg" alt="screenshot of MIDI Archive website">
   <!-- <figcaption></figcaption> -->
@@ -49,5 +57,6 @@
 <p>Read more about this project at <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47</a>.</p>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Reflections on my time at Recurse Center</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Reflections on my time at Recurse Center</h1>
+        <a href=""></a>
+      </header>
       <h2>Reflections on my time at Recurse Center</h2>
 <p>(Note: this writing has also been published to Medium <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">here</a>)</p>
 <figure>
@@ -140,5 +148,6 @@ Like many members of my cohort, many of these questions were inflected by recent
 - The preserving machine
 - A period of reconnecting to the underlying human impulses that manifest on the web, the kinds of projects surveyed by Naive Weekly on Substack -->
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

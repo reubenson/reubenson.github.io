@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Frog Chorus</h1>
-      <a href="https://frogchor.us">https://frogchor.us</a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Frog Chorus</h1>
+        <a href="https://frogchor.us">https://frogchor.us</a>
+      </header>
       <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/Frog-Chorus-video-capture.gif" alt="screen capture of frog chorus app">
   <figcaption>Screen capture of <em>Frog Chorus</em></figcaption>
@@ -47,5 +55,6 @@
 <p>This project is dedicated to the memory of the Dutch physicist and sound artist, Felix Hess, whose <em><a href="https://isea-archives.siggraph.org/art-events/electronic-sound-creatures-by-felix-hess/">Electronic Sound Creatures</a></em> work was a direct inspiration for this project.</p>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

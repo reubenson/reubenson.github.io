@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Frog Chorus: Application to Web Sound Art Open Call</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Frog Chorus: Application to Web Sound Art Open Call</h1>
+        <a href=""></a>
+      </header>
       <h1 style="text-align: center">Frog Chorus: Application to Web Sound Art Open Call</h1>
 <p>This application contains a <a href="#project-description">project description</a>, <a href="#technical-description">technical description</a>, and proposed <a href="#timeline">timeline</a> for the development of a web-app called <em>Frog Chorus</em> in response to the <a href="https://websoundart.org/call">2023 Web Sound Art Open Call</a>.</p>
 <figure>
@@ -85,5 +93,6 @@ In a gathering of five or more people (ideally, many more) with smartphones runn
 </ul>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

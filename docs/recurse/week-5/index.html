@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>On deploying a neural net to AWS Lambda</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>On deploying a neural net to AWS Lambda</h1>
+        <a href=""></a>
+      </header>
       <h2>On deploying a neural net to AWS Lambda</h2>
 <h3>Week 5 at Recurse Center</h3>
 <p>I’m heading into my last week at Recurse, and feeling an excited rush to wrap up the MIDI archive project I began ruminating on the previous week. The shape of it has been slowly coming together, and what remains to be seen is how much I can manage to deploy in the handful of days I have left. At the moment, the project looks something like the following, involving many components beyond just neural net model.</p>
@@ -54,5 +62,6 @@
 <p>At the same time, it was interesting to me that torchlambda used something called <a href="https://pytorch.org/tutorials/beginner/Intro_to_TorchScript_tutorial.html">torchscript</a> to compile a model to C++, and vastly minimize the size of source code and dependencies to be deployed to Lambda. But as I was considering going further down this path, <a href="https://github.com/kenjinp">Kenny</a>, a fellow Recurse resident suggested that I look into <a href="https://onnx.ai/">https://onnx.ai/</a>, which aims to bring interoperability to the growing ecosystem of various ML libraries and runtime environments. The Onnx runtime, unlikely PyTorch, is relatively small (~45 MB), and falls within Lambda’s filesize restrictions. After a quick test run, loosely following suggestions <a href="https://becominghuman.ai/onnx-inference-with-python-in-aws-lambda-f09d08530e87">here</a>, I’ve set up a toy model deployed to Lambda using the Onnx runtime packaged into a Lambda layer, and happy to report that it’s functioning as expected!</p>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

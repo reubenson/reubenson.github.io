@@ -15,13 +15,15 @@ title: Project Title
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
   </head>
-  <body class="project broider">
-    <header>
-      <h1>{{ title }}</h1>
-      <a href="{{ url }}">{{ url }}</a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>{{ title }}</h1>
+        <a href="{{ url }}">{{ url }}</a>
+      </header>
       {{ content | safe }}
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

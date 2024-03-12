@@ -29,6 +29,13 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
   
     <style>
@@ -114,11 +121,11 @@
       }
     </style>
   </head>
-  <body class="project broider">
-    <header>
-      <h1><a href="/">Reuben Son</a></h1>
-    </header>
+  <body class="project">
     <div class="content">
+      <header>
+        <h1><a href="/">Reuben Son</a></h1>
+      </header>
       <figure class="figure-medium" style="transform:rotate(2deg)">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" alt="photo of Reuben on his couch">
   <figcaption>Photo by <a href="https://laurelschwulst.com/">Laurel Schwulst</a></figcaption>
@@ -197,6 +204,6 @@
       
       </ul>
     </div>
-    <ul>
+    <div class="project-border broider"></div>
   </body>
 </html>

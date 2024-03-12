@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Ceramics</h1>
-      <a href="https://reubenson.com/portfolio/ceramics/">https://reubenson.com/portfolio/ceramics/</a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Ceramics</h1>
+        <a href="https://reubenson.com/portfolio/ceramics/">https://reubenson.com/portfolio/ceramics/</a>
+      </header>
       <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_casa-mug.jpg" alt="photo of a carved mug">
   <figcaption>From a series of "casa mugs", produced with a kurinuki carving technique, in which the vessel and door-like handle is carved out, and the surface is left jagged and rough, largely untouched by any surface intervention.</figcaption>
@@ -45,5 +53,6 @@
 <p>Reuben’s most recent ceramics work was completed during a summer workshop at the <a href="https://www.haystack-mtn.org/">Haystack Mountain School of Crafts</a>, where he protyped and experimented with 3D ceramic printing techniques and bots. You can read reflections on that workshop <a href="https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd">here</a>, see an image gallery of selected works <a href="/ceramics">here</a>, and check out ceramics for sale on <a href="https://sonceramics.etsy.com">Etsy</a>.</p>
 
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

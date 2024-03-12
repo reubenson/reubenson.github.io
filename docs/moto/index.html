@@ -29,15 +29,23 @@
   border-style:  solid;
 }
 
+@media print {
+  .broider {
+    border: none;
+  }
+}
+
+
 </style>
 
   </head>
-  <body class="project broider">
-    <header>
-      <h1>Bookmarklet for motorcycle digest</h1>
-      <a href=""></a>
-    </header>
+  <body class="project">
+    <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>Bookmarklet for motorcycle digest</h1>
+        <a href=""></a>
+      </header>
       <h1>Bookmarklet for motorcycle digest</h1>
 <p>
   This is a bookmarklet for auto-scraping Facebook Marketplace listings from within the browser. Save me to your bookmarks bar!
@@ -60,5 +68,6 @@
   <img style="width:100%" src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/moto-bookmarklet-demo.gif" alt="">
 </section>
     </div>
+    <div class="project-border broider"></div>
   </body>
 </html>

@@ -31,6 +31,7 @@ h1, .project h1 > a {
 
 header a {
   text-decoration: none;
+  word-break: break-all;
 }
 
 h2 {
@@ -121,10 +122,27 @@ a {
 
 .project {
   background-color: #f0f0e6;
-  margin: 20px;
-  max-width: 768px;
-  min-height: calc(100vh - 100px);
-  padding: 20px;
+  /* margin: 20px; */
+  /* max-width: 768px; */
+  /* min-height: calc(100vh - 100px); */
+  /* padding: 10px; */
+}
+
+.project .top-spacer {
+  margin-top: 10px; 
+}
+
+.project-border {
+  height: calc(100vh - 20px);
+  width: calc(100vw - 20px);
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  margin: 10px;
 }
 
 .project header {
@@ -156,7 +174,16 @@ a {
 }
 
 .project .content {
-  overflow: auto;
+  /* overflow: auto; */
+  left: 10px;
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  top: 20px;
+  bottom: 20px;
+  right: 10px;
+  padding: 30px;
+  max-width: 768px;
 }
 
 .project .figure-medium {
@@ -223,14 +250,6 @@ a {
     /* max-width: 100%; */
     /* width: auto; */
   }
-
-  .broider {
-    border: none;
-  }
-
-  /* .content {
-    position: relative;
-  } */
 
   /* float is not supported in print */
   figure {

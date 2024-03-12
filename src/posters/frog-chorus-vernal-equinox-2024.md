@@ -1,7 +1,8 @@
 ---
 <!-- title: Frog Chorus -->
 layout: poster.njk
-backgroundImageUrl: https://frogchor.us/assets/spring-p-f64eb9b5.png
+# backgroundImageUrl: https://frogchor.us/assets/spring-p-f64eb9b5.png
+# backgroundImageUrl: https://f4.bcbits.com/img/a3647274627_65
 ---
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,16 +14,27 @@ backgroundImageUrl: https://frogchor.us/assets/spring-p-f64eb9b5.png
   }
 
   h1 {
-    font-size: 120px;
-    position: relative;
+    color: #d77754;
+    font-size: 80px;
     font-weight: 400;
+    letter-spacing: -5px;
+    position: relative;
     text-align: center;
   }
   
   h1 .header-frog {
+    color: #2b4727;
     font-size: 30px;
     font-size: 20px;
     margin: 20px 0;
+  }
+
+  h2 {
+    color: #367b3d;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -1.7px;
+    text-align: center;
   }
 
   h3 {
@@ -66,23 +78,102 @@ backgroundImageUrl: https://frogchor.us/assets/spring-p-f64eb9b5.png
     /* background-size: cover; */
     /* background-repeat: no-repeat; */
   }
+
+  .calendar {
+    margin: auto;
+    position: relative;
+    width: 400px;
+  }
+
+  .calendar img {
+    width: 100%;
+  }
+
+  .frogs {
+    z-index: 1;
+  }
+
+  .frogs span:nth-child(1) {
+    color: #367b3d;
+    font-size: 120px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .frogs span:nth-child(2) {
+    color: #367b3d;
+    font-size: 160px;
+    transform: scaleX(-1);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .square {
+    background-image: url(https://f4.bcbits.com/img/a3647274627_65);
+    width: 390px;
+    height: 469px;
+    background-position: center -215px;
+    background-size: auto;
+    margin: auto;
+  }
+
+  .square img {
+    width: 100%;
+  }
 </style>
+<h1>ḟԻ✺❡ ḉℏ✺Ի<span class="header-frog">&#78223;</span>ṳṧ</h1>
+<h2>VERNAL EQUINOX</h2>
 
 
 <div class="details">
-  <h3 class="details-item">Vernal Equinox 2024</h3>
-  <h3 class="details-item">Location TBD</h3>
-  <h3 class="details-item">A Listening Event</h3>
+  <!-- <h3 class="details-item">Vernal Equinox 2024</h3> -->
+  <!-- <h3 class="details-item">Location TBD</h3> -->
+  <!-- <h3 class="details-item">A Listening Event</h3> -->
 </div>
+
+<div class="calendar">
+  <img src="/public/vernal-equinox-2024.png" />
+  <div class="frogs">
+    <span>𓆏</span>
+    <span>𓆏</span>
+  </div>
+</div>
+
+<!-- <div class="square"> -->
+  <!-- <img src="https://f4.bcbits.com/img/a3647274627_65" /> -->
+<!-- </div> -->
 
 <!-- <img class="frog" src="https://frogchor.us/assets/spring-p-f64eb9b5.png"> -->
 <!-- </img> -->
 
-<h1>ḟԻ✺❡ ḉℏ✺Ի<span class="header-frog">&#78223;</span>ṳṧ</h1>
-<p class="description">
-  Walk in a slow, undirected manner with your phone (frog) until you find a good place to set it down.
+<section class="description">
+  <p>
+    Wednesday, March 20, 2024
+  </p>
+  <p>
+    6:30pm
+  </p>
+  <p>
+    Pier 3 Plaza, Brooklyn Bridge Park
+  </p>
+  <p>
+    Dear everyone,
+  </p>
+  <p>
+    You are invited to a special event following the vernal equinox, activating and celebrating Reuben Son’s web-based work, <em>Frog Chorus</em>. Please bring your smartphones to join in the chorus.
+    See you there!
+  </p>
+  <p>
+    🥭
+  </p>
+</section>
+
+<!-- <p class="description"> -->
+  <!-- Walk in a slow, undirected manner with your phone (frog) until you find a good place to set it down.
   Notice how the other participants are setting down their phones (frogs) too, and remain quiet as the frogs (phones) settle into their environment, slowly beginning to make their calls.
   Focus on the sound of your frog, apart from the other frogs. Wander further away from your frog, until you can no longer distinguish which which frog is yours.
   Consider what it feels like to be separated from your frog (phone), witnessing it absorbed in the act of listening and singing?
-  After a while, leave the frog chorus, either bringing your phone with you, or not.
-</p>
+  After a while, leave the frog chorus, either bringing your phone with you, or not. -->
+<!-- </p> -->
