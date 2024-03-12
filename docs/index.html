@@ -49,7 +49,7 @@
       }
 
       .project-border {
-        height: calc(100vh - 20px);
+        height: calc(100% - 20px);
         width: calc(100vw - 20px);
         position: fixed;
         z-index: -1;
@@ -105,6 +105,9 @@
         position: absolute;
         right: 0;
         width: calc(100% - 40px);
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
       }
 
       .card {
@@ -206,9 +209,18 @@
       }
 
       .card-quote a {
-        border: none;
-        text-decoration: none;
+        
+        
       }
+
+      
+      .card-quote {
+        width: 260px;
+      }
+      .card-quote header p {
+        margin: 0 auto;
+      }
+      
 
       .social {
         display: inline;
@@ -295,7 +307,27 @@
         </div>
         <div class="container">
           <span class="card-quote">
-            Left blank for a work expressing modern feeling. 
+            <div>
+              <header>
+                <p style="margin-bottom: 10px;">
+                  Upcoming: <a href="/posters/frog-chorus-vernal-equinox-2024/">Frog Chorus Listening Event</a>
+                </p>
+                <p>
+                  Wednesday, March 20, 2024
+                </p>
+                <p>
+                  6:30pm til sundown
+                </p>
+                <p>
+                  <a href="https://maps.app.goo.gl/bsWruvJthmBE1XF9A" target="_blank"> Pier 3 Plaza Brooklyn Bridge Park</a>
+                </p>
+              </header>
+              <p style="margin-top: 20px;">
+                <a href="/posters/frog-chorus-vernal-equinox-2024/">Event flyer ↝</a>
+              </p>
+            </div>
+            
+            
           </span>
         </div>
         <div class="social">
@@ -306,7 +338,7 @@
         <div class="container-background"></div>
       </div>
     </div>
-    <div class="project-border"></div>
+    <div class="project-border broider"></div>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
