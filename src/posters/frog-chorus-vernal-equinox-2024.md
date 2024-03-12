@@ -1,5 +1,5 @@
 ---
-<!-- title: Frog Chorus -->
+title: Frog Chorus - Vernal Equinox 2024
 layout: poster.njk
 # backgroundImageUrl: https://frogchor.us/assets/spring-p-f64eb9b5.png
 # backgroundImageUrl: https://f4.bcbits.com/img/a3647274627_65
@@ -69,7 +69,6 @@ layout: poster.njk
     display: block;
     position: relative;
     padding: 10px;
-    text-align: justify;
     margin: 40px 40px 80px;
   }
 
@@ -103,11 +102,25 @@ layout: poster.njk
 
   .frogs span:nth-child(2) {
     color: #367b3d;
-    font-size: 160px;
+    font-size: 140px;
     transform: scaleX(-1);
     position: absolute;
     bottom: 0;
     left: 0;
+  }
+
+  .frog-labels span:nth-child(1) {
+    bottom: 152px;
+    color: #367b3d;
+    position: absolute;
+    right: 10px;
+  }
+
+  .frog-labels span:nth-child(2) {
+    bottom: 170px;
+    color: #367b3d;
+    left: 36px;
+    position: absolute;
   }
 
   .square {
@@ -122,8 +135,17 @@ layout: poster.njk
   .square img {
     width: 100%;
   }
+
+  p {
+    color: #367b3d;
+  }
+
+  .description header p {
+    margin: 0 auto;
+  }
 </style>
-<h1>ḟԻ✺❡ ḉℏ✺Ի<span class="header-frog">&#78223;</span>ṳṧ</h1>
+<!-- <h1>ḟԻ✺❡ ḉℏ✺Ի<span class="header-frog">&#78223;</span>ṳṧ</h1> -->
+<h1>ḟԻ✺❡ ḉℏ✺Իṳṧ</h1>
 <h2>VERNAL EQUINOX</h2>
 
 
@@ -134,10 +156,14 @@ layout: poster.njk
 </div>
 
 <div class="calendar">
-  <img src="/public/vernal-equinox-2024.png" />
+  <img src="/public/vernal-equinox-2024.svg" />
   <div class="frogs">
     <span>𓆏</span>
     <span>𓆏</span>
+  </div>
+  <div class="frog-labels">
+    <span>ʄཞųıɬʄųƖ ʂƈɧơơƖ</span>
+    <span>ཞɛųცɛŋ ʂơŋ</span>
   </div>
 </div>
 
@@ -149,15 +175,17 @@ layout: poster.njk
 <!-- </img> -->
 
 <section class="description">
-  <p>
-    Wednesday, March 20, 2024
-  </p>
-  <p>
-    6:30pm
-  </p>
-  <p>
-    Pier 3 Plaza, Brooklyn Bridge Park
-  </p>
+  <header>
+    <p>
+      Wednesday, March 20, 2024
+    </p>
+    <p>
+      6:30pm
+    </p>
+    <p>
+      Pier 3 Plaza, Brooklyn Bridge Park
+    </p>
+  </header>
   <p>
     Dear everyone,
   </p>
