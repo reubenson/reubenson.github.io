@@ -225,14 +225,14 @@ socialImage: /public/frog-chorus-vernal-equinox-2024-mobile.jpeg
       6:30pm til sundown
     </p>
     <p>
-      <a href="https://maps.app.goo.gl/bsWruvJthmBE1XF9A" target="_blank"> Pier 3 Plaza Brooklyn Bridge Park</a>
+      <a href="https://maps.app.goo.gl/bsWruvJthmBE1XF9A" target="_blank"> Pier 3 Plaza, Brooklyn Bridge Park</a>
     </p>
   </header>
   <p>
     Dear everyone,
   </p>
   <p>
-    You are invited to a special event following the vernal equinox, activating and celebrating Reuben Son’s web-based work, <a href="https://frogchor.us" target="_blank">Frog Chorus</a>. Please bring your smartphones to join in the chorus.
+    You are invited to a special event following the vernal equinox, activating and celebrating Reuben Son’s web-based work, <a href="https://frogchor.us" target="_blank">Frog Chorus (https://frogchor.us)</a>. Please bring your smartphones to join in the chorus.
   </p>
   <p>
     See you there!
