@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  font-family: sans-serif;
   font-family: Courier New;
   font-weight: 300;
   line-height: 1.4em;
@@ -283,5 +282,10 @@ a {
   text-align: center;
   margin: 20px auto;
   letter-spacing: 20px;
+  font-weight: bold;
+}
+
+.ibarra {
+  font-family: 'Ibarra Real Nova', serif;
   font-weight: bold;
 }
