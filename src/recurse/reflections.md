@@ -3,8 +3,6 @@ layout: project.njk
 title: Reflections on my time at Recurse Center
 tags: posts
 ---
-## {{ title }}
-
 (Note: this writing has also been published to Medium [here](https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47))
 
 <figure>

@@ -4,8 +4,6 @@ title: On deploying a neural net to AWS Lambda
 subtitle: Week 5 at Recurse Center
 tags: posts
 ---
-## {{ title }}
-
 ### {{ subtitle }}
 
 I'm heading into my last week at Recurse, and feeling an excited rush to wrap up the MIDI archive project I began ruminating on the previous week. The shape of it has been slowly coming together, and what remains to be seen is how much I can manage to deploy in the handful of days I have left. At the moment, the project looks something like the following, involving many components beyond just neural net model.

@@ -4,8 +4,6 @@ title: Goldberg Variations Variations
 subtitle: Week 4 at Recurse Center
 tags: posts
 ---
-## {{ title }}
-
 ### {{ subtitle }}
 
 After seeing my friend Asha Tamirisa give a talk on building a [counter-archive of The Kitchen](https://thekitchen.org/on-view/counter-archiving-the-avant-garde/) at [Software for Artists Day](https://pioneerworks.org/programs/software-for-artists-day-8) last week, I've been thinking more about the overlap between archives and ML training sets, how each deals with concerns of how information perpetuates biases, and produces contestable views of history and reality. Complex socio-economic and political realities are embedded in the objective artifacts that may be included or excluded in both archives and training sets.

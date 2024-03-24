@@ -2,9 +2,7 @@
 layout: project.njk
 title: Reflections on my time at Recurse Center
 ---
-# {{ title }}
-
-Currently attending a residency at [Recurse Center](https://www.recurse.com/) (Winter 1, 2023) through the end of the year. Aiming to write a new reflection weekly.
+At the end of 2023 (Winter 1, 2023), I attended [Recurse Center](https://www.recurse.com/). During this time, I wrote a weekly blogpost, and have continued to write to it when it's felt right.
 
 - Week 1: [Learning to paddleboard](/recurse/week-1)
 - Week 2: [Gradually, then suddenly](/recurse/week-2)
@@ -13,6 +11,7 @@ Currently attending a residency at [Recurse Center](https://www.recurse.com/) (W
 - Week 5: [On deploying a neural net to AWS Lambda](/recurse/week-5)
 - Week 6: [Wrapping up!](/recurse/week-6)
 - [Reflections on my time at Recurse Center](/recurse/reflections)
+- [Website as a meandering home](/recurse/meander)
 
 <!-- Recurse Center webring below! -->
 <script src="https://ring.recurse.com/ring.js" type="text/javascript"></script>

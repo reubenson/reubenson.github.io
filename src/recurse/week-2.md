@@ -4,7 +4,6 @@ title: Gradually, Then Suddenly
 subtitle: Week 2 at Recurse Center
 tags: posts
 ---
-## {{ title }}
 
 ### {{ subtitle }}
 

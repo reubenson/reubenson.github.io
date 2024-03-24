@@ -4,8 +4,6 @@ title: Alignment Is All You Need
 subtitle: Week 3 at Recurse Center
 tags: posts
 ---
-## {{ title }}
-
 ### {{ subtitle }}
 
 I've just finished my third week at Recurse Center, which means I'm already halfway through my residency here. Although I'm still digesting the material in [Andrej Karpathy's Neural Net series](https://karpathy.ai/zero-to-hero.html), I've finished working through the videos, and in the coming week, I'll be continuing to implement my own model system to improve my understanding and intuition about these systems. 

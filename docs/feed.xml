@@ -4,7 +4,7 @@
   <subtitle>Weekly writings from my time at Recurse Center</subtitle>
   <link href="https://reubenson.com/feed.xml" rel="self"/>
   <link href="https://reubenson.com/"/>
-  <updated>2023-12-30T22:38:04Z</updated>
+  <updated>2024-03-24T15:11:42Z</updated>
   <id>https://reubenson.com/</id>
   <author>
     <name>Reuben Son</name>
@@ -12,12 +12,27 @@
   </author>
   
   <entry>
+    <title>Website as a meandering home</title>
+    <link href="https://reubenson.com/recurse/meander/"/>
+    <updated>2024-03-24T15:11:42Z</updated>
+    <id>https://reubenson.com/recurse/meander/</id>
+    <content type="html">&lt;figure class=&quot;figure-medium&quot;&gt;
+  &lt;img src=&quot;https://reubenson.com/public/meander-tile.jpg&quot; alt=&quot;photo of meander pattern in apartment building&quot; /&gt;
+  &lt;figcaption&gt;The tile work in my apartment building, which has been reproduced as a border across my website&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;I first registered the domain, &lt;a href=&quot;http://reubenson.com/&quot;&gt;reubenson.com&lt;/a&gt;, on 01/20/2016. At the time, I was navigating various transitions, having moved from Boston to New York City, and was in the process of pivoting from research science to web development. I was living in the Ditmas Park neighborhood, and I spent a lot of time walking along the lake in the southern portion of Prospect Park. I lived directly below the cartooninst &lt;a href=&quot;https://en.wikipedia.org/wiki/Gary_Panter&quot;&gt;Gary Panter&lt;/a&gt;, and on several occasions, I improvised duets with him, unbeknownst to Gary, in which I could hear the sound of him playing guitar through my ceiling (his floor) and I joined with my guitar. The website I launched then evolved slightly from 2016 to 2023, and you can visit it on &lt;a href=&quot;https://web.archive.org/web/20230406031235/https://reubenson.com/&quot;&gt;archive.org here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The version of the website you’re visiting now began to take shape in the fall of 2023, just as I was beginning a residency at &lt;a href=&quot;https://recurse.com/&quot;&gt;Recurse Center&lt;/a&gt;. I was also beginning to wrap up my year-long personal sabbatical, and trying to understand the shape of my life to come. New chapters of life sometimes need new websites.&lt;/p&gt;
+&lt;p&gt;This website is still under construction, as I find my (pathless) path, but I’ve really been appreciating the framework of “personal website as private engine of change”. I’ve never really felt at home online, and maybe for this reason, I’ve found it compelling to incorporate an architectural design motif that is repeated across my current apartment building into the borders of the pages herein. I’ve &lt;a href=&quot;https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd&quot;&gt;written elsewhere a little&lt;/a&gt; about my interest in the Greek meander pattern, and while the border used here isn’t exactly a meander pattern, it bears more than a passing resemblance.&lt;/p&gt;
+&lt;p&gt;In my continued meander through life, I’m glad to have a website that meanders with me.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
     <title>Reflections on my time at Recurse Center</title>
     <link href="https://reubenson.com/recurse/reflections/"/>
     <updated>2023-12-30T22:38:04Z</updated>
     <id>https://reubenson.com/recurse/reflections/</id>
-    <content type="html">&lt;h2&gt;Reflections on my time at Recurse Center&lt;/h2&gt;
-&lt;p&gt;(Note: this writing has also been published to Medium &lt;a href=&quot;https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47&quot;&gt;here&lt;/a&gt;)&lt;/p&gt;
+    <content type="html">&lt;p&gt;(Note: this writing has also been published to Medium &lt;a href=&quot;https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47&quot;&gt;here&lt;/a&gt;)&lt;/p&gt;
 &lt;figure&gt;
     &lt;img src=&quot;https://images.metmuseum.org/CRDImages/ep/original/DT2159.jpg&quot; alt=&quot;painting of flowers by painter Odilon Redon&quot; style=&quot;max-width:420px; margin: auto;&quot; /&gt;
     &lt;figcaption&gt;&lt;a href=&quot;https://www.metmuseum.org/art/collection/search/437382&quot; target=&quot;_blank&quot;&gt;Odilon Redon, Vase of Flowers (Pink Background), ca. 1906 &lt;/a&gt;&lt;/figcaption&gt;
@@ -124,8 +139,7 @@ Like many members of my cohort, many of these questions were inflected by recent
     <link href="https://reubenson.com/recurse/week-6/"/>
     <updated>2023-12-10T20:20:13Z</updated>
     <id>https://reubenson.com/recurse/week-6/</id>
-    <content type="html">&lt;h2&gt;Wrapping up&lt;/h2&gt;
-&lt;h3&gt;Week 6 at Recurse Center&lt;/h3&gt;
+    <content type="html">&lt;h3&gt;Week 6 at Recurse Center&lt;/h3&gt;
 &lt;p&gt;It’s been such a fast six weeks at Recurse, and all the more so for getting so absorbed in getting my MIDI Archive project into shape. It’s been a journey … which I think I’ll need some time to sit with before writing out a proper reflection of my wonderful and expansive time here.&lt;/p&gt;
 &lt;p&gt;For now, I’m still figuring out a path to an MVP version of this project, which I’m hoping to chip away at the next few weeks as I adjust to a new post-RC equilibrium. I’m also struggling with uncertainty and doubt about the technical and cultural value of this project, and whether it makes sense to put much more effort into an MVP. At worst, it feels unclear to me whether I’m just re-enacting the algorithmic instrumentalization of music (a lá Spotify) in a more amateur way, on a more campy substrate.&lt;/p&gt;
 &lt;p&gt;But for the moment, I’ll just limit my scope to documenting and preserving the groundwork I’ve laid out thus far. And while still in very skeletal form, the project has at least been shipped to prod! &lt;a href=&quot;http://reubenson.com/midi-archive/&quot;&gt;http://reubenson.com/midi-archive/&lt;/a&gt;&lt;/p&gt;
@@ -156,8 +170,7 @@ Like many members of my cohort, many of these questions were inflected by recent
     <link href="https://reubenson.com/recurse/week-5/"/>
     <updated>2023-12-04T01:08:10Z</updated>
     <id>https://reubenson.com/recurse/week-5/</id>
-    <content type="html">&lt;h2&gt;On deploying a neural net to AWS Lambda&lt;/h2&gt;
-&lt;h3&gt;Week 5 at Recurse Center&lt;/h3&gt;
+    <content type="html">&lt;h3&gt;Week 5 at Recurse Center&lt;/h3&gt;
 &lt;p&gt;I’m heading into my last week at Recurse, and feeling an excited rush to wrap up the MIDI archive project I began ruminating on the previous week. The shape of it has been slowly coming together, and what remains to be seen is how much I can manage to deploy in the handful of days I have left. At the moment, the project looks something like the following, involving many components beyond just neural net model.&lt;/p&gt;
 &lt;figure&gt;
 &lt;img src=&quot;https://mermaid.ink/img/pako:eNplUsFqGzEQ_ZVBJwXiQujNh4LttR1DCgUHmqSbw1ia3RXRStuR1ls35N8r7W5JQ3UaoffezLynV6G8JrEUlfWDapAj3Belg3RW8qgYO-IrWCy-PMnCD8561PD1UBygMpYCVOxbOLhI7CjCilVjznQ18Z8yDdbySHymiYQhUAxwNgh7E5v-9A3rpDKkGkLEaNQimEhQkyNOV--gQact6QlzcxMvs_p6VN_IHUXVwKffpgNf_Tta9NAHSi0hMhpnXA2pOVSewVHPaCGP3Kbt7Sy5yZLbH_cZ_h_mecJsM-ZRbn91nj-yH8eBdrKgzvpLbr_6foQ7bE8aZ8huhDzIAo29wMb6Xg-Yx49s6joZPcEeRthe7icXZu8C_ezJqbSR0xAwWZpaHD9_sKOQdzkg79LTSJoTgYFO2dgZXIzgg1yzHwIxKGvIRVDeOVJzPpnh1UuOK4lNa-SKSZH5m-eJUzuFIc7Ct_J9qcW8VMpuZjOhDu8RTZ8nbTBNMynsU31bOnEtWuIWjU5f8zU_lSI21FIplqnUyC-lKN1bwmEf_fHilFhG7ula9J1OnhUGa8ZWLCu0gd7-ANel7tU?type=png&quot; alt=&quot;drawing&quot; style=&quot;max-width:500px;&quot; /&gt;
@@ -178,8 +191,7 @@ Like many members of my cohort, many of these questions were inflected by recent
     <link href="https://reubenson.com/recurse/week-4/"/>
     <updated>2023-11-26T14:43:26Z</updated>
     <id>https://reubenson.com/recurse/week-4/</id>
-    <content type="html">&lt;h2&gt;Goldberg Variations Variations&lt;/h2&gt;
-&lt;h3&gt;Week 4 at Recurse Center&lt;/h3&gt;
+    <content type="html">&lt;h3&gt;Week 4 at Recurse Center&lt;/h3&gt;
 &lt;p&gt;After seeing my friend Asha Tamirisa give a talk on building a &lt;a href=&quot;https://thekitchen.org/on-view/counter-archiving-the-avant-garde/&quot;&gt;counter-archive of The Kitchen&lt;/a&gt; at &lt;a href=&quot;https://pioneerworks.org/programs/software-for-artists-day-8&quot;&gt;Software for Artists Day&lt;/a&gt; last week, I’ve been thinking more about the overlap between archives and ML training sets, how each deals with concerns of how information perpetuates biases, and produces contestable views of history and reality. Complex socio-economic and political realities are embedded in the objective artifacts that may be included or excluded in both archives and training sets.&lt;/p&gt;
 &lt;p&gt;The emergence of certain canonical training sets, like &lt;a href=&quot;https://www.kaggle.com/datasets/wcukierski/enron-email-dataset&quot;&gt;this archive of half a million emails within Enron&lt;/a&gt; obtained by the federal government during its investigation, says something too about how ML is a powerful tool for distilling and operationalizing archives. To turn archives of the near or distant past into substrates that can be mined for the purposes of future prediction or content generation.&lt;/p&gt;
 &lt;p&gt;In the information age, big tech often finds a business model in leveraging capital to extract value from assets already in circulation in the wider economy (e.g.ride-sharing or behavioral surplus), and this continues to be the pattern in how today’s LLMs feed on the previously inert archives of the past.&lt;/p&gt;
@@ -205,8 +217,7 @@ been thinking more about how the problematics of archives (tk) bleeds over into 
     <link href="https://reubenson.com/recurse/week-3/"/>
     <updated>2023-11-19T15:33:19Z</updated>
     <id>https://reubenson.com/recurse/week-3/</id>
-    <content type="html">&lt;h2&gt;Alignment Is All You Need&lt;/h2&gt;
-&lt;h3&gt;Week 3 at Recurse Center&lt;/h3&gt;
+    <content type="html">&lt;h3&gt;Week 3 at Recurse Center&lt;/h3&gt;
 &lt;p&gt;I’ve just finished my third week at Recurse Center, which means I’m already halfway through my residency here. Although I’m still digesting the material in &lt;a href=&quot;https://karpathy.ai/zero-to-hero.html&quot;&gt;Andrej Karpathy’s Neural Net series&lt;/a&gt;, I’ve finished working through the videos, and in the coming week, I’ll be continuing to implement my own model system to improve my understanding and intuition about these systems.&lt;/p&gt;
 &lt;p&gt;The last video in the series is centered around the pivotal &lt;a href=&quot;https://reubenson.com/recurse/week-3/&quot;&gt;Attention is All You Need&lt;/a&gt; paper, which presents the &lt;em&gt;transformer&lt;/em&gt; architecture central to OpenAI’s GPT models. In working through Karpathy’s lecture series, I’m struck by the elegance of neural net architecture, their composition through the repetition of simple elements. And I’m struck too by the degree to which much of the “art” of designing these systems relies on simple arithmetic operations that nudge the state of the system within a regime of being “well-behaved”. Scale is the main thing, which led Rich Sutton to conclude in his &lt;a href=&quot;http://www.incompleteideas.net/IncIdeas/BitterLesson.html&quot;&gt;&lt;em&gt;Bitter Lesson&lt;/em&gt;&lt;/a&gt;: “We have to learn the bitter lesson that building in how we think we think does not work in the long run.”&lt;/p&gt;
 &lt;p&gt;Meanwhile … OpenAI continues to make dramatic headlines, with the sudden firing of Sam Altman. At the time of this writing, conflicts within the board around the speed and safety of the development of their products seem to be at the core of this rift.&lt;/p&gt;
@@ -220,8 +231,7 @@ been thinking more about how the problematics of archives (tk) bleeds over into 
     <link href="https://reubenson.com/recurse/week-2/"/>
     <updated>2023-11-11T18:30:32Z</updated>
     <id>https://reubenson.com/recurse/week-2/</id>
-    <content type="html">&lt;h2&gt;Gradually, Then Suddenly&lt;/h2&gt;
-&lt;h3&gt;Week 2 at Recurse Center&lt;/h3&gt;
+    <content type="html">&lt;h3&gt;Week 2 at Recurse Center&lt;/h3&gt;
 &lt;p&gt;Earlier this week, at an informal dinner centered around the theme of AI Safety, I saw Rob Nail of Singularity University quote &lt;em&gt;“gradually, then suddenly”&lt;/em&gt; (attribution often asigned to Ernest Hemingway, on going bankrupt) in a presentation. It feels equally apt describing the subjective experience of time while at Recurse Center as it does exponential technologies. While I’d been vaguely familiar with AI Safety, this week has gone a long ways towards concretizing my understanding of this emerging field of research and development (thanks in no small part to &lt;a href=&quot;https://github.com/changlinli&quot;&gt;Changlin Li&lt;/a&gt;’s generous efforts to bring me and my cohorts at Recurse up to speed!).&lt;/p&gt;
 &lt;p&gt;As of right now, I’ve made it through 4 of the 7 &lt;a href=&quot;https://karpathy.ai/zero-to-hero.html&quot;&gt;videos in Andrej Karpathy’s lecture series on neural nets&lt;/a&gt;, and the first two chapters of the &lt;a href=&quot;https://github.com/fastai/fastbook&quot;&gt;fastbook notebooks&lt;/a&gt;. The majority of my effort is still towards getting up to speed on fundamentals. But that said, it seems worthwhile to think through some of my current questions, assumptions, and intuitions here, if only for my future benefit in tracking how my views shift over time.&lt;/p&gt;
 &lt;h3&gt;On AGI&lt;/h3&gt;
@@ -252,8 +262,7 @@ I have inclinations to debate some of the terminology involved here; ground trut
     <link href="https://reubenson.com/recurse/week-1/"/>
     <updated>2023-11-05T17:23:18Z</updated>
     <id>https://reubenson.com/recurse/week-1/</id>
-    <content type="html">&lt;h2&gt;Week 1 at Recurse Center (Learning to Paddleboard)&lt;/h2&gt;
-&lt;p&gt;Twice this year, I’ve had the good fortune to find myself in spaces filled with people aligned to a common purpose: earlier this year at &lt;a href=&quot;https://www.haystack-mtn.org/&quot;&gt;Haystack Mountain Schoool of Craft&lt;/a&gt;, and now at &lt;a href=&quot;https://www.recurse.com/&quot;&gt;Recurse Center&lt;/a&gt;. These environments foster a regime of expansion and change, and have the power to focus, broaden, and alter one’s sense of purpose. These environments can be quite intense to adjust and recalibrate to, as they involve large changes to the core substrates and infrastructures that compose of one’s daily existence: time, geography, architecture, and community. Much of this is self-evident and not particularly profound to point out, but its lived experience can most immediately be felt in the constellation of affective states that manifest throughout the transition: overhwelm, nervous excitement, disorientation, decision paralysis, fight-or-flight, hyperactivity, dissociation.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Twice this year, I’ve had the good fortune to find myself in spaces filled with people aligned to a common purpose: earlier this year at &lt;a href=&quot;https://www.haystack-mtn.org/&quot;&gt;Haystack Mountain Schoool of Craft&lt;/a&gt;, and now at &lt;a href=&quot;https://www.recurse.com/&quot;&gt;Recurse Center&lt;/a&gt;. These environments foster a regime of expansion and change, and have the power to focus, broaden, and alter one’s sense of purpose. These environments can be quite intense to adjust and recalibrate to, as they involve large changes to the core substrates and infrastructures that compose of one’s daily existence: time, geography, architecture, and community. Much of this is self-evident and not particularly profound to point out, but its lived experience can most immediately be felt in the constellation of affective states that manifest throughout the transition: overhwelm, nervous excitement, disorientation, decision paralysis, fight-or-flight, hyperactivity, dissociation.&lt;/p&gt;
 &lt;p&gt;This summer, at Haystack, in addition to learning the &lt;a href=&quot;https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd&quot;&gt;workflows and processes of ceramic 3D printing&lt;/a&gt;, I went paddleboarding for the very first time. On my initial attempts to stand up and paddle about, I was quickly tossed into the water. The Haystack campus is built on a granite island off the Maine coast, and faces out directly to the ocean. After falling a couple times into the rocking waves, I decided to paddle sitting down instead for a while, but before finally returning to shore, I decided to just stand on the board for a bit, without paddling. I then sat back down again and rowed back to shore. The next day, and each subsequent day on the beach, I found myself immediately able to paddleboard standing up without any further issue. The last time I watched my body in the process of learning was when I began taking ceramics classes in 2019, and it struck me, more or less for the first time, how quickly, and quietly, embodied intelligence is set into motion.&lt;/p&gt;
 &lt;p&gt;I think of acclimating to environments like Recurse in a similar way, that the transition still passes through the body, even for something as heady as Recurse’s guiding mission to enable its participants to become radically better programmers over the duration of the residency.&lt;/p&gt;
 &lt;div class=&quot;divider-line&quot;&gt;〜〜〜&lt;/div&gt;

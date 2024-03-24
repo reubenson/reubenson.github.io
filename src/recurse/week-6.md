@@ -4,8 +4,6 @@ title: Wrapping up
 subtitle: Week 6 at Recurse Center
 tags: posts
 ---
-## {{ title }}
-
 ### {{ subtitle }}
 
 It's been such a fast six weeks at Recurse, and all the more so for getting so absorbed in getting my MIDI Archive project into shape. It's been a journey ... which I think I'll need some time to sit with before writing out a proper reflection of my wonderful and expansive time here.
