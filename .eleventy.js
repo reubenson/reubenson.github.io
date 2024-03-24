@@ -20,7 +20,7 @@ module.exports = function(eleventyConfig) {
     let now = new Date();
     return new Intl.DateTimeFormat(
       'en-US', { dateStyle: 'full' }
-    ).format(now);
+    ).format(now).toLocaleLowerCase();
   });
 
   // better customization of markdown parsing

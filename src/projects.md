@@ -17,6 +17,8 @@ Over the last decade or so, my energy and attention had settled around software,
 
 During my sabbatical, I've deployed a few browser-based projects, through which I've tried to express what I still find beautiful, open-ended, and poetic about computing interfaces. A series of love-letters to the web. For being so turbulent and *noisy*, the web is also a rather _quiet_ place, in which sound routinely defers to the primacy of text and image. Sound is also among the more numinous of the human senses, and perhaps owing to this, I've found it endlessly interesting to develop experimental intefaces around sound, disrupting the _affect of determinism_ that continues to dominate our collective ways of sensemaking.
 
+<div class="divider-line">✺ ✺ ✺</div>
+
 - In [_Weaving Music_](/weaving), which began as a residency project at [EMS](https://elektronmusikstudion.se/composers/2019/1013-reuben-son-ems-10-19-june-2019), I've built a grid-based generative music interface that draws inspiration from weaving patterns. 
 
 - In [_MIDI Archive_](/midi-archive), which came out of a residency at [Recurse Center](https://recurse.com), I prototyped a hybrid model of AI and archive as an interface to a historical catalogue of music on the early web. 
