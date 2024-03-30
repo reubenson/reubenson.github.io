@@ -70,7 +70,7 @@ figure figcaption a {
 figure img {
   flex-basis: 1;
   flex-grow: 1;
-  border: 2px solid #000;
+  border: 1px solid #000;
   height: auto;
   margin-top: 10px;
   width: 100%;
@@ -80,6 +80,29 @@ figure .flex-half {
   flex-basis: 48%;
   flex-shrink: 1;
   flex-grow: 0;
+}
+
+.project figure.two-two,
+.project figure.three-one {
+  max-width: 100%;
+}
+
+figure img {
+  border-radius: 2px 2px;
+}
+
+figure.two-two img,
+figure.three-one img {
+  flex-basis: 45%;
+  flex-grow: 1;
+  /* border-radius: 20px 20px; */
+  height: auto;
+  margin: 10px;
+  /* padding: 10px; */
+  max-height: 350px;
+  min-width: 40%;
+  height: auto;
+  object-fit: cover;
 }
 
 ul {
@@ -288,4 +311,25 @@ a {
 .ibarra {
   font-family: 'Ibarra Real Nova', serif;
   font-weight: bold;
+}
+
+figure.three-one img.full-width {
+  /* min-width: 100%; */
+  max-width: 100%;
+  width: 100%;
+  flex-basis: 100%;
+}
+
+figure.three-one img {
+  flex-basis: 30%;
+  min-width: 30%;
+  /* max-width: 45%; */
+  flex-grow: 2;
+}
+
+figure.two-two img {
+  flex-basis: 45%;
+  min-width: 45%;
+  /* max-width: 45%; */
+  flex-grow: 2;
 }

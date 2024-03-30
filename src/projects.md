@@ -19,10 +19,12 @@ During my sabbatical, I've deployed a few browser-based projects, through which 
 
 <div class="divider-line">✺ ✺ ✺</div>
 
-- In [_Weaving Music_](/weaving), which began as a residency project at [EMS](https://elektronmusikstudion.se/composers/2019/1013-reuben-son-ems-10-19-june-2019), I've built a grid-based generative music interface that draws inspiration from weaving patterns. 
+- In [_Weaving Music_](/weaving), which began as a residency project at [EMS](https://elektronmusikstudion.se/composers/2019/1013-reuben-son-ems-10-19-june-2019), I built a grid-based generative music interface that draws inspiration from weaving patterns. 
 
 - In [_MIDI Archive_](/midi-archive), which came out of a residency at [Recurse Center](https://recurse.com), I prototyped a hybrid model of AI and archive as an interface to a historical catalogue of music on the early web. 
 
 - And in [_Frog Chorus_](https://frogchor.us), I explored the possibilities of device-device interfaces within an acoustic environment, an internet of frogs.
 
-I'm still figuring things out, but I'm happy you're here and I hope you enjoy perusing some of the things I've made along the way. While none of these projects are truly _finished_, I do feel like this body of work has connecting throughlines, and has given me the space to think ... and if not find answers, to at least ask better questions.
+<!-- <div class="divider-line">✺ ✺ ✺</div> -->
+
+<!-- I'm still figuring things out, but I'm happy you're here and I hope you enjoy perusing some of the things I've made along the way. While none of these projects are truly _finished_, I do feel like this body of work has connecting throughlines, and has given me the space to think ... and if not find answers, to at least ask better questions. -->

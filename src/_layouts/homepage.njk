@@ -135,7 +135,7 @@ title: Reuben Son Homepage
         margin: 20px;
         padding: 8px;
         position: absolute;
-        height: calc(100% - 50px);
+        height: calc(100% - 60px);
         width: calc(100% - 55px);
       }
 
@@ -195,6 +195,37 @@ title: Reuben Son Homepage
         margin: auto;
       }
 
+      .card-quote-header {
+        font-style: normal;
+        left: 0;
+        letter-spacing: normal;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 0;
+        text-transform: uppercase;
+      }
+
+      .card-quote-footer {
+        bottom: 0;
+        font-style: normal;
+        left: 0;
+        position: absolute;
+      }
+
+      .left-arrow {
+        top: -40px;
+        left: 0;
+        position: absolute;
+      }
+
+      .right-arrow {
+        top: -40px;
+        right: 0;
+        position: absolute;
+      }
+
       .social {
         display: inline;
         font-size: 8px;
@@ -245,6 +276,11 @@ title: Reuben Son Homepage
         mask:url("/public/transparent.png") center/contain;
       }
 
+      .hidden {
+        display: none;
+        visibility: hidden;
+      }
+
       @media screen and (min-height: 550px) {
         .cards {
           top: 50%;
@@ -275,10 +311,23 @@ title: Reuben Son Homepage
           </a>
         </div>
         <div class="container">
-          <div class="card-quote">
-            <p>
-              Coming out to close the gate I end up listening to frogs
+          <div class="card-quote" style="width: {{ announcements[0].width | safe}}">
+            <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span>
+            <span class="right-arrow" onclick="handleRightArrow()">&#x2192;</span>
+            {% if announcements[0].header %}
+              <header class="card-quote-header">
+                {{ announcements[0].header | safe }}
+              </header>
+            {% endif %}
+            <p class="card-quote-content">
+              {{ announcements[0].content | safe}}
+              {# Coming out to close the gate I end up listening to frogs #}
             </p>
+            {% if announcements[0].footer %}
+              <p class="card-quote-footer">
+                {{ announcements[0].footer | safe }}
+              </p>
+            {% endif %}
           </div>
           {# <span class="card-quote"> #}
             {# <div>
@@ -300,8 +349,6 @@ title: Reuben Son Homepage
                 <a href="/posters/frog-chorus-vernal-equinox-2024/">Event flyer ↝</a>
               </p>
             </div> #}
-            {# https://www.goodreads.com/review/show/785097402 #}
-            {# Left blank for a work expressing modern feeling.  #}
           {# </span> #}
         </div>
         <div class="social">
@@ -314,11 +361,49 @@ title: Reuben Son Homepage
     </div>
     <div class="project-border broider"></div>
     <script>
+      {# add GA #}
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'UA-120208217-1');
+
+      {# embed annoucements json #}
+      const ANNOUNCEMENTS_DATA = {{ announcements | dump | safe }};
+      let index = 0;
+
+      function renderAnnouncement(data) {
+        const content = document.querySelector('.card-quote-content');
+        const header = document.querySelector('.card-quote-header');
+        const footer = document.querySelector('.card-quote-footer');
+        
+        header.innerHTML = data.header || '';
+        content.innerHTML = data.content || '';
+        footer.innerHTML = data.footer || '';
+      }
+
+      function handleLeftArrow() {
+        console.log('left arrow');
+        index--;
+        index = Math.max(0, index);
+        renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
+        if (index === 0) {
+          document.querySelector('.left-arrow').classList.add('hidden');
+        }
+      }
+
+      function handleRightArrow() {
+        console.log('right arrow');
+        index++;
+        renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
+        if (index > 0) {
+          document.querySelector('.left-arrow').classList.remove('hidden');
+        }
+        if (index === ANNOUNCEMENTS_DATA.length - 1) {
+          document.querySelector('.right-arrow').classList.add('hidden');
+        }
+      }
+
     </script>
   </body>
 </html>

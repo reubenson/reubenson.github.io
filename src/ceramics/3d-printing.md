@@ -1,5 +1,5 @@
-<figure>
-  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-installation.jpeg" alt="3D printing">
+<figure class="three-one">
+  <img class="full-width" src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-installation.jpeg" alt="3D printing">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/3D-printing.jpeg" alt="3D printing">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-submerged-1.jpg" alt="3D printing">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-submerged-2.jpg" alt="3D printing">

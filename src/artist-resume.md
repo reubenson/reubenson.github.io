@@ -12,8 +12,7 @@ includeExhibitions: true
 ---
 # {{ title }}
 
-Reuben Son (born 1986, lives in New York City) is a Korean-American artist and technologist who makes sound, software, and ceramics.
-
+{% renderFile './src/_includes/resume/artist-bio.md' %}
 
 <style>
   .resume-year {
