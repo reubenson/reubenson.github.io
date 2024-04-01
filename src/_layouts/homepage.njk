@@ -183,11 +183,6 @@ title: Reuben Son Homepage
         width: 177px;
       }
 
-      .card-quote a {
-        {# border: none; #}
-        {# text-decoration: none; #}
-      }
-
       .card-quote {
         width: 130px;
       }
@@ -214,16 +209,20 @@ title: Reuben Son Homepage
         position: absolute;
       }
 
-      .left-arrow {
-        top: -40px;
-        left: 0;
+      .left-arrow, .right-arrow {
+        cursor: pointer;
+        font-size: 20px;
         position: absolute;
+        top: 0;
+        z-index: 10;
+      }
+.
+      .left-arrow {
+        left: 0;
       }
 
       .right-arrow {
-        top: -40px;
-        right: 0;
-        position: absolute;
+        right: 6px;
       }
 
       .social {
@@ -312,8 +311,8 @@ title: Reuben Son Homepage
         </div>
         <div class="container">
           <div class="card-quote" style="width: {{ announcements[0].width | safe}}">
-            <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span>
-            <span class="right-arrow" onclick="handleRightArrow()">&#x2192;</span>
+            {# <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span>
+            <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span> #}
             {% if announcements[0].header %}
               <header class="card-quote-header">
                 {{ announcements[0].header | safe }}
@@ -321,7 +320,6 @@ title: Reuben Son Homepage
             {% endif %}
             <p class="card-quote-content">
               {{ announcements[0].content | safe}}
-              {# Coming out to close the gate I end up listening to frogs #}
             </p>
             {% if announcements[0].footer %}
               <p class="card-quote-footer">
@@ -329,27 +327,6 @@ title: Reuben Son Homepage
               </p>
             {% endif %}
           </div>
-          {# <span class="card-quote"> #}
-            {# <div>
-              <header>
-                <p style="margin-bottom: 10px;">
-                  Upcoming: <a href="https://fruitful.school/blog/2024-03-13.html">Frog Chorus Listening Event (co-presented with Fruitful School)</a>
-                </p>
-                <p>
-                  Wednesday, March 20, 2024
-                </p>
-                <p>
-                  6:30pm til sundown
-                </p>
-                <p>
-                  <a href="https://maps.app.goo.gl/bsWruvJthmBE1XF9A" target="_blank"> Pier 3 Plaza Brooklyn Bridge Park</a>
-                </p>
-              </header>
-              <p style="margin-top: 20px;">
-                <a href="/posters/frog-chorus-vernal-equinox-2024/">Event flyer ↝</a>
-              </p>
-            </div> #}
-          {# </span> #}
         </div>
         <div class="social">
           <p>
@@ -373,17 +350,18 @@ title: Reuben Son Homepage
       let index = 0;
 
       function renderAnnouncement(data) {
+        const cardQuote = document.querySelector('.card-quote');
         const content = document.querySelector('.card-quote-content');
         const header = document.querySelector('.card-quote-header');
         const footer = document.querySelector('.card-quote-footer');
         
+        cardQuote.style.width = data.width || '130px';
         header.innerHTML = data.header || '';
         content.innerHTML = data.content || '';
         footer.innerHTML = data.footer || '';
       }
 
       function handleLeftArrow() {
-        console.log('left arrow');
         index--;
         index = Math.max(0, index);
         renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
@@ -393,11 +371,11 @@ title: Reuben Son Homepage
       }
 
       function handleRightArrow() {
-        console.log('right arrow');
         index++;
         renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
         if (index > 0) {
-          document.querySelector('.left-arrow').classList.remove('hidden');
+          // leave off right arrow
+          // document.querySelector('.left-arrow').classList.remove('hidden');
         }
         if (index === ANNOUNCEMENTS_DATA.length - 1) {
           document.querySelector('.right-arrow').classList.add('hidden');

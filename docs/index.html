@@ -207,11 +207,6 @@
         width: 177px;
       }
 
-      .card-quote a {
-        
-        
-      }
-
       .card-quote {
         width: 130px;
       }
@@ -238,16 +233,20 @@
         position: absolute;
       }
 
-      .left-arrow {
-        top: -40px;
-        left: 0;
+      .left-arrow, .right-arrow {
+        cursor: pointer;
+        font-size: 20px;
         position: absolute;
+        top: 0;
+        z-index: 10;
+      }
+.
+      .left-arrow {
+        left: 0;
       }
 
       .right-arrow {
-        top: -40px;
-        right: 0;
-        position: absolute;
+        right: 6px;
       }
 
       .social {
@@ -342,31 +341,22 @@
           </a>
         </div>
         <div class="container">
-          <div class="card-quote" style="width: 250px">
-            <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span>
-            <span class="right-arrow" onclick="handleRightArrow()">&#x2192;</span>
+          <div class="card-quote" style="width: 130px">
             
-              <header class="card-quote-header">
-                ECHEA w/ Eli Keszler
-              </header>
             
             <p class="card-quote-content">
-              Opening Reception on April 11, 2024, exhibition runs through May 2024
-              
+              Coming out to close the gate I end up listening to frogs
             </p>
             
               <p class="card-quote-footer">
-                <a href='https://www.galeriepepe.com/'>Galerie Pepe</a>, Mexico City
+                Masaoka Shiki (1866-1902)
               </p>
             
           </div>
-          
-            
-          
         </div>
         <div class="social">
           <p>
-            last updated saturday, march 30, 2024 ~ <a href="/colophon">colophon</a>
+            last updated monday, april 1, 2024 ~ <a href="/colophon">colophon</a>
           </p>
         </div>
         <div class="container-background"></div>
@@ -382,21 +372,22 @@
       gtag('config', 'UA-120208217-1');
 
       
-      const ANNOUNCEMENTS_DATA = [{"header":"ECHEA w/ Eli Keszler","content":"Opening Reception on April 11, 2024, exhibition runs through May 2024","footer":"<a href='https://www.galeriepepe.com/'>Galerie Pepe</a>, Mexico City","width":"250px"},{"content":"Coming out to close the gate I end up listening to frogs","footer":"Masaoka Shiki (1866-1902)","width":"130px"},{"header":"<a href='https://reubenson.com/posters/frog-chorus-vernal-equinox-2024/'>Frog Chorus Listening Event</a>","content":"<p>A celebration of the vernal equinox</p><p>Wednesday, March 20, 2024</p><p>6:30pm til sundown</p><p><a href='https://fruitful.school/blog/2024-03-13.html'>Presented with Fruitful School</a></p><p></p>","footer":"Pier 3 Plaza, Brooklyn Bridge Park","width":"210px"},{"content":"Left blank for a work expressing modern feeling.","width":"180px"}];
+      const ANNOUNCEMENTS_DATA = [{"content":"Coming out to close the gate I end up listening to frogs","footer":"Masaoka Shiki (1866-1902)","width":"130px"},{"header":"<a href='https://reubenson.com/posters/frog-chorus-vernal-equinox-2024/'>Frog Chorus Listening Event</a>","content":"<p>A celebration of the vernal equinox</p><p>Wednesday, March 20, 2024</p><p>6:30pm til sundown</p><p><a href='https://fruitful.school/blog/2024-03-13.html'>Presented with Fruitful School</a></p><p></p>","footer":"Pier 3 Plaza, Brooklyn Bridge Park","width":"210px"},{"content":"Left blank for a work expressing modern feeling.","width":"180px"},{"header":"ECHEA w/ Eli Keszler","content":"Opening Reception on April 11, 2024, exhibition runs through May 2024","footer":"<a href='https://www.galeriepepe.com/'>Galerie Pepe</a>, Mexico City","width":"250px"}];
       let index = 0;
 
       function renderAnnouncement(data) {
+        const cardQuote = document.querySelector('.card-quote');
         const content = document.querySelector('.card-quote-content');
         const header = document.querySelector('.card-quote-header');
         const footer = document.querySelector('.card-quote-footer');
         
+        cardQuote.style.width = data.width || '130px';
         header.innerHTML = data.header || '';
         content.innerHTML = data.content || '';
         footer.innerHTML = data.footer || '';
       }
 
       function handleLeftArrow() {
-        console.log('left arrow');
         index--;
         index = Math.max(0, index);
         renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
@@ -406,11 +397,11 @@
       }
 
       function handleRightArrow() {
-        console.log('right arrow');
         index++;
         renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
         if (index > 0) {
-          document.querySelector('.left-arrow').classList.remove('hidden');
+          // leave off right arrow
+          // document.querySelector('.left-arrow').classList.remove('hidden');
         }
         if (index === ANNOUNCEMENTS_DATA.length - 1) {
           document.querySelector('.right-arrow').classList.add('hidden');
