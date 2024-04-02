@@ -23,6 +23,26 @@ title: Project Title
         <a href="{{ url }}">{{ url }}</a>
       </header>
       {{ content | safe }}
+      <section class="project-more">
+        <h2>See also</h2>
+        <ul>
+        {% for project in projects %}
+          {{ project.title}}
+          {% if project.title == title %}
+            {% for relatedProjectId in project.relatedProjects %}
+            {{ relatedProjectId }}
+              <li class="related-project">
+                {% for project in projects %}
+                  {% if project.id == relatedProjectId %}
+                    <a href="{{ project.path }}">{{ project.title }}</a>
+                  {% endif %}
+                {% endfor %}
+              </li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </section>
     </div>
     <div class="project-border broider"></div>
   </body>

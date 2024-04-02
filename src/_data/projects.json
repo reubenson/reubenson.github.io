@@ -1,5 +1,6 @@
 [
   {
+    "id": "midi-archive",
     "title": "MIDI Archive",
     "description": "",
     "year": 2023,
@@ -7,9 +8,15 @@
     "path": "/projects/midi-archive",
     "tagline": "ML model and archive of music on the early web",
     "selected": true,
-    "category": "Audio and the Web"
+    "categories": ["algorithm-audible", "interfaces"],
+    "relatedProjects": [
+      "frog-chorus",
+      "airports-for-music",
+      "weaving-music"
+    ]
   },
   {
+    "id": "frog-chorus",
     "title": "Frog Chorus",
     "description": "",
     "year": 2023,
@@ -17,45 +24,78 @@
     "path": "/projects/frog-chorus",
     "tagline": "Summon a chorus of frogs from your phone",
     "selected": true,
-    "category": "Audio and the Web"
+    "categories": ["algorithm-audible", "on-listening"],
+    "relatedProjects": [
+      "midi-archive",
+      "hobo-ufo",
+      "composing-listening"
+    ]
   },
   {
+    "id": "airports-for-music",
     "title": "Airports for Music",
     "description": "",
     "year": 2023,
     "url": "https://hubs.ninaprotocol.com/airportsformusic",
     "path": "/projects/airports-for-music",
     "tagline": "Sound as fragrance",
-    "selected": true
+    "selected": true,
+    "categories": ["on-listening", "publications"],
+    "relatedProjects": [
+      "weaving-music",
+      "composing-listening",
+      "frog-chorus"
+    ]
   },
   {
-    "title": "Meandering Ceramic Prints",
+    "id": "meandering-printing",
+    "title": "Meandering Ceramic Printing",
     "description": "",
     "year": 2023,
     "url": "https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd",
-    "path": "/projects/meandering-prints",
+    "path": "/projects/meandering-printing",
     "tagline": "3D printing ceramics at Haystack Mountain School of Crafts",
-    "selected": false
+    "selected": true,
+    "categories": ["meander"],
+    "relatedProjects": [
+      "ceramics",
+      "weaving-music",
+      "hobo-ufo"
+    ]
   },
   {
-    "title": "Ceramics",
+    "id": "ceramics",
+    "title": "Selected Ceramic Works",
     "description": "",
     "year": 2023,
     "url": "https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd",
     "path": "/projects/ceramics",
     "tagline": "Material explorations into surface and form",
-    "selected": true
+    "selected": true,
+    "categories": [],
+    "relatedProjects": [
+      "meandering-printing",
+      "weaving-music"
+    ]
   },
   {
+    "id": "composing-listening",
     "title": "Composing Through Listening",
     "description": "",
     "year": 2023,
     "url": "https://wfmu.org/playlists/shows/119916",
     "path": "/projects/composing-through-listening",
     "tagline": "Radio broadcast for WFMU",
-    "selected": true
+    "selected": true,
+    "categories": ["on-listening", "publications"],
+    "relatedProjects": [
+      "frog-chorus",
+      "airports-for-music",
+      "midi-archive"
+    ]
   },
   {
+    "id": "weaving-music",
     "title": "Weaving Music",
     "description": "",
     "year": 2019,
@@ -63,33 +103,74 @@
     "path": "/projects/weaving",
     "tagline": "Sound as a woven textile",
     "selected": true,
-    "category": "Audio and the Web"
+    "categories": ["on-grid", "algorithm-audible"],
+    "relatedProjects": [
+      "airports-for-music",
+      "qcvg",
+      "private-chronology"
+    ]
   },
   {
+    "id": "hobo-ufo",
     "title": "HOBO UFO",
     "description": "",
     "year": 2019,
     "url": "https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/",
     "path": "/projects/hobo-ufo",
     "tagline": "Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a>",
-    "selected": true
+    "selected": true,
+    "categories": ["on-grid", "publications"],
+    "relatedProjects": [
+      "frog-chorus",
+      "midi-archive",
+      "meandering-printing"
+    ]
   },
   {
+    "id": "qcvg",
     "title": "QCVG",
     "description": "",
     "year": 2012,
     "url": "",
     "path": "/projects/qcvg",
     "tagline": "Programmable modular synthesizer",
-    "selected": true
+    "selected": true,
+    "categories": ["algorithm-audble", "interfaces"],
+    "relatedProjects": [
+      "weaving-music",
+      "midi-archive",
+      "airports-for-music"
+    ]
   },
   {
+    "id": "private-chronology",
     "title": "Private Chronology",
     "description": "",
     "year": 2009,
     "url": "https://reubenson.com/private-chronology",
     "path": "/projects/private-chronology",
     "tagline": "DIY music label, exclusively distributed by Mimaroglu Music Sales",
-    "selected": true
+    "selected": true,
+    "categories": ["publications"],
+    "relatedProjects": [
+      "composing-listening",
+      "weaving-music",
+      "airports-for-music"
+    ]
+  },
+  {
+    "id": "discography",
+    "title": "Discography",
+    "description": "",
+    "year": 2009,
+    "url": "https://www.discogs.com/artist/1649287-Reuben-Son",
+    "path": "/projects/discography",
+    "tagline": "Published music",
+    "selected": false,
+    "categories": ["publications"],
+    "relatedProjects": [
+      "private-chronology",
+      "airports-for-music"
+    ]
   }
 ]

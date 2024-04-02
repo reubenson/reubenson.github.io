@@ -1,6 +1,6 @@
 ---
-layout: more.njk
-title: Quotes
+layout: project.njk
+title: Passages
 ---
 ### Simone Weil, _Gravity and Grace_
 - "In general we must not wish for the disappearance of any of our troubles, but grace to transform them"

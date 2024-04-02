@@ -7,24 +7,12 @@ title: Reuben Son
   <figcaption>Photo by <a href="https://laurelschwulst.com/">Laurel Schwulst</a></figcaption>
 </figure>
 
-When I was younger, I wanted to be a filmmaker, furniture designer, or a guitarist ([which I did do for a while](https://wagtailrecordings.bandcamp.com/album/reuben-son-days-gone-by)). While these impulses have ebbed and flowed over the years, I still feel broadly and intensely drawn to certain kinds of objects and experiences. 
+When I was younger, I first wanted to be a filmmaker, or a furniture designer, or a guitarist ([which I did sometimes record](https://wagtailrecordings.bandcamp.com/album/reuben-son-days-gone-by) and still play for myself). While these impulses and gestures towards future selves have ebbed and flowed over the years, I still feel broadly and intensely drawn to certain kinds of objects and aesthetic experiences.
 
-Towards the end of 2022, I had the feeling that I had lost the thread a bit, professionally and creatively. And so, in 2023, I took a year-long sabbatical to tap into both my inner child and my north star. _Where had I been, and where was I going_? 
+Over the last decade, my energies have settled, through desire paths and tributaries, into software, sound, and ceramics. I would characterize my approach to these disciplines to be sculptural in a broad sense, in which the resulting object (experience) is dependent on the accretion of smaller, more intuitive decisions, as opposed to starting from a dogmatic schema and working backwards. 
 
-Over the last decade or so, my energy and attention had settled around software, sound, and ceramics, but I felt I needed to take to backtrack a little to see what other signposts I may have passed by on the path I was on. 
+> "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." <br/><br/> - Christopher Bollas, _The Shadow of the Object_
 
-> "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." - Christopher Bollas, _The Shadow of the Object_
+I have found that the locus of vitality exists in material engagement with the world, within only a loose framework of epistemology, a minimum viable ontology. Regarding this, I find myself somewhere in the continuum of Simone Weil, who wrote "[to work in order to eat, to eat in order to work [...] only the cycle contains the truth](https://theanarchistlibrary.org/library/simone-weil-gravity-and-grace#:~:text=%27Work%20makes%20us%20experience%20in,the%20cycle%20contains%20the%20truth.)", and Ray Peat, who wrote "[energy creates organization and structure](https://www.functionalps.com/blog/2011/04/23/energy-structure-and-carbon-dioxide-a-realistic-view-of-the-organism/#:~:text=energy%20creates%20organization%20and%20structure)". 
 
-During my sabbatical, I've deployed a few browser-based projects, through which I've tried to express what I still find beautiful, open-ended, and poetic about computing interfaces. A series of love-letters to the web. For being so turbulent and *noisy*, the web is also a rather _quiet_ place, in which sound routinely defers to the primacy of text and image. Sound is also among the more numinous of the human senses, and perhaps owing to this, I've found it endlessly interesting to develop experimental intefaces around sound, disrupting the _affect of determinism_ that continues to dominate our collective ways of sensemaking.
-
-<div class="divider-line">✺ ✺ ✺</div>
-
-- In [_Weaving Music_](/weaving), which began as a residency project at [EMS](https://elektronmusikstudion.se/composers/2019/1013-reuben-son-ems-10-19-june-2019), I built a grid-based generative music interface that draws inspiration from weaving patterns. 
-
-- In [_MIDI Archive_](/midi-archive), which came out of a residency at [Recurse Center](https://recurse.com), I prototyped a hybrid model of AI and archive as an interface to a historical catalogue of music on the early web. 
-
-- And in [_Frog Chorus_](https://frogchor.us), I explored the possibilities of device-device interfaces within an acoustic environment, an internet of frogs.
-
-<!-- <div class="divider-line">✺ ✺ ✺</div> -->
-
-<!-- I'm still figuring things out, but I'm happy you're here and I hope you enjoy perusing some of the things I've made along the way. While none of these projects are truly _finished_, I do feel like this body of work has connecting throughlines, and has given me the space to think ... and if not find answers, to at least ask better questions. -->
+The projects below represent an incomplete index of my creative work between the period of 2009 to the present. Registrations of organization and stucture. I'm still figuring things out, but I'm happy you're here and I hope you enjoy perusing some of the things I've made along the way. While none of these projects are truly _finished_, I do feel like this body of work has connecting throughlines, and has given me the space to think ... and if not find answers, to at least ask better questions.
