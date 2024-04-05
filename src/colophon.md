@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Colophon
+hideSeeMore: true
 ---
 <figure class="figure-medium">
   <img src="/public/meander-tile.jpg" alt="photo of meander pattern in apartment building">
@@ -22,5 +23,7 @@ As I embrace the meander of life, I'm glad to have a website that meanders with 
 This website has been built with the [Eleventy](https://www.11ty.dev/) static site generator, and is deployed on Github Pages. Content has largely been written in markdown, and typeset with Courier New and <span class="ibarra">Ibarra Real Nova</span>.
 
 Additional references and links:
-- [Kristoffer Tjalve's Colophon Web](https://www.are.na/kristoffer-tjalve/colophon-web)
-- [Max Bittker's Broider](https://maxbittker.github.io/broider/)
+- [Wacław Szpakowski, _Rhythmical Lines_](https://www.theparisreview.org/blog/2017/02/15/rhythmical-lines/)
+- [Kristoffer Tjalve, _Colophon Web_](https://www.are.na/kristoffer-tjalve/colophon-web)
+- [Max Bittker, _Broider_](https://maxbittker.github.io/broider/)
+- [Serving Library Annual, _Meander_](https://www.servinglibrary.org/journal/17)
