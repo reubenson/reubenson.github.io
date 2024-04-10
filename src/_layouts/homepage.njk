@@ -311,8 +311,8 @@ title: Reuben Son Homepage
         </div>
         <div class="container">
           <div class="card-quote" style="width: {{ announcements[0].width | safe}}">
-            {# <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span>
-            <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span> #}
+            {# <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span> #}
+            <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span>
             {% if announcements[0].header %}
               <header class="card-quote-header">
                 {{ announcements[0].header | safe }}

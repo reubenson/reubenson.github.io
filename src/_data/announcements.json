@@ -1,5 +1,11 @@
 [
   {
+    "header": "ECHEA w/ Eli Keszler",
+    "content": "Opening Reception on April 11, 2024, exhibition runs through June 2024",
+    "footer": "<a href='https://www.galeriepepe.com/'>Galerie Pepe</a>, Mexico City",
+    "width": "250px"
+  },
+  {
     "content": "Coming out to close the gate I end up listening to frogs",
     "footer": "Masaoka Shiki (1866-1902)",
     "width": "130px"
@@ -13,11 +19,5 @@
   {
     "content": "Left blank for a work expressing modern feeling.",
     "width": "180px"
-  },
-  {
-    "header": "ECHEA w/ Eli Keszler",
-    "content": "Opening Reception on April 11, 2024, exhibition runs through May 2024",
-    "footer": "<a href='https://www.galeriepepe.com/'>Galerie Pepe</a>, Mexico City",
-    "width": "250px"
   }
 ]
