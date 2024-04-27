@@ -1,4 +1,4 @@
-### Group Exhibitions
+### Exhibitions
 
-<!-- - <span class="resume-year">2024</span> Ec, Manny Cantor Center, NY -->
-- <span class="resume-year">2023</span> Panopoly, Manny Cantor Center, NY
+- <span class="resume-year">2024</span> _Echea_ (w/ Eli Keszler), Galerie Pepe, Mexico City
+- <span class="resume-year">2024</span> _Panopoly_, Manny Cantor Center, NY

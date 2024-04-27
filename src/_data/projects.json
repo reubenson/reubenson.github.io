@@ -79,6 +79,22 @@
     ]
   },
   {
+    "id": "allure-of-inertia",
+    "title": "Allure of Inertia",
+    "description": "",
+    "year": 2024,
+    "url": "",
+    "path": "/projects/allure-of-inertia",
+    "tagline": "Mix for NTS Radio",
+    "selected": true,
+    "categories": ["publications"],
+    "relatedProjects": [
+      "composing-listening",
+      "airports-for-music",
+      "meandering-printing"
+    ]
+  },
+  {
     "id": "composing-listening",
     "title": "Composing Through Listening",
     "description": "",
@@ -89,9 +105,9 @@
     "selected": true,
     "categories": ["on-listening", "publications"],
     "relatedProjects": [
+      "allure-of-inertia",
       "frog-chorus",
-      "airports-for-music",
-      "midi-archive"
+      "airports-for-music"
     ]
   },
   {

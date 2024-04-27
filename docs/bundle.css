@@ -207,7 +207,7 @@ a {
   bottom: 20px;
   right: 10px;
   padding: 30px;
-  max-width: 768px;
+  /* max-width: 768px; */
 }
 
 .project .figure-medium {
@@ -246,6 +246,14 @@ a {
   border-top: solid black 1px;
   margin-top: 20px;
   clear: both;
+}
+
+.project .all-projects-link {
+  list-style: none;
+}
+
+.project .all-projects-link::before {
+  content: '↪';
 }
 
 @media screen and (min-width: 400px) {
