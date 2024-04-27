@@ -11,7 +11,7 @@ When I was younger, I first wanted to be a filmmaker, or a furniture designer, o
 
 Over the last decade, my energies have settled, through desire paths and tributaries, into software, sound, and ceramics. I would characterize my approach to these disciplines to be sculptural in a broad sense, in which the resulting object (experience) is dependent on the accretion of smaller, more intuitive decisions, as opposed to starting from a dogmatic schema and working backwards. 
 
-> "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." <br/><br/> - Christopher Bollas, _The Shadow of the Object_
+> "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." <br/><br/> - Christopher Bollas, _The Shadow of the Object_ <br/><br/> ([✶✶ Passages](https://www.are.na/reuben-son/passages-m7zf9-4vnu4))
 
 I have found that the locus of vitality exists in material engagement with the world, within only a loose framework of epistemology, a minimum viable ontology. Regarding this, I find myself somewhere in the continuum of Simone Weil, who wrote "[to work in order to eat, to eat in order to work [...] only the cycle contains the truth](https://theanarchistlibrary.org/library/simone-weil-gravity-and-grace#:~:text=%27Work%20makes%20us%20experience%20in,the%20cycle%20contains%20the%20truth.)", and Ray Peat, who wrote "[energy creates organization and structure](https://www.functionalps.com/blog/2011/04/23/energy-structure-and-carbon-dioxide-a-realistic-view-of-the-organism/#:~:text=energy%20creates%20organization%20and%20structure)". 
 
