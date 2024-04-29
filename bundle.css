@@ -210,6 +210,11 @@ a {
   /* max-width: 768px; */
 }
 
+.project .content .content-wrapper {
+  margin: auto;
+  max-width: 768px;
+}
+
 .project .figure-medium {
   margin: auto auto 20px;
   width: 100%;

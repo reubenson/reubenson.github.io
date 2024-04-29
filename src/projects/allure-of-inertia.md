@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Allure of Inertia
+url: https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024
 ---
 <figure class="figure-medium">
   <img src="/public/allure-of-inertia.jpeg" alt="show flyer by NTS">
@@ -44,4 +45,4 @@ Mix for NTS Radio, on the theme of _metamorphosis_.
   Eiko Ishibashi, _Ask Me How I Sleep at Night_
 </blockquote> -->
 
-[Download Link]()
+[Download Link](https://www.dropbox.com/s/zebvsqnx1qu3aam/Allure%20of%20Inertia.mp3?dl=0)

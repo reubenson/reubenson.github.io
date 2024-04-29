@@ -99,23 +99,25 @@ title: Project Title
   </head>
   <body class="project">
     <div class="content">
-      <header>
-        <h1><a href="/">{{ title }}</a></h1>
-      </header>
-      {{ content | safe }}
-      <h2 class="projects-list-header">Selected Projects</h2>
-      <ul class="projects-list">
-      {% for project in projects %}
-        {% if project.selected %}
-        <li class="project-item">
-          <span class="project-title"><a href="{{ project.path }}">{{ project.title }}</a></span>
-          <span class="project-index"><a href="{{ project.path }}">{{ loop.index }}</a></span>
-          <span class="project-line"></span>
-          <span class="project-tagline"><a href="{{ project.path }}">{{ project.tagline | safe }}</a></span>
-        </li>
-        {% endif %}
-      {% endfor %}
-      </ul>
+      <div class="content-wrapper">
+        <header>
+          <h1><a href="/">{{ title }}</a></h1>
+        </header>
+        {{ content | safe }}
+        <h2 class="projects-list-header">Selected Projects</h2>
+        <ul class="projects-list">
+        {% for project in projects %}
+          {% if project.selected %}
+          <li class="project-item">
+            <span class="project-title"><a href="{{ project.path }}">{{ project.title }}</a></span>
+            <span class="project-index"><a href="{{ project.path }}">{{ loop.index }}</a></span>
+            <span class="project-line"></span>
+            <span class="project-tagline"><a href="{{ project.path }}">{{ project.tagline | safe }}</a></span>
+          </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
     </div>
     <div class="project-border broider"></div>
   </body>
