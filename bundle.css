@@ -234,7 +234,6 @@ a {
   /* text-align: center; */
   font-style: italic;
   /* overflow: auto; */
-  margin: auto 40px;
   padding: 0 20px;
   text-align: justify;
 }
@@ -280,6 +279,12 @@ a {
     margin-right: 30px;
     max-width: 300px;
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .project blockquote {
+    margin: auto 40px;
   }
 }
 
