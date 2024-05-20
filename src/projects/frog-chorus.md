@@ -3,6 +3,7 @@ layout: project.njk
 title: Frog Chorus
 subtitle: Web-app for summoning a chorus of frogs with your phone
 url: https://frogchor.us
+layoutType: two-column
 ---
 <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/Frog-Chorus-video-capture.gif" alt="screen capture of frog chorus app">

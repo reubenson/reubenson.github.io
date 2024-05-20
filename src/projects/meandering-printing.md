@@ -1,8 +1,9 @@
 ---
 layout: project.njk
-title: Meandering Ceramic Printing
+title: Meandering Ceramic 
+layoutType: one-column
 ---
-These photos document some of the pieces I designed, fabricated, and activated during a two-week workshop on 3D-printing ceramics at The Haystack Mountain School of Crafts. In this work, I focused on site-specificity and expression of the line, and wrote a brief essay about my process(<a href="https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd">https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd</a>)
+These photos document some of the pieces I designed, fabricated, and activated during a two-week workshop on 3D-printing ceramics at The Haystack Mountain School of Crafts. In this work, I focused on site-specificity and expression of the line, and [wrote a brief essay about my process](https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd).
 
 <figure class="three-one">
   <img class="full-width" src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-installation.jpeg" alt="3D printing">

@@ -2,6 +2,7 @@
 layout: project.njk
 title: Airports for Music
 url: https://hubs.ninaprotocol.com/airportsformusic
+layoutType: two-column
 ---
 <!-- ## {{ subtitle }} -->
 

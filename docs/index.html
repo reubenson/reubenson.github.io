@@ -110,6 +110,10 @@
         transform: translateY(-50%);
       }
 
+      .card-container {
+        background-color: #f0f0e6;
+      }
+
       .card {
         box-sizing: border-box;
         width: 100%;
@@ -119,7 +123,7 @@
         position: relative;
       }
 
-      .card.back {
+      .card-container:nth-child(2) {
         margin-top: 40px;
       }
 
@@ -161,6 +165,7 @@
         position: absolute;
         height: calc(100% - 60px);
         width: calc(100% - 55px);
+        z-index: 1;
       }
 
       .container-background {
@@ -169,7 +174,7 @@
         height: calc(100% - 20px);
         margin: 10px;
         width: calc(100% - 20px);
-        z-index: -1;
+        
       }
 
       .card p {
@@ -252,7 +257,7 @@
 
       .social {
         display: inline;
-        font-size: 8px;
+        font-size: 9px;
         letter-spacing: normal;
         position: absolute;
         bottom: -2px;
@@ -312,60 +317,83 @@
           transform: translateY(-50%);
         }
       }
+
+      @media screen and (min-width: 768px) {
+        .project-border {
+          background-image: url('/public/riso-maine.png');
+          background-size: cover;
+          background-position: center;
+        }
+
+        .cards {
+          max-width: 450px;
+        }
+
+        .card-container {
+          border: solid black 1px;
+        }
+
+      }
+
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
   <body>
     <div class="cards">
-      <div class="card front broider-cancel">
-        <h1><a href="/projects">Reuben Son</a></h1>
-        <div class="container">
-          <p><em>Makes <a href="/projects">software, sound, and ceramics</a></em>.</p>
+      <div class="card-container">
+        <div class="card front broider-cancel">
+          <h1><a href="/projects">Reuben Son</a></h1>
+          <div class="container">
+            <p><em>Makes <a href="/projects">software, sound, and ceramics</a></em>.</p>
 <p>Based in NYC, and recently combined machine learning with music from the early web during <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">a residency at Recurse Center</a>.</p>
-<p>Currently looking for freelance or full-time employment as a creative technologist!</p>
+<p>Currently <a href="/projects#work">looking for freelance or full-time employment as a creative technologist</a>!</p>
 
-        </div>
-        <div class="social">
-          <p><a href="mailto:reubenson@gmail.com">e-mail</a> ~ <a href="https://www.instagram.com/not_not_reuben" rel="me">instagram</a> ~ <a href="https://www.are.na/reuben-son" rel="me">are.na</a> ~ <a href="https://special.fish/sonanze" rel="me">special.fish</a>  ~ <a href="https://read.cv/not_not_reuben" rel="me">read.cv</a></p>
+          </div>
+          <div class="social">
+            <p><a href="mailto:reubenson@gmail.com">e-mail</a> ~ <a href="https://www.instagram.com/not_not_reuben" rel="me">instagram</a> ~ <a href="https://www.are.na/reuben-son" rel="me">are.na</a> ~ <a href="https://special.fish/sonanze" rel="me">special.fish</a>  ~ <a href="https://read.cv/not_not_reuben" rel="me">read.cv</a></p>
 <!-- [Mastodon](https://mastodon.social/@sonanze) -->
 <!-- [X](https://twitter.com/not_not_reuben) -->
 <!-- <a href="https://www.linkedin.com/in/reubenson/" rel="me">LinkedIn</a> -->
 <!-- <a href="https://sonceramics.etsy.com/" rel="me">etsy</a> -->
-        </div>
-        <div class="container-background"></div>
-      </div>
-      <div class="card back broider-cancel">
-        <h1><a href="/projects">Reuben Son</a></h1>
-        <div class="glyph">
-          <a href="https://frogchor.us" target="_blank">
-            <img src="/public/frog-glyph.png">
-          </a>
-        </div>
-        <div class="container">
-          <div class="card-quote" style="width: 170px">
-            
-            <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span>
-            
-              <header class="card-quote-header">
-                <a href='https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024'target='_blank'>Allure of Inertia</a>
-              </header>
-            
-            <p class="card-quote-content">
-              Broadcast on NTS Radio 7-8pm ET, Sunday May 5th
-            </p>
-            
-              <p class="card-quote-footer">
-                <a href="https://www.nts.live" target="_blank">https://www.nts.live</a>
-              </p>
-            
           </div>
+          <div class="container-background"></div>
         </div>
-        <div class="social">
-          <p>
-            last updated tuesday, april 30, 2024 ~ <a href="/colophon">colophon</a>
-          </p>
+      </div>
+      <div class="card-container">
+
+        <div class="card back broider-cancel">
+          <h1><a href="/projects">Reuben Son</a></h1>
+          <div class="glyph">
+            <a href="https://frogchor.us" target="_blank">
+              <img src="/public/frog-glyph.png">
+            </a>
+          </div>
+          <div class="container">
+            <div class="card-quote" style="width: 170px">
+              
+              <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span>
+              
+                <header class="card-quote-header">
+                  <a href='https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024'target='_blank'>Allure of Inertia</a>
+                </header>
+              
+              <p class="card-quote-content">
+                Broadcast on NTS Radio 7-8pm ET, Sunday May 5th
+              </p>
+              
+                <p class="card-quote-footer">
+                  <a href="https://www.nts.live" target="_blank">https://www.nts.live</a>
+                </p>
+              
+            </div>
+          </div>
+          <div class="social">
+            <p>
+              last updated monday, may 20, 2024 ~ <a href="/colophon">colophon</a>
+            </p>
+          </div>
+          <div class="container-background"></div>
         </div>
-        <div class="container-background"></div>
       </div>
     </div>
     <div class="project-border broider"></div>

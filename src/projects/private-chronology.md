@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Private Chronology
+layoutType: two-column
 # url: /private-chronology
 ---
 <figure class="figure-medium">
@@ -13,7 +14,7 @@ title: Private Chronology
 
 **Private Chronology** was a small music label operated from Boston, MA between 2009 and 2015, with 10 editions published in cassette, vinyl, and digital formats. In additional to publishing music by Reuben Son, the label also released music by associated artists, such as <a href="https://en.wikipedia.org/wiki/Xela_(musician)">Xela</a>, <a href="https://mmucci.bandcamp.com/">M. Mucci</a>, <a href="https://rubbercitynoise.bandcamp.com/album/grandeur-weakness">The North Sea</a>, <a href="https://patrickemm.bandcamp.com/">Patrick Emm</a>, <a href="https://cpark.bandcamp.com/">CPARK</a>, and <a href="https://ashatamirisa.net/">Asha Tamirisa</a>
 
-<h4>Catalogue</h4>
+<h3>Catalogue</h3>
 <ul>
   <li><a href="/private-chronology/01">[PC01]</a> Reuben Son, <em>Glowing Departure</em></li>
   <li><a href="/private-chronology/02">[PC02]</a> Reuben Son, <em>Sensual Square</em></li>

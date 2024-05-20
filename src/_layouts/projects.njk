@@ -29,12 +29,11 @@ title: Project Title
 
       .project-item {
         display: flex;
-        font-family: Courier New;
+        {# font-family: Courier New; #}
         flex-direction: row;
         justify-content: space-between;
-        letter-spacing: -.3px;
+        {# letter-spacing: -.3px; #}
         position: relative;
-        font-size: 14px;
         margin: 20px 0 20px;
       }
 
@@ -97,13 +96,15 @@ title: Project Title
       }
     </style>
   </head>
-  <body class="project">
+  <body class="project two-column">
     <div class="content">
+      <header>
+        <h1><a href="/">{{ title }}</a></h1>
+      </header>
       <div class="content-wrapper">
-        <header>
-          <h1><a href="/">{{ title }}</a></h1>
-        </header>
         {{ content | safe }}
+      </div>
+      <section>
         <h2 class="projects-list-header">Selected Projects</h2>
         <ul class="projects-list">
         {% for project in projects %}
@@ -117,7 +118,7 @@ title: Project Title
           {% endif %}
         {% endfor %}
         </ul>
-      </div>
+      </section>
     </div>
     <div class="project-border broider"></div>
   </body>

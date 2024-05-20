@@ -2,6 +2,7 @@
 layout: project.njk
 title: HOBO UFO
 url: https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/
+layoutType: two-column
 ---
 <figure class="figure-medium">
   <img src="https://p-a-n.org/wp-content/uploads/2019/10/HOBO_SQ_10.png" alt="still image from Hobo UFO">

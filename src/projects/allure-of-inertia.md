@@ -2,6 +2,7 @@
 layout: project.njk
 title: Allure of Inertia
 url: https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024
+layoutType: two-column
 ---
 <figure class="figure-medium">
   <img src="/public/allure-of-inertia.jpeg" alt="show flyer by NTS">
@@ -11,6 +12,9 @@ url: https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-a
 "_Music for holding the capacity to change, for letting go of state. Breaking forms and surfaces, following water to weather. Speakers diffusing fragrances of sound. From open windows and sliding glass doors to the ocean … amor fati._"
 
 Mix for NTS Radio, on the theme of _metamorphosis_.
+
+Title taken from a passage in Adam Phillips' [_Wanting to Change_](https://www.are.na/block/27704076)
+> “For both Freud and James, the enemy of pleasure and growth was stuckness, addiction, fixity, stasis. They teach us about the temptations of stultification, of the allure of inertia … of the wish to attack our own development”
 
 <!-- <blockquote style="display: block">
 

@@ -86,6 +86,10 @@ title: Reuben Son Homepage
         transform: translateY(-50%);
       }
 
+      .card-container {
+        background-color: #f0f0e6;
+      }
+
       .card {
         box-sizing: border-box;
         width: 100%;
@@ -95,7 +99,7 @@ title: Reuben Son Homepage
         position: relative;
       }
 
-      .card.back {
+      .card-container:nth-child(2) {
         margin-top: 40px;
       }
 
@@ -137,6 +141,7 @@ title: Reuben Son Homepage
         position: absolute;
         height: calc(100% - 60px);
         width: calc(100% - 55px);
+        z-index: 1;
       }
 
       .container-background {
@@ -145,7 +150,7 @@ title: Reuben Son Homepage
         height: calc(100% - 20px);
         margin: 10px;
         width: calc(100% - 20px);
-        z-index: -1;
+        {# z-index: -1; #}
       }
 
       .card p {
@@ -228,7 +233,7 @@ title: Reuben Son Homepage
 
       .social {
         display: inline;
-        font-size: 8px;
+        font-size: 9px;
         letter-spacing: normal;
         position: absolute;
         bottom: -2px;
@@ -288,53 +293,76 @@ title: Reuben Son Homepage
           transform: translateY(-50%);
         }
       }
+
+      @media screen and (min-width: 768px) {
+        .project-border {
+          background-image: url('/public/riso-maine.png');
+          background-size: cover;
+          background-position: center;
+        }
+
+        .cards {
+          max-width: 450px;
+        }
+
+        .card-container {
+          border: solid black 1px;
+        }
+
+      }
+
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
   <body>
     <div class="cards">
-      <div class="card front broider-cancel">
-        <h1><a href="/projects">Reuben Son</a></h1>
-        <div class="container">
-          {% renderFile './src/_includes/tiny-bio.md' %}
-        </div>
-        <div class="social">
-          {% renderFile './src/_includes/social.md' %}
-        </div>
-        <div class="container-background"></div>
-      </div>
-      <div class="card back broider-cancel">
-        <h1><a href="/projects">Reuben Son</a></h1>
-        <div class="glyph">
-          <a href="https://frogchor.us" target="_blank">
-            <img src="/public/frog-glyph.png">
-          </a>
-        </div>
-        <div class="container">
-          <div class="card-quote" style="width: {{ announcements[0].width | safe}}">
-            {# <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span> #}
-            <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span>
-            {% if announcements[0].header %}
-              <header class="card-quote-header">
-                {{ announcements[0].header | safe }}
-              </header>
-            {% endif %}
-            <p class="card-quote-content">
-              {{ announcements[0].content | safe}}
-            </p>
-            {% if announcements[0].footer %}
-              <p class="card-quote-footer">
-                {{ announcements[0].footer | safe }}
-              </p>
-            {% endif %}
+      <div class="card-container">
+        <div class="card front broider-cancel">
+          <h1><a href="/projects">Reuben Son</a></h1>
+          <div class="container">
+            {% renderFile './src/_includes/tiny-bio.md' %}
           </div>
+          <div class="social">
+            {% renderFile './src/_includes/social.md' %}
+          </div>
+          <div class="container-background"></div>
         </div>
-        <div class="social">
-          <p>
-            last updated {{ timestamp }} ~ <a href="/colophon">colophon</a>
-          </p>
+      </div>
+      <div class="card-container">
+
+        <div class="card back broider-cancel">
+          <h1><a href="/projects">Reuben Son</a></h1>
+          <div class="glyph">
+            <a href="https://frogchor.us" target="_blank">
+              <img src="/public/frog-glyph.png">
+            </a>
+          </div>
+          <div class="container">
+            <div class="card-quote" style="width: {{ announcements[0].width | safe}}">
+              {# <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span> #}
+              <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span>
+              {% if announcements[0].header %}
+                <header class="card-quote-header">
+                  {{ announcements[0].header | safe }}
+                </header>
+              {% endif %}
+              <p class="card-quote-content">
+                {{ announcements[0].content | safe}}
+              </p>
+              {% if announcements[0].footer %}
+                <p class="card-quote-footer">
+                  {{ announcements[0].footer | safe }}
+                </p>
+              {% endif %}
+            </div>
+          </div>
+          <div class="social">
+            <p>
+              last updated {{ timestamp }} ~ <a href="/colophon">colophon</a>
+            </p>
+          </div>
+          <div class="container-background"></div>
         </div>
-        <div class="container-background"></div>
       </div>
     </div>
     <div class="project-border broider"></div>

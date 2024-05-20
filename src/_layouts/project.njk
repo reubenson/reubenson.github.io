@@ -15,40 +15,40 @@ title: Project Title
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
   </head>
-  <body class="project">
+  <body class="project {{ layoutType }}">
     <div class="top-spacer"></div>
     <div class="content">
+      <header>
+        <h1>{{ title }}</h1>
+        <a href="{{ url }}">{{url}}</a>
+      </header>
       <div class="content-wrapper">
-        <header>
-          <h1>{{ title }}</h1>
-          <a href="{{ url }}">{{ url }}</a>
-        </header>
         {{ content | safe }}
-
-        {% if not hideSeeMore %}
-        <section class="project-more">
-          <h2>See also</h2>
-          <ul>
-            {% for project in projects %}
-              {% if project.title == title %}
-                {% for relatedProjectId in project.relatedProjects %}
-                  <li class="related-project">
-                    {% for project in projects %}
-                      {% if project.id == relatedProjectId %}
-                        <a href="{{ project.path }}">{{ project.title }}</a>
-                      {% endif %}
-                    {% endfor %}
-                  </li>
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-            <li class="related-project all-projects-link">
-              <a href="/projects">Selected Projects</a>
-            </li>
-          </ul>
-        </section>
-        {% endif %}
       </div>
+
+      {% if not hideSeeMore %}
+      <section class="project-more">
+        <h2>See also</h2>
+        <ul>
+          {% for project in projects %}
+            {% if project.title == title %}
+              {% for relatedProjectId in project.relatedProjects %}
+                <li class="related-project">
+                  {% for project in projects %}
+                    {% if project.id == relatedProjectId %}
+                      <a href="{{ project.path }}">{{ project.title }}</a>
+                    {% endif %}
+                  {% endfor %}
+                </li>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          <li class="related-project all-projects-link">
+            <a href="/projects">Selected Projects</a>
+          </li>
+        </ul>
+      </section>
+      {% endif %}
     </div>
     <div class="project-border broider"></div>
   </body>

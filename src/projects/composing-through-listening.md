@@ -2,6 +2,7 @@
 layout: project.njk
 title: Composing Through Listening
 url: https://wfmu.org/playlists/shows/119916
+layoutType: two-column
 ---
 <figure class="figure-medium">
   <img src="https://maison-ona.com/img/works/116_slideshow_4.jpg" alt="photo of Luc Ferrari's score for Presque Rien">
