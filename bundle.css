@@ -1,35 +1,24 @@
 body {
-  margin: 0;
-  /* font-family: Courier New; */
+  background-color: #f0f0e6;
   font-family: 'Ibarra Real Nova';
   font-weight: 300;
   font-size: 16px;
-  /* line-height: 1.4em; */
   line-height: 20px;
+  margin: 0;
   scroll-behavior: smooth;
-}
-
-.index {
-  padding-bottom: 100vh;
-}
-
-.index .content {
-  background-color: #f0f0e6;
-  border: 2px solid #000;
-  margin: 10px;
-  padding: 20px;
 }
 
 section {
   margin: 30px auto;
-  max-width: 768px;
+  max-width: 680px;
 }
 
-h1, .project h1 a {
+h1, h1 a {
   border-bottom: none;
   line-height: 34px;
   font-size: 30px;
   font-weight: 300;
+  margin: 0 20px 0 0;
   text-decoration: none;
 }
 
@@ -40,9 +29,10 @@ header a {
 }
 
 h2 {
-  border-bottom: 2px solid #000;
   font-weight: 300;
   margin: 30px auto 10px;
+  margin: 40px 0 40px;
+  text-align: center;
 }
 
 h2 a {
@@ -65,19 +55,13 @@ figure {
 
 figure img {
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 figure figcaption {
   flex-basis: 100%;
   font-size: 12px;
   line-height: 14px;
-  /* padding: 0 10px 0; */
-}
-
-.project figure figcaption a {
-  /* font-size: 10px; */
-  border-bottom: none;
-  text-decoration: underline;
 }
 
 figure img {
@@ -96,8 +80,8 @@ figure .flex-half {
   flex-grow: 0;
 }
 
-.project figure.two-two,
-.project figure.three-one {
+figure.two-two,
+figure.three-one {
   max-width: 100%;
 }
 
@@ -109,10 +93,8 @@ figure.two-two img,
 figure.three-one img {
   flex-basis: 45%;
   flex-grow: 1;
-  /* border-radius: 20px 20px; */
   height: auto;
   margin: 10px;
-  /* padding: 10px; */
   max-height: 350px;
   min-width: 40%;
   height: auto;
@@ -156,15 +138,8 @@ a {
   margin: 20px auto;
 }
 
-.project {
-  background-color: #f0f0e6;
-  /* margin: 20px; */
-  /* max-width: 768px; */
-  /* min-height: calc(100vh - 100px); */
-  /* padding: 10px; */
-}
 
-.project .top-spacer {
+.top-spacer {
   margin-top: 10px; 
 }
 
@@ -181,7 +156,7 @@ a {
   margin: 10px;
 }
 
-.project header {
+header {
   align-items: flex-end;
   border-bottom: solid black 1px;
   display: flex;
@@ -190,33 +165,27 @@ a {
   justify-content: space-between;
   margin: auto auto 10px;
   padding-bottom: 10px;
-  width: 768px;
+  width: 100%;
+  max-width: 680px;
   position: relative;
 }
 
-.project a {
+.content-wrapper a {
   text-decoration: none;
   border-bottom: solid grey 2px;
   margin: 0;
-  /* word-break: break-all; */
 }
 
-.project .projects-list a {
+.content-wrapper figcaption a {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+.content-wrapper .project-more a {
   border-bottom: none;
 }
 
-.project h1 {
-  margin: 0 20px 0 0;
-}
-
-.project h2 {
-  border: none;
-  margin: 40px 0 40px;
-  text-align: center;
-}
-
 .project .content {
-  /* overflow: auto; */
   left: 10px;
   position: absolute;
   overflow-x: hidden;
@@ -225,7 +194,6 @@ a {
   bottom: 20px;
   right: 10px;
   padding: 30px;
-  /* max-width: 768px; */
 }
 
 .project .content .content-wrapper {
@@ -233,7 +201,6 @@ a {
   max-width: 768px;
   position: relative;
   text-align: justify;
-  /* margin-right: calc(50% - 50px); */
 }
 
 .project.one-column .content .content-wrapper {
@@ -250,19 +217,13 @@ a {
   width: 100%;
 }
 
-.project p {
-  /* line-height: 16px; */
-}
-
 .project blockquote {
   margin: auto;
   border-bottom: solid black 1px;
   border-top: solid black 1px;
   clear: both;
   display: flex;
-  /* text-align: center; */
   font-style: italic;
-  /* overflow: auto; */
   padding: 0 20px;
   text-align: justify;
 }
@@ -289,48 +250,33 @@ a {
   content: '↪';
 }
 
-@media screen and (min-width: 400px) {
-  .index .content {
-    max-width: 480px;
-  }
-
-  .project {
-    margin: 20px auto;
-    /* max-width: calc(100vw - 100px); */
-  }
-
-  .project .content {
-    margin: 10px auto;
-  }
-
-  .project .figure-medium {
-    margin: auto;
-    /* float: left; */
-    /* margin-right: 30px; */
-    max-width: 300px;
-    width: 100%;
-  }
+.project {
+  margin: 20px auto;
 }
 
-@media screen and (min-width: 600px) {
-  /* .project blockquote {
-    margin: auto 40px;
-  } */
+.project .content {
+  margin: 10px auto;
+}
+
+.project .figure-medium {
+  margin: auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
   .project .content .content-wrapper {
     margin: auto;
-    max-width: 430px;
+    max-width: 400px;
     position: relative;
-    text-align: justify;
-    margin-right: calc(50% - 50px);
+    margin-left: calc((100% - 680px) / 2);
   }
 
-  /* about section */
   .project.two-column .figure-medium { 
     position: absolute;
-    left: calc(100% + 40px);
+    left: calc(100% + 30px);
     margin: auto;
-    /* left: auto; */
-    width: 280px;
+    width: 250px;
   }
 
   .project.two-column .figure-medium img {
@@ -340,27 +286,16 @@ a {
 
 @media print {
   img {
-    /* height: 300px; */
     max-width: 300px;
-    /* width: auto; */
     text-align: center;
     margin: auto;
-    /* height: 400px; */
-    /* max-width: 100%; */
-    /* width: auto; */
   }
 
   /* float is not supported in print */
   figure {
     float: none;
     margin: auto;
-    /* max-width: 200px; */
     text-align: center;
-    /* height: 400px;
-    max-height: 400px; */
-    /* position: absolute;
-    left: 0;
-    top: 0; */
   }
 }
 
@@ -391,7 +326,6 @@ a {
 }
 
 figure.three-one img.full-width {
-  /* min-width: 100%; */
   max-width: 100%;
   width: 100%;
   flex-basis: 100%;
@@ -400,13 +334,11 @@ figure.three-one img.full-width {
 figure.three-one img {
   flex-basis: 30%;
   min-width: 30%;
-  /* max-width: 45%; */
   flex-grow: 2;
 }
 
 figure.two-two img {
   flex-basis: 45%;
   min-width: 45%;
-  /* max-width: 45%; */
   flex-grow: 2;
 }

@@ -35,6 +35,8 @@ I've worked as an engineering lead at _New York Magazine_ and _Vox Media_, devel
 
 As a product-driven technologist, I'm broadly interested in the synthesis of technical affordances with human needs and desires. I approach software design and org charts as technologies for managing complexity, and believe that "perfect systems" exists only in their allure ... when you're holding a hammer, everything becomes a nail.
 
+[View engineering resume](/engineering-resume)
+
 <h3 id="creative-practice">Creative Practice</h3>
 
 <figure class="figure-medium">
@@ -54,6 +56,8 @@ This emphasis on embodied experience and materiality also forms the root of my c
 </figure>
 
 In my web-based practice, I'm interested in ways in which [interfaces construct users](https://academic.oup.com/mit-press-scholarship-online/book/23681/chapter-abstract/184886856?redirectedFrom=fulltext&login=false), and I've developed a number of personal projects that experiment with user interfaces as strategies for using technology in more expansive ways: [the phone as a frog](https://frogchor.us), [AI as an interface to an archive](/midi-archive), and [weaving music](/weaving). Just as poetry may undo the instrumentalization of language [2], poetic interfaces may allow us to move beyond software that is merely instrumental and instrumentalizing.
+
+[View artist resume](/artist-resume)
 
 <!-- My web-based projects have been a means for exploring the use of technology to augment the senses, a map to a real, or surreal, territory. This is most apparent in _Frog Chorus_, where a chorus of frogs emerges from smartphones, becoming an audible environment that reorients the user towards an expansive act of listening. -->
 <!-- Over the years, my fantasies/images around art-making have shifted, feeling the burn of the impulse to create a formal system, or machine. Now it's more about a kind of opening up, balancing logical and material concerns. -->
