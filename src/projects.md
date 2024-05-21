@@ -27,7 +27,7 @@ The British psychoanalyst Christopher Bollas writes that "the aesthetic moment i
 <h3 id="work">Professional Practice</h3>
 
 <figure class="figure-medium" style="transform:rotate(0deg)">
-  <img src="/public/strategist-screenshot.png" alt="Screenshot of The Strategist">
+  <img src="/public/strat-screenshot.png" alt="Screenshot of The Strategist">
   <figcaption>Screenshot of <em>The Strategist</em> homepage on May 18, 2024</figcaption>
 </figure>
 
