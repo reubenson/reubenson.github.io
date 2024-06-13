@@ -291,11 +291,35 @@ header {
     margin: auto;
   }
 
+  .project header {
+    margin-top: -30px;
+  }
+
+  .project .content-wrapper {
+    width: 100%;
+    max-width: 100%;
+    /* margin: 80px 0 0; */
+    margin-top: 180px;
+  }
+
+  .project .content-wrapper p {
+    width: 320px;
+  }
+
+  .project figure {
+    position: absolute;
+    margin: 0;
+    right: -50px;
+  }
   /* float is not supported in print */
-  figure {
+  /* figure {
     float: none;
     margin: auto;
     text-align: center;
+  } */
+
+  .project-more {
+    display: none;
   }
 }
 
