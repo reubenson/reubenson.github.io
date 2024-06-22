@@ -196,6 +196,13 @@ header {
   padding: 30px;
 }
 
+.project .content p:first-child {
+  width: 680px;
+  font-size: 20px;
+  line-height: 28px;
+  margin-top: 20px;
+}
+
 .project .content .content-wrapper {
   margin: auto;
   max-width: 768px;
@@ -264,12 +271,20 @@ header {
   width: 100%;
 }
 
+.no-border, .no-border * {
+  border: none;
+}
+
 @media screen and (min-width: 768px) {
   .project .content .content-wrapper {
     margin: auto;
     max-width: 400px;
     position: relative;
     margin-left: calc((100% - 680px) / 2);
+  }
+
+  .project .content p:first-child {
+    margin: 40px 20px;
   }
 
   .project.two-column .figure-medium { 
@@ -320,6 +335,10 @@ header {
 
   .project-more {
     display: none;
+  }
+
+  .project .content p:first-child {
+    margin: 40px 20px;
   }
 }
 
