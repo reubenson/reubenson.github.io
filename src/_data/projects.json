@@ -127,6 +127,22 @@
     ]
   },
   {
+    "id": "collaborations",
+    "title": "Collaborations",
+    "description": "",
+    "year": 2019,
+    "url": "",
+    "path": "/projects/collaborations",
+    "tagline": "Collaborations with Eli Keszler and James Hoff",
+    "selected": true,
+    "categories": ["on-grid", "publications"],
+    "relatedProjects": [
+      "frog-chorus",
+      "midi-archive",
+      "meandering-printing"
+    ]
+  },
+  {
     "id": "hobo-ufo",
     "title": "HOBO UFO",
     "description": "",
@@ -134,7 +150,7 @@
     "url": "https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/",
     "path": "/projects/hobo-ufo",
     "tagline": "Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a>",
-    "selected": true,
+    "selected": false,
     "categories": ["on-grid", "publications"],
     "relatedProjects": [
       "frog-chorus",

@@ -10,7 +10,7 @@ body {
 
 section {
   margin: 30px auto;
-  max-width: 680px;
+  max-width: 720px;
 }
 
 h1, h1 a {
@@ -62,6 +62,7 @@ figure figcaption {
   flex-basis: 100%;
   font-size: 12px;
   line-height: 14px;
+  text-align: center;
 }
 
 figure img {
@@ -166,7 +167,7 @@ header {
   margin: auto auto 10px;
   padding-bottom: 10px;
   width: 100%;
-  max-width: 680px;
+  max-width: 720px;
   position: relative;
 }
 
@@ -197,7 +198,7 @@ header {
 }
 
 .project .content p:first-child {
-  width: 680px;
+  width: 100%;
   font-size: 20px;
   line-height: 28px;
   margin-top: 20px;
@@ -216,7 +217,7 @@ header {
 }
 
 .project.two-column .content-wrapper {
-  min-height: 450px;
+  min-height: 680px;
 }
 
 .project .figure-medium {
@@ -276,15 +277,21 @@ header {
 }
 
 @media screen and (min-width: 768px) {
+  body {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
   .project .content .content-wrapper {
     margin: auto;
-    max-width: 400px;
+    max-width: 440px;
     position: relative;
-    margin-left: calc((100% - 680px) / 2);
+    margin-left: calc((100% - 720px) / 2);
   }
 
   .project .content p:first-child {
     margin: 40px 20px;
+    width: 640px;
   }
 
   .project.two-column .figure-medium { 
@@ -300,10 +307,15 @@ header {
 }
 
 @media print {
-  img {
+  .figure-medium img,
+  .figure-medium figcaption {
     max-width: 300px;
     text-align: center;
     margin: auto;
+  }
+
+  .figure-body {
+    margin-left: 0;
   }
 
   .project header {
@@ -317,21 +329,21 @@ header {
     margin-top: 180px;
   }
 
-  .project .content-wrapper p {
+  .project .content-wrapper p,
+  .figure-body {
     width: 320px;
   }
 
-  .project figure {
+  .project .figure-medium {
     position: absolute;
     margin: 0;
     right: -50px;
   }
-  /* float is not supported in print */
-  /* figure {
-    float: none;
-    margin: auto;
-    text-align: center;
-  } */
+
+  .project .figure-medium figcaption {
+    margin-top: 20px;
+    /* max-width: 400px; */
+  }
 
   .project-more {
     display: none;
@@ -339,6 +351,11 @@ header {
 
   .project .content p:first-child {
     margin: 40px 20px;
+    max-width: calc(100% - 40px);
+  }
+
+  .soundcloud-embed {
+    display: none;
   }
 }
 

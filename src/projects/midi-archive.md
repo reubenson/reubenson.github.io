@@ -5,9 +5,11 @@ url: https://reubenson.com/midi-archive/
 layoutType: two-column
 
 ---
-<figure class="figure-medium">
-  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/projects/midi-archive-screenshot.jpg" alt="screenshot of MIDI Archive website">
-  <!-- <figcaption></figcaption> -->
+_**[MIDI Archive]({{ url }})**_ is an exploratory prototype of a generative AI model presented alongside an archive of MIDI music on the early web, which it is trained on.
+
+<figure class="figure-medium no-border">
+  <img src="/public/midi-archive-model.png" alt="screenshot of MIDI Archive website">
+  <figcaption>Screen capture of <em>MIDI Archive</em></figcaption>
 </figure>
 
 <!-- MIDI Archive uses machine learning and archiving to give the visitor various entrypoints into the world of music on the early web. -->
