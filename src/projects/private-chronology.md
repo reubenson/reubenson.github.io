@@ -4,6 +4,8 @@ title: Private Chronology
 layoutType: two-column
 # url: /private-chronology
 ---
+**Private Chronology** was a small music label operated from Boston, MA between 2009 and 2015, with 10 editions published in cassette, vinyl, and digital formats.
+
 <figure class="figure-medium">
   <img src="https://s3.amazonaws.com/privatechronology/assets/DSCF3880.JPG" alt="image of cassette tape" class="flex-half">
   <img src="https://s3.amazonaws.com/privatechronology/assets/PC09_5.JPG" alt="image of cassette tape" class="flex-half">
@@ -12,7 +14,7 @@ layoutType: two-column
   </figcaption>
 </figure>
 
-**Private Chronology** was a small music label operated from Boston, MA between 2009 and 2015, with 10 editions published in cassette, vinyl, and digital formats. In additional to publishing music by Reuben Son, the label also released music by associated artists, such as <a href="https://en.wikipedia.org/wiki/Xela_(musician)">Xela</a>, <a href="https://mmucci.bandcamp.com/">M. Mucci</a>, <a href="https://rubbercitynoise.bandcamp.com/album/grandeur-weakness">The North Sea</a>, <a href="https://patrickemm.bandcamp.com/">Patrick Emm</a>, <a href="https://cpark.bandcamp.com/">CPARK</a>, and <a href="https://ashatamirisa.net/">Asha Tamirisa</a>
+In additional to publishing music by Reuben Son, the label also released music by associated artists, such as <a href="https://en.wikipedia.org/wiki/Xela_(musician)">Xela</a>, <a href="https://mmucci.bandcamp.com/">M. Mucci</a>, <a href="https://rubbercitynoise.bandcamp.com/album/grandeur-weakness">The North Sea</a>, <a href="https://patrickemm.bandcamp.com/">Patrick Emm</a>, <a href="https://cpark.bandcamp.com/">CPARK</a>, and <a href="https://ashatamirisa.net/">Asha Tamirisa</a>
 
 <h3>Catalogue</h3>
 <ul>

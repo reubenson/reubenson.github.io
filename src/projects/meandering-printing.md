@@ -3,8 +3,7 @@ layout: project.njk
 title: Meandering Ceramic 
 layoutType: two-column
 ---
-*Meandering Ceramics* represent my experimentation with 3D-printing porcelain, using this technology to frame an inquiry into site-specificity and the expression of the line.
-<!-- These ceramic pieces are the results of a two-week workshop on 3D-printing ceramics at The Haystack Mountain School of Crafts. -->
+*Meandering Ceramics* represent my experimentation with 3D-printing porcelain, using this technology to frame an inquiry into site-specificity and the expression of the line via the Greek meander pattern.
 
 <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/3D-printing.jpeg" alt="WASP 3D printer in action">

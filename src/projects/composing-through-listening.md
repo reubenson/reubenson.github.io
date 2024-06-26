@@ -4,12 +4,14 @@ title: Composing Through Listening
 url: https://wfmu.org/playlists/shows/119916
 layoutType: two-column
 ---
+_**[Composing Through Listening]({{ url }})**_ is a one-hour radio broadcast composed for the [WFMU](https://wfmu.org/), historic free-form community radio station based in Jersey City.
+
 <figure class="figure-medium">
   <img src="https://maison-ona.com/img/works/116_slideshow_4.jpg" alt="photo of Luc Ferrari's score for Presque Rien">
   <figcaption>Luc Ferrari's score for <em>Presque Rien No. 1</em>, courtesy of <a href="https://maison-ona.com/catalog-0059ONA">Maison ONA</a></figcaption>
 </figure>
 
-_**[Composing Through Listening]({{ url }})**_ is a one-hour radio broadcast composed for the historic free-form community radio station, [WFMU](https://wfmu.org/). This program was composed, mixed, and edited specifically for radio, presenting a survey of works by composers who deal with the phenomenology of listening directly in their compositional practices. 
+This program was composed, mixed, and edited specifically for radio, presenting a survey of works by composers who deal with the phenomenology of listening directly in their compositional practices. 
 
 At one extreme, Jakob Ullmann and Luc Ferrari explore composition at the threshold of being reduced to almost nothing. In his liner notes, Ullmann often suggests to "set the volume so as to just barely mask the ambient sounds in the room".
 

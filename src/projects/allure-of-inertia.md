@@ -4,12 +4,13 @@ title: Allure of Inertia
 url: https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024
 layoutType: two-column
 ---
+_Music for holding the capacity to change, for letting go of state. Breaking forms and surfaces, following water to weather. Speakers diffusing fragrances of sound. From open windows and sliding glass doors to the ocean … amor fati._
+
 <figure class="figure-medium">
   <img src="/public/allure-of-inertia.jpeg" alt="show flyer by NTS">
   <figcaption>Background photo for show flyer taken of ceramic 'barnacle' temporarily installed by the Atlantic Ocean</figcaption>
 </figure>
 
-"_Music for holding the capacity to change, for letting go of state. Breaking forms and surfaces, following water to weather. Speakers diffusing fragrances of sound. From open windows and sliding glass doors to the ocean … amor fati._"
 
 Mix for NTS Radio, on the theme of _metamorphosis_.
 

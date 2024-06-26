@@ -5,7 +5,7 @@ url: https://reubenson.com/midi-archive/
 layoutType: two-column
 
 ---
-_**[MIDI Archive]({{ url }})**_ is an exploratory prototype of a generative AI model presented alongside an archive of MIDI music on the early web, which it is trained on.
+_**[MIDI Archive]({{ url }})**_ is an exploratory prototype of a generative AI model presented alongside a bespoke archive of MIDI music on the early web, which forms the corpus the model is trained on.
 
 <figure class="figure-medium no-border">
   <img src="/public/midi-archive-model.png" alt="screenshot of MIDI Archive website">

@@ -202,6 +202,7 @@ header {
   font-size: 20px;
   line-height: 28px;
   margin-top: 20px;
+  font-style: italic;
 }
 
 .project .content .content-wrapper {
@@ -290,8 +291,8 @@ header {
   }
 
   .project .content p:first-child {
-    margin: 40px 20px;
-    width: 640px;
+    margin: 40px 0px;
+    width: 720px;
   }
 
   .project.two-column .figure-medium { 
@@ -349,10 +350,10 @@ header {
     display: none;
   }
 
-  .project .content p:first-child {
-    margin: 40px 20px;
-    max-width: calc(100% - 40px);
-  }
+  /* .project .content p:first-child { */
+    /* margin: 40px 20px; */
+    /* max-width: ; */
+  /* } */
 
   .soundcloud-embed {
     display: none;

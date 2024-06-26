@@ -3,7 +3,7 @@ layout: project.njk
 title: Collaborations
 layoutType: two-column
 ---
-Collaborations with artists Eli Keszler and James Hoff have included software development, live performance, and installation work.
+Collaborations with artists Eli Keszler and James Hoff have included contributions in software development, live performance, and installation work.
 
 <figure class="figure-medium">
   <img src="/public/echea-installation.jpg" alt="installation view of Echea sculpture">

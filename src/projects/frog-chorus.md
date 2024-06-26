@@ -21,5 +21,5 @@ The app uses the built-in speaker and microphone to have devices listen to and i
 
 This project is dedicated to the memory of the Dutch physicist and sound artist, Felix Hess, whose _[Electronic Sound Creatures](https://isea-archives.siggraph.org/art-events/electronic-sound-creatures-by-felix-hess/)_ work was a direct inspiration for this project. 
 
-On March 20, 2024, a listening event honoring the vernal equinox was presented in conjunction with [Fruitful School](https://fruitful.school/blog/2024-03-13.html). Herein, thirty participants placed their phones down, and let the phones sing to each other as frogs, as the humans listened in and watched the sun set over the Hudson River.
+On March 20, 2024, a listening event honoring the vernal equinox was presented in conjunction with [Fruitful School](https://fruitful.school/blog/2024-03-13.html). On this occasion, thirty participants placed their phones down, and let the phones sing to each other as frogs, as the humans listened in and watched the sun set over the Hudson River.
 
