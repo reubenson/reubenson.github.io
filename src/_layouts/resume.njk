@@ -163,6 +163,9 @@ title: Reuben Son
       {% if includeEngProjects %}
         {% renderFile "./src/_includes/resume/eng-projects.md" %}  
       {% endif %}
+      {% if includeTalks %}
+        {% renderFile "./src/_includes/resume/talks.md" %}  
+      {% endif %}
     </section>
   </body>
 </html>

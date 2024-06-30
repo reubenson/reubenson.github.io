@@ -7,8 +7,9 @@ includePerformances: true
 includeProjects: true
 includeResidencies: true
 includeEmployment: true
-includeEducation: true
+includeEducation: false
 includeExhibitions: true
+includeTalks: true
 ---
 # {{ title }}
 

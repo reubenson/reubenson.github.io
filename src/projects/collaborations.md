@@ -19,6 +19,6 @@ With James Hoff, I produced a standalone piece of software that uses realtime au
   <figcaption>Still image from <a href="https://youtu.be/ERbfczLUr-A" target="_blank">HOBO UFO (v. Chernobyl)</a></figcaption>
 </figure>
 
-Hobo UFO debuted at the [London ICA in 2016](https://archive.ica.art/whats-on/ica-associates-pan-present-james-hoff-lee-gamble-steve-warwick-nora-khan-tcf/index.html), and has been presented internationally at galleries and music festivals alike. Many versions of this project were produced from 2016 onwards, culminating in a video published by [PAN records](https://p-a-n.org/releases/) in 2019.
+The resulting project, _Hobo UFO_, debuted at the [London ICA in 2016](https://archive.ica.art/whats-on/ica-associates-pan-present-james-hoff-lee-gamble-steve-warwick-nora-khan-tcf/index.html), and has been presented internationally at galleries and music festivals alike. Many versions of this project were produced from 2016 onwards, culminating in a video published by [PAN](https://p-a-n.org/releases/) in 2019.
 
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/ERbfczLUr-A?si=80VyUmYJLXUADiYM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->

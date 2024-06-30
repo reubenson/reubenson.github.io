@@ -21,8 +21,7 @@ In the end, this project attempts a fairly straightforward translation of weavin
   <figcaption>The seeds of this project were formed when first encountering grid notation for weaving patterns in Anni Albers' <em>On Weaving</em></figcaption>
 </figure>
 
-These different mode offer different expressions of the underlying harmonic structure, which this app leaves intentionally simplified (as a selection from a variety of chords), such that the resulting music is an expression of an underlying harmonic structure.
-
+These various modes offer different expressions of the underlying harmonic structure of the chord selected to go with the weaving pattern.
 
 In sharing this software, my hope is that you too may find it useful for harmonic and rhythmic research and discovery, sharing some similarity in intent to the historical [Triadex Muse](https://till.com/articles/muse/).
 

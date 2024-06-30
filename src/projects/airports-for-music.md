@@ -6,7 +6,7 @@ layoutType: two-column
 ---
 <!-- ## {{ subtitle }} -->
 
-_**[Airports for Music]({{ url }})**_ is an ongoing collection of compositions that juxtapose location recordings with synthetic sound, produced under the metaphor of sound as a fragrance drifting gently from speakers into the air surrounding the listener.
+_**[Airports for Music]({{ url }})**_ is an ongoing collection of compositions that juxtapose location recordings with synthetic sound, produced under the metaphor of sound as a fragrance drifting gently from speakers into the air.
 
 <figure class="figure-medium">
   <img src="https://nina.imgix.net/https%3A%2F%2Fwww.arweave.net%2FrjEf_KNl44Bt_N6l--G03ZoRiqOWFOO-z2XG46b9DPw?ixlib=js-3.8.0&width=1200&fm=webp&s=f21a383c96e8a5efd68abc9af3805a2b" alt="Cover art for the second edition of Airports for Music">

@@ -24,7 +24,7 @@ Over the course of a two-week workshop at The Haystack Mountain School of Crafts
   <figcaption>Installation centerpiece</figcaption>
 </figure>
 
-As the centerpiece piece in my final show, I assembled a mixed-media sculpture that included wood boards, a rock, a piece of seaweed, a barnacle shell, an unfired 3D-printed sculpture, and a ceramic imprint, produced by grating porcelain dust over another printed sculpture used as a stencil.The resulting sculpture plays with the idea of a print (in its different contexts) and gestures at notions of land art (Robert Smithson’s Spiral Jetty, porcelain as earthen material), which came full circle when I brought the brittle, un-fired ceramic sculpture (what we call greenware) to dissolve into the ocean the hour before finally departing from campus.
+As the centerpiece piece in my final show, I assembled a mixed-media sculpture that included wood boards, a rock, a piece of seaweed, a barnacle shell, an unfired 3D-printed sculpture, and a ceramic imprint, produced by grating porcelain dust over another printed sculpture used as a stencil. The resulting sculpture plays with the idea of a print (in its different contexts) and gestures at notions of land art (Robert Smithson’s Spiral Jetty, porcelain as earthen material), which came full circle when I brought the brittle, un-fired ceramic sculpture (what we call greenware) to dissolve into the ocean the hour before finally departing from campus.
 
 <!-- <figure class="figure-medium">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-submerged-2.jpg">
