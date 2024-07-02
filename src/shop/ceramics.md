@@ -4,8 +4,8 @@ title: Travel Vases
 layoutType: two-column
 ---
 <figure class="figure-medium">
-  <img src="/public/pocket-vase.jpg" alt="photo of a pocket vase on a windowsill" class="">
-  <figcaption>Photo of my first pocket vase (2019), sitting on the windowsill of an apartment rental in Stockholm while I was attending a <a href="/projects/weaving" target="_blank">music studio residency at EMS</a></figcaption>
+  <img src="/public/pocket-vase.jpg" alt="photo of a travel vase on a windowsill">
+  <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm while I was attending a <a href="/projects/weaving" target="_blank">music studio residency at EMS</a></figcaption>
 </figure>
 
 These miniature vases are designed to be easy to travel with, the idea being that wherever you go, you might find a wildflower to pluck and arrange. I would suggest that the simple act of noticing and collecting wildflowers while you travel is a way of finding a home within dislocation, a small bulwark against the sometimes overwhelming feeling of being in a radically new environment.

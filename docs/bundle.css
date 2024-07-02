@@ -231,9 +231,13 @@ header {
 }
 
 #product-listings iframe {
-  max-width: fit-content;
+  /* max-width: fit-content; */
+  border: solid black 1px !important;
+  border-radius: 5px;
+  flex: 1 0 40%; /* flex-grow, flex-shrink, flex-basis */
+  min-width: 200px;
   /* height: auto !important; */
-  height: 360px !important;
+  /* height: 360px !important; */
   /* width: 250px; */
 }
 
@@ -351,7 +355,7 @@ header {
 
   #product-listings iframe {
     max-width: 220px;
-    height: 300px !important;
+    /* height: 300px !important; */
   }
 }
 
