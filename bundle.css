@@ -71,7 +71,7 @@ figure img {
   border: 1px solid #000;
   height: auto;
   margin-top: 10px;
-  padding: 1px;
+  padding: 0;
   width: 100%;
 }
 
@@ -186,7 +186,7 @@ header {
   border-bottom: none;
 }
 
-.project .content {
+.content {
   left: 10px;
   position: absolute;
   overflow-x: hidden;
@@ -205,11 +205,36 @@ header {
   font-style: italic;
 }
 
-.project .content .content-wrapper {
+.shop-page .content-wrapper p:first-child {
+  width: 100%;
+  font-size: 20px;
+  line-height: 28px;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+.content .content-wrapper {
   margin: auto;
-  max-width: 768px;
+  max-width: 720px;
   position: relative;
   text-align: justify;
+}
+
+#product-listings {
+  margin: auto;
+  max-width: 720px !important;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#product-listings iframe {
+  max-width: fit-content;
+  /* height: auto !important; */
+  height: 360px !important;
+  /* width: 250px; */
 }
 
 .project.one-column .content .content-wrapper {
@@ -221,7 +246,8 @@ header {
   min-height: 680px;
 }
 
-.project .figure-medium {
+.project .figure-medium,
+.shop-page .figure-medium {
   margin: auto auto 20px;
   width: 100%;
 }
@@ -267,7 +293,8 @@ header {
   margin: 10px auto;
 }
 
-.project .figure-medium {
+.project .figure-medium,
+.shop-page .figure-medium {
   margin: auto;
   max-width: 400px;
   width: 100%;
@@ -277,33 +304,54 @@ header {
   border: none;
 }
 
+.shop #product-listings {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  max-width: 100% !important;
+}
+
 @media screen and (min-width: 768px) {
   body {
     font-size: 18px;
     line-height: 22px;
   }
 
-  .project .content .content-wrapper {
+  .project .content .content-wrapper,
+  .shop-page .content .content-wrapper {
     margin: auto;
     max-width: 440px;
     position: relative;
     margin-left: calc((100% - 720px) / 2);
   }
 
-  .project .content p:first-child {
+  .project .content p:first-child,
+  .shop-page .content p:first-child {
     margin: 40px 0px;
     width: 720px;
   }
 
-  .project.two-column .figure-medium { 
+  .project.two-column .figure-medium,
+  .shop-page.two-column .figure-medium { 
     position: absolute;
     left: calc(100% + 30px);
     margin: auto;
     width: 250px;
   }
 
-  .project.two-column .figure-medium img {
+  .project.two-column .figure-medium img,
+  .shop-page.two-column .figure-medium img {
     margin-top: 0;
+  }
+
+  #product-listings {
+    width: 720px !important;
+  }
+
+  #product-listings iframe {
+    max-width: 220px;
+    height: 300px !important;
   }
 }
 
