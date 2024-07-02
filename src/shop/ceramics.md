@@ -2,6 +2,7 @@
 layout: shop-page.njk
 title: Travel Vases
 layoutType: two-column
+socialImg: /public/pocket-vase.jpg
 ---
 <figure class="figure-medium">
   <img src="/public/pocket-vase.jpg" alt="photo of a travel vase on a windowsill">
