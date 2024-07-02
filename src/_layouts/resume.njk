@@ -154,6 +154,9 @@ title: Reuben Son
       {% if includeResidencies %}
         {% renderFile "./src/_includes/resume/residencies.md" %}
       {% endif %}
+      {% if includeTalks %}
+        {% renderFile "./src/_includes/resume/talks.md" %}  
+      {% endif %}
       {% if includeEmployment %}
         {% renderFile "./src/_includes/resume/employment.md" %}  
       {% endif %}
@@ -162,9 +165,6 @@ title: Reuben Son
       {% endif %}
       {% if includeEngProjects %}
         {% renderFile "./src/_includes/resume/eng-projects.md" %}  
-      {% endif %}
-      {% if includeTalks %}
-        {% renderFile "./src/_includes/resume/talks.md" %}  
       {% endif %}
     </section>
   </body>

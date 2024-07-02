@@ -6,7 +6,7 @@ layoutType: one-column
 ---
 <!-- Ceramics, for me, privilege doing over thinking, feeling over knowing,  -->
 
-In ceramics, I mostly work with intuitive forms, striations of color built up into surface. It seems to have grown out of my sound art practice, which had increasingly become focused on notions of materiality.
+In ceramics, I mostly work with intuitive forms, striations of color built up into surface. It seems to have grown out of my sound art practice, which has increasingly become focused on notions of materiality.
 
 {% renderFile "./src/ceramics/greatest-hits.md" %}
 

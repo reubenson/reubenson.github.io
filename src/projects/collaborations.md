@@ -10,7 +10,7 @@ Collaborations with artists Eli Keszler and James Hoff have included contributio
   <figcaption>Photo taken during installation of the <em>Echea</em> sculpture</figcaption>
 </figure>
 
-With Eli Keszler, I've contributed across a range of roles, ranging from [bassoon performance on Cold Pin](https://p-a-n.org/product/eli-keszler-cold-pin-pan-21/) (2011), Arduino microcontroller programming for installations at gallieries like the [MIT List Center](https://listart.mit.edu/exhibitions/open-tunings) (2015), [sound design and live spatialization for a performance at The Whitney](https://whitney.org/events/eli-keszler) (2019), and most recently, a [mixed media sculpture at Galerie Pepe](https://arc.net/l/quote/qgchhwmo) (2024).
+With Eli Keszler, I've contributed across a range of roles, ranging from [bassoon performance on _Cold Pin_](https://p-a-n.org/product/eli-keszler-cold-pin-pan-21/) (2011), Arduino microcontroller programming for installations at gallieries like the [MIT List Center](https://listart.mit.edu/exhibitions/open-tunings) (2015), [sound design and live spatialization for a performance at The Whitney](https://whitney.org/events/eli-keszler) (2019), and most recently, a [mixed media sculpture at Galerie Pepe](https://arc.net/l/quote/qgchhwmo) (2024).
 
 With James Hoff, I produced a standalone piece of software that uses realtime audio analysis to programmatically détourn Google Maps Street View into audio-reactive cinematography reminiscent of Michael Snow's [*La Région Centrale*](https://www.youtube.com/watch?v=uYr_SvIKKuI).
 
