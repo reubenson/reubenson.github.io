@@ -9,7 +9,7 @@ socialImg: /public/pocket-vase.jpg
   <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm while I was attending a <a href="/projects/weaving" target="_blank">music studio residency at EMS</a></figcaption>
 </figure>
 
-These miniature vases are designed to be easy to travel with, the idea being that wherever you go, you might find a wildflower to pluck and arrange. I would suggest that the simple act of noticing and collecting wildflowers while you travel is a way of finding a home within dislocation, a small bulwark against the sometimes overwhelming feeling of being in a radically new environment.
+I've gotten in the habit of bringing a small vase with me when I travel, the idea being that wherever you go, you might find a wildflower to pluck and arrange. I would suggest that the simple act of noticing and collecting wildflowers while you travel is a way of finding a home within dislocation, a small bulwark against the sometimes overwhelming feeling of being in a radically new environment.
 
 Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact, and has given me the framework to experiment rapidly with form and proportion. The process of glazing them falls under the rubric of experimentation as well, as these surfaces serve as tests for various glaze formulations and application methods. Thus, each vase is rather unique, and not expected to repeat within the series.
 
