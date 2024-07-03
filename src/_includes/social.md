@@ -1,4 +1,4 @@
-[e-mail](mailto:reubenson@gmail.com) ~ <a href="https://www.instagram.com/not_not_reuben" rel="me">instagram</a> ~ <a href="https://www.are.na/reuben-son" rel="me">are.na</a> ~ <a href="https://read.cv/not_not_reuben" rel="me">read.cv</a> ~ <a href="/shop/ceramics" rel="me">shoppe</a>
+[e-mail](mailto:reubenson@gmail.com) ~ <a href="https://www.instagram.com/not_not_reuben" rel="me">instagram</a> ~ <a href="https://www.are.na/reuben-son" rel="me">are.na</a> ~ <a href="https://read.cv/not_not_reuben" rel="me">read.cv</a> ~ <a href="/shop" rel="me">shoppe</a>
 
 <!-- [Mastodon](https://mastodon.social/@sonanze) -->
 <!-- [X](https://twitter.com/not_not_reuben) -->

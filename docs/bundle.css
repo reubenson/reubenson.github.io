@@ -231,14 +231,10 @@ header {
 }
 
 #product-listings iframe {
-  /* max-width: fit-content; */
   border: solid black 1px !important;
-  border-radius: 5px;
-  flex: 1 0 40%; /* flex-grow, flex-shrink, flex-basis */
+  border-radius: 2px;
+  flex: 1 0 40%;
   min-width: 200px;
-  /* height: auto !important; */
-  /* height: 360px !important; */
-  /* width: 250px; */
 }
 
 .project.one-column .content .content-wrapper {
