@@ -1,5 +1,17 @@
 [
   {
+    "id": "travel-vases",
+    "title": "Travel Vases",
+    "description": "",
+    "year": 2024,
+    "url": "/shop/",
+    "path": "/shop",
+    "tagline": "Pocket-sized ceramic vessesl for vacation wildflowers",
+    "selected": true,
+    "categories": [],
+    "relatedProjects": []
+  },
+  {
     "id": "midi-archive",
     "title": "MIDI Archive",
     "description": "",
