@@ -342,6 +342,7 @@ a {
 }
 
 .table-of-contents nav {
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -494,16 +495,13 @@ a {
   #product-listings iframe {
     max-width: 220px;
   }
+
+  .table-of-contents {
+    max-width: 100%;
+  }
 }
 
 @media screen and (min-width: 1180px) {
-  .table-of-contents {
-    /* max-width: 720px; */
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   #product-listings {
     width: 1024px !important;
     max-width: 1024px !important;
