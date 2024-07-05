@@ -235,10 +235,12 @@ a {
 }
 
 #product-listings iframe {
-  border: solid black 1px !important;
+  /* border: solid black 1px !important; */
   border-radius: 2px;
   flex: 1 0 40%;
   min-width: 200px;
+  filter: sepia(3%) hue-rotate(0);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2)
 }
 
 .project.one-column .content .content-wrapper {
