@@ -342,7 +342,7 @@ a {
 }
 
 .table-of-contents nav {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -440,6 +440,7 @@ a {
   z-index: 10;
   width: 30px;
   height: 30px;
+  max-width: 30px;
 }
 
 .toc-button:after {
