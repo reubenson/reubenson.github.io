@@ -3,6 +3,7 @@ layout: resume.njk
 title: Reuben Son
 includeEducation: true
 includeEngProjects: true
+includeTalks: true
 ---
 # {{ title }}
 
@@ -19,7 +20,7 @@ includeEngProjects: true
 #### Vox Media — Senior Software Engineer<span class="resume-item-date">11/2019 to 03/2021</span>
 - As team lead, architected and developed back-end service (Express API, Postgres, Redis, Elasticsearch) and front-end Vue application to centralize product information within the CMS, which increased affiliate revenue monetization by more than 50% and vastly improved editorial and business development workflows.
 - Led the launch of the award-winning redesign of _The Strategist_, as well as its UK-internationalized offshoot, cementing its position as a best-of-class source of product recommendations and contributing to a period of rapid growth in affiliate revenue (up 400% YoY).
-- Launched microservice that integrates with Amazon’s Product Advertising API to normalize data and update pricing data, improving both the reader experience and monetization of tens of thousands of products.
+- Launched microservice that integrates with Amazon’s Product API to normalize data and update pricing data, improving both the reader experience and monetization of tens of thousands of products.
 <!-- - Diversified affiliate revenue streams by extending affiliate partners integrations and increased general audience reach by 25% through automation of content distribution into Apple News, Facebook Instant Articles, and AMP. -->
 
 #### New York Magazine — Web Developer<span class="resume-item-date">03/2016 to 11/2019</span>

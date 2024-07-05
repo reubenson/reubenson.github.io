@@ -1,0 +1,10 @@
+<button class="toc-button" onclick="handleClick()"></button>
+
+<script>
+  function handleClick() {
+    const toc = document.querySelector('.table-of-contents');
+    const tocBtn = document.querySelector('.toc-button');
+    toc.classList.toggle('open');
+    tocBtn.classList.toggle('open');
+  }
+</script>

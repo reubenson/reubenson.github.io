@@ -16,6 +16,8 @@ title: Project Title
     {% include "broider.njk" %}
   </head>
   <body class="project {{ layoutType }}">
+    {% include "toc-button.njk" %}
+    {% include "table-of-contents.njk" %}
     <div class="top-spacer"></div>
     <div class="content">
       <header>
@@ -43,9 +45,9 @@ title: Project Title
               {% endfor %}
             {% endif %}
           {% endfor %}
-          <li class="related-project all-projects-link">
+          {# <li class="related-project all-projects-link">
             <a href="/projects">Selected Projects</a>
-          </li>
+          </li> #}
         </ul>
       </section>
       {% endif %}

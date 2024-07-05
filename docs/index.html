@@ -37,15 +37,21 @@
 
 </style>
 
+    <link rel="stylesheet" href="/bundle.css">
     <style type="text/css">
-      body {
+      .homepage {
         background-color: #f0f0e6;
         font-weight: 100;
-        font-family: Courier New;
-        letter-spacing: 1.15px;
         margin: 0;
-        text-align: center;
         width: 100%;
+      }
+
+      .homepage .cards {
+        font-family: Courier New;
+      }
+
+      .homepage .table-of-contents {
+        margin-top: 20px;
       }
 
       .project-border {
@@ -61,29 +67,30 @@
         margin: 10px;
       }
 
-      .content {
+      .cards .content {
         margin: auto;
         max-width: 600px;
         position: relative;
         overflow-x: hidden;
         padding: 0 20px;
+        letter-spacing: 1.15px;
       }
 
-      p {
+      .cards p {
         line-height: 1.3em;
         text-align: left;
       }
 
-      h1 a, h2 a {
+      .cards h1 a, h2 a {
         color: black;
         text-decoration: none;
       }  
 
-      ul {
+      .cards ul {
         padding: 0;
       }
 
-      li {
+      .cards li {
         font-weight: 100;
         font-size: 13px;
         list-style: none;
@@ -92,7 +99,7 @@
         text-decoration: none;
       }
 
-      li::before {
+      .cards li::before {
         font-size: 12px;
         font-family: serif;
         position: absolute;
@@ -144,14 +151,14 @@
       }
 
       .card.front h1 {
-        left: -81px;
+        left: -75px;
         text-align: center;
         transform: rotateZ(-90deg);
         top: 81px;
       }
 
       .card.back h1 {
-        right: -81px;
+        right: -75px;
         top: 81px;
         transform: rotateZ(90deg) scaleX(-1);
       }
@@ -255,7 +262,7 @@
         transform: scaleX(-1);
       }
 
-      .social {
+      .cards .social {
         
         display: inline;
         font-size: 10px;
@@ -265,10 +272,11 @@
         left: 0;
         margin: auto;
         right: 0;
+        text-align: center;
         z-index: 1;
       }
 
-      .social p {
+      .cards .social p {
         background: #f0f0e6;
         display: inline-block;
         margin: 5px;
@@ -283,7 +291,7 @@
         text-decoration: none;
       }
 
-      .glyph {
+      .cards .glyph {
         bottom: 27px;
         line-height: 40px;
         right: 16px;
@@ -293,12 +301,12 @@
         z-index: 1;
       }
 
-      .glyph a {
+      .cards .glyph a {
         text-decoration: none;
         color: #003000;
       }
 
-      .glyph img {
+      .cards .glyph img {
         height: 100%;
         display:inline-block;
         background: #003000;
@@ -306,7 +314,7 @@
         mask:url("/public/transparent.png") center/contain;
       }
 
-      .hidden {
+      .cards .hidden {
         display: none;
         visibility: hidden;
       }
@@ -360,15 +368,147 @@
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
-  <body>
+  <body class="homepage">
+    <button class="toc-button" onclick="handleClick()"></button>
+
+<script>
+  function handleClick() {
+    const toc = document.querySelector('.table-of-contents');
+    const tocBtn = document.querySelector('.toc-button');
+    toc.classList.toggle('open');
+    tocBtn.classList.toggle('open');
+  }
+</script>
+    <section class="table-of-contents">
+  <nav>
+    <a href="/">Home</a> | <a href="/about">About</a> | <a href="/shop">Shop</a> | <a href="/colophon">Colophon</a>
+  </nav>
+  <h2 class="projects-list-header">Table of Contents</h2>
+  <ul class="projects-list">
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/shop">Travel Vases</a></span>
+      <span class="project-index"><a href="/shop">1</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/shop">Pocket-sized ceramic vessels for vacation wildflowers</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/midi-archive">MIDI Archive</a></span>
+      <span class="project-index"><a href="/projects/midi-archive">2</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/midi-archive">ML model and archive of music on the early web</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/frog-chorus">Frog Chorus</a></span>
+      <span class="project-index"><a href="/projects/frog-chorus">3</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/frog-chorus">Summon a chorus of frogs from your phone</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/airports-for-music">Airports for Music</a></span>
+      <span class="project-index"><a href="/projects/airports-for-music">4</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/airports-for-music">Sound as fragrance</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/weaving">Weaving Music</a></span>
+      <span class="project-index"><a href="/projects/weaving">5</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/weaving">Sound as a woven textile</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/meandering-printing">Ceramic Meandering</a></span>
+      <span class="project-index"><a href="/projects/meandering-printing">6</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/meandering-printing">3D printing ceramics at Haystack Mountain School of Crafts</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/ceramics">Selected Ceramic Works</a></span>
+      <span class="project-index"><a href="/projects/ceramics">7</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/ceramics">Material explorations into surface and form</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/allure-of-inertia">Allure of Inertia</a></span>
+      <span class="project-index"><a href="/projects/allure-of-inertia">8</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/allure-of-inertia">Mix for NTS Radio</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/composing-through-listening">Composing Through Listening</a></span>
+      <span class="project-index"><a href="/projects/composing-through-listening">9</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/composing-through-listening">Radio broadcast for WFMU</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/collaborations">Collaborations</a></span>
+      <span class="project-index"><a href="/projects/collaborations">10</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/collaborations">Collaborations with Eli Keszler and James Hoff</a></span>
+      </li>
+      
+  
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/qcvg">QCVG</a></span>
+      <span class="project-index"><a href="/projects/qcvg">12</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/qcvg">Programmable modular synthesizer</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/private-chronology">Private Chronology</a></span>
+      <span class="project-index"><a href="/projects/private-chronology">13</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/private-chronology">DIY music label, exclusively distributed by Mimaroglu Music Sales</a></span>
+      </li>
+      
+  
+      
+  
+  </ul>
+</section>
+    
     <div class="cards">
       <div class="card-container">
         <div class="card front broider-cancel">
-          <h1><a href="/projects">Reuben Son</a></h1>
+          <h1><a href="/about">Reuben Son</a></h1>
           <div class="container">
-            <p><em>Makes <a href="/projects">software, sound, and ceramics</a></em>.</p>
+            <p><em>Makes <a href="/about">software, sound, and ceramics</a></em>.</p>
 <p>Based in NYC, and recently combined machine learning with music from the early web during <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">a residency at Recurse Center</a>.</p>
-<p>Currently <a href="/projects#work">looking for freelance or full-time employment as a creative technologist</a>!</p>
+<p>Currently <a href="/about#work">looking for freelance or full-time employment as a creative technologist</a>!</p>
 
           </div>
           <div class="social">
@@ -385,7 +525,7 @@
       <div class="card-container">
 
         <div class="card back broider-cancel">
-          <h1><a href="/projects">Reuben Son</a></h1>
+          <h1><a href="/about">Reuben Son</a></h1>
           <div class="glyph">
             <a href="https://frogchor.us" target="_blank">
               <img src="/public/frog-glyph.png">
@@ -412,7 +552,7 @@
           </div>
           <div class="social">
             <p>
-              last updated wednesday, july 3, 2024 ~ <a href="/colophon">colophon</a>
+              last updated friday, july 5, 2024 ~ <a href="/colophon">colophon</a>
             </p>
           </div>
           <div class="container-background"></div>

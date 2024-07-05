@@ -1,4 +1,5 @@
-body {
+body.project,
+body.shop-page {
   background-color: #f0f0e6;
   font-family: 'Ibarra Real Nova';
   font-weight: 300;
@@ -8,12 +9,13 @@ body {
   scroll-behavior: smooth;
 }
 
-section {
+.project .project-more {
   margin: 30px auto;
   max-width: 720px;
 }
 
-h1, h1 a {
+.project h1,
+.project h1 a {
   border-bottom: none;
   line-height: 34px;
   font-size: 30px;
@@ -22,30 +24,31 @@ h1, h1 a {
   text-decoration: none;
 }
 
-header a {
+.project header a {
   border-bottom: none;
   text-decoration: none;
   word-break: break-all;
 }
 
-h2 {
+.project h2,
+.shop-page h2 {
   font-weight: 300;
   margin: 30px auto 10px;
   margin: 40px 0 40px;
   text-align: center;
 }
 
-h2 a {
+.project h2 a {
   border-bottom: none;
   text-decoration: none;
 }
 
-h3 {
+.project h3 {
   border-bottom: 1px solid #000;
   font-weight: 300;
 }
 
-figure {
+.project figure {
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -135,10 +138,10 @@ a {
 }
 
 .projects-list-header {
+  margin: 30px auto 10px;
+  margin: 40px 0 40px;
   text-align: center;
-  margin: 20px auto;
 }
-
 
 .top-spacer {
   margin-top: 10px; 
@@ -157,7 +160,8 @@ a {
   margin: 10px;
 }
 
-header {
+.project header,
+.shop-page header {
   align-items: flex-end;
   border-bottom: solid black 1px;
   display: flex;
@@ -285,7 +289,7 @@ header {
   content: '↪';
 }
 
-.project {
+.project, .shop-page {
   margin: 20px auto;
 }
 
@@ -312,8 +316,145 @@ header {
   max-width: 100% !important;
 }
 
+.table-of-contents {
+  font-family: "Ibarra Real Nova", serif;
+  background-color: #f0f0e6;
+  display: none;
+  visibility: hidden;
+  width: 240px;
+  position: absolute;
+  left: 20px;
+  border: solid black 1px;
+  padding: 20px;
+  left: 0;
+  right: 0;
+  /* margin: 10px auto; */
+  margin: 20px 30px;
+  padding: 10px;
+  max-height: calc(100vh - 80px);
+  overflow: scroll;
+}
+
+.table-of-contents.open {
+  display: block;
+  visibility: visible;
+  z-index: 1;
+  /* margin: auto; */
+  border: none;
+  width: calc(100% - 80px);
+}
+
+.table-of-contents nav {
+  text-align: center;
+}
+
+.table-of-contents nav a {
+  /* border-bottom: solid grey 2px; */
+  /* text-decoration: none; */
+  padding: 0 5px;
+}
+
+.table-of-contents h1 {
+  font-size: 24px;
+}
+
+/* body {
+  background-color: #f0f0e6;
+} */
+
+.projects-list {
+  clear: both;
+}
+
+.table-of-contents .project-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  margin: 20px 0 20px;
+}
+
+.table-of-contents .project-title {
+  font-weight: 400;
+  padding-right: 5px;
+  position: absolute;
+  left: 0;
+}
+
+.table-of-contents .project-title a, .project-index a {
+  text-decoration: none;
+}
+
+.table-of-contents .project-index {
+  font-style: italic;
+  padding-left: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.table-of-contents .project-title, .project-index {
+  z-index: 1;
+  background-color: #f0f0e6;
+  top: -3px;
+}
+
+.table-of-contents .project-line {
+  border-bottom: 2px dotted black;
+  display: block;
+  position: absolute;
+  top: 9px;
+  width: 100%;
+}
+
+.table-of-contents .project-tagline {
+  font-style: italic;
+  margin-top: 20px;
+  top: 20px;
+}
+
+.table-of-contents .project-tagline a {
+  text-decoration: none;
+}
+
+.table-of-contents .project-tagline::after {
+  content: '↝';
+  margin-left: 5px;
+  font-family: math;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.table-of-contents li::before {
+  display: none;
+}
+
+/*  */
+.table-of-contents.open + .content {
+  filter: blur(10px);
+  transition: filter 0.9s ease;
+}
+
+.toc-button {
+  background-color: #f0f0e6;
+  right: 30px;
+  position: absolute;
+  top: 30px;
+  font-size: 20px;
+  border: none;
+  z-index: 10;
+}
+
+.toc-button:after {
+  content: '☰';
+}
+
+.toc-button.open:after {
+  content: '✕';
+}
+
 @media screen and (min-width: 768px) {
-  body {
+  body.project,
+  body.shop-page {
     font-size: 18px;
     line-height: 22px;
   }

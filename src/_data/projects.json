@@ -6,7 +6,7 @@
     "year": 2024,
     "url": "/shop/",
     "path": "/shop",
-    "tagline": "Pocket-sized ceramic vessesl for vacation wildflowers",
+    "tagline": "Pocket-sized ceramic vessels for vacation wildflowers",
     "selected": true,
     "categories": [],
     "relatedProjects": []
@@ -60,8 +60,24 @@
     ]
   },
   {
+    "id": "weaving-music",
+    "title": "Weaving Music",
+    "description": "",
+    "year": 2019,
+    "url": "https://reubenson.com/weaving",
+    "path": "/projects/weaving",
+    "tagline": "Sound as a woven textile",
+    "selected": true,
+    "categories": ["on-grid", "algorithm-audible"],
+    "relatedProjects": [
+      "airports-for-music",
+      "qcvg",
+      "private-chronology"
+    ]
+  },
+  {
     "id": "meandering-printing",
-    "title": "Meandering Ceramic Printing",
+    "title": "Ceramic Meandering",
     "description": "",
     "year": 2023,
     "url": "https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd",
@@ -120,22 +136,6 @@
       "allure-of-inertia",
       "frog-chorus",
       "airports-for-music"
-    ]
-  },
-  {
-    "id": "weaving-music",
-    "title": "Weaving Music",
-    "description": "",
-    "year": 2019,
-    "url": "https://reubenson.com/weaving",
-    "path": "/projects/weaving",
-    "tagline": "Sound as a woven textile",
-    "selected": true,
-    "categories": ["on-grid", "algorithm-audible"],
-    "relatedProjects": [
-      "airports-for-music",
-      "qcvg",
-      "private-chronology"
     ]
   },
   {
