@@ -239,7 +239,6 @@ a {
 
 #product-listings iframe {
   background-color: #f0f0e6;
-  /* border: solid black 1px !important; */
   border-radius: 2px;
   flex: 1 0 40%;
   min-width: 200px;
@@ -447,9 +446,9 @@ a {
   font-size: 20px;
   border: none;
   z-index: 10;
-  width: 30px;
-  height: 30px;
-  max-width: 30px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
 }
 
 .toc-button:after {
