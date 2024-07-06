@@ -328,16 +328,20 @@ a {
   display: none;
   visibility: hidden;
   width: 240px;
-  position: absolute;
+  position: fixed;
   left: 20px;
   padding: 20px;
   left: 0;
   right: 0;
-  margin: 20px 30px;
+  margin: auto;
   padding: 10px;
-  max-height: calc(100vh - 80px);
+  height: 100%;
+  max-height: calc(100% - 80px);
   max-width: 720px;
   overflow: scroll;
+  top: 0;
+  bottom: 0;
+  border: solid black 1px;
 }
 
 .table-of-contents.open {
