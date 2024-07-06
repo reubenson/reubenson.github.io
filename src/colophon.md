@@ -23,6 +23,8 @@ As I embrace the meander of life, I'm glad to have a website that meanders with 
 
 This website has been built with the [Eleventy](https://www.11ty.dev/) static site generator, and is deployed on Github Pages. Content has largely been written in markdown, and typeset in <span class="ibarra">Ibarra Real Nova</span>. The [shop](/shop) page has been created with a Shopify embed.
 
+Special thanks to [Laurel Schwulst](https://laurelschwulst.com/) for all the micro-hangs and big-picture conversations that helped guide the development of this site.
+
 Additional references and links:
 - [Wacław Szpakowski, _Rhythmical Lines_](https://www.theparisreview.org/blog/2017/02/15/rhythmical-lines/)
 - [Kristoffer Tjalve, _Colophon Web_](https://www.are.na/kristoffer-tjalve/colophon-web)

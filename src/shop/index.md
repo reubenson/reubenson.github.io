@@ -13,7 +13,7 @@ I've gotten in the habit of bringing a pocket-size vase with me when I travel, c
 
 Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They range from about 1.5 to 3 inches in height, and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
 
-For more photos of these vases out in the wild, check the <a href="/projects/travel-vases">travel vase gallery</a>, and don't hesitate to send me pictures of your own!
+You can also check out a collection of photos from friends and family of these vessels [out in the field](/projects/travel-vases), it's rather gratifying to see how people end up using these tiny pots :)
 <!-- , and has given me the framework to experiment rapidly with form and proportion. The process of glazing them falls under the rubric of experimentation as well, as these surfaces serve as tests for various glaze formulations and application methods.  -->
 <!-- They're subject to experimentations in form and glaze application, and not expected to repeat within the series. It's challenging to convey the size of these vessels in product photos, but they range from 1.5 to 3 inches tall. -->
 

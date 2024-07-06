@@ -4,7 +4,9 @@ title: Travel Vase Gallery
 layoutType: one-column
 hideSeeMore: true
 ---
-Photographs of travel vases from out in the field. Check out [the shop](/shop) to see current inventory!
+A photo gallery of travel vases out and about, sent by friends and family
+
+Check out [the shop](/shop) to see current inventory!
 
 <figure class="two-two">
   <img src="/public/travel-vase-laurel.jpg" class="double" alt="photo of laurel's travel vase">
