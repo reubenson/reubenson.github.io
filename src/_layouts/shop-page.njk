@@ -60,6 +60,7 @@ title: Project Title
             let randomColor;
             {% for ceramic in ceramics %}
               randomColor = Math.floor(Math.random() * 16777215).toString(16);
+              {# randomColor = Math.floor({{loop.index}} / {{ceramics|length}} * 16777215).toString(16); #}
 
               ui.createComponent('product', {
                 id: {{ceramic}},
@@ -100,6 +101,7 @@ title: Project Title
                         "position": "relative",
                         "z-index": "1",
                         "background-image": "url(/public/riso-maine.png)",
+                        "zoom": "0.5",
                         {# "box-shadow": "0px 0px 100px rgba(0, 0, 0, 1)" #}
                       },
                       "imgWrapper": {

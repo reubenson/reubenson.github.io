@@ -21,7 +21,7 @@ As I embrace the meander of life, I'm glad to have a website that meanders with 
 
 <div class="divider-line">✺ ✺ ✺</div>
 
-This website has been built with the [Eleventy](https://www.11ty.dev/) static site generator, and is deployed on Github Pages. Content has largely been written in markdown, and typeset in <span class="ibarra">Ibarra Real Nova</span>. The [shop](/shop) page has been created with Shopify, using their _buy button_ embed solution.
+This website has been built with the [Eleventy](https://www.11ty.dev/) static site generator, and is deployed on Github Pages. Content has largely been written in markdown, and typeset in <span class="ibarra">Ibarra Real Nova</span>. The [shop](/shop) page has been created with a Shopify embed.
 
 Additional references and links:
 - [Wacław Szpakowski, _Rhythmical Lines_](https://www.theparisreview.org/blog/2017/02/15/rhythmical-lines/)
