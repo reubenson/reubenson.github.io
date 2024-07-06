@@ -341,7 +341,6 @@ a {
   overflow: scroll;
   top: 0;
   bottom: 0;
-  border: solid black 1px;
 }
 
 .table-of-contents.open {
