@@ -44,10 +44,12 @@
 
 <script>
   function handleClick() {
+    const content = document.querySelector('.content');
     const toc = document.querySelector('.table-of-contents');
     const tocBtn = document.querySelector('.toc-button');
     toc.classList.toggle('open');
     tocBtn.classList.toggle('open');
+    content.classList.toggle('no-scroll');
   }
 </script>
     <section class="table-of-contents">
