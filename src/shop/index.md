@@ -22,7 +22,6 @@ P.S. I'm launching this shop the first week of July 2024, and shipping is curren
 If you'd like to keep up to date with the occasional shop update (a few mailings per year _at most_), sign up for my mailing list here:
 
 <div id="mc_embed_shell">
-  <!-- <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css"> -->
 <div id="mc_embed_signup">
   <form action="https://gmail.us17.list-manage.com/subscribe/post?u=b7633fa6a9f5102615176078a&amp;id=a831f2671d&amp;f_id=00cce8e3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
     <div id="mc_embed_signup_scroll"><h2>Subscribe to updates from my shop</h2>
