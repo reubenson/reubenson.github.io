@@ -30,8 +30,8 @@ body.shop-page {
   word-break: break-all;
 }
 
-.project h2,
-.shop-page h2 {
+.project .content h2,
+.shop-page .content h2 {
   font-weight: 300;
   margin: 30px auto 10px;
   margin: 40px 0 40px;
@@ -342,6 +342,11 @@ a {
   bottom: 0;
 }
 
+.table-of-contents > * {
+  max-width: 720px;
+  margin: auto;
+}
+
 .table-of-contents.open {
   display: block;
   visibility: visible;
@@ -358,9 +363,15 @@ a {
   padding: 0 5px;
 }
 
-.table-of-contents h1 {
-  font-size: 24px;
+.table-of-contents h2.projects-list-header {
+  text-align: center;
+  margin: 40px auto;
 }
+
+/* .table-of-contents h1 {
+  font-size: 24px;
+} */
+
 
 /* body {
   background-color: #f0f0e6;
@@ -440,9 +451,9 @@ a {
 
 .toc-button {
   background-color: #f0f0e6;
-  right: 31px;
+  right: 34px;
   position: absolute;
-  top: 31px;
+  top: 34px;
   font-size: 20px;
   border: none;
   z-index: 10;
