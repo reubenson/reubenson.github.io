@@ -1,5 +1,11 @@
 [
   {
+    "header": "<a href='/shop' target='_blank'>shop page launch</a>",
+    "content": "Pocket-size vases now in stock, perfect for arranging wildflowers on your summer travels",
+    "footer": "🌻 🏺",
+    "width": "230px"
+  },
+  {
     "header": "<a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>",
     "content": "Presenting at <a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>, hosted by the <a href='https://mao.si/en/' target='_blank'>Museum of Architecture and Design</a> (SI) on Friday September 20th, 2024",
     "footer": "Ljubljana, Slovenia",
