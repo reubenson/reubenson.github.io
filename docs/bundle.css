@@ -631,7 +631,6 @@ figure.two-two img {
   clear:left;
   gap: 10px;
   margin: 20px auto;
-  font-family:'Courier New', Courier, monospace;
   position: relative;
   width: 100%;
 }
@@ -642,10 +641,12 @@ figure.two-two img {
   flex-direction: row;
   justify-content: space-between;
   gap: 20px;
+  height: 35px;
 }
 
 #mc_embed_signup form {
   width: 100%;
+  font-family:'Courier New', Courier, monospace;
 }
 
 #mc_embed_signup input,
@@ -666,12 +667,12 @@ figure.two-two img {
 
 #mc_embed_signup div.mce_inline_error {
   background-color: transparent !important;
-  padding: 0;
+  padding: 0 !important;
   font-size: 14px;
   text-align: left;
   font-weight: normal;
   position: absolute;
-  top: 40px;
+  top: -20px;
   color: #6B0505 !important;
 }
 
@@ -692,4 +693,10 @@ figure.two-two img {
 #mc_embed_signup .refferal_badge,
 #mc_embed_signup h2 {
   display: none !important;
+}
+
+#mc_embed_signup .signup-description {
+  font-size: 12px;
+  font-weight: normal;
+  text-align: left;
 }

@@ -17,7 +17,7 @@ You can also check out a collection of photos from friends and family of these v
 
 * * *
 
-P.S. I'm launching this shop the first week of July 2024, and shipping is currently limited to within the U.S. If you'd like to keep up to date with the occasional shop update (a few mailings per year _at most_), sign up for my mailing list here:
+P.S. I'm launching this shop the second week of July 2024, and shipping is currently limited to within the U.S. If you'd like to keep up to date with updates, sign up for my mailing list below:
 
 <div id="mc_embed_shell">
 <div id="mc_embed_signup">
@@ -43,6 +43,6 @@ P.S. I'm launching this shop the first week of July 2024, and shipping is curren
       </div>
     </div>
   </form>
+  <span class="signup-description">(No more than a few mailings per year)</span>
 </div>
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='MSG';ftypes[5]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
-
