@@ -460,6 +460,7 @@ a {
   width: 44px;
   height: 44px;
   padding: 0;
+  cursor: pointer;
 }
 
 .toc-button:after {
