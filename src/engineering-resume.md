@@ -24,10 +24,10 @@ includeTalks: true
 <!-- - Diversified affiliate revenue streams by extending affiliate partners integrations and increased general audience reach by 25% through automation of content distribution into Apple News, Facebook Instant Articles, and AMP. -->
 
 #### New York Magazine — Web Developer<span class="resume-item-date">03/2016 to 11/2019</span>
+- Developed UI for launch of _New York Magazine_'s digital subscriptions checkout flow.
 - Reduced photo editor effort by 30% with a microservice to improve consistency in product images.
 - Overhauled the production of advertising units in Google Ad Manager to allow the ad-sales team to work with minimal input from product/dev.
 - Improved user-engagement reporting through a reimplementation of Google Analytics and GTM across the network of sites, reaching 40M unique visitors per month.
-- Contributed to launch of _New York Magazine_'s checkout flow for digital subscriptions.
 <!-- - Built 10+ custom interactives for editorial and branded content teams. -->
 
 #### M.I.T. — Technical Assistant<span class="resume-item-date">05/2009 to 07/2015</span>
