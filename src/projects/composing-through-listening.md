@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Composing Through Listening
+description: Radio broadcast for WFMU
 url: https://wfmu.org/playlists/shows/119916
 layoutType: two-column
 ---

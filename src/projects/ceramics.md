@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Selected Ceramic Works
+description: Material explorations into surface and form
 layoutType: one-column
 # url: https://reubenson.com/portfolio/ceramics/
 ---

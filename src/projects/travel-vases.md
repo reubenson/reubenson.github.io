@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Travel Vase Gallery
+description: Pocket-sized ceramic vessels for vacation wildflowers
 layoutType: one-column
 hideSeeMore: true
 ---

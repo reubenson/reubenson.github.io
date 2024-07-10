@@ -2,6 +2,7 @@
 layout: project.njk
 title: Frog Chorus
 subtitle: Web-app for summoning a chorus of frogs with your phone
+description: Summon a chorus of frogs from your phone
 url: https://frogchor.us
 layoutType: two-column
 ---

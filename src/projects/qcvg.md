@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: QCVG
+description: Programmable modular synthesizer
 layoutType: two-column
 ---
 The QCVG (Quad Control Voltage Generator) is a hardware and software package designed and developed for computerized control of an analogue modular synthesizer.

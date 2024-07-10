@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Private Chronology
+description: DIY music label, distributed by Mimaroglu Music Sales
 layoutType: two-column
 # url: /private-chronology
 ---

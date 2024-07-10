@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Allure of Inertia
+description: Mix for NTS Radio
 url: https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024
 layoutType: two-column
 ---

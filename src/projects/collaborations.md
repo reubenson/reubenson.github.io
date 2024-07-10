@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Collaborations
+descriptions: Collaborations with other artists
 layoutType: two-column
 ---
 Collaborations with artists Eli Keszler and James Hoff have included contributions in software development, live performance, and installation work.

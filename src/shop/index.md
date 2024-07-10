@@ -1,6 +1,7 @@
 ---
 layout: shop-page.njk
 title: Travel Vases
+description: Shop for ceramics and other goods made by Reuben Son
 layoutType: two-column
 socialImg: /public/pocket-vase.jpg
 ---

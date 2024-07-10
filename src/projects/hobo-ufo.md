@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: HOBO UFO
+description: Audio-reactive Street View built for James Hoff
 url: https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/
 layoutType: two-column
 ---

@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: MIDI Archive
+description: ML model and archive of music on the early web
 url: https://reubenson.com/midi-archive/
 layoutType: two-column
 

@@ -1,6 +1,7 @@
 ---
 layout: project.njk
 title: Airports for Music
+description: ML model and archive of music on the early web
 url: https://hubs.ninaprotocol.com/airportsformusic
 layoutType: two-column
 ---
