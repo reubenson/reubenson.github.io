@@ -7,8 +7,8 @@
     <title>Reuben Son</title>
     <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
-    <meta property="og:image" content="https://reubenson-portfiolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <meta property="og:image" content="https://reubenson-portfiolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -125,7 +125,7 @@
       .card {
         box-sizing: border-box;
         width: 100%;
-        padding-bottom: 228px;
+        
         margin: 10px auto;
         max-width: 400px;
         position: relative;
@@ -156,7 +156,9 @@
         left: -73px;
         text-align: center;
         transform: rotateZ(-90deg);
-        top: 81px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
       }
 
       .card.back h1 {
@@ -170,9 +172,9 @@
         letter-spacing: -1px;
         line-height: 15px;
         margin: 20px;
-        padding: 8px;
-        position: absolute;
-        height: calc(100% - 60px);
+        padding: 20px 8px 10px;
+        position: relative;
+        
         width: calc(100% - 55px);
         z-index: 1;
       }
@@ -180,10 +182,12 @@
       .container-background {
         border: solid black 1px;
         position: absolute;
-        height: calc(100% - 20px);
+        height: 100%;
+        
         margin: 10px;
         width: calc(100% - 20px);
         
+        top: -10px;
       }
 
       .card p {
@@ -270,7 +274,7 @@
         font-size: 10px;
         letter-spacing: normal;
         position: absolute;
-        bottom: -2px;
+        bottom: -13px;
         left: 0;
         margin: auto;
         right: 0;
@@ -329,7 +333,7 @@
         }
 
         .card-container {
-          height: 450px;
+          
         }
 
         .card {
@@ -518,9 +522,9 @@
         <div class="card front broider-cancel">
           <h1><a href="/about">Reuben Son</a></h1>
           <div class="container">
-            <p><em>Makes <a href="/about">software, sound, and ceramics</a></em>.</p>
-<p>Based in NYC, and recently combined machine learning with music from the early web during <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">a residency at Recurse Center</a>.</p>
-<p>Currently <a href="/about#work">looking for freelance or full-time employment as a creative technologist</a>!</p>
+            <p>Hi there!</p>
+<p>I’m a software engineer and creative technologist who is interested in the <a href="https://boards.greenhouse.io/notion/jobs/4973980003">Core Product engineering role at Notion</a>. I’ve spent much of my career working on a modular and component system for a CMS, and rather curious about Notion’s block data model!</p>
+<p>I’m currently transitioning out of a sabbatical, during which I’ve focused on designing and developing experimental/poetic user interfaces, and would love to chat more about Notion’s vision for how people produce and share documents on the web!</p>
 
           </div>
           <div class="social">
@@ -530,41 +534,6 @@
 <!-- <a href="https://www.linkedin.com/in/reubenson/" rel="me">LinkedIn</a> -->
 <!-- <a href="https://sonceramics.etsy.com/" rel="me">etsy</a> -->
 <!-- ~ <a href="https://special.fish/sonanze" rel="me">special.fish</a>  ~  -->
-          </div>
-          <div class="container-background"></div>
-        </div>
-      </div>
-      <div class="card-container">
-        <div class="card back broider-cancel">
-          <h1><a href="/about">Reuben Son</a></h1>
-          <div class="glyph">
-            <a href="https://frogchor.us" target="_blank">
-              <img src="/public/frog-glyph.png">
-            </a>
-          </div>
-          <div class="container">
-            <div class="card-quote" style="width: 230px">
-              
-              <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span>
-              
-                <header class="card-quote-header">
-                  <a href='/shop' target='_blank'>shop page launch</a>
-                </header>
-              
-              <p class="card-quote-content">
-                Pocket-size vases now in stock, perfect for arranging wildflowers on your summer travels
-              </p>
-              
-                <p class="card-quote-footer">
-                  🌻 🏺
-                </p>
-              
-            </div>
-          </div>
-          <div class="social">
-            <p>
-              last updated wednesday, july 10, 2024 ~ <a href="/colophon">colophon</a>
-            </p>
           </div>
           <div class="container-background"></div>
         </div>
