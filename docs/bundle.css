@@ -627,6 +627,56 @@ figure.two-two img {
   flex-grow: 2;
 }
 
+/* card page styles */
+.card-page .card {
+  min-height: 218px;
+  margin-bottom: 20px;
+}
+
+.card-page .cards .social {
+  bottom: -17px;
+}
+
+.card-page .card .container {
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin: auto 20px;
+  /* bottom: -17px; */
+}
+
+.card-page .social li {
+  list-style: none;
+  letter-spacing: normal;
+  line-height: 10px;
+  font-size: 10px;
+  /* display: inline; */
+  background: #f0f0e6;
+  display: inline;
+  margin: 5px;
+  margin-left: -12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 0;
+  text-align: center;
+  width: auto;
+}
+
+.card-page .social li::before {
+  content: '~';
+  padding-right: 10px;
+}
+
+.card-page .social li:first-child {
+  margin-left: 0;
+}
+
+.card-page .social li:first-child::before {
+  content: '';
+  padding: 0;
+}
+
 /* mailchimp styles */
 #mc_embed_signup {
   clear:left;

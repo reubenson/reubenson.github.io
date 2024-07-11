@@ -11,7 +11,7 @@ title: Reuben Son Homepage
     <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <meta property="og:image" content="https://reubenson-portfiolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg">
+    <meta property="og:image" content="/public/card_july2024.jpg">
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
     <link rel="stylesheet" href="/bundle.css">
@@ -76,11 +76,11 @@ title: Reuben Son Homepage
         text-decoration: none;
       }
 
-      .cards li::before {
+      {# .cards li::before {
         font-size: 12px;
         font-family: serif;
         position: absolute;
-      }
+      } #}
 
       {# card styling #}
       .cards {
@@ -357,7 +357,7 @@ title: Reuben Son Homepage
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
   </head>
-  <body class="homepage">
+  <body class="card-page homepage">
     {% include "toc-button.njk" %}
     {% include "table-of-contents.njk" %}
     {# {% include "table-of-contents.njk" %} #}
@@ -370,9 +370,12 @@ title: Reuben Son Homepage
           </div>
           <div class="social">
             {# {% renderFile './src/_includes/social.md' %} #}
-            <p>
-              <a href="mailto:reubenson@gmail.com">e-mail</a> ~ <a href="https://www.instagram.com/not_not_reuben" rel="me">instagram</a> ~ <a href="https://www.are.na/reuben-son" rel="me">are.na</a> ~ <a href="https://read.cv/not_not_reuben" rel="me">read.cv</a> ~ <a href="/engineering-resume" rel="me">resume</a>
-            </p>
+            <ul>
+              {% for social in socials %}
+                <li>{{ social }}</li>
+              {% endfor %}
+              {# <a href="mailto:reubenson@gmail.com">e-mail</a> ~ <a href="https://www.instagram.com/not_not_reuben" rel="me">instagram</a> ~ <a href="https://www.are.na/reuben-son" rel="me">are.na</a> ~ <a href="https://read.cv/not_not_reuben" rel="me">read.cv</a> ~ <a href="/engineering-resume" rel="me">resume</a> #}
+            </ul>
           </div>
           <div class="container-background"></div>
         </div>
