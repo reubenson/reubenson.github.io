@@ -637,13 +637,15 @@ figure.two-two img {
   bottom: -17px;
 }
 
-/* .card-page .card .container {
-  position: absolute;
+.card-page .card .container {
+  max-height: calc(100vh - 80px);
+  overflow: scroll;
+  /* position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  margin: auto 20px;
-} */
+  margin: auto 20px; */
+}
 
 .card-page .social li {
   list-style: none;
