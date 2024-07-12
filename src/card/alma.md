@@ -8,4 +8,4 @@ I'm a software engineer and creative technologist who is interested in the [EM r
 
 I'm currently transitioning out of a sabbatical, during which I've realigned myself around what I still find compelling about building software for the web. And as someone who has been in therapy since 2018, I can really relate to the challenges of accessing mental health services and navigating the complex web of compliance regulations around insurer-paid services.
 
-If you're open to it, I would love to get your thoughts on the business of mental health and your experience at Alma!
+If you're open to it, I would love to chat about your work at Alma and whether you might be able to help get my resume in front of the appropriate hiring manager!
