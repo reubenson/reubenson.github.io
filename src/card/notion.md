@@ -1,6 +1,7 @@
 ---
 layout: card.njk
 title: Reuben Son
+addressee: Notion
 ---
 Hi there! 
 
