@@ -2,30 +2,30 @@
 
 body {
   margin: 0;
+  background-color: #f0f0e6;
   padding: 0;
   scroll-behavior: smooth;
 }
 .content {
-  background-color: #f0f0e6;
-  /* border: 2px solid #000; */
   font-family: 'Courier New', Courier, monospace;
   font-weight: 100;
-  height: calc(100vh - 40px);
+  /* height: calc(100vh - 40px); */
   /* height: 100vh; */
   letter-spacing: .7px;
   line-height: 1.4em;
   /* margin: 20px 20px; */
+  margin: auto;
   overflow-y: scroll;
   padding: 20px 40px;
 }
 
 section {
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 }
 
 h1 {
   font-weight: 200;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   text-align: center;
   border-bottom: solid black 2px;
   padding: 10px 10px 30px;
@@ -57,8 +57,8 @@ figure {
 figure figcaption {
   /* min-width: 100%; */
   flex-basis: 100%;
-  font-size: .8em;
-  letter-spacing: .8px;
+  font-size: 16px;
+  /* letter-spacing: .8px; */
   line-height: 1.5em;
   padding: 10px 10px 0;
   text-align: justify;
@@ -74,7 +74,8 @@ figure img {
   border-radius: 20px 20px;
   height: auto;
   padding: 10px;
-  max-height: 350px;
+  max-height: calc(100vh - 270px);
+  /* max-height: 350px; */
   min-width: 40%;
   height: auto;
   object-fit: cover;
@@ -97,7 +98,7 @@ a {
 
 .splide {
   margin: auto;
-  max-width: 680px;
+  /* max-width: 680px; */
 }
 
 li.splide__slide {

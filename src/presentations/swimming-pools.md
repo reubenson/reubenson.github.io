@@ -1,0 +1,60 @@
+---
+layout: project-slides.njk
+title: How to use an empty swimming pool
+---
+# {{ title }}
+
+<section class="splide" aria-label="{{ title }}">
+  <div class="splide__track">
+		<ul class="splide__list">
+        <li class="splide__slide">
+        <figure class="splide__slide">
+          <img src="https://bloximages.chicago2.vip.townnews.com/tucson.com/content/tncms/assets/v3/editorial/f/26/f2664447-f36e-51ff-b127-00aa3a8ea92e/5c1be45e99f2e.image.jpg?resize=1200,870" alt="an empty swimming pool">
+          <figcaption>
+            The question at the top of every new yorker's mind this summer: what do I do with the empty swimming pool in my backyard?
+          </figcaption>
+        </figure>
+      </li>
+			<li class="splide__slide">
+        <figure>
+          <img src="https://www.breakingbad-locations.com/wp-content/uploads/2014/11/Breaking.Bad_.S05E09.1080p.mkv_000033260.jpg" alt="swimming pool as skate park">
+          <figcaption>
+            Load up an UberXL with 4-6 of your favorite skaters from Dimes Square
+          </figcaption>
+        </figure>
+      </li>
+	    <li class="splide__slide">
+        <figure>
+          <img src="https://i0.wp.com/www.urbangardensweb.com/wp-content/uploads/2017/08/garden_pool_closed_loop_garden_schematic_urbangardensweb.png" alt="swimming pool as greenhouse">
+          <figcaption>
+            Get in touch with your inner landscape architect / tilapia farmer
+          </figcaption>
+        </figure>
+      </li>
+      <li class="splide__slide">
+        <figure>
+          <img src="/public/swimming-pool-climbing-gym.webp" alt="swimming pool as climbing gym">
+          <figcaption>
+            Practice the art of touching vertically-arranged colored rocks
+          </figcaption>
+        </figure>
+      </li>
+      <li class="splide__slide">
+        <figure>
+          <img src="https://scenebygreen.com/wp-content/uploads/2023/03/videoscreenshot-file8lpv1bcwe8ss-vidcloud-5531.jpg?w=825&h=510&crop=1" alt="swimming pool as mural wall">
+          <figcaption>
+            Invite the cast members of Robert Altman's <em>Three Women</em> to come over and give your swimming pool the full mural treatment
+          </figcaption>
+        </figure>
+      </li>
+      <li class="splide__slide">
+        <figure>
+          <img src="https://hyperallergic-newspack.s3.amazonaws.com/uploads/2015/10/Bob-Bielecki-and-Bill-Viola-testing-systems-The-Talking-Drum-1982-Photo-Kira-Perov.jpg" alt="swimming pool as structure for sound art">
+          <figcaption>
+            Announce an open call for sound artists
+          </figcaption>
+        </figure>
+      </li>
+		</ul>
+  </div>
+</section>

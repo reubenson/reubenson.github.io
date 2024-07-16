@@ -1,6 +1,7 @@
 ---
 layout: card.njk
 title: Reuben Son
+addressee: Reuben Son
 socials:
     - https://reubenson.com
     - reubenson@gmail.com
