@@ -1,6 +1,6 @@
 ---
 layout: project-slides.njk
-title: How to use an empty swimming pool
+title: How to make the most of your empty swimming pool
 ---
 # {{ title }}
 
