@@ -18,7 +18,7 @@ You can also check out a collection of photos from friends and family of these v
 
 * * *
 
-P.S. I'm launching this shop the second week of July 2024, and shipping is currently limited to within the U.S. If you'd like to keep up to date with updates, sign up for my mailing list below:
+Please note that shipping is currently limited to the U.S. If you'd like to keep up to date with updates, sign up for my mailing list below:
 
 <div id="mc_embed_shell">
 <div id="mc_embed_signup">

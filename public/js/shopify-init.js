@@ -1,3 +1,9 @@
+/**
+ * @file Shopify Buy Button initialization script
+ * This might be overkill for behavior that won't likely change all that much in the future
+ * Note to self: consider deprecating and implementing a more declarative approach
+ */
+
 const WAIT_FOR = 2000;
 const LISTINGS_THRESHOLD_HEIGHT = 1000;
 const __T = 'MjM5ZGZhZmQ0YjNjN2NiZWMwZWY3ZWMzOTJjOWFlNTE=';
@@ -7,7 +13,8 @@ const __D = 'MjNjNDM2LTgyLm15c2hvcGlmeS5jb20=';
  * Show shop closed message
  */
 function showShopClosedMessage() {
-  const el = document.querySelector('#shop-closed')?.classList.remove('hidden');
+  document.querySelector('#shop-closed')?.classList.remove('hidden');
+  document.querySelector('#product-listings')?.classList.add('hidden');
 }
 
 /**
