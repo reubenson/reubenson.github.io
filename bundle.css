@@ -220,6 +220,11 @@ a {
   font-style: italic;
 }
 
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
 .content .content-wrapper {
   margin: auto;
   max-width: 720px;
