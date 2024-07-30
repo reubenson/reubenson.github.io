@@ -1,11 +1,7 @@
 /**
  * @file Shopify Buy Button initialization script
- * This might be overkill for behavior that won't likely change all that much in the future
- * Note to self: consider deprecating and implementing a more declarative approach
  */
 
-const WAIT_FOR = 2000;
-const LISTINGS_THRESHOLD_HEIGHT = 1000;
 const __T = 'MjM5ZGZhZmQ0YjNjN2NiZWMwZWY3ZWMzOTJjOWFlNTE=';
 const __D = 'MjNjNDM2LTgyLm15c2hvcGlmeS5jb20=';
 
@@ -18,39 +14,17 @@ function showShopClosedMessage() {
 }
 
 /**
- * Watch the selected element for height changes in
- * order to conditionally render the shop closed message
- * @param {string} selector
- */
-function handleShopClosedVisibility(selector) {
-  const element = document.querySelector(selector);
-  let timer;
-
-  const observer = new ResizeObserver((entries) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      showShopClosedMessage();
-    }, WAIT_FOR);
-
-    for (let entry of entries) {
-      const rect = entry.contentRect;
-
-      if (rect.height > LISTINGS_THRESHOLD_HEIGHT) {
-        observer.disconnect();
-        clearTimeout(timer);
-      }
-    }
-  });
-
-  observer.observe(element);
-}
-
-handleShopClosedVisibility('#product-listings');
-
-/**
  * Modified embed code for Shopify Buy Button
  */
 (function () {
+  const productIdsStr = document.getElementById('product-listings')?.getAttribute('data-product-ids')
+  const productIds = productIdsStr === '' ? [] : productIdsStr.split(',');
+
+  if (!productIds.length) {
+    showShopClosedMessage();
+    return;
+  }
+
   var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
     if (window.ShopifyBuy.UI) {
@@ -77,8 +51,6 @@ handleShopClosedVisibility('#product-listings');
     ShopifyBuy.UI.onReady(client).then(function (ui) {
       const productIds = document.getElementById('product-listings')?.getAttribute('data-product-ids').split(',') || [];
       let randomColor;
-
-      // console.log('productIds', productIds);
       
       for (let i in productIds ) {
         const productId = productIds[i];

@@ -98,7 +98,7 @@ figure.three-one img {
   flex-grow: 1;
   height: auto;
   margin: 10px;
-  max-height: 350px;
+  /* max-height: 350px; */
   min-width: 40%;
   height: auto;
   object-fit: cover;
@@ -227,7 +227,7 @@ a {
 
 .content .content-wrapper {
   margin: auto;
-  max-width: 720px;
+  max-width: 768px;
   position: relative;
   text-align: justify;
 }
@@ -279,10 +279,6 @@ a {
 
 .project blockquote p {
   padding: 0 20px;
-}
-
-.project figure {
-  max-width: 600px;
 }
 
 .project .project-more {
