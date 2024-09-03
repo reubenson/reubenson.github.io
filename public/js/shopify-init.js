@@ -2,8 +2,8 @@
  * @file Shopify Buy Button initialization script
  */
 
-const __T = 'MjM5ZGZhZmQ0YjNjN2NiZWMwZWY3ZWMzOTJjOWFlNTE=';
-const __D = 'MjNjNDM2LTgyLm15c2hvcGlmeS5jb20=';
+const __T = 'ZDQ1ZTc0OGIxMzA3MmMwMTViNjU1ODIwMjc0ZWRhNmM=';
+const __D = 'MDI0Nzc1LWFlLm15c2hvcGlmeS5jb20=';
 
 /**
  * Show shop closed message

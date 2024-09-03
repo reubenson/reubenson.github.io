@@ -1,6 +1,6 @@
 ### Selected Discography and Publications
 - <span class="resume-year">2024</span> *Allure of Inertia* — Radio program for NTS Radio ([link](https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024))
-- <span class="resume-year">2023</span> *Airports for Music* — Digital release on Nina Protocol ([link](https://hubs.ninaprotocol.com/airportsformusic/))
+- <span class="resume-year">2023</span> *Airports for Music* — Digital release on Nina Protocol ([link](https://www.ninaprotocol.com/hubs/airportsformusic))
 - <span class="resume-year">2022</span> *Composing Through Listening* — Radio program for WFMU ([link](https://wfmu.org/playlists/shows/119916))
 - <span class="resume-year">2019</span> *Hobo UFO v Chernobyl* — Digital release on PAN (credit: software engineer; [link](https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/))
 - <span class="resume-year">2015</span> *Still Sleeping* — Digital release on Private Chronology ([link](/private-chronology/10))
