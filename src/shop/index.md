@@ -21,21 +21,23 @@ You can also check out a collection of photos from friends and family of these v
 Please note that shipping is currently limited to the U.S. If you'd like to keep up to date with updates, sign up for my mailing list below:
 
 <div id="mc_embed_shell">
-<div id="mc_embed_signup">
-  <form action="https://gmail.us17.list-manage.com/subscribe/post?u=b7633fa6a9f5102615176078a&amp;id=a831f2671d&amp;f_id=00cce8e3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-    <div id="mc_embed_signup_scroll"><h2>Subscribe to updates from my shop</h2>
-      <!-- <div class="indicates-required"><span class="asterisk">*</span> indicates required</div> -->
-      <div class="mc-field-group">
+  <div id="mc_embed_signup">
+    <form action="https://gmail.us17.list-manage.com/subscribe/post?u=b7633fa6a9f5102615176078a&amp;id=a831f2671d&amp;f_id=00cce8e3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+      <div id="mc_embed_signup_scroll">
+        <h2>Subscribe to updates from my shop</h2>
+        <!-- <div class="indicates-required"><span class="asterisk">*</span> indicates required</div> -->
+        <div class="mc-field-group">
         <!-- <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label> -->
-        <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value="" placeholder="Enter email address"></div>
-    <div id="mce-responses" class="clear foot">
+        <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value="" placeholder="Enter email address">
+      </div>
+      <div id="mce-responses" class="clear foot">
         <div class="response" id="mce-error-response" style="display: none;"></div>
         <div class="response" id="mce-success-response" style="display: none;"></div>
-    </div>
-    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+      </div>
+      <div aria-hidden="true" style="position: absolute; left: -5000px;">
         /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
         <input type="text" name="b_b7633fa6a9f5102615176078a_a831f2671d" tabindex="-1" value="">
-    </div>
+      </div>
       <div class="optionalParent">
         <div class="clear foot">
           <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">

@@ -13,19 +13,8 @@ function showShopClosedMessage() {
   document.querySelector('#product-listings')?.classList.add('hidden');
 }
 
-/**
- * Modified embed code for Shopify Buy Button
- */
-(function () {
-  const productIdsStr = document.getElementById('product-listings')?.getAttribute('data-product-ids')
-  const productIds = productIdsStr === '' ? [] : productIdsStr.split(',');
-
-  if (!productIds.length) {
-    showShopClosedMessage();
-    return;
-  }
-
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+function loadShopifyProducts(productIds) {
+    var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
     if (window.ShopifyBuy.UI) {
       ShopifyBuyInit();
@@ -55,7 +44,6 @@ function showShopClosedMessage() {
       for (let i in productIds ) {
         const productId = productIds[i];
         randomColor = Math.floor(Math.random() * 16777215).toString(16);
-        console.log('productId', productId);
 
         ui.createComponent('product', {
           id: productId,
@@ -224,5 +212,25 @@ function showShopClosedMessage() {
       }
     });
   }
+}
+
+/**
+ * Modified embed code for Shopify Buy Button
+ */
+(function () {
+  
 })();
   
+document.addEventListener('DOMContentLoaded', function() {
+  const productIdsStr = document.getElementById('product-listings')?.getAttribute('data-product-ids')
+  const productIds = productIdsStr === '' ? [] : productIdsStr?.split(',');
+
+  if (!productIds.length) {
+    showShopClosedMessage();
+    return;
+  }
+
+  loadShopifyProducts(productIds);
+  // console.log('Document is fully loaded and parsed');
+  // initObserver(); // Call your function here
+});

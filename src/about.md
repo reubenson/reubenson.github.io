@@ -23,6 +23,8 @@ Irrespective of the medium, I'm interested in the interplay of phenomonologicall
 
 The British psychoanalyst Christopher Bollas writes that "the aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object" [1]. In our daily lives, these moments of transformative _caesura_ come unbeckoned, or not at all, and a life well-lived might be one in which the possibility of such moments feel close at hand.
 
+For more about this website, see [Colophon](/colophon).
+
 <!-- , which makes a compelling, if ambiguous attempt at describing with language the rare sense of fulfillment activated in a certain kind of engagement with a framgent of the world. -->
 
 <!-- Over the last decade, my energies have settled, through desire paths and streams, into software, sound, and ceramics. I would characterize my approach to these disciplines to be sculptural in a broad sense, in which the resulting object (experience) is dependent on the accretion of smaller, more intuitive decisions, as opposed to starting from a dogmatic schema and working backwards. -->
@@ -88,7 +90,5 @@ The projects below represent an incomplete index of my creative work between the
 <!-- > "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." <br/><br/> - Christopher Bollas, _The Shadow of the Object_ <br/><br/> ([✶✶ Passages](https://www.are.na/reuben-son/passages-m7zf9-4vnu4)) -->
 
 <!-- I have found that the locus of vitality exists in material engagement with the world, within only a loose framework of epistemology, a minimum viable ontology. Regarding this, I find myself somewhere in the continuum of Simone Weil, who wrote "[to work in order to eat, to eat in order to work [...] only the cycle contains the truth](https://theanarchistlibrary.org/library/simone-weil-gravity-and-grace#:~:text=%27Work%20makes%20us%20experience%20in,the%20cycle%20contains%20the%20truth.)", and Ray Peat, who wrote "[energy creates organization and structure](https://www.functionalps.com/blog/2011/04/23/energy-structure-and-carbon-dioxide-a-realistic-view-of-the-organism/#:~:text=energy%20creates%20organization%20and%20structure)".  -->
-
-For more about this website, see [Colophon](/colophon).
 
 If you'd like to support my work, please consider buying something from my [ceramics shop](/shop)!
