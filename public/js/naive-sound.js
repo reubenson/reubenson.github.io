@@ -34,6 +34,8 @@ async function createReverb(filepath, ctx) {
 }
 
 async function main () {
+  console.log('started');
+
   // start CSS transition
   const blurEl = document.querySelector('.content-wrapper');
   blurEl.style.filter = 'blur(100px)';
@@ -56,10 +58,11 @@ async function main () {
   // const reverbGainValue = 0.5;
   // const reverbDelay = 0.5;
 
-  // oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); 
-  oscillator.connect(gainNode);
-  gainNode.connect(reverb);
-  reverb.connect(audioCtx.destination);
+  
+  // oscillator.connect(gainNode);
+  // gainNode.connect(reverb);
+  // reverb.connect(audioCtx.destination);
+  oscillator.connect(audioCtx.destination);
 
   // Set initial gain value
   gainNode.gain.setValueAtTime(0, audioCtx.currentTime); // slow attack
@@ -73,6 +76,10 @@ async function main () {
 
   // Stop the oscillator after the duration
   oscillator.stop(audioCtx.currentTime + DURATION * 60);
+
+  console.log('oscillator', oscillator);
+  console.log('audioCtx.destination' , audioCtx.destination);
+
 
   // const reverbDecay = 0.5;
   // const reverbDelaySamples = reverbDelay * audioCtx.sampleRate;

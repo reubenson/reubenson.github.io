@@ -8,7 +8,7 @@ Your phone will play a single note. If it feels too loud or too quiet at first, 
 
 <div>
   <button id="naive-button" style="
-      background-color: transparent; margin: auto; text-align: center; width: 100%; padding: 10px; border-radius: 5px; font-family: 'Ibarra Real Nova'; font-size: 16px; cursor: pointer">
+      background-color: transparent; margin: auto; text-align: center; width: 100%; padding: 10px; border-radius: 5px; font-family: 'Ibarra Real Nova'; font-size: 16px; cursor: pointer; border: solid black 1px">
     Start
   </button>
 </div>
