@@ -77,10 +77,6 @@ async function main () {
   // Stop the oscillator after the duration
   oscillator.stop(audioCtx.currentTime + DURATION * 60);
 
-  console.log('oscillator', oscillator);
-  console.log('audioCtx.destination' , audioCtx.destination);
-
-
   // const reverbDecay = 0.5;
   // const reverbDelaySamples = reverbDelay * audioCtx.sampleRate;
   // const reverbDecaySamples = reverbDecay * audioCtx.sampleRate;
