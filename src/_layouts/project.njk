@@ -15,10 +15,16 @@ description: Project description
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:description" content="{{ description }}" />
-    <meta property="og:image" content="https://reubenson.com/public/card_july2024.jpg">
+    {# <meta property="og:image" content="https://reubenson.com/public/card_july2024.jpg"> #}
+    <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
+    <meta property="og:type" content="website" />
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
+    {% if scriptUrl %}
+      <script src="{{ scriptUrl | safe }}"></script>
+    {% endif %}
+    {# <script async src="/bundle.js"></script> #}
   </head>
   <body class="project {{ layoutType }}">
     {% include "toc-button.njk" %}
