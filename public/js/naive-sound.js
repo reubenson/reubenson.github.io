@@ -8,6 +8,8 @@ const HARMONICS = [8, 6, 10, 9, 4, 7, 12, 15, 20, 18];
 const MAX_GAIN = 0.2;
 const FADE_OUT_TIME = DURATION * 0.8;
 const FADE_DURATION = 0.25; // minutes
+let audioContext = null;
+// const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 let hasStarted = false;
 let buffer = null;
@@ -68,12 +70,12 @@ async function createReverb(filepath, ctx) {
 }
 
 async function main () {
-  if (hasStarted) return;
+  // if (hasStarted) return;
 
-  // initiate no-sleep
-  const noSleep = new NoSleep();
-  noSleep.enable();
-  console.log('no sleep enabled', noSleep)
+  // // initiate no-sleep
+  // const noSleep = new NoSleep();
+  // noSleep.enable();
+  // console.log('no sleep enabled', noSleep)
 
   // hide button
   // const startButton = document.getElementById('naive-button');
@@ -116,10 +118,17 @@ async function main () {
   gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + DURATION * 60); // units of seconds
 
   // Start the oscillator
+  audioCtx.resume();
   oscillator.start();
 
   // Stop the oscillator after the duration
-  oscillator.stop(audioCtx.currentTime + DURATION * 60);
+  // oscillator.stop(audioCtx.currentTime + DURATION * 60);
+
+  console.log('audioCtx', audioCtx);
+  audioContext = audioCtx;
+
+  audioCtx.onstatechange = () => console.log(audioCtx.state); // running
+
 
   // const reverbDecay = 0.5;
   // const reverbDelaySamples = reverbDelay * audioCtx.sampleRate;
@@ -147,14 +156,14 @@ document.addEventListener('DOMContentLoaded', function() {
   //   console.log('fade in closing')
   // }, FADE_OUT_TIME * MINUTE);
   
-  setTimeout(() => {
-    fadeInClosing();
-    fadeOutOpening();
-  }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
+  // setTimeout(() => {
+  //   fadeInClosing();
+  //   fadeOutOpening();
+  // }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
 
   startButton.addEventListener('click', main);
-  // startButton.addEventListener('touchstart', main);
-  startButton.addEventListener('touchend', main);
+  startButton.addEventListener('touchstart', main);
+  // startButton.addEventListener('touchend', main);
 });
 
 
