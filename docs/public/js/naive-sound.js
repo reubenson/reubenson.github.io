@@ -74,8 +74,8 @@ async function main () {
   console.log('no sleep enabled', noSleep)
 
   // hide button
-  const startButton = document.getElementById('naive-button');
-  startButton.style.opacity = .5;
+  // const startButton = document.getElementById('naive-button');
+  // startButton.style.opacity = .5;
 
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioCtx.createOscillator();
