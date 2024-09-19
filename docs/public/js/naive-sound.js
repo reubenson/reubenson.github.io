@@ -33,7 +33,7 @@ function fadeOutOpening() {
 
 function fadeInClosing() {
   const openingEl = document.querySelector('#opening-screen');
-  // openingEl.style.zIndex = -1;
+  openingEl.style.zIndex = -1;
   openingEl.style.display = 'none';
 
   const blurEl = document.querySelector('#opening-screen');
@@ -41,7 +41,7 @@ function fadeInClosing() {
   const closingEl = document.getElementById('closing-message');
   closingEl.classList.add('unblur');
   closingEl.style.display = 'block';
-  // closingEl.style.zIndex = 1;
+  closingEl.style.zIndex = 1;
 }
 
 function getRandomHarmonic() {
@@ -155,10 +155,10 @@ document.addEventListener('DOMContentLoaded', function() {
   //   console.log('fade in closing')
   // }, FADE_OUT_TIME * MINUTE);
   
-  // setTimeout(() => {
-  //   fadeInClosing();
-  //   fadeOutOpening();
-  // }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
+  setTimeout(() => {
+    fadeInClosing();
+    fadeOutOpening();
+  }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
 
   startButton.addEventListener('click', main);
   // startButton.addEventListener('touchstart', main);
