@@ -68,6 +68,11 @@ async function createReverb(filepath, ctx) {
 async function main () {
   if (hasStarted) return;
 
+  // initiate no-sleep
+  const noSleep = new NoSleep();
+  noSleep.enable();
+  console.log('no sleep enabled', noSleep)
+
   // hide button
   // const startButton = document.getElementById('naive-button');
   // startButton.style.display = 'none';
@@ -148,11 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
   startButton.addEventListener('click', main);
   // startButton.addEventListener('touchstart', main);
   startButton.addEventListener('touchend', main);
-
-  // initiate no-sleep
-  const noSleep = new NoSleep();
-  noSleep.enable();
-  console.log('no sleep enabled', noSleep)
 });
 
 
