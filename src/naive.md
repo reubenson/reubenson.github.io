@@ -22,7 +22,7 @@ scriptUrl2: /public/js/nosleep.js
   </div>
 </div>
 
-<div id="closing-message" style="filter: blur(100px); transition: filter 10s ease-in-out; height: 300px; position: absolute; left: 0; right: 0; bottom: 0; top: 0; margin: auto; z-index: -1;">
+<div id="closing-message" style="filter: blur(100px); transition: filter 10s ease-in-out; height: 300px; position: absolute; left: 0; right: 0; bottom: 0; top: 0; margin: auto; z-index: -1; background-color: transparent;">
   <p>"Audio is an ephemeral social architecture made of air"</p>
   <p>- Micah Silver, <em>Figures in Air</em></p>
   <p style="margin-top: 50px">This is an in initial experiment in using a web-based score for sound-making, which combines elements of user performance, text-based instruction, and web-native audio. If you would like to develop a piece within this framework, or have feedback, <a href="mailto:reubenson@gmail.com">send me an email!</a></p>

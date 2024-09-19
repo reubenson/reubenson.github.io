@@ -5,9 +5,12 @@ const REVERB_PATH = 'https://reubenson.com/weaving/Swede%20Plate%203.0s.wav';
 const BASE_FREQ = 16.357 * 2;
 // const HARMONICS = [5, 6, 8, 9];
 const HARMONICS = [8, 6, 10, 9];
-const MAX_GAIN = 0.3;
+const MAX_GAIN = 0.2;
 const FADE_OUT_TIME = DURATION * 0.8;
 const FADE_DURATION = 0.25; // minutes
+
+let hasStarted = false;
+let buffer = null;
 
 function cleanUpPage() {
   const tocButtonEl = document.querySelector('.toc-button');
@@ -47,24 +50,39 @@ async function createReverb(filepath, ctx) {
 
   // load impulse response from file
   let response = await fetch(filepath);
+  console.log('response', response);
   let arraybuffer = await response.arrayBuffer();
+  console.log('arraybuffer', arraybuffer);
+  const dataString = JSON.stringify(Array.from(new Uint8Array(arraybuffer)));
+  console.log('dataString', dataString);
   convolver.buffer = await ctx.decodeAudioData(arraybuffer);
+
+  // buffer = convolver.buffer;
+  buffer = arraybuffer;
+  console.log('buffer', JSON.stringify(arraybuffer));
+  console.log('arraybuffer', arraybuffer)
 
   return convolver;
 }
 
 async function main () {
+  if (hasStarted) return;
+
+  // hide button
+  const startButton = document.getElementById('naive-button');
+  startButton.style.display = 'none';
+
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioCtx.createOscillator();
   const frequency = BASE_FREQ * getRandomHarmonic();
   oscillator.type = 'sine';
   oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
 
-  try {
-    const reverb = await createReverb(REVERB_PATH, audioCtx)
-  } catch (error) {
+  // try {
+  //   const reverb = await createReverb(REVERB_PATH, audioCtx)
+  // } catch (error) {
     
-  }
+  // }
 
   const gainNode = audioCtx.createGain();
   // const reverb = audioCtx.createConvolver();
@@ -110,6 +128,8 @@ async function main () {
   // connect oscillator to reverb and destination
   // start oscillator on a timer
   // CSS transition also to fade page to black over five minutes
+
+  hasStarted = true;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -132,4 +152,5 @@ document.addEventListener('DOMContentLoaded', function() {
   // initiate no-sleep
   const noSleep = new NoSleep();
   noSleep.enable();
+  console.log('no sleep enabled')
 });
