@@ -66,7 +66,7 @@ async function createReverb(filepath, ctx) {
 }
 
 async function main () {
-  if (hasStarted) return;
+  // if (hasStarted) return;
 
   // initiate no-sleep
   const noSleep = new NoSleep();
