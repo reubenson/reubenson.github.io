@@ -36,6 +36,11 @@ module.exports = function(eleventyConfig) {
   // add RSS
   eleventyConfig.addPlugin(pluginRss);
 
+  // add no-sleep
+  eleventyConfig.addPassthroughCopy({
+      "./node_modules/@uriopass/nosleep.js/dist/NoSleep.min.js": "/public/js/nosleep.js"
+  });
+
   return {
     dir: {
       input: "src",

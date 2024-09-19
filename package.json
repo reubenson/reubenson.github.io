@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@uriopass/nosleep.js": "^0.12.2",
     "markdown-it": "^14.0.0"
   }
 }

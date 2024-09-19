@@ -24,6 +24,9 @@ description: Project description
     {% if scriptUrl %}
       <script src="{{ scriptUrl | safe }}"></script>
     {% endif %}
+    {% if scriptUrl2 %}
+      <script src="{{ scriptUrl2 | safe }}"></script>
+    {% endif %}
     {# <script async src="/bundle.js"></script> #}
   </head>
   <body class="project {{ layoutType }}">

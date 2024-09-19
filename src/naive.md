@@ -3,6 +3,7 @@ layout: project.njk
 title: ''
 hideSeeMore: true
 scriptUrl: /public/js/naive-sound.js
+scriptUrl2: /public/js/nosleep.js
 ---
 <div id="opening-screen">
   <p>
