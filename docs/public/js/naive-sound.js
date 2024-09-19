@@ -30,14 +30,16 @@ function fadeOutOpening() {
 }
 
 function fadeInClosing() {
-  // start CSS transition
+  const openingEl = document.querySelector('#opening-screen');
+  // openingEl.style.zIndex = -1;
+  openingEl.style.display = 'none';
+
   const blurEl = document.querySelector('#opening-screen');
   blurEl.style.filter = 'blur(100px)';
   const closingEl = document.getElementById('closing-message');
-  // closingEl.style.filter = 'blur(0px)';
   closingEl.classList.add('unblur');
   closingEl.style.display = 'block';
-  closingEl.style.zIndex = 1;
+  // closingEl.style.zIndex = 1;
 }
 
 function getRandomHarmonic() {
@@ -151,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
 
   startButton.addEventListener('click', main);
-  startButton.addEventListener('touchstart', main);
+  // startButton.addEventListener('touchstart', main);
   startButton.addEventListener('touchend', main);
 });
 
