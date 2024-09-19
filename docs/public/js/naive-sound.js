@@ -66,7 +66,7 @@ async function createReverb(filepath, ctx) {
 }
 
 async function main () {
-  // if (hasStarted) return;
+  if (hasStarted) return;
 
   // initiate no-sleep
   const noSleep = new NoSleep();
@@ -75,7 +75,7 @@ async function main () {
 
   // hide button
   const startButton = document.getElementById('naive-button');
-  startButton.style.opacity = 0;
+  startButton.style.opacity = .5;
 
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioCtx.createOscillator();
