@@ -5,7 +5,6 @@ const REVERB_PATH = 'https://reubenson.com/weaving/Swede%20Plate%203.0s.wav';
 const BASE_FREQ = 16.357 * 2;
 // const HARMONICS = [5, 6, 8, 9];
 const HARMONICS = [8, 6, 10, 9, 4, 7, 12, 15, 20, 18];
-// const HARMONICS = [18];
 const MAX_GAIN = 0.2;
 const FADE_OUT_TIME = DURATION * 0.8;
 const FADE_DURATION = 0.25; // minutes
@@ -76,7 +75,7 @@ async function main () {
 
   // hide button
   const startButton = document.getElementById('naive-button');
-  startButton.style.display = 'none';
+  startButton.style.opacity = 0;
 
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioCtx.createOscillator();
@@ -152,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
 
   startButton.addEventListener('click', main);
-  // startButton.addEventListener('touchstart', main);
+  startButton.addEventListener('touchstart', main);
   startButton.addEventListener('touchend', main);
 });
 

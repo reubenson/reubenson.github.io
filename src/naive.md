@@ -8,7 +8,9 @@ scriptUrl: /public/js/naive-sound.js
   <p style="font-style:italic;">
     River Song
 
-    Your phone will play a single note, which will slowly fade to silence over five minutes. If the volume is too quiet at first, adjust the volume to be louder and check if your phone is in silent mode. Take this note with you in your hand as you wander alongside the river. As your note disappears, you may hum or sing the note you still hear in the air.
+    Your phone will play a single note, which will slowly fade to silence over five minutes. If the volume is too quiet at first, adjust the volume to be louder and check if your phone is in silent mode. Take this note with you in your hand as you wander alongside the river.
+    
+    As your note disappears, you may hum or sing the note you still hear in the air.
   </p>
 
   <!-- <p>
@@ -17,7 +19,7 @@ scriptUrl: /public/js/naive-sound.js
 
   <div>
     <button id="naive-button" style="
-        background-color: transparent; margin: auto; text-align: center; width: 100%; padding: 10px; border-radius: 5px; font-family: 'Ibarra Real Nova'; font-size: 20px; cursor: pointer; border: solid black 1px; color: black;">
+        background-color: transparent; margin: auto; text-align: center; width: 100%; padding: 10px; border-radius: 5px; font-family: 'Ibarra Real Nova'; font-size: 20px; cursor: pointer; border: solid black 1px; color: black; transition: opacity 1s linear;">
       Start
     </button>
   </div>
