@@ -69,8 +69,8 @@ async function main () {
   if (hasStarted) return;
 
   // hide button
-  const startButton = document.getElementById('naive-button');
-  startButton.style.display = 'none';
+  // const startButton = document.getElementById('naive-button');
+  // startButton.style.display = 'none';
 
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioCtx.createOscillator();
@@ -147,7 +147,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
 
   startButton.addEventListener('click', main);
-  startButton.addEventListener('touchstart', main);
+  // startButton.addEventListener('touchstart', main);
+  startButton.addEventListener('touchend', main);
 
   // initiate no-sleep
   const noSleep = new NoSleep();
