@@ -6,7 +6,7 @@ scriptUrl: /public/js/naive-sound.js
 scriptUrl2: /public/js/nosleep.js
 ---
 <div id="opening-screen">
-  <p>
+  <p style="font-style:normal;">
     Your phone will play a single note, which will slowly fade to silence over five minutes. If the volume is too quiet at first, adjust the volume to be louder and check if your phone is in silent mode. As you notice your note getting more faint, replace the sound with your own voice by humming or singing, matching the pitch, at whatever volume feels comfortable to you. Think of this note as the exhale of your breath, starting and stopping in a rhythm that feels natural to you.
   </p>
 
