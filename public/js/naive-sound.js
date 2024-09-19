@@ -70,16 +70,16 @@ async function createReverb(filepath, ctx) {
 }
 
 async function main () {
-  // if (hasStarted) return;
+  if (hasStarted) return;
 
   // // initiate no-sleep
-  // const noSleep = new NoSleep();
-  // noSleep.enable();
-  // console.log('no sleep enabled', noSleep)
+  const noSleep = new NoSleep();
+  noSleep.enable();
+  console.log('no sleep enabled', noSleep)
 
   // hide button
-  // const startButton = document.getElementById('naive-button');
-  // startButton.style.opacity = .5;
+  const startButton = document.getElementById('naive-button');
+  startButton.style.opacity = 0;
 
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioCtx.createOscillator();
@@ -118,16 +118,15 @@ async function main () {
   gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + DURATION * 60); // units of seconds
 
   // Start the oscillator
-  audioCtx.resume();
   oscillator.start();
+  audioCtx.resume();
 
   // Stop the oscillator after the duration
   // oscillator.stop(audioCtx.currentTime + DURATION * 60);
 
-  console.log('audioCtx', audioCtx);
   audioContext = audioCtx;
 
-  audioCtx.onstatechange = () => console.log(audioCtx.state); // running
+  // audioCtx.onstatechange = () => console.log(audioCtx.state); // running
 
 
   // const reverbDecay = 0.5;
@@ -162,8 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // }, (FADE_OUT_TIME - FADE_DURATION) * MINUTE );
 
   startButton.addEventListener('click', main);
-  startButton.addEventListener('touchstart', main);
-  // startButton.addEventListener('touchend', main);
+  // startButton.addEventListener('touchstart', main);
+  startButton.addEventListener('touchend', main);
 });
 
 
