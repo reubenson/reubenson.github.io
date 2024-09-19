@@ -128,4 +128,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   startButton.addEventListener('click', main);
   startButton.addEventListener('touchstart', main);
+
+  // initiate no-sleep
+  const noSleep = new NoSleep();
+  noSleep.enable();
 });
