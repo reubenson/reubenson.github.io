@@ -56,7 +56,7 @@
 <script>
   function handleClick() {
     const content = document.querySelector('.content');
-    const toc = document.querySelector('.table-of-contents');
+    const toc = document.querySelector('body > .table-of-contents');
     const tocBtn = document.querySelector('.toc-button');
     toc.classList.toggle('open');
     tocBtn.classList.toggle('open');
@@ -68,7 +68,8 @@
     <a href="/">Home</a> | <a href="/about">About</a> | <a href="/shop">Shop</a>
      
   </nav>
-  <h2 class="projects-list-header">Table of Contents</h2>
+  <h2 class="table-of-contents-header">Table of Contents</h2>
+  <div class="projects-list-container">
   <ul class="projects-list">
   
       
@@ -184,6 +185,8 @@
       
   
   </ul>
+</div>
+
 </section>
     <div class="top-spacer"></div>
     <div class="content">
