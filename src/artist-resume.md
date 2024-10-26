@@ -6,7 +6,7 @@ includeDiscography: true
 includePerformances: true
 includeProjects: true
 includeResidencies: true
-includeEmployment: true
+# includeEmployment: true
 includeEducation: false
 includeExhibitions: true
 includeTalks: true
