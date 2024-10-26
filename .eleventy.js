@@ -46,6 +46,7 @@ module.exports = function(eleventyConfig) {
       input: "src",
       layouts: "_layouts",
       output: "docs"
-    }
+    },
+    markdownTemplateEngine: "njk",
   }
 };

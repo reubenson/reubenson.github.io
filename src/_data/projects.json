@@ -1,5 +1,19 @@
 [
   {
+    "id": "quiet-time",
+    "title": "Quiet Time",
+    "description": "",
+    "year": 2024,
+    "url": "",
+    "path": "/projects/quiet-time",
+    "tagline": "Lecture and performance at Naive Yearly 2024",
+    "selected": true,
+    "categories": [],
+    "relatedProjects": [
+      "frog-chorus"
+    ]
+  },
+  {
     "id": "travel-vases",
     "title": "Travel Vases",
     "description": "",

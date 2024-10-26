@@ -3,17 +3,6 @@
     <a href="/">Home</a> | <a href="/about">About</a> | <a href="/shop">Shop</a>
      {# | <a href="/colophon">Colophon</a> #}
   </nav>
-  <h2 class="projects-list-header">Table of Contents</h2>
-  <ul class="projects-list">
-  {% for project in projects %}
-      {% if project.selected %}
-      <li class="project-item">
-      <span class="project-title"><a href="{{ project.path }}">{{ project.title }}</a></span>
-      <span class="project-index"><a href="{{ project.path }}">{{ loop.index }}</a></span>
-      <span class="project-line"></span>
-      <span class="project-tagline"><a href="{{ project.path }}">{{ project.tagline | safe }}</a></span>
-      </li>
-      {% endif %}
-  {% endfor %}
-  </ul>
+  <h2 class="table-of-contents-header">Table of Contents</h2>
+  {% include "projects-list.njk" %}
 </section>

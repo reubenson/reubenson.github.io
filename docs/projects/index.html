@@ -4,11 +4,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reuben Son</title>
-    <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
+    <title>Projects</title>
+    <meta name="description" content="Project description">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
     <link rel="stylesheet" href="/bundle.css">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <meta property="og:title" content="Projects" />
+    <meta property="og:description" content="Project description" />
+    
+    <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
+    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -37,23 +42,47 @@
 
 
 </style>
-  
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
     
-    </style>
+    
+    
   </head>
-  <body class="project two-column">
+  <body class="project one-column">
+    <button class="toc-button" onclick="handleClick()"></button>
+
+<script>
+  function handleClick() {
+    const content = document.querySelector('.content');
+    const toc = document.querySelector('body > .table-of-contents');
+    const tocBtn = document.querySelector('.toc-button');
+    toc.classList.toggle('open');
+    tocBtn.classList.toggle('open');
+    content.classList.toggle('no-scroll');
+  }
+</script>
     <section class="table-of-contents">
   <nav>
-    <a href="/projects">About</a>
-    <a href="/about">Shop</a>
+    <a href="/">Home</a> | <a href="/about">About</a> | <a href="/shop">Shop</a>
+     
   </nav>
-  <h2 class="projects-list-header">Table of Contents</h2>
+  <h2 class="table-of-contents-header">Table of Contents</h2>
+  <div class="projects-list-container">
   <ul class="projects-list">
   
       
       <li class="project-item">
+      <span class="project-title"><a href="/projects/quiet-time">Quiet Time</a></span>
+      <span class="project-index"><a href="/projects/quiet-time">1</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/quiet-time">Lecture and performance at Naive Yearly 2024</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
       <span class="project-title"><a href="/shop">Travel Vases</a></span>
-      <span class="project-index"><a href="/shop">1</a></span>
+      <span class="project-index"><a href="/shop">2</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/shop">Pocket-sized ceramic vessels for vacation wildflowers</a></span>
       </li>
@@ -62,7 +91,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/midi-archive">MIDI Archive</a></span>
-      <span class="project-index"><a href="/projects/midi-archive">2</a></span>
+      <span class="project-index"><a href="/projects/midi-archive">3</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/midi-archive">ML model and archive of music on the early web</a></span>
       </li>
@@ -71,7 +100,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/frog-chorus">Frog Chorus</a></span>
-      <span class="project-index"><a href="/projects/frog-chorus">3</a></span>
+      <span class="project-index"><a href="/projects/frog-chorus">4</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/frog-chorus">Summon a chorus of frogs from your phone</a></span>
       </li>
@@ -80,7 +109,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/airports-for-music">Airports for Music</a></span>
-      <span class="project-index"><a href="/projects/airports-for-music">4</a></span>
+      <span class="project-index"><a href="/projects/airports-for-music">5</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/airports-for-music">Sound as fragrance</a></span>
       </li>
@@ -88,8 +117,17 @@
   
       
       <li class="project-item">
-      <span class="project-title"><a href="/projects/meandering-printing">Meandering Ceramic Printing</a></span>
-      <span class="project-index"><a href="/projects/meandering-printing">5</a></span>
+      <span class="project-title"><a href="/projects/weaving">Weaving Music</a></span>
+      <span class="project-index"><a href="/projects/weaving">6</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="/projects/weaving">Sound as a woven textile</a></span>
+      </li>
+      
+  
+      
+      <li class="project-item">
+      <span class="project-title"><a href="/projects/meandering-printing">Ceramic Meandering</a></span>
+      <span class="project-index"><a href="/projects/meandering-printing">7</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/meandering-printing">3D printing ceramics at Haystack Mountain School of Crafts</a></span>
       </li>
@@ -98,7 +136,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/ceramics">Selected Ceramic Works</a></span>
-      <span class="project-index"><a href="/projects/ceramics">6</a></span>
+      <span class="project-index"><a href="/projects/ceramics">8</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/ceramics">Material explorations into surface and form</a></span>
       </li>
@@ -107,7 +145,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/allure-of-inertia">Allure of Inertia</a></span>
-      <span class="project-index"><a href="/projects/allure-of-inertia">7</a></span>
+      <span class="project-index"><a href="/projects/allure-of-inertia">9</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/allure-of-inertia">Mix for NTS Radio</a></span>
       </li>
@@ -116,7 +154,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/composing-through-listening">Composing Through Listening</a></span>
-      <span class="project-index"><a href="/projects/composing-through-listening">8</a></span>
+      <span class="project-index"><a href="/projects/composing-through-listening">10</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/composing-through-listening">Radio broadcast for WFMU</a></span>
       </li>
@@ -124,17 +162,8 @@
   
       
       <li class="project-item">
-      <span class="project-title"><a href="/projects/weaving">Weaving Music</a></span>
-      <span class="project-index"><a href="/projects/weaving">9</a></span>
-      <span class="project-line"></span>
-      <span class="project-tagline"><a href="/projects/weaving">Sound as a woven textile</a></span>
-      </li>
-      
-  
-      
-      <li class="project-item">
       <span class="project-title"><a href="/projects/collaborations">Collaborations</a></span>
-      <span class="project-index"><a href="/projects/collaborations">10</a></span>
+      <span class="project-index"><a href="/projects/collaborations">11</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/collaborations">Collaborations with Eli Keszler and James Hoff</a></span>
       </li>
@@ -145,7 +174,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/qcvg">QCVG</a></span>
-      <span class="project-index"><a href="/projects/qcvg">12</a></span>
+      <span class="project-index"><a href="/projects/qcvg">13</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/qcvg">Programmable modular synthesizer</a></span>
       </li>
@@ -154,77 +183,111 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/private-chronology">Private Chronology</a></span>
-      <span class="project-index"><a href="/projects/private-chronology">13</a></span>
+      <span class="project-index"><a href="/projects/private-chronology">14</a></span>
       <span class="project-line"></span>
-      <span class="project-tagline"><a href="/projects/private-chronology">DIY music label, exclusively distributed by Mimaroglu Music Sales</a></span>
+      <span class="project-tagline"><a href="/projects/private-chronology">DIY music label, distributed by Mimaroglu Music Sales</a></span>
       </li>
       
   
       
   
   </ul>
+</div>
+
 </section>
+    <div class="top-spacer"></div>
     <div class="content">
       <header>
-        <h1><a href="/">Reuben Son</a></h1>
+        <h1>Projects</h1>
+        <a href=""></a>
       </header>
       <div class="content-wrapper">
-        <figure class="figure-medium" style="transform:rotate(0deg)">
-  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" alt="photo of Reuben on his couch">
-  <figcaption>Photo by <a href="https://laurelschwulst.com/">Laurel Schwulst</a></figcaption>
-</figure>
-<p>I’m a software engineer and artist based in New York City, with a multi-disciplinary background in research science and humanities.</p>
-<p>When I was younger, I wanted to be a filmmaker, or a furniture designer, or a concert guitarist. While my fantasies and gestures towards future selves have shifted over the years, I still feel drawn to certain kinds of objects and aesthetic experiences. Over the last decade, my energies have settled, through desire paths and streams, into software, sound, and ceramics.</p>
-<p>Irrespective of the medium, I’m interested in the interplay of phenomonologically irreducible elments of surface and structure, of object and affect, of screen and software. I think of my methodology as broadly sculptural, in which form and content are not determined <em>a priori</em>, and the final work emerges in negotation with the materiality of the medium.</p>
-<figure class="figure-medium" style="transform:rotate(0deg)">
-  <!-- <img src="/public/strategist-screenshot.png" alt="Screenshot of The Strategist"> -->
-  <figcaption><strong>1.</strong> From <em>The Spirit of the Object as the Hand of Fate</em> in <a href="https://www.goodreads.com/book/show/968010.The_Shadow_of_the_Object" target="_blank"><em>The Shadow of the Object</em></a>. You can see <a href="https://www.are.na/block/27704381" target="_blank">this passage</a>, and others like it that I've underlined in my readings over recent years over on <a href="https://www.are.na/reuben-son/passages-m7zf9-4vnu4" target="_blank">Are.na</a>.</figcaption>
-</figure>
-<p>The British psychoanalyst Christopher Bollas writes that “the aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object” [1]. In our daily lives, these moments of transformative <em>caesura</em> come unbeckoned, or not at all, and a life well-lived might be one in which the possibility of such moments feel close at hand.</p>
-<!-- , which makes a compelling, if ambiguous attempt at describing with language the rare sense of fulfillment activated in a certain kind of engagement with a framgent of the world. -->
-<!-- Over the last decade, my energies have settled, through desire paths and streams, into software, sound, and ceramics. I would characterize my approach to these disciplines to be sculptural in a broad sense, in which the resulting object (experience) is dependent on the accretion of smaller, more intuitive decisions, as opposed to starting from a dogmatic schema and working backwards. -->
-<h3 id="work">Professional Practice</h3>
-<figure class="figure-medium" style="transform:rotate(0deg)">
-  <img src="/public/strat-screenshot.png" alt="Screenshot of The Strategist">
-  <figcaption>Screenshot of <em>The Strategist</em> homepage on May 18, 2024</figcaption>
-</figure>
-<p>I’ve worked as an engineering lead at <em>New York Magazine</em> and <em>Vox Media</em>, developing editorial tooling and delivering award-winning reader experiences. Working closely with design, editorial, and business development teams, I played a leading role in developing <a href="https://nymag.com/strategist"><em>The Strategist</em></a> during a period of rapid growth in its editorial scope and affiliate revenue business.</p>
-<p>As a product-driven technologist, I’m broadly interested in the synthesis of technical affordances with human needs and desires. I approach software design and org charts as technologies for managing complexity, and believe that “perfect systems” exists only in their allure … when you’re holding a hammer, everything becomes a nail.</p>
-<!-- [View engineering resume](/engineering-resume) -->
-<h3 id="creative-practice">Creative Practice</h3>
-<figure class="figure-medium">
-  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_casa-mug.jpg" alt="mug in shape of a dwelling">
-  <figcaption>
-    Hand-carved mug from my <em>casa</em> series.
-  </figcaption>
-</figure>
-<p>Work with sound forms the basis of my creative practice, which has evolved through engagement with materiality and metaphor. In recent work, like <a href="/projects/airports-for-music">Airports for Music</a> and <a href="/projects/frog-chorus">Frog Chorus</a>, frogs and microphones act as metaphors on the act of listening itself, in both the compositional process and in prompting audiences to attend to their own act of listening. In addition to my solo practice, my sound-based work also includes assisting artists like <a href="https://www.elikeszler.com/">Eli Keszler</a>, <a href="https://www.james-hoff.com/">James Hoff</a>, and <a href="https://thrilljockey.com/artists/glenn-jones">Glenn Jones</a> on installations, performances, and recordings, for institutions and labels like the Whitney Museum of American Art, PAN, and Thrill Jockey.</p>
-<p>This emphasis on embodied experience and materiality also forms the root of my ceramics practice, and I’m currently developing a new body of work that combines sound with ceramics.</p>
-<figure class="figure-medium" style="transform:rotate(0deg)">
-  <!-- <img src="/public/strategist-screenshot.png" alt="Screenshot of The Strategist"> -->
-  <figcaption><strong>2.</strong> “… we think of language as daemonic. We think of ourselves as doing things with words, while language does things to us,”<a href="https://www.are.na/block/27704091" target="_blank"> Adam Phillips, <em>On Wanting to Change</em></a></figcaption>
-</figure>
-<p>In my web-based practice, I’m interested in ways in which <a href="https://academic.oup.com/mit-press-scholarship-online/book/23681/chapter-abstract/184886856?redirectedFrom=fulltext&amp;login=false">interfaces construct users</a>, and I’ve developed a number of personal projects that experiment with user interfaces as strategies for using technology in more expansive ways: <a href="https://frogchor.us">the phone as a frog</a>, <a href="/midi-archive">AI as an interface to an archive</a>, and <a href="/weaving">weaving music</a>. Just as poetry may undo the instrumentalization of language [2], poetic interfaces may allow us to move beyond software that is merely instrumental and instrumentalizing.</p>
-<!-- [View artist resume](/artist-resume) -->
-<!-- My web-based projects have been a means for exploring the use of technology to augment the senses, a map to a real, or surreal, territory. This is most apparent in _Frog Chorus_, where a chorus of frogs emerges from smartphones, becoming an audible environment that reorients the user towards an expansive act of listening. -->
-<!-- Over the years, my fantasies/images around art-making have shifted, feeling the burn of the impulse to create a formal system, or machine. Now it's more about a kind of opening up, balancing logical and material concerns. -->
-<!-- The specific metaphors and materials have changed over time -->
-<!-- What to say about multidisciplinarity? Lack of desire to reduce the complexity of senses -->
-<!-- In Airports for Music, I'm guided by the metaphor of fragrance, as a means of thinking about sound as texture and color, carried by the air. -->
-<!-- Like with music, I'm drawn to the immediacy of ceramics, the unity of surface and form -->
-<!-- Somatic forms of sense-making. -->
-<!-- Maybe use Odilon Redon quote to address the logic of the visible in the service of the invisible ... ? -->
-<!-- In addition to his solo sound practice, he has also collaborated with artists like Eli Keszler and James Hoff for institutions like the Whitney Museum of American Art and Eyebeam. Over the last five years, he has extended his interest in the materiality of sound into a material exploration of surface and form in ceramics. -->
-<!-- Reuben Son makes software, sound, and ceramics. For more than a decade, his sound-based work has engaged the materiality of sound, in the form of magnetic tape or through metaphors of textile weaving and fragrance. In recent work, he has focused on the act of listening itself, both in the compositional process, and in prompting audiences to attend to their own act of listening. This emphasis on embodied experience and materiality also forms the root of his ceramics practice, and he is currently developing a new body of work that combines sound with ceramics. -->
-<!-- I deployed my first site in 2010, to serve as a landing page and blog for a DIY music label I casually ran for a few years, and since then my creative projects have been fused in various ways with web technology.  -->
-<div class="divider-line">✺ ✺ ✺</div>
-<p>The projects below represent an incomplete index of my creative work between the period of 2009 to the present. I’m still figuring things out, but I’m happy you’re here and I hope you enjoy browsing some of the things I’ve made along the way. While none of these projects are truly <em>finished</em>, I do feel like this body of work has connecting throughlines, and has given me the space to think and to feel … and if not to find answers, to at least ask better questions.</p>
-<!-- > "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." <br/><br/> - Christopher Bollas, _The Shadow of the Object_ <br/><br/> ([✶✶ Passages](https://www.are.na/reuben-son/passages-m7zf9-4vnu4)) -->
-<!-- I have found that the locus of vitality exists in material engagement with the world, within only a loose framework of epistemology, a minimum viable ontology. Regarding this, I find myself somewhere in the continuum of Simone Weil, who wrote "[to work in order to eat, to eat in order to work [...] only the cycle contains the truth](https://theanarchistlibrary.org/library/simone-weil-gravity-and-grace#:~:text=%27Work%20makes%20us%20experience%20in,the%20cycle%20contains%20the%20truth.)", and Ray Peat, who wrote "[energy creates organization and structure](https://www.functionalps.com/blog/2011/04/23/energy-structure-and-carbon-dioxide-a-realistic-view-of-the-organism/#:~:text=energy%20creates%20organization%20and%20structure)".  -->
-<p>For more about this website, see <a href="/colophon">Colophon</a>.</p>
-<p>If you’d like to support my work, please consider buying something from my <a href="/shop">ceramics shop</a>!</p>
+        <div class="projects-list-container">
+  <ul class="projects-list">
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/quiet-time">Quiet Time</a></span>
+<span class="project-index"><a href="/projects/quiet-time">1</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/quiet-time">Lecture and performance at Naive Yearly 2024</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/shop">Travel Vases</a></span>
+<span class="project-index"><a href="/shop">2</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/shop">Pocket-sized ceramic vessels for vacation wildflowers</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/midi-archive">MIDI Archive</a></span>
+<span class="project-index"><a href="/projects/midi-archive">3</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/midi-archive">ML model and archive of music on the early web</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/frog-chorus">Frog Chorus</a></span>
+<span class="project-index"><a href="/projects/frog-chorus">4</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/frog-chorus">Summon a chorus of frogs from your phone</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/airports-for-music">Airports for Music</a></span>
+<span class="project-index"><a href="/projects/airports-for-music">5</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/airports-for-music">Sound as fragrance</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/weaving">Weaving Music</a></span>
+<span class="project-index"><a href="/projects/weaving">6</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/weaving">Sound as a woven textile</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/meandering-printing">Ceramic Meandering</a></span>
+<span class="project-index"><a href="/projects/meandering-printing">7</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/meandering-printing">3D printing ceramics at Haystack Mountain School of Crafts</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/ceramics">Selected Ceramic Works</a></span>
+<span class="project-index"><a href="/projects/ceramics">8</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/ceramics">Material explorations into surface and form</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/allure-of-inertia">Allure of Inertia</a></span>
+<span class="project-index"><a href="/projects/allure-of-inertia">9</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/allure-of-inertia">Mix for NTS Radio</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/composing-through-listening">Composing Through Listening</a></span>
+<span class="project-index"><a href="/projects/composing-through-listening">10</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/composing-through-listening">Radio broadcast for WFMU</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/collaborations">Collaborations</a></span>
+<span class="project-index"><a href="/projects/collaborations">11</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/collaborations">Collaborations with Eli Keszler and James Hoff</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/qcvg">QCVG</a></span>
+<span class="project-index"><a href="/projects/qcvg">13</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/qcvg">Programmable modular synthesizer</a></span>
+</li></p>
+<p><li class="project-item">
+<span class="project-title"><a href="/projects/private-chronology">Private Chronology</a></span>
+<span class="project-index"><a href="/projects/private-chronology">14</a></span>
+<span class="project-line"></span>
+<span class="project-tagline"><a href="/projects/private-chronology">DIY music label, distributed by Mimaroglu Music Sales</a></span>
+</li></p>
+  </ul>
+</div>
 
       </div>
+
+      
     </div>
     <div class="project-border broider"></div>
   </body>
