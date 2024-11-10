@@ -47,7 +47,6 @@ function drawColorfield(color) {
 
   canvasCtx.putImageData(imageData, 0, 0);
 
-  console.log('imageData', imageData);
 }
 
 function handleImageUpload(event) {
@@ -96,7 +95,6 @@ function getImageBuffer(event) {
   const file = event.target.files[0];
   const reader = new FileReader();
   reader.onload = async function(e) {
-    console.log('e.target.result', e.target.result);
     audioBuffer = await audioCtx.decodeAudioData(e.target.result);
   };
   reader.readAsArrayBuffer(file);
@@ -128,7 +126,7 @@ async function handleConvolution() {
   gainNodeConvolution.connect(analyser);
   gainNodeSource.connect(analyser);
   
-  analyser.connect(audioCtx.destination);
+  // analyser.connect(audioCtx.destination);
   // source.playbackRate.value = 9.87505;
   // source.playbackRate.value = 1 + 1/64 + .00001
   source.playbackRate.value = 1 + .000002
