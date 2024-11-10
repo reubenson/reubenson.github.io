@@ -126,9 +126,6 @@ async function handleConvolution() {
   gainNodeConvolution.connect(analyser);
   gainNodeSource.connect(analyser);
   
-  // analyser.connect(audioCtx.destination);
-  // source.playbackRate.value = 9.87505;
-  // source.playbackRate.value = 1 + 1/64 + .00001
   source.playbackRate.value = 1 + .000002
   source.start(0);
   visualize();
