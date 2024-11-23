@@ -292,3 +292,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Fingerprint below
+// demo data: https://fingerprintjs.github.io/fingerprintjs/
