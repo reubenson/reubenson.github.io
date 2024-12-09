@@ -7,6 +7,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("splide.min.js");
   eleventyConfig.addPassthroughCopy("splide.min.css");
   eleventyConfig.addPassthroughCopy("project-slides.css");
+  eleventyConfig.addPassthroughCopy("aura.css");
   eleventyConfig.addPassthroughCopy("bundle.css");
   eleventyConfig.addPassthroughCopy("public");
   eleventyConfig.addPassthroughCopy({ "favicon.png": "/" });
