@@ -6,6 +6,8 @@ description:
 url: 
 layoutType: one-column
 scriptUrl: /public/js/html-review.js
+# scriptUrl2: /public/js/random-noise-processor.js
+cssUrl: /aura.css
 hideSeeMore: true
 ---
 A proposal for a visual-text piece around the theme of the digital fingerprint.
@@ -24,12 +26,49 @@ Click below to see a very rough prototype of color-field animation as a sort of 
 
 <button id="start">Start Animation</button>
 
-<div style="position: relative; filter: contrast(10)">
-  <p style="font-size: 34px; line-height: 34px; filter: blur(1px); height: 34px; text-align: center; margin: auto; position: absolute; bottom: 100px; right: 0; left: 0; color: #f0f0e6; width: fit-content; background-color: transparent">Example text overlaid on <strong>aura</strong></p>
-  <canvas id="visualizer" width="200" height="200" style="zoom: 1; filter: blur(25px) contrast(1); position: relative; top: 0; right: 0; left: 0; margin: auto; z-index: -1; width: 100%"></canvas>
-</div>
-<!-- Image input
-<input type="file" id="imageInput" accept="image/*"> -->
+<div id="canvas-container">
+<!-- <img src="/public/html-review/bently-snowflakes-cover.jpg" width: 300 /> -->
+  <!-- <p>Example text overlaid on <strong>aura</strong></p> -->
 
-<!-- Audio input
-<input type="file" id="audioInput" accept="audio/mp3"> -->
+  <p>He would examine the snowflakes with a magnifying glass and sweep away the ones he didn’t want with a turkey feather</p>
+   <!-- “Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost,” -->
+   <!-- https://arc.net/l/quote/haruwzln -->
+  <canvas id="visualizer" width="200" height="200"></canvas>
+</div>
+
+<!-- SVG filter seems like a good way of customizing the aura to a specific color palette without having to write explicit pixel logic -->
+<!-- https://css-irl.info/into-the-matrix-with-svg-filters/ -->
+<svg viewBox="0 0 600 400" width="0" height="0" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter id="test">
+      <feColorMatrix in="SourceGraphic"
+        type="matrix"
+        values="0 1 0 0 0
+                0 1 0 0 0
+                0 1 0 0 0
+                0 0 0 1 0" />
+    </filter>
+    <filter id="duo">
+      <feColorMatrix in="SourceGraphic"
+        type="matrix"
+        values="1 1 1 0 0
+		    0 0 0 -0.5 0
+		    0 0 0 0.2 0
+		    0 0 0 1 0 " />
+    </filter>
+    <filter id="displacementFilter">
+      <feImage xlink:href="/public/html-review/bently-snowflakes-cover.jpg" result="beagle"/>
+      <feTurbulence
+        type="turbulence"
+        baseFrequency="0.001"
+        numOctaves="4"
+        result="turbulence" />
+      <feDisplacementMap
+        in2="beagle"
+        in="SourceGraphic"
+        scale="125"
+        xChannelSelector="R"
+        yChannelSelector="G" />
+  </filter>
+  </defs>
+</svg>

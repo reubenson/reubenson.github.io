@@ -27,6 +27,9 @@ description: Project description
     {% if scriptUrl2 %}
       <script src="{{ scriptUrl2 | safe }}"></script>
     {% endif %}
+    {% if cssUrl %}
+      <link rel="stylesheet" href="{{ cssUrl | safe }}">
+    {% endif %}
     {# <script async src="/bundle.js"></script> #}
   </head>
   <body class="project {{ layoutType }}">

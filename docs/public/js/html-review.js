@@ -1,4 +1,8 @@
-const PLAYBACK_VALUES = [1 + .00001, 1+ 1/64 + 0.0005, 2+ 1/64 + .00001];
+/**
+ * instead of cycling through so many colors, would be nice to oscillate within a subtle range. can that be done with svg filters?
+ */
+
+const PLAYBACK_VALUES = [1 + .00001, 1+ 1/64 + 0.00005, 2+ 1/64 + .000001];
 let frameCount = 0;
 const frameRate = 30; // Target frame rate (e.g., 30 frames per second)
 const frameInterval = 60 / frameRate; // Calculate the interval for the target frame rate
@@ -16,6 +20,13 @@ let imageHeight;
 let imageBuffer;
 let gainNodeSource;
 let gainNodeConvolution;
+let processor;
+
+function applyCSS() {
+  const container = document.querySelector('#canvas-container');
+
+  container.classList.add('fullscreen');
+}
 
 function drawColorfield(color) {
   const width = canvas.width;
@@ -112,8 +123,9 @@ async function handleConvolution() {
 
   gainNodeSource = audioCtx.createGain();
   gainNodeConvolution = audioCtx.createGain();
-  gainNodeSource.gain.value = 0.5;
-  gainNodeConvolution.gain.value = 0.5;
+  const dryWet = 0.1;
+  gainNodeSource.gain.value = dryWet;
+  gainNodeConvolution.gain.value = 1.0 - dryWet;
 
   convolver.normalize = false;
 
@@ -122,42 +134,28 @@ async function handleConvolution() {
 
   source.connect(convolver);
   source.connect(gainNodeSource);
-  convolver.connect(gainNodeConvolution);;
-  gainNodeConvolution.connect(analyser);
-  gainNodeSource.connect(analyser);
+  convolver.connect(gainNodeConvolution);
+
+  // gainNodeConvolution.connect(analyser);
+  // gainNodeSource.connect(analyser);
+
+  // connect to processor
+  gainNodeSource.connect(processor);
+  gainNodeConvolution.connect(processor);
+  processor.connect(analyser);
   
-  source.playbackRate.value = 1 + .000002
+  // source.playbackRate.value = 1;
+  source.playbackRate.value = PLAYBACK_VALUES[0];
   source.start(0);
   visualize();
 }
 
-function handleAudioUpload(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 2048 * 4 * 4;
-
-    audioCtx.decodeAudioData(e.target.result, async function(buffer) {
-      source = audioCtx.createBufferSource();
-      source.loop = true;
-
-      convolver.normalize = false;
-      processImageData(imageData, convolver);
-      source.buffer = buffer;
-
-      source.connect(convolver);
-      convolver.connect(analyser);
-      source.start(0);
-      visualize();
-    });
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-function visualize() {
+function visualize(dataArray) {
   function draw() {
-    requestAnimationFrame(draw);
+    // requestAnimationFrame(draw);
+
+    // request bufferArray data from processor
+    processor.port.postMessage('ping');
 
     frameCount++;
     if (frameCount < frameInterval) {
@@ -165,27 +163,36 @@ function visualize() {
     }
     frameCount = 0;
 
-    const bufferLength = analyser.frequencyBinCount;
-    let dataArray = new Uint8Array(bufferLength);
-    analyser.getByteTimeDomainData(dataArray);
+    // I think this is retrieving redundant data on each call, could be optimized
+    // and also a running buffer would be nicer to scale up the time range of audio data
+    // const bufferLength = analyser.frequencyBinCount;
+    // let dataArray = new Uint8Array(bufferLength);
+    // analyser.getByteTimeDomainData(dataArray);
+
+    // console.log('dataArray', dataArray);
+    
+    // console.log('draw');
+    // maximum value of this is 16384 (128 x 128)
+    // console.log('dataArray.length', dataArray.length);
 
     canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (imageData) {
-      const pixels = imageData.data;
-      for (let i = 0; i < bufferLength; i++) {
-        const v = dataArray[i] / 128.0;
-        const y = v * imageHeight / 2;
+    // console.log('imageData', imageData);
+    // if (imageData) {
+    //   const pixels = imageData.data;
+    //   for (let i = 0; i < bufferLength; i++) {
+    //     const v = dataArray[i] / 128.0;
+    //     const y = v * imageHeight / 2;
 
-        for (let j = 0; j < imageWidth; j++) {
-          const index = (Math.floor(y) * imageWidth + j) * 4;
-          pixels[index] = dataArray[i] * 0;
-          pixels[index + 1] = dataArray[i] * 0;
-          pixels[index + 2] = dataArray[i] * 0;
-          pixels[index + 3] = 0;
-        }
-      }
-    }
+    //     for (let j = 0; j < imageWidth; j++) {
+    //       const index = (Math.floor(y) * imageWidth + j) * 4;
+    //       pixels[index] = dataArray[i] * 0;
+    //       pixels[index + 1] = dataArray[i] * 0;
+    //       pixels[index + 2] = dataArray[i] * 0;
+    //       pixels[index + 3] = 0;
+    //     }
+    //   }
+    // }
 
     // need to rotate data array for color correction
     function isRedPixel(arr) {
@@ -220,11 +227,12 @@ function visualize() {
       } else if (index % 4 === 2) {
         return val;
       } else if (index % 4 === 3) {
+        // return val;
         return 255;
       }
     });
 
-    const len = Math.sqrt(dataArray.length) / 2;
+    const len = Math.sqrt(dataArray.byteLength) / 2;
 
     // dataArray 2048 -> 16 x 16
     // dataArray 4096 -> 32 x 32
@@ -233,19 +241,28 @@ function visualize() {
     // Example usage:
     const originalWidth = len;
     const originalHeight = len;
-    const scaleFactor = 4; // or 4
+    const scaleFactor = 1;
     const scaledPixelArray = scaleUpPixels(imageArray, originalWidth, originalHeight, scaleFactor);
 
-    canvasCtx.putImageData(new ImageData(scaledPixelArray, len * scaleFactor, len * scaleFactor), 0, 0);
+    // console.log('dataArray.byteLength', dataArray.byteLength);
+    // console.log('imageArray', imageArray);
+    
+    // seems like len wants to be 32?, but not sure where that number is coming from
+    // console.log(len / 8)
+
+    // 
+
+    canvasCtx.putImageData(new ImageData(imageArray, len * scaleFactor / 1, len * scaleFactor * 1), 0, 0);
   }
 
   draw();
+  // console.log('draw');
 }
 
 function scaleUpPixels(pixelArray, width, height, scaleFactor) {
   const newWidth = width * scaleFactor;
   const newHeight = height * scaleFactor;
-  const newPixelArray = new Uint8ClampedArray(newWidth * newHeight * 4);
+  const newPixelArray = new Uint8ClampedArray(newWidth * newHeight * 1);
 
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
@@ -272,16 +289,22 @@ function scaleUpPixels(pixelArray, width, height, scaleFactor) {
   return newPixelArray;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
+  await audioCtx.audioWorklet.addModule("/public/js/random-noise-processor.js");
+  processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
+
+  processor.port.onmessage = (e) => {
+    visualize(e.data);
+  };
+
   canvas = document.getElementById('visualizer');
   canvasCtx = canvas.getContext('2d');
-  // document.getElementById('imageInput').addEventListener('change', handleImageUpload);
-  // document.getElementById('audioInput').addEventListener('change', handleAudioUpload);
   const button = document.querySelector('#start');
 
   button?.addEventListener('click', () => {
+    applyCSS();
     drawColorfield({r: 200, g: 50, b: 50});
     // drawColorfield();
     handleConvolution();
