@@ -14,7 +14,8 @@ function showShopClosedMessage() {
 }
 
 function loadShopifyProducts(productIds) {
-    var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  console.log('loading shopify products', productIds);
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
     if (window.ShopifyBuy.UI) {
       ShopifyBuyInit();
@@ -214,16 +215,11 @@ function loadShopifyProducts(productIds) {
   }
 }
 
-/**
- * Modified embed code for Shopify Buy Button
- */
-(function () {
-  
-})();
-  
-document.addEventListener('DOMContentLoaded', function() {
+function main() {
   const productIdsStr = document.getElementById('product-listings')?.getAttribute('data-product-ids')
   const productIds = productIdsStr === '' ? [] : productIdsStr?.split(',');
+
+  if (!productIds) throw new Error('DOM not yet loaded'); // DOM hasn't loaded yet
 
   if (!productIds.length) {
     showShopClosedMessage();
@@ -231,6 +227,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   loadShopifyProducts(productIds);
-  // console.log('Document is fully loaded and parsed');
-  // initObserver(); // Call your function here
-});
+};
+
+try {
+  main();
+} catch (error) {
+  document.addEventListener('DOMContentLoaded', main);
+}
