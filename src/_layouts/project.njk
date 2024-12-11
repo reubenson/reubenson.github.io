@@ -20,7 +20,7 @@ description: Project description
     <meta property="og:type" content="website" />
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
+    {% include "gtm.njk" %}
     {% if scriptUrl %}
       <script src="{{ scriptUrl | safe }}"></script>
     {% endif %}

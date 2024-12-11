@@ -14,7 +14,6 @@ function showShopClosedMessage() {
 }
 
 function loadShopifyProducts(productIds) {
-  console.log('loading shopify products', productIds);
   var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
     if (window.ShopifyBuy.UI) {

@@ -16,7 +16,7 @@ description: Shop description
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
     <meta property="og:image" content="{{ socialImg }}">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
+    {% include "gtm.njk" %}
     <script async src="/public/js/shopify-init.js" defer></script>
   </head>
   <body class="shop-page {{ layoutType }}">
