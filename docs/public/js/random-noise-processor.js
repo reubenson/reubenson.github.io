@@ -63,7 +63,7 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
         }
 
         // do I need this in stereo? not sure that's useful, but could be integrated in some way ...
-        channel[i] = inputs[0][0][i] * 1 + inputs[0][1][i] * 1 + noise * 0.0;
+        channel[i] = inputs[0][0][i] * 1 + inputs[0][1][i] * 1 + noise * 0.2;
       }
       this.appendToBuffer(channel);
     });
