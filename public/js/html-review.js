@@ -1,11 +1,16 @@
+// const audioFilepath = '/public/airports-for-music-i.mp3';
+const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
 const PLAYBACK_VALUES = [
   // 1 + .00001,
-  1 + 1/64 + 0.000005,
+  1,
+  1+ 1/64 + 0.00005,
   // 1 - 1/64 + 0.000005,
   // 1 - 1/64 - 0.000003,
   1 + 1/64 + 0.000003,
   // 2 + 1/64 + .000001
 ];
+// const PLAYBACK_VALUES = [1 + .00001, 1+ 1/64 + 0.00005, 2+ 1/64 + .000001];
+
 let frameCount = 0;
 const frameRate = 30; // Target frame rate (e.g., 30 frames per second)
 const frameInterval = 1000 / frameRate; // Calculate the interval for the target frame rate
@@ -183,7 +188,7 @@ function getImageBuffer(event) {
 
 async function handleConvolution() {
   // load impulse response from file
-  let response = await fetch("https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav");
+  let response = await fetch(audioFilepath);
   let buffer = await response.arrayBuffer();
 
   analyser = audioCtx.createAnalyser();
@@ -193,7 +198,7 @@ async function handleConvolution() {
 
   gainNodeSource = audioCtx.createGain();
   gainNodeConvolution = audioCtx.createGain();
-  const dry = 0;
+  const dry = 1.0;
   const wet = 1.0 - dry;
   gainNodeSource.gain.value = dry;
   gainNodeConvolution.gain.value = wet;
@@ -213,11 +218,13 @@ async function handleConvolution() {
   // connect to processor
   gainNodeSource.connect(processor);
   gainNodeConvolution.connect(processor);
-  processor.connect(analyser);
+  // processor.connect(analyser);
+  // processor.connect(audioCtx.destination);
   
-  source.playbackRate.value = PLAYBACK_VALUES[1];
+  source.playbackRate.value = PLAYBACK_VALUES[0];
   source.start(0);
-  visualize();
+  // visualize();
+  processor.port.postMessage('ping');
 }
 
 function visualize(dataArray) {
@@ -229,7 +236,7 @@ function visualize(dataArray) {
     
     frameCount++;
     if (frameCount < 1) {
-      return;
+      // return;
     }
     frameCount = 0;
     
@@ -298,9 +305,9 @@ function visualize(dataArray) {
         return val;
       } else if (index % 4 === 3) {
         // increase level (more negative -> more transparency?)
-        return Math.pow(val / 255, -1.5) * 255
+        // return Math.pow(val / 255, -1.5) * 255
         // return val;
-        // return 255;
+        return 255;
       }
     });
 
@@ -328,7 +335,6 @@ function visualize(dataArray) {
   }
 
   draw();
-  // console.log('draw');
 }
 
 function scaleUpPixels(pixelArray, width, height, scaleFactor) {
@@ -488,7 +494,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     handleConvolution();
 
     window.setInterval(() => {
-      source.playbackRate.value = PLAYBACK_VALUES[Math.floor(Math.random() * PLAYBACK_VALUES.length)];
+      // source.playbackRate.value = PLAYBACK_VALUES[Math.floor(Math.random() * PLAYBACK_VALUES.length)];
     }, 4500);
 
     // bug
@@ -501,7 +507,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       colorValue += event.key === 'ArrowLeft' ? -0.01 : 0.01;
-      console.log('colorValue', colorValue);
       setColorMatrix(colorValue);
       }
     });
