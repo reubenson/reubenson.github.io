@@ -10,20 +10,22 @@ scriptUrl: /public/js/html-review.js
 cssUrl: /aura.css
 hideSeeMore: true
 ---
-Prototype for the presentation of prose poetry on the page with a combination of visual manipulation, coloration, and animation.
-
-The text for these poems come from research into the history of auras and fingerprinting. Using the [FingerprintJS](https://fingerprint.com/blog/browser-fingerprinting-techniques/) NPM library, the animation and coloration will be rendered differently across different browser profiles (not limited to user agent).
-
-Approximately twenty of these poems will be presented in total, which readers can click through on mobile & desktop devices.
-
 <button id="start">Start Animation</button>
 
 <div id="canvas-container">
   <p id="text"></p>
    <!-- “Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost,” -->
    <!-- https://arc.net/l/quote/haruwzln -->
-  <canvas id="visualizer" width="200" height="200"></canvas>
+  <canvas id="visualizer" width="32" height="512"></canvas>
 </div>
+
+
+
+Prototype for the presentation of prose poetry on the page with a combination of visual manipulation, coloration, and animation.
+
+The text for these poems come from research into the history of auras and fingerprinting. Using the [FingerprintJS](https://fingerprint.com/blog/browser-fingerprinting-techniques/) NPM library, the animation and coloration will be rendered differently across different browser profiles (not limited to user agent).
+
+Approximately twenty of these poems will be presented in total, which readers can click through on mobile & desktop devices.
 
 
 ~~A proposal for a visual-text piece around the theme of the digital fingerprint.~~
@@ -67,6 +69,9 @@ Approximately twenty of these poems will be presented in total, which readers ca
           0 0 1 0 0
           1 1 1 1 -1" />
       </filter>
+     <filter id="dis-filter">
+      <feImage xlink:href="" result="dis-filter" preserveAspectRatio="xMidYMid meet" width="430px" x="0" y="0"></feImage><feDisplacementMap in2="dis-filter" in="SourceGraphic" scale="5" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+     </filter> 
       <filter id="displacementFilter">
     <feTurbulence
       type="turbulence"
