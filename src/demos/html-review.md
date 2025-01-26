@@ -1,29 +1,61 @@
 ---
-layout: project.njk
-title: Wherever You Go There You Are
+layout: demo.njk
+title: #Wherever You Go There You Are
 subtitle: 
 description: 
 url: 
-layoutType: one-column
+# layoutType: one-column
 scriptUrl: /public/js/html-review.js
 # scriptUrl2: /public/js/random-noise-processor.js
 cssUrl: /aura.css
 hideSeeMore: true
 ---
-Prototype for the presentation of prose poetry on the page with a combination of visual manipulation, coloration, and animation.
+<p>Three sound-fragrance poems</p>
+
+As you browse through these texts, a selection of air recordings will play.
+
+<div id="player" class="player">
+  <p class="description">Fragments taken from Wikipedia's list of local winds</p>
+  <footer>
+    <p>Wind: Central Loire Valley, June 20, 2022</p>
+    <button id="start" data-poem="poem-1">Visit</button>
+  </footer>
+</div>
+
+<div id="player" class="player">
+  <p class="description">Untitled</p>
+  <footer>
+    <p>Wind: Berlin, August 14, 2023</p>
+    <button id="start" data-poem="poem-2">Visit</button>
+  </footer>
+</div>
+
+
+<div id="canvas-container">
+  <div id="poem-1" class="poem">
+    {% include "./poem-1.md" %}
+  </div>
+  <div id="poem-2" class="poem">
+    {% include "./poem-2.md" %}
+  </div>
+  <canvas id="visualizer" width="128" height="512"></canvas>
+
+  
+
+
+
+  <!-- <p id="text"></p> -->
+   <!-- “Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost,” -->
+   <!-- https://arc.net/l/quote/haruwzln -->
+</div>
+
+
+
+<!-- Prototype for the presentation of prose poetry on the page with a combination of visual manipulation, coloration, and animation.
 
 The text for these poems come from research into the history of auras and fingerprinting. Using the [FingerprintJS](https://fingerprint.com/blog/browser-fingerprinting-techniques/) NPM library, the animation and coloration will be rendered differently across different browser profiles (not limited to user agent).
 
 Approximately twenty of these poems will be presented in total, which readers can click through on mobile & desktop devices.
-
-<button id="start">Start Animation</button>
-
-<div id="canvas-container">
-  <p id="text"></p>
-   <!-- “Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost,” -->
-   <!-- https://arc.net/l/quote/haruwzln -->
-  <canvas id="visualizer" width="200" height="200"></canvas>
-</div>
 
 
 ~~A proposal for a visual-text piece around the theme of the digital fingerprint.~~
@@ -36,7 +68,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
 
 ~~I think there's a few different directions this project might go, but the content would ultimately be a sort of meditation on the connection between digital fingerprint and aura. And while I think it would be educational to address surveillance technology, I plan to focus the overall tone towards something that feels numinous, as opposed to didactic.~~
 
-~~Click below to see a very rough prototype of color-field animation as a sort of film.~~
+~~Click below to see a very rough prototype of color-field animation as a sort of film.~~ -->
 
 <!-- In addition to the prose poems, the visual presentation will translate the visitor's digital fingerprint into a subtly animating color-field "aura", which will appear differently for each visitor. -->
 
@@ -67,6 +99,9 @@ Approximately twenty of these poems will be presented in total, which readers ca
           0 0 1 0 0
           1 1 1 1 -1" />
       </filter>
+     <filter id="dis-filter">
+      <feImage xlink:href="" result="dis-filter" preserveAspectRatio="xMidYMid meet" width="430px" x="20" y="0"></feImage><feDisplacementMap in2="dis-filter" in="SourceGraphic" scale="5" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+     </filter> 
       <filter id="displacementFilter">
     <feTurbulence
       type="turbulence"
@@ -79,5 +114,10 @@ Approximately twenty of these poems will be presented in total, which readers ca
       scale="50"
       xChannelSelector="R"
       yChannelSelector="G" />
+    </filter>
+    <filter id="wind-filter">
+      <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="830px" x="10px" y="0"></feImage>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="10" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+    </filter>
   </defs>
 </svg>

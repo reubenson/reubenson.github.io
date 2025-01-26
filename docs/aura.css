@@ -1,7 +1,11 @@
+body {
+  font-family: 'Ibarra Real Nova', monospace;
+}
+
 #canvas-container {
   background: white;
   /* filter: blur(1px) contrast(10) url(#duo); */
-  /* filter: blur(0px) contrast(2) url(#customFilter); */
+  filter: blur(2px) contrast(2) url(#customFilter);
   opacity: 0;
   width: 100%;
   height: 100%;
@@ -10,7 +14,7 @@
 #canvas-container p {
   opacity: 0;
   color: #000;
-  font-size: 24px;
+  font-size: 48px;
   line-height: 1.3em;
   /* filter: blur(1px) url(#image-0); */
   font-weight: 600;
@@ -27,14 +31,14 @@
   width: fit-content;
   background-color: transparent;
   width: 550px;
-  z-index: -1;
-  /* background: black;
-  color: white; */
+  z-index: 10;
+  /* background: black; */
+  color: black;
 }
 
 canvas {
   /* border-radius: 10px; */
-  opacity: 0.60;
+  opacity: 1.0;
   width: 100%;
   height: 100%;
   /* zoom: 1.3; */
@@ -68,15 +72,16 @@ canvas {
 }
 
 #canvas-container.fullscreen p {
-  opacity: 0.8;
+  opacity: 0.9;
   /* background: black;
   color: white; */
-  padding: 150px;
+  /* padding: 150px; */
   border: solid black 2px;
+  display: none;
 }
 
 .fullscreen ~ * {
-  display: none;
+  /* display: none; */
 }
 
 img {
@@ -94,7 +99,7 @@ img {
   filter: url(#black-to-transparent);
 }
 
-.active {
+#canvas-container p.active {
   display: block;
 }
 
@@ -118,10 +123,64 @@ button:hover {
   cursor: pointer;
 }
 
+.poem {
+  width: 100vw;
+  height: auto;
+  border: none;
+  margin: auto;
+  display: none;
+}
+
+.poem.selected-poem {
+  display: block;
+}
+
+#poem-2 p {
+  border: none !important;
+  font-size: 560px !important;
+  text-align: center !important;
+}
+
+canvas.front {
+  z-index: 1000 !important;
+}
+
+.player {
+  margin-top: 20px;
+  max-width: 500px;
+  border: solid black 1px;
+  padding: 0px;
+}
+
+.player p.description {
+  margin: 10px;
+  font-size: 16px;
+  width: auto;
+  font-style: normal;
+}
+
+.player footer {
+  border-top: solid black 1px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.player footer p {
+  margin: 0;
+  font-size: 12px;
+  width: 100%
+}
+
+.player button {
+  font-size: 12px;
+  font-family: 'Ibarra Real Nova', monospace;
+}
+
 @media screen and (min-width: 768px) {
   #canvas-container p {
     font-size: 36px;
     margin: auto;
-    padding: 160px;
+    /* padding: 160px; */
   }
 }
