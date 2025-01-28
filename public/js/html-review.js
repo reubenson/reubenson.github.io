@@ -642,7 +642,7 @@ function beginUntitled(event) {
   // frames[previousSlideIndex]?.classList.remove('active');
 
   const el = document.querySelector('#canvas-container');
-  el.style.filter = `blur(1px) contrast(4) url(#dis-filter)`;
+  // el.style.filter = `blur(1px) contrast(4) url(#dis-filter)`;
   
   event.preventDefault();
 

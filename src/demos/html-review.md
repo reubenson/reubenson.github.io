@@ -100,7 +100,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
           1 1 1 1 -1" />
       </filter>
      <filter id="dis-filter">
-      <feImage xlink:href="" result="dis-filter" preserveAspectRatio="xMidYMid meet" width="430px" x="20" y="0"></feImage><feDisplacementMap in2="dis-filter" in="SourceGraphic" scale="5" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+      <feImage xlink:href="" result="dis-filter" preserveAspectRatio="xMidYMid meet" width="430px" x="20" y="0"></feImage><feDisplacementMap in2="dis-filter" in="SourceGraphic" scale="15" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
      </filter> 
       <filter id="displacementFilter">
     <feTurbulence
