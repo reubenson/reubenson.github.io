@@ -1,3 +1,5 @@
+let audioHasStarted = false
+
 const audioFilepath = '/public/airports-for-music-i.mp3';
 // const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
 const PLAYBACK_VALUES = [
@@ -15,7 +17,7 @@ let frameCount = 0;
 const frameRate = 30; // Target frame rate (e.g., 30 frames per second)
 const frameInterval = 1000 / frameRate; // Calculate the interval for the target frame rate
 let colorMatrix, colorMatrixEl;
-let colorValue = 0.85;
+let colorValue = 0.46;
 
 let canvasContainerEl;
 let audioCtx;
@@ -24,6 +26,10 @@ let convolver;
 let analyser;
 let canvas;
 let canvasCtx;
+
+function rotateColors() {
+
+}
 let imageData;
 let imageWidth;
 let imageHeight;
@@ -31,6 +37,8 @@ let imageBuffer;
 let gainNodeSource;
 let gainNodeConvolution;
 let processor;
+
+let eventListeners = [];
 
 let slideIndex = 0;
 let previousSlideIndex = null;
@@ -226,22 +234,33 @@ function getImageBuffer(event) {
   reader.readAsArrayBuffer(file);
 }
 
+function updateConvolutionLevel(level) {
+  if (!audioHasStarted) return;
+
+  // const currentValue = gainNodeConvolution.gain.value;
+  const duration = 60; // seconds
+  gainNodeConvolution.gain.linearRampToValueAtTime(level, audioCtx.currentTime + duration);
+}
+
 async function handleConvolution() {
+  if (audioHasStarted) return;
+
   let response = await fetch(audioFilepath);
   let buffer = await response.arrayBuffer();
 
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048 * 4 * 4;
   source = audioCtx.createBufferSource();
-  source.loop = false;
+  source.loop = true;
 
   gainNodeSource = audioCtx.createGain();
   gainNodeConvolution = audioCtx.createGain();
   sumNode = audioCtx.createGain();
   const dry = 1.0;
   // const wet = 1.0 - dry;
-  const wet  = 0.01;
-  gainNodeSource.gain.value = dry;
+  const wet  = 0.0;
+  gainNodeSource.gain.value = 0;
+  gainNodeSource.gain.linearRampToValueAtTime(dry, audioCtx.currentTime + 15);
   gainNodeConvolution.gain.value = wet;
   sumNode.gain.value = 1.0;
 
@@ -253,26 +272,26 @@ async function handleConvolution() {
   // testing wind instead 
   let windresponse = await fetch('/public/html-review/test-wind.mp3');
   let windBuffer = await windresponse.arrayBuffer();
-  // let windBufferSource = audioCtx.createBufferSource();
   source.buffer = await audioCtx.decodeAudioData(windBuffer);
-  // source.connect(audioCtx.destination);
 
-
-  
   convolver.buffer = await audioCtx.decodeAudioData(buffer);
   
   source.connect(gainNodeSource);
   gainNodeSource.connect(convolver);
   convolver.connect(gainNodeConvolution);
   gainNodeSource.connect(sumNode);
-  gainNodeConvolution.connect(sumNode);
   
-  const compressor = audioCtx.createDynamicsCompressor();
-  sumNode.connect(compressor);
+  let gainNodeConvolution2 = audioCtx.createGain();
+  gainNodeConvolution2.gain.value = 0.2;
+  gainNodeConvolution.connect(gainNodeConvolution2);
+  gainNodeConvolution2.connect(sumNode);
+  
+  // const compressor = audioCtx.createDynamicsCompressor();
+  // sumNode.connect(compressor);
 
   // lower volume of player relative to animation
   const playerGainNode = audioCtx.createGain();
-  playerGainNode.gain.value = 0.2;
+  playerGainNode.gain.value = 0.5;
   sumNode.connect(playerGainNode);
   playerGainNode.connect(audioCtx.destination);
 
@@ -301,6 +320,8 @@ async function handleConvolution() {
   // source.sampleRate = 42000;
   source.start();
   processor.port.postMessage('ping');
+
+  audioHasStarted = true;
 }
 
 function visualize(dataArray) {
@@ -525,161 +546,150 @@ function updateText(index) {
   // el.textContent = slides[index].text;
 }
 
-function handlePoemSelection(event) {
-  const poem = event.target.dataset.poem;
-  console.log('poem', poem);
+function handlePartSelection(event) {
+  const part = event.target.dataset.part;
+  const previousPoemEl = document.querySelector('.poem-container.selected-part');
+  previousPoemEl?.classList.remove('selected-part');
+  const poemEl = document.querySelector(`#${part}`);
+  poemEl.classList.add('selected-part');
 
-  const previousPoemEl = document.querySelector('.poem.selected-poem');
-  previousPoemEl?.classList.remove('selected-poem');
-  const poemEl = document.querySelector(`#${poem}`);
-  poemEl.classList.add('selected-poem');
-
-  if (poem === 'poem-1') {
+  if (part === 'part-1') {
     beginFragments(event); // refactor this to not pass down events
-  } else if (poem === 'poem-2') {
+  } else if (part === 'part-2') {
     beginUntitled(event);
   }
+
+  // document.body.style.backgroundColor = 'black';
+  document.body.classList.add('now-viewing');
 }
 
 function parsePoem(poem) {
-  const frames = document.querySelectorAll(`#${poem} p`);
+  const frames = document.querySelectorAll(`#${poem} div`);
   return frames;
 }
 
-function beginFragments(event) {
-  console.log('beginFragments');
+function updateFrame(el) {
+  const activeEl = document.querySelector('.active');
+  activeEl?.classList.remove('active');
 
-  const frames = parsePoem(event.target.dataset.poem);
+  el.classList.add('active');
+  // frames[previousIndex]?.classList.remove('active');
+}
 
-  // updateToSlide(slideIndex);
+async function beginFragments(event) {
+  canvasContainerEl.classList.add('part-1');
+  const closeButton = document.querySelector('#close');
+  closeButton.style.display = 'block';
+
+  const frames = parsePoem(event.target.dataset.part);
+
   applyCSS();
-  // drawColorfield({r: 200, g: 50, b: 50});
-  drawColorfield({r: 255,  g: 0, b: 0}, 0);
 
-  // test whether drawing an invisible image changes the canvas
-  // testColorfield();
-
-  handleConvolution();
-
-  window.setInterval(() => {
-    // source.playbackRate.value = PLAYBACK_VALUES[Math.floor(Math.random() * PLAYBACK_VALUES.length)];
-  }, 4500);
-
-  // bug
   slideIndex = 0;
   updateFrame(frames[0]);
-  // frames[slideIndex].classList.add('active');
-  // frames[previousSlideIndex]?.classList.remove('active');
-  // updateText(0);
-
-  const el = document.querySelector('#canvas-container');
-  el.style.filter = `blur(0px) contrast(4) url(#wind-filter)`;
   
   event.preventDefault();
 
-  function updateFrame(el) {
-    const activeEl = document.querySelector('.active');
-    activeEl?.classList.remove('active');
-
-    el.classList.add('active');
-    // frames[previousIndex]?.classList.remove('active');
-  }
-
   function handleNavigation(event) {
-    const viewportWidth = window.innerWidth;
-    if (event.clientX > viewportWidth / 2) {
+    const viewportWidth = window.innerWidth;  
+    const xLocation = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
+    
+    if (xLocation > viewportWidth / 2) {
       slideIndex++;
     } else {
       slideIndex--;
     }
-
+  
     updateFrame(frames[slideIndex]);
   
     previousSlideIndex = slideIndex;
     slideIndex = Math.max(0, Math.min(slideIndex, slides.length - 1));
-    // updateToSlide(slideIndex);
-    // updateText(slideIndex);
   }
 
-  canvasContainerEl.addEventListener('click', (event) => handleNavigation(event));
-  canvasContainerEl.addEventListener('touchend', (event) => handleNavigation(event));
+  eventListeners = [
+    { element: canvasContainerEl, type: 'click', handler: handleNavigation },
+    { element: canvasContainerEl, type: 'touchend', handler: handleNavigation }
+  ];
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-    colorValue += event.key === 'ArrowLeft' ? -0.01 : 0.01;
-    setColorMatrix(colorValue);
-    }
-  });
-  // });
+  for (const listener of eventListeners) {
+    listener.element.addEventListener(listener.type, listener.handler);
+  }
+
+  await handleConvolution();
+  updateConvolutionLevel(0);
 }
 
-function beginUntitled(event) {
-  console.log('beginUntitled');
-
-  const frames = parsePoem(event.target.dataset.poem);
-  console.log('frames', frames);
+async function beginUntitled(event) {
+  canvasContainerEl.classList.add('part-2');
+  const closeButton = document.querySelector('#close');
+  closeButton.style.display = 'block';
 
   canvas.classList.add('front');
-  // updateToSlide(slideIndex);
   applyCSS();
-  // drawColorfield({r: 200, g: 50, b: 50});
-  drawColorfield({r: 255,  g: 0, b: 0}, 0);
+  // drawColorfield({r: 255,  g: 0, b: 0}, 0);
 
   // test whether drawing an invisible image changes the canvas
   // testColorfield();
 
-  handleConvolution();
-
-  window.setInterval(() => {
-    // source.playbackRate.value = PLAYBACK_VALUES[Math.floor(Math.random() * PLAYBACK_VALUES.length)];
-  }, 4500);
-
   // bug
-  slideIndex = 0;
-  updateFrame(frames[slideIndex]);
-  // updateText(0);
-  // frames[slideIndex].classList.add('active');
-  // frames[previousSlideIndex]?.classList.remove('active');
+  // slideIndex = 0;
+  // updateFrame(frames[slideIndex]);
 
-  const el = document.querySelector('#canvas-container');
+  window.setTimeout(() => {
+    const el = document.querySelector('#canvas-container');
+    el.classList.add('has-started');
+  }, 0);
   // el.style.filter = `blur(1px) contrast(4) url(#dis-filter)`;
   
   event.preventDefault();
 
-  function updateFrame(el) {
-    const activeEl = document.querySelector('.active');
-    activeEl?.classList.remove('active');
+  // function updateFrame(el) {
+  //   const activeEl = document.querySelector('.active');
+  //   activeEl?.classList.remove('active');
 
-    el.classList.add('active');
-    // frames[previousIndex]?.classList.remove('active');
-  }
-
-  function handleNavigation(event) {
-    const viewportWidth = window.innerWidth;
-    if (event.clientX > viewportWidth / 2) {
-      slideIndex++;
-    } else {
-      slideIndex--;
-    }
-
-    updateFrame(frames[slideIndex]);
-  
-    previousSlideIndex = slideIndex;
-    slideIndex = Math.max(0, Math.min(slideIndex, slides.length - 1));
-
-    // updateToSlide(slideIndex);
-    // updateText(slideIndex);
-  }
-
-  canvasContainerEl.addEventListener('click', (event) => handleNavigation(event));
-  canvasContainerEl.addEventListener('touchend', (event) => handleNavigation(event));
+  //   el.classList.add('active');
+  // }
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-    colorValue += event.key === 'ArrowLeft' ? -0.01 : 0.01;
-    setColorMatrix(colorValue);
+      const increment = event.key === 'ArrowLeft' ? -0.01 : 0.01;
+      applyColorShift(increment);
     }
   });
+
+  window.setInterval(() => {
+    applyColorShift(0.001);
+  }, 500);
+
+  await handleConvolution();
+  console.log('updating convolution level');
+  updateConvolutionLevel(0.03);
+}
+
+function applyColorShift(increment = 0.01) {
+  colorValue += increment;
+  setColorMatrix(colorValue);
+}
+
+function returnHome() {
+  // reset state
+  const canvasContainerEl = document.querySelector('#canvas-container');
+  canvasContainerEl.classList.remove('fullscreen');
+  canvasContainerEl.classList.remove('part-1');
+  canvasContainerEl.classList.remove('part-2');
+  const closeButton = document.querySelector('#close');
+  closeButton.style.display = 'none';
+  eventListeners.forEach(({ element, type, handler }) => {
+    element.removeEventListener(type, handler);
+  });
+  slideIndex = 0;
+  eventListeners = [];
+  previousSlideIndex = null;
+  updateConvolutionLevel(0);
+
+  // document.body.style.backgroundColor = 'snow';
+  document.body.classList.remove('now-viewing');
+  canvasContainerEl.classList.remove('has-started');
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -699,45 +709,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   canvas = document.getElementById('visualizer');
   canvasCtx = canvas.getContext('2d');
-  const buttons = document.querySelectorAll('button');
   createSvgFilter();
-
-  buttons.forEach((button) => {
-    button?.addEventListener('click', (event) => handlePoemSelection(event));
-    button?.addEventListener('touchend', (event) => handlePoemSelection(event));
+  
+  const closeButton = document.querySelector('#close');
+  closeButton?.addEventListener('click', (event) => {
+    returnHome();
+    // canvasContainerEl.classList.remove('front');
   });
-
-
-  // button?.addEventListener('click', (event) => {
-  //   // updateToSlide(slideIndex);
-  //   applyCSS();
-  //   // drawColorfield({r: 200, g: 50, b: 50});
-  //   drawColorfield({r: 255,  g: 0, b: 0}, 0);
-
-  //   // test whether drawing an invisible image changes the canvas
-  //   // testColorfield();
-
-  //   handleConvolution();
-
-  //   window.setInterval(() => {
-  //     // source.playbackRate.value = PLAYBACK_VALUES[Math.floor(Math.random() * PLAYBACK_VALUES.length)];
-  //   }, 4500);
-
-  //   // bug
-  //   slideIndex = 0;
-  //   updateText(0);
-  //   event.preventDefault();
-
-  //   canvasContainerEl.addEventListener('click', (event) => handleNavigation(event));
-  //   canvasContainerEl.addEventListener('touchend', (event) => handleNavigation(event));
-
-  //   document.addEventListener('keydown', (event) => {
-  //     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-  //     colorValue += event.key === 'ArrowLeft' ? -0.01 : 0.01;
-  //     setColorMatrix(colorValue);
-  //     }
-  //   });
-  // });
+  
+  const startButtons = document.querySelectorAll('button.start');
+  startButtons.forEach((button) => {
+    button?.addEventListener('click', (event) => handlePartSelection(event));
+    button?.addEventListener('touchend', (event) => handlePartSelection(event));
+  });
 });
 
 function addArrays(arr1, arr2) {
@@ -760,7 +744,8 @@ function hslColorMatrix(h) {
   const [r, g, b] = hslToRgb(h, s, l);
   const [r2, g2, b2] = hslToRgb(h + 0.55, s, l);
 
-  console.log(`RGB: (${r}, ${g}, ${b})`);
+  // console.log(`RGB: (${r}, ${g}, ${b})`);
+  console.log(`RGB: (${h}`);
 
   const primaryArray = [
     r, 0, 0, -b/3, 0,

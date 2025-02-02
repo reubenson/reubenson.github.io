@@ -1,6 +1,6 @@
 ---
 layout: demo.njk
-title: #Wherever You Go There You Are
+title: airs
 subtitle: 
 description: 
 url: 
@@ -10,35 +10,35 @@ scriptUrl: /public/js/html-review.js
 cssUrl: /aura.css
 hideSeeMore: true
 ---
-<p>Three sound-fragrance poems</p>
+Airs: a poem in two parts
 
-As you browse through these texts, a selection of air recordings will play.
+As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind.
 
 <div id="player" class="player">
-  <p class="description">Fragments taken from Wikipedia's list of local winds</p>
+  <!-- <p class="description">Part I: The Pages</p> -->
+  <button class="start" data-part="part-1">Part I: The Pages</button>
   <footer>
-    <p>Wind: Central Loire Valley, June 20, 2022</p>
-    <button id="start" data-poem="poem-1">Visit</button>
+    <p>I am not really sure how to write poems but I am trying to write poems. The typographic distortion adds texture to the page, but I don't want it to look too much like print. I do like how it slows down the reading experience, which complements the quiet sound of air moving.</p>
   </footer>
 </div>
 
 <div id="player" class="player">
-  <p class="description">Untitled</p>
+  <!-- <p class="description">Part II: The Window</p> -->
+  <button class="start" data-part="part-2">Part II: The Window</button>
   <footer>
-    <p>Wind: Berlin, August 14, 2023</p>
-    <button id="start" data-poem="poem-2">Visit</button>
+    <p>Lattice of Xs (a representational gesture of the screen of a window), also under typographic distortion. It's too fast right now, too much, and I want it instead to feel more like a canopy of leaves rustling in the wind. In addition to the sound of wind, there is an additional resonance. I want it to be like an aeolian harp, taught steel wires vibrating in the wind. This additional sound is processed/produced in the browser, and is what is driving the animation.</p>
   </footer>
 </div>
 
-
+<button id="close">Close</button>
 <div id="canvas-container">
-  <div id="poem-1" class="poem">
+  <div id="part-1" class="poem-container">
     {% include "./poem-1.md" %}
   </div>
-  <div id="poem-2" class="poem">
+  <div id="part-2" class="poem-container">
+    <canvas id="visualizer" width="128" height="512"></canvas>
     {% include "./poem-2.md" %}
   </div>
-  <canvas id="visualizer" width="128" height="512"></canvas>
 
   
 
@@ -116,7 +116,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
       yChannelSelector="G" />
     </filter>
     <filter id="wind-filter">
-      <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="830px" x="10px" y="0"></feImage>
+      <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="860px" x="15px" y="0"></feImage>
       <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="10" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
