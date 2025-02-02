@@ -3,7 +3,7 @@
 class RandomNoiseProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
-    const size = 256 * 2;
+    const size = 256 * 4;
     this.bufferData = new ArrayBuffer(size * size);
     this.bufferView = new Uint8Array(this.bufferData);
     this.bufferSize = size * size;
@@ -12,9 +12,9 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
       // console.log('received ping and posting data')
       // console.log('e.data', e.data);
       // console.log('this.bufferData', this.bufferData.byteLength);
-      this.port.postMessage(this.bufferData);
+      // this.port.postMessage(this.bufferData);
     };
-
+    this.counter = 0;
   }
 
   // append to beginning of buffer
@@ -51,10 +51,16 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
     // console.log('inputs', inputs);
     // console.log('outputs', outputs);
     // console.log('parameters', parameters);
-    const output = outputs[0];
+    // const output = outputs[0];
+    const output = inputs[0];
+    // console.log('output', output);
     // console.log('output', output.length);
-    output.forEach((channel) => {
-      // always a Float32Arrray of 128 samples
+
+    // console.log('output', output.length);
+    
+    output.forEach((channel, index) => {
+      if (index === 1) return; // skip second channel for now
+      // always a Float32Arrray of 128 samples (or 32 pixels)
       for (let i = 0; i < channel.length; i++) {
         let noise = (Math.random() * 2 - 1) / 1.;
         if (!inputs[0].length) {
@@ -62,10 +68,23 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
           return;
         }
 
+        // console.log('channel[i]', channel[i]);
+        // convert audio data to pixel data range
+        channel[i] = 255 * (channel[i] + 1) / 2;
+
+        // channel[i] = inputs[0][0][i];
         // do I need this in stereo? not sure that's useful, but could be integrated in some way ...
-        channel[i] = inputs[0][0][i] * 1 + inputs[0][1][i] * 1 + noise * 0.2;
+        // channel[i] = inputs[0][0][i] * 1 + inputs[0][1][i] * 1 + noise * 0;
       }
+
+      // console.log('First 12 data points in channel:', channel.slice(0, 12));
       this.appendToBuffer(channel);
+
+      // slow down framerate
+      if (this.counter % (16) === 0) {
+        this.port.postMessage(this.bufferData);
+      }
+      this.counter++;
     });
 
     // const newData = new Uint8Array(channel);

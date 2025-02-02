@@ -1,29 +1,61 @@
 ---
-layout: project.njk
-title: Wherever You Go There You Are
+layout: demo.njk
+title: airs
 subtitle: 
 description: 
 url: 
-layoutType: one-column
+# layoutType: one-column
 scriptUrl: /public/js/html-review.js
 # scriptUrl2: /public/js/random-noise-processor.js
 cssUrl: /aura.css
 hideSeeMore: true
 ---
-Prototype for the presentation of prose poetry on the page with a combination of visual manipulation, coloration, and animation.
+Airs: a poem in two parts
+
+As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind.
+
+<div id="player" class="player">
+  <!-- <p class="description">Part I: The Pages</p> -->
+  <button class="start" data-part="part-1">Part I: The Pages</button>
+  <footer>
+    <p>I am not really sure how to write poems but I am trying to write poems. The typographic distortion adds texture to the page, but I don't want it to look too much like print. I do like how it slows down the reading experience, which complements the quiet sound of air moving.</p>
+  </footer>
+</div>
+
+<div id="player" class="player">
+  <!-- <p class="description">Part II: The Window</p> -->
+  <button class="start" data-part="part-2">Part II: The Window</button>
+  <footer>
+    <p>Lattice of Xs (a representational gesture of the screen of a window), also under typographic distortion. It's too fast right now, too much, and I want it instead to feel more like a canopy of leaves rustling in the wind. In addition to the sound of wind, there is an additional resonance. I want it to be like an aeolian harp, taught steel wires vibrating in the wind. This additional sound is processed/produced in the browser, and is what is driving the animation.</p>
+  </footer>
+</div>
+
+<button id="close">Close</button>
+<div id="canvas-container">
+  <div id="part-1" class="poem-container">
+    {% include "./poem-1.md" %}
+  </div>
+  <div id="part-2" class="poem-container">
+    <canvas id="visualizer" width="128" height="512"></canvas>
+    {% include "./poem-2.md" %}
+  </div>
+
+  
+
+
+
+  <!-- <p id="text"></p> -->
+   <!-- “Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost,” -->
+   <!-- https://arc.net/l/quote/haruwzln -->
+</div>
+
+
+
+<!-- Prototype for the presentation of prose poetry on the page with a combination of visual manipulation, coloration, and animation.
 
 The text for these poems come from research into the history of auras and fingerprinting. Using the [FingerprintJS](https://fingerprint.com/blog/browser-fingerprinting-techniques/) NPM library, the animation and coloration will be rendered differently across different browser profiles (not limited to user agent).
 
 Approximately twenty of these poems will be presented in total, which readers can click through on mobile & desktop devices.
-
-<button id="start">Start Animation</button>
-
-<div id="canvas-container">
-  <p id="text"></p>
-   <!-- “Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost,” -->
-   <!-- https://arc.net/l/quote/haruwzln -->
-  <canvas id="visualizer" width="200" height="200"></canvas>
-</div>
 
 
 ~~A proposal for a visual-text piece around the theme of the digital fingerprint.~~
@@ -36,7 +68,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
 
 ~~I think there's a few different directions this project might go, but the content would ultimately be a sort of meditation on the connection between digital fingerprint and aura. And while I think it would be educational to address surveillance technology, I plan to focus the overall tone towards something that feels numinous, as opposed to didactic.~~
 
-~~Click below to see a very rough prototype of color-field animation as a sort of film.~~
+~~Click below to see a very rough prototype of color-field animation as a sort of film.~~ -->
 
 <!-- In addition to the prose poems, the visual presentation will translate the visitor's digital fingerprint into a subtly animating color-field "aura", which will appear differently for each visitor. -->
 
@@ -67,6 +99,9 @@ Approximately twenty of these poems will be presented in total, which readers ca
           0 0 1 0 0
           1 1 1 1 -1" />
       </filter>
+     <filter id="dis-filter">
+      <feImage xlink:href="" result="dis-filter" preserveAspectRatio="xMidYMid meet" width="430px" x="20" y="0"></feImage><feDisplacementMap in2="dis-filter" in="SourceGraphic" scale="15" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+     </filter> 
       <filter id="displacementFilter">
     <feTurbulence
       type="turbulence"
@@ -79,5 +114,10 @@ Approximately twenty of these poems will be presented in total, which readers ca
       scale="50"
       xChannelSelector="R"
       yChannelSelector="G" />
+    </filter>
+    <filter id="wind-filter">
+      <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="860px" x="15px" y="0"></feImage>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="10" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+    </filter>
   </defs>
 </svg>

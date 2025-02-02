@@ -10,7 +10,7 @@ socialImg: /public/pocket-vase.jpg
   <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm while I was attending a <a href="/projects/weaving" target="_blank">music studio residency at EMS</a>.</figcaption>
 </figure>
 
-I've gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It's a simple gestures towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of _being away_.
+I've gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It's a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of _being away_.
 
 Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They range from about 1.5 to 3 inches in height, and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
 
