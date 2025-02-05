@@ -20,7 +20,7 @@
 
   and backwards
   
-  followed closey by
+  followed closely by
   
   another
   
@@ -160,6 +160,13 @@
   is quieter in the shadow
   
   of a leaf
+</div>
+
+<div class="poem">
+
+###
+
+it is as if
 </div>
 
 

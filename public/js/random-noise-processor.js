@@ -3,7 +3,7 @@
 class RandomNoiseProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
-    const size = 256 * 4;
+    const size = 256 * 2;
     this.bufferData = new ArrayBuffer(size * size);
     this.bufferView = new Uint8Array(this.bufferData);
     this.bufferSize = size * size;

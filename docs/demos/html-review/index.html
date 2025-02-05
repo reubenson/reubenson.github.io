@@ -52,14 +52,14 @@
       <div class="content-wrapper">
         <p>Airs: a poem in two parts</p>
 <p>As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind.</p>
-<div id="player" class="player">
+<div class="player">
   <!-- <p class="description">Part I: The Pages</p> -->
   <button class="start" data-part="part-1">Part I: The Pages</button>
   <footer>
     <p>I am not really sure how to write poems but I am trying to write poems. The typographic distortion adds texture to the page, but I don't want it to look too much like print. I do like how it slows down the reading experience, which complements the quiet sound of air moving.</p>
   </footer>
 </div>
-<div id="player" class="player">
+<div class="player">
   <!-- <p class="description">Part II: The Window</p> -->
   <button class="start" data-part="part-2">Part II: The Window</button>
   <footer>
@@ -67,7 +67,7 @@
   </footer>
 </div>
 <p><button id="close">Close</button></p>
-<div id="canvas-container">
+<div id="poems-container">
   <div id="part-1" class="poem-container">
     <div class="poem">
 <h3>against rain</h3>
@@ -80,7 +80,7 @@
 <p>green stems make their way</p>
 <p>a step backwards</p>
 <p>and backwards</p>
-<p>followed closey by</p>
+<p>followed closely by</p>
 <p>another</p>
 <p>they make their way home</p>
 </div>
@@ -152,6 +152,10 @@
 <p>every thing</p>
 <p>is quieter in the shadow</p>
 <p>of a leaf</p>
+</div>
+<div class="poem">
+<h3></h3>
+<p>it is as if</p>
 </div>
 <!-- prevented them from drying their laundry<span class="line-break"></span> -->
 <!-- and yet -->
@@ -235,7 +239,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
     </filter>
     <filter id="wind-filter">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="860px" x="15px" y="0"></feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="10" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>

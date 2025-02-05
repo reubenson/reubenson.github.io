@@ -14,7 +14,7 @@ Airs: a poem in two parts
 
 As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind.
 
-<div id="player" class="player">
+<div class="player">
   <!-- <p class="description">Part I: The Pages</p> -->
   <button class="start" data-part="part-1">Part I: The Pages</button>
   <footer>
@@ -22,7 +22,7 @@ As you browse through these texts, recordings of the wind (made 2022-2024) will 
   </footer>
 </div>
 
-<div id="player" class="player">
+<div class="player">
   <!-- <p class="description">Part II: The Window</p> -->
   <button class="start" data-part="part-2">Part II: The Window</button>
   <footer>
@@ -31,7 +31,7 @@ As you browse through these texts, recordings of the wind (made 2022-2024) will 
 </div>
 
 <button id="close">Close</button>
-<div id="canvas-container">
+<div id="poems-container">
   <div id="part-1" class="poem-container">
     {% include "./poem-1.md" %}
   </div>
@@ -117,7 +117,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
     </filter>
     <filter id="wind-filter">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="860px" x="15px" y="0"></feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="10" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>
