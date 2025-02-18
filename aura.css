@@ -1,6 +1,7 @@
 body {
   font-family: 'Ibarra Real Nova', monospace;
   font-weight: 400;
+  background: black;
 }
 
 body.now-viewing {
@@ -40,8 +41,8 @@ body.now-viewing {
   display: none;
 }
 
-canvas {
-  opacity: 0.7;
+/* canvas { */
+  /* opacity: 0.7;
   width: 100%;
   height: 100%;
   filter: blur(16px) contrast(2);
@@ -53,8 +54,8 @@ canvas {
   z-index: -1;
   transition: 120s filter linear;
   filter: blur(15px) contrast(1);
-  display: none;
-}
+  display: none; */
+/* } */
 
 /* #poems-container p {
   opacity: 0.9;
@@ -131,7 +132,7 @@ button:hover {
   height: 80%;
   filter: blur(2px) contrast(3) brightness(0.7);
   background: snow;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   transition: 240s filter linear, 60s opacity linear;
   opacity: 0;
 
@@ -142,28 +143,47 @@ button:hover {
 
   canvas {
     display: block;
+    opacity: 1.0;
+    width: 100%;
+    height: 100%;
+    filter: url(#customFilter);
+    /* filter: blur(16px) contrast(2); */
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: -1;
+    /* transition: 120s filter linear; */
+    /* filter: blur(15px) contrast(1); */
+    /* display: none; */
   }
 
   .poem-container {
     width: 100%;
+    height: 100%;
     overflow: hidden;
-    filter: url(#customFilter);
+    /* filter: url(#customFilter); */
     position: absolute;
 
     .poem {
+      border-radius: 40px;
       height: calc(100vh - 100px);
       width: calc(100vw - 100px);
       overflow: hidden;
       opacity: 0;
-      transition: 12s opacity linear;
+      /* transition: 12s opacity linear; */
       border: none !important;
+      width: 100%;
+      height: 100%;
       text-align: center !important;
     }
 
     &.selected-part {
       .poem {
         display: block;
-        opacity: 0.8;
+        opacity: 1.0;
+        /* display: none; */
       }
     }
 
@@ -171,10 +191,13 @@ button:hover {
       color: black !important;
       background: snow;
       line-break: anywhere;
-      letter-spacing: 0.01em;
-      line-height: .51em;
+      letter-spacing: -0.09em;
+      line-height: .42em;
+      /* letter-spacing: 0.01em;
+      line-height: .51em; */
       font-size: 35px;
       margin: -10px auto auto;
+      text-transform: lowercase;
     }
   }
 }
