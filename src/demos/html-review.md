@@ -36,7 +36,6 @@ As you browse through these texts, recordings of the wind (made 2022-2024) will 
     {% include "./poem-1.md" %}
   </div>
   <div id="part-2" class="poem-container">
-    <!-- <canvas id="visualizer" width="512" height="512"></canvas> -->
     {% include "./poem-2.md" %}
   </div>
 

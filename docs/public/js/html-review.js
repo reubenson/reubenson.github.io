@@ -1,20 +1,11 @@
 const CANVAS_WIDTH = 512; // this is the desired width of the image drawn from the audio buffer
 const CANVAS_HEIGHT = 512;
 
-let audioHasStarted = false
+let audioHasStarted = false;
+const href = window.location.href.split('#')[0];
 
 const audioFilepath = '/public/airports-for-music-i.mp3';
 // const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
-const PLAYBACK_VALUES = [
-  // 1 + .00001,
-  // 1,
-  1+ 1/64 + 0.00005,
-  // 1 - 1/64 + 0.000005,
-  // 1 - 1/64 - 0.000003,
-  1 + 1/64 + 0.000003,
-  // 2 + 1/64 + .000001
-];
-// const PLAYBACK_VALUES = [1 + .00001, 1+ 1/64 + 0.00005, 2+ 1/64 + .000001];
 
 let frameCount = 0;
 const frameRate = 30; // Target frame rate (e.g., 30 frames per second)
@@ -29,7 +20,6 @@ let convolver;
 let analyser;
 let canvas;
 let canvasCtx;
-
 
 let imageData;
 let imageWidth;
@@ -89,91 +79,6 @@ function hueToRgb(p, q, t) {
   return p;
 }
 
-function drawColorfield(color, alpha = 255) {
-  const width = canvas.width;
-  const height = canvas.height;
-  imageData = canvasCtx.createImageData(width, height);
-  const data = imageData.data;
-
-  if (color) {
-    for (let i = 0; i < data.length; i += 4) {
-      data[i] = color.r;
-      data[i + 1] = color.g;
-      data[i + 2] = color.b;
-      data[i + 3] = alpha;
-    }
-  } else {
-    for (let i = 0; i < data.length; i += 4) {
-      const x = (i / 4) % width;
-      const y = Math.floor(i / 4 / width);
-      const r = x / width * 255;
-      const g = y / height * 255;
-      const b = 128;
-      data[i] = r;
-      data[i + 1] = g;
-      data[i + 2] = b;
-      data[i + 3] = 25;
-    }
-  }
-  canvasCtx.putImageData(imageData, 0, 0);
-}
-
-function handleImageUpload(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = new Image();
-
-    img.onload = async function() {
-      imageWidth = img.width;
-      imageHeight = img.height;
-      canvas.width = imageWidth;
-      canvas.height = imageHeight;
-      canvasCtx.drawImage(img, 0, 0);
-      imageData = canvasCtx.getImageData(0, 0, imageWidth, imageHeight);
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-function processImageData(imageData, audioNode, sampleRate) { 
-  const pixels = imageData.data;
-  const numSamples = canvas.width * canvas.height * 4;
-  // const width = 32 * 4;
-  // const height = 32 * 4;
-  // const numSamples = width * height * 4;
-  const audioBuffer = new Float32Array(numSamples);
-
-  // Convert pixel data to audio data
-  for (let i = 0; i < numSamples; i++) {
-    // brute force encoding of red pixels
-    // if (i%4 === 0 || i%4 === 3) {
-    //   audioBuffer[i] = 1;
-    // } else {
-    //   audioBuffer[i] = 0;
-    // }
-
-    // this seems to work just as well though
-    audioBuffer[i] = (pixels[i] / 255) * 2 - 1;
-  }
-
-  const buffer = audioCtx.createBuffer(2, numSamples, sampleRate);
-  buffer.copyToChannel(audioBuffer, 0);
-  buffer.copyToChannel(audioBuffer, 1);
-  audioNode.buffer = buffer;
-  // console.log('First 10 data points in buffer:', audioBuffer.slice(0, 10));
-}
-
-function getImageBuffer(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    audioBuffer = await audioCtx.decodeAudioData(e.target.result);
-  };
-  reader.readAsArrayBuffer(file);
-}
-
 function updateConvolutionLevel(level) {
   if (!audioHasStarted) return;
 
@@ -204,12 +109,8 @@ async function handleConvolution() {
   gainNodeConvolution.gain.value = wet;
   sumNode.gain.value = 1.0;
 
-  
   convolver.normalize = false;
   
-  // using music as convolution signal and image as source (looping)
-  // processImageData(imageData, source, audioCtx.sampleRate);
-  // testing wind instead 
   let windresponse = await fetch('/public/html-review/test-wind.mp3');
   let windBuffer = await windresponse.arrayBuffer();
   source.buffer = await audioCtx.decodeAudioData(windBuffer);
@@ -226,8 +127,6 @@ async function handleConvolution() {
   gainNodeConvolution.connect(gainNodeConvolution2);
   gainNodeConvolution2.connect(sumNode);
   
-  // const compressor = audioCtx.createDynamicsCompressor();
-  // sumNode.connect(compressor);
 
   // lower volume of player relative to animation
   const playerGainNode = audioCtx.createGain();
@@ -235,31 +134,7 @@ async function handleConvolution() {
   sumNode.connect(playerGainNode);
   playerGainNode.connect(audioCtx.destination);
 
-  // sumNode.connect(audioCtx.destination);
-
-  // const distortion = audioCtx.createWaveShaper();
-  // distortion.curve = new Float32Array([0, 1]); // Simple linear distortion curve
-  // distortion.oversample = '4x';
-
-  // compressor.connect(distortion);
-  // distortion.connect(audioCtx.destination);
-
-  // compressor.connect(audioCtx.destination);
-
-  // gainNodeConvolution.connect(analyser);
-  // gainNodeSource.connect(analyser);
-
-  // connect to processor
-  // convolver.connect(processor);
   convolver.connect(processor);
-
-  // compressor.connect(processor);
-  // distortion.connect(processor);
-  // processor.connect(analyser);
-  // processor.connect(audioCtx.destination);
-  
-  // source.playbackRate.value = PLAYBACK_VALUES[0];
-  // source.sampleRate = 42000;
   source.start();
   processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
 
@@ -272,79 +147,9 @@ function visualize() {
   function draw() {
     requestAnimationFrame(draw);
 
-    // console.log('drawing')
-
-    if (!shouldUpdateCanvas) {
-      // console.log('not updating canvas');
-      return;
-    }
+    if (!shouldUpdateCanvas) return;
 
     shouldUpdateCanvas = false;
-
-    // request bufferArray data from processor
-    // processor.port.postMessage('ping');
-    
-    // frameCount++;
-    // if (frameCount < 1) {
-      // return;
-    // }
-    // frameCount = 0;
-
-    // console.log('audioBufferData', audioBufferData.length);
-    
-    // I think this is retrieving redundant data on each call, could be optimized
-    // and also a running buffer would be nicer to scale up the time range of audio data
-    // const bufferLength = analyser.frequencyBinCount;
-    // let dataArray = new Uint8Array(bufferLength);
-
-    // // Fill dataArray with data from audioBufferData until full
-    // let dataArrayIndex = 0;
-    
-    // // Keep adding data while we have space in dataArray and data in audioBufferData
-    // while (dataArrayIndex < bufferLength && audioBufferData.length > 0) {
-    //   const currentBuffer = audioBufferData[0];
-      
-    //   // Copy as many elements as possible from current buffer
-    //   const remainingSpace = bufferLength - dataArrayIndex;
-    //   const elementsToCopy = Math.min(remainingSpace, currentBuffer.length);
-      
-    //   for (let i = 0; i < elementsToCopy; i++) {
-    //     dataArray[dataArrayIndex] = currentBuffer[i];
-    //     dataArrayIndex++;
-    //   }
-      
-    //   // If we used all elements from current buffer, remove it
-    //   if (elementsToCopy === currentBuffer.length) {
-    //     audioBufferData.shift();
-    //   } else {
-    //     // Otherwise trim the used elements
-    //     audioBufferData[0] = currentBuffer.slice(elementsToCopy);
-    //   }
-    // }
-
-    // console.log('dataArray', dataArray);
-
-    // analyser.getByteTimeDomainData(dataArray);
-
-    // Get latest audio buffer data and copy into dataArray
-    // if (audioBufferData.length > 0) {
-    //   // Take up to bufferLength worth of data from the buffer
-    //   const buffersToProcess = audioBufferData.splice(-bufferLength);
-    //   // Combine all buffers into one array of size bufferLength
-    //   const combinedBuffer = new Uint8Array(bufferLength);
-    //   buffersToProcess.forEach((buffer, i) => {
-    //     const offset = i * buffer.length;
-    //     if (offset + buffer.length <= bufferLength) {
-    //       combinedBuffer.set(buffer, offset);
-    //     }
-    //   });
-    //   dataArray.set(combinedBuffer);
-    // }
-
-    // console.log('First 16 elements:', Array.from(audioBufferData.slice(0, 16)));
-
-
-    // maximum value of this is 16384 (128 x 128)
 
     // this should only incrementally update?
     canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
@@ -355,7 +160,6 @@ function visualize() {
 
     imageArray = imageArray.map((val, index) => {
       if (index % 4 === 0) {
-        // console.log('val', val);
         return val;
       } else if (index % 4 === 1) {
         return val;
@@ -371,27 +175,16 @@ function visualize() {
     });
 
     const len = Math.sqrt(audioBufferData.byteLength) / 2;
+    
 
-    // console.log('len', len);
-
-    // dataArray 2048 -> 16 x 16
-    // dataArray 4096 -> 32 x 32
-    // dataArray 16384 -> 64 x 64
-
-    // Example usage:
     const originalWidth = len;
     const originalHeight = len;
     const scaleFactor = 1;
-    const scaledPixelArray = scaleUpPixels(imageArray, originalWidth, originalHeight, scaleFactor);
+    // const scaledPixelArray = scaleUpPixels(imageArray, originalWidth, originalHeight, scaleFactor);
     
-    // seems like len wants to be 32?, but not sure where that number is coming from
-    // console.log(len / 8)
-
-    // 
-    const aspect = 2;
-    // canvasCtx.putImageData(new ImageData(imageArray, len * scaleFactor / aspect, len * scaleFactor * aspect), 0, 0);
     canvasCtx.putImageData(new ImageData(imageArray, CANVAS_WIDTH, CANVAS_HEIGHT), 0, 0);
 
+    return;
 
     // experiment with using canvas for displacement
     if (displacementCount < 0) {
@@ -439,57 +232,10 @@ function scaleUpPixels(pixelArray, width, height, scaleFactor) {
   return newPixelArray;
 }
 
-function updateWithImage(index) {
-  const canvasEl = document.querySelector('canvas');
-  const container = document.querySelector('#poems-container');
-  const lastActiveEl = container.querySelector('.active');
-
-  const imgEl = document.querySelector(`#slide-${index}-image`);
-
-  // removing images for now
-  // imgEl?.classList.add('active');
-  lastActiveEl?.classList.remove('active');
-
-  // imgEl.style.display = 'block';
-  // canvasEl.style.filter = `blur(15px) contrast(1) url(#slide-${slideIndex}-filter)`;
-  // const url = slides[slideIndex].imgUrl;
-  // const filterStyle = canvasEl.style.filter;
-  // const el = document.querySelector('feDisplacementMap');
-  // console.log('el', el);
-  // el.setAttribute("in2", `slide-${slideIndex}`);
-  // const feImage = el.querySelector('feImage');
-  // feImage.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", url);
-  // feImage.setAttribute("result", "beagle");
-  // el.appendChild(feImage);
-}
-
-function updateWithText(text) {
-  const el = document.querySelector('#text');
-  el.textContent = text;
-}
-
 function updateFilter(index) {
   const el = document.querySelector('#text');
   el.style.filter = `blur(0px) contrast(4) url(#slide-${index}-filter)`;
   // el.style.filter = `blur(2px) contrast(4) url(#dis-filter)`;
-}
-
-function updateToSlide(index) {
-  const { imgUrl, text } = slides[index];
-
-  updateWithImage(index);
-  updateWithText(text);
-  updateFilter(index);
-
-  // const img = new Image();
-  // img.onload = function() {
-  //   canvas.width = img.width;
-  //   canvas.height = img.height;
-  //   canvasCtx.drawImage(img, 0, 0);
-  //   imageData = canvasCtx.getImageData(0, 0, img.width, img.height);
-  // };
-  // img.src = slide.imgUrl;
-  // slideIndex++;
 }
 
 function initializeSlideImages() {
@@ -529,49 +275,32 @@ function initializeSlideImages() {
   });
 }
 
-// function handleNavigation(event) {
-//   const viewportWidth = window.innerWidth;
-//   if (event.clientX > viewportWidth / 2) {
-//     slideIndex++;
-//   } else {
-//     slideIndex--;
-//   }
-
-//   slideIndex = Math.max(0, Math.min(slideIndex, slides.length - 1));
-//   // updateToSlide(slideIndex);
-//   // updateText(slideIndex);
-// }
-
-function updateText(index) {
-  const textEls = document.querySelectorAll('#poems-container p');
-  textEls[index].classList.add('active');
-  if (previousSlideIndex !== null) {
-    textEls[previousSlideIndex].classList.remove('active');
-  }
-  previousSlideIndex = index;
-  // const el = document.querySelector('#text');
-  // el.textContent = slides[index].text;
-}
-
-function handlePartSelection(event) {
-  const part = event.target.dataset.part;
+function handlePartSelection(part) {
+  let hash = window.location.hash;
+  const splitHash = hash.split('-');
+  const index = splitHash[splitHash.length - 1] || 0;
+  // const part = event.target.dataset.part;
   const previousPoemEl = document.querySelector('.poem-container.selected-part');
   previousPoemEl?.classList.remove('selected-part');
   const poemEl = document.querySelector(`#${part}`);
   poemEl.classList.add('selected-part');
 
   if (part === 'part-1') {
-    beginFragments(event); // refactor this to not pass down events
+    beginFragments(index);
+    hash = `#part-1-${index + 1}`;
+    window.history.pushState({}, '', `${href}${hash}`);
   } else if (part === 'part-2') {
-    beginUntitled(event);
+    beginUntitled();
+    hash = `#part-2`;
+    window.history.pushState({}, '', `${href}${hash}`);
   }
 
-  // document.body.style.backgroundColor = 'black';
   document.body.classList.add('now-viewing');
 }
 
-function parsePoem(poem) {
-  const frames = document.querySelectorAll(`#${poem} div`);
+function parsePoem(el) {
+  const frames = el.querySelectorAll('div');
+
   return frames;
 }
 
@@ -583,18 +312,16 @@ function updateFrame(el) {
   // frames[previousIndex]?.classList.remove('active');
 }
 
-async function beginFragments(event) {
+async function beginFragments(index) {
   canvasContainerEl.classList.add('part-1');
   const closeButton = document.querySelector('#close');
   closeButton.style.display = 'block';
 
-  const frames = parsePoem(event.target.dataset.part);
+  const frames = parsePoem(document.querySelector('#part-1'));
 
-  slideIndex = 0;
-  updateFrame(frames[0]);
+  slideIndex = index;
+  updateFrame(frames[index]);
   
-  event.preventDefault();
-
   function handleNavigation(event) {
     const viewportWidth = window.innerWidth;  
     const xLocation = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
@@ -606,6 +333,7 @@ async function beginFragments(event) {
     }
   
     updateFrame(frames[slideIndex]);
+    window.history.pushState({}, '', `${href}#part-1-${slideIndex + 1}`);
   
     previousSlideIndex = slideIndex;
     slideIndex = Math.max(0, Math.min(slideIndex, frames.length - 1));
@@ -624,7 +352,7 @@ async function beginFragments(event) {
   updateConvolutionLevel(0);
 }
 
-async function beginUntitled(event) {
+async function beginUntitled() {
   canvasContainerEl.classList.add('part-2');
   const closeButton = document.querySelector('#close');
   closeButton.style.display = 'block';
@@ -636,15 +364,6 @@ async function beginUntitled(event) {
     el.classList.add('has-started');
   }, 0);
   // el.style.filter = `blur(1px) contrast(4) url(#dis-filter)`;
-  
-  event.preventDefault();
-
-  // function updateFrame(el) {
-  //   const activeEl = document.querySelector('.active');
-  //   activeEl?.classList.remove('active');
-
-  //   el.classList.add('active');
-  // }
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -658,7 +377,6 @@ async function beginUntitled(event) {
   }, 500);
 
   await handleConvolution();
-  console.log('updating convolution level');
   updateConvolutionLevel(0.03);
 }
 
@@ -683,9 +401,11 @@ function returnHome() {
   previousSlideIndex = null;
   updateConvolutionLevel(0);
 
-  // document.body.style.backgroundColor = 'snow';
   document.body.classList.remove('now-viewing');
   canvasContainerEl.classList.remove('has-started');
+
+  // Update URL without triggering popstate
+  window.history.pushState({}, '', href);
 }
 
 let updateCounter= 0;
@@ -695,26 +415,24 @@ let shouldUpdateCanvas = false;
 // it should be appended to preserve linearity of the audio data, where the first element of the buffer is
 // the newest and the last element is the oldest
 function updateAudioBufferData(data) {
-  const incrementCount = Math.round(4 * CANVAS_WIDTH / data.length);
-  
-  // Create temporary array to hold combined data
   const tempArray = new Uint8Array(audioBufferData.length);
   
-  // Copy existing data at the start, shifted by the length of new data
   tempArray.set(audioBufferData.slice(0, audioBufferData.length - data.length), data.length);
-  
-  // Copy new data at the end
-  // tempArray.set(data, audioBufferData.length - data.length);
   tempArray.set(data, 0);
-  
-  // Update audioBufferData with the new combined array
   audioBufferData.set(tempArray);
-
-  // if (updateCounter % incrementCount === 0) {
   shouldUpdateCanvas = true;
-  //   updateCounter = 0;
-  // }
-  // updateCounter++;
+}
+
+function handleRouting() {
+  const hash = window.location.hash;
+
+  if (hash === '') {
+    returnHome();
+  } else if (hash.includes('#part-1')) {
+    handlePartSelection('part-1');
+  } else if (hash.includes('#part-2')) {
+    handlePartSelection('part-2');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -726,14 +444,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   processor.port.onmessage = (e) => {
     updateAudioBufferData(e.data);
-    // instead of appending to a stream, could update only when the whole image is ready?
-    // but that might also look jarring due to convolution
-    // visualize(e.data);
-    // audioBufferData.push(e.data);
-    // console.log('hi', e.data);
   };
 
-  // canvas = document.getElementById('visualizer');
   canvas = document.createElement('canvas');
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
@@ -750,9 +462,17 @@ document.addEventListener('DOMContentLoaded', async function() {
   
   const startButtons = document.querySelectorAll('button.start');
   startButtons.forEach((button) => {
-    button?.addEventListener('click', (event) => handlePartSelection(event));
-    button?.addEventListener('touchend', (event) => handlePartSelection(event));
+    button?.addEventListener('click', (event) => handlePartSelection(event.target.dataset.part));
+    button?.addEventListener('touchend', (event) => handlePartSelection(event.target.dataset.part));
   });
+
+  // Add popstate event listener for browser back/forward
+  window.addEventListener('popstate', () => {
+    handleRouting();
+  });
+
+  // Handle initial route
+  handleRouting();
 });
 
 function addArrays(arr1, arr2) {
