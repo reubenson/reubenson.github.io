@@ -1,17 +1,12 @@
-let audioHasStarted = false
+const CANVAS_WIDTH = 512; // this is the desired width of the image drawn from the audio buffer
+const CANVAS_HEIGHT = 512;
+
+let audioHasStarted = false;
+let part1Index = 0;
+const href = window.location.href.split('#')[0];
 
 const audioFilepath = '/public/airports-for-music-i.mp3';
 // const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
-const PLAYBACK_VALUES = [
-  // 1 + .00001,
-  // 1,
-  1+ 1/64 + 0.00005,
-  // 1 - 1/64 + 0.000005,
-  // 1 - 1/64 - 0.000003,
-  1 + 1/64 + 0.000003,
-  // 2 + 1/64 + .000001
-];
-// const PLAYBACK_VALUES = [1 + .00001, 1+ 1/64 + 0.00005, 2+ 1/64 + .000001];
 
 let frameCount = 0;
 const frameRate = 30; // Target frame rate (e.g., 30 frames per second)
@@ -27,9 +22,6 @@ let analyser;
 let canvas;
 let canvasCtx;
 
-function rotateColors() {
-
-}
 let imageData;
 let imageWidth;
 let imageHeight;
@@ -42,72 +34,13 @@ let eventListeners = [];
 
 let slideIndex = 0;
 let previousSlideIndex = null;
-const slides = [
-  {
-    imgUrl: "",
-    // imgUrl: "/public/html-review/bently-snowflakes-cover.jpg",
-    text: "There's a certain weightlessness to being here \n \n There's a certain weightlessness to being here \n \n There's a certain weightlessness to being here \n \n There's a certain weightlessness to being here \n \n There's a certain weightlessness to being here",
-    displacementUrl: "/public/html-review/bently-snowflakes-cover.jpg"
-  },
-  {
-    imgUrl: "",
-    // imgUrl: "/public/html-review/bently-snowflakes-cover.jpg",
-    text: "that has been heated / upwardly spiraling cyclonic",
-    displacementUrl: "/public/html-review/bently-snowflakes-cover.jpg"
-  },
-  {
-    imgUrl: "",
-    // imgUrl: "/public/html-review/bently-snowflakes-cover.jpg",
-    text: "orographically trapped",
-    displacementUrl: "/public/html-review/bently-snowflakes-cover.jpg"
-  },
-  {
-    imgUrl: "",
-    // imgUrl: "/public/html-review/bently-snowflakes-cover.jpg",
-    text: "its invigorating dryness",
-    displacementUrl: "/public/html-review/bently-snowflakes-cover.jpg"
-  },
-  {
-    imgUrl: "",
-    // imgUrl: "/public/html-review/bently-snowflakes-cover.jpg",
-    text: "usually felt throughout the summertime",
-    displacementUrl: "/public/html-review/bently-snowflakes-cover.jpg"
-  },
-  {
-    imgUrl: "",
-    // imgUrl: "/public/html-review/bently-snowflakes-cover.jpg",
-    text: "there would be no seasonal transport",
-    displacementUrl: "/public/html-review/bently-snowflakes-cover.jpg"
-  },
 
-  {
-    imgUrl: "",
-    // imgUrl: "/public/html-review/bently-snowflakes-cover.jpg",
-    text: "He would examine the snowflakes with a magnifying glass and sweep away the ones he didn’t want with a turkey feather",
-    displacementUrl: "/public/html-review/bently-snowflakes-cover.jpg"
-  },
-  {
-    imgUrl: "/public/meander-door.jpg",
-    text: "Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost",
-    displacementUrl: "/public/meander-door.jpg",
-  },
-  {
-    imgUrl: "/public/html-review/crystals.png",
-    text: "Just that much beauty was gone, without leaving any record behind",
-    displacementUrl: "/public/html-review/crystals.png",
-  },
-  {
-    imgUrl: "/public/html-review/herschel-fingerprint.jpg",
-    text: "Every print showed the minute tell-tale dot which Mr. Gallon’s sharp eye had noticed twenty-two years before. No doubt it was a natal mark. It has anyhow already persisted for thirty-two years.",
-    displacementUrl: "/public/html-review/herschel-fingerprint.jpg",
-  }
-]
+// this is the audio buffer data that is being sent to the processor
+// it will be of fixed size ... of 512 x 512 pixels
+const bufferWidth = CANVAS_WIDTH * 4;
+let audioBufferData = new Uint8Array(bufferWidth * CANVAS_HEIGHT);
 
-function applyCSS() {
-  const container = document.querySelector('#canvas-container');
-
-  container.classList.add('fullscreen');
-}
+let colorShiftInterval;
 
 /**
  * Converts an HSL color value to RGB. Conversion formula
@@ -149,91 +82,6 @@ function hueToRgb(p, q, t) {
   return p;
 }
 
-function drawColorfield(color, alpha = 255) {
-  const width = canvas.width;
-  const height = canvas.height;
-  imageData = canvasCtx.createImageData(width, height);
-  const data = imageData.data;
-
-  if (color) {
-    for (let i = 0; i < data.length; i += 4) {
-      data[i] = color.r;
-      data[i + 1] = color.g;
-      data[i + 2] = color.b;
-      data[i + 3] = alpha;
-    }
-  } else {
-    for (let i = 0; i < data.length; i += 4) {
-      const x = (i / 4) % width;
-      const y = Math.floor(i / 4 / width);
-      const r = x / width * 255;
-      const g = y / height * 255;
-      const b = 128;
-      data[i] = r;
-      data[i + 1] = g;
-      data[i + 2] = b;
-      data[i + 3] = 25;
-    }
-  }
-  canvasCtx.putImageData(imageData, 0, 0);
-}
-
-function handleImageUpload(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = new Image();
-
-    img.onload = async function() {
-      imageWidth = img.width;
-      imageHeight = img.height;
-      canvas.width = imageWidth;
-      canvas.height = imageHeight;
-      canvasCtx.drawImage(img, 0, 0);
-      imageData = canvasCtx.getImageData(0, 0, imageWidth, imageHeight);
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-function processImageData(imageData, audioNode, sampleRate) { 
-  const pixels = imageData.data;
-  const numSamples = canvas.width * canvas.height * 4;
-  // const width = 32 * 4;
-  // const height = 32 * 4;
-  // const numSamples = width * height * 4;
-  const audioBuffer = new Float32Array(numSamples);
-
-  // Convert pixel data to audio data
-  for (let i = 0; i < numSamples; i++) {
-    // brute force encoding of red pixels
-    // if (i%4 === 0 || i%4 === 3) {
-    //   audioBuffer[i] = 1;
-    // } else {
-    //   audioBuffer[i] = 0;
-    // }
-
-    // this seems to work just as well though
-    audioBuffer[i] = (pixels[i] / 255) * 2 - 1;
-  }
-
-  const buffer = audioCtx.createBuffer(2, numSamples, sampleRate);
-  buffer.copyToChannel(audioBuffer, 0);
-  buffer.copyToChannel(audioBuffer, 1);
-  audioNode.buffer = buffer;
-  // console.log('First 10 data points in buffer:', audioBuffer.slice(0, 10));
-}
-
-function getImageBuffer(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    audioBuffer = await audioCtx.decodeAudioData(e.target.result);
-  };
-  reader.readAsArrayBuffer(file);
-}
-
 function updateConvolutionLevel(level) {
   if (!audioHasStarted) return;
 
@@ -264,12 +112,8 @@ async function handleConvolution() {
   gainNodeConvolution.gain.value = wet;
   sumNode.gain.value = 1.0;
 
-  
   convolver.normalize = false;
   
-  // using music as convolution signal and image as source (looping)
-  // processImageData(imageData, source, audioCtx.sampleRate);
-  // testing wind instead 
   let windresponse = await fetch('/public/html-review/test-wind.mp3');
   let windBuffer = await windresponse.arrayBuffer();
   source.buffer = await audioCtx.decodeAudioData(windBuffer);
@@ -286,8 +130,6 @@ async function handleConvolution() {
   gainNodeConvolution.connect(gainNodeConvolution2);
   gainNodeConvolution2.connect(sumNode);
   
-  // const compressor = audioCtx.createDynamicsCompressor();
-  // sumNode.connect(compressor);
 
   // lower volume of player relative to animation
   const playerGainNode = audioCtx.createGain();
@@ -295,96 +137,60 @@ async function handleConvolution() {
   sumNode.connect(playerGainNode);
   playerGainNode.connect(audioCtx.destination);
 
-  // sumNode.connect(audioCtx.destination);
-
-  // const distortion = audioCtx.createWaveShaper();
-  // distortion.curve = new Float32Array([0, 1]); // Simple linear distortion curve
-  // distortion.oversample = '4x';
-
-  // compressor.connect(distortion);
-  // distortion.connect(audioCtx.destination);
-
-  // compressor.connect(audioCtx.destination);
-
-  // gainNodeConvolution.connect(analyser);
-  // gainNodeSource.connect(analyser);
-
-  // connect to processor
   convolver.connect(processor);
-  // compressor.connect(processor);
-  // distortion.connect(processor);
-  // processor.connect(analyser);
-  // processor.connect(audioCtx.destination);
-  
-  source.playbackRate.value = PLAYBACK_VALUES[0];
-  // source.sampleRate = 42000;
   source.start();
-  processor.port.postMessage('ping');
+  
+  // does not indicate that user interaction has occured
+  audioHasStarted = audioCtx.state === 'running' ? true : false;
+  if (audioHasStarted) {
+    processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
+  }
 
-  audioHasStarted = true;
+  visualize();
 }
 
-function visualize(dataArray) {
+function visualize() {
   function draw() {
-    // requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
 
-    // request bufferArray data from processor
-    processor.port.postMessage('ping');
-    
-    frameCount++;
-    if (frameCount < 1) {
-      // return;
-    }
-    frameCount = 0;
-    
-    // I think this is retrieving redundant data on each call, could be optimized
-    // and also a running buffer would be nicer to scale up the time range of audio data
-    // const bufferLength = analyser.frequencyBinCount;
-    // let dataArray = new Uint8Array(bufferLength);
-    // analyser.getByteTimeDomainData(dataArray);
+    if (!shouldUpdateCanvas) return;
 
-    // maximum value of this is 16384 (128 x 128)
+    shouldUpdateCanvas = false;
 
+    // this should only incrementally update?
     canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let imageArray = new Uint8ClampedArray(dataArray);
+    let imageArray = new Uint8ClampedArray(audioBufferData);
+    // console.log('imageArray', imageArray.slice(0, 16));
+    // console.log('imageArray', imageArray.length);
 
     imageArray = imageArray.map((val, index) => {
       if (index % 4 === 0) {
-        // console.log('val', val);
         return val;
       } else if (index % 4 === 1) {
         return val;
       } else if (index % 4 === 2) {
         return val;
       } else if (index % 4 === 3) {
-        return val;
+        // return val;
         // increase level (more negative -> more transparency?)
-        return Math.pow(val / 255, -1.5) * 255
+        return Math.pow(val / 255, -1.25) * 255
         // return val;
         return 255;
       }
     });
 
-    const len = Math.sqrt(dataArray.byteLength) / 2;
+    const len = Math.sqrt(audioBufferData.byteLength) / 2;
+    
 
-    // dataArray 2048 -> 16 x 16
-    // dataArray 4096 -> 32 x 32
-    // dataArray 16384 -> 64 x 64
-
-    // Example usage:
     const originalWidth = len;
     const originalHeight = len;
     const scaleFactor = 1;
-    const scaledPixelArray = scaleUpPixels(imageArray, originalWidth, originalHeight, scaleFactor);
+    // const scaledPixelArray = scaleUpPixels(imageArray, originalWidth, originalHeight, scaleFactor);
     
-    // seems like len wants to be 32?, but not sure where that number is coming from
-    // console.log(len / 8)
+    canvasCtx.putImageData(new ImageData(imageArray, CANVAS_WIDTH, CANVAS_HEIGHT), 0, 0);
 
-    // 
-    const aspect = 2;
-    canvasCtx.putImageData(new ImageData(imageArray, len * scaleFactor / aspect, len * scaleFactor * aspect), 0, 0);
-
+    return;
 
     // experiment with using canvas for displacement
     if (displacementCount < 0) {
@@ -432,62 +238,15 @@ function scaleUpPixels(pixelArray, width, height, scaleFactor) {
   return newPixelArray;
 }
 
-function updateWithImage(index) {
-  const canvasEl = document.querySelector('canvas');
-  const container = document.querySelector('#canvas-container');
-  const lastActiveEl = container.querySelector('.active');
-
-  const imgEl = document.querySelector(`#slide-${index}-image`);
-
-  // removing images for now
-  // imgEl?.classList.add('active');
-  lastActiveEl?.classList.remove('active');
-
-  // imgEl.style.display = 'block';
-  // canvasEl.style.filter = `blur(15px) contrast(1) url(#slide-${slideIndex}-filter)`;
-  // const url = slides[slideIndex].imgUrl;
-  // const filterStyle = canvasEl.style.filter;
-  // const el = document.querySelector('feDisplacementMap');
-  // console.log('el', el);
-  // el.setAttribute("in2", `slide-${slideIndex}`);
-  // const feImage = el.querySelector('feImage');
-  // feImage.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", url);
-  // feImage.setAttribute("result", "beagle");
-  // el.appendChild(feImage);
-}
-
-function updateWithText(text) {
-  const el = document.querySelector('#text');
-  el.textContent = text;
-}
-
 function updateFilter(index) {
   const el = document.querySelector('#text');
   el.style.filter = `blur(0px) contrast(4) url(#slide-${index}-filter)`;
   // el.style.filter = `blur(2px) contrast(4) url(#dis-filter)`;
 }
 
-function updateToSlide(index) {
-  const { imgUrl, text } = slides[index];
-
-  updateWithImage(index);
-  updateWithText(text);
-  updateFilter(index);
-
-  // const img = new Image();
-  // img.onload = function() {
-  //   canvas.width = img.width;
-  //   canvas.height = img.height;
-  //   canvasCtx.drawImage(img, 0, 0);
-  //   imageData = canvasCtx.getImageData(0, 0, img.width, img.height);
-  // };
-  // img.src = slide.imgUrl;
-  // slideIndex++;
-}
-
 function initializeSlideImages() {
   slides.forEach((slide, index) => {
-    const canvasContainer = document.querySelector('#canvas-container');
+    const canvasContainer = document.querySelector('#poems-container');
     const img = new Image();
     img.src = slide.imgUrl;
     img.id = `slide-${index}-image`;
@@ -522,75 +281,66 @@ function initializeSlideImages() {
   });
 }
 
-// function handleNavigation(event) {
-//   const viewportWidth = window.innerWidth;
-//   if (event.clientX > viewportWidth / 2) {
-//     slideIndex++;
-//   } else {
-//     slideIndex--;
-//   }
+function handlePartSelection(part) {
+  let hash = window.location.hash;
+  const splitHash = hash.split('-');
+  const index = parseInt(splitHash[splitHash.length - 1]) || 0;
 
-//   slideIndex = Math.max(0, Math.min(slideIndex, slides.length - 1));
-//   // updateToSlide(slideIndex);
-//   // updateText(slideIndex);
-// }
-
-function updateText(index) {
-  const textEls = document.querySelectorAll('#canvas-container p');
-  textEls[index].classList.add('active');
-  if (previousSlideIndex !== null) {
-    textEls[previousSlideIndex].classList.remove('active');
-  }
-  previousSlideIndex = index;
-  // const el = document.querySelector('#text');
-  // el.textContent = slides[index].text;
-}
-
-function handlePartSelection(event) {
-  const part = event.target.dataset.part;
+  // const part = event.target.dataset.part;
   const previousPoemEl = document.querySelector('.poem-container.selected-part');
   previousPoemEl?.classList.remove('selected-part');
   const poemEl = document.querySelector(`#${part}`);
   poemEl.classList.add('selected-part');
 
+  // update nav
+  const navButtons = document.querySelectorAll('nav button');
+  navButtons.forEach((button) => {
+    button.classList.remove('active');
+  });
+  const activeButton = document.querySelector(`nav button[data-part="${part}"]`);
+  activeButton.classList.add('active');
+
   if (part === 'part-1') {
-    beginFragments(event); // refactor this to not pass down events
+    beginFragments(index);
   } else if (part === 'part-2') {
-    beginUntitled(event);
+    beginUntitled();
   }
 
-  // document.body.style.backgroundColor = 'black';
   document.body.classList.add('now-viewing');
 }
 
-function parsePoem(poem) {
-  const frames = document.querySelectorAll(`#${poem} div`);
+function parsePoem(el) {
+  const frames = el.querySelectorAll('div');
+
   return frames;
 }
 
 function updateFrame(el) {
-  const activeEl = document.querySelector('.active');
+  console.log('el', el);
+  const activeEl = el.parentElement.querySelector('.active');
   activeEl?.classList.remove('active');
 
   el.classList.add('active');
-  // frames[previousIndex]?.classList.remove('active');
 }
 
-async function beginFragments(event) {
+async function beginFragments(index) {
   canvasContainerEl.classList.add('part-1');
-  const closeButton = document.querySelector('#close');
-  closeButton.style.display = 'block';
+  const frames = parsePoem(document.querySelector('#part-1'));
 
-  const frames = parsePoem(event.target.dataset.part);
+  slideIndex = index;
+  let frame = frames[index];
+  if (!frame) {
+    slideIndex = 0;
+    frame = frames[slideIndex];
+  }
 
-  applyCSS();
+  const hash = `#part-1-${slideIndex + 1}`;
+  window.history.pushState({}, '', `${href}${hash}`);
 
-  slideIndex = 0;
-  updateFrame(frames[0]);
+  updateFrame(frame);
   
-  event.preventDefault();
-
   function handleNavigation(event) {
+    console.log('handleNavigation', event);
     const viewportWidth = window.innerWidth;  
     const xLocation = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
     
@@ -601,9 +351,10 @@ async function beginFragments(event) {
     }
   
     updateFrame(frames[slideIndex]);
+    window.history.pushState({}, '', `${href}#part-1-${slideIndex + 1}`);
   
     previousSlideIndex = slideIndex;
-    slideIndex = Math.max(0, Math.min(slideIndex, slides.length - 1));
+    slideIndex = Math.max(0, Math.min(slideIndex, frames.length - 1));
   }
 
   eventListeners = [
@@ -617,38 +368,22 @@ async function beginFragments(event) {
 
   await handleConvolution();
   updateConvolutionLevel(0);
+
 }
 
-async function beginUntitled(event) {
+async function beginUntitled() {
+  const hash = `#part-2`;
+  window.history.pushState({}, '', `${href}${hash}`);
+  
   canvasContainerEl.classList.add('part-2');
-  const closeButton = document.querySelector('#close');
-  closeButton.style.display = 'block';
 
   canvas.classList.add('front');
-  applyCSS();
-  // drawColorfield({r: 255,  g: 0, b: 0}, 0);
-
-  // test whether drawing an invisible image changes the canvas
-  // testColorfield();
-
-  // bug
-  // slideIndex = 0;
-  // updateFrame(frames[slideIndex]);
 
   window.setTimeout(() => {
-    const el = document.querySelector('#canvas-container');
+    const el = document.querySelector('#poems-container');
     el.classList.add('has-started');
   }, 0);
   // el.style.filter = `blur(1px) contrast(4) url(#dis-filter)`;
-  
-  event.preventDefault();
-
-  // function updateFrame(el) {
-  //   const activeEl = document.querySelector('.active');
-  //   activeEl?.classList.remove('active');
-
-  //   el.classList.add('active');
-  // }
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -657,12 +392,12 @@ async function beginUntitled(event) {
     }
   });
 
-  window.setInterval(() => {
+  colorShiftInterval = window.setInterval(() => {
     applyColorShift(0.001);
   }, 500);
 
+  
   await handleConvolution();
-  console.log('updating convolution level');
   updateConvolutionLevel(0.03);
 }
 
@@ -671,14 +406,23 @@ function applyColorShift(increment = 0.01) {
   setColorMatrix(colorValue);
 }
 
-function returnHome() {
-  // reset state
-  const canvasContainerEl = document.querySelector('#canvas-container');
+function resetState() {
+  const canvasContainerEl = document.querySelector('#poems-container');
   canvasContainerEl.classList.remove('fullscreen');
   canvasContainerEl.classList.remove('part-1');
   canvasContainerEl.classList.remove('part-2');
-  const closeButton = document.querySelector('#close');
-  closeButton.style.display = 'none';
+
+  const navButtons = document.querySelectorAll('nav button');
+  navButtons.forEach((button) => {
+    button.classList.remove('active');
+  });
+  
+  // Clear the color shift interval
+  if (colorShiftInterval) {
+    clearInterval(colorShiftInterval);
+    colorShiftInterval = null;
+  }
+
   eventListeners.forEach(({ element, type, handler }) => {
     element.removeEventListener(type, handler);
   });
@@ -687,42 +431,91 @@ function returnHome() {
   previousSlideIndex = null;
   updateConvolutionLevel(0);
 
-  // document.body.style.backgroundColor = 'snow';
   document.body.classList.remove('now-viewing');
   canvasContainerEl.classList.remove('has-started');
 }
 
+function returnHome() {
+  resetState();
+
+  window.history.pushState({}, '', href);
+}
+
+let updateCounter= 0;
+let shouldUpdateCanvas = false;
+
+// on each iteration, a chunk of time-domain audio data is appended to the buffer
+// it should be appended to preserve linearity of the audio data, where the first element of the buffer is
+// the newest and the last element is the oldest
+function updateAudioBufferData(data) {
+  const tempArray = new Uint8Array(audioBufferData.length);
+  
+  tempArray.set(audioBufferData.slice(0, audioBufferData.length - data.length), data.length);
+  tempArray.set(data, 0);
+  audioBufferData.set(tempArray);
+  shouldUpdateCanvas = true;
+}
+
+function handleRouting() {
+  const hash = window.location.hash;
+
+  // uncomment this to prevent page from defaulting to home on load
+  // window.location.href = href;
+  if (hash.includes('#part-1')) {
+    handlePartSelection('part-1');
+  } else if (hash.includes('#part-2')) {
+    handlePartSelection('part-2');
+  } else {
+    returnHome();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
-  canvasContainerEl = document.querySelector('#canvas-container');
+  canvasContainerEl = document.querySelector('#poems-container');
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
   await audioCtx.audioWorklet.addModule("/public/js/random-noise-processor.js");
   processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
 
-  initializeSlideImages();
-
   processor.port.onmessage = (e) => {
-    // instead of appending to a stream, could update only when the whole image is ready?
-    // but that might also look jarring due to convolution
-    visualize(e.data);
+    updateAudioBufferData(e.data);
   };
 
-  canvas = document.getElementById('visualizer');
+  canvas = document.createElement('canvas');
+  canvas.width = CANVAS_WIDTH;
+  canvas.height = CANVAS_HEIGHT;
+  canvasContainerEl.querySelector('#part-2').appendChild(canvas);
+  
   canvasCtx = canvas.getContext('2d');
   createSvgFilter();
-  
-  const closeButton = document.querySelector('#close');
-  closeButton?.addEventListener('click', (event) => {
-    returnHome();
-    // canvasContainerEl.classList.remove('front');
-  });
-  
+
   const startButtons = document.querySelectorAll('button.start');
   startButtons.forEach((button) => {
-    button?.addEventListener('click', (event) => handlePartSelection(event));
-    button?.addEventListener('touchend', (event) => handlePartSelection(event));
+    button?.addEventListener('click', (event) => handleNavigationEvent(event.target.dataset.part));
+    button?.addEventListener('touchend', (event) => handleNavigationEvent(event.target.dataset.part));
   });
+
+  const homeButton = document.querySelector('button.nav-home');
+  homeButton?.addEventListener('click', () => handleNavigationEvent(''));
+  homeButton?.addEventListener('touchend', () => handleNavigationEvent(''));
+
+  // Add popstate event listener for browser back/forward
+  window.addEventListener('popstate', () => {
+    // handleRouting();
+  });
+
+  // Handle initial route
+  // need interaction to begin audio, so only remove this during development
+  // window.location.href = href;
+  // window.history.pushState({}, '', window.location.href);
+  handleRouting();
 });
+
+function handleNavigationEvent(part) {
+  resetState();
+  if (part === '') return returnHome();
+  handlePartSelection(part);
+}
 
 function addArrays(arr1, arr2) {
   if (arr1.length !== arr2.length) {
@@ -762,48 +555,9 @@ function hslColorMatrix(h) {
   ]
 
   return addArrays(primaryArray, secondaryArray).join(" ");
-
 }
 
 function setColorMatrix(val = Math.random()) {
-  function valueToRgbMatrix(value) {
-    const r = value;
-    const g = 1 - value;
-    const b = value * 0.5;
-
-    return [
-      r, 0, 0, 0, 0,
-      0, g, 0, 0, 0,
-      0, 0, b, 0, 0,
-      r, g, b, 0, 0
-    ].join(" ");
-  }
-
-  
-  function getRandomColorMatrix(value) {
-    const matrix = [];
-    for (let row = 0; row < 3; row++) {
-      for (let col = 0; col < 3; col++) {
-        matrix.push(Math.random().toFixed(2));
-        
-      }
-      matrix.push(0); // leave alpha
-      matrix.push(0); // leave multiply
-      
-      
-      // matrix.push(0); // don't need multiply column
-    }
-    matrix.push(0);
-    matrix.push(0);
-    matrix.push(0);
-    matrix.push(1);
-    return matrix.join(" ");
-  }
-
-  // const el = document.querySelector("#customFilter feColorMatrix");
-
-  // colorMatrixEl.setAttribute("values", valueToRgbMatrix(val));
-  // colorMatrixEl.setAttribute("values", getRandomColorMatrix(Math.random()));
   colorMatrixEl.setAttribute("values", hslColorMatrix(val));
 }
 
@@ -821,283 +575,3 @@ function createSvgFilter() {
 
   document.querySelector("svg defs").appendChild(filter);
 }
-
-function testColorfield() {
-  const canvas = document.querySelector('canvas');
-  if (!canvas) {
-    return null;
-  }
-
-  // Get the canvas context and data URL
-  const ctx = canvas.getContext('2d');
-  
-  // Draw something small to ensure we have data
-  ctx.fillStyle = '#fff';
-  ctx.fillRect(0, 0, 1, 1);
-
-  try {
-    // Generate fingerprint from canvas data
-    const dataURL = canvas.toDataURL();
-    return dataURL;
-  } catch (e) {
-    // Handle cases where toDataURL() might fail
-    console.error('Failed to generate canvas fingerprint:', e);
-    return null;
-  }
-}
-
-function dataURLToPixelArray(dataURL) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      // Create a temporary canvas to draw the image
-      const tempCanvas = document.createElement('canvas');
-      const tempCtx = tempCanvas.getContext('2d');
-      
-      // Set canvas size to match image
-      tempCanvas.width = img.width;
-      tempCanvas.height = img.height;
-      
-      // Draw image onto canvas
-      tempCtx.drawImage(img, 0, 0);
-      
-      // Get pixel data
-      const imageData = tempCtx.getImageData(0, 0, img.width, img.height);
-      
-      resolve({
-        pixels: imageData.data,  // Uint8ClampedArray of RGBA values
-        width: img.width,
-        height: img.height
-      });
-    };
-    
-    img.onerror = reject;
-    img.src = dataURL;
-  });
-}
-
-function getInvisibleCanvasFingerprint(toggle = true) {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  
-  // Draw completely transparent elements
-  if (toggle) {
-    ctx.fillStyle = 'rgba(255, 0, 0, 0)';  // Red with 0 opacity
-    ctx.fillRect(10, 10, 100, 100);
-  }
-  else {
-    ctx.font = '16px Arial';
-    ctx.fillStyle = 'rgba(0, 0, 0, 0)';    // Black with 0 opacity
-    ctx.fillText("Invisible text", 15, 50);
-  }
-  
-  // The resulting dataURL will still contain the fingerprint
-  // even though nothing is visible to the user
-  const dataURL = canvas.toDataURL();
-  
-  return dataURL;
-}
-
-function getRecursiveFingerprint(iterations = 3) {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = 200;
-  canvas.height = 200;
-
-  // Initial subtle drawing
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
-  ctx.fillRect(0, 0, 200, 200);
-
-  function recursiveAmplify(depth = 0) {
-    if (depth >= iterations) return;
-
-    // console.log(`Depth: ${depth}`);
-
-    // Get the current canvas state as an image
-    const prevImage = new Image();
-    prevImage.src = canvas.toDataURL();
-
-    prevImage.onload = () => {
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw the previous state multiple times with slight variations
-      for (let i = 0; i < 4; i++) {
-        ctx.save();
-        
-        // Translate to each quadrant
-        ctx.translate(
-          (i % 2) * canvas.width/2, 
-          Math.floor(i/2) * canvas.height/2
-        );
-        
-        // Scale down to fit quadrant
-        ctx.scale(0.5, 0.5);
-        
-        // Add a tiny rotation
-        ctx.rotate(0.0001 * depth);
-        
-        // Draw with very slight opacity
-        ctx.globalAlpha = 0.95;
-        
-        // Draw the previous state
-        ctx.drawImage(prevImage, 0, 0);
-        
-        ctx.restore();
-      }
-
-      // Continue recursion
-      recursiveAmplify(depth + 1);
-    };
-  }
-
-  recursiveAmplify(0);
-  return canvas;
-}
-
-// Fingerprint below
-// demo data: https://fingerprintjs.github.io/fingerprintjs/
-
-function createVisualFingerprint(targetElement, options = {}) {
-  const {
-    width = 400,
-    height = 400,
-    speed = 0.001,
-    colorShift = true,
-    interactive = true
-  } = options;
-
-  // Create visible canvas
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  targetElement.appendChild(canvas);
-  const ctx = canvas.getContext('2d');
-
-  // Animation state
-  let angle = 0;
-  let mouseX = width / 2;
-  let mouseY = height / 2;
-
-  // Initial pattern
-  function createInitialPattern() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
-    ctx.fillRect(0, 0, width, height);
-    ctx.strokeStyle = 'rgba(128, 128, 255, 0.1)';
-    ctx.beginPath();
-    ctx.moveTo(width/4, height/4);
-    ctx.bezierCurveTo(
-      width/2, height/4,
-      width/2, height*3/4,
-      width*3/4, height*3/4
-    );
-    ctx.stroke();
-  }
-
-  // Animation loop
-  function animate() {
-    // Get current state as image
-    const prevImage = new Image();
-    prevImage.src = canvas.toDataURL();
-
-    prevImage.onload = () => {
-      // Clear canvas
-      ctx.clearRect(0, 0, width, height);
-
-      // Create multiple transformed copies
-      for (let i = 0; i < 6; i++) {
-        ctx.save();
-        
-        // Center of rotation
-        ctx.translate(mouseX, mouseY);
-        
-        // Rotate based on current angle
-        ctx.rotate(angle + (Math.PI * 2 * i / 6));
-        
-        // Scale slightly
-        const scale = 0.95 + Math.sin(angle * 5) * 0.05;
-        ctx.scale(scale, scale);
-        
-        // Color effects
-        if (colorShift) {
-          ctx.filter = `hue-rotate(${angle * 360}deg) saturate(150%)`;
-        }
-        
-        // Blend mode rotation
-        ctx.globalCompositeOperation = [
-          'multiply',
-          'screen',
-          'overlay'
-        ][Math.floor(angle * 3) % 3];
-        
-        // Slight transparency
-        ctx.globalAlpha = 0.8;
-        
-        // Draw previous state
-        ctx.drawImage(
-          prevImage, 
-          -mouseX, 
-          -mouseY
-        );
-        
-        ctx.restore();
-      }
-
-      // Update angle
-      angle += speed;
-      
-      // Request next frame
-      requestAnimationFrame(animate);
-    };
-  }
-
-  // Mouse interaction
-  if (interactive) {
-    canvas.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    });
-
-    // Touch support
-    canvas.addEventListener('touchmove', (e) => {
-      e.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.touches[0].clientX - rect.left;
-      mouseY = e.touches[0].clientY - rect.top;
-    });
-  }
-
-  // Start the effect
-  createInitialPattern();
-  animate();
-
-  // Return control methods
-  return {
-    setSpeed: (newSpeed) => speed = newSpeed,
-    toggleColorShift: () => colorShift = !colorShift,
-    reset: () => {
-      ctx.clearRect(0, 0, width, height);
-      createInitialPattern();
-    }
-  };
-}
-
-// Usage:
-/*
-const effect = createVisualFingerprint(
-  document.getElementById('container'),
-  {
-    width: 400,
-    height: 400,
-    speed: 0.001,
-    colorShift: true,
-    interactive: true
-  }
-);
-
-// Control the effect:
-// effect.setSpeed(0.002);
-// effect.toggleColorShift();
-// effect.reset();
-*/

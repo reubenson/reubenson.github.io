@@ -4,39 +4,53 @@ title: airs
 subtitle: 
 description: 
 url: 
-# layoutType: one-column
 scriptUrl: /public/js/html-review.js
-# scriptUrl2: /public/js/random-noise-processor.js
 cssUrl: /aura.css
 hideSeeMore: true
 ---
-Airs: a poem in two parts
+<header class="poems-header">
+  <h1><button class="nav-home">Airs</button></h1>
+</header>
 
-As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind.
+<div class="poems-description">
 
-<div id="player" class="player">
+  <em>Airs</em> is a collection of poems
+  
+  in two parts
+  
+  accompanied by recordings of the wind
+</div>
+
+
+<!-- As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind. -->
+
+<!-- <div class="player"> -->
   <!-- <p class="description">Part I: The Pages</p> -->
-  <button class="start" data-part="part-1">Part I: The Pages</button>
-  <footer>
+  <!-- <button class="start" data-part="part-1">Part I: The Pages</button> -->
+  <!-- <footer>
     <p>I am not really sure how to write poems but I am trying to write poems. The typographic distortion adds texture to the page, but I don't want it to look too much like print. I do like how it slows down the reading experience, which complements the quiet sound of air moving.</p>
   </footer>
-</div>
+</div> -->
 
-<div id="player" class="player">
+<!-- <div class="player"> -->
   <!-- <p class="description">Part II: The Window</p> -->
-  <button class="start" data-part="part-2">Part II: The Window</button>
-  <footer>
+  <!-- <button class="start" data-part="part-2">Part II: The Window</button> -->
+  <!-- <footer>
     <p>Lattice of Xs (a representational gesture of the screen of a window), also under typographic distortion. It's too fast right now, too much, and I want it instead to feel more like a canopy of leaves rustling in the wind. In addition to the sound of wind, there is an additional resonance. I want it to be like an aeolian harp, taught steel wires vibrating in the wind. This additional sound is processed/produced in the browser, and is what is driving the animation.</p>
   </footer>
-</div>
+</div> -->
 
-<button id="close">Close</button>
-<div id="canvas-container">
+<!-- <button id="close">Close</button> -->
+<nav>
+  <button class="nav-part-1 start" data-part="part-1">Part I: The Page</button>
+  <button class="nav-part-2 start" data-part="part-2">Part II: The Screen</button>
+</nav>
+<div id="poems-container">
+  </header>
   <div id="part-1" class="poem-container">
     {% include "./poem-1.md" %}
   </div>
   <div id="part-2" class="poem-container">
-    <canvas id="visualizer" width="128" height="512"></canvas>
     {% include "./poem-2.md" %}
   </div>
 
@@ -117,7 +131,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
     </filter>
     <filter id="wind-filter">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="860px" x="15px" y="0"></feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="10" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>

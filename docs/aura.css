@@ -1,146 +1,118 @@
 body {
   font-family: 'Ibarra Real Nova', monospace;
   font-weight: 400;
+  background: black;
+  margin: auto;
+  padding: 20px;
+}
+
+.poems-header {
+  color: snow;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  margin:auto;
+  z-index:10000;
+
+  h1, h2 {
+    display: inline-block;
+    font-size: 24px;
+    margin: 0;
+  }
+}
+
+header button {
+  font-size: 24px;
+  font-weight: 100;
+  font-style: italic;
+  font-family: 'Ibarra Real Nova', monospace;
+  background: transparent;
+  color: snow;
+  padding: 20px;
+  border: none;
+}
+
+nav {
+  position: fixed;
+  margin: auto;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10000;
+  left: 0;
+  right: 0;
+}
+
+nav button {
+  flex: 1;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+  color: snow;
+  font-weight: 100;
+  padding: 10px;
+  font-style: italic;
+  font-family: 'Ibarra Real Nova', monospace;
+}
+
+nav button.active {
+  /* text-decoration: underline; */
+  border-bottom: solid snow 2px;
+}
+
+.content-wrapper {
+  margin-top: 200px;
+}
+
+p {
+  color: snow;
+}
+
+.poems-description {
+  font-size: 18px;
+  text-align: justify;
+  width: 300px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 body.now-viewing {
   background: black;
 
-  #player {
+  .poems-description {
     display: none;
+  }
+
+  #poems-container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    opacity: 1;
   }
 }
 
-#canvas-container {
+#poems-container {
   background: white;
-  /* filter: blur(1px) contrast(10) url(#duo); */
-  /* filter: blur(2px) contrast(3) url(#customFilter) brightness(0.2); */
-  /* filter: url(#customFilter); */
-  /* filter: blur(1px) contrast(3) brightness(0.7);
-  transition: 240s filter linear; */
   opacity: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-#canvas-container.part-2 {
-  transition: 240s filter linear;
-  filter: blur(1px) contrast(3) brightness(0.7);
-}
-
-#close {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 10000;
-  color: black;
-  font-size: 24px;
   display: none;
 }
 
-#canvas-container p {
-  opacity: 0;
-  line-height: 1.3em;
-  /* filter: blur(1px) url(#image-0); */
-  /* font-weight: 600; */
-  text-align: justify;
-  /* letter-spacing: 0.1em; */
-  /* margin: 20px; */
-  /* position: absolute; */
-  /* padding: 40px; */
-  bottom: 0px;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: fit-content;
-  background-color: transparent;
-  /* width: 550px; */
-  z-index: 10;
-  /* background: black; */
-  /* color: black; */
-}
-
-canvas {
-  opacity: 0.7;
-  width: 100%;
-  height: 100%;
-  filter: blur(16px) contrast(2);
-  /* transition: 4s filter cubic-bezier(0.165, 0.84, 0.44, 1), 8s zoom linear; */
-  position: relative;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
-  z-index: -1;
-}
-
-#canvas-container.fullscreen {
-  z-index: 1000;
-  display: flex;
-  position: fixed;
-  /* width: 100%;
-  height: 100%; */
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  opacity: 1;
-}
-
-#canvas-container.fullscreen canvas {
-  position: absolute;
-  /* filter: blur(1px) contrast(1); */
-}
-
-#canvas-container.fullscreen p {
-  opacity: 0.9;
-  /* background: black;
-  color: white; */
-  /* padding: 150px; */
-  /* border: solid black 2px; */
-  /* display: none; */
-}
-
-.fullscreen ~ * {
-  /* display: none; */
-}
-
-img {
-  display: none;
-  object-fit: contain;
-  width: 50%;
-  height: auto;
-  position: absolute;
-  margin: auto;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: -2;
-  filter: url(#black-to-transparent);
-}
-
-#canvas-container p.active {
-  display: block;
-}
-
-/* testing mix-blend */
-/* #canvas-container.fullscreen {
-  background: url(public/meander-door.jpg) no-repeat center / cover;
-  mix-blend-mode: multiply;
-  filter: url(#displacementFilter)
-} */
-
-/* testing clip-path */
-#canvas-container.fullscreen {
-  /* /* width: 300px; */
-  /* height: 300px; */
-  /* background: url(public/meander-door.jpg) no-repeat center / 938px;
-  clip-path: ellipse(130px 140px at 10% 20%); */
-  /* filter: url(#displacementFilter) */
+svg {
+  max-width: 100%;
 }
 
 button:hover {
@@ -149,18 +121,10 @@ button:hover {
 
 .poem-container {
   opacity: 0;
-}
 
-.poem-container#part-1 {
-  width: 100%;
-}
-
-.poem-container#part-2 {
-  position: absolute;
-}
-
-.poem-container.selected-part {
-  opacity: 1;
+  &.selected-part {
+    opacity: 1;
+  }
 }
 
 .poem {
@@ -168,177 +132,192 @@ button:hover {
   height: auto;
   border: none;
   margin: auto;
-  /* opacity: 0; */
-  /* display: none; */
 }
 
-.poem.selected-part {
-  display: block;
-}
 
-#canvas-container.part-1 {
+#poems-container.part-1 {
   background: black;
-  width: calc(100% + 30px);
-  height: calc(100% + 30px);
-  canvas {
-    display: none;
-  }
+  /* width: calc(100% + 30px); */
+  /* height: calc(100% + 30px); */
   top: -15px;
   left: -15px;
+
+  .poem-container {
+    background: black;
+    display: flex;
+    width: 100%;
+
+    h3 {
+      text-align: left;
+      border-bottom: solid snow 2px;
+      padding-bottom: 10px;
+    }
+
+    h3, p {
+      font-size: 24px;
+    }
+
+    p {
+      text-align: right;
+      margin: 0 0 0 auto;
+    }
+
+    .poem {
+      color: snow;
+      width: 550px;
+      padding: 20px;
+      max-width: calc(100% - 40px);
+      display: none;
+    }
+    
+    .poem.active {
+      display: block;
+      filter: blur(0px) contrast(1) url(#wind-filter);
+    }
+
+    .line-break {
+      display: block;
+    }
+  }
 }
 
-#canvas-container.part-2 {
-  width: 60%;
+#poems-container.part-2 {
+  width: 80%;
   height: 80%;
-  /* filter: blur(1px) contrast(3) url(#customFilter) invert(1) brightness(0.6); */
+  filter: blur(0px) contrast(3) brightness(0.7);
   background: snow;
-  border-radius: 150px;
+  /* border-radius: 40px; */
+  transition: 240s filter linear, 60s opacity linear;
+  opacity: 0;
 
   &.has-started {
-    filter: blur(3px) contrast(50) brightness(0.7);
+    filter: blur(4px) contrast(50) brightness(0.7);
+    opacity: 1;
+
+    canvas {
+      opacity: 1;
+    }
+
+    .poem-container .poem p {
+      color: black;
+      background: snow;
+    }
+    
   }
-  /* border: solid black 40px; */
 
   canvas {
-    filter: blur(8px) contrast(5);
-  }
-}
-
-canvas {
-  transition: 120s filter linear;
-  filter: blur(15px) contrast(1);
-}
-
-#part-1 {
-  filter: blur(1px) contrast(4) url(#wind-filter);
-  background: black;
-  display: flex;
-
-  .poem {
-    color: snow;
-    width: 550px;
-    /* border: solid black 4px !important; */
-    /* text-align: right; */
-    padding: 20px;
-    max-width: calc(100% - 40px);
-    display: none;
-  }
-  
-  .poem.active {
     display: block;
-    /* opacity: 1; */
+    opacity: 1.0;
+    width: 100%;
+    height: 100%;
+    filter: url(#customFilter);
+    /* filter: blur(16px) contrast(2); */
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: -1;
+    opacity: 0;
+    transition: 60s opacity linear;
+    /* transition: 120s filter linear; */
+    /* filter: blur(15px) contrast(1); */
+    /* display: none; */
+  }
+
+  .poem-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* filter: url(#customFilter); */
+    position: absolute;
+  
+    .poem {
+      /* border-radius: 40px; */
+      height: calc(100vh - 100px);
+      width: calc(100vw - 100px);
+      overflow: hidden;
+      opacity: 0;
+      /* transition: 12s opacity linear; */
+      border: none !important;
+      width: 100%;
+      height: 100%;
+      text-align: center !important;
+    }
+
+    &.selected-part {
+      .poem {
+        display: block;
+        opacity: 1.0;
+        /* display: none; */
+      }
+    }
+
+    .poem p {
+      color: snow;
+      background: black;
+      /* color: black;
+      background: snow; */
+      line-break: anywhere;
+      letter-spacing: -0.09em;
+      line-height: .42em;
+      /* letter-spacing: 0.01em;
+      line-height: .51em; */
+      font-size: 35px;
+      margin: -10px auto auto;
+      text-transform: lowercase;
+      transition: 240s color linear, 240s background linear;
+    }
   }
 }
 
-#part-1 h3 {
-  text-align: left;
-  border-bottom: solid snow 2px;
-  padding-bottom: 10px;
-}
-
-#part-1 h3, #part-1 p {
-  font-size: 36px;
-}
-
-#part-1 p {
-  text-align: right;
-  margin: 0 0 0 auto;
-}
-
-#part-1 .line-break {
-  display: block;
-}
 
 #part-2 {
-  /* z-index: 10000000; */
-  width: 100%;
-  overflow: hidden;
-  /* filter: blur(1px) contrast(3) invert(0) brightness(0.6); */
-  filter: url(#customFilter);
-}
-
-#part-2 .poem {
-  /* padding: 50px; */
-  /* margin: 50px 0 0 50px; */
-  height: calc(100vh - 100px);
-  width: calc(100vw - 100px);
-  /* max-width: calc(100% - 100px); */
-  /* max-height: calc(100% - 100px); */
-  overflow: hidden;
-
-}
-
-#part-2.selected-part {
-  .poem {
-    display: block;
-    opacity: 0.8;
-  }
-}
-
-#part-2 .poem {
-  opacity: 0;
-  transition: 12s opacity linear;
-  border: none !important;
-  /* font-size: 50px; */
-  text-align: center !important;
-  /* line-height: .4em; */
-  /* width: 310px; */
-  /* opacity: 0.8 !important; */
-  /* font-family: 'monospace' !important; */
-  
-  p {
-    color: black !important;
-    background: snow;
-    line-break: anywhere;
-    letter-spacing: 0.01em;
-    line-height: .51em;
-    font-size: 35px;
-    margin: -10px auto auto;
-  }
+  position: absolute;
 }
 
 canvas.front {
   z-index: 1000 !important;
 }
 
-.player {
+/* .player {
   margin-top: 20px;
   max-width: 500px;
   border: solid black 1px;
   padding: 0px;
-}
 
-.player p.description {
-  margin: 10px;
-  font-size: 16px;
-  width: auto;
-  font-style: normal;
-}
+  p.description {
+    margin: 10px;
+    font-size: 16px;
+    width: auto;
+    font-style: normal;
+  }
 
-.player footer {
-  border-top: solid black 1px;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
+  footer {
+    border-top: solid black 1px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
 
-.player footer p {
-  margin: 0;
-  font-size: 12px;
-  width: 100%
-}
+  footer p {
+    margin: 0;
+    font-size: 12px;
+    width: 100%
+  }
 
-.player button {
-  font-size: 12px;
-  font-family: 'Ibarra Real Nova', monospace;
-  padding: 10px;
-  margin: 10px;
-}
+  button {
+    font-size: 12px;
+    font-family: 'Ibarra Real Nova', monospace;
+    padding: 10px;
+    margin: 10px;
+  }
+} */
 
 @media screen and (min-width: 768px) {
-  #canvas-container p {
-    /* font-size: 36px; */
-    /* margin: auto; */
-    /* padding: 160px; */
+  #poems-container.part-1 .poem-container {
+    h3, p {
+      font-size: 32px;
+    }
   }
 }

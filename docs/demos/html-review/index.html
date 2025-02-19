@@ -50,24 +50,36 @@
     <div class="content">
       
       <div class="content-wrapper">
-        <p>Airs: a poem in two parts</p>
-<p>As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind.</p>
-<div id="player" class="player">
+        <header class="poems-header">
+  <h1><button class="nav-home">Airs</button></h1>
+</header>
+<div class="poems-description">
+<p><em>Airs</em> is a collection of poems</p>
+<p>in two parts</p>
+<p>accompanied by recordings of the wind</p>
+</div>
+<!-- As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind. -->
+<!-- <div class="player"> -->
   <!-- <p class="description">Part I: The Pages</p> -->
-  <button class="start" data-part="part-1">Part I: The Pages</button>
-  <footer>
+  <!-- <button class="start" data-part="part-1">Part I: The Pages</button> -->
+  <!-- <footer>
     <p>I am not really sure how to write poems but I am trying to write poems. The typographic distortion adds texture to the page, but I don't want it to look too much like print. I do like how it slows down the reading experience, which complements the quiet sound of air moving.</p>
   </footer>
-</div>
-<div id="player" class="player">
+</div> -->
+<!-- <div class="player"> -->
   <!-- <p class="description">Part II: The Window</p> -->
-  <button class="start" data-part="part-2">Part II: The Window</button>
-  <footer>
+  <!-- <button class="start" data-part="part-2">Part II: The Window</button> -->
+  <!-- <footer>
     <p>Lattice of Xs (a representational gesture of the screen of a window), also under typographic distortion. It's too fast right now, too much, and I want it instead to feel more like a canopy of leaves rustling in the wind. In addition to the sound of wind, there is an additional resonance. I want it to be like an aeolian harp, taught steel wires vibrating in the wind. This additional sound is processed/produced in the browser, and is what is driving the animation.</p>
   </footer>
-</div>
-<p><button id="close">Close</button></p>
-<div id="canvas-container">
+</div> -->
+<!-- <button id="close">Close</button> -->
+<nav>
+  <button class="nav-part-1 start" data-part="part-1">Part I: The Page</button>
+  <button class="nav-part-2 start" data-part="part-2">Part II: The Screen</button>
+</nav>
+<div id="poems-container">
+  </header>
   <div id="part-1" class="poem-container">
     <div class="poem">
 <h3>against rain</h3>
@@ -80,7 +92,7 @@
 <p>green stems make their way</p>
 <p>a step backwards</p>
 <p>and backwards</p>
-<p>followed closey by</p>
+<p>followed closely by</p>
 <p>another</p>
 <p>they make their way home</p>
 </div>
@@ -153,11 +165,14 @@
 <p>is quieter in the shadow</p>
 <p>of a leaf</p>
 </div>
+<div class="poem">
+<h3></h3>
+<p>it is as if</p>
+</div>
 <!-- prevented them from drying their laundry<span class="line-break"></span> -->
 <!-- and yet -->
   </div>
   <div id="part-2" class="poem-container">
-    <canvas id="visualizer" width="128" height="512"></canvas>
 <div class="poem">
 <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -235,7 +250,7 @@ Approximately twenty of these poems will be presented in total, which readers ca
     </filter>
     <filter id="wind-filter">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="860px" x="15px" y="0"></feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="10" xChannelSelector="A" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>
