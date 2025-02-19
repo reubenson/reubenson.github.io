@@ -459,8 +459,8 @@ function updateAudioBufferData(data) {
 function handleRouting() {
   const hash = window.location.hash;
 
-  // uncomment this to prevent page from defaulting to home on load
-  // window.location.href = href;
+  // comment next line to prevent page from defaulting to home on load
+  window.location.href = href;
   if (hash.includes('#part-1')) {
     handlePartSelection('part-1');
   } else if (hash.includes('#part-2')) {
