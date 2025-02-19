@@ -2,6 +2,7 @@ const CANVAS_WIDTH = 512; // this is the desired width of the image drawn from t
 const CANVAS_HEIGHT = 512;
 
 let audioHasStarted = false;
+let part1Index = 0;
 const href = window.location.href.split('#')[0];
 
 const audioFilepath = '/public/airports-for-music-i.mp3';
@@ -38,6 +39,8 @@ let previousSlideIndex = null;
 // it will be of fixed size ... of 512 x 512 pixels
 const bufferWidth = CANVAS_WIDTH * 4;
 let audioBufferData = new Uint8Array(bufferWidth * CANVAS_HEIGHT);
+
+let colorShiftInterval;
 
 /**
  * Converts an HSL color value to RGB. Conversion formula
@@ -136,9 +139,12 @@ async function handleConvolution() {
 
   convolver.connect(processor);
   source.start();
-  processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
-
-  audioHasStarted = true;
+  
+  // does not indicate that user interaction has occured
+  audioHasStarted = audioCtx.state === 'running' ? true : false;
+  if (audioHasStarted) {
+    processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
+  }
 
   visualize();
 }
@@ -166,9 +172,9 @@ function visualize() {
       } else if (index % 4 === 2) {
         return val;
       } else if (index % 4 === 3) {
-        return val;
+        // return val;
         // increase level (more negative -> more transparency?)
-        return Math.pow(val / 255, -1.5) * 255
+        return Math.pow(val / 255, -1.25) * 255
         // return val;
         return 255;
       }
@@ -278,21 +284,26 @@ function initializeSlideImages() {
 function handlePartSelection(part) {
   let hash = window.location.hash;
   const splitHash = hash.split('-');
-  const index = splitHash[splitHash.length - 1] || 0;
+  const index = parseInt(splitHash[splitHash.length - 1]) || 0;
+
   // const part = event.target.dataset.part;
   const previousPoemEl = document.querySelector('.poem-container.selected-part');
   previousPoemEl?.classList.remove('selected-part');
   const poemEl = document.querySelector(`#${part}`);
   poemEl.classList.add('selected-part');
 
+  // update nav
+  const navButtons = document.querySelectorAll('nav button');
+  navButtons.forEach((button) => {
+    button.classList.remove('active');
+  });
+  const activeButton = document.querySelector(`nav button[data-part="${part}"]`);
+  activeButton.classList.add('active');
+
   if (part === 'part-1') {
     beginFragments(index);
-    hash = `#part-1-${index + 1}`;
-    window.history.pushState({}, '', `${href}${hash}`);
   } else if (part === 'part-2') {
     beginUntitled();
-    hash = `#part-2`;
-    window.history.pushState({}, '', `${href}${hash}`);
   }
 
   document.body.classList.add('now-viewing');
@@ -305,24 +316,31 @@ function parsePoem(el) {
 }
 
 function updateFrame(el) {
-  const activeEl = document.querySelector('.active');
+  console.log('el', el);
+  const activeEl = el.parentElement.querySelector('.active');
   activeEl?.classList.remove('active');
 
   el.classList.add('active');
-  // frames[previousIndex]?.classList.remove('active');
 }
 
 async function beginFragments(index) {
   canvasContainerEl.classList.add('part-1');
-  const closeButton = document.querySelector('#close');
-  closeButton.style.display = 'block';
-
   const frames = parsePoem(document.querySelector('#part-1'));
 
   slideIndex = index;
-  updateFrame(frames[index]);
+  let frame = frames[index];
+  if (!frame) {
+    slideIndex = 0;
+    frame = frames[slideIndex];
+  }
+
+  const hash = `#part-1-${slideIndex + 1}`;
+  window.history.pushState({}, '', `${href}${hash}`);
+
+  updateFrame(frame);
   
   function handleNavigation(event) {
+    console.log('handleNavigation', event);
     const viewportWidth = window.innerWidth;  
     const xLocation = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
     
@@ -350,12 +368,14 @@ async function beginFragments(index) {
 
   await handleConvolution();
   updateConvolutionLevel(0);
+
 }
 
 async function beginUntitled() {
+  const hash = `#part-2`;
+  window.history.pushState({}, '', `${href}${hash}`);
+  
   canvasContainerEl.classList.add('part-2');
-  const closeButton = document.querySelector('#close');
-  closeButton.style.display = 'block';
 
   canvas.classList.add('front');
 
@@ -372,10 +392,11 @@ async function beginUntitled() {
     }
   });
 
-  window.setInterval(() => {
+  colorShiftInterval = window.setInterval(() => {
     applyColorShift(0.001);
   }, 500);
 
+  
   await handleConvolution();
   updateConvolutionLevel(0.03);
 }
@@ -385,14 +406,23 @@ function applyColorShift(increment = 0.01) {
   setColorMatrix(colorValue);
 }
 
-function returnHome() {
-  // reset state
+function resetState() {
   const canvasContainerEl = document.querySelector('#poems-container');
   canvasContainerEl.classList.remove('fullscreen');
   canvasContainerEl.classList.remove('part-1');
   canvasContainerEl.classList.remove('part-2');
-  const closeButton = document.querySelector('#close');
-  closeButton.style.display = 'none';
+
+  const navButtons = document.querySelectorAll('nav button');
+  navButtons.forEach((button) => {
+    button.classList.remove('active');
+  });
+  
+  // Clear the color shift interval
+  if (colorShiftInterval) {
+    clearInterval(colorShiftInterval);
+    colorShiftInterval = null;
+  }
+
   eventListeners.forEach(({ element, type, handler }) => {
     element.removeEventListener(type, handler);
   });
@@ -403,8 +433,11 @@ function returnHome() {
 
   document.body.classList.remove('now-viewing');
   canvasContainerEl.classList.remove('has-started');
+}
 
-  // Update URL without triggering popstate
+function returnHome() {
+  resetState();
+
   window.history.pushState({}, '', href);
 }
 
@@ -426,12 +459,14 @@ function updateAudioBufferData(data) {
 function handleRouting() {
   const hash = window.location.hash;
 
-  if (hash === '') {
-    returnHome();
-  } else if (hash.includes('#part-1')) {
+  // uncomment this to prevent page from defaulting to home on load
+  // window.location.href = href;
+  if (hash.includes('#part-1')) {
     handlePartSelection('part-1');
   } else if (hash.includes('#part-2')) {
     handlePartSelection('part-2');
+  } else {
+    returnHome();
   }
 }
 
@@ -453,27 +488,34 @@ document.addEventListener('DOMContentLoaded', async function() {
   
   canvasCtx = canvas.getContext('2d');
   createSvgFilter();
-  
-  const closeButton = document.querySelector('#close');
-  closeButton?.addEventListener('click', (event) => {
-    returnHome();
-    // canvasContainerEl.classList.remove('front');
-  });
-  
+
   const startButtons = document.querySelectorAll('button.start');
   startButtons.forEach((button) => {
-    button?.addEventListener('click', (event) => handlePartSelection(event.target.dataset.part));
-    button?.addEventListener('touchend', (event) => handlePartSelection(event.target.dataset.part));
+    button?.addEventListener('click', (event) => handleNavigationEvent(event.target.dataset.part));
+    button?.addEventListener('touchend', (event) => handleNavigationEvent(event.target.dataset.part));
   });
+
+  const homeButton = document.querySelector('button.nav-home');
+  homeButton?.addEventListener('click', () => handleNavigationEvent(''));
+  homeButton?.addEventListener('touchend', () => handleNavigationEvent(''));
 
   // Add popstate event listener for browser back/forward
   window.addEventListener('popstate', () => {
-    handleRouting();
+    // handleRouting();
   });
 
   // Handle initial route
+  // need interaction to begin audio, so only remove this during development
+  // window.location.href = href;
+  // window.history.pushState({}, '', window.location.href);
   handleRouting();
 });
+
+function handleNavigationEvent(part) {
+  resetState();
+  if (part === '') return returnHome();
+  handlePartSelection(part);
+}
 
 function addArrays(arr1, arr2) {
   if (arr1.length !== arr2.length) {
@@ -513,7 +555,6 @@ function hslColorMatrix(h) {
   ]
 
   return addArrays(primaryArray, secondaryArray).join(" ");
-
 }
 
 function setColorMatrix(val = Math.random()) {

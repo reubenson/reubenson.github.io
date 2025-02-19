@@ -2,12 +2,91 @@ body {
   font-family: 'Ibarra Real Nova', monospace;
   font-weight: 400;
   background: black;
+  margin: auto;
+  padding: 20px;
+}
+
+.poems-header {
+  color: snow;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  margin:auto;
+  z-index:10000;
+
+  h1, h2 {
+    display: inline-block;
+    font-size: 24px;
+    margin: 0;
+  }
+}
+
+header button {
+  font-size: 24px;
+  font-weight: 100;
+  font-style: italic;
+  font-family: 'Ibarra Real Nova', monospace;
+  background: transparent;
+  color: snow;
+  padding: 20px;
+  border: none;
+}
+
+nav {
+  position: fixed;
+  margin: auto;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10000;
+  left: 0;
+  right: 0;
+}
+
+nav button {
+  flex: 1;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+  color: snow;
+  font-weight: 100;
+  padding: 10px;
+  font-style: italic;
+  font-family: 'Ibarra Real Nova', monospace;
+}
+
+nav button.active {
+  /* text-decoration: underline; */
+  border-bottom: solid snow 2px;
+}
+
+.content-wrapper {
+  margin-top: 200px;
+}
+
+p {
+  color: snow;
+}
+
+.poems-description {
+  font-size: 18px;
+  text-align: justify;
+  width: 300px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 body.now-viewing {
   background: black;
 
-  .player {
+  .poems-description {
     display: none;
   }
 
@@ -29,37 +108,12 @@ body.now-viewing {
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-#close {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 10000;
-  color: black;
-  font-size: 24px;
   display: none;
 }
 
-/* canvas { */
-  /* opacity: 0.7;
-  width: 100%;
-  height: 100%;
-  filter: blur(16px) contrast(2);
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
-  z-index: -1;
-  transition: 120s filter linear;
-  filter: blur(15px) contrast(1);
-  display: none; */
-/* } */
-
-/* #poems-container p {
-  opacity: 0.9;
-} */
+svg {
+  max-width: 100%;
+}
 
 button:hover {
   cursor: pointer;
@@ -83,8 +137,8 @@ button:hover {
 
 #poems-container.part-1 {
   background: black;
-  width: calc(100% + 30px);
-  height: calc(100% + 30px);
+  /* width: calc(100% + 30px); */
+  /* height: calc(100% + 30px); */
   top: -15px;
   left: -15px;
 
@@ -100,7 +154,7 @@ button:hover {
     }
 
     h3, p {
-      font-size: 36px;
+      font-size: 24px;
     }
 
     p {
@@ -128,17 +182,27 @@ button:hover {
 }
 
 #poems-container.part-2 {
-  width: 60%;
+  width: 80%;
   height: 80%;
-  filter: blur(2px) contrast(3) brightness(0.7);
+  filter: blur(0px) contrast(3) brightness(0.7);
   background: snow;
   /* border-radius: 40px; */
   transition: 240s filter linear, 60s opacity linear;
   opacity: 0;
 
   &.has-started {
-    filter: blur(3px) contrast(50) brightness(0.7);
+    filter: blur(4px) contrast(50) brightness(0.7);
     opacity: 1;
+
+    canvas {
+      opacity: 1;
+    }
+
+    .poem-container .poem p {
+      color: black;
+      background: snow;
+    }
+    
   }
 
   canvas {
@@ -154,6 +218,8 @@ button:hover {
     left: 0;
     margin: auto;
     z-index: -1;
+    opacity: 0;
+    transition: 60s opacity linear;
     /* transition: 120s filter linear; */
     /* filter: blur(15px) contrast(1); */
     /* display: none; */
@@ -165,9 +231,9 @@ button:hover {
     overflow: hidden;
     /* filter: url(#customFilter); */
     position: absolute;
-
+  
     .poem {
-      border-radius: 40px;
+      /* border-radius: 40px; */
       height: calc(100vh - 100px);
       width: calc(100vw - 100px);
       overflow: hidden;
@@ -188,8 +254,10 @@ button:hover {
     }
 
     .poem p {
-      color: black !important;
-      background: snow;
+      color: snow;
+      background: black;
+      /* color: black;
+      background: snow; */
       line-break: anywhere;
       letter-spacing: -0.09em;
       line-height: .42em;
@@ -198,6 +266,7 @@ button:hover {
       font-size: 35px;
       margin: -10px auto auto;
       text-transform: lowercase;
+      transition: 240s color linear, 240s background linear;
     }
   }
 }
@@ -211,7 +280,7 @@ canvas.front {
   z-index: 1000 !important;
 }
 
-.player {
+/* .player {
   margin-top: 20px;
   max-width: 500px;
   border: solid black 1px;
@@ -243,7 +312,12 @@ canvas.front {
     padding: 10px;
     margin: 10px;
   }
-}
+} */
 
 @media screen and (min-width: 768px) {
+  #poems-container.part-1 .poem-container {
+    h3, p {
+      font-size: 32px;
+    }
+  }
 }
