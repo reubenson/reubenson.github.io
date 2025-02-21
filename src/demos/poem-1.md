@@ -1,22 +1,28 @@
 <div class="poem">
 
-  ### against rain
+  ### rain
   
   spreads water to hair
   
-  sheets coalesce
+  coalesces
 
-  to translucent cone
+  to a translucent sheet
+  
+  a cone
 
   of dewy plastic
   
   <br/>
 
-  enclosed
+  enclosed, splashy
   
-  green stems make their way
+  green stems
+  
+  they wind their way
   
   a step backwards
+
+  <br/>
 
   and backwards
   
@@ -24,7 +30,9 @@
   
   another
   
-  they make their way home
+  they wind their way
+  
+  home
 
 </div>
 
@@ -32,23 +40,20 @@
 
   ### everything you already know
 
-  dawn, whispering
+  dawn comes whispering
   
-  comes
+  comes down from
   
-  down
-  
-  from
-  
-  the
-  
-  trees
+  the trees
+
+  <br/>
 
   you walk so lightly
   
   you carry the wind
 
   under your feet
+
 </div>
 
 <div class="poem">
@@ -58,14 +63,16 @@
   of tapered wood
 
   of curling arc
+
+  <br/>
   
   everything you can throw
   
   to the wind
   
+  floats on back
+
   to you
-  
-  floats on
   
 </div>
 
@@ -73,9 +80,14 @@
 
   ### instead of being a snow-eater
 
+  winds rise in the north
+  
   when free
   
   of confining fjords
+
+
+  <br/>
 
   acquire heat and moisture
 
@@ -95,17 +107,23 @@
   
   settles like swept dunes
   
-  in silence
+  under a blanket of silence
+
+  <br/>
   
   a ghost paces
   
-  in neat and rhythmic lines 
+  in neat and rhythmic lines
+
+  tracing stillness
+
+  <br/>
   
-  a window and it is all
+  a window
   
   you open 
   
-  around you
+  and it is all around you
 </div>
 
 <div class="poem">
@@ -135,6 +153,7 @@
   to soft brown lace
   
   yawning for air
+
 </div>
 
 <div class="poem">
@@ -149,9 +168,10 @@
 
   holding diaphragm, rising breath
   
-  the sound
 
-  that rustles
+  <br/>
+
+  the sound, that rustles
 
   <!-- I cannot get enough of -->
   
@@ -167,6 +187,17 @@
 ###
 
 it is as if
+
+</div>
+
+<div class="poem three-sheets-to-the-wind">
+
+### to the wind
+
+<span>t</span><span>h</span><span>r</span><span>e</span><span>e</span><span> </span>
+<span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span><span>
+<!-- <span>t</span><span>o</span><span> </span><span>t</span><span>h</span><span>e</span><span> </span><span>w</span><span>i</span><span>n</span><span>d</span> -->
+
 </div>
 
 

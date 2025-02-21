@@ -201,6 +201,8 @@ button:hover {
     .poem-container .poem p {
       color: black;
       background: snow;
+      /* opacity: 1; */
+      filter: brightness(1);
     }
     
   }
@@ -219,7 +221,7 @@ button:hover {
     margin: auto;
     z-index: -1;
     opacity: 0;
-    transition: 60s opacity linear;
+    transition: 120s opacity linear;
     /* transition: 120s filter linear; */
     /* filter: blur(15px) contrast(1); */
     /* display: none; */
@@ -264,9 +266,10 @@ button:hover {
       /* letter-spacing: 0.01em;
       line-height: .51em; */
       font-size: 35px;
+      filter: brightness(0.1);
       margin: -10px auto auto;
       text-transform: lowercase;
-      transition: 240s color linear, 240s background linear;
+      transition: 440s color linear, 440s background linear, 15s filter linear;
     }
   }
 }
@@ -280,39 +283,21 @@ canvas.front {
   z-index: 1000 !important;
 }
 
-/* .player {
-  margin-top: 20px;
-  max-width: 500px;
-  border: solid black 1px;
-  padding: 0px;
+.three-sheets-to-the-wind {
+  display: inline-block;
+  height: 80vw;
+}
 
-  p.description {
-    margin: 10px;
-    font-size: 16px;
-    width: auto;
-    font-style: normal;
-  }
+.three-sheets-to-the-wind p {
+  text-align: center !important;
+  /* font-size: 48px !important; */
+}
 
-  footer {
-    border-top: solid black 1px;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-
-  footer p {
-    margin: 0;
-    font-size: 12px;
-    width: 100%
-  }
-
-  button {
-    font-size: 12px;
-    font-family: 'Ibarra Real Nova', monospace;
-    padding: 10px;
-    margin: 10px;
-  }
-} */
+.three-sheets-to-the-wind p > span {
+  display: inline-block;
+  position: relative;
+  transform-origin: center;
+}
 
 @media screen and (min-width: 768px) {
   #poems-container.part-1 .poem-container {
