@@ -284,9 +284,8 @@ function initializeSlideImages() {
 function handlePartSelection(part) {
   let hash = window.location.hash;
   const splitHash = hash.split('-');
-  const index = parseInt(splitHash[splitHash.length - 1]) || 0;
+  const index = parseInt(splitHash[splitHash.length - 1]) - 1 || 0;
 
-  // const part = event.target.dataset.part;
   const previousPoemEl = document.querySelector('.poem-container.selected-part');
   previousPoemEl?.classList.remove('selected-part');
   const poemEl = document.querySelector(`#${part}`);
@@ -316,7 +315,6 @@ function parsePoem(el) {
 }
 
 function updateFrame(el) {
-  console.log('el', el);
   const activeEl = el.parentElement.querySelector('.active');
   activeEl?.classList.remove('active');
 
@@ -340,7 +338,7 @@ async function beginFragments(index) {
   updateFrame(frame);
   
   function handleNavigation(event) {
-    console.log('handleNavigation', event);
+    event.preventDefault();
     const viewportWidth = window.innerWidth;  
     const xLocation = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
     
@@ -349,7 +347,17 @@ async function beginFragments(index) {
     } else {
       slideIndex--;
     }
-  
+
+    if (slideIndex < 0) {
+      slideIndex = 0;
+      return;
+    }
+    
+    if (slideIndex >= frames.length) {
+      slideIndex = frames.length - 1;
+      return;
+    }
+
     updateFrame(frames[slideIndex]);
     window.history.pushState({}, '', `${href}#part-1-${slideIndex + 1}`);
   
@@ -369,6 +377,7 @@ async function beginFragments(index) {
   await handleConvolution();
   updateConvolutionLevel(0);
 
+  threeSheetsToTheWind();
 }
 
 async function beginUntitled() {
@@ -460,7 +469,8 @@ function handleRouting() {
   const hash = window.location.hash;
 
   // comment next line to prevent page from defaulting to home on load
-  window.location.href = href;
+  if (hash !== '') return returnHome();
+
   if (hash.includes('#part-1')) {
     handlePartSelection('part-1');
   } else if (hash.includes('#part-2')) {
@@ -491,13 +501,13 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   const startButtons = document.querySelectorAll('button.start');
   startButtons.forEach((button) => {
-    button?.addEventListener('click', (event) => handleNavigationEvent(event.target.dataset.part));
-    button?.addEventListener('touchend', (event) => handleNavigationEvent(event.target.dataset.part));
+    button?.addEventListener('click', (event) => handleNavigationEvent(event, event.target.dataset.part));
+    button?.addEventListener('touchend', (event) => handleNavigationEvent(event, event.target.dataset.part));
   });
 
   const homeButton = document.querySelector('button.nav-home');
-  homeButton?.addEventListener('click', () => handleNavigationEvent(''));
-  homeButton?.addEventListener('touchend', () => handleNavigationEvent(''));
+  homeButton?.addEventListener('click', (event) => handleNavigationEvent(event, ''));
+  homeButton?.addEventListener('touchend', (event) => handleNavigationEvent(event, ''));
 
   // Add popstate event listener for browser back/forward
   window.addEventListener('popstate', () => {
@@ -509,9 +519,11 @@ document.addEventListener('DOMContentLoaded', async function() {
   // window.location.href = href;
   // window.history.pushState({}, '', window.location.href);
   handleRouting();
+
 });
 
-function handleNavigationEvent(part) {
+function handleNavigationEvent(event, part) {
+  event.preventDefault();
   resetState();
   if (part === '') return returnHome();
   handlePartSelection(part);
@@ -574,4 +586,15 @@ function createSvgFilter() {
   filter.appendChild(feColorMatrix);
 
   document.querySelector("svg defs").appendChild(filter);
+}
+
+function threeSheetsToTheWind() {
+  const elements = document.querySelectorAll('.three-sheets-to-the-wind span');
+  elements.forEach(el => {
+    const translateX = (Math.random() - 0.5) * 400; // -2px to 2px
+    const translateY = (Math.random() - 0.5) * 400; // -2px to 2px
+    const rotate = (Math.random() - 0.5) * 180; // -3deg to 3deg
+    
+    el.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`;
+  });
 }
