@@ -140,12 +140,13 @@ async function handleConvolution() {
   sumNode.connect(playerGainNode);
   playerGainNode.connect(audioCtx.destination);
 
-  convolver.connect(processor);
+  // convolver.connect(processor);
   source.start();
   
   // does not indicate that user interaction has occured
   audioHasStarted = audioCtx.state === 'running' ? true : false;
   if (audioHasStarted) {
+    console.log('audioHasStarted', audioHasStarted);
     processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
   }
 
