@@ -6,7 +6,7 @@
   
   coalesces
 
-  to a translucent sheet
+  to translucent sheet
   
   a cone
 
@@ -14,13 +14,17 @@
   
   <br/>
 
-  enclosed, splashy
+  enclosed,
+
+  under wrapped arms
   
-  green stems
+  green stems hold
   
-  they wind their way
+  their bloom
   
-  a step backwards
+  as they wind their way
+  
+  backwards
 
   <br/>
 
@@ -42,11 +46,17 @@
 
   dawn comes whispering
   
-  comes down from
+  streaming down from
   
-  the trees
+  the trees under humming
+
+  sky of cerulean perfume
 
   <br/>
+
+  earth drunk on petrichor
+
+  rises & wafts
 
   you walk so lightly
   
@@ -60,19 +70,29 @@
 
   ### a certain weight
 
-  of tapered wood
+  tapered wood
 
-  of curling arc
+  of curling arc under voices
+
+  of the night sky
 
   <br/>
+
+  you toss everything into the wind
+
+  that you want to float on
+
+  back
+
+  <!-- into the epidermal ridges of your hand -->
   
-  everything you can throw
+  <!-- everything you can throw
   
   to the wind
   
   floats on back
 
-  to you
+  to you -->
   
 </div>
 
@@ -113,9 +133,9 @@
   
   a ghost paces
   
-  in neat and rhythmic lines
+  in still and moving lines
 
-  tracing stillness
+  tracing every breath
 
   <br/>
   
@@ -166,7 +186,7 @@
 
   and it sinks.
 
-  holding diaphragm, rising breath
+  holding diaphragm, or diaresis
   
 
   <br/>
@@ -184,7 +204,7 @@
 
 <div class="poem">
 
-###
+### the vast library of air
 
 it is as if
 

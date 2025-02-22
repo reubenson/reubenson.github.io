@@ -40,6 +40,7 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
   }
 
   handleChannelData(channel) {
+    console.log('channel', channel.length);
     const downsampleFactor = 8;
     const length = channel.length / downsampleFactor;
     const downsampledChannel = channel.filter((_, i) => i % downsampleFactor === 0);

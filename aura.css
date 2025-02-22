@@ -8,17 +8,30 @@ body {
 
 .poems-header {
   color: snow;
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  margin:auto;
-  z-index:10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 10000;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 
   h1, h2 {
-    display: inline-block;
+    display: block;
     font-size: 24px;
-    margin: 0;
+    margin: 20px;
+  }
+
+  h2 {
+    text-align: right;
+    font-size: 18px;
+  }
+
+  a {
+    text-decoration: none;
+    color: snow;
   }
 }
 
@@ -29,7 +42,7 @@ header button {
   font-family: 'Ibarra Real Nova', monospace;
   background: transparent;
   color: snow;
-  padding: 20px;
+  /* padding: 20px; */
   border: none;
 }
 
@@ -165,11 +178,11 @@ button:hover {
       padding: 20px;
       max-width: calc(100% - 40px);
       display: none;
+      filter: blur(0px) contrast(1) url(#wind-filter);
     }
     
     .poem.active {
       display: block;
-      filter: blur(0px) contrast(1) url(#wind-filter);
     }
 
     .line-break {

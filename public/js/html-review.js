@@ -499,7 +499,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   canvasContainerEl = document.querySelector('#poems-container');
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
-  await audioCtx.audioWorklet.addModule("/public/js/random-noise-processor.js");
+  console.log('audioCtx.audioWorklet', audioCtx.audioWorklet);
+  await audioCtx.audioWorklet?.addModule("/public/js/random-noise-processor.js");
   processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
 
   processor.port.onmessage = (e) => {
@@ -612,7 +613,7 @@ function threeSheetsToTheWind() {
   const elements = document.querySelectorAll('.three-sheets-to-the-wind span');
   elements.forEach(el => {
     const translateX = (Math.random() - 0.5) * 400; // -2px to 2px
-    const translateY = (Math.random() - 0.5) * 400; // -2px to 2px
+    const translateY = 200 + (Math.random() - 0.5) * 400; // -2px to 2px
     const rotate = (Math.random() - 0.5) * 180; // -3deg to 3deg
     
     el.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`;

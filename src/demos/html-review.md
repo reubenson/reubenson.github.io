@@ -10,6 +10,9 @@ hideSeeMore: true
 ---
 <header class="poems-header">
   <h1><button class="nav-home">Airs</button></h1>
+  <h2>
+    <a href="https://thehtml.review/04/">The HTML Review, <em>Issue 04, Spring 2025</em></a>
+  </h2>
 </header>
 
 <div class="poems-description">
@@ -121,7 +124,11 @@ Approximately twenty of these poems will be presented in total, which readers ca
       yChannelSelector="G" />
     </filter>
     <filter id="wind-filter">
-      <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" result="slide-0" preserveAspectRatio="xMidYMid meet" width="860px" x="15px" y="0"></feImage>
+      <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
+        result="slide-0" 
+        height="1000px"
+        >
+      </feImage>
       <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
