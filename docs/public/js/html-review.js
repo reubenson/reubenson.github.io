@@ -127,7 +127,11 @@ async function handleConvolution() {
   source.buffer = await audioCtx.decodeAudioData(windBuffer);
   console.log('after decodeAudioData');
 
-  convolver.buffer = await audioCtx.decodeAudioData(buffer);
+  try {
+    convolver.buffer = await audioCtx.decodeAudioData(buffer);
+  } catch (error) {
+    console.error('Error in handleConvolution', error);
+  }
 
   
   console.log('after fetch');
