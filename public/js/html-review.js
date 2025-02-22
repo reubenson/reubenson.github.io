@@ -2,15 +2,14 @@ const CANVAS_WIDTH = 256; // this is the desired width of the image drawn from t
 const CANVAS_HEIGHT = 256;
 
 let audioHasStarted = false;
+let convolutionInitialized = false;
+let windInitialized = false;
 let part1Index = 0;
 const href = window.location.href.split('#')[0];
 
-const audioFilepath = '/public/airports-for-music-i.mp3';
+const audioFilepath = '/public/html-review/woo.mp3';
 // const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
 
-let frameCount = 0;
-const frameRate = 30; // Target frame rate (e.g., 30 frames per second)
-const frameInterval = 1000 / frameRate; // Calculate the interval for the target frame rate
 let colorMatrix, colorMatrixEl;
 let colorValue = 0.46;
 
@@ -25,10 +24,10 @@ let canvasCtx;
 let offscreenCanvas;
 let offscreenCtx;
 
-let imageData;
-let imageWidth;
-let imageHeight;
-let imageBuffer;
+// let imageData;
+// let imageWidth;
+// let imageHeight;
+// let imageBuffer;
 let gainNodeSource;
 let gainNodeConvolution;
 let processor;
@@ -86,18 +85,46 @@ function hueToRgb(p, q, t) {
 }
 
 function updateConvolutionLevel(level) {
-  if (!audioHasStarted) return;
+  
+  // if (!audioHasStarted) return;
 
   // const currentValue = gainNodeConvolution.gain.value;
   const duration = 60; // seconds
   gainNodeConvolution.gain.linearRampToValueAtTime(level, audioCtx.currentTime + duration);
 }
 
-async function handleConvolution() {
-  if (audioHasStarted) return;
+function audioIsReady() {
+  return convolutionInitialized && windInitialized;
+}
 
+async function initializeConvolution() {
   let response = await fetch(audioFilepath);
   let buffer = await response.arrayBuffer();
+  convolver.buffer = await audioCtx.decodeAudioData(buffer);
+
+  convolutionInitialized = true;
+  startAudio();
+}
+
+async function initializeWind() {
+  let response = await fetch('/public/html-review/test-wind.mp3');
+  let buffer = await response.arrayBuffer();
+  source.buffer = await audioCtx.decodeAudioData(buffer);
+  windInitialized = true;
+  startAudio();
+}
+
+function startAudio() {
+  if (!audioIsReady()) return;
+  if (audioHasStarted) return;
+  source.start();
+}
+
+async function initializeAudio() {
+  if (audioHasStarted) return;
+
+  // let response = await fetch(audioFilepath);
+  // let buffer = await response.arrayBuffer();
 
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048 * 4 * 4;
@@ -117,12 +144,11 @@ async function handleConvolution() {
 
   convolver.normalize = false;
   
-  let windresponse = await fetch('/public/html-review/test-wind.mp3');
-  let windBuffer = await windresponse.arrayBuffer();
-  source.buffer = await audioCtx.decodeAudioData(windBuffer);
+  // let windresponse = await fetch('/public/html-review/test-wind.mp3');
+  // let windBuffer = await windresponse.arrayBuffer();
+  // source.buffer = await audioCtx.decodeAudioData(windBuffer);
+  // convolver.buffer = await audioCtx.decodeAudioData(buffer);
 
-  convolver.buffer = await audioCtx.decodeAudioData(buffer);
-  
   source.connect(gainNodeSource);
   gainNodeSource.connect(convolver);
   convolver.connect(gainNodeConvolution);
@@ -141,15 +167,22 @@ async function handleConvolution() {
   playerGainNode.connect(audioCtx.destination);
 
   convolver.connect(processor);
-  source.start();
+  // source.start();
+
+  initializeConvolution();
+  initializeWind();
   
   // does not indicate that user interaction has occured
-  audioHasStarted = audioCtx.state === 'running' ? true : false;
+  audioCtx.addEventListener('statechange', (event) => {
+    audioHasStarted = audioCtx.state === 'running';
+    if (audioHasStarted) {
+      processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
+    }
+  });
+  audioHasStarted = audioCtx.state === 'running';
   if (audioHasStarted) {
     processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
   }
-
-  visualize();
 }
 
 function visualize() {
@@ -315,9 +348,9 @@ function handlePartSelection(part) {
   activeButton.classList.add('active');
 
   if (part === 'part-1') {
-    beginFragments(index);
+    beginPart1(index);
   } else if (part === 'part-2') {
-    beginUntitled();
+    beginPart2();
   }
 
   document.body.classList.add('now-viewing');
@@ -336,7 +369,7 @@ function updateFrame(el) {
   el.classList.add('active');
 }
 
-async function beginFragments(index) {
+async function beginPart1(index) {
   canvasContainerEl.classList.add('part-1');
   const frames = parsePoem(document.querySelector('#part-1'));
 
@@ -388,14 +421,13 @@ async function beginFragments(index) {
   for (const listener of eventListeners) {
     listener.element.addEventListener(listener.type, listener.handler);
   }
-
-  await handleConvolution();
+  await initializeAudio();
   updateConvolutionLevel(0);
 
   threeSheetsToTheWind();
 }
 
-async function beginUntitled() {
+async function beginPart2() {
   const hash = `#part-2`;
   window.history.pushState({}, '', `${href}${hash}`);
   
@@ -420,9 +452,9 @@ async function beginUntitled() {
     applyColorShift(0.001);
   }, 500);
 
-  
-  await handleConvolution();
+  await initializeAudio();  
   updateConvolutionLevel(0.03);
+  visualize();
 }
 
 function applyColorShift(increment = 0.01) {
@@ -453,7 +485,12 @@ function resetState() {
   slideIndex = 0;
   eventListeners = [];
   previousSlideIndex = null;
-  updateConvolutionLevel(0);
+  
+  try {
+    updateConvolutionLevel(0);
+  } catch (e) {
+    // console.error(e);
+  }
 
   document.body.classList.remove('now-viewing');
   canvasContainerEl.classList.remove('has-started');
@@ -499,10 +536,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   canvasContainerEl = document.querySelector('#poems-container');
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
-  console.log('audioCtx.audioWorklet', audioCtx.audioWorklet);
+
   await audioCtx.audioWorklet?.addModule("/public/js/random-noise-processor.js");
   processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
-
   processor.port.onmessage = (e) => {
     updateAudioBufferData(e.data);
   };
@@ -557,13 +593,6 @@ function addArrays(arr1, arr2) {
   return arr1.map((value, index) => value + arr2[index]);
 }
 
-function subtractArrays(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    throw new Error('Arrays must be of the same length');
-  }
-  return arr1.map((value, index) => value - arr2[index]);
-}
-
 function hslColorMatrix(h) {
   const s = 1;
   const l = 0.6;
@@ -571,7 +600,7 @@ function hslColorMatrix(h) {
   const [r2, g2, b2] = hslToRgb(h + 0.55, s, l);
 
   // console.log(`RGB: (${r}, ${g}, ${b})`);
-  console.log(`RGB: (${h}`);
+  // console.log(`RGB: (${h}`);
 
   const primaryArray = [
     r, 0, 0, -b/3, 0,
