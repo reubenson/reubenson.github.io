@@ -455,6 +455,13 @@ async function beginPart2() {
   await initializeAudio();  
   updateConvolutionLevel(0.03);
   visualize();
+
+  // Request wake lock to keep screen on
+  try {
+    window.wakeLock = await navigator.wakeLock.request('screen');
+  } catch (err) {
+    console.error(`Failed to request wake lock: ${err.name}, ${err.message}`);
+  }
 }
 
 function applyColorShift(increment = 0.01) {
@@ -462,7 +469,7 @@ function applyColorShift(increment = 0.01) {
   setColorMatrix(colorValue);
 }
 
-function resetState() {
+async function resetState() {
   const canvasContainerEl = document.querySelector('#poems-container');
   canvasContainerEl.classList.remove('fullscreen');
   canvasContainerEl.classList.remove('part-1');
@@ -494,6 +501,16 @@ function resetState() {
 
   document.body.classList.remove('now-viewing');
   canvasContainerEl.classList.remove('has-started');
+
+  // Release wake lock if it exists
+  if (window.wakeLock) {
+    try {
+      await window.wakeLock.release();
+      window.wakeLock = null;
+    } catch (err) {
+      console.error(`Failed to release wake lock: ${err.name}, ${err.message}`);
+    }
+  }
 }
 
 function returnHome() {
