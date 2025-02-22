@@ -501,8 +501,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
   console.log('audioCtx.audioWorklet', audioCtx.audioWorklet);
-  await audioCtx.audioWorklet?.addModule("/public/js/random-noise-processor.js");
-  processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
+  // await audioCtx.audioWorklet?.addModule("/public/js/random-noise-processor.js");
+  // processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
   console.log('processor', processor);
 
   // processor.port.onmessage = (e) => {
