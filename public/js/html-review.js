@@ -147,7 +147,7 @@ async function handleConvolution() {
   audioHasStarted = audioCtx.state === 'running' ? true : false;
   if (audioHasStarted) {
     console.log('audioHasStarted', audioHasStarted);
-    processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
+    // processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
   }
 
   visualize();
@@ -505,9 +505,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
   console.log('processor', processor);
 
-  processor.port.onmessage = (e) => {
-    updateAudioBufferData(e.data);
-  };
+  // processor.port.onmessage = (e) => {
+  //   updateAudioBufferData(e.data);
+  // };
 
   canvas = document.createElement('canvas');
   canvas.width = CANVAS_WIDTH;
