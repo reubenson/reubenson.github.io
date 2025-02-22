@@ -123,7 +123,9 @@ async function handleConvolution() {
   
   let windresponse = await fetch('/public/html-review/test-wind.mp3');
   let windBuffer = await windresponse.arrayBuffer();
+  console.log('after fetch windBuffer');
   source.buffer = await audioCtx.decodeAudioData(windBuffer);
+  console.log('after decodeAudioData');
 
   convolver.buffer = await audioCtx.decodeAudioData(buffer);
 
