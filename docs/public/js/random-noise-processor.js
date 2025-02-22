@@ -64,6 +64,7 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
 
   // The method is called synchronously from the audio rendering thread, once for each block of audio (also known as a rendering quantum) being directed through the processor's corresponding AudioWorkletNode. In other words, every time a new block of audio is ready for your processor to manipulate, your process() function is invoked to do so.
   process(inputs, outputs, parameters) {
+    console.log('process', inputs);
     const output = inputs[0];
     
     output.forEach((channel, index) => {
