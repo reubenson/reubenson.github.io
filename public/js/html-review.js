@@ -1,5 +1,5 @@
-const CANVAS_WIDTH = 512; // this is the desired width of the image drawn from the audio buffer
-const CANVAS_HEIGHT = 512;
+const CANVAS_WIDTH = 256; // this is the desired width of the image drawn from the audio buffer
+const CANVAS_HEIGHT = 256;
 
 let audioHasStarted = false;
 let part1Index = 0;
@@ -21,6 +21,9 @@ let convolver;
 let analyser;
 let canvas;
 let canvasCtx;
+
+let offscreenCanvas;
+let offscreenCtx;
 
 let imageData;
 let imageWidth;
@@ -157,38 +160,50 @@ function visualize() {
 
     shouldUpdateCanvas = false;
 
+    // offscreenCtx.drawImage(canvas, 0, 0);
+    // canvasCtx.clearRect(0, 0, CANVAS_WIDTH, 1);
+    // canvasCtx.drawImage(offscreenCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT - 1, 0, 1, CANVAS_WIDTH, CANVAS_HEIGHT - 1);
+
     // this should only incrementally update?
-    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    // canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let imageArray = new Uint8ClampedArray(audioBufferData);
-    // console.log('imageArray', imageArray.slice(0, 16));
-    // console.log('imageArray', imageArray.length);
+    // let imageArray = new Uint8ClampedArray(audioBufferData);
 
-    imageArray = imageArray.map((val, index) => {
-      if (index % 4 === 0) {
-        return val;
-      } else if (index % 4 === 1) {
-        return val;
-      } else if (index % 4 === 2) {
-        return val;
-      } else if (index % 4 === 3) {
-        // return val;
-        // increase level (more negative -> more transparency?)
-        return Math.pow(val / 255, -1.25) * 255
-        // return val;
-        return 255;
-      }
-    });
+    // Draw only the new row of data at the top
+    // let newRowData = new Uint8ClampedArray(audioBufferData.slice(0, CANVAS_WIDTH * 4));
+    // newRowData = newRowData.map((val, index) => {
+    //   if (index % 4 === 3) {
+    //     return Math.pow(val / 255, -1.25) * 255;
+    //   }
+    //   return val;
+    // });
 
-    const len = Math.sqrt(audioBufferData.byteLength) / 2;
+    // canvasCtx.putImageData(new ImageData(newRowData, CANVAS_WIDTH, 1), 0, 0);
+
     
-
-    const originalWidth = len;
-    const originalHeight = len;
-    const scaleFactor = 1;
+    // const len = Math.sqrt(audioBufferData.byteLength) / 2;
+    // const originalWidth = len;
+    // const originalHeight = len;
+    // const scaleFactor = 1;
     // const scaledPixelArray = scaleUpPixels(imageArray, originalWidth, originalHeight, scaleFactor);
     
-    canvasCtx.putImageData(new ImageData(imageArray, CANVAS_WIDTH, CANVAS_HEIGHT), 0, 0);
+    // Create a temporary canvas to hold the image data
+    // const tempCanvas = document.createElement('canvas');
+    // tempCanvas.width = CANVAS_WIDTH;
+    // tempCanvas.height = CANVAS_HEIGHT;
+    // const tempCtx = tempCanvas.getContext('2d');
+    
+    // Put the image data on the temporary canvas
+    // Skip first row and collect remaining rows
+    const remainingRows = new Uint8ClampedArray(audioBufferData.slice(CANVAS_WIDTH * 4));
+    offscreenCtx.putImageData(new ImageData(remainingRows, CANVAS_WIDTH, CANVAS_HEIGHT - 1), 0, 1);
+    
+    // Draw the new row of data at the top
+    const firstRow = new Uint8ClampedArray(audioBufferData.slice(0, CANVAS_WIDTH * 4));
+    canvasCtx.putImageData(new ImageData(firstRow, CANVAS_WIDTH, 1), 0, 0);
+
+    // Draw the temporary canvas onto the main canvas
+    canvasCtx.drawImage(offscreenCanvas, 0, 1, CANVAS_WIDTH, CANVAS_HEIGHT - 1, 0, 1, CANVAS_WIDTH, CANVAS_HEIGHT - 1);
 
     return;
 
@@ -495,8 +510,13 @@ document.addEventListener('DOMContentLoaded', async function() {
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
   canvasContainerEl.querySelector('#part-2').appendChild(canvas);
-  
   canvasCtx = canvas.getContext('2d');
+
+  offscreenCanvas = document.createElement('canvas');
+  offscreenCanvas.width = CANVAS_WIDTH;
+  offscreenCanvas.height = CANVAS_HEIGHT;
+  offscreenCtx = offscreenCanvas.getContext('2d');
+
   createSvgFilter();
 
   const startButtons = document.querySelectorAll('button.start');

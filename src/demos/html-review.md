@@ -40,7 +40,6 @@ hideSeeMore: true
   </footer>
 </div> -->
 
-<!-- <button id="close">Close</button> -->
 <nav>
   <button class="nav-part-1 start" data-part="part-1">Part I: The Page</button>
   <button class="nav-part-2 start" data-part="part-2">Part II: The Screen</button>
@@ -53,14 +52,6 @@ hideSeeMore: true
   <div id="part-2" class="poem-container">
     {% include "./poem-2.md" %}
   </div>
-
-  
-
-
-
-  <!-- <p id="text"></p> -->
-   <!-- “Every crystal was a masterpiece of design and no one design was ever repeated. When a snowflake melted, that design was forever lost,” -->
-   <!-- https://arc.net/l/quote/haruwzln -->
 </div>
 
 

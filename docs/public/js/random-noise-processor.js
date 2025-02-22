@@ -27,6 +27,7 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
     // Ensure we don't write more data than the buffer can hold
     const writeLength = Math.min(newDataLength, this.bufferSize);
 
+
     // Shift existing data to the right to make room for new data
     for (let i = this.bufferSize - 1; i >= writeLength; i--) {
       this.bufferView[i] = this.bufferView[i - writeLength];
@@ -34,16 +35,27 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
 
     // Write new data to the beginning of the buffer
     for (let i = 0; i < writeLength; i++) {
-      this.bufferView[i] = newData[i];
+      this.bufferView[i] = newData[writeLength - 1 - i];
     }
   }
 
   handleChannelData(channel) {
-    this.appendToBuffer(channel);
+    const downsampleFactor = 8;
+    const length = channel.length / downsampleFactor;
+    const downsampledChannel = channel.filter((_, i) => i % downsampleFactor === 0);
+    this.appendToBuffer(downsampledChannel);
 
     // only post message with data when the buffer contains a full row for the canvas
-    if (this.bufferCounter % (this.bufferSize / channel.length) === 0) {
-      this.port.postMessage(this.bufferView);
+    if (this.bufferCounter % (this.bufferSize / length) === 0) {
+      
+      this.port.postMessage(this.bufferView.map(val => {
+        if (this.bufferCounter % 4 === 3) {
+          // modulate transparency
+          // increase level (more negative -> more transparency?) 
+          return Math.pow(val / 255, -1.25) * 255;
+        }
+        return val;
+      }));
       this.bufferCounter = 0;
     }
     this.bufferCounter++;
@@ -54,10 +66,12 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
     const output = inputs[0];
     
     output.forEach((channel, index) => {
-      if (index === 1) return; // skip second channel for now
+      // console.log('channel', channel);
+      // console.log('index', index);
+      // if (index === 1) return; // skip second channel for now
 
       for (let i = 0; i < channel.length; i++) {
-        let noise = (Math.random() * 2 - 1) / 1.;
+        // let noise = (Math.random() * 2 - 1) / 1.;
         if (!inputs[0].length) {
           channel[i] = 0;
           return;
