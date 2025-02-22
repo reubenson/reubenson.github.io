@@ -116,13 +116,17 @@ async function handleConvolution() {
   sumNode.gain.value = 1.0;
 
   convolver.normalize = false;
+
+  console.log('before fetch');
   
   let windresponse = await fetch('/public/html-review/test-wind.mp3');
   let windBuffer = await windresponse.arrayBuffer();
   source.buffer = await audioCtx.decodeAudioData(windBuffer);
 
   convolver.buffer = await audioCtx.decodeAudioData(buffer);
+
   
+  console.log('after fetch');
   source.connect(gainNodeSource);
   gainNodeSource.connect(convolver);
   convolver.connect(gainNodeConvolution);
@@ -392,8 +396,12 @@ async function beginFragments(index) {
 
   console.log('before handleConvolution');
 
-  await handleConvolution();
-  updateConvolutionLevel(0);
+  try {
+    await handleConvolution();
+    updateConvolutionLevel(0);
+  } catch (error) {
+    console.error('Error in beginFragments', error);
+  }
 
   console.log('after handleConvolution');
 
