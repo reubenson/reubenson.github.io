@@ -96,8 +96,10 @@ function updateConvolutionLevel(level) {
 async function handleConvolution() {
   if (audioHasStarted) return;
 
+  console.log('before fetch audiofilepath');
   let response = await fetch(audioFilepath);
   let buffer = await response.arrayBuffer();
+  console.log('after fetch audiofilepath');
 
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048 * 4 * 4;
