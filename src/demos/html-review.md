@@ -11,7 +11,7 @@ hideSeeMore: true
 <header class="poems-header">
   <h1><button class="nav-home">Airs</button></h1>
   <h2>
-    <a href="https://thehtml.review/04/">The HTML Review, <em>Issue 04, Spring 2025</em></a>
+    <a href="https://thehtml.review/04/">The HTML Review<br/><em>Issue 04, Spring 2025</em></a>
   </h2>
 </header>
 
@@ -21,7 +21,7 @@ hideSeeMore: true
   
   in two parts
   
-  accompanied by recordings of the wind
+  accompanied by the wind
 </div>
 
 
@@ -48,14 +48,26 @@ hideSeeMore: true
   <button class="nav-part-2 start" data-part="part-2">Part II: The Screen</button>
 </nav>
 <div id="poems-container">
-  </header>
+  <div class="poems-container-blur"></div>
   <div id="part-1" class="poem-container">
     {% include "./poem-1.md" %}
   </div>
   <div id="part-2" class="poem-container">
     {% include "./poem-2.md" %}
   </div>
+  <!-- <div class="credits">
+    <h2 class="credits-title">Airs</h2>
+  </div> -->
 </div>
+<!-- <div class="credits"> -->
+  <!-- <h2 class="credits-title">Airs</h2> -->
+  <!-- <p class="credits-text">
+    Recordings of wind made between 2020 and 2024.
+    <br/>
+    Electronics recorded at Electronmusicstudion in 2019.
+  </p>
+</div> -->
+
 
 
 
@@ -126,10 +138,10 @@ Approximately twenty of these poems will be presented in total, which readers ca
     <filter id="wind-filter">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
         result="slide-0" 
-        height="1000px"
+        height="100vh"
         >
       </feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="5" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>

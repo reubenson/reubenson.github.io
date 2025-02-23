@@ -16,17 +16,17 @@ body {
   z-index: 10000;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 
   h1, h2 {
     display: block;
-    font-size: 24px;
-    margin: 20px;
+    margin: 15px;
   }
 
   h2 {
     text-align: right;
-    font-size: 18px;
+    font-size: 14px;
+    line-height: 1em;
   }
 
   a {
@@ -36,7 +36,7 @@ body {
 }
 
 header button {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 100;
   font-style: italic;
   font-family: 'Ibarra Real Nova', monospace;
@@ -65,7 +65,7 @@ nav button {
   background: transparent;
   color: snow;
   font-weight: 100;
-  padding: 10px;
+  padding: 15px;
   font-style: italic;
   font-family: 'Ibarra Real Nova', monospace;
 }
@@ -164,7 +164,7 @@ button:hover {
     }
 
     h3, p {
-      font-size: 24px;
+      font-size: 20px;
     }
 
     p {
@@ -255,7 +255,7 @@ button:hover {
       }
     }
 
-    .poem p {
+    .poem > p {
       color: snow;
       background: black;
       line-break: anywhere;
@@ -266,6 +266,39 @@ button:hover {
       margin: -10px auto auto;
       text-transform: lowercase;
       transition: 440s color linear, 440s background linear, 15s filter linear;
+    }
+  }
+
+  .credits {
+    font-size: 180px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+
+    h2 {
+      font-size: 140px;
+      line-height: 1em;
+      padding: 0;
+      margin: auto;
+      color: snow;
+    }
+
+    p {
+      font-size: 30px !important;
+      line-height: 0.8em !important;
+      margin: auto;
+      text-align: justify;
+      line-break: auto !important;
+      background: transparent !important;
     }
   }
 }
@@ -289,9 +322,69 @@ canvas.front {
 }
 
 .three-sheets-to-the-wind p > span {
-  display: inline-block;
+  display: block;
   position: relative;
   transform-origin: center;
+
+  &:nth-child(1) {
+    transform: translate(-118.087px, 113.935px) rotate(-60.7089deg);
+    transform: translate(-32%, 44%) rotate(-60.7089deg);
+  }
+
+  &:nth-child(2) {
+    transform: translate(63.1012px, 169.607px) rotate(-82.1365deg);
+    transform: translate(31.1%, 64.8%) rotate(-82.1365deg);
+  }
+
+  &:nth-child(3) {
+    transform: translate(180.712px, 216.631px) rotate(-85.2554deg);
+    transform: translate(12%, 65%) rotate(-85.2554deg);
+  }
+
+  &:nth-child(4) {
+    transform: translate(189.632px, 42.1053px) rotate(-39.2808deg); 
+    transform: translate(16.8%, 2.4%) rotate(-39.2808deg);
+  }
+
+  &:nth-child(5) {
+    transform: translate(-87.9262px, 316.465px) rotate(-75.3951deg);
+    transform: translate(-7%, 65%) rotate(-75.3951deg);
+  }
+
+  &:nth-child(6) {
+    transform: translate(184.434px, 138.076px) rotate(-25.0452deg); 
+    transform: translate(15%, 46%) rotate(-25.0452deg);
+  }
+
+  &:nth-child(7) {
+    transform: translate(-95.1094px, 325.007px) rotate(-56.5112deg);
+    transform: translate(-7.9%, 65%) rotate(-56.5112deg);
+  }
+
+  &:nth-child(8) {
+    transform: translate(-140.643px, 3.05186px) rotate(77.8996deg);
+    transform: translate(-11.7%, 1%) rotate(77.8996deg);
+  }
+
+  &:nth-child(9) {
+    transform: translate(23.8009px, 233.439px) rotate(-60.7171deg);
+    transform: translate(18.9%, 63.2%) rotate(-60.7171deg);
+  } 
+
+  &:nth-child(10) {
+    transform: translate(-11.0199px, 140.275px) rotate(35.4707deg);
+    transform: translate(-0.9%, 46.1%) rotate(35.4707deg);
+  }
+
+  &:nth-child(11) {
+    transform: translate(13.6709px, 180.529px) rotate(28.3927deg);
+    transform: translate(-16.4%, 54.9%) rotate(28.3927deg);
+  }
+
+  &:nth-child(12) {
+    transform: translate(71.12px, 315.738px) rotate(-17.7133deg);
+    transform: translate(5.9%, 65%) rotate(-17.7133deg);
+  }
 }
 
 @media screen and (min-width: 768px) {

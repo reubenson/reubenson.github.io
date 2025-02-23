@@ -46,19 +46,23 @@
 
   dawn comes whispering
   
-  streaming down from
+  streaming
   
-  the trees under humming
+  down
+  
+  from the trees under tilting
 
   sky of cerulean perfume
 
   <br/>
 
-  earth drunk on petrichor
+  earth fuming petrichor
 
   rises & wafts
 
-  you walk so lightly
+  you walk so
+  
+  lightly
   
   you carry the wind
 
@@ -133,7 +137,7 @@
   
   a ghost paces
   
-  in still and moving lines
+  still and moving lines
 
   tracing every breath
 
@@ -178,7 +182,7 @@
 
 <div class="poem">
 
-  ### that rustles
+  ### rustle
 
   colder air is
   
@@ -200,13 +204,20 @@
   is quieter in the shadow
   
   of a leaf
+
 </div>
 
 <div class="poem">
 
-### the vast library of air
+### night
 
-it is as if
+the aura of night itself
+
+a chorus of frogs
+
+singing from
+
+the vast library of air
 
 </div>
 

@@ -53,13 +53,13 @@
         <header class="poems-header">
   <h1><button class="nav-home">Airs</button></h1>
   <h2>
-    <a href="https://thehtml.review/04/">The HTML Review, <em>Issue 04, Spring 2025</em></a>
+    <a href="https://thehtml.review/04/">The HTML Review<br/><em>Issue 04, Spring 2025</em></a>
   </h2>
 </header>
 <div class="poems-description">
 <p><em>Airs</em> is a collection of poems</p>
 <p>in two parts</p>
-<p>accompanied by recordings of the wind</p>
+<p>accompanied by the wind</p>
 </div>
 <!-- As you browse through these texts, recordings of the wind (made 2022-2024) will play. The underlying gesture in both parts is that of subjecting typographic elements to processes that register traces of the wind. -->
 <!-- <div class="player"> -->
@@ -81,7 +81,7 @@
   <button class="nav-part-2 start" data-part="part-2">Part II: The Screen</button>
 </nav>
 <div id="poems-container">
-  </header>
+  <div class="poems-container-blur"></div>
   <div id="part-1" class="poem-container">
     <div class="poem">
 <h3>rain</h3>
@@ -107,13 +107,15 @@
 <div class="poem">
 <h3>everything you already know</h3>
 <p>dawn comes whispering</p>
-<p>streaming down from</p>
-<p>the trees under humming</p>
+<p>streaming</p>
+<p>down</p>
+<p>from the trees under tilting</p>
 <p>sky of cerulean perfume</p>
   <br/>
-<p>earth drunk on petrichor</p>
+<p>earth fuming petrichor</p>
 <p>rises &amp; wafts</p>
-<p>you walk so lightly</p>
+<p>you walk so</p>
+<p>lightly</p>
 <p>you carry the wind</p>
 <p>under your feet</p>
 </div>
@@ -153,7 +155,7 @@
 <p>under a blanket of silence</p>
   <br/>
 <p>a ghost paces</p>
-<p>in still and moving lines</p>
+<p>still and moving lines</p>
 <p>tracing every breath</p>
   <br/>
 <p>a window</p>
@@ -176,7 +178,7 @@
 <p>yawning for air</p>
 </div>
 <div class="poem">
-<h3>that rustles</h3>
+<h3>rustle</h3>
 <p>colder air is</p>
 <p>denser</p>
 <p>and it sinks.</p>
@@ -189,8 +191,11 @@
 <p>of a leaf</p>
 </div>
 <div class="poem">
-<h3>the vast library of air</h3>
-<p>it is as if</p>
+<h3>night</h3>
+<p>the aura of night itself</p>
+<p>a chorus of frogs</p>
+<p>singing from</p>
+<p>the vast library of air</p>
 </div>
 <div class="poem three-sheets-to-the-wind">
 <h3>to the wind</h3>
@@ -210,7 +215,18 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 </div>
   </div>
+  <!-- <div class="credits">
+    <h2 class="credits-title">Airs</h2>
+  </div> -->
 </div>
+<!-- <div class="credits"> -->
+  <!-- <h2 class="credits-title">Airs</h2> -->
+  <!-- <p class="credits-text">
+    Recordings of wind made between 2020 and 2024.
+    <br/>
+    Electronics recorded at Electronmusicstudion in 2019.
+  </p>
+</div> -->
 <!-- Prototype for the presentation of prose poetry on the page with a combination of visual manipulation, coloration, and animation.
 
 The text for these poems come from research into the history of auras and fingerprinting. Using the [FingerprintJS](https://fingerprint.com/blog/browser-fingerprinting-techniques/) NPM library, the animation and coloration will be rendered differently across different browser profiles (not limited to user agent).
@@ -276,10 +292,10 @@ Approximately twenty of these poems will be presented in total, which readers ca
     <filter id="wind-filter">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
         result="slide-0" 
-        height="1000px"
+        height="100vh"
         >
       </feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="5" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>

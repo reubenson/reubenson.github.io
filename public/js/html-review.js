@@ -7,7 +7,8 @@ let windInitialized = false;
 let part1Index = 0;
 const href = window.location.href.split('#')[0];
 
-const audioFilepath = '/public/html-review/woo.mp3';
+// const audioFilepath = '/public/html-review/woo.mp3';
+const audioFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
 // const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
 
 let colorMatrix, colorMatrixEl;
@@ -23,11 +24,6 @@ let canvasCtx;
 
 let offscreenCanvas;
 let offscreenCtx;
-
-// let imageData;
-// let imageWidth;
-// let imageHeight;
-// let imageBuffer;
 let gainNodeSource;
 let gainNodeConvolution;
 let processor;
@@ -115,8 +111,8 @@ async function initializeWind() {
 }
 
 function startAudio() {
-  if (!audioIsReady()) return;
-  if (audioHasStarted) return;
+  // if (!audioIsReady()) return;
+  // if (audioHasStarted) return;
   source.start();
 }
 
@@ -167,7 +163,7 @@ async function initializeAudio() {
   playerGainNode.connect(audioCtx.destination);
 
   convolver.connect(processor);
-  // source.start();
+  source.start();
 
   initializeConvolution();
   initializeWind();
@@ -424,7 +420,7 @@ async function beginPart1(index) {
   await initializeAudio();
   updateConvolutionLevel(0);
 
-  threeSheetsToTheWind();
+  // threeSheetsToTheWind();
 }
 
 async function beginPart2() {
@@ -538,7 +534,7 @@ function handleRouting() {
   const hash = window.location.hash;
 
   // comment next line to prevent page from defaulting to home on load
-  if (hash !== '') return returnHome();
+  // if (hash !== '') return returnHome();
 
   if (hash.includes('#part-1')) {
     handlePartSelection('part-1');
