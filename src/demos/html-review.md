@@ -17,11 +17,16 @@ hideSeeMore: true
 
 <div class="poems-description">
 
-  <em>Airs</em> is a collection of poems
-  
-  in two parts
-  
-  accompanied by the wind
+  <img src="/public/html-review/santa-ana-winds.jpg" alt="Santa Ana Winds" />
+
+  <div class="poems-description-text">
+
+    <em>Airs</em> is a collection of poems
+
+    in two parts
+
+    accompanied by the wind
+  </div>
 </div>
 
 

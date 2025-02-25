@@ -16,7 +16,7 @@
 
   enclosed,
 
-  under wrapped arms
+  and enclasped
   
   green stems hold
   
@@ -46,13 +46,11 @@
 
   dawn comes whispering
   
-  streaming
-  
   down
   
   from the trees under tilting
 
-  sky of cerulean perfume
+  sky of blue perfume
 
   <br/>
 
@@ -76,13 +74,13 @@
 
   tapered wood
 
-  of curling arc under voices
+  curling arc under voices
 
   of the night sky
 
   <br/>
 
-  you toss everything into the wind
+  you throw everything into the wind
 
   that you want to float on
 
@@ -131,7 +129,7 @@
   
   settles like swept dunes
   
-  under a blanket of silence
+  over silent histories
 
   <br/>
   
@@ -192,10 +190,9 @@
 
   holding diaphragm, or diaresis
   
+  the sound, that rustles
 
   <br/>
-
-  the sound, that rustles
 
   <!-- I cannot get enough of -->
   

@@ -6,10 +6,11 @@ let convolutionInitialized = false;
 let windInitialized = false;
 let part1Index = 0;
 const href = window.location.href.split('#')[0];
-
-// const audioFilepath = '/public/html-review/woo.mp3';
 const audioFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
-// const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
+
+// todo: add wind library
+// todo: play with keyframes to have the animation cycle something like 24 hrs
+// const audioFilepath = '/public/html-review/excerpt-b.mp3';
 
 let colorMatrix, colorMatrixEl;
 let colorValue = 0.46;
@@ -39,6 +40,21 @@ const bufferWidth = CANVAS_WIDTH * 4;
 let audioBufferData = new Uint8Array(bufferWidth * CANVAS_HEIGHT);
 
 let colorShiftInterval;
+
+const CSS_TRANSITIONS = [
+  {
+    selector: '#poems-container.part-2',
+    transition: "240s filter linear, 60s opacity linear;"
+  },
+  {
+    selector: '#poems-container.part-2 canvas',
+    transition: '30s opacity linear;'
+  },
+  {
+    selector: '#poems-container.part-2 #part-2 p',
+    transition: '240s color linear, 240s background linear, 10s filter linear;'
+  }
+]
 
 /**
  * Converts an HSL color value to RGB. Conversion formula
@@ -81,7 +97,6 @@ function hueToRgb(p, q, t) {
 }
 
 function updateConvolutionLevel(level) {
-  
   // if (!audioHasStarted) return;
 
   // const currentValue = gainNodeConvolution.gain.value;
@@ -113,14 +128,15 @@ async function initializeWind() {
 function startAudio() {
   // if (!audioIsReady()) return;
   // if (audioHasStarted) return;
-  source.start();
+  try {
+    source.start();
+  } catch (e) {
+    // console.error(e);
+  }
 }
 
 async function initializeAudio() {
   if (audioHasStarted) return;
-
-  // let response = await fetch(audioFilepath);
-  // let buffer = await response.arrayBuffer();
 
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048 * 4 * 4;
@@ -137,13 +153,7 @@ async function initializeAudio() {
   gainNodeSource.gain.linearRampToValueAtTime(dry, audioCtx.currentTime + 15);
   gainNodeConvolution.gain.value = wet;
   sumNode.gain.value = 1.0;
-
   convolver.normalize = false;
-  
-  // let windresponse = await fetch('/public/html-review/test-wind.mp3');
-  // let windBuffer = await windresponse.arrayBuffer();
-  // source.buffer = await audioCtx.decodeAudioData(windBuffer);
-  // convolver.buffer = await audioCtx.decodeAudioData(buffer);
 
   source.connect(gainNodeSource);
   gainNodeSource.connect(convolver);
@@ -154,7 +164,6 @@ async function initializeAudio() {
   gainNodeConvolution2.gain.value = 0.2;
   gainNodeConvolution.connect(gainNodeConvolution2);
   gainNodeConvolution2.connect(sumNode);
-  
 
   // lower volume of player relative to animation
   const playerGainNode = audioCtx.createGain();
@@ -163,7 +172,7 @@ async function initializeAudio() {
   playerGainNode.connect(audioCtx.destination);
 
   convolver.connect(processor);
-  source.start();
+  startAudio()
 
   initializeConvolution();
   initializeWind();
@@ -282,49 +291,6 @@ function scaleUpPixels(pixelArray, width, height, scaleFactor) {
   return newPixelArray;
 }
 
-function updateFilter(index) {
-  const el = document.querySelector('#text');
-  el.style.filter = `blur(0px) contrast(4) url(#slide-${index}-filter)`;
-  // el.style.filter = `blur(2px) contrast(4) url(#dis-filter)`;
-}
-
-function initializeSlideImages() {
-  slides.forEach((slide, index) => {
-    const canvasContainer = document.querySelector('#poems-container');
-    const img = new Image();
-    img.src = slide.imgUrl;
-    img.id = `slide-${index}-image`;
-    img.alt = `Slide ${index}`;
-    // img.style.display = 'none';
-    canvasContainer.appendChild(img);
-
-    if (index === 0) img.classList.add('active');
-
-    // return;
-    const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
-    filter.setAttribute("id", `slide-${index}-filter`);
-    document.querySelector("svg defs").appendChild(filter);
-    const feImage = document.createElementNS("http://www.w3.org/2000/svg", "feImage");
-    feImage.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", slide.displacementUrl);
-    feImage.setAttribute("result", `slide-${index}`);
-    // bug: can't get this to center???
-    feImage.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    feImage.setAttribute("width", "630px");
-    feImage.setAttribute("x", "10px");
-    feImage.setAttribute("y", "0");
-    filter.appendChild(feImage);
-    
-    const feDisplacementMap = document.createElementNS("http://www.w3.org/2000/svg", "feDisplacementMap");
-    feDisplacementMap.setAttribute("in2", `slide-${index}`);
-    feDisplacementMap.setAttribute("in", "SourceGraphic");
-    feDisplacementMap.setAttribute("scale", "5");
-    feDisplacementMap.setAttribute("xChannelSelector", "A");
-    feDisplacementMap.setAttribute("yChannelSelector", "R");
-    // feDisplacementMap.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    filter.appendChild(feDisplacementMap);
-  });
-}
-
 function handlePartSelection(part) {
   let hash = window.location.hash;
   const splitHash = hash.split('-');
@@ -419,8 +385,6 @@ async function beginPart1(index) {
   }
   await initializeAudio();
   updateConvolutionLevel(0);
-
-  // threeSheetsToTheWind();
 }
 
 async function beginPart2() {
@@ -428,14 +392,14 @@ async function beginPart2() {
   window.history.pushState({}, '', `${href}${hash}`);
   
   canvasContainerEl.classList.add('part-2');
-
   canvas.classList.add('front');
 
   window.setTimeout(() => {
     const el = document.querySelector('#poems-container');
     el.classList.add('has-started');
   }, 0);
-  // el.style.filter = `blur(1px) contrast(4) url(#dis-filter)`;
+
+  applyTransitions();
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -507,6 +471,26 @@ async function resetState() {
       console.error(`Failed to release wake lock: ${err.name}, ${err.message}`);
     }
   }
+
+  resetTransitions();
+}
+
+function applyTransitions() {
+  CSS_TRANSITIONS.forEach(({ selector, transition }) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    el.style.removeProperty('transition');
+    void el.offsetWidth;
+    el.style.cssText += `transition: ${transition};`;
+  });
+}
+
+function resetTransitions() {
+  CSS_TRANSITIONS.forEach(({ selector }) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    el.style.removeProperty('transition');
+  });
 }
 
 function returnHome() {
@@ -534,7 +518,7 @@ function handleRouting() {
   const hash = window.location.hash;
 
   // comment next line to prevent page from defaulting to home on load
-  // if (hash !== '') return returnHome();
+  if (hash !== '') return returnHome();
 
   if (hash.includes('#part-1')) {
     handlePartSelection('part-1');
@@ -579,11 +563,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   homeButton?.addEventListener('click', (event) => handleNavigationEvent(event, ''));
   homeButton?.addEventListener('touchend', (event) => handleNavigationEvent(event, ''));
 
-  // Add popstate event listener for browser back/forward
-  window.addEventListener('popstate', () => {
-    // handleRouting();
-  });
-
   // Handle initial route
   // need interaction to begin audio, so only remove this during development
   // window.location.href = href;
@@ -608,7 +587,7 @@ function addArrays(arr1, arr2) {
 
 function hslColorMatrix(h) {
   const s = 1;
-  const l = 0.6;
+  const l = 0.3;
   const [r, g, b] = hslToRgb(h, s, l);
   const [r2, g2, b2] = hslToRgb(h + 0.55, s, l);
 
@@ -623,13 +602,14 @@ function hslColorMatrix(h) {
   ];
 
   const secondaryArray = [
-    r2/2, 0, 0, -r2/3, 0,
-    0, g2/2, 0, -g2/3, 0,
-    0, 0, b2/2, -b2/3, 0,
+    r2/2, 0, 0, -r2/4, 0,
+    0, g2/2, 0, -g2/4, 0,
+    0, 0, b2/2, -b2/4, 0,
     -r/6, -g/6, -b/6, 0.1, 0
   ]
 
   return addArrays(primaryArray, secondaryArray).join(" ");
+  // return primaryArray.join(" ");
 }
 
 function setColorMatrix(val = Math.random()) {
@@ -649,15 +629,4 @@ function createSvgFilter() {
   filter.appendChild(feColorMatrix);
 
   document.querySelector("svg defs").appendChild(filter);
-}
-
-function threeSheetsToTheWind() {
-  const elements = document.querySelectorAll('.three-sheets-to-the-wind span');
-  elements.forEach(el => {
-    const translateX = (Math.random() - 0.5) * 400; // -2px to 2px
-    const translateY = 200 + (Math.random() - 0.5) * 400; // -2px to 2px
-    const rotate = (Math.random() - 0.5) * 180; // -3deg to 3deg
-    
-    el.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`;
-  });
 }
