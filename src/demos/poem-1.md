@@ -1,5 +1,65 @@
 <div class="poem">
 
+  ### everything you already know
+
+  dawn comes whispering
+  
+  down
+  
+  from the trees
+  
+  under tilting expanse
+
+  of sky blue perfume
+
+  <br/>
+
+  earth fuming petrichor
+
+  rises & wafts
+
+  you walk so
+  
+  lightly
+  
+  you carry the wind
+
+  under your feet
+
+</div>
+
+<div class="poem">
+
+  ### or down here
+
+  soundlessness
+
+  up there
+
+  or down here 
+
+  <br/>
+
+  as if teeming
+
+  multiplying the air into air
+
+  and more air
+
+  <br/>
+
+  as if speeding
+
+  crashing into itself
+
+  only stunned into stillness
+
+  when the swirling mass cracks in half by thin white tines of forking light
+
+</div>
+
+<div class="poem">
+
   ### rain
   
   spreads water to hair
@@ -37,34 +97,6 @@
   they wind their way
   
   home
-
-</div>
-
-<div class="poem">
-
-  ### everything you already know
-
-  dawn comes whispering
-  
-  down
-  
-  from the trees under tilting
-
-  sky of blue perfume
-
-  <br/>
-
-  earth fuming petrichor
-
-  rises & wafts
-
-  you walk so
-  
-  lightly
-  
-  you carry the wind
-
-  under your feet
 
 </div>
 
@@ -180,6 +212,20 @@
 
 <div class="poem">
 
+### night
+
+the aura of night itself
+
+a chorus of frogs
+
+singing from
+
+the vast library of air
+
+</div>
+
+<div class="poem">
+
   ### rustle
 
   colder air is
@@ -201,20 +247,6 @@
   is quieter in the shadow
   
   of a leaf
-
-</div>
-
-<div class="poem">
-
-### night
-
-the aura of night itself
-
-a chorus of frogs
-
-singing from
-
-the vast library of air
 
 </div>
 

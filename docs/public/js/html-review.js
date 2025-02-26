@@ -10,6 +10,7 @@ const href = window.location.href.split('#')[0];
 const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
 // const audioFilepath = '/public/html-review/2022-04-22 08.35.20.mp3';
 
+// todo to s3 bucket
 const windFilepaths = [
   '/public/html-review/2022-07-21 12.05.00.mp3',
   '/public/html-review/2022-07-25 20.16.11.mp3',
