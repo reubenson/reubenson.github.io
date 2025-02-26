@@ -307,13 +307,23 @@ Approximately twenty of these poems will be presented in total, which readers ca
       xChannelSelector="R"
       yChannelSelector="G" />
     </filter>
-    <filter id="wind-filter">
+    <filter id="wind-filter-sm">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
         result="slide-0" 
-        height="100vh"
+        height="500px"
+        width="500px"
         >
       </feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="5" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="7" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+    </filter>
+    <filter id="wind-filter-lg">
+      <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
+        result="slide-0" 
+        height="1000px"
+        width="1000px"
+        >
+      </feImage>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="15" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>

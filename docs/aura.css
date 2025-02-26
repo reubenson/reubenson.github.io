@@ -203,7 +203,7 @@ button:hover {
       padding: 20px;
       max-width: calc(100% - 40px);
       display: none;
-      filter: blur(0px) contrast(1) url(#wind-filter);
+      filter: blur(0px) contrast(1) url(#wind-filter-sm);
       height: 80vh;
     }
     
@@ -452,6 +452,10 @@ canvas.front {
   #poems-container.part-1 .poem-container {
     h3, p {
       font-size: 32px;
+    }
+
+    .poem {
+      filter: blur(0px) contrast(1) url(#wind-filter-lg);
     }
   }
 }
