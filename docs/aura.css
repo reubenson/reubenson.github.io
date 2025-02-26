@@ -184,8 +184,8 @@ button:hover {
 
     h3 {
       text-align: left;
-      border-bottom: solid snow 2px;
-      padding-bottom: 10px;
+      /* border-bottom: solid snow 2px; */
+      padding-bottom: 20px;
     }
 
     h3, p {
@@ -204,6 +204,7 @@ button:hover {
       max-width: calc(100% - 40px);
       display: none;
       filter: blur(0px) contrast(1) url(#wind-filter);
+      height: 80vh;
     }
     
     .poem.active {
