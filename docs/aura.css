@@ -20,7 +20,7 @@ body {
 
   h1, h2 {
     display: block;
-    margin: 15px;
+    margin: 10px 15px;
   }
 
   h2 {
@@ -185,7 +185,7 @@ button:hover {
     h3 {
       text-align: left;
       /* border-bottom: solid snow 2px; */
-      padding-bottom: 20px;
+      padding: 20px 0;;
     }
 
     h3, p {
