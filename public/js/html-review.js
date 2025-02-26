@@ -4,16 +4,25 @@ const CANVAS_HEIGHT = 256;
 let audioHasStarted = false;
 let convolutionInitialized = false;
 let windInitialized = false;
+let currentWindIndex = 0;
 let part1Index = 0;
 const href = window.location.href.split('#')[0];
-const audioFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
+const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
+// const audioFilepath = '/public/html-review/2022-04-22 08.35.20.mp3';
 
-// todo: add wind library
-// todo: play with keyframes to have the animation cycle something like 24 hrs
+const windFilepaths = [
+  '/public/html-review/2022-07-21 12.05.00.mp3',
+  '/public/html-review/2022-07-25 20.16.11.mp3',
+  '/public/html-review/2022-07-28 20.50.36.mp3',
+  '/public/html-review/2023-08-31 17.03.15.mp3', // need to recover
+  '/public/html-review/2023-09-02 14.03.01.mp3',
+  '/public/html-review/2023-10-16 13.31.39.mp3'
+]
+
 // const audioFilepath = '/public/html-review/excerpt-b.mp3';
 
 let colorMatrix, colorMatrixEl;
-let colorValue = 0.46;
+let colorValue = 0.62;
 
 let canvasContainerEl;
 let audioCtx;
@@ -34,8 +43,6 @@ let eventListeners = [];
 let slideIndex = 0;
 let previousSlideIndex = null;
 
-// this is the audio buffer data that is being sent to the processor
-// it will be of fixed size ... of 512 x 512 pixels
 const bufferWidth = CANVAS_WIDTH * 4;
 let audioBufferData = new Uint8Array(bufferWidth * CANVAS_HEIGHT);
 
@@ -109,7 +116,7 @@ function audioIsReady() {
 }
 
 async function initializeConvolution() {
-  let response = await fetch(audioFilepath);
+  let response = await fetch(convolutionFilepath);
   let buffer = await response.arrayBuffer();
   convolver.buffer = await audioCtx.decodeAudioData(buffer);
 
@@ -118,9 +125,39 @@ async function initializeConvolution() {
 }
 
 async function initializeWind() {
-  let response = await fetch('/public/html-review/test-wind.mp3');
+  const handleEnded = async () => {
+    currentWindIndex = (currentWindIndex + 1) % windFilepaths.length;
+    console.log('ended', currentWindIndex);
+    
+    // Create and configure new source
+    const newSource = audioCtx.createBufferSource();
+    newSource.loop = false;
+    newSource.connect(gainNodeSource);
+    
+    // Load and play next file
+    const response = await fetch(windFilepaths[currentWindIndex]);
+    const buffer = await response.arrayBuffer();
+    const audioBuffer = await audioCtx.decodeAudioData(buffer);
+    newSource.buffer = audioBuffer;
+    newSource.onended = handleEnded;
+    newSource.start();
+    
+    // Replace old source with new one
+    source = newSource;
+    // source.start();
+  };
+
+  // Initial setup
+  let response = await fetch(windFilepaths[currentWindIndex]);
   let buffer = await response.arrayBuffer();
-  source.buffer = await audioCtx.decodeAudioData(buffer);
+  let audioBuffer = await audioCtx.decodeAudioData(buffer);
+  
+  source = audioCtx.createBufferSource();
+  source.loop = false;
+  source.buffer = audioBuffer;
+  source.connect(gainNodeSource);
+  source.onended = handleEnded;
+
   windInitialized = true;
   startAudio();
 }
@@ -141,13 +178,12 @@ async function initializeAudio() {
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048 * 4 * 4;
   source = audioCtx.createBufferSource();
-  source.loop = true;
+  source.loop = false;
 
   gainNodeSource = audioCtx.createGain();
   gainNodeConvolution = audioCtx.createGain();
   sumNode = audioCtx.createGain();
   const dry = 1.0;
-  // const wet = 1.0 - dry;
   const wet  = 0.0;
   gainNodeSource.gain.value = 0;
   gainNodeSource.gain.linearRampToValueAtTime(dry, audioCtx.currentTime + 15);
@@ -161,17 +197,18 @@ async function initializeAudio() {
   gainNodeSource.connect(sumNode);
   
   let gainNodeConvolution2 = audioCtx.createGain();
-  gainNodeConvolution2.gain.value = 0.2;
+  gainNodeConvolution2.gain.value = 0.15;
   gainNodeConvolution.connect(gainNodeConvolution2);
   gainNodeConvolution2.connect(sumNode);
 
   // lower volume of player relative to animation
   const playerGainNode = audioCtx.createGain();
-  playerGainNode.gain.value = 0.5;
+  playerGainNode.gain.value = 1.0;
   sumNode.connect(playerGainNode);
   playerGainNode.connect(audioCtx.destination);
 
   convolver.connect(processor);
+  // sumNode.connect(processor);
   startAudio()
 
   initializeConvolution();

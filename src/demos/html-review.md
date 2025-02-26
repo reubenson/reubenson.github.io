@@ -25,7 +25,7 @@ hideSeeMore: true
 
     in two parts
 
-    accompanied by the wind
+    accompanied by sound recordings of open spaces
   </div>
 </div>
 
