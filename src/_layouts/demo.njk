@@ -19,7 +19,6 @@ description: Project description
     <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
     <meta property="og:type" content="website" />
     {% include "open-font.njk" %}
-    {# {% include "broider.njk" %} #}
     {% include "gtm.njk" %}
     {% if scriptUrl %}
       <script src="{{ scriptUrl | safe }}"></script>
@@ -30,45 +29,8 @@ description: Project description
     {% if cssUrl %}
       <link rel="stylesheet" href="{{ cssUrl | safe }}">
     {% endif %}
-    {# <script async src="/bundle.js"></script> #}
   </head>
   <body class="project {{ layoutType }}">
-    {# {% include "toc-button.njk" %} #}
-    {# {% include "table-of-contents.njk" %} #}
-    {# <div class="top-spacer"></div> #}
-    <div class="content">
-      {# <header>
-        <h1>{{ title }}</h1>
-        <a href="{{ url }}">{{url}}</a>
-      </header> #}
-      <div class="content-wrapper">
-        {{ content | safe }}
-      </div>
-
-      {% if not hideSeeMore %}
-      <section class="project-more">
-        <h2>See also</h2>
-        <ul>
-          {% for project in projects %}
-            {% if project.title == title %}
-              {% for relatedProjectId in project.relatedProjects %}
-                <li class="related-project">
-                  {% for project in projects %}
-                    {% if project.id == relatedProjectId %}
-                      <a href="{{ project.path }}">{{ project.title }}</a>
-                    {% endif %}
-                  {% endfor %}
-                </li>
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-          {# <li class="related-project all-projects-link">
-            <a href="/projects">Selected Projects</a>
-          </li> #}
-        </ul>
-      </section>
-      {% endif %}
-    </div>
-    <div class="project-border broider"></div>
+    {{ content | safe }}
   </body>
 </html>

@@ -8,32 +8,46 @@ body {
 
 .poems-header {
   color: snow;
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  margin:auto;
-  z-index:10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 10000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   h1, h2 {
-    display: inline-block;
-    font-size: 24px;
-    margin: 0;
+    display: block;
+    margin: 10px 15px;
+  }
+
+  h2 {
+    text-align: right;
+    font-size: 14px;
+    line-height: 1em;
+  }
+
+  a {
+    text-decoration: none;
+    color: snow;
   }
 }
 
 header button {
-  font-size: 24px;
-  font-weight: 100;
-  font-style: italic;
+  font-size: 28px;
+  font-weight: 400;
+  font-style: normal;
   font-family: 'Ibarra Real Nova', monospace;
   background: transparent;
   color: snow;
-  padding: 20px;
+  /* padding: 20px; */
   border: none;
 }
 
 nav {
+  align-items: end;
   position: fixed;
   margin: auto;
   bottom: 0;
@@ -43,22 +57,32 @@ nav {
   z-index: 10000;
   left: 0;
   right: 0;
+  height: 50px;
+  overflow: hidden;
 }
 
 nav button {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   flex: 1;
+  height: 50px;
   font-size: 18px;
   border: none;
   background: transparent;
   color: snow;
   font-weight: 100;
-  padding: 10px;
+  padding: 15px;
   font-style: italic;
   font-family: 'Ibarra Real Nova', monospace;
 }
 
+nav button span {
+  font-style: normal;
+}
+
 nav button.active {
-  /* text-decoration: underline; */
   border-bottom: solid snow 2px;
 }
 
@@ -72,7 +96,7 @@ p {
 
 .poems-description {
   font-size: 18px;
-  text-align: justify;
+  /* text-align: justify; */
   width: 300px;
   height: 250px;
   position: absolute;
@@ -81,6 +105,35 @@ p {
   right: 0;
   bottom: 0;
   margin: auto;
+  flex-wrap: wrap;
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: auto;
+    filter: hue-rotate(180deg) brightness(0.7) contrast(1.2);
+  }
+
+  .poems-description-text {
+    width: 100%;
+    text-align: center;
+
+    span {
+      padding: 0 60px;
+    }
+/* 
+    p:nth-child(2) {
+      margin-left: 80px;
+    }
+
+    p:nth-child(3) {
+      margin-left: 40px;
+    } */
+  }
 }
 
 body.now-viewing {
@@ -137,10 +190,9 @@ button:hover {
 
 #poems-container.part-1 {
   background: black;
-  /* width: calc(100% + 30px); */
-  /* height: calc(100% + 30px); */
   top: -15px;
   left: -15px;
+  width: 80vw;
 
   .poem-container {
     background: black;
@@ -149,12 +201,12 @@ button:hover {
 
     h3 {
       text-align: left;
-      border-bottom: solid snow 2px;
-      padding-bottom: 10px;
+      /* border-bottom: solid snow 2px; */
+      padding: 20px 0;;
     }
 
     h3, p {
-      font-size: 24px;
+      font-size: 20px;
     }
 
     p {
@@ -168,11 +220,12 @@ button:hover {
       padding: 20px;
       max-width: calc(100% - 40px);
       display: none;
+      filter: blur(0px) contrast(1) url(#wind-filter-sm);
+      /* height: 80vh; */
     }
     
     .poem.active {
       display: block;
-      filter: blur(0px) contrast(1) url(#wind-filter);
     }
 
     .line-break {
@@ -186,9 +239,10 @@ button:hover {
   height: 80%;
   filter: blur(0px) contrast(3) brightness(0.7);
   background: snow;
-  /* border-radius: 40px; */
-  transition: 240s filter linear, 60s opacity linear;
+  /* transition: 240s filter linear, 60s opacity linear; */
   opacity: 0;
+  max-width: 1200px;
+  max-height: 800px;
 
   &.has-started {
     filter: blur(4px) contrast(50) brightness(0.7);
@@ -201,7 +255,6 @@ button:hover {
     .poem-container .poem p {
       color: black;
       background: snow;
-      /* opacity: 1; */
       filter: brightness(1);
     }
     
@@ -209,11 +262,10 @@ button:hover {
 
   canvas {
     display: block;
-    opacity: 1.0;
+    opacity: 0;
     width: 100%;
     height: 100%;
     filter: url(#customFilter);
-    /* filter: blur(16px) contrast(2); */
     position: absolute;
     top: 0;
     right: 0;
@@ -221,26 +273,20 @@ button:hover {
     margin: auto;
     z-index: -1;
     opacity: 0;
-    transition: 120s opacity linear;
-    /* transition: 120s filter linear; */
-    /* filter: blur(15px) contrast(1); */
-    /* display: none; */
+    /* transition: 120s opacity linear; */
   }
 
   .poem-container {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /* filter: url(#customFilter); */
     position: absolute;
   
     .poem {
-      /* border-radius: 40px; */
-      height: calc(100vh - 100px);
-      width: calc(100vw - 100px);
-      overflow: hidden;
+      /* height: calc(100vh - 100px);
+      width: calc(100vw - 100px); */
+      /* overflow: hidden; */
       opacity: 0;
-      /* transition: 12s opacity linear; */
       border: none !important;
       width: 100%;
       height: 100%;
@@ -251,25 +297,60 @@ button:hover {
       .poem {
         display: block;
         opacity: 1.0;
-        /* display: none; */
       }
     }
 
-    .poem p {
+    .poem > p {
+      /* height: calc(100vh - 100px);
+      width: calc(100vw - 100px); */
       color: snow;
       background: black;
-      /* color: black;
-      background: snow; */
       line-break: anywhere;
       letter-spacing: -0.09em;
-      line-height: .42em;
-      /* letter-spacing: 0.01em;
-      line-height: .51em; */
-      font-size: 35px;
+      line-height: .43em;
+      font-size: 32px;
       filter: brightness(0.1);
-      margin: -10px auto auto;
+      margin: -10px;
       text-transform: lowercase;
-      transition: 440s color linear, 440s background linear, 15s filter linear;
+      /* width: calc(100% + 20px);
+      height: calc(100% + 20px); */
+      box-sizing: border-box;
+      animation: textOpacity 120s infinite;
+      /* margin-left: -10px; */
+      /* transition: 440s color linear, 440s background linear, 15s filter linear; */
+    }
+  }
+
+  .credits {
+    font-size: 180px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+
+    h2 {
+      font-size: 140px;
+      line-height: 1em;
+      padding: 0;
+      margin: auto;
+      color: snow;
+    }
+
+    p {
+      font-size: 30px !important;
+      line-height: 0.8em !important;
+      margin: auto;
+      text-align: justify;
+      line-break: auto !important;
+      background: transparent !important;
     }
   }
 }
@@ -285,24 +366,114 @@ canvas.front {
 
 .three-sheets-to-the-wind {
   display: inline-block;
-  height: 80vw;
+  height: 80vh;
 }
 
 .three-sheets-to-the-wind p {
   text-align: center !important;
-  /* font-size: 48px !important; */
 }
 
 .three-sheets-to-the-wind p > span {
-  display: inline-block;
+  display: block;
   position: relative;
   transform-origin: center;
+
+  &:nth-child(1) {
+    transform: translate(-118.087px, 113.935px) rotate(-60.7089deg);
+    transform: translate(-32%, 44%) rotate(-60.7089deg);
+  }
+
+  &:nth-child(2) {
+    transform: translate(63.1012px, 169.607px) rotate(-82.1365deg);
+    transform: translate(31.1%, 64.8%) rotate(-82.1365deg);
+  }
+
+  &:nth-child(3) {
+    transform: translate(180.712px, 216.631px) rotate(-85.2554deg);
+    transform: translate(12%, 65%) rotate(-85.2554deg);
+  }
+
+  &:nth-child(4) {
+    transform: translate(189.632px, 42.1053px) rotate(-39.2808deg); 
+    transform: translate(16.8%, 2.4%) rotate(-39.2808deg);
+  }
+
+  &:nth-child(5) {
+    transform: translate(-87.9262px, 316.465px) rotate(-75.3951deg);
+    transform: translate(-7%, 65%) rotate(-75.3951deg);
+  }
+
+  &:nth-child(6) {
+    transform: translate(184.434px, 138.076px) rotate(-25.0452deg); 
+    transform: translate(15%, 46%) rotate(-25.0452deg);
+  }
+
+  &:nth-child(7) {
+    transform: translate(-95.1094px, 325.007px) rotate(-56.5112deg);
+    transform: translate(-7.9%, 65%) rotate(-56.5112deg);
+  }
+
+  &:nth-child(8) {
+    transform: translate(-140.643px, 3.05186px) rotate(77.8996deg);
+    transform: translate(-11.7%, 1%) rotate(77.8996deg);
+  }
+
+  &:nth-child(9) {
+    transform: translate(23.8009px, 233.439px) rotate(-60.7171deg);
+    transform: translate(18.9%, 63.2%) rotate(-60.7171deg);
+  } 
+
+  &:nth-child(10) {
+    transform: translate(-11.0199px, 140.275px) rotate(35.4707deg);
+    transform: translate(-0.9%, 46.1%) rotate(35.4707deg);
+  }
+
+  &:nth-child(11) {
+    transform: translate(13.6709px, 180.529px) rotate(28.3927deg);
+    transform: translate(-16.4%, 54.9%) rotate(28.3927deg);
+  }
+
+  &:nth-child(12) {
+    transform: translate(71.12px, 315.738px) rotate(-17.7133deg);
+    transform: translate(5.9%, 65%) rotate(-17.7133deg);
+  }
+}
+
+/* {
+  selector: '#poems-container.part-2',
+  transition: "240s filter linear, 60s opacity linear;"
+},
+{
+  selector: '#poems-container.part-2 canvas',
+  transition: '30s opacity linear;'
+},
+{
+  selector: '#poems-container.part-2 #part-2 p',
+  transition: '240s color linear, 240s background linear, 10s filter linear;'
+} */
+
+@keyframes textOpacity {
+  0% {
+    /* filter: blur(0px) contrast(3) brightness(0.7); */
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1
+  }
+  100% {
+    /* filter: blur(4px) contrast(50) brightness(0.7); */
+    opacity: 0.7;
+  }
 }
 
 @media screen and (min-width: 768px) {
   #poems-container.part-1 .poem-container {
     h3, p {
       font-size: 32px;
+    }
+
+    .poem {
+      filter: blur(0px) contrast(1) url(#wind-filter-lg);
     }
   }
 }
