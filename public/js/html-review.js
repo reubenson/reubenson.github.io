@@ -1,18 +1,31 @@
-const CANVAS_WIDTH = 512; // this is the desired width of the image drawn from the audio buffer
-const CANVAS_HEIGHT = 512;
+const CANVAS_WIDTH = 256; // this is the desired width of the image drawn from the audio buffer
+const CANVAS_HEIGHT = 256;
 
 let audioHasStarted = false;
+let convolutionInitialized = false;
+let windInitialized = false;
+let currentWindIndex = 0;
 let part1Index = 0;
+let frames = [];
 const href = window.location.href.split('#')[0];
+const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
 
-const audioFilepath = '/public/airports-for-music-i.mp3';
-// const audioFilepath = 'https://reubenson.com/weaving/Swede\ Plate\ 5.0s.wav';
+// todo: turn off when screen is not visible
+// todo: debug switching between parts on mobile chrome
+// todo: improve convolution fade in/out
+const windFilepaths = [
+  '/public/html-review/2022-07-21 12.05.00.mp3',
+  '/public/html-review/2022-07-25 20.16.11.mp3',
+  '/public/html-review/2022-07-28 20.50.36.mp3',
+  '/public/html-review/2023-08-31 17.03.15.mp3', // need to recover
+  '/public/html-review/2023-09-02 14.03.01.mp3',
+  '/public/html-review/2023-10-16 13.31.39.mp3'
+]
 
-let frameCount = 0;
-const frameRate = 30; // Target frame rate (e.g., 30 frames per second)
-const frameInterval = 1000 / frameRate; // Calculate the interval for the target frame rate
+// const audioFilepath = '/public/html-review/excerpt-b.mp3';
+
 let colorMatrix, colorMatrixEl;
-let colorValue = 0.46;
+let colorValue = 0.62;
 
 let canvasContainerEl;
 let audioCtx;
@@ -22,10 +35,8 @@ let analyser;
 let canvas;
 let canvasCtx;
 
-let imageData;
-let imageWidth;
-let imageHeight;
-let imageBuffer;
+let offscreenCanvas;
+let offscreenCtx;
 let gainNodeSource;
 let gainNodeConvolution;
 let processor;
@@ -33,14 +44,26 @@ let processor;
 let eventListeners = [];
 
 let slideIndex = 0;
-let previousSlideIndex = null;
 
-// this is the audio buffer data that is being sent to the processor
-// it will be of fixed size ... of 512 x 512 pixels
 const bufferWidth = CANVAS_WIDTH * 4;
 let audioBufferData = new Uint8Array(bufferWidth * CANVAS_HEIGHT);
 
 let colorShiftInterval;
+
+const CSS_TRANSITIONS = [
+  {
+    selector: '#poems-container',
+    transition: "240s filter linear, 60s opacity linear;"
+  },
+  {
+    selector: '#poems-container canvas',
+    transition: '30s opacity linear;'
+  },
+  {
+    selector: '#poems-container #part-2 p',
+    transition: '360s color linear, 360s background linear, 10s filter linear;'
+  }
+]
 
 /**
  * Converts an HSL color value to RGB. Conversion formula
@@ -82,71 +105,144 @@ function hueToRgb(p, q, t) {
   return p;
 }
 
-function updateConvolutionLevel(level) {
-  if (!audioHasStarted) return;
+let convolutionInterval = null;
 
-  // const currentValue = gainNodeConvolution.gain.value;
-  const duration = 60; // seconds
-  gainNodeConvolution.gain.linearRampToValueAtTime(level, audioCtx.currentTime + duration);
+function updateConvolutionLevel(targetLevel) {
+  const duration = 30; // seconds
+  const steps = 60; // One update per second
+  const stepDuration = duration / steps;
+  
+  // Clear any existing interval
+  if (convolutionInterval) {
+    clearInterval(convolutionInterval);
+  }
+  
+  const startLevel = gainNodeConvolution.gain.value;
+  const levelDifference = targetLevel - startLevel;
+  const levelStep = levelDifference / steps;
+  let currentStep = 0;
+  
+  convolutionInterval = setInterval(() => {
+    currentStep++;
+    const newLevel = startLevel + (levelStep * currentStep);
+    gainNodeConvolution.gain.value = newLevel;
+    
+    if (currentStep >= steps) {
+      gainNodeConvolution.gain.value = targetLevel;
+      clearInterval(convolutionInterval);
+      convolutionInterval = null;
+    }
+  }, stepDuration * 1000);
 }
 
-async function handleConvolution() {
-  if (audioHasStarted) return;
-
-  let response = await fetch(audioFilepath);
+async function initializeConvolution() {
+  let response = await fetch(convolutionFilepath);
   let buffer = await response.arrayBuffer();
+  convolver.buffer = await audioCtx.decodeAudioData(buffer);
+
+  convolutionInitialized = true;
+  startAudio();
+}
+
+async function initializeWind() {
+  const handleEnded = async () => {
+    currentWindIndex = (currentWindIndex + 1) % windFilepaths.length;
+    console.log('ended', currentWindIndex);
+    
+    // Create and configure new source
+    const newSource = audioCtx.createBufferSource();
+    newSource.loop = false;
+    newSource.connect(gainNodeSource);
+    
+    // Load and play next file
+    const response = await fetch(windFilepaths[currentWindIndex]);
+    const buffer = await response.arrayBuffer();
+    const audioBuffer = await audioCtx.decodeAudioData(buffer);
+    newSource.buffer = audioBuffer;
+    newSource.onended = handleEnded;
+    newSource.start();
+    
+    // Replace old source with new one
+    source = newSource;
+    // source.start();
+  };
+
+  // Initial setup
+  let response = await fetch(windFilepaths[currentWindIndex]);
+  let buffer = await response.arrayBuffer();
+  let audioBuffer = await audioCtx.decodeAudioData(buffer);
+  
+  source = audioCtx.createBufferSource();
+  source.loop = false;
+  source.buffer = audioBuffer;
+  source.connect(gainNodeSource);
+  source.onended = handleEnded;
+
+  windInitialized = true;
+  startAudio();
+}
+
+function startAudio() {
+  try {
+    source.start();
+  } catch (e) {
+    // console.error(e);
+  }
+}
+
+async function initializeAudio() {
+  if (audioHasStarted) return;
 
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048 * 4 * 4;
   source = audioCtx.createBufferSource();
-  source.loop = true;
+  source.loop = false;
 
   gainNodeSource = audioCtx.createGain();
   gainNodeConvolution = audioCtx.createGain();
   sumNode = audioCtx.createGain();
   const dry = 1.0;
-  // const wet = 1.0 - dry;
   const wet  = 0.0;
   gainNodeSource.gain.value = 0;
   gainNodeSource.gain.linearRampToValueAtTime(dry, audioCtx.currentTime + 15);
   gainNodeConvolution.gain.value = wet;
   sumNode.gain.value = 1.0;
-
   convolver.normalize = false;
-  
-  let windresponse = await fetch('/public/html-review/test-wind.mp3');
-  let windBuffer = await windresponse.arrayBuffer();
-  source.buffer = await audioCtx.decodeAudioData(windBuffer);
 
-  convolver.buffer = await audioCtx.decodeAudioData(buffer);
-  
   source.connect(gainNodeSource);
   gainNodeSource.connect(convolver);
   convolver.connect(gainNodeConvolution);
   gainNodeSource.connect(sumNode);
   
   let gainNodeConvolution2 = audioCtx.createGain();
-  gainNodeConvolution2.gain.value = 0.2;
+  gainNodeConvolution2.gain.value = 0.15;
   gainNodeConvolution.connect(gainNodeConvolution2);
   gainNodeConvolution2.connect(sumNode);
-  
 
   // lower volume of player relative to animation
   const playerGainNode = audioCtx.createGain();
-  playerGainNode.gain.value = 0.5;
+  playerGainNode.gain.value = 1.0;
   sumNode.connect(playerGainNode);
   playerGainNode.connect(audioCtx.destination);
 
   convolver.connect(processor);
-  source.start();
+  // sumNode.connect(processor);
+  startAudio()
+
+  initializeConvolution();
+  initializeWind();
   
   // does not indicate that user interaction has occured
-  audioHasStarted = audioCtx.state === 'running' ? true : false;
+  audioCtx.addEventListener('statechange', (event) => {
+    audioHasStarted = audioCtx.state === 'running';
+    if (audioHasStarted) {
+      processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
+    }
+  });
+  audioHasStarted = audioCtx.state === 'running';
   if (audioHasStarted) {
     processor.port.postMessage({canvasWidth: CANVAS_WIDTH});
   }
-
-  visualize();
 }
 
 function visualize() {
@@ -156,136 +252,24 @@ function visualize() {
     if (!shouldUpdateCanvas) return;
 
     shouldUpdateCanvas = false;
-
-    // this should only incrementally update?
-    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-
-    let imageArray = new Uint8ClampedArray(audioBufferData);
-    // console.log('imageArray', imageArray.slice(0, 16));
-    // console.log('imageArray', imageArray.length);
-
-    imageArray = imageArray.map((val, index) => {
-      if (index % 4 === 0) {
-        return val;
-      } else if (index % 4 === 1) {
-        return val;
-      } else if (index % 4 === 2) {
-        return val;
-      } else if (index % 4 === 3) {
-        // return val;
-        // increase level (more negative -> more transparency?)
-        return Math.pow(val / 255, -1.25) * 255
-        // return val;
-        return 255;
-      }
-    });
-
-    const len = Math.sqrt(audioBufferData.byteLength) / 2;
     
-
-    const originalWidth = len;
-    const originalHeight = len;
-    const scaleFactor = 1;
-    // const scaledPixelArray = scaleUpPixels(imageArray, originalWidth, originalHeight, scaleFactor);
+    // Put the image data on the temporary canvas
+    // Skip first row and collect remaining rows
+    const remainingRows = new Uint8ClampedArray(audioBufferData.slice(CANVAS_WIDTH * 4));
+    offscreenCtx.putImageData(new ImageData(remainingRows, CANVAS_WIDTH, CANVAS_HEIGHT - 1), 0, 1);
     
-    canvasCtx.putImageData(new ImageData(imageArray, CANVAS_WIDTH, CANVAS_HEIGHT), 0, 0);
+    // Draw the new row of data at the top
+    const firstRow = new Uint8ClampedArray(audioBufferData.slice(0, CANVAS_WIDTH * 4));
+    canvasCtx.putImageData(new ImageData(firstRow, CANVAS_WIDTH, 1), 0, 0);
 
-    return;
-
-    // experiment with using canvas for displacement
-    if (displacementCount < 0) {
-      // if applying this displacement, need to make canvas the same width as text area
-      const dataURL = canvas.toDataURL();
-      // const displacementImage = document.querySelector('#slide-0-filter feImage');
-      const displacementImage = document.querySelector('#dis-filter feImage');
-      displacementImage.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', dataURL);
-      displacementCount++;
-    }
+    // Draw the temporary canvas onto the main canvas
+    canvasCtx.drawImage(offscreenCanvas, 0, 1, CANVAS_WIDTH, CANVAS_HEIGHT - 1, 0, 1, CANVAS_WIDTH, CANVAS_HEIGHT - 1);
   }
 
   draw();
 }
 
-let displacementCount = 0;
-
-function scaleUpPixels(pixelArray, width, height, scaleFactor) {
-  const newWidth = width * scaleFactor;
-  const newHeight = height * scaleFactor;
-  const newPixelArray = new Uint8ClampedArray(newWidth * newHeight * 1);
-
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      const srcIndex = (y * width + x) * 4;
-      const r = pixelArray[srcIndex];
-      const g = pixelArray[srcIndex + 1];
-      const b = pixelArray[srcIndex + 2];
-      const a = pixelArray[srcIndex + 3];
-
-      for (let dy = 0; dy < scaleFactor; dy++) {
-        for (let dx = 0; dx < scaleFactor; dx++) {
-          const destX = x * scaleFactor + dx;
-          const destY = y * scaleFactor + dy;
-          const destIndex = (destY * newWidth + destX) * 4;
-          newPixelArray[destIndex] = r;
-          newPixelArray[destIndex + 1] = g;
-          newPixelArray[destIndex + 2] = b;
-          newPixelArray[destIndex + 3] = a;
-        }
-      }
-    }
-  }
-
-  return newPixelArray;
-}
-
-function updateFilter(index) {
-  const el = document.querySelector('#text');
-  el.style.filter = `blur(0px) contrast(4) url(#slide-${index}-filter)`;
-  // el.style.filter = `blur(2px) contrast(4) url(#dis-filter)`;
-}
-
-function initializeSlideImages() {
-  slides.forEach((slide, index) => {
-    const canvasContainer = document.querySelector('#poems-container');
-    const img = new Image();
-    img.src = slide.imgUrl;
-    img.id = `slide-${index}-image`;
-    img.alt = `Slide ${index}`;
-    // img.style.display = 'none';
-    canvasContainer.appendChild(img);
-
-    if (index === 0) img.classList.add('active');
-
-    // return;
-    const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
-    filter.setAttribute("id", `slide-${index}-filter`);
-    document.querySelector("svg defs").appendChild(filter);
-    const feImage = document.createElementNS("http://www.w3.org/2000/svg", "feImage");
-    feImage.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", slide.displacementUrl);
-    feImage.setAttribute("result", `slide-${index}`);
-    // bug: can't get this to center???
-    feImage.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    feImage.setAttribute("width", "630px");
-    feImage.setAttribute("x", "10px");
-    feImage.setAttribute("y", "0");
-    filter.appendChild(feImage);
-    
-    const feDisplacementMap = document.createElementNS("http://www.w3.org/2000/svg", "feDisplacementMap");
-    feDisplacementMap.setAttribute("in2", `slide-${index}`);
-    feDisplacementMap.setAttribute("in", "SourceGraphic");
-    feDisplacementMap.setAttribute("scale", "5");
-    feDisplacementMap.setAttribute("xChannelSelector", "A");
-    feDisplacementMap.setAttribute("yChannelSelector", "R");
-    // feDisplacementMap.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    filter.appendChild(feDisplacementMap);
-  });
-}
-
-function handlePartSelection(part) {
-  let hash = window.location.hash;
-  const splitHash = hash.split('-');
-  const index = parseInt(splitHash[splitHash.length - 1]) - 1 || 0;
-
+function updatePartStyles(part) {
   const previousPoemEl = document.querySelector('.poem-container.selected-part');
   previousPoemEl?.classList.remove('selected-part');
   const poemEl = document.querySelector(`#${part}`);
@@ -299,19 +283,21 @@ function handlePartSelection(part) {
   const activeButton = document.querySelector(`nav button[data-part="${part}"]`);
   activeButton.classList.add('active');
 
-  if (part === 'part-1') {
-    beginFragments(index);
-  } else if (part === 'part-2') {
-    beginUntitled();
-  }
-
   document.body.classList.add('now-viewing');
 }
 
-function parsePoem(el) {
-  const frames = el.querySelectorAll('div');
+function handlePartSelection(part) {
+  let hash = window.location.hash;
+  const splitHash = hash.split('-');
+  const index = parseInt(splitHash[splitHash.length - 1]) - 1 || 0;
 
-  return frames;
+  updatePartStyles(part);
+
+  if (part === 'part-1') {
+    beginPart1(index);
+  } else if (part === 'part-2') {
+    beginPart2();
+  }
 }
 
 function updateFrame(el) {
@@ -321,9 +307,8 @@ function updateFrame(el) {
   el.classList.add('active');
 }
 
-async function beginFragments(index) {
+async function beginPart1(index) {
   canvasContainerEl.classList.add('part-1');
-  const frames = parsePoem(document.querySelector('#part-1'));
 
   slideIndex = index;
   let frame = frames[index];
@@ -336,63 +321,24 @@ async function beginFragments(index) {
   window.history.pushState({}, '', `${href}${hash}`);
 
   updateFrame(frame);
-  
-  function handleNavigation(event) {
-    event.preventDefault();
-    const viewportWidth = window.innerWidth;  
-    const xLocation = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
-    
-    if (xLocation > viewportWidth / 2) {
-      slideIndex++;
-    } else {
-      slideIndex--;
-    }
 
-    if (slideIndex < 0) {
-      slideIndex = 0;
-      return;
-    }
-    
-    if (slideIndex >= frames.length) {
-      slideIndex = frames.length - 1;
-      return;
-    }
-
-    updateFrame(frames[slideIndex]);
-    window.history.pushState({}, '', `${href}#part-1-${slideIndex + 1}`);
-  
-    previousSlideIndex = slideIndex;
-    slideIndex = Math.max(0, Math.min(slideIndex, frames.length - 1));
-  }
-
-  eventListeners = [
-    { element: canvasContainerEl, type: 'click', handler: handleNavigation },
-    { element: canvasContainerEl, type: 'touchend', handler: handleNavigation }
-  ];
-
-  for (const listener of eventListeners) {
-    listener.element.addEventListener(listener.type, listener.handler);
-  }
-
-  await handleConvolution();
+  await initializeAudio();
   updateConvolutionLevel(0);
-
-  threeSheetsToTheWind();
 }
 
-async function beginUntitled() {
+async function beginPart2() {
   const hash = `#part-2`;
   window.history.pushState({}, '', `${href}${hash}`);
   
   canvasContainerEl.classList.add('part-2');
-
   canvas.classList.add('front');
 
   window.setTimeout(() => {
     const el = document.querySelector('#poems-container');
     el.classList.add('has-started');
   }, 0);
-  // el.style.filter = `blur(1px) contrast(4) url(#dis-filter)`;
+
+  applyTransitions();
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -405,9 +351,16 @@ async function beginUntitled() {
     applyColorShift(0.001);
   }, 500);
 
-  
-  await handleConvolution();
+  await initializeAudio();  
   updateConvolutionLevel(0.03);
+  visualize();
+
+  // Request wake lock to keep screen on
+  try {
+    window.wakeLock = await navigator.wakeLock.request('screen');
+  } catch (err) {
+    console.error(`Failed to request wake lock: ${err.name}, ${err.message}`);
+  }
 }
 
 function applyColorShift(increment = 0.01) {
@@ -415,7 +368,8 @@ function applyColorShift(increment = 0.01) {
   setColorMatrix(colorValue);
 }
 
-function resetState() {
+async function resetState() {
+  console.log('resetState');
   const canvasContainerEl = document.querySelector('#poems-container');
   canvasContainerEl.classList.remove('fullscreen');
   canvasContainerEl.classList.remove('part-1');
@@ -437,11 +391,45 @@ function resetState() {
   });
   slideIndex = 0;
   eventListeners = [];
-  previousSlideIndex = null;
-  updateConvolutionLevel(0);
+  
+  try {
+    updateConvolutionLevel(0);
+  } catch (e) {
+    // console.error(e);
+  }
 
   document.body.classList.remove('now-viewing');
   canvasContainerEl.classList.remove('has-started');
+
+  // Release wake lock if it exists
+  if (window.wakeLock) {
+    try {
+      await window.wakeLock.release();
+      window.wakeLock = null;
+    } catch (err) {
+      console.error(`Failed to release wake lock: ${err.name}, ${err.message}`);
+    }
+  }
+
+  resetTransitions();
+}
+
+function applyTransitions() {
+  CSS_TRANSITIONS.forEach(({ selector, transition }) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    el.style.removeProperty('transition');
+    void el.offsetWidth;
+    el.style.cssText += `transition: ${transition};`;
+  });
+}
+
+function resetTransitions() {
+  CSS_TRANSITIONS.forEach(({ selector }) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    el.style.removeProperty('transition');
+  });
 }
 
 function returnHome() {
@@ -481,12 +469,14 @@ function handleRouting() {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
+  frames = document.querySelectorAll('#part-1 .poem');
+
   canvasContainerEl = document.querySelector('#poems-container');
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
-  await audioCtx.audioWorklet.addModule("/public/js/random-noise-processor.js");
-  processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
 
+  await audioCtx.audioWorklet?.addModule("/public/js/random-noise-processor.js");
+  processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
   processor.port.onmessage = (e) => {
     updateAudioBufferData(e.data);
   };
@@ -495,34 +485,106 @@ document.addEventListener('DOMContentLoaded', async function() {
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
   canvasContainerEl.querySelector('#part-2').appendChild(canvas);
-  
   canvasCtx = canvas.getContext('2d');
+
+  offscreenCanvas = document.createElement('canvas');
+  offscreenCanvas.width = CANVAS_WIDTH;
+  offscreenCanvas.height = CANVAS_HEIGHT;
+  offscreenCtx = offscreenCanvas.getContext('2d');
+
   createSvgFilter();
 
   const startButtons = document.querySelectorAll('button.start');
   startButtons.forEach((button) => {
-    button?.addEventListener('click', (event) => handleNavigationEvent(event, event.target.dataset.part));
-    button?.addEventListener('touchend', (event) => handleNavigationEvent(event, event.target.dataset.part));
+    button?.addEventListener('click', (event) => handleButtonInteraction(event, event.target.dataset.part));
+    button?.addEventListener('touchend', (event) => handleButtonInteraction(event, event.target.dataset.part));
   });
 
   const homeButton = document.querySelector('button.nav-home');
-  homeButton?.addEventListener('click', (event) => handleNavigationEvent(event, ''));
-  homeButton?.addEventListener('touchend', (event) => handleNavigationEvent(event, ''));
+  homeButton?.addEventListener('click', (event) => handleButtonInteraction(event, ''));
+  homeButton?.addEventListener('touchend', (event) => handleButtonInteraction(event, ''));
 
-  // Add popstate event listener for browser back/forward
-  window.addEventListener('popstate', () => {
-    // handleRouting();
-  });
+  window.addEventListener('click', (event) => handleNavigation(event));
+  window.addEventListener('touchend', (event) => handleNavigation(event));
+  window.addEventListener('keydown', (event) => handleNavigation(event));
 
-  // Handle initial route
-  // need interaction to begin audio, so only remove this during development
-  // window.location.href = href;
-  // window.history.pushState({}, '', window.location.href);
   handleRouting();
-
 });
 
-function handleNavigationEvent(event, part) {
+function handleNavigation(event) {
+  event.preventDefault();
+  let clickedLeft = true;
+  
+  if (event.type === 'keydown' && event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+    clickedLeft = event.key === 'ArrowLeft';
+  } else if (event.type === 'touchend') {
+    clickedLeft = event.changedTouches[0].clientX <= window.innerWidth / 2;
+  } else if (event.type === 'click') {
+    clickedLeft = event.clientX <= window.innerWidth / 2;
+  } else {
+    return;
+  }
+
+
+  let currentPart;
+  if (window.location.hash.includes('#part-1')) {
+    currentPart = 'part-1';
+  } else if (window.location.hash.includes('#part-2')) {
+    currentPart = 'part-2';
+  } else {
+    currentPart = 'home';
+  }
+
+  if (currentPart === 'part-1') {
+    if (clickedLeft) {
+      slideIndex--;
+    } else {
+      slideIndex++;
+    }
+  
+    if (slideIndex < 0) {
+      slideIndex = 0;
+      return returnHome();
+    }
+    
+    if (slideIndex >= frames.length) {
+      slideIndex = frames.length - 1;
+      resetState();
+      updatePartStyles('part-2');
+      beginPart2();
+      return;
+    }
+  
+    updateFrame(frames[slideIndex]);
+    window.history.pushState({}, '', `${href}#part-1-${slideIndex + 1}`);
+
+    slideIndex = Math.max(0, Math.min(slideIndex, frames.length - 1));
+
+    return;
+  }
+
+  if (currentPart === 'part-2') {
+    if (clickedLeft) {
+      resetState();
+      updatePartStyles('part-1');
+      beginPart1(frames.length - 1);
+    } else {
+      // do nothing
+    }
+
+    return;
+  }
+
+  // home
+  if (!clickedLeft) {
+    updatePartStyles('part-1');
+    beginPart1(0);
+  } else {
+    // do nothing, or maybe go to part 2?
+  }
+}
+
+function handleButtonInteraction(event, part) {
   event.preventDefault();
   resetState();
   if (part === '') return returnHome();
@@ -536,21 +598,14 @@ function addArrays(arr1, arr2) {
   return arr1.map((value, index) => value + arr2[index]);
 }
 
-function subtractArrays(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    throw new Error('Arrays must be of the same length');
-  }
-  return arr1.map((value, index) => value - arr2[index]);
-}
-
 function hslColorMatrix(h) {
   const s = 1;
-  const l = 0.6;
+  const l = 0.3;
   const [r, g, b] = hslToRgb(h, s, l);
   const [r2, g2, b2] = hslToRgb(h + 0.55, s, l);
 
   // console.log(`RGB: (${r}, ${g}, ${b})`);
-  console.log(`RGB: (${h}`);
+  // console.log(`RGB: (${h}`);
 
   const primaryArray = [
     r, 0, 0, -b/3, 0,
@@ -560,9 +615,9 @@ function hslColorMatrix(h) {
   ];
 
   const secondaryArray = [
-    r2/2, 0, 0, -r2/3, 0,
-    0, g2/2, 0, -g2/3, 0,
-    0, 0, b2/2, -b2/3, 0,
+    r2/2, 0, 0, -r2/4, 0,
+    0, g2/2, 0, -g2/4, 0,
+    0, 0, b2/2, -b2/4, 0,
     -r/6, -g/6, -b/6, 0.1, 0
   ]
 
@@ -586,15 +641,4 @@ function createSvgFilter() {
   filter.appendChild(feColorMatrix);
 
   document.querySelector("svg defs").appendChild(filter);
-}
-
-function threeSheetsToTheWind() {
-  const elements = document.querySelectorAll('.three-sheets-to-the-wind span');
-  elements.forEach(el => {
-    const translateX = (Math.random() - 0.5) * 400; // -2px to 2px
-    const translateY = (Math.random() - 0.5) * 400; // -2px to 2px
-    const rotate = (Math.random() - 0.5) * 180; // -3deg to 3deg
-    
-    el.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`;
-  });
 }
