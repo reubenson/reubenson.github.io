@@ -52,16 +52,16 @@ let colorShiftInterval;
 
 const CSS_TRANSITIONS = [
   {
-    selector: '#poems-container',
-    transition: "240s filter linear, 60s opacity linear;"
+    selector: '#part-2.poem-container',
+    transition: "90s filter linear, 0s opacity linear;"
   },
   {
     selector: '#poems-container canvas',
-    transition: '30s opacity linear;'
+    transition: '45s opacity linear;'
   },
   {
     selector: '#poems-container #part-2 p',
-    transition: '360s color linear, 360s background linear, 10s filter linear;'
+    transition: '360s color linear, 360s background linear, 5s filter linear;'
   }
 ]
 
@@ -108,7 +108,7 @@ function hueToRgb(p, q, t) {
 let convolutionInterval = null;
 
 function updateConvolutionLevel(targetLevel) {
-  const duration = 30; // seconds
+  const duration = 15; // seconds
   const steps = 60; // One update per second
   const stepDuration = duration / steps;
   
@@ -147,7 +147,6 @@ async function initializeConvolution() {
 async function initializeWind() {
   const handleEnded = async () => {
     currentWindIndex = (currentWindIndex + 1) % windFilepaths.length;
-    console.log('ended', currentWindIndex);
     
     // Create and configure new source
     const newSource = audioCtx.createBufferSource();
@@ -318,6 +317,7 @@ async function beginPart1(index) {
   }
 
   const hash = `#part-1-${slideIndex + 1}`;
+
   window.history.pushState({}, '', `${href}${hash}`);
 
   updateFrame(frame);
@@ -336,13 +336,14 @@ async function beginPart2() {
   window.setTimeout(() => {
     const el = document.querySelector('#poems-container');
     el.classList.add('has-started');
+    // document.body.classList.add('has-started');
   }, 0);
 
   applyTransitions();
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      const increment = event.key === 'ArrowLeft' ? -0.01 : 0.01;
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      const increment = event.key === 'ArrowDown' ? -0.01 : 0.01;
       applyColorShift(increment);
     }
   });
@@ -369,7 +370,6 @@ function applyColorShift(increment = 0.01) {
 }
 
 async function resetState() {
-  console.log('resetState');
   const canvasContainerEl = document.querySelector('#poems-container');
   canvasContainerEl.classList.remove('fullscreen');
   canvasContainerEl.classList.remove('part-1');
@@ -399,7 +399,8 @@ async function resetState() {
   }
 
   document.body.classList.remove('now-viewing');
-  canvasContainerEl.classList.remove('has-started');
+  // canvasContainerEl.classList.remove('has-started');
+  canvas.classList.remove('front');
 
   // Release wake lock if it exists
   if (window.wakeLock) {
@@ -411,7 +412,7 @@ async function resetState() {
     }
   }
 
-  resetTransitions();
+  // resetTransitions();
 }
 
 function applyTransitions() {
@@ -513,6 +514,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 function handleNavigation(event) {
   event.preventDefault();
+  event.stopPropagation();
   let clickedLeft = true;
   
   if (event.type === 'keydown' && event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
@@ -586,8 +588,10 @@ function handleNavigation(event) {
 
 function handleButtonInteraction(event, part) {
   event.preventDefault();
+  event.stopPropagation();
   resetState();
   if (part === '') return returnHome();
+  updatePartStyles(part);
   handlePartSelection(part);
 }
 

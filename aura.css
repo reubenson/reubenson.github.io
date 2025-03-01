@@ -97,7 +97,12 @@ p {
 .poems-description {
   font-size: 18px;
   /* text-align: justify; */
+<<<<<<< HEAD
   width: 300px;
+=======
+  width: 360px;
+  max-width: 80vw;
+>>>>>>> airs
   height: 250px;
   position: absolute;
   top: 0;
@@ -120,10 +125,17 @@ p {
 
   .poems-description-text {
     width: 100%;
+<<<<<<< HEAD
     text-align: center;
 
     span {
       padding: 0 60px;
+=======
+    text-align: justify;
+
+    span {
+      padding: 0 40px;
+>>>>>>> airs
     }
 /* 
     p:nth-child(2) {
@@ -155,8 +167,17 @@ body.now-viewing {
   }
 }
 
+.poem-container {
+  z-index: -1;
+
+  &.selected-part {
+    z-index: 1;
+  }
+}
+
+
 #poems-container {
-  background: white;
+  /* background: white; */
   opacity: 0;
   width: 100%;
   height: 100%;
@@ -175,9 +196,46 @@ button:hover {
 .poem-container {
   opacity: 0;
 
-  &.selected-part {
+  /* &.selected-part {
+    opacity: 1;
+  } */
+}
+
+.has-started .poem-container {
+  /* &.selected-part { */
+  opacity: 1;
+  /* } */
+}
+
+#poems-container.has-started #part-2.poem-container {
+  opacity: 1;
+
+  canvas {
     opacity: 1;
   }
+
+  /* .poem {
+    opacity: 1 !important;
+  } */
+
+  /* .poem-container { */
+  filter: blur(4px) contrast(50) brightness(0.7);
+  .poem {
+    display: block !important;
+    opacity: 1.0 !important;
+  }
+  /* } */
+
+  /* .poem-container  */
+  .poem p {
+    color: black !important;
+    background: snow !important;
+    filter: brightness(1) !important;
+  }
+}
+
+#part-1.selected-part {
+  opacity: 1;
 }
 
 .poem {
@@ -234,22 +292,28 @@ button:hover {
   }
 }
 
-#poems-container.part-2 {
-  width: 80%;
-  height: 80%;
-  filter: blur(0px) contrast(3) brightness(0.7);
-  background: snow;
-  /* transition: 240s filter linear, 60s opacity linear; */
-  opacity: 0;
-  max-width: 1200px;
-  max-height: 800px;
+#part-1 {
+  display: none;
 
-  &.has-started {
-    filter: blur(4px) contrast(50) brightness(0.7);
+  &.selected-part {
+    display: block;
+  }
+}
+
+/* styles for both parts after user has begin reading */
+/* .has-started {
+  #part-1 {
+
+  }
+
+  #part-2 {
     opacity: 1;
-
     canvas {
       opacity: 1;
+    }
+
+    .poem-container {
+      filter: blur(4px) contrast(50) brightness(0.7);
     }
 
     .poem-container .poem p {
@@ -257,10 +321,45 @@ button:hover {
       background: snow;
       filter: brightness(1);
     }
-    
+  }
+} */
+
+#poems-container.part-2 {
+  width: 80%;
+  height: 80%;
+<<<<<<< HEAD
+  filter: blur(0px) contrast(3) brightness(0.7);
+  background: snow;
+  /* transition: 240s filter linear, 60s opacity linear; */
+  opacity: 0;
+=======
+>>>>>>> airs
+  max-width: 1200px;
+  max-height: 800px;
+
+  &.has-started {
+    opacity: 1;
+
+    canvas {
+      opacity: 1;
+    }
+
+    /* .poem-container {
+      filter: blur(4px) contrast(50) brightness(0.7);
+      .poem {
+        display: block;
+        opacity: 1.0;
+      }
+    }
+
+    .poem-container .poem p {
+      color: black;
+      background: snow;
+      filter: brightness(1);
+    } */
   }
 
-  canvas {
+  /* canvas {
     display: block;
     opacity: 0;
     width: 100%;
@@ -273,26 +372,35 @@ button:hover {
     margin: auto;
     z-index: -1;
     opacity: 0;
+<<<<<<< HEAD
     /* transition: 120s opacity linear; */
   }
+=======
+  } */
+>>>>>>> airs
 
   .poem-container {
-    width: 100%;
+    /* width: 100%;
     height: 100%;
     overflow: hidden;
     position: absolute;
+    filter: blur(0px) contrast(3) brightness(0.7);
   
     .poem {
+<<<<<<< HEAD
       /* height: calc(100vh - 100px);
       width: calc(100vw - 100px); */
       /* overflow: hidden; */
+=======
+>>>>>>> airs
       opacity: 0;
       border: none !important;
       width: 100%;
       height: 100%;
       text-align: center !important;
-    }
+    } */
 
+<<<<<<< HEAD
     &.selected-part {
       .poem {
         display: block;
@@ -303,6 +411,9 @@ button:hover {
     .poem > p {
       /* height: calc(100vh - 100px);
       width: calc(100vw - 100px); */
+=======
+    /* .poem > p {
+>>>>>>> airs
       color: snow;
       background: black;
       line-break: anywhere;
@@ -312,6 +423,7 @@ button:hover {
       filter: brightness(0.1);
       margin: -10px;
       text-transform: lowercase;
+<<<<<<< HEAD
       /* width: calc(100% + 20px);
       height: calc(100% + 20px); */
       box-sizing: border-box;
@@ -319,6 +431,11 @@ button:hover {
       /* margin-left: -10px; */
       /* transition: 440s color linear, 440s background linear, 15s filter linear; */
     }
+=======
+      box-sizing: border-box;
+      animation: textOpacity 120s infinite;
+    } */
+>>>>>>> airs
   }
 
   .credits {
@@ -358,6 +475,48 @@ button:hover {
 
 #part-2 {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  filter: blur(0px) contrast(3) brightness(0.7);
+
+  .poem {
+    opacity: 0;
+    border: none !important;
+    width: 100%;
+    height: 100%;
+    text-align: center !important;
+  }
+  
+  .poem > p {
+    color: snow;
+    background: black;
+    line-break: anywhere;
+    letter-spacing: -0.09em;
+    line-height: .43em;
+    font-size: 32px;
+    filter: brightness(0.1);
+    margin: -10px;
+    text-transform: lowercase;
+    box-sizing: border-box;
+    animation: textOpacity 120s infinite;
+  }
+
+  canvas {
+    display: block;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    filter: url(#customFilter);
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: -1;
+    opacity: 0;
+  }
 }
 
 canvas.front {
@@ -455,6 +614,7 @@ canvas.front {
 @keyframes textOpacity {
   0% {
     /* filter: blur(0px) contrast(3) brightness(0.7); */
+<<<<<<< HEAD
     opacity: 0.7;
   }
   50% {
@@ -463,6 +623,16 @@ canvas.front {
   100% {
     /* filter: blur(4px) contrast(50) brightness(0.7); */
     opacity: 0.7;
+=======
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    /* filter: blur(4px) contrast(50) brightness(0.7); */
+    opacity: 1.0;
+>>>>>>> airs
   }
 }
 

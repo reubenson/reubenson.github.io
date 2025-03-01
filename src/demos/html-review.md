@@ -24,7 +24,7 @@ hideSeeMore: true
     <em>Airs</em> is a collection of poems
     <span>in two parts</span>
     accompanied by sound recordings of the quiet and teeming air
-    <span>which you can navigate by moving left and right</span>
+    <span>which you can navigate by clicking left and right</span>
   </div>
 </div>
 
