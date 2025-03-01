@@ -97,12 +97,8 @@ p {
 .poems-description {
   font-size: 18px;
   /* text-align: justify; */
-<<<<<<< HEAD
-  width: 300px;
-=======
   width: 360px;
   max-width: 80vw;
->>>>>>> airs
   height: 250px;
   position: absolute;
   top: 0;
@@ -125,17 +121,10 @@ p {
 
   .poems-description-text {
     width: 100%;
-<<<<<<< HEAD
-    text-align: center;
-
-    span {
-      padding: 0 60px;
-=======
     text-align: justify;
 
     span {
       padding: 0 40px;
->>>>>>> airs
     }
 /* 
     p:nth-child(2) {
@@ -327,13 +316,6 @@ button:hover {
 #poems-container.part-2 {
   width: 80%;
   height: 80%;
-<<<<<<< HEAD
-  filter: blur(0px) contrast(3) brightness(0.7);
-  background: snow;
-  /* transition: 240s filter linear, 60s opacity linear; */
-  opacity: 0;
-=======
->>>>>>> airs
   max-width: 1200px;
   max-height: 800px;
 
@@ -372,12 +354,7 @@ button:hover {
     margin: auto;
     z-index: -1;
     opacity: 0;
-<<<<<<< HEAD
-    /* transition: 120s opacity linear; */
-  }
-=======
   } */
->>>>>>> airs
 
   .poem-container {
     /* width: 100%;
@@ -387,12 +364,6 @@ button:hover {
     filter: blur(0px) contrast(3) brightness(0.7);
   
     .poem {
-<<<<<<< HEAD
-      /* height: calc(100vh - 100px);
-      width: calc(100vw - 100px); */
-      /* overflow: hidden; */
-=======
->>>>>>> airs
       opacity: 0;
       border: none !important;
       width: 100%;
@@ -400,20 +371,7 @@ button:hover {
       text-align: center !important;
     } */
 
-<<<<<<< HEAD
-    &.selected-part {
-      .poem {
-        display: block;
-        opacity: 1.0;
-      }
-    }
-
-    .poem > p {
-      /* height: calc(100vh - 100px);
-      width: calc(100vw - 100px); */
-=======
     /* .poem > p {
->>>>>>> airs
       color: snow;
       background: black;
       line-break: anywhere;
@@ -423,19 +381,9 @@ button:hover {
       filter: brightness(0.1);
       margin: -10px;
       text-transform: lowercase;
-<<<<<<< HEAD
-      /* width: calc(100% + 20px);
-      height: calc(100% + 20px); */
-      box-sizing: border-box;
-      animation: textOpacity 120s infinite;
-      /* margin-left: -10px; */
-      /* transition: 440s color linear, 440s background linear, 15s filter linear; */
-    }
-=======
       box-sizing: border-box;
       animation: textOpacity 120s infinite;
     } */
->>>>>>> airs
   }
 
   .credits {
@@ -614,16 +562,6 @@ canvas.front {
 @keyframes textOpacity {
   0% {
     /* filter: blur(0px) contrast(3) brightness(0.7); */
-<<<<<<< HEAD
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 1
-  }
-  100% {
-    /* filter: blur(4px) contrast(50) brightness(0.7); */
-    opacity: 0.7;
-=======
     opacity: 1.0;
   }
   50% {
@@ -632,7 +570,6 @@ canvas.front {
   100% {
     /* filter: blur(4px) contrast(50) brightness(0.7); */
     opacity: 1.0;
->>>>>>> airs
   }
 }
 
