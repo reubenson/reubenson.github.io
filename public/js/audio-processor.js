@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/AudioWorkletNode
-// random-noise-processor.js
-class RandomNoiseProcessor extends AudioWorkletProcessor {
+class AudioProcessor extends AudioWorkletProcessor {
   constructor(input) {
     super();
     const size = 256 * 2;
@@ -95,4 +94,4 @@ class RandomNoiseProcessor extends AudioWorkletProcessor {
   }
 }
   
-registerProcessor("random-noise-processor", RandomNoiseProcessor);
+registerProcessor("audio-processor", AudioProcessor);

@@ -160,14 +160,21 @@
   
   of confining fjords
 
-
   <br/>
 
-  acquire heat and moisture
+  acquiring heat and moisture
 
   frictional contrasts
 
   that disconnect the flow
+
+  <br/>
+
+  between the gentle breeze
+
+  and the pale and shearing
+
+  contempt of your inner thermal reservoir
 
 </div>
 

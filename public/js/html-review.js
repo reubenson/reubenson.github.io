@@ -12,7 +12,6 @@ const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp
 
 // todo: turn off when screen is not visible
 // todo: debug switching between parts on mobile chrome
-// todo: improve convolution fade in/out
 const windFilepaths = [
   '/public/html-review/2022-07-21 12.05.00.mp3',
   '/public/html-review/2022-07-25 20.16.11.mp3',
@@ -121,6 +120,11 @@ function updateConvolutionLevel(targetLevel) {
   const levelDifference = targetLevel - startLevel;
   const levelStep = levelDifference / steps;
   let currentStep = 0;
+
+  if (targetLevel > 0) {
+    // begin audio worklet
+    convolver.connect(processor);
+  }
   
   convolutionInterval = setInterval(() => {
     currentStep++;
@@ -131,6 +135,12 @@ function updateConvolutionLevel(targetLevel) {
       gainNodeConvolution.gain.value = targetLevel;
       clearInterval(convolutionInterval);
       convolutionInterval = null;
+      // pause audio worklet when convolution has been zero'd
+      if (targetLevel === 0) {
+        try {
+          convolver.disconnect(processor);
+        } catch (e) {}
+      }
     }
   }, stepDuration * 1000);
 }
@@ -224,7 +234,8 @@ async function initializeAudio() {
   sumNode.connect(playerGainNode);
   playerGainNode.connect(audioCtx.destination);
 
-  convolver.connect(processor);
+  // to be connected later
+  // convolver.connect(processor);
   // sumNode.connect(processor);
   startAudio()
 
@@ -244,9 +255,11 @@ async function initializeAudio() {
   }
 }
 
+let animationFrameId = null;
+
 function visualize() {
   function draw() {
-    requestAnimationFrame(draw);
+    animationFrameId = requestAnimationFrame(draw);
 
     if (!shouldUpdateCanvas) return;
 
@@ -266,6 +279,19 @@ function visualize() {
   }
 
   draw();
+}
+
+function stopVisualization() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+}
+
+function startVisualization() {
+  if (!animationFrameId) {
+    visualize();
+  }
 }
 
 function updatePartStyles(part) {
@@ -307,8 +333,6 @@ function updateFrame(el) {
 }
 
 async function beginPart1(index) {
-  canvasContainerEl.classList.add('part-1');
-
   slideIndex = index;
   let frame = frames[index];
   if (!frame) {
@@ -329,14 +353,12 @@ async function beginPart1(index) {
 async function beginPart2() {
   const hash = `#part-2`;
   window.history.pushState({}, '', `${href}${hash}`);
-  
-  canvasContainerEl.classList.add('part-2');
-  canvas.classList.add('front');
+
+  startVisualization();
 
   window.setTimeout(() => {
     const el = document.querySelector('#poems-container');
     el.classList.add('has-started');
-    // document.body.classList.add('has-started');
   }, 0);
 
   applyTransitions();
@@ -354,7 +376,7 @@ async function beginPart2() {
 
   await initializeAudio();  
   updateConvolutionLevel(0.03);
-  visualize();
+  startVisualization();
 
   // Request wake lock to keep screen on
   try {
@@ -370,15 +392,14 @@ function applyColorShift(increment = 0.01) {
 }
 
 async function resetState() {
-  const canvasContainerEl = document.querySelector('#poems-container');
-  canvasContainerEl.classList.remove('fullscreen');
-  canvasContainerEl.classList.remove('part-1');
-  canvasContainerEl.classList.remove('part-2');
-
-  const navButtons = document.querySelectorAll('nav button');
-  navButtons.forEach((button) => {
-    button.classList.remove('active');
+  const selectedPart = document.querySelector('.poem-container.selected-part');
+  selectedPart?.classList.remove('selected-part');
+  stopVisualization();
+  const activeEls = document.querySelectorAll('.active');
+  activeEls.forEach((el) => {
+    el.classList.remove('active');
   });
+  
   
   // Clear the color shift interval
   if (colorShiftInterval) {
@@ -394,13 +415,10 @@ async function resetState() {
   
   try {
     updateConvolutionLevel(0);
-  } catch (e) {
-    // console.error(e);
-  }
+  } catch (e) {}
 
   document.body.classList.remove('now-viewing');
-  // canvasContainerEl.classList.remove('has-started');
-  canvas.classList.remove('front');
+  canvasContainerEl.classList.remove('has-started');
 
   // Release wake lock if it exists
   if (window.wakeLock) {
@@ -419,8 +437,7 @@ function applyTransitions() {
   CSS_TRANSITIONS.forEach(({ selector, transition }) => {
     const el = document.querySelector(selector);
     if (!el) return;
-    el.style.removeProperty('transition');
-    void el.offsetWidth;
+    // void el.offsetWidth;
     el.style.cssText += `transition: ${transition};`;
   });
 }
@@ -476,8 +493,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
 
-  await audioCtx.audioWorklet?.addModule("/public/js/random-noise-processor.js");
-  processor = new AudioWorkletNode(audioCtx, "random-noise-processor");
+  await audioCtx.audioWorklet?.addModule("/public/js/audio-processor.js");
+  processor = new AudioWorkletNode(audioCtx, "audio-processor");
   processor.port.onmessage = (e) => {
     updateAudioBufferData(e.data);
   };
@@ -513,7 +530,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 function handleNavigation(event) {
-  event.preventDefault();
+  // event.preventDefault();
   event.stopPropagation();
   let clickedLeft = true;
   
@@ -526,7 +543,6 @@ function handleNavigation(event) {
   } else {
     return;
   }
-
 
   let currentPart;
   if (window.location.hash.includes('#part-1')) {

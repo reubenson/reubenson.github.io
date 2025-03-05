@@ -11,7 +11,7 @@ hideSeeMore: true
 <header class="poems-header">
   <h1><button class="nav-home">Airs</button></h1>
   <h2>
-    <a href="https://thehtml.review/04/">The HTML Review<br/><em>Issue 04, Spring 2025</em></a>
+    <a href="https://thehtml.review/04/" target="_blank">The HTML Review<br/><em>Issue 04, Spring 2025</em></a>
   </h2>
 </header>
 

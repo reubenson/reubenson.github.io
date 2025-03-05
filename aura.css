@@ -42,7 +42,6 @@ header button {
   font-family: 'Ibarra Real Nova', monospace;
   background: transparent;
   color: snow;
-  /* padding: 20px; */
   border: none;
 }
 
@@ -76,6 +75,10 @@ nav button {
   padding: 15px;
   font-style: italic;
   font-family: 'Ibarra Real Nova', monospace;
+
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 nav button span {
@@ -96,7 +99,6 @@ p {
 
 .poems-description {
   font-size: 18px;
-  /* text-align: justify; */
   width: 360px;
   max-width: 80vw;
   height: 250px;
@@ -112,6 +114,7 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 
   img {
     width: 100%;
@@ -126,52 +129,29 @@ p {
     span {
       padding: 0 40px;
     }
-/* 
-    p:nth-child(2) {
-      margin-left: 80px;
-    }
-
-    p:nth-child(3) {
-      margin-left: 40px;
-    } */
   }
 }
 
 body.now-viewing {
-  background: black;
-
   .poems-description {
     display: none;
   }
-
-  #poems-container {
-    display: flex;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    opacity: 1;
-  }
 }
-
-.poem-container {
-  z-index: -1;
-
-  &.selected-part {
-    z-index: 1;
-  }
-}
-
 
 #poems-container {
-  /* background: white; */
-  opacity: 0;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  opacity: 1;
   overflow: hidden;
-  display: none;
+  position: fixed;
+  width: 80vw;
+  height: 80vh;
+  max-width: 1200px;
+  max-height: 800px;
 }
 
 svg {
@@ -182,51 +162,6 @@ button:hover {
   cursor: pointer;
 }
 
-.poem-container {
-  opacity: 0;
-
-  /* &.selected-part {
-    opacity: 1;
-  } */
-}
-
-.has-started .poem-container {
-  /* &.selected-part { */
-  opacity: 1;
-  /* } */
-}
-
-#poems-container.has-started #part-2.poem-container {
-  opacity: 1;
-
-  canvas {
-    opacity: 1;
-  }
-
-  /* .poem {
-    opacity: 1 !important;
-  } */
-
-  /* .poem-container { */
-  filter: blur(4px) contrast(50) brightness(0.7);
-  .poem {
-    display: block !important;
-    opacity: 1.0 !important;
-  }
-  /* } */
-
-  /* .poem-container  */
-  .poem p {
-    color: black !important;
-    background: snow !important;
-    filter: brightness(1) !important;
-  }
-}
-
-#part-1.selected-part {
-  opacity: 1;
-}
-
 .poem {
   width: 100vw;
   height: auto;
@@ -234,200 +169,62 @@ button:hover {
   margin: auto;
 }
 
-
-#poems-container.part-1 {
-  background: black;
-  top: -15px;
-  left: -15px;
-  width: 80vw;
-
-  .poem-container {
-    background: black;
-    display: flex;
-    width: 100%;
-
-    h3 {
-      text-align: left;
-      /* border-bottom: solid snow 2px; */
-      padding: 20px 0;;
-    }
-
-    h3, p {
-      font-size: 20px;
-    }
-
-    p {
-      text-align: right;
-      margin: 0 0 0 auto;
-    }
-
-    .poem {
-      color: snow;
-      width: 550px;
-      padding: 20px;
-      max-width: calc(100% - 40px);
-      display: none;
-      filter: blur(0px) contrast(1) url(#wind-filter-sm);
-      /* height: 80vh; */
-    }
-    
-    .poem.active {
-      display: block;
-    }
-
-    .line-break {
-      display: block;
-    }
-  }
-}
-
 #part-1 {
-  display: none;
+  background: black;
+  display: flex;
+  width: 100%;
+  /* visibility: hidden; */
 
-  &.selected-part {
-    display: block;
-  }
-}
-
-/* styles for both parts after user has begin reading */
-/* .has-started {
-  #part-1 {
-
+  h3 {
+    text-align: left;
+    padding: 20px 0;;
   }
 
-  #part-2 {
-    opacity: 1;
-    canvas {
-      opacity: 1;
-    }
-
-    .poem-container {
-      filter: blur(4px) contrast(50) brightness(0.7);
-    }
-
-    .poem-container .poem p {
-      color: black;
-      background: snow;
-      filter: brightness(1);
-    }
-  }
-} */
-
-#poems-container.part-2 {
-  width: 80%;
-  height: 80%;
-  max-width: 1200px;
-  max-height: 800px;
-
-  &.has-started {
-    opacity: 1;
-
-    canvas {
-      opacity: 1;
-    }
-
-    /* .poem-container {
-      filter: blur(4px) contrast(50) brightness(0.7);
-      .poem {
-        display: block;
-        opacity: 1.0;
-      }
-    }
-
-    .poem-container .poem p {
-      color: black;
-      background: snow;
-      filter: brightness(1);
-    } */
+  h3, p {
+    font-size: 20px;
   }
 
-  /* canvas {
-    display: block;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    filter: url(#customFilter);
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    z-index: -1;
-    opacity: 0;
-  } */
-
-  .poem-container {
-    /* width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    filter: blur(0px) contrast(3) brightness(0.7);
-  
-    .poem {
-      opacity: 0;
-      border: none !important;
-      width: 100%;
-      height: 100%;
-      text-align: center !important;
-    } */
-
-    /* .poem > p {
-      color: snow;
-      background: black;
-      line-break: anywhere;
-      letter-spacing: -0.09em;
-      line-height: .43em;
-      font-size: 32px;
-      filter: brightness(0.1);
-      margin: -10px;
-      text-transform: lowercase;
-      box-sizing: border-box;
-      animation: textOpacity 120s infinite;
-    } */
+  p {
+    text-align: right;
+    margin: 0 0 0 auto;
   }
 
-  .credits {
-    font-size: 180px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    margin: auto;
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+  .poem {
+    color: snow;
+    width: 550px;
     padding: 20px;
+    max-width: calc(100% - 40px);
+    display: none;
+    /* visibility: hidden; */
+    filter: blur(0px) contrast(1) url(#wind-filter-sm);
+  }
+  
+  .poem.active {
+    display: block;
+    /* visibility: visible; */
+  }
 
-    h2 {
-      font-size: 140px;
-      line-height: 1em;
-      padding: 0;
-      margin: auto;
-      color: snow;
-    }
-
-    p {
-      font-size: 30px !important;
-      line-height: 0.8em !important;
-      margin: auto;
-      text-align: justify;
-      line-break: auto !important;
-      background: transparent !important;
-    }
+  .line-break {
+    display: block;
   }
 }
 
+.selected-part#part-1,
+.selected-part#part-2 {
+  /* visibility: visible; */
+}
+
+.selected-part#part-1 {
+  z-index: 10000;
+}
 
 #part-2 {
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: absolute;
   filter: blur(0px) contrast(3) brightness(0.7);
+  /* visibility: hidden; */
 
   .poem {
     opacity: 0;
@@ -450,30 +247,48 @@ button:hover {
     box-sizing: border-box;
     animation: textOpacity 120s infinite;
   }
+}
 
-  canvas {
-    display: block;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    filter: url(#customFilter);
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    z-index: -1;
-    opacity: 0;
+.has-started {
+  /* #part-1 {
+  } */
+
+  #part-2 {
+    filter: blur(4px) contrast(50) brightness(0.7);
+    canvas {
+      opacity: 1;
+    }
+    .poem {
+      display: block !important;
+      opacity: 1.0 !important;
+    }
+
+    .poem p {
+      color: black !important;
+      background: snow !important;
+      filter: brightness(1) !important;
+    }
   }
 }
 
-canvas.front {
+canvas {
+  display: block;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  filter: url(#customFilter);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  z-index: -1;
   z-index: 1000 !important;
 }
 
 .three-sheets-to-the-wind {
   display: inline-block;
-  height: 80vh;
+  height: 500px;
 }
 
 .three-sheets-to-the-wind p {
@@ -546,19 +361,6 @@ canvas.front {
   }
 }
 
-/* {
-  selector: '#poems-container.part-2',
-  transition: "240s filter linear, 60s opacity linear;"
-},
-{
-  selector: '#poems-container.part-2 canvas',
-  transition: '30s opacity linear;'
-},
-{
-  selector: '#poems-container.part-2 #part-2 p',
-  transition: '240s color linear, 240s background linear, 10s filter linear;'
-} */
-
 @keyframes textOpacity {
   0% {
     /* filter: blur(0px) contrast(3) brightness(0.7); */
@@ -574,7 +376,7 @@ canvas.front {
 }
 
 @media screen and (min-width: 768px) {
-  #poems-container.part-1 .poem-container {
+  #part-1 {
     h3, p {
       font-size: 32px;
     }
@@ -584,3 +386,41 @@ canvas.front {
     }
   }
 }
+
+
+
+/* ignore */
+/* #part-2 {
+  .credits {
+    font-size: 180px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+
+    h2 {
+      font-size: 140px;
+      line-height: 1em;
+      padding: 0;
+      margin: auto;
+      color: snow;
+    }
+
+    p {
+      font-size: 30px !important;
+      line-height: 0.8em !important;
+      margin: auto;
+      text-align: justify;
+      line-break: auto !important;
+      background: transparent !important;
+    }
+  }
+} */
