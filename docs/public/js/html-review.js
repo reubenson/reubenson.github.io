@@ -12,13 +12,17 @@ const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp
 
 // todo: turn off when screen is not visible
 // todo: debug switching between parts on mobile chrome
+// idea for performance: add additional filter on top-level; display poem-1 on top of poem-2; start subtle, then add some sort of crescendo or fade poem-1 opacity to 0; 
+// add syndication tag back to /airs
+// handle accessibility
+
 const windFilepaths = [
-  '/public/html-review/2022-07-21 12.05.00.mp3',
   '/public/html-review/2022-07-25 20.16.11.mp3',
   '/public/html-review/2022-07-28 20.50.36.mp3',
   '/public/html-review/2023-08-31 17.03.15.mp3', // need to recover
   '/public/html-review/2023-09-02 14.03.01.mp3',
-  '/public/html-review/2023-10-16 13.31.39.mp3'
+  '/public/html-review/2023-10-16 13.31.39.mp3',
+  '/public/html-review/2022-07-21 12.05.00.mp3',
 ]
 
 // const audioFilepath = '/public/html-review/excerpt-b.mp3';
@@ -355,6 +359,24 @@ async function beginPart2() {
   window.history.pushState({}, '', `${href}${hash}`);
 
   startVisualization();
+
+  // const poemEl = document.querySelector('#part-2 .poem p');
+  // const originalText = poemEl.textContent;
+  // let currentSpaces = 0;
+  // const totalDuration = 10000; // 10 seconds
+  // const intervalTime = 100; // Update every 100ms
+  // const steps = totalDuration / intervalTime;
+  // const spacesToAdd = Math.floor(originalText.length / steps);
+
+  // const interval = setInterval(() => {
+  //   currentSpaces += spacesToAdd;
+  //   if (currentSpaces >= originalText.length) {
+  //     clearInterval(interval);
+  //     return;
+  //   }
+  //   const newText = originalText.slice(0, currentSpaces) + ' ' + originalText.slice(currentSpaces);
+  //   poemEl.textContent = newText;
+  // }, intervalTime);
 
   window.setTimeout(() => {
     const el = document.querySelector('#poems-container');

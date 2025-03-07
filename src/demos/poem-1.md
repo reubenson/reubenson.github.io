@@ -172,9 +172,13 @@
 
   between the gentle breeze
 
+  is a self cure for
+
   and the pale and shearing
 
-  contempt of your inner thermal reservoir
+  <!-- contempt of your inner thermal reservoir -->
+
+  the hot white of contempt
 
 </div>
 

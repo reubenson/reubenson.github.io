@@ -249,6 +249,12 @@ button:hover {
   }
 }
 
+#part-2 .poem {
+  transform: scale(1.3);
+  transition: transform 120s ease;
+  /* remove the zoom properties */
+}
+
 .has-started {
   /* #part-1 {
   } */
@@ -261,6 +267,7 @@ button:hover {
     .poem {
       display: block !important;
       opacity: 1.0 !important;
+      transform: scale(1);  /* instead of zoom: 1 */
     }
 
     .poem p {
