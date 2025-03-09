@@ -32,9 +32,9 @@ hideSeeMore: true
   <img src="/public/html-review/santa-ana-winds.jpg" alt="photo of the Santa Ana winds" />
   <div class="poems-introduction-text">
     <em>Airs</em> is a collection of poems
-    <span>accompanied by sound recordings of the quiet and teeming air</span>
-    <span>in two parts</span>
-    <span>which you can navigate by clicking on the left and right sides of the page/screen</span>
+    <span>which you can navigate by clicking on the left and right sides of the <em>page</em> or <em>screen</em></span>
+    <span>accompanied by six recordings (34'28", 82.6MB) of the wind</span>
+    <!-- <span>in two parts</span> -->
   </div>
 </div>
 
@@ -59,7 +59,7 @@ hideSeeMore: true
         width="500px"
         >
       </feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="6" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
     <filter id="wind-filter-lg">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
@@ -68,7 +68,7 @@ hideSeeMore: true
         width="1000px"
         >
       </feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="12" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="16" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>

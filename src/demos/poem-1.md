@@ -1,20 +1,14 @@
 <div class="poem">
 
-  <!-- ### everything you already know -->
-
-  dawn comes whispering
-
-  down
+  dawn comes whispering down
   
   from the trees 
-  
-  <!-- unlacing dark from near-dark -->
 
   <div class="line-break"></div>
   
   exhaling under thin blue expanse
 
-  earth fuming petrichor
+  earth-fuming petrichor
 
   rises &
   
@@ -24,7 +18,6 @@
 
 <div class="poem">
 
-
   holding diaphragm, or 
   
   adorning diaresis
@@ -32,32 +25,21 @@
   you bask
 
   and tilt under the rolling sky
-
-  <!-- everything you can throw
-  
-  to the wind
-  
-  floats on back
-
-  to you -->
   
 </div>
 
 <div class="poem">
+  <!-- <div class="line-break"></div> -->
 
-  gathering upon 
+  rippling aerial choreography dances the ear
+
+</div>
+
+<div class="poem">
+
+  intoxicated by 
   
   the pure albedo of glaciers
-
-  <!-- between rustling green
-
-  breezes
-  
-  gathering up
-
-  inexorably, yes
-
-  from slow -->
 
 
   <div class="line-break"></div>
@@ -81,37 +63,11 @@
   
   <div class="line-break"></div>
 
-  enclasped green stems hold
+  enclasped green stems hold their 
   
-  their bloom
-  
-  as they wind their way
-  
-  backwards
-
-  and back
-
-  <!-- <br/>
-
-  and backwards
-  
-  followed closely by
-  
-  another
-  
-  they wind their way
-  
-  home -->
+  blooms as they wind their way
 
 </div>
-
-
-<!-- <div class="poem"> -->
-  <!-- you weren't here yet -->
-
- 
-
-<!-- </div> -->
 
 <div class="poem">
 
@@ -134,42 +90,6 @@
 </div>
 
 <div class="poem">
-
-cold air is
-  
-  denser
-
-  and it sinks
-
-  <div class="line-break"></div>
-
-
-  listlessly sounding
-
-  up there
-
-  or down here 
-
-  <div class="line-break"></div>
-
-
-  <!-- between gentle breezes
-
-  the edifice of hubris
-
-  summons plague-wind -->
-
-  
-
-  <!-- <br/> -->
-  <!-- contempt of your inner thermal reservoir -->
-
-  <!-- the hot white of contempt -->
-</div>
-
-<div class="poem">
-
-  <!-- ### albedo of glaciers -->
   
   in summer it is most persistent
   
@@ -221,22 +141,44 @@ cold air is
 
 <div class="poem">
 
+  listlessly sounding
+
+  up there
+
+  or down here 
+
+  <div class="line-break"></div>
+
+  a storm-cloud
+
+  approaches from one or another
+
+  of the neighboring centuries
+
+
+  <!-- between gentle breezes
+
+  the edifice of hubris
+
+  summons plague-wind -->
+
+  
+
+  <!-- <br/> -->
+  <!-- contempt of your inner thermal reservoir -->
+
+  <!-- the hot white of contempt -->
+</div>
+
+<div class="poem">
+
   
 
   pale red and 
   
   shearing
 
-  <!-- <div class="line-break"></div> -->
-
-  seraphim
-  <!-- from one or 
-
-  another of the neighboring centuries -->
-
-  <!-- a self cure for hot white contempt -->
-
-  of total caesura
+  seraphim of total caesura
   
   without suture or
 
@@ -244,11 +186,7 @@ cold air is
 
   <div class="line-break"></div>
 
-   an unappointed storm-cloud
-
-  from one or another
-
-  of the neighboring centuries
+  cold air is denser and it sinks
   
   <!-- ### rustle -->
   
@@ -260,76 +198,46 @@ cold air is
 <div class="poem">
 
   a clatter of saucer
-
-  <!-- <br/> -->
   
   and cup appears
   
   the receding tide of foam
   
-  to soft brown lace
+  yielding soft brown lace yawning
   
-  yawning for air
+  for air
 
 </div>
 
 <div class="poem">
-
-  <!-- ### oscillations -->
 
   the dust in your brain
   
-  <!-- oscillates -->
-  
   settles like swept dunes
   
-  over epochs of stone
+  <!-- over epochs of stone -->
 
   <div class="line-break"></div>
   
-  a ghost paces
+  a ghost paces still
   
-  still and moving lines
+  and moving
+  
+  lines
 
-  tracing breath
+  <div class="line-break"></div>
 
-  <br/>
+  tracing breath like
   
-  a window
-  
-  you open 
-  
-  and it is all around you
+  a window you open all around you
   
 </div>
 
 <div class="poem">
 
-  <!-- ### a certain weight -->
+the aura of night itself frogpondering
 
-  you throw everything the wind
-
-  that you want to float on
-
-  like tapered wood a
-
-  curling arc under voices
-
-  of the night sky
-
-</div>
-
-<div class="poem">
-
-<!-- ### night -->
-
-the aura of night itself
-
-<!-- a chorus of frogs -->
-
-frogpondering
-
-singing from
+<!-- singing from -->
 
 the vast library of air
 
@@ -337,23 +245,44 @@ the vast library of air
 
 <div class="poem">
 
-  rippling air
-  
-  dances ear
-
-</div>
-
-<div class="poem">
-
-  <div class="line-break"></div>
-
-  <!-- I cannot get enough of -->
-  
   every thing
   
   is quieter in the shadow
   
   of a leaf
+
+<!-- </div> -->
+
+<!-- <div class="poem"> -->
+
+  <!-- <div class="line-break"></div> -->
+
+  <!-- I cannot get enough of -->
+  
+  <!-- every thing
+  
+  is quieter in the shadow
+  
+  of a leaf -->
+
+</div>
+
+<div class="poem">
+
+  a certain weight of tapered wood
+
+  curling arcs under voices
+
+  of the night sky
+
+  <div class="line-break"></div>
+  <!-- ### a certain weight -->
+
+  you throw everything 
+  
+  that you want to hold onto
+  
+  <!-- to the wind -->
 
 </div>
 
@@ -373,3 +302,43 @@ to the wind
 <!-- all caesura and no suture -->
 
 <!-- seraphim -->
+
+<!-- everything you can throw
+  
+  to the wind
+  
+  floats on back
+
+  to you -->
+
+  <!-- between rustling green
+
+  breezes
+  
+  gathering up
+
+  inexorably, yes
+
+  from slow -->
+
+
+  
+  <!-- backwards
+
+  and back -->
+
+  <!-- <br/>
+
+  and backwards
+  
+  followed closely by
+  
+  another
+  
+  they wind their way
+  
+  home -->
+
+  <!-- <div class="poem"> -->
+  <!-- you weren't here yet -->
+<!-- </div> -->

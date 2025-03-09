@@ -7,20 +7,21 @@ let windInitialized = false;
 let currentWindIndex = 0;
 let frames = [];
 const href = window.location.href.split('#')[0];
-const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
+const convolutionFilepath = '/public/html-review/airports-for-music-i-excerpt.mp3';
 
 // todo: turn off when screen is not visible
 // todo: debug switching between parts on mobile chrome
 // idea for performance: add additional filter on top-level; display poem-1 on top of poem-2; start subtle, then add some sort of crescendo or fade poem-1 opacity to 0; 
 // handle accessibility
 
+// total duration 34'28" - 82.6MB
 const windFilepaths = [
-  '/public/html-review/2022-07-21 12.05.00.mp3',
-  '/public/html-review/2023-09-02 14.03.01.mp3',
-  '/public/html-review/2023-08-31 17.03.15.mp3',
-  '/public/html-review/2022-07-25 20.16.11.mp3',
-  '/public/html-review/2022-07-28 20.50.36.mp3',
-  '/public/html-review/2023-10-16 13.31.39.mp3',
+  '/public/html-review/2023-08-31 17.03.15.mp3', // 7'28" - 17.9MB
+  '/public/html-review/2022-07-25 20.16.11.mp3', // 5'00" - 12MB
+  '/public/html-review/2022-07-28 20.50.36.mp3', // 5'01" - 12MB
+  '/public/html-review/2023-10-16 13.31.39.mp3', // 7'00" - 16.8MB
+  '/public/html-review/2022-07-21 12.05.00.mp3', // 4'58" - 11.9MB
+  '/public/html-review/2023-09-02 14.03.01.mp3', // 5'01" - 12MB
 ]
 
 let colorMatrixEl;
@@ -165,11 +166,10 @@ async function initializeAudio() {
   gainNodeSource = audioCtx.createGain();
   gainNodeConvolution = audioCtx.createGain();
   sumNode = audioCtx.createGain();
-  const dry = 1.0;
-  const wet  = 0.0;
-  gainNodeSource.gain.value = 0;
-  gainNodeSource.gain.linearRampToValueAtTime(dry, audioCtx.currentTime + 15);
-  gainNodeConvolution.gain.value = wet;
+  // const wet  = 0.0;
+  gainNodeSource.gain.value = 1;
+  // gainNodeSource.gain.linearRampToValueAtTime(dry, audioCtx.currentTime + 15);
+  gainNodeConvolution.gain.value = 0.0;
   sumNode.gain.value = 1.0;
   convolver.normalize = false;
 
@@ -423,7 +423,7 @@ function handleRouting() {
   const hash = window.location.hash;
 
   // comment next line to prevent page from defaulting to home on load
-  if (hash !== '') return returnHome();
+  // if (hash !== '') return returnHome();
 
   if (hash.includes('#part-1')) {
     handlePartSelection('part-1');
