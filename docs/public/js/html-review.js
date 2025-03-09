@@ -5,7 +5,6 @@ let audioHasStarted = false;
 let convolutionInitialized = false;
 let windInitialized = false;
 let currentWindIndex = 0;
-let part1Index = 0;
 let frames = [];
 const href = window.location.href.split('#')[0];
 const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp3';
@@ -13,28 +12,24 @@ const convolutionFilepath = '/public/html-review/music-for-airports-i-excerpt.mp
 // todo: turn off when screen is not visible
 // todo: debug switching between parts on mobile chrome
 // idea for performance: add additional filter on top-level; display poem-1 on top of poem-2; start subtle, then add some sort of crescendo or fade poem-1 opacity to 0; 
-// add syndication tag back to /airs
 // handle accessibility
 
 const windFilepaths = [
+  '/public/html-review/2022-07-21 12.05.00.mp3',
+  '/public/html-review/2023-09-02 14.03.01.mp3',
+  '/public/html-review/2023-08-31 17.03.15.mp3',
   '/public/html-review/2022-07-25 20.16.11.mp3',
   '/public/html-review/2022-07-28 20.50.36.mp3',
-  '/public/html-review/2023-08-31 17.03.15.mp3', // need to recover
-  '/public/html-review/2023-09-02 14.03.01.mp3',
   '/public/html-review/2023-10-16 13.31.39.mp3',
-  '/public/html-review/2022-07-21 12.05.00.mp3',
 ]
 
-// const audioFilepath = '/public/html-review/excerpt-b.mp3';
-
-let colorMatrix, colorMatrixEl;
+let colorMatrixEl;
 let colorValue = 0.62;
 
 let canvasContainerEl;
 let audioCtx;
 let source;
 let convolver;
-let analyser;
 let canvas;
 let canvasCtx;
 
@@ -45,7 +40,6 @@ let gainNodeConvolution;
 let processor;
 
 let eventListeners = [];
-
 let slideIndex = 0;
 
 const bufferWidth = CANVAS_WIDTH * 4;
@@ -56,57 +50,17 @@ let colorShiftInterval;
 const CSS_TRANSITIONS = [
   {
     selector: '#part-2.poem-container',
-    transition: "90s filter linear, 0s opacity linear;"
+    transition: "120s filter linear, 0s opacity linear;"
   },
   {
     selector: '#poems-container canvas',
-    transition: '45s opacity linear;'
+    transition: '120s opacity ease;'
   },
   {
     selector: '#poems-container #part-2 p',
     transition: '360s color linear, 360s background linear, 5s filter linear;'
   }
 ]
-
-/**
- * Converts an HSL color value to RGB. Conversion formula
- * adapted from https://en.wikipedia.org/wiki/HSL_color_space.
- * Assumes h, s, and l are contained in the set [0, 1] and
- * returns r, g, and b in the set [0, 1].
- * https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
- *
- * @param   {number}  h       The hue
- * @param   {number}  s       The saturation
- * @param   {number}  l       The lightness
- * @return  {Array}           The RGB representation
- */
-function hslToRgb(h, s, l) {
-  let r, g, b;
-  while (h < 0) h += 1;
-  while (h > 1) h -= 1;
-
-  if (s === 0) {
-    r = g = b = l; // achromatic
-  } else {
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
-    r = hueToRgb(p, q, h + 1/3);
-    g = hueToRgb(p, q, h);
-    b = hueToRgb(p, q, h - 1/3);
-  }
-
-  // return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
-  return [r, g, b];
-}
-
-function hueToRgb(p, q, t) {
-  if (t < 0) t += 1;
-  if (t > 1) t -= 1;
-  if (t < 1/6) return p + (q - p) * 6 * t;
-  if (t < 1/2) return q;
-  if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-  return p;
-}
 
 let convolutionInterval = null;
 
@@ -177,7 +131,6 @@ async function initializeWind() {
     
     // Replace old source with new one
     source = newSource;
-    // source.start();
   };
 
   // Initial setup
@@ -206,8 +159,6 @@ function startAudio() {
 async function initializeAudio() {
   if (audioHasStarted) return;
 
-  analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 2048 * 4 * 4;
   source = audioCtx.createBufferSource();
   source.loop = false;
 
@@ -304,7 +255,6 @@ function updatePartStyles(part) {
   const poemEl = document.querySelector(`#${part}`);
   poemEl.classList.add('selected-part');
 
-  // update nav
   const navButtons = document.querySelectorAll('nav button');
   navButtons.forEach((button) => {
     button.classList.remove('active');
@@ -360,24 +310,6 @@ async function beginPart2() {
 
   startVisualization();
 
-  // const poemEl = document.querySelector('#part-2 .poem p');
-  // const originalText = poemEl.textContent;
-  // let currentSpaces = 0;
-  // const totalDuration = 10000; // 10 seconds
-  // const intervalTime = 100; // Update every 100ms
-  // const steps = totalDuration / intervalTime;
-  // const spacesToAdd = Math.floor(originalText.length / steps);
-
-  // const interval = setInterval(() => {
-  //   currentSpaces += spacesToAdd;
-  //   if (currentSpaces >= originalText.length) {
-  //     clearInterval(interval);
-  //     return;
-  //   }
-  //   const newText = originalText.slice(0, currentSpaces) + ' ' + originalText.slice(currentSpaces);
-  //   poemEl.textContent = newText;
-  // }, intervalTime);
-
   window.setTimeout(() => {
     const el = document.querySelector('#poems-container');
     el.classList.add('has-started');
@@ -400,7 +332,6 @@ async function beginPart2() {
   updateConvolutionLevel(0.03);
   startVisualization();
 
-  // Request wake lock to keep screen on
   try {
     window.wakeLock = await navigator.wakeLock.request('screen');
   } catch (err) {
@@ -409,8 +340,10 @@ async function beginPart2() {
 }
 
 function applyColorShift(increment = 0.01) {
-  colorValue += increment;
-  setColorMatrix(colorValue);
+  requestIdleCallback(() => {
+    colorValue += increment;
+    setColorMatrix(colorValue);
+  });
 }
 
 async function resetState() {
@@ -421,9 +354,7 @@ async function resetState() {
   activeEls.forEach((el) => {
     el.classList.remove('active');
   });
-  
-  
-  // Clear the color shift interval
+    
   if (colorShiftInterval) {
     clearInterval(colorShiftInterval);
     colorShiftInterval = null;
@@ -442,7 +373,6 @@ async function resetState() {
   document.body.classList.remove('now-viewing');
   canvasContainerEl.classList.remove('has-started');
 
-  // Release wake lock if it exists
   if (window.wakeLock) {
     try {
       await window.wakeLock.release();
@@ -451,15 +381,12 @@ async function resetState() {
       console.error(`Failed to release wake lock: ${err.name}, ${err.message}`);
     }
   }
-
-  // resetTransitions();
 }
 
 function applyTransitions() {
   CSS_TRANSITIONS.forEach(({ selector, transition }) => {
     const el = document.querySelector(selector);
     if (!el) return;
-    // void el.offsetWidth;
     el.style.cssText += `transition: ${transition};`;
   });
 }
@@ -478,7 +405,6 @@ function returnHome() {
   window.history.pushState({}, '', href);
 }
 
-let updateCounter= 0;
 let shouldUpdateCanvas = false;
 
 // on each iteration, a chunk of time-domain audio data is appended to the buffer
@@ -552,7 +478,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 function handleNavigation(event) {
-  // event.preventDefault();
+  if (event.target.closest('.poems-header') || event.target.closest('nav')) {
+    return;
+  }
+
+  event.preventDefault();
   event.stopPropagation();
   let clickedLeft = true;
   
@@ -633,39 +563,6 @@ function handleButtonInteraction(event, part) {
   handlePartSelection(part);
 }
 
-function addArrays(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    throw new Error('Arrays must be of the same length');
-  }
-  return arr1.map((value, index) => value + arr2[index]);
-}
-
-function hslColorMatrix(h) {
-  const s = 1;
-  const l = 0.3;
-  const [r, g, b] = hslToRgb(h, s, l);
-  const [r2, g2, b2] = hslToRgb(h + 0.55, s, l);
-
-  // console.log(`RGB: (${r}, ${g}, ${b})`);
-  // console.log(`RGB: (${h}`);
-
-  const primaryArray = [
-    r, 0, 0, -b/3, 0,
-    0, g, 0, -r/3, 0,
-    0, 0, b, -g/3, 0,
-    r, g, b, 0, 0
-  ];
-
-  const secondaryArray = [
-    r2/2, 0, 0, -r2/4, 0,
-    0, g2/2, 0, -g2/4, 0,
-    0, 0, b2/2, -b2/4, 0,
-    -r/6, -g/6, -b/6, 0.1, 0
-  ]
-
-  return addArrays(primaryArray, secondaryArray).join(" ");
-}
-
 function setColorMatrix(val = Math.random()) {
   colorMatrixEl.setAttribute("values", hslColorMatrix(val));
 }
@@ -683,4 +580,73 @@ function createSvgFilter() {
   filter.appendChild(feColorMatrix);
 
   document.querySelector("svg defs").appendChild(filter);
+}
+
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from https://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 1].
+ * https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+ *
+ * @param   {number}  h       The hue
+ * @param   {number}  s       The saturation
+ * @param   {number}  l       The lightness
+ * @return  {Array}           The RGB representation
+ */
+function hslToRgb(h, s, l) {
+  let r, g, b;
+  while (h < 0) h += 1;
+  while (h > 1) h -= 1;
+
+  if (s === 0) {
+    r = g = b = l; // achromatic
+  } else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hueToRgb(p, q, h + 1/3);
+    g = hueToRgb(p, q, h);
+    b = hueToRgb(p, q, h - 1/3);
+  }
+
+  return [r, g, b];
+}
+
+function hueToRgb(p, q, t) {
+  if (t < 0) t += 1;
+  if (t > 1) t -= 1;
+  if (t < 1/6) return p + (q - p) * 6 * t;
+  if (t < 1/2) return q;
+  if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+  return p;
+}
+
+function addArrays(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    throw new Error('Arrays must be of the same length');
+  }
+  return arr1.map((value, index) => value + arr2[index]);
+}
+
+function hslColorMatrix(h) {
+  const s = 1;
+  const l = 0.3;
+  const [r, g, b] = hslToRgb(h, s, l);
+  const [r2, g2, b2] = hslToRgb(h + 0.55, s, l);
+
+  const primaryArray = [
+    r, 0, 0, -b/3, 0,
+    0, g, 0, -r/3, 0,
+    0, 0, b, -g/3, 0,
+    r, g, b, 0, 0
+  ];
+
+  const secondaryArray = [
+    r2/2, 0, 0, -r2/4, 0,
+    0, g2/2, 0, -g2/4, 0,
+    0, 0, b2/2, -b2/4, 0,
+    -r/6, -g/6, -b/6, 0.1, 0
+  ]
+
+  return addArrays(primaryArray, secondaryArray).join(" ");
 }

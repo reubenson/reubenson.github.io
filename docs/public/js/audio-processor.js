@@ -1,4 +1,3 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/AudioWorkletNode
 class AudioProcessor extends AudioWorkletProcessor {
   constructor(input) {
     super();
@@ -11,7 +10,6 @@ class AudioProcessor extends AudioWorkletProcessor {
     this.bufferCounter = 0;
     this.port.onmessage = ({ data }) => {
       const { canvasWidth } = data;
-      console.log('received ping and posting data', data);
       this.canvasWidth = canvasWidth;
       this.bufferSize = canvasWidth * 4;
       this.bufferData = new ArrayBuffer(this.bufferSize);
@@ -40,7 +38,7 @@ class AudioProcessor extends AudioWorkletProcessor {
 
   handleChannelData(channel) {
     // console.log('channel', channel.length);
-    const downsampleFactor = 8;
+    const downsampleFactor = 4;
     const length = channel.length / downsampleFactor;
     const downsampledChannel = channel.filter((_, i) => i % downsampleFactor === 0);
     this.appendToBuffer(downsampledChannel);
@@ -67,12 +65,9 @@ class AudioProcessor extends AudioWorkletProcessor {
     const output = inputs[0];
     
     output.forEach((channel, index) => {
-      // console.log('channel', channel);
-      // console.log('index', index);
-      // if (index === 1) return; // skip second channel for now
+      if (index === 1) return; // skip second channel for now
 
       for (let i = 0; i < channel.length; i++) {
-        // let noise = (Math.random() * 2 - 1) / 1.;
         if (!inputs[0].length) {
           channel[i] = 0;
           return;

@@ -10,27 +10,22 @@ description: Project description
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}">
-    <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
-    {# <link rel="stylesheet" href="/bundle.css"> #}
+    <meta name="keywords" content="{{ keywords }}">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="author" content="Reuben Son">
+    <meta property="og:type" content="website" />
+    {% if alternateUrl %}<link rel="alternate" type="text/html" href="{{ alternateUrl }}" hreflang="en" />{% endif %}
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:description" content="{{ description }}" />
-    {# <meta property="og:image" content="https://reubenson.com/public/card_july2024.jpg"> #}
-    <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
+    {% if ogImage %}<meta property="og:image" content="{{ ogImage }}" />{% endif %}
     <meta property="og:type" content="website" />
-    {% include "open-font.njk" %}
-    {% include "gtm.njk" %}
-    {% if scriptUrl %}
-      <script src="{{ scriptUrl | safe }}"></script>
-    {% endif %}
-    {% if scriptUrl2 %}
-      <script src="{{ scriptUrl2 | safe }}"></script>
-    {% endif %}
-    {% if cssUrl %}
-      <link rel="stylesheet" href="{{ cssUrl | safe }}">
-    {% endif %}
+      {% include "open-font.njk" %}
+    {% if includeGTM %}{% include "gtm.njk" %}{% endif %}
+    {% if scriptUrl %}<script src="{{ scriptUrl | safe }}"></script>{% endif %}
+    {% if scriptUrl2 %}<script src="{{ scriptUrl2 | safe }}"></script>{% endif %}
+    {% if cssUrl %}<link rel="stylesheet" href="{{ cssUrl | safe }}">{% endif %}
   </head>
-  <body class="project {{ layoutType }}">
+  <body class="{{ layoutType }}">
     {{ content | safe }}
   </body>
 </html>

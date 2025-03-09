@@ -3,14 +3,16 @@
   <!-- ### everything you already know -->
 
   dawn comes whispering
-  
+
   down
   
-  from the trees
+  from the trees 
   
-  <br/>
+  <!-- unlacing dark from near-dark -->
 
-  exhaling under tilting blue expanse
+  <div class="line-break"></div>
+  
+  exhaling under thin blue expanse
 
   earth fuming petrichor
 
@@ -22,81 +24,64 @@
 
 <div class="poem">
 
-  <!-- ### you walk so -->
+
+  holding diaphragm, or 
+  
+  adorning diaresis
+
+  you bask
+
+  and tilt under the rolling sky
+
+  <!-- everything you can throw
+  
+  to the wind
+  
+  floats on back
+
+  to you -->
+  
+</div>
+
+<div class="poem">
+
+  gathering upon 
+  
+  the pure albedo of glaciers
+
+  <!-- between rustling green
+
+  breezes
+  
+  gathering up
+
+  inexorably, yes
+
+  from slow -->
+
+
+  <div class="line-break"></div>
 
   you walk so
-  
+
   lightly
-  
-  you carry the wind
 
-  under your feet
-
+  you carry the wind under your feet
 </div>
 
 <div class="poem">
-
-  <!-- ### or down here -->
-
-  listlessly sounding
-
-  up there
-
-  or down here 
-
-  <br/>
-
-  as if teeming
-
-  multiplying the air into air
-
-  and more air
-
-  <br/>
-
-  as if speeding
-
-  crashing vapors into abstraction
-
-  and the other way around
-
-</div>
-
-<div class="poem">
-
-  <!-- ### or down here -->
-
-  stunned into stillness
-
-  when swirling mass cracks
   
-  in half under thin white
+  rain spreads water
   
-  tines of forking light
-
-</div>
-
-<div class="poem">
-
-  ### rain
+  to hair
   
-  spreads water to hair
+  coalesces to translucent sheet
   
-  coalesces
-
-  to translucent sheet
+  a cone of dewy plastic
   
-  a cone
+  <div class="line-break"></div>
 
-  of dewy plastic
-  
-  <br/>
-
-  enclosed,
-
-  and enclasped
-  
-  green stems hold
+  enclasped green stems hold
   
   their bloom
   
@@ -120,66 +105,66 @@
 
 </div>
 
-<div class="poem">
 
-  <!-- ### a certain weight -->
+<!-- <div class="poem"> -->
+  <!-- you weren't here yet -->
 
-  tapered wood
+ 
 
-  curling arc under voices
-
-  of the night sky
-
-  <br/>
-
-  you throw everything into the wind
-
-  that you want to float on
-
-  back
-
-  <!-- into the epidermal ridges of your hand -->
-  
-  <!-- everything you can throw
-  
-  to the wind
-  
-  floats on back
-
-  to you -->
-  
-</div>
+<!-- </div> -->
 
 <div class="poem">
 
-  ### instead of being a snow-eater
+  <!-- ### instead of being a snow-eater -->
 
   winds rise in the north
   
   when free
   
   of confining fjords
-
-  <br/>
-
+  
   acquiring heat and moisture
+
+  <div class="line-break"></div>
 
   frictional contrasts
 
   that disconnect the flow
 
-  <br/>
+</div>
 
-  between the gentle breeze
+<div class="poem">
 
-  is a self cure for
+cold air is
+  
+  denser
 
-  and the pale and shearing
+  and it sinks
 
+  <div class="line-break"></div>
+
+
+  listlessly sounding
+
+  up there
+
+  or down here 
+
+  <div class="line-break"></div>
+
+
+  <!-- between gentle breezes
+
+  the edifice of hubris
+
+  summons plague-wind -->
+
+  
+
+  <!-- <br/> -->
   <!-- contempt of your inner thermal reservoir -->
 
-  the hot white of contempt
-
+  <!-- the hot white of contempt -->
 </div>
 
 <div class="poem">
@@ -188,11 +173,11 @@
   
   in summer it is most persistent
   
-  persistent
+  <!-- persistent -->
+  <div class="line-break"></div>
   
-  blanket of thick moisture-rich clouds
+  a blanket of thick moisture-rich clouds
 
-  <br/>
   
   warmed by descent
   
@@ -204,7 +189,77 @@
 
 <div class="poem">
 
-  ### a clatter of saucer
+  as if teeming
+
+  multiplying the air into air
+
+  and more air
+
+  <div class="line-break"></div>
+
+  as if speeding
+
+  crashing vapors into abstraction
+
+  and other forms of statecraft
+
+</div>
+
+<div class="poem">
+
+  <!-- ### or down here -->
+
+  stunned into stillness
+
+  when swirling mass cracks
+  
+  in half under thin white
+  
+  tines of forking light
+
+</div>
+
+<div class="poem">
+
+  
+
+  pale red and 
+  
+  shearing
+
+  <!-- <div class="line-break"></div> -->
+
+  seraphim
+  <!-- from one or 
+
+  another of the neighboring centuries -->
+
+  <!-- a self cure for hot white contempt -->
+
+  of total caesura
+  
+  without suture or
+
+  self-cure
+
+  <div class="line-break"></div>
+
+   an unappointed storm-cloud
+
+  from one or another
+
+  of the neighboring centuries
+  
+  <!-- ### rustle -->
+  
+  <!-- the sound, that rustles -->
+
+</div>
+
+
+<div class="poem">
+
+  a clatter of saucer
 
   <!-- <br/> -->
   
@@ -220,49 +275,6 @@
 
 <div class="poem">
 
-<!-- ### night -->
-
-the aura of night itself
-
-a chorus of frogs
-
-singing from
-
-the vast library of air
-
-</div>
-
-<div class="poem">
-
-  <!-- ### rustle -->
-
-  colder air is
-  
-  denser
-
-  and it sinks.
-  
-
-  holding diaphragm, or diaresis
-  
-  the sound, that rustles
-
-</div>
-
-<div class="poem">
-
-  <!-- I cannot get enough of -->
-  
-  every thing
-  
-  is quieter in the shadow
-  
-  of a leaf
-
-</div>
-
-<div class="poem">
-
   <!-- ### oscillations -->
 
   the dust in your brain
@@ -273,13 +285,13 @@ the vast library of air
   
   over epochs of stone
 
-  <br/>
+  <div class="line-break"></div>
   
   a ghost paces
   
   still and moving lines
 
-  tracing every breath
+  tracing breath
 
   <br/>
   
@@ -291,15 +303,73 @@ the vast library of air
   
 </div>
 
+<div class="poem">
+
+  <!-- ### a certain weight -->
+
+  you throw everything the wind
+
+  that you want to float on
+
+  like tapered wood a
+
+  curling arc under voices
+
+  of the night sky
+
+</div>
+
+<div class="poem">
+
+<!-- ### night -->
+
+the aura of night itself
+
+<!-- a chorus of frogs -->
+
+frogpondering
+
+singing from
+
+the vast library of air
+
+</div>
+
+<div class="poem">
+
+  rippling air
+  
+  dances ear
+
+</div>
+
+<div class="poem">
+
+  <div class="line-break"></div>
+
+  <!-- I cannot get enough of -->
+  
+  every thing
+  
+  is quieter in the shadow
+  
+  of a leaf
+
+</div>
+
 <div class="poem three-sheets-to-the-wind">
 
-### to the wind
-
-<span>t</span><span>h</span><span>r</span><span>e</span><span>e</span><span> </span>
-<span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span><span>
+to the wind
+<span>t</span><span>h</span><span>r</span><span>e</span><span>e</span>
+<span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span>
 </div>
 
 
 <!-- prevented them from drying their laundry<span class="line-break"></span> -->
 
 <!-- and yet -->
+
+
+<!-- all caesura and no suture -->
+
+<!-- seraphim -->

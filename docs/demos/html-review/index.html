@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>airs</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
-    
+    <meta name="description" content="typographic poems animated by the wind">
+    <meta name="keywords" content="reuben son, the html review">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <meta property="og:title" content="airs" />
-    <meta property="og:description" content="" />
-    
-    <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
+    <meta name="author" content="Reuben Son">
     <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="alternate" type="text/html" href="https://reubenson.com/airs" hreflang="en" />
+    <meta property="og:title" content="airs" />
+    <meta property="og:description" content="typographic poems animated by the wind" />
+    
+    <meta property="og:type" content="website" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-
 <style>
   h1, h2, h3, h4, h5, h6 {
     font-family: "Ibarra Real Nova", serif;
@@ -25,95 +25,87 @@
   }
 </style>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90GXJSKXY9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-90GXJSKXY9');
-</script>
     
-      <script src="/public/js/html-review.js"></script>
+    <script src="/public/js/html-review.js"></script>
     
-    
-    
-      <link rel="stylesheet" href="/aura.css">
-    
+    <link rel="stylesheet" href="/aura.css">
   </head>
-  <body class="project ">
-    <header class="poems-header">
-  <h1><button class="nav-home">Airs</button></h1>
+  <body class="">
+    <header class="poems-header" role="banner">
+  <h1><button class="nav-home" aria-label="Return to home">Airs</button></h1>
   <h2>
     <a href="https://thehtml.review/04/" target="_blank">The HTML Review<br/><em>Issue 04, Spring 2025</em></a>
   </h2>
 </header>
-<div class="poems-description">
-  <img src="/public/html-review/santa-ana-winds.jpg" alt="Santa Ana Winds" />
-  <div class="poems-description-text">
-<p><em>Airs</em> is a collection of poems
-<span>in two parts</span>
-accompanied by sound recordings of the quiet and teeming air
-<span>which you can navigate by clicking left and right</span></p>
+<nav role="navigation" aria-label="Poem sections">
+  <button class="nav-part-1 start" data-part="part-1" aria-controls="part-1">
+    <span>Part I:</span> The Page
+  </button>
+  <button class="nav-part-2 start" data-part="part-2" aria-controls="part-2">
+    <span>Part II:</span> The Screen
+    <span class="visually-hidden">(visual poem with text alternative available)</span>
+  </button>
+</nav>
+<div class="poems-introduction" role="complementary">
+  <img src="/public/html-review/santa-ana-winds.jpg" alt="photo of the Santa Ana winds" />
+  <div class="poems-introduction-text">
+    <em>Airs</em> is a collection of poems
+    <span>accompanied by sound recordings of the quiet and teeming air</span>
+    <span>in two parts</span>
+    <span>which you can navigate by clicking on the left and right sides of the page/screen</span>
   </div>
 </div>
-<nav>
-  <button class="nav-part-1 start" data-part="part-1"><span>Part I:</span> The Page</button>
-  <button class="nav-part-2 start" data-part="part-2"><span>Part II:</span> The Screen</button>
-</nav>
-<div id="poems-container">
-  <!-- <div class="poems-container-blur"></div> -->
+<div id="poems-container" role="main">
   <div id="part-1" class="poem-container">
     <div class="poem">
   <!-- ### everything you already know -->
 <p>dawn comes whispering</p>
 <p>down</p>
 <p>from the trees</p>
-  <br/>
-<p>exhaling under tilting blue expanse</p>
+  <!-- unlacing dark from near-dark -->
+  <div class="line-break"></div>
+<p>exhaling under thin blue expanse</p>
 <p>earth fuming petrichor</p>
 <p>rises &amp;</p>
 <p>wafts</p>
 </div>
 <div class="poem">
-  <!-- ### you walk so -->
+<p>holding diaphragm, or</p>
+<p>adorning diaresis</p>
+<p>you bask</p>
+<p>and tilt under the rolling sky</p>
+  <!-- everything you can throw
+  
+  to the wind
+  
+  floats on back
+
+  to you -->
+</div>
+<div class="poem">
+<p>gathering upon</p>
+<p>the pure albedo of glaciers</p>
+  <!-- between rustling green
+
+  breezes
+  
+  gathering up
+
+  inexorably, yes
+
+  from slow -->
+  <div class="line-break"></div>
 <p>you walk so</p>
 <p>lightly</p>
-<p>you carry the wind</p>
-<p>under your feet</p>
+<p>you carry the wind under your feet</p>
 </div>
 <div class="poem">
-  <!-- ### or down here -->
-<p>listlessly sounding</p>
-<p>up there</p>
-<p>or down here</p>
-  <br/>
-<p>as if teeming</p>
-<p>multiplying the air into air</p>
-<p>and more air</p>
-  <br/>
-<p>as if speeding</p>
-<p>crashing vapors into abstraction</p>
-<p>and the other way around</p>
-</div>
-<div class="poem">
-  <!-- ### or down here -->
-<p>stunned into stillness</p>
-<p>when swirling mass cracks</p>
-<p>in half under thin white</p>
-<p>tines of forking light</p>
-</div>
-<div class="poem">
-<h3>rain</h3>
-<p>spreads water to hair</p>
-<p>coalesces</p>
-<p>to translucent sheet</p>
-<p>a cone</p>
-<p>of dewy plastic</p>
-  <br/>
-<p>enclosed,</p>
-<p>and enclasped</p>
-<p>green stems hold</p>
+<p>rain spreads water</p>
+<p>to hair</p>
+<p>coalesces to translucent sheet</p>
+<p>a cone of dewy plastic</p>
+  <div class="line-break"></div>
+<p>enclasped green stems hold</p>
 <p>their bloom</p>
 <p>as they wind their way</p>
 <p>backwards</p>
@@ -130,52 +122,84 @@ accompanied by sound recordings of the quiet and teeming air
   
   home -->
 </div>
+<!-- <div class="poem"> -->
+  <!-- you weren't here yet -->
+<!-- </div> -->
 <div class="poem">
-  <!-- ### a certain weight -->
-<p>tapered wood</p>
-<p>curling arc under voices</p>
-<p>of the night sky</p>
-  <br/>
-<p>you throw everything into the wind</p>
-<p>that you want to float on</p>
-<p>back</p>
-  <!-- into the epidermal ridges of your hand -->
-  <!-- everything you can throw
-  
-  to the wind
-  
-  floats on back
-
-  to you -->
-</div>
-<div class="poem">
-<h3>instead of being a snow-eater</h3>
+  <!-- ### instead of being a snow-eater -->
 <p>winds rise in the north</p>
 <p>when free</p>
 <p>of confining fjords</p>
-  <br/>
 <p>acquiring heat and moisture</p>
+  <div class="line-break"></div>
 <p>frictional contrasts</p>
 <p>that disconnect the flow</p>
-  <br/>
-<p>between the gentle breeze</p>
-<p>is a self cure for</p>
-<p>and the pale and shearing</p>
+</div>
+<div class="poem">
+<p>cold air is</p>
+<p>denser</p>
+<p>and it sinks</p>
+  <div class="line-break"></div>
+<p>listlessly sounding</p>
+<p>up there</p>
+<p>or down here</p>
+  <div class="line-break"></div>
+  <!-- between gentle breezes
+
+  the edifice of hubris
+
+  summons plague-wind -->
+  <!-- <br/> -->
   <!-- contempt of your inner thermal reservoir -->
-<p>the hot white of contempt</p>
+  <!-- the hot white of contempt -->
 </div>
 <div class="poem">
   <!-- ### albedo of glaciers -->
 <p>in summer it is most persistent</p>
-<p>persistent</p>
-<p>blanket of thick moisture-rich clouds</p>
-  <br/>
+  <!-- persistent -->
+  <div class="line-break"></div>
+<p>a blanket of thick moisture-rich clouds</p>
 <p>warmed by descent</p>
 <p>from the crest</p>
 <p>forcing lake waves into the mouths of rivers</p>
 </div>
 <div class="poem">
-<h3>a clatter of saucer</h3>
+<p>as if teeming</p>
+<p>multiplying the air into air</p>
+<p>and more air</p>
+  <div class="line-break"></div>
+<p>as if speeding</p>
+<p>crashing vapors into abstraction</p>
+<p>and other forms of statecraft</p>
+</div>
+<div class="poem">
+  <!-- ### or down here -->
+<p>stunned into stillness</p>
+<p>when swirling mass cracks</p>
+<p>in half under thin white</p>
+<p>tines of forking light</p>
+</div>
+<div class="poem">
+<p>pale red and</p>
+<p>shearing</p>
+  <!-- <div class="line-break"></div> -->
+<p>seraphim</p>
+  <!-- from one or 
+
+  another of the neighboring centuries -->
+  <!-- a self cure for hot white contempt -->
+<p>of total caesura</p>
+<p>without suture or</p>
+<p>self-cure</p>
+  <div class="line-break"></div>
+<p>an unappointed storm-cloud</p>
+<p>from one or another</p>
+<p>of the neighboring centuries</p>
+  <!-- ### rustle -->
+  <!-- the sound, that rustles -->
+</div>
+<div class="poem">
+<p>a clatter of saucer</p>
   <!-- <br/> -->
 <p>and cup appears</p>
 <p>the receding tide of foam</p>
@@ -183,68 +207,68 @@ accompanied by sound recordings of the quiet and teeming air
 <p>yawning for air</p>
 </div>
 <div class="poem">
-<!-- ### night -->
-<p>the aura of night itself</p>
-<p>a chorus of frogs</p>
-<p>singing from</p>
-<p>the vast library of air</p>
-</div>
-<div class="poem">
-  <!-- ### rustle -->
-<p>colder air is</p>
-<p>denser</p>
-<p>and it sinks.</p>
-<p>holding diaphragm, or diaresis</p>
-<p>the sound, that rustles</p>
-</div>
-<div class="poem">
-  <!-- I cannot get enough of -->
-<p>every thing</p>
-<p>is quieter in the shadow</p>
-<p>of a leaf</p>
-</div>
-<div class="poem">
   <!-- ### oscillations -->
 <p>the dust in your brain</p>
   <!-- oscillates -->
 <p>settles like swept dunes</p>
 <p>over epochs of stone</p>
-  <br/>
+  <div class="line-break"></div>
 <p>a ghost paces</p>
 <p>still and moving lines</p>
-<p>tracing every breath</p>
+<p>tracing breath</p>
   <br/>
 <p>a window</p>
 <p>you open</p>
 <p>and it is all around you</p>
 </div>
+<div class="poem">
+  <!-- ### a certain weight -->
+<p>you throw everything the wind</p>
+<p>that you want to float on</p>
+<p>like tapered wood a</p>
+<p>curling arc under voices</p>
+<p>of the night sky</p>
+</div>
+<div class="poem">
+<!-- ### night -->
+<p>the aura of night itself</p>
+<!-- a chorus of frogs -->
+<p>frogpondering</p>
+<p>singing from</p>
+<p>the vast library of air</p>
+</div>
+<div class="poem">
+<p>rippling air</p>
+<p>dances ear</p>
+</div>
+<div class="poem">
+  <div class="line-break"></div>
+  <!-- I cannot get enough of -->
+<p>every thing</p>
+<p>is quieter in the shadow</p>
+<p>of a leaf</p>
+</div>
 <div class="poem three-sheets-to-the-wind">
-<h3>to the wind</h3>
-<p><span>t</span><span>h</span><span>r</span><span>e</span><span>e</span><span> </span>
-<span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span><span></p>
+<p>to the wind
+<span>t</span><span>h</span><span>r</span><span>e</span><span>e</span>
+<span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span></p>
 </div>
 <!-- prevented them from drying their laundry<span class="line-break"></span> -->
 <!-- and yet -->
+<!-- all caesura and no suture -->
+<!-- seraphim -->
   </div>
   <div id="part-2" class="poem-container">
-<div class="poem">
+    <div class="visually-hidden" role="note" aria-label="about part 2">
+      <p>The second part of Airs is a visually animated poem of infinite duration. It begins with a rectangular arrangement of the letter 'x' repeated over and over, creating a typographic grid resembling the screen of a window in your home that keeps bugs from getting in while you have the window open. Audio data from the recordings of wind is processed and converted to a moving image, and then overlaid on top of the typographic grid. Various CSS filters are then applied to these two visual elements, producing an animation that is expressive of what a concrete poem would look like if turned into a screensaver.</p>
+    </div>
+<div class="poem" aria-hidden="true">
 <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 </div>
   </div>
-  <!-- <div class="credits">
-    <h2 class="credits-title">Airs</h2>
-  </div> -->
 </div>
-<!-- <div class="credits"> -->
-  <!-- <h2 class="credits-title">Airs</h2> -->
-  <!-- <p class="credits-text">
-    Recordings of wind made between 2020 and 2024.
-    <br/>
-    Electronics recorded at Electronmusicstudion in 2019.
-  </p>
-</div> -->
-<svg viewBox="0 0 600 400" width="600" height="400" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <filter id="wind-filter-sm">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
@@ -266,5 +290,6 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     </filter>
   </defs>
 </svg>
+
   </body>
 </html>
