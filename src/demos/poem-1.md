@@ -1,4 +1,4 @@
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 1" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   dawn comes whispering down
   
@@ -16,11 +16,11 @@
 
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 2" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   holding diaphragm, or 
   
-  adorning diaresis
+  adorning dieresis
 
   you bask
 
@@ -28,14 +28,7 @@
   
 </div>
 
-<div class="poem">
-  <!-- <div class="line-break"></div> -->
-
-  rippling aerial choreography dances the ear
-
-</div>
-
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 3" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   intoxicated by 
   
@@ -51,7 +44,7 @@
   you carry the wind under your feet
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 4" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
   
   rain spreads water
   
@@ -69,9 +62,7 @@
 
 </div>
 
-<div class="poem">
-
-  <!-- ### instead of being a snow-eater -->
+<div class="poem" role="text" aria-label="part 1 poem 5" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   winds rise in the north
   
@@ -89,11 +80,10 @@
 
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 6" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
   
   in summer it is most persistent
   
-  <!-- persistent -->
   <div class="line-break"></div>
   
   a blanket of thick moisture-rich clouds
@@ -107,7 +97,7 @@
   
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 7" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   as if teeming
 
@@ -125,9 +115,7 @@
 
 </div>
 
-<div class="poem">
-
-  <!-- ### or down here -->
+<div class="poem" role="text" aria-label="part 1 poem 8" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   stunned into stillness
 
@@ -139,7 +127,7 @@
 
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 9" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   listlessly sounding
 
@@ -155,24 +143,9 @@
 
   of the neighboring centuries
 
-
-  <!-- between gentle breezes
-
-  the edifice of hubris
-
-  summons plague-wind -->
-
-  
-
-  <!-- <br/> -->
-  <!-- contempt of your inner thermal reservoir -->
-
-  <!-- the hot white of contempt -->
 </div>
 
-<div class="poem">
-
-  
+<div class="poem" role="text" aria-label="part 1 poem 10" tabindex="0" aria-live="polite" aria-atomic="true" hidden>  
 
   pale red and 
   
@@ -187,15 +160,11 @@
   <div class="line-break"></div>
 
   cold air is denser and it sinks
-  
-  <!-- ### rustle -->
-  
-  <!-- the sound, that rustles -->
 
 </div>
 
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 11" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   a clatter of saucer
   
@@ -209,14 +178,18 @@
 
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 12" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
+
+  rippling aerial choreography dances the ear
+
+</div>
+
+<div class="poem" role="text" aria-label="part 1 poem 13" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   the dust in your brain
   
   settles like swept dunes
   
-  <!-- over epochs of stone -->
-
   <div class="line-break"></div>
   
   a ghost paces still
@@ -233,17 +206,15 @@
   
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 14" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
-the aura of night itself frogpondering
+  the aura of night itself frogpondering
 
-<!-- singing from -->
-
-the vast library of air
+  the vast library of air
 
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 15" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   every thing
   
@@ -251,23 +222,9 @@ the vast library of air
   
   of a leaf
 
-<!-- </div> -->
-
-<!-- <div class="poem"> -->
-
-  <!-- <div class="line-break"></div> -->
-
-  <!-- I cannot get enough of -->
-  
-  <!-- every thing
-  
-  is quieter in the shadow
-  
-  of a leaf -->
-
 </div>
 
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 16" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
   a certain weight of tapered wood
 
@@ -276,69 +233,17 @@ the vast library of air
   of the night sky
 
   <div class="line-break"></div>
-  <!-- ### a certain weight -->
 
   you throw everything 
   
   that you want to hold onto
-  
-  <!-- to the wind -->
 
 </div>
 
-<div class="poem three-sheets-to-the-wind">
+<div class="poem three-sheets-to-the-wind" role="text" aria-label="part 1 poem 17" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
-to the wind
-<span>t</span><span>h</span><span>r</span><span>e</span><span>e</span>
-<span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span>
-</div>
-
-
-<!-- prevented them from drying their laundry<span class="line-break"></span> -->
-
-<!-- and yet -->
-
-
-<!-- all caesura and no suture -->
-
-<!-- seraphim -->
-
-<!-- everything you can throw
-  
   to the wind
-  
-  floats on back
+  <span>t</span><span>h</span><span>r</span><span>e</span><span>e</span>
+  <span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span>
 
-  to you -->
-
-  <!-- between rustling green
-
-  breezes
-  
-  gathering up
-
-  inexorably, yes
-
-  from slow -->
-
-
-  
-  <!-- backwards
-
-  and back -->
-
-  <!-- <br/>
-
-  and backwards
-  
-  followed closely by
-  
-  another
-  
-  they wind their way
-  
-  home -->
-
-  <!-- <div class="poem"> -->
-  <!-- you weren't here yet -->
-<!-- </div> -->
+</div>

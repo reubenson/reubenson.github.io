@@ -61,10 +61,6 @@ nav {
   overflow: hidden;
 
   button {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     flex: 1;
     height: 50px;
     font-size: 18px;
@@ -75,13 +71,13 @@ nav {
     padding: 15px;
     font-style: italic;
     font-family: 'Ibarra Real Nova', monospace;
-  
-    &:focus-visible {
-      outline: none;
-    }
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   
     &.active {
-      border-bottom: solid snow 2px;
+      border-bottom: solid snow 3px;
     }
   
     &:nth-child(1) {
@@ -121,7 +117,6 @@ nav {
   margin: auto;
   flex-wrap: wrap;
   display: flex;
-  /* height: 80vh; */
   flex-direction: column;
   justify-content: center;
   text-align: center;
@@ -130,7 +125,7 @@ nav {
     width: 100%;
     object-fit: cover;
     height: auto;
-    max-height: calc(100% - 140px);
+    max-height: calc(100% - 200px);
     filter: hue-rotate(180deg) brightness(0.7) contrast(1.2);
     flex-shrink: 1;
   }
@@ -162,7 +157,6 @@ body.now-viewing {
   overflow: hidden;
   position: fixed;
   width: 80vw;
-  /* height: 80vh; */
   max-width: 1200px;
   max-height: 800px;
 }
@@ -176,10 +170,8 @@ button:hover {
 }
 
 #part-1 {
-  /* background: black; */
   display: flex;
   width: 100%;
-  /* width: 460px; */
   margin: auto;
   height: 100%;
   overflow: scroll;
@@ -199,18 +191,15 @@ button:hover {
     max-width: calc(100% - 40px);
     display: none;
     margin-left: -20px;
-    /* visibility: hidden; */
     filter: url(#wind-filter-sm);
   }
   
   .poem.active {
     display: block;
-    /* visibility: visible; */
   }
 
   .line-break {
     display: block;
-    /* line-height: 2em; */
     height: 2em;
   }
 }
@@ -221,7 +210,6 @@ button:hover {
   height: 100%;
   overflow: hidden;
   filter: blur(0px) contrast(3) brightness(0.7);
-  /* visibility: hidden; */
 
   .poem {
     opacity: 0;
@@ -255,7 +243,6 @@ button:hover {
     left: 0;
     margin: auto;
     z-index: -1;
-    /* z-index: 1000 !important; */
   }
 }
 
@@ -266,12 +253,13 @@ button:hover {
 
     canvas {
       opacity: 1;
+      z-index: 10;
     }
 
     .poem {
       display: block !important;
       opacity: 1.0 !important;
-      transform: scale(1);
+      /* transform: scale(1); */
     }
 
     .poem p {
@@ -302,78 +290,79 @@ button:hover {
     text-align: left;
     padding-left: 0;
     width: 100%;
+    position: relative;
   }
 
   p > span {
     display: block;
     position: relative;
     transform-origin: center;
-    position: fixed;
+    position: absolute;
   
     &:nth-child(1) {
       transform: rotate(-61deg);
-      top: 16%;
-      left: 13%;
+      top: 140px;
+      left: 116px;
     }
   
     &:nth-child(2) {
       transform: rotate(-82deg);
-      top: 49%;
-      left: 68%;
+      top: 250px;
+      left: 140px;
     }
   
     &:nth-child(3) {
       transform: rotate(-85deg);
-      top: 65%;
-      left: 49%;
+      top: 325px;
+      left: 245px;
     }
   
     &:nth-child(4) {
       transform: rotate(-39deg);
-      top: 55%;
-      left: 45%;
+      top: 175px;
+      left: 57px;
     }
   
     &:nth-child(5) {
       transform: rotate(-75deg);
-      top: 65%;
-      left: 7%;
+      top: 325px;
+      left: 61px;
     }
   
     &:nth-child(6) {
       transform: rotate(-25deg);
-      top: 25%;
-      left: 46%;
+      top: 275px;
+      left: 122px;
     }
   
     &:nth-child(7) {
       transform: rotate(-56deg);
-      top: 79%;
-      left: 38%;
+      top: 325px;
+      left: 122px;
     }
   
     &:nth-child(8) {
       transform: rotate(77deg);
-      top: 28%;
-      left: 13%;
+      top: 175px;
+      left: 122px;
     }
   
     &:nth-child(9) {
       transform: rotate(-60deg);
-      top: 19%;
-      left: 63.2%;
+      top: 100px;
+      left: 217px;
     } 
   
     &:nth-child(10) {
       transform: rotate(35deg);
-      top: 41%;
-      left: 31%;
+      top: 183px;
+      left: 145px;
     }
   
     &:nth-child(11) {
       transform: rotate(28deg);
-      top: 59%;
-      left: 67%;
+      top: 393px;
+      left: 67px;
     }
   }
 }
@@ -410,14 +399,12 @@ button:hover {
 
 @keyframes textOpacity {
   0% {
-    /* filter: blur(0px) contrast(3) brightness(0.7); */
     opacity: 1.0;
   }
   50% {
     opacity: 0.7;
   }
   100% {
-    /* filter: blur(4px) contrast(50) brightness(0.7); */
     opacity: 1.0;
   }
 }

@@ -14,7 +14,7 @@ I'm a software engineer and artist based in New York City, with a multi-discipli
 
 When I was younger, I wanted to be a filmmaker, or a furniture designer, or a concert guitarist. While my fantasies and gestures towards future selves have shifted over the years, I still feel drawn to certain kinds of objects and aesthetic experiences. Over the last decade, my energies have settled, through desire paths and streams, into software, sound, and ceramics. 
 
-Irrespective of the medium, I'm interested in the interplay of phenomonologically irreducible elments of surface and structure, of object and affect, of screen and software. I think of my methodology as broadly sculptural, in which form and content are not determined _a priori_, and the final work emerges in negotation with the materiality of the medium.
+Irrespective of the medium, I'm interested in the interplay of phenomonologically irreducible elements of surface and structure, of object and affect, of screen and software. I think of my methodology as broadly sculptural, in which form and content are not determined _a priori_, and the final work emerges in negotation with the materiality of the medium.
 
 <figure class="figure-medium" style="transform:rotate(0deg)">
   <!-- <img src="/public/strategist-screenshot.png" alt="Screenshot of The Strategist"> -->

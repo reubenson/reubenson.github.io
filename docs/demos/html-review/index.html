@@ -26,7 +26,7 @@
 </style>
 
     
-    <script src="/public/js/html-review.js"></script>
+    <script src="/public/html-review/html-review.js"></script>
     
     <link rel="stylesheet" href="/aura.css">
   </head>
@@ -37,27 +37,20 @@
     <a href="https://thehtml.review/04/" target="_blank">The HTML Review<br/><em>Issue 04, Spring 2025</em></a>
   </h2>
 </header>
-<nav role="navigation" aria-label="Poem sections">
-  <button class="nav-part-1 start" data-part="part-1" aria-controls="part-1">
-    <span>Part I:</span> The Page
-  </button>
-  <button class="nav-part-2 start" data-part="part-2" aria-controls="part-2">
-    <span>Part II:</span> The Screen
-    <span class="visually-hidden">(visual poem with text alternative available)</span>
-  </button>
-</nav>
 <div class="poems-introduction" role="complementary">
   <img src="/public/html-review/santa-ana-winds.jpg" alt="photo of the Santa Ana winds" />
   <div class="poems-introduction-text">
     <em>Airs</em> is a collection of poems
     <span>which you can navigate by clicking on the left and right sides of the <em>page</em> or <em>screen</em></span>
     <span>accompanied by recordings of the wind</span>
-    <!-- <span>in two parts</span> -->
   </div>
 </div>
 <div id="poems-container" role="main">
-  <div id="part-1" class="poem-container">
-    <div class="poem">
+  <div id="part-1" class="poem-container" role="region" aria-label="part 1">
+    <div class="visually-hidden" role="note">
+      <p>The first part of Airs is a set of seventeen brief poems.</p>
+    </div>
+    <div class="poem" role="text" aria-label="part 1 poem 1" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>dawn comes whispering down</p>
 <p>from the trees</p>
   <div class="line-break"></div>
@@ -66,17 +59,13 @@
 <p>rises &amp;</p>
 <p>wafts</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 2" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>holding diaphragm, or</p>
-<p>adorning diaresis</p>
+<p>adorning dieresis</p>
 <p>you bask</p>
 <p>and tilt under the rolling sky</p>
 </div>
-<div class="poem">
-  <!-- <div class="line-break"></div> -->
-<p>rippling aerial choreography dances the ear</p>
-</div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 3" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>intoxicated by</p>
 <p>the pure albedo of glaciers</p>
   <div class="line-break"></div>
@@ -84,7 +73,7 @@
 <p>lightly</p>
 <p>you carry the wind under your feet</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 4" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>rain spreads water</p>
 <p>to hair</p>
 <p>coalesces to translucent sheet</p>
@@ -93,8 +82,7 @@
 <p>enclasped green stems hold their</p>
 <p>blooms as they wind their way</p>
 </div>
-<div class="poem">
-  <!-- ### instead of being a snow-eater -->
+<div class="poem" role="text" aria-label="part 1 poem 5" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>winds rise in the north</p>
 <p>when free</p>
 <p>of confining fjords</p>
@@ -103,16 +91,15 @@
 <p>frictional contrasts</p>
 <p>that disconnect the flow</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 6" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>in summer it is most persistent</p>
-  <!-- persistent -->
   <div class="line-break"></div>
 <p>a blanket of thick moisture-rich clouds</p>
 <p>warmed by descent</p>
 <p>from the crest</p>
 <p>forcing lake waves into the mouths of rivers</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 7" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>as if teeming</p>
 <p>multiplying the air into air</p>
 <p>and more air</p>
@@ -121,14 +108,13 @@
 <p>crashing vapors into abstraction</p>
 <p>and other forms of statecraft</p>
 </div>
-<div class="poem">
-  <!-- ### or down here -->
+<div class="poem" role="text" aria-label="part 1 poem 8" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>stunned into stillness</p>
 <p>when swirling mass cracks</p>
 <p>in half under thin white</p>
 <p>tines of forking light</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 9" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>listlessly sounding</p>
 <p>up there</p>
 <p>or down here</p>
@@ -136,16 +122,8 @@
 <p>a storm-cloud</p>
 <p>approaches from one or another</p>
 <p>of the neighboring centuries</p>
-  <!-- between gentle breezes
-
-  the edifice of hubris
-
-  summons plague-wind -->
-  <!-- <br/> -->
-  <!-- contempt of your inner thermal reservoir -->
-  <!-- the hot white of contempt -->
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 10" tabindex="0" aria-live="polite" aria-atomic="true" hidden>  
 <p>pale red and</p>
 <p>shearing</p>
 <p>seraphim of total caesura</p>
@@ -153,20 +131,20 @@
 <p>self-cure</p>
   <div class="line-break"></div>
 <p>cold air is denser and it sinks</p>
-  <!-- ### rustle -->
-  <!-- the sound, that rustles -->
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 11" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>a clatter of saucer</p>
 <p>and cup appears</p>
 <p>the receding tide of foam</p>
 <p>yielding soft brown lace yawning</p>
 <p>for air</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 12" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
+<p>rippling aerial choreography dances the ear</p>
+</div>
+<div class="poem" role="text" aria-label="part 1 poem 13" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>the dust in your brain</p>
 <p>settles like swept dunes</p>
-  <!-- over epochs of stone -->
   <div class="line-break"></div>
 <p>a ghost paces still</p>
 <p>and moving</p>
@@ -175,80 +153,31 @@
 <p>tracing breath like</p>
 <p>a window you open all around you</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 14" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>the aura of night itself frogpondering</p>
-<!-- singing from -->
 <p>the vast library of air</p>
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 15" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>every thing</p>
 <p>is quieter in the shadow</p>
 <p>of a leaf</p>
-<!-- </div> -->
-<!-- <div class="poem"> -->
-  <!-- <div class="line-break"></div> -->
-  <!-- I cannot get enough of -->
-  <!-- every thing
-  
-  is quieter in the shadow
-  
-  of a leaf -->
 </div>
-<div class="poem">
+<div class="poem" role="text" aria-label="part 1 poem 16" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>a certain weight of tapered wood</p>
 <p>curling arcs under voices</p>
 <p>of the night sky</p>
   <div class="line-break"></div>
-  <!-- ### a certain weight -->
 <p>you throw everything</p>
 <p>that you want to hold onto</p>
-  <!-- to the wind -->
 </div>
-<div class="poem three-sheets-to-the-wind">
+<div class="poem three-sheets-to-the-wind" role="text" aria-label="part 1 poem 17" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 <p>to the wind
 <span>t</span><span>h</span><span>r</span><span>e</span><span>e</span>
 <span>s</span><span>h</span><span>e</span><span>e</span><span>t</span><span>s</span></p>
 </div>
-<!-- prevented them from drying their laundry<span class="line-break"></span> -->
-<!-- and yet -->
-<!-- all caesura and no suture -->
-<!-- seraphim -->
-<!-- everything you can throw
-  
-  to the wind
-  
-  floats on back
-
-  to you -->
-  <!-- between rustling green
-
-  breezes
-  
-  gathering up
-
-  inexorably, yes
-
-  from slow -->
-  <!-- backwards
-
-  and back -->
-  <!-- <br/>
-
-  and backwards
-  
-  followed closely by
-  
-  another
-  
-  they wind their way
-  
-  home -->
-  <!-- <div class="poem"> -->
-  <!-- you weren't here yet -->
-<!-- </div> -->
   </div>
-  <div id="part-2" class="poem-container">
-    <div class="visually-hidden" role="note" aria-label="about part 2">
+  <div id="part-2" class="poem-container" role="region" aria-label="part 2">
+    <div class="visually-hidden" role="note">
       <p>The second part of Airs is a visually animated poem of infinite duration. It begins with a rectangular arrangement of the letter 'x' repeated over and over, creating a typographic grid resembling the screen of a window in your home that keeps bugs from getting in while you have the window open. Audio data from the recordings of wind is processed and converted to a moving image, and then overlaid on top of the typographic grid. Various CSS filters are then applied to these two visual elements, producing an animation that is expressive of what a concrete poem would look like if turned into a screensaver.</p>
     </div>
 <div class="poem" aria-hidden="true">
@@ -257,6 +186,16 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 </div>
   </div>
 </div>
+<nav role="navigation" aria-label="Poem sections">
+  <button class="nav-part-1 start" data-part="part-1" aria-controls="part-1">
+    <span>Part I:</span> The Page
+    <span class="visually-hidden">(typographically set poem that can be navigated one by one with the right arrow key)</span>
+  </button>
+  <button class="nav-part-2 start" data-part="part-2" aria-controls="part-2">
+    <span>Part II:</span> The Screen
+    <span class="visually-hidden">(visual poem with text alternative available)</span>
+  </button>
+</nav>
 <svg xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <filter id="wind-filter-sm">
@@ -266,16 +205,16 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         width="500px"
         >
       </feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="12" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
     <filter id="wind-filter-lg">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
         result="slide-0" 
-        height="1000px"
-        width="1000px"
+        height="600px"
+        width="600px"
         >
       </feImage>
-      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="16" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
+      <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="8" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>
     </filter>
   </defs>
 </svg>

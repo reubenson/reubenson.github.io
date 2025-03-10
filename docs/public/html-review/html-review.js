@@ -1,4 +1,4 @@
-const CANVAS_WIDTH = 256; // this is the desired width of the image drawn from the audio buffer
+const CANVAS_WIDTH = 256;
 const CANVAS_HEIGHT = 256;
 const ASSET_DIR = '/public/html-review/';
 
@@ -51,7 +51,7 @@ const CSS_TRANSITIONS = [
   },
   {
     selector: '#poems-container canvas',
-    transition: '120s opacity ease;'
+    transition: '90s opacity ease;'
   },
   {
     selector: '#poems-container #part-2 p',
@@ -61,10 +61,9 @@ const CSS_TRANSITIONS = [
 
 function updateConvolutionLevel(targetLevel) {
   const duration = 15; // seconds
-  const steps = 60; // One update per second
+  const steps = 60;
   const stepDuration = duration / steps;
   
-  // Clear any existing interval
   if (convolutionInterval) {
     clearInterval(convolutionInterval);
   }
@@ -364,7 +363,6 @@ async function resetState() {
   } catch (e) {}
 
   document.body.classList.remove('now-viewing');
-  // canvasContainerEl.classList.remove('has-started');
 
   if (window.wakeLock) {
     try {
@@ -434,7 +432,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
 
-  await audioCtx.audioWorklet?.addModule(ASSET_DIR + 'js/audio-processor.js');
+  const processorPath = ASSET_DIR + 'audio-processor.js';
+  await audioCtx.audioWorklet?.addModule(processorPath);
   processor = new AudioWorkletNode(audioCtx, "audio-processor");
   processor.port.onmessage = (e) => {
     updateAudioBufferData(e.data);

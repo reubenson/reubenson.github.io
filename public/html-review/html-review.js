@@ -1,5 +1,6 @@
-const CANVAS_WIDTH = 256; // this is the desired width of the image drawn from the audio buffer
+const CANVAS_WIDTH = 256;
 const CANVAS_HEIGHT = 256;
+const ASSET_DIR = '/public/html-review/';
 
 let audioHasStarted = false;
 let convolutionInitialized = false;
@@ -7,25 +8,22 @@ let windInitialized = false;
 let currentWindIndex = 0;
 let frames = [];
 const href = window.location.href.split('#')[0];
-const convolutionFilepath = '/public/html-review/airports-for-music-i-excerpt.mp3';
-
-// todo: turn off when screen is not visible
-// todo: debug switching between parts on mobile chrome
-// idea for performance: add additional filter on top-level; display poem-1 on top of poem-2; start subtle, then add some sort of crescendo or fade poem-1 opacity to 0; 
-// handle accessibility
+const convolutionFilepath = ASSET_DIR + 'airports-for-music-i-excerpt.mp3';
 
 // total duration 34'28" - 82.6MB
 const windFilepaths = [
-  '/public/html-review/2022-07-25 20.16.11.mp3', // 5'00" - 12MB
-  '/public/html-review/2023-08-31 17.03.15.mp3', // 7'28" - 17.9MB
-  '/public/html-review/2022-07-28 20.50.36.mp3', // 5'01" - 12MB
-  '/public/html-review/2023-10-16 13.31.39.mp3', // 7'00" - 16.8MB ++ note: this one is a little loud
-  '/public/html-review/2022-07-21 12.05.00.mp3', // 4'58" - 11.9MB
-  '/public/html-review/2023-09-02 14.03.01.mp3', // 5'01" - 12MB
+  ASSET_DIR + '2022-07-25 20.16.11.mp3', // 5'00"
+  ASSET_DIR + '2023-08-31 17.03.15.mp3', // 7'28"
+  ASSET_DIR + '2022-07-28 20.50.36.mp3', // 5'01"
+  ASSET_DIR + '2023-10-16 13.31.39.mp3', // 7'00"
+  ASSET_DIR + '2022-07-21 12.05.00.mp3', // 4'58"
+  ASSET_DIR + '2023-09-02 14.03.01.mp3', // 5'01"
 ]
 
 let colorMatrixEl;
 let colorValue = 0.62;
+let colorShiftInterval;
+let convolutionInterval = null;
 
 let canvasContainerEl;
 let audioCtx;
@@ -33,7 +31,6 @@ let source;
 let convolver;
 let canvas;
 let canvasCtx;
-
 let offscreenCanvas;
 let offscreenCtx;
 let gainNodeSource;
@@ -46,7 +43,6 @@ let slideIndex = 0;
 const bufferWidth = CANVAS_WIDTH * 4;
 let audioBufferData = new Uint8Array(bufferWidth * CANVAS_HEIGHT);
 
-let colorShiftInterval;
 
 const CSS_TRANSITIONS = [
   {
@@ -55,7 +51,7 @@ const CSS_TRANSITIONS = [
   },
   {
     selector: '#poems-container canvas',
-    transition: '120s opacity ease;'
+    transition: '90s opacity ease;'
   },
   {
     selector: '#poems-container #part-2 p',
@@ -63,14 +59,11 @@ const CSS_TRANSITIONS = [
   }
 ]
 
-let convolutionInterval = null;
-
 function updateConvolutionLevel(targetLevel) {
   const duration = 15; // seconds
-  const steps = 60; // One update per second
+  const steps = 60;
   const stepDuration = duration / steps;
   
-  // Clear any existing interval
   if (convolutionInterval) {
     clearInterval(convolutionInterval);
   }
@@ -166,9 +159,7 @@ async function initializeAudio() {
   gainNodeSource = audioCtx.createGain();
   gainNodeConvolution = audioCtx.createGain();
   sumNode = audioCtx.createGain();
-  // const wet  = 0.0;
   gainNodeSource.gain.value = 1;
-  // gainNodeSource.gain.linearRampToValueAtTime(dry, audioCtx.currentTime + 15);
   gainNodeConvolution.gain.value = 0.0;
   sumNode.gain.value = 1.0;
   convolver.normalize = false;
@@ -191,7 +182,6 @@ async function initializeAudio() {
 
   // to be connected later
   // convolver.connect(processor);
-  // sumNode.connect(processor);
   startAudio()
 
   initializeConvolution();
@@ -250,10 +240,10 @@ function startVisualization() {
 }
 
 function updatePartStyles(part) {
-  const previousPoemEl = document.querySelector('.poem-container.selected-part');
-  previousPoemEl?.classList.remove('selected-part');
-  const poemEl = document.querySelector(`#${part}`);
-  poemEl.classList.add('selected-part');
+  const previousSelectedPart = document.querySelector('.poem-container.selected-part');
+  previousSelectedPart?.classList.remove('selected-part');
+  const newSelectedPart = document.querySelector(`#${part}`);
+  newSelectedPart.classList.add('selected-part');
 
   const navButtons = document.querySelectorAll('nav button');
   navButtons.forEach((button) => {
@@ -282,8 +272,10 @@ function handlePartSelection(part) {
 function updateFrame(el) {
   const activeEl = el.parentElement.querySelector('.active');
   activeEl?.classList.remove('active');
+  activeEl?.setAttribute('hidden', '');
 
   el.classList.add('active');
+  el.removeAttribute('hidden');
 }
 
 async function beginPart1(index) {
@@ -371,7 +363,6 @@ async function resetState() {
   } catch (e) {}
 
   document.body.classList.remove('now-viewing');
-  canvasContainerEl.classList.remove('has-started');
 
   if (window.wakeLock) {
     try {
@@ -441,7 +432,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   convolver = audioCtx.createConvolver();
 
-  await audioCtx.audioWorklet?.addModule("/public/js/audio-processor.js");
+  const processorPath = ASSET_DIR + 'audio-processor.js';
+  await audioCtx.audioWorklet?.addModule(processorPath);
   processor = new AudioWorkletNode(audioCtx, "audio-processor");
   processor.port.onmessage = (e) => {
     updateAudioBufferData(e.data);
@@ -538,8 +530,6 @@ function handleNavigation(event) {
       resetState();
       updatePartStyles('part-1');
       beginPart1(frames.length - 1);
-    } else {
-      // do nothing
     }
 
     return;
@@ -549,8 +539,6 @@ function handleNavigation(event) {
   if (!clickedLeft) {
     updatePartStyles('part-1');
     beginPart1(0);
-  } else {
-    // do nothing, or maybe go to part 2?
   }
 }
 
