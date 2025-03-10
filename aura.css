@@ -5,6 +5,8 @@ body {
   margin: auto;
   padding: 20px;
   color: snow;
+  min-height: 100vh;
+  min-height: -webkit-fill-available; /* For iOS Safari */
 }
 
 .poems-header {
@@ -99,11 +101,6 @@ nav {
   }
 }
 
-#poems-container, .poems-introduction {
-  height: 80vh;
-  max-height: calc(100vh - 100px);
-}
-
 .poems-introduction {
   align-items: center;
   font-size: 18px;
@@ -120,12 +117,13 @@ nav {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  height: 80vh;
 
   img {
     width: 100%;
     object-fit: cover;
-    height: auto;
-    max-height: calc(100% - 200px);
+    height: 200px;
+    max-height: calc(100vh - 360px);
     filter: hue-rotate(180deg) brightness(0.7) contrast(1.2);
     flex-shrink: 1;
   }
@@ -157,8 +155,8 @@ body.now-viewing {
   overflow: hidden;
   position: fixed;
   width: 80vw;
-  max-width: 1200px;
-  max-height: 800px;
+  height: 80vh;
+  max-height: calc(100vh - 100px);
 }
 
 .poem-container {
@@ -210,6 +208,7 @@ button:hover {
   height: 100%;
   overflow: hidden;
   filter: blur(0px) contrast(3) brightness(0.7);
+  max-height: 80vh;
 
   .poem {
     opacity: 0;
@@ -368,6 +367,18 @@ button:hover {
 }
 
 @media screen and (min-width: 500px) {
+  .poems-introduction {
+    img {
+      height: auto;
+    }
+  }
+
+  #poems-container {
+    max-width: 1200px;
+    max-height: 800px;
+  }
+
+
   #part-1 {
     width: 460px;
     
@@ -414,7 +425,7 @@ button:hover {
     transform: scale(1);
   }
   50% {
-    transform: scale(2.5);
+    transform: scale(2);
   }
   100% {
     transform: scale(1);

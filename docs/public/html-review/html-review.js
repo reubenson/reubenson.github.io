@@ -433,11 +433,16 @@ document.addEventListener('DOMContentLoaded', async function() {
   convolver = audioCtx.createConvolver();
 
   const processorPath = ASSET_DIR + 'audio-processor.js';
-  await audioCtx.audioWorklet?.addModule(processorPath);
-  processor = new AudioWorkletNode(audioCtx, "audio-processor");
-  processor.port.onmessage = (e) => {
-    updateAudioBufferData(e.data);
-  };
+  try {
+    await audioCtx.audioWorklet?.addModule(processorPath);
+    processor = new AudioWorkletNode(audioCtx, "audio-processor");
+    processor.port.onmessage = (e) => {
+      updateAudioBufferData(e.data);
+    };
+  } catch (error) {
+    // processor didn't load for some reason, so part II wont do very much
+    console.error(error);
+  }
 
   canvas = document.createElement('canvas');
   canvas.width = CANVAS_WIDTH;

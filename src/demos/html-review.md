@@ -5,7 +5,7 @@ keywords: reuben son, the html review
 description: typographic poems animated by the wind
 # alternateUrl: https://thehtml.review/04/
 alternateUrl: https://reubenson.com/airs
-ogImage: ''
+ogImage: /public/html-review/promo.jpg
 url: 
 scriptUrl: /public/html-review/html-review.js
 cssUrl: /aura.css

@@ -172,9 +172,7 @@
   
   the receding tide of foam
   
-  yielding soft brown lace yawning
-  
-  for air
+  yawning soft brown lace
 
 </div>
 
