@@ -1,7 +1,7 @@
 ---
 layout: resume.njk
 title: Reuben Son
-includeBiography: true
+includeBiography: false
 includeDiscography: true
 includePerformances: true
 includeProjects: true
@@ -12,8 +12,6 @@ includeExhibitions: true
 includeTalks: true
 ---
 # {{ title }}
-
-{% renderFile './src/_includes/resume/artist-bio.md' %}
 
 <style>
   .resume-year {

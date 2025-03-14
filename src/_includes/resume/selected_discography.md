@@ -1,4 +1,7 @@
 ### Selected Discography and Publications
+- <span class="resume-year">2025</span> *Airs* — Poetry for Issue No.4 of The HTML Review ([forthcoming](https://thehtml.review/))
+- <span class="resume-year">2025</span> *Quiet Time* — Essay for Are&#8203;.na Editorial ([forthcoming](https://www.are.na/editorial))
+- <span class="resume-year">2024</span> *Surface Tension* — Essay for Are&#8203;.na Annual 2025 ([link](https://store.are.na/products/are-na-annual-2025?variant=44886611296407))
 - <span class="resume-year">2024</span> *Allure of Inertia* — Radio program for NTS Radio ([link](https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024))
 - <span class="resume-year">2023</span> *Airports for Music* — Digital release on Nina Protocol ([link](https://www.ninaprotocol.com/hubs/airportsformusic))
 - <span class="resume-year">2022</span> *Composing Through Listening* — Radio program for WFMU ([link](https://wfmu.org/playlists/shows/119916))

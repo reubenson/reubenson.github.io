@@ -5,8 +5,8 @@
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/tiny-vase-st2.JPG" alt="tiny amphora">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_small-creamer.jpg" alt="tiny creamer">
   <img src="/public/turquoise-travel-vase.jpg" alt="travel vase">
-  <img src="/public/haystack-ceramic-centerpiece.webp" alt="mixed media sculpture">
-  <img src="/public/3d-printed-porcelain-prototype.jpg" alt="3D printed porcelain">
+  <!-- <img src="/public/haystack-ceramic-centerpiece.webp" alt="mixed media sculpture"> -->
+  <!-- <img src="/public/3d-printed-porcelain-prototype.jpg" alt="3D printed porcelain"> -->
   
   <!-- <figcaption>TK TK</figcaption> -->
 </figure>

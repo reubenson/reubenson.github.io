@@ -6,7 +6,6 @@ body {
   padding: 20px;
   color: snow;
   min-height: 100vh;
-  min-height: -webkit-fill-available; /* For iOS Safari */
 }
 
 .poems-header {

@@ -546,6 +546,10 @@ a {
 }
 
 @media print {
+  .toc-button {
+    display: none;
+  }  
+
   .figure-medium img,
   .figure-medium figcaption {
     max-width: 300px;
@@ -565,7 +569,7 @@ a {
     width: 100%;
     max-width: 100%;
     /* margin: 80px 0 0; */
-    margin-top: 180px;
+    /* margin-top: 180px; */
   }
 
   .project .content-wrapper p,

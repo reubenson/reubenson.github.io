@@ -47,7 +47,7 @@ let audioBufferData = new Uint8Array(bufferWidth * CANVAS_HEIGHT);
 const CSS_TRANSITIONS = [
   {
     selector: '#part-2.poem-container',
-    transition: "120s filter linear, 0s opacity linear;"
+    transition: "120s filter linear, 120s opacity linear;"
   },
   {
     selector: '#poems-container canvas',
@@ -55,7 +55,7 @@ const CSS_TRANSITIONS = [
   },
   {
     selector: '#poems-container #part-2 p',
-    transition: '360s color linear, 360s background linear, 5s filter linear;'
+    transition: '360s color linear, 360s background linear, 5s filter linear'
   }
 ]
 
@@ -182,6 +182,7 @@ async function initializeAudio() {
 
   // to be connected later
   // convolver.connect(processor);
+  sumNode.connect(processor);
   startAudio()
 
   initializeConvolution();
@@ -240,8 +241,8 @@ function startVisualization() {
 }
 
 function updatePartStyles(part) {
-  const previousSelectedPart = document.querySelector('.poem-container.selected-part');
-  previousSelectedPart?.classList.remove('selected-part');
+  // const previousSelectedPart = document.querySelector('.poem-container.selected-part');
+  // previousSelectedPart?.classList.remove('selected-part');
   const newSelectedPart = document.querySelector(`#${part}`);
   newSelectedPart.classList.add('selected-part');
 
@@ -447,7 +448,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   canvas = document.createElement('canvas');
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
-  canvasContainerEl.querySelector('#part-2').appendChild(canvas);
+  canvasContainerEl.querySelector('#part-1').appendChild(canvas);
   canvasCtx = canvas.getContext('2d');
 
   offscreenCanvas = document.createElement('canvas');
@@ -502,7 +503,7 @@ function handleNavigation(event) {
     currentPart = 'home';
   }
 
-  if (currentPart === 'part-1') {
+  if (currentPart === 'part-1' || currentPart === 'part-2') {
     if (clickedLeft) {
       slideIndex--;
     } else {
@@ -511,14 +512,14 @@ function handleNavigation(event) {
   
     if (slideIndex < 0) {
       slideIndex = 0;
-      return returnHome();
+      // return returnHome();
     }
     
     if (slideIndex >= frames.length) {
       slideIndex = frames.length - 1;
-      resetState();
-      updatePartStyles('part-2');
-      beginPart2();
+      // resetState();
+      // updatePartStyles('part-2');
+      // beginPart2();
       return;
     }
   
@@ -530,20 +531,22 @@ function handleNavigation(event) {
     return;
   }
 
-  if (currentPart === 'part-2') {
-    if (clickedLeft) {
-      resetState();
-      updatePartStyles('part-1');
-      beginPart1(frames.length - 1);
-    }
+  // if (currentPart === 'part-2') {
+  //   if (clickedLeft) {
+  //     resetState();
+  //     updatePartStyles('part-1');
+  //     beginPart1(frames.length - 1);
+  //   }
 
-    return;
-  }
+  //   return;
+  // }
 
   // home
-  if (!clickedLeft) {
+  if (currentPart === 'home' && !clickedLeft) {
     updatePartStyles('part-1');
+    updatePartStyles('part-2');
     beginPart1(0);
+    beginPart2();
   }
 }
 
