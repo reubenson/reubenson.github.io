@@ -124,7 +124,7 @@ nav {
     object-fit: cover;
     height: 200px;
     max-height: calc(100vh - 360px);
-    filter: hue-rotate(180deg) brightness(0.7) contrast(1.2);
+    /* filter: brightness(0.7); */
     flex-shrink: 1;
   }
 
@@ -233,8 +233,8 @@ button:hover {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  filter: blur(0px) contrast(3) brightness(0.7);
-  transition: opacity 120s ease;
+  filter: blur(10px);
+  transition: opacity 120s linear, filter 120s linear;
   opacity: 0;
   /* max-height: 80vh; */
 
@@ -247,11 +247,12 @@ button:hover {
   }
   
   .poem > p {
-    background: black;
+    /* background: black; */
+    color: snow;
     line-break: anywhere;
     letter-spacing: -0.09em;
     line-height: .42em;
-    font-size: 32px;
+    font-size: 70px;
     filter: brightness(0.1);
     margin: -10px;
     text-transform: lowercase;
@@ -301,10 +302,10 @@ canvas {
     }
 
     .poem p {
-      color: black !important;
-      background: snow !important;
+      /* color: black !important; */
+      /* background: snow !important; */
       filter: brightness(1) !important;
-      animation: textOpacity 120s infinite, textScale 1500s infinite;
+      /* animation: textOpacity 120s infinite, textScale 1500s infinite; */
     }
   }
 }
@@ -508,8 +509,8 @@ canvas {
   }
 
   canvas {
-    opacity: 0.7;
-    filter: blur(6px) brightness(0.8);
+    opacity: 0.6;
+    filter: blur(8px) brightness(0.8) contrast(1.2);
     /* z-index: 10; */
     /* opacity: 0; */
   }
@@ -526,7 +527,8 @@ canvas {
   }
 
   #part-2 {
-    /* opacity: 0.2; */
+    opacity: 0.2;
+    filter: blur(2px);
   }
 }
 

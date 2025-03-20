@@ -521,9 +521,9 @@ function handleNavigation(event) {
     // const originalMatrix = ""
 
     // transitionTimestamp
-    colorShiftIsBlack = false;
-    transitionTimestamp = Date.now();
-    document.querySelector('#poems-container').classList.add('after-transition');
+    // colorShiftIsBlack = false;
+    // transitionTimestamp = Date.now();
+    // document.querySelector('#poems-container').classList.add('after-transition');
     return;
   } else if (event.type === 'touchend') {
     clickedLeft = event.changedTouches[0].clientX <= window.innerWidth / 2;
@@ -567,8 +567,15 @@ function handleNavigation(event) {
 
     slideIndex = Math.max(0, Math.min(slideIndex, frames.length - 1));
 
+    // apply QR transition
+    if (slideIndex === 19 && colorShiftIsBlack) {
+      colorShiftIsBlack = false;
+      transitionTimestamp = Date.now();
+      document.querySelector('#poems-container').classList.add('after-transition');
+    }
+
+    // apply final transition
     if (slideIndex === frames.length - 1) {
-      // apply final transition
       document.querySelector('#poems-container').classList.add('final');
     }
 
@@ -653,6 +660,9 @@ function createSvgFilter() {
   const feColorMatrix = document.createElementNS(svgNS, "feColorMatrix");
   feColorMatrix.setAttribute("type", "matrix");
   colorMatrixEl = feColorMatrix;
+
+  // const identityMatrix = "1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0";
+  // colorMatrix.setAttribute("values", identityMatrix);
 
   setColorMatrix(colorValue);
   filter.appendChild(feColorMatrix);

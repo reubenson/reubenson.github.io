@@ -66,8 +66,8 @@ hideSeeMore: true
     <filter id="wind-filter-lg">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
         result="slide-0" 
-        height="1000px"
-        width="1000px"
+        height="1600px"
+        width="1600px"
         >
       </feImage>
       <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="25" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>

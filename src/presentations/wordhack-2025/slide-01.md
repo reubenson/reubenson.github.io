@@ -1,18 +1,30 @@
-<div class="poem" role="text" aria-label="part 1 poem 1" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
+<div class="poem" role="text" aria-label="part 1 poem 3" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
     
-    <img style="width: 100%;" src="/public/Kitagawa-Utamaro-frog.webp" />
+    "Airs" is a collection of poems accompanied by recordings of the wind
 
 </div>
 
-<!-- <div class="poem" role="text" aria-label="part 1 poem 2" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
-
-    And incidentally, it is also world frog day
-
-</div> -->
-
-<div class="poem" role="text" aria-label="part 1 poem 3" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
+<div class="poem" role="text" aria-label="part 1 poem 1" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
     
-    "Airs" is a collection of poems published today by The HTML Review
+    Part 1: Activating a typographic surface with the wind
+
+</div>
+
+<div class="poem" role="text" aria-label="part 1 poem 1" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
+    
+    Part 2: What if a concrete poem became a screensaver?
+
+</div>
+
+<div class="poem" role="text" aria-label="part 1 poem 2" tabindex="0" aria-live="polite" aria-atomic="true" hidden  >
+
+    tension between flatness of the screen, what kinds of compression can occur, combined with the expansiveness of the open air
+
+</div>
+
+<div class="poem" role="text" aria-label="part 1 poem 2" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
+
+    ... Begin Part I ...
 
 </div>
 

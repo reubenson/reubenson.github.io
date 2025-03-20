@@ -307,17 +307,17 @@ title: Reuben Son Homepage
         display: none;
         position: fixed;
         z-index: 100;
-        max-width: 300px; /* Adjust size as needed */
+        max-width: 380px;
         {# box-shadow: 0 2px 8px rgba(0,0,0,0.15); #}
-        padding: 10px;
+        padding: 5px;
         border: solid black 1px;
         border-radius: 4px;
         pointer-events: none;
         background: #f0f0e6;
-        left: 0;
+        left: 500px;
         right: 0;
         margin: auto;
-        bottom: 400px;
+        bottom: 0;
         top: 0;
       }
 
@@ -452,11 +452,18 @@ title: Reuben Son Homepage
         const content = document.querySelector('.card-quote-content');
         const header = document.querySelector('.card-quote-header');
         const footer = document.querySelector('.card-quote-footer');
+        const hoverImage = document.querySelector('.hover-image');
         
         cardQuote.style.width = data.width || '130px';
         header.innerHTML = data.header || '';
         content.innerHTML = data.content || '';
         footer.innerHTML = data.footer || '';
+        hoverImage.src = data.hoverImage || '';
+        if (!data.hoverImage) {
+          hoverImage.classList.add('hidden');
+        } else {
+          hoverImage.classList.remove('hidden');
+        }
       }
 
       function handleLeftArrow() {
