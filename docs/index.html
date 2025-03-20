@@ -326,6 +326,24 @@
         visibility: hidden;
       }
 
+      .hover-image {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        max-width: 300px; /* Adjust size as needed */
+        
+        padding: 10px;
+        border: solid black 1px;
+        border-radius: 4px;
+        pointer-events: none;
+        background: #f0f0e6;
+        left: 0;
+        right: 0;
+        margin: auto;
+        bottom: 400px;
+        top: 0;
+      }
+
       /* styling for promoting card from homepage */
       .promo {
         .card-container:nth-child(1),
@@ -345,7 +363,6 @@
           width: 100%;
           left: -10px;
         }
-        
       }
 
       @media screen and (min-height: 550px) {
@@ -369,6 +386,10 @@
 
         .card-container {
           border: solid black 1px;
+        }
+
+        .card-quote:hover .hover-image {
+          display: block;
         }
       }
 
@@ -583,11 +604,12 @@ Feel free to poke around my <a href="/projects">projects</a> and <a href="/shop"
                   <a href='https://www.instagram.com/p/DHB6M3fvsBR/' target='_blank'>Wonderville</a> | 1186 Broadway, Brooklyn
                 </p>
               
+              <img src="/public/pocket-vase.jpg" class="hover-image" alt="" />
             </div>
           </div>
           <div class="social">
             <p>
-              last updated friday, march 14, 2025
+              last updated wednesday, march 19, 2025
             </p>
           </div>
           <div class="container-background"></div>
@@ -604,7 +626,7 @@ Feel free to poke around my <a href="/projects">projects</a> and <a href="/shop"
       gtag('config', 'UA-120208217-1');
 
       
-      const ANNOUNCEMENTS_DATA = [{"header":"<a href='https://withfriends.co/event/22981305/wordhack_feat_maya_man_herdimas_anggara_reuben_son_blair_johnson_and_luke_williams' target='_blank'>Wordhack, March 20, 2025</a>","content":"Celebrating the first day of spring (and world frog day) with poetry and sound from \"Airs\", published in The HTML Review, Issue No. 4","footer":"<a href='https://www.instagram.com/p/DHB6M3fvsBR/' target='_blank'>Wonderville</a> | 1186 Broadway, Brooklyn","width":"250px"},{"header":"<a href='https://www.are.na/editorial/introducing-the-are-na-annual-2025' target='_blank'>Are.na Annual 2025</a>","content":"Book launch and reading for the sixth edition of the <a href='https://store.are.na/products/are-na-annual-2025?variant=44886611296407' target='_blank'>Are.na Annual</a> on Friday December 13th, 2024","footer":"<a href='https://www.instagram.com/heartbroadwaylove/' target='_blank'>HEART</a> | 442 Broadway Floor #3, NYC","width":"260px"},{"header":"<a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>","content":"Presenting at <a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>, hosted by the <a href='https://mao.si/en/' target='_blank'>Museum of Architecture and Design</a> (SI) on Friday September 20th, 2024","footer":"Ljubljana, Slovenia","width":"260px"},{"header":"<a href='/shop' target='_blank'>shop page launch</a>","content":"Pocket-size vases now in stock, perfect for arranging wildflowers on your summer travels","footer":"🌻 🏺","width":"230px"},{"header":"<a href='https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024'target='_blank'>Allure of Inertia</a>","content":"Broadcast on NTS Radio 7-8pm ET, Sunday May 5th","footer":"<a href=\"https://www.nts.live\" target=\"_blank\">https://www.nts.live</a>","width":"170px"},{"header":"ECHEA w/ Eli Keszler","content":"Opening Reception on April 11, 2024, exhibition runs through June 2024","footer":"<a href='https://www.galeriepepe.com/'>Galerie Pepe</a>, Mexico City","width":"250px"},{"content":"Coming out to close the gate I end up listening to frogs","footer":"Masaoka Shiki (1866-1902)","width":"130px"},{"header":"<a href='https://reubenson.com/posters/frog-chorus-vernal-equinox-2024/'>Frog Chorus Listening Event</a>","content":"<p>A celebration of the vernal equinox</p><p>Wednesday, March 20, 2024</p><p>6:30pm til sundown</p><p><a href='https://fruitful.school/blog/2024-03-13.html'>Presented with Fruitful School</a></p><p></p>","footer":"Pier 3 Plaza, Brooklyn Bridge Park","width":"240px"},{"content":"Left blank for a work expressing modern feeling.","width":"180px"}];
+      const ANNOUNCEMENTS_DATA = [{"header":"<a href='https://withfriends.co/event/22981305/wordhack_feat_maya_man_herdimas_anggara_reuben_son_blair_johnson_and_luke_williams' target='_blank'>Wordhack, March 20, 2025</a>","content":"Celebrating the first day of spring (and world frog day) with poetry and sound from \"Airs\", published in The HTML Review, Issue No. 4","footer":"<a href='https://www.instagram.com/p/DHB6M3fvsBR/' target='_blank'>Wonderville</a> | 1186 Broadway, Brooklyn","hoverImage":"/public/pocket-vase.jpg","width":"250px"},{"header":"<a href='https://www.are.na/editorial/introducing-the-are-na-annual-2025' target='_blank'>Are.na Annual 2025</a>","content":"Book launch and reading for the sixth edition of the <a href='https://store.are.na/products/are-na-annual-2025?variant=44886611296407' target='_blank'>Are.na Annual</a> on Friday December 13th, 2024","footer":"<a href='https://www.instagram.com/heartbroadwaylove/' target='_blank'>HEART</a> | 442 Broadway Floor #3, NYC","width":"260px"},{"header":"<a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>","content":"Presenting at <a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>, hosted by the <a href='https://mao.si/en/' target='_blank'>Museum of Architecture and Design</a> (SI) on Friday September 20th, 2024","footer":"Ljubljana, Slovenia","width":"260px"},{"header":"<a href='/shop' target='_blank'>shop page launch</a>","content":"Pocket-size vases now in stock, perfect for arranging wildflowers on your summer travels","footer":"🌻 🏺","width":"230px"},{"header":"<a href='https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024'target='_blank'>Allure of Inertia</a>","content":"Broadcast on NTS Radio 7-8pm ET, Sunday May 5th","footer":"<a href=\"https://www.nts.live\" target=\"_blank\">https://www.nts.live</a>","width":"170px"},{"header":"ECHEA w/ Eli Keszler","content":"Opening Reception on April 11, 2024, exhibition runs through June 2024","footer":"<a href='https://www.galeriepepe.com/'>Galerie Pepe</a>, Mexico City","width":"250px"},{"header":"<a href='https://reubenson.com/posters/frog-chorus-vernal-equinox-2024/'>Frog Chorus Listening Event</a>","content":"<p>A celebration of the vernal equinox</p><p>Wednesday, March 20, 2024</p><p>6:30pm til sundown</p><p><a href='https://fruitful.school/blog/2024-03-13.html'>Presented with Fruitful School</a></p><p></p>","footer":"Pier 3 Plaza, Brooklyn Bridge Park","width":"240px"},{"content":"Coming out to close the gate I end up listening to frogs","footer":"Masaoka Shiki (1866-1902)","width":"130px"},{"content":"Left blank for a work expressing modern feeling.","width":"180px"}];
       let index = 0;
 
       function renderAnnouncement(data) {

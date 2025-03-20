@@ -3,6 +3,7 @@
     "header": "<a href='https://withfriends.co/event/22981305/wordhack_feat_maya_man_herdimas_anggara_reuben_son_blair_johnson_and_luke_williams' target='_blank'>Wordhack, March 20, 2025</a>",
     "content": "Celebrating the first day of spring (and world frog day) with poetry and sound from \"Airs\", published in The HTML Review, Issue No. 4",
     "footer": "<a href='https://www.instagram.com/p/DHB6M3fvsBR/' target='_blank'>Wonderville</a> | 1186 Broadway, Brooklyn",
+    "hoverImage": "/public/pocket-vase.jpg",
     "width": "250px"
   },
   {
@@ -36,15 +37,15 @@
     "width": "250px"
   },
   {
-    "content": "Coming out to close the gate I end up listening to frogs",
-    "footer": "Masaoka Shiki (1866-1902)",
-    "width": "130px"
-  },
-  {
     "header": "<a href='https://reubenson.com/posters/frog-chorus-vernal-equinox-2024/'>Frog Chorus Listening Event</a>",
     "content": "<p>A celebration of the vernal equinox</p><p>Wednesday, March 20, 2024</p><p>6:30pm til sundown</p><p><a href='https://fruitful.school/blog/2024-03-13.html'>Presented with Fruitful School</a></p><p></p>",
     "footer": "Pier 3 Plaza, Brooklyn Bridge Park",
     "width": "240px"
+  },
+  {
+    "content": "Coming out to close the gate I end up listening to frogs",
+    "footer": "Masaoka Shiki (1866-1902)",
+    "width": "130px"
   },
   {
     "content": "Left blank for a work expressing modern feeling.",

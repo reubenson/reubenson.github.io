@@ -1,18 +1,18 @@
 <div class="poem" role="text" aria-label="part 1 poem 1" tabindex="0" aria-live="polite" aria-atomic="true" hidden>
 
-  <span>dawn comes whispering down</span>
+  dawn comes whispering down
   
-  <span>from the trees</span>
+  from the trees
 
   <div class="line-break"></div>
   
-  <span>exhaling under thin blue expanse</span>
+  exhaling under thin blue expanse
 
-  <span>earth-fuming petrichor</span>
+  earth-fuming petrichor
 
-  <span>rises &</span>
+  rises &
   
-  <span>wafts</span>
+  wafts
 
 </div>
 

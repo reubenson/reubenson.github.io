@@ -303,6 +303,24 @@ title: Reuben Son Homepage
         visibility: hidden;
       }
 
+      .hover-image {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        max-width: 300px; /* Adjust size as needed */
+        {# box-shadow: 0 2px 8px rgba(0,0,0,0.15); #}
+        padding: 10px;
+        border: solid black 1px;
+        border-radius: 4px;
+        pointer-events: none;
+        background: #f0f0e6;
+        left: 0;
+        right: 0;
+        margin: auto;
+        bottom: 400px;
+        top: 0;
+      }
+
       /* styling for promoting card from homepage */
       .promo {
         .card-container:nth-child(1),
@@ -322,7 +340,6 @@ title: Reuben Son Homepage
           width: 100%;
           left: -10px;
         }
-        
       }
 
       @media screen and (min-height: 550px) {
@@ -346,6 +363,10 @@ title: Reuben Son Homepage
 
         .card-container {
           border: solid black 1px;
+        }
+
+        .card-quote:hover .hover-image {
+          display: block;
         }
       }
 
@@ -401,6 +422,7 @@ title: Reuben Son Homepage
                   {{ announcements[0].footer | safe }}
                 </p>
               {% endif %}
+              <img src="{{ announcements[0].hoverImage }}" class="hover-image" alt="" />
             </div>
           </div>
           <div class="social">
