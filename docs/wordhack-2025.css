@@ -3,7 +3,7 @@ body {
   font-weight: 400;
   background: black;
   margin: auto;
-  padding: 20px;
+  /* padding: 20px; */
   color: snow;
   min-height: 100vh;
 }
@@ -48,6 +48,7 @@ body {
 
 
 nav {
+  display: none !important;
   align-items: end;
   position: fixed;
   margin: auto;
@@ -59,7 +60,7 @@ nav {
   left: 0;
   right: 0;
   height: 50px;
-  overflow: hidden;
+  overflow: visible;
 
   button {
     flex: 1;
@@ -123,7 +124,7 @@ nav {
     object-fit: cover;
     height: 200px;
     max-height: calc(100vh - 360px);
-    filter: hue-rotate(180deg) brightness(0.7) contrast(1.2);
+    /* filter: brightness(0.7); */
     flex-shrink: 1;
   }
 
@@ -138,6 +139,9 @@ nav {
 }
 
 body.now-viewing {
+  /* filter: url("#customFilter") brightness(1) contrast(5); */
+  filter: url("#customFilter") brightness(1) contrast(1);
+
   .poems-introduction {
     display: none;
   }
@@ -155,8 +159,10 @@ body.now-viewing {
   position: fixed;
   width: 100vw;
   height: 100vh;
+  transition: filter 90s linear;
+  /* filter: contrast(5); */
   /* filter: blur(2px) contrast(4) brightness(1.0) url(#customFilter); */
-  filter: blur(1.4px) contrast(5) brightness(1.0) url(#customFilter)
+  /* filter: blur(0px) contrast(5) brightness(1.0) url(#customFilter) */
   /* filter: url(#customFilter); */
   /* max-height: calc(100vh - 100px); */
 }
@@ -177,26 +183,33 @@ button:hover {
   /* width: 100%; */
   /* height: 100%;\ */
   margin: auto;
-  overflow: scroll;
+  overflow: visible;
   align-items: center;
   z-index: 100000;
+  transition: filter 30s linear, opacity 30s linear;
 
   p {
-    font-size: 28px;
+    font-size: 58px;
     margin: 0 0 0 auto;
     display: inline-block;
     padding: 10px;
     text-align: right;
     background: none;
-    color: black;
+    /* color: black; */
+    color: snow;
   }
   
   p span {
     background: black;
   }
 
+  p img {
+    /* margin-left: 60px; recenter */
+    max-height: 80vh;
+  }
+
   .poem {
-    width: 550px;
+    /* width: 550px; */
     padding: 20px;
     max-width: calc(100% - 40px);
     display: none;
@@ -220,8 +233,8 @@ button:hover {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  filter: blur(0px) contrast(3) brightness(0.7);
-  transition: opacity 120s ease;
+  filter: blur(10px);
+  transition: opacity 120s linear, filter 120s linear;
   opacity: 0;
   /* max-height: 80vh; */
 
@@ -234,11 +247,12 @@ button:hover {
   }
   
   .poem > p {
-    background: black;
+    /* background: black; */
+    color: snow;
     line-break: anywhere;
     letter-spacing: -0.09em;
     line-height: .42em;
-    font-size: 32px;
+    font-size: 70px;
     filter: brightness(0.1);
     margin: -10px;
     text-transform: lowercase;
@@ -255,25 +269,30 @@ canvas {
   height: 100%;
   /* filter: url(#customFilter); */
   /* filter: blur(14px) contrast(5.5) brightness(0.7); */
-  filter: blur(7px) contrast(2.4) brightness(1.6);
+  /* filter: blur(7px) contrast(2.4) brightness(1.6); */
+  /* filter:blur(14px) brightness(1.8) contrast(1); */
+  /* filter: blur(1px) brightness(0.5) contrast(0.5); */
+  filter: blur(20px) brightness(0);
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   margin: auto;
   z-index: -1;
-  opacity: 0.2;
+  opacity: 0;
+  transition: opacity 70s linear, filter 70s linear;
+  /* transition: opacity 90s linear; */
 }
 
 .has-started {
   #part-2 {
     filter: blur(4px) contrast(50) brightness(0.7);
     z-index: 1000;
-    opacity: 1;
+    /* opacity: 1; */
 
     canvas {
-      opacity: 1;
-      z-index: 10;
+      /* opacity: 1;
+      z-index: 10; */
     }
 
     .poem {
@@ -283,10 +302,10 @@ canvas {
     }
 
     .poem p {
-      color: black !important;
-      background: snow !important;
+      /* color: black !important; */
+      /* background: snow !important; */
       filter: brightness(1) !important;
-      animation: textOpacity 120s infinite, textScale 1500s infinite;
+      /* animation: textOpacity 120s infinite, textScale 1500s infinite; */
     }
   }
 }
@@ -297,9 +316,12 @@ canvas {
 }
 
 #part-1 .three-sheets-to-the-wind {
-  max-height: 500px;
-  height: 90%;
-  margin-left: 0px;
+  --x-position-offset: 20vw;
+  --y-position-offset: 10vh;
+
+  /* max-height: 500px; */
+  height: 80vh;
+  margin-left: 160px;
   overflow: hidden;
   
   &.active {
@@ -318,71 +340,73 @@ canvas {
     position: relative;
     transform-origin: center;
     position: absolute;
+    color: snow;
+    background: none;
   
     &:nth-child(1) {
       transform: rotate(-61deg);
-      top: 140px;
-      left: 116px;
+      top: calc(36px + var(--y-position-offset));
+      left: calc(116px + var(--x-position-offset));
     }
   
     &:nth-child(2) {
       transform: rotate(-82deg);
-      top: 250px;
-      left: 140px;
+      top: calc(250px + var(--y-position-offset));
+      left: calc(286px + var(--x-position-offset));
     }
   
     &:nth-child(3) {
       transform: rotate(-85deg);
-      top: 325px;
-      left: 245px;
+      top: calc(425px + var(--y-position-offset));
+      left: calc(245px + var(--x-position-offset));
     }
   
     &:nth-child(4) {
       transform: rotate(-39deg);
-      top: 175px;
-      left: 57px;
+      top: calc(175px + var(--y-position-offset));
+      left: calc(-43px + var(--x-position-offset));
     }
   
     &:nth-child(5) {
       transform: rotate(-75deg);
-      top: 325px;
-      left: 61px;
+      top: calc(405px + var(--y-position-offset));
+      left: calc(-56px + var(--x-position-offset));
     }
   
     &:nth-child(6) {
       transform: rotate(-25deg);
-      top: 275px;
-      left: 122px;
+      top: calc(385px + var(--y-position-offset));
+      left: calc(392px + var(--x-position-offset));
     }
   
     &:nth-child(7) {
       transform: rotate(-56deg);
-      top: 325px;
-      left: 122px;
+      top: calc(325px + var(--y-position-offset));
+      left: calc(122px + var(--x-position-offset));
     }
   
     &:nth-child(8) {
       transform: rotate(77deg);
-      top: 175px;
-      left: 122px;
+      top: calc(465px + var(--y-position-offset));
+      left: calc(122px + var(--x-position-offset));
     }
   
     &:nth-child(9) {
       transform: rotate(-60deg);
-      top: 100px;
-      left: 217px;
+      top: calc(100px + var(--y-position-offset));
+      left: calc(217px + var(--x-position-offset));
     } 
   
     &:nth-child(10) {
       transform: rotate(35deg);
-      top: 183px;
-      left: 145px;
+      top: calc(183px + var(--y-position-offset));
+      left: calc(145px + var(--x-position-offset));
     }
   
     &:nth-child(11) {
       transform: rotate(28deg);
-      top: 393px;
-      left: 67px;
+      top: calc(393px + var(--y-position-offset));
+      left: calc(67px + var(--x-position-offset));
     }
   }
 }
@@ -401,20 +425,31 @@ canvas {
 
 
   #part-1 {
-    width: 460px;
-    
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    /* width: 1200px; */
+    /* width: 100%; */
+
+    .poem {
+      width: 1200px;
+      max-width: 80vw;
+      margin: auto;
+    }
+
     p {
-      font-size: 36px;
-      padding-left: 120px;
+      font-size: 80px;
+      padding-left: 60px;
+      letter-spacing: 0.2em;
     }
 
     .poem {
       filter: blur(0px) contrast(1) url(#wind-filter-lg);
-      margin-left: -60px;
+      /* margin-left: -60px; */
     }
 
     .poem.three-sheets-to-the-wind {
-      margin-left: 60px;
+      margin-left: 160px;
     }
   }
 }
@@ -431,13 +466,13 @@ canvas {
 
 @keyframes textOpacity {
   0% {
-    opacity: 1.0;
+    opacity: 0.2;
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.1;
   }
   100% {
-    opacity: 1.0;
+    opacity: 0.2;
   }
 }
 
@@ -450,5 +485,55 @@ canvas {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+.blur-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(1.7px) contrast(5);
+  /* filter: blur(1.7px) contrast(5) invert(1); */
+}
+
+/* transition styles */
+
+.after-transition {
+
+  &#poems-container {
+    filter: blur(1.8px) contrast(5);
+    /* filter: url(#customFilter) brightness(5) blur(1.7px) contrast(5) invert(1); */
+    /* filter: blur(0px) contrast(5) brightness(1.0) url(#customFilter) */
+      /* filter: url(#customFilter); */
+      /* max-height: calc(100vh - 100px); */
+  }
+
+  canvas {
+    opacity: 0.6;
+    filter: blur(8px) brightness(0.8) contrast(1.2);
+    /* z-index: 10; */
+    /* opacity: 0; */
+  }
+
+  #part-1 {
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  #part-1 p {
+    /* color: black; */
+    color: snow;
+    /* filter: blur(1.5px) contrast(1.5); */
+  }
+
+  #part-2 {
+    opacity: 0.2;
+    filter: blur(2px);
+  }
+}
+
+.final {
+  &#poems-container {
+     filter: blur(120px) contrast(5) !important;
   }
 }

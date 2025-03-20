@@ -303,6 +303,24 @@ title: Reuben Son Homepage
         visibility: hidden;
       }
 
+      .hover-image {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        max-width: 380px;
+        {# box-shadow: 0 2px 8px rgba(0,0,0,0.15); #}
+        padding: 5px;
+        border: solid black 1px;
+        border-radius: 4px;
+        pointer-events: none;
+        background: #f0f0e6;
+        left: 500px;
+        right: 0;
+        margin: auto;
+        bottom: 0;
+        top: 0;
+      }
+
       /* styling for promoting card from homepage */
       .promo {
         .card-container:nth-child(1),
@@ -322,7 +340,6 @@ title: Reuben Son Homepage
           width: 100%;
           left: -10px;
         }
-        
       }
 
       @media screen and (min-height: 550px) {
@@ -346,6 +363,10 @@ title: Reuben Son Homepage
 
         .card-container {
           border: solid black 1px;
+        }
+
+        .card-quote:hover .hover-image {
+          display: block;
         }
       }
 
@@ -401,6 +422,7 @@ title: Reuben Son Homepage
                   {{ announcements[0].footer | safe }}
                 </p>
               {% endif %}
+              <img src="{{ announcements[0].hoverImage }}" class="hover-image" alt="" />
             </div>
           </div>
           <div class="social">
@@ -430,11 +452,18 @@ title: Reuben Son Homepage
         const content = document.querySelector('.card-quote-content');
         const header = document.querySelector('.card-quote-header');
         const footer = document.querySelector('.card-quote-footer');
+        const hoverImage = document.querySelector('.hover-image');
         
         cardQuote.style.width = data.width || '130px';
         header.innerHTML = data.header || '';
         content.innerHTML = data.content || '';
         footer.innerHTML = data.footer || '';
+        hoverImage.src = data.hoverImage || '';
+        if (!data.hoverImage) {
+          hoverImage.classList.add('hidden');
+        } else {
+          hoverImage.classList.remove('hidden');
+        }
       }
 
       function handleLeftArrow() {

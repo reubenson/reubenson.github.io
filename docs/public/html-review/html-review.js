@@ -2,6 +2,7 @@ const CANVAS_WIDTH = 256;
 const CANVAS_HEIGHT = 256;
 const ASSET_DIR = '/public/html-review/';
 
+let colorShiftIsBlack = true;
 let audioHasStarted = false;
 let convolutionInitialized = false;
 let windInitialized = false;
@@ -51,7 +52,7 @@ const CSS_TRANSITIONS = [
   },
   {
     selector: '#poems-container canvas',
-    transition: '90s opacity ease;'
+    transition: '90s opacity ease 90s filter ease;'
   },
   {
     selector: '#poems-container #part-2 p',
@@ -178,7 +179,7 @@ async function initializeAudio() {
   const playerGainNode = audioCtx.createGain();
   playerGainNode.gain.value = 1.0;
   sumNode.connect(playerGainNode);
-  playerGainNode.connect(audioCtx.destination);
+  // playerGainNode.connect(audioCtx.destination);
 
   // to be connected later
   // convolver.connect(processor);
@@ -319,7 +320,7 @@ async function beginPart2() {
 
   colorShiftInterval = window.setInterval(() => {
     applyColorShift(0.001);
-  }, 500);
+  }, 100);
 
   await initializeAudio();  
   updateConvolutionLevel(0.03);
@@ -475,6 +476,26 @@ document.addEventListener('DOMContentLoaded', async function() {
   handleRouting();
 });
 
+function animateBlur(element, startBlur, endBlur, duration) {
+  const fps = 60;
+  const frames = duration * fps;
+  const blurIncrement = (endBlur - startBlur) / frames;
+  let currentFrame = 0;
+  
+  const interval = setInterval(() => {
+    currentFrame++;
+    const currentBlur = startBlur + (blurIncrement * currentFrame);
+    
+    element.style.filter = `url(#customFilter) brightness(5) blur(${currentBlur}px) contrast(5) invert(1)`;
+    
+    if (currentFrame >= frames) {
+      clearInterval(interval);
+    }
+  }, 1000 / fps);
+}
+
+let transitionTimestamp = null;
+
 function handleNavigation(event) {
   if (event.target.closest('.poems-header') || event.target.closest('nav')) {
     return;
@@ -486,6 +507,24 @@ function handleNavigation(event) {
   
   if (event.type === 'keydown' && event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
     clickedLeft = event.key === 'ArrowLeft';
+  } else if (event.type === 'keydown' && event.key === '`') {
+    if (document.querySelector('#poems-container').classList.contains('after-transition')) {
+      return;
+    }
+    // transition from state 1 to state 2
+    // in state 1, there is no blur on #poems-container
+    // const el = document.querySelector('#poems-container');
+    // animateBlur(el, 0, 1.7, 10);
+    // in state 2, there is blur on #poems-container and colorShiftIsBlack = false
+    // make transition
+    
+    // const originalMatrix = ""
+
+    // transitionTimestamp
+    // colorShiftIsBlack = false;
+    // transitionTimestamp = Date.now();
+    // document.querySelector('#poems-container').classList.add('after-transition');
+    return;
   } else if (event.type === 'touchend') {
     clickedLeft = event.changedTouches[0].clientX <= window.innerWidth / 2;
   } else if (event.type === 'click') {
@@ -528,6 +567,18 @@ function handleNavigation(event) {
 
     slideIndex = Math.max(0, Math.min(slideIndex, frames.length - 1));
 
+    // apply QR transition
+    if (slideIndex === 19 && colorShiftIsBlack) {
+      colorShiftIsBlack = false;
+      transitionTimestamp = Date.now();
+      document.querySelector('#poems-container').classList.add('after-transition');
+    }
+
+    // apply final transition
+    if (slideIndex === frames.length - 1) {
+      document.querySelector('#poems-container').classList.add('final');
+    }
+
     return;
   }
 
@@ -559,8 +610,46 @@ function handleButtonInteraction(event, part) {
   handlePartSelection(part);
 }
 
+function interpolateMatrices(originalMatrix, newMatrix, progress) {
+  const originalArray = originalMatrix.split(" ").map(Number);
+  const newArray = newMatrix.split(" ").map(Number);
+  return originalArray.map((value, index) => {
+    return value + (newArray[index] - value) * progress;
+  }).join(" ");
+}
+
 function setColorMatrix(val = Math.random()) {
-  colorMatrixEl.setAttribute("values", hslColorMatrix(val));
+  // val = 0.5;
+  const transitionDuration = 30000;
+  // const originalMatrix = "-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0";
+  const originalMatrix = "1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0";
+  
+  // If no transition is in progress, just set the original matrix
+  if (!transitionTimestamp) {
+    colorMatrixEl.setAttribute("values", originalMatrix);
+    return;
+  }
+
+  const newMatrix = hslColorMatrix(val);
+  // colorMatrixEl.setAttribute("values", newMatrix);
+  // return;
+  const currentTime = Date.now();
+  const elapsedTime = currentTime - transitionTimestamp;
+  const progress = Math.min(elapsedTime / transitionDuration, 1);
+
+  // If transition is complete, set final values and stop
+  if (progress >= 1) {
+    colorMatrixEl.setAttribute("values", newMatrix);
+    return;
+  }
+
+  const interpolatedMatrix = interpolateMatrices(originalMatrix, newMatrix, progress);
+  colorMatrixEl.setAttribute("values", interpolatedMatrix);
+
+  // Continue animation until complete
+  // if (progress < 1) {
+  //   requestAnimationFrame(() => setColorMatrix(val));
+  // }
 }
 
 function createSvgFilter() {
@@ -571,6 +660,9 @@ function createSvgFilter() {
   const feColorMatrix = document.createElementNS(svgNS, "feColorMatrix");
   feColorMatrix.setAttribute("type", "matrix");
   colorMatrixEl = feColorMatrix;
+
+  // const identityMatrix = "1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0";
+  // colorMatrix.setAttribute("values", identityMatrix);
 
   setColorMatrix(colorValue);
   filter.appendChild(feColorMatrix);
@@ -625,7 +717,7 @@ function addArrays(arr1, arr2) {
 }
 
 function hslColorMatrix(h) {
-  const s = 1;
+  const s = 1.0;
   const l = 0.3;
   const [r, g, b] = hslToRgb(h, s, l);
   const [r2, g2, b2] = hslToRgb(h + 0.55, s, l);

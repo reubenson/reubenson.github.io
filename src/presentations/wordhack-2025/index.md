@@ -28,16 +28,17 @@ hideSeeMore: true
 </div>
 
 <div id="poems-container" role="main">
-  <div id="part-1" class="poem-container" role="region" aria-label="part 1">
-    {% include "./slide-01.md" %}
-    {% include "../../demos/poem-1.md" %}
-  </div>
-  <div id="part-2" class="poem-container" role="region" aria-label="part 2">
-    <div class="visually-hidden" role="note">
-      <p>The second part of Airs is a visually animated poem of infinite duration. It begins with a rectangular arrangement of the letter 'x' repeated over and over, creating a typographic grid resembling the screen of a window in your home that keeps bugs from getting in while you have the window open. Audio data from the recordings of wind is processed and converted to a moving image, and then overlaid on top of the typographic grid. Various CSS filters are then applied to these two visual elements, producing an animation that is expressive of what a concrete poem would look like if turned into a screensaver.</p>
+  <!-- <div class="blur-container"> -->
+    <div id="part-1" class="poem-container" role="region" aria-label="part 1">
+      {% include "./slide-01.md" %}
     </div>
-  {% include "../../demos/poem-2.md" %}
-  </div>
+    <div id="part-2" class="poem-container" role="region" aria-label="part 2">
+      <div class="visually-hidden" role="note">
+        <p>The second part of Airs is a visually animated poem of infinite duration. It begins with a rectangular arrangement of the letter 'x' repeated over and over, creating a typographic grid resembling the screen of a window in your home that keeps bugs from getting in while you have the window open. Audio data from the recordings of wind is processed and converted to a moving image, and then overlaid on top of the typographic grid. Various CSS filters are then applied to these two visual elements, producing an animation that is expressive of what a concrete poem would look like if turned into a screensaver.</p>
+      </div>
+    {% include "../../demos/poem-2.md" %}
+    </div>
+  <!-- </div> -->
 </div>
 
 <nav role="navigation" aria-label="Poem sections">
@@ -65,8 +66,8 @@ hideSeeMore: true
     <filter id="wind-filter-lg">
       <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
         result="slide-0" 
-        height="1000px"
-        width="1000px"
+        height="1600px"
+        width="1600px"
         >
       </feImage>
       <feDisplacementMap in2="slide-0" in="SourceGraphic" scale="25" xChannelSelector="G" yChannelSelector="R"></feDisplacementMap>

@@ -37,7 +37,7 @@ class AudioProcessor extends AudioWorkletProcessor {
   }
 
   handleChannelData(channel) {
-    const downsampleFactor = 4;
+    const downsampleFactor = 8;
     const length = channel.length / downsampleFactor;
     const downsampledChannel = channel.filter((_, i) => i % downsampleFactor === 0);
     this.appendToBuffer(downsampledChannel);
