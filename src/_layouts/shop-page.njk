@@ -33,7 +33,14 @@ description: Shop description
         <div id="shop-closed" class="hidden">
           <p>The shop is currently sold out — If you'd like to notified when new items are available again, sign up for the mailing list above!</p>
         </div>
-        <div id="product-listings" data-product-ids="{{ ceramics | join(',') }}"></div>
+        <section>
+          <h2>Available</h2>
+          <div class="shop-listings" id="product-listings" data-product-ids="{{ ceramics | join(',') }}"></div>
+        </section>
+        <section>
+          <h2>Sold Out</h2>
+          <div class="shop-listings" id="product-sold-out-listings" data-product-ids="{{ ceramicsSoldOut | join(',') }}"></div>
+        </section>
       </div>
 
       <script type="text/javascript">

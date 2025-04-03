@@ -13,7 +13,7 @@ function showShopClosedMessage() {
   document.querySelector('#product-listings')?.classList.add('hidden');
 }
 
-function loadShopifyProducts(productIds) {
+function loadShopifyProducts(nodeId, productIds) {
   var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
     if (window.ShopifyBuy.UI) {
@@ -38,7 +38,7 @@ function loadShopifyProducts(productIds) {
     });
     
     ShopifyBuy.UI.onReady(client).then(function (ui) {
-      const productIds = document.getElementById('product-listings')?.getAttribute('data-product-ids').split(',') || [];
+      // const productIds = document.getElementById('product-listings')?.getAttribute('data-product-ids').split(',') || [];
       let randomColor;
       
       for (let i in productIds ) {
@@ -47,7 +47,7 @@ function loadShopifyProducts(productIds) {
 
         ui.createComponent('product', {
           id: productId,
-          node: document.getElementById('product-listings'),
+          node: document.getElementById(nodeId),
           moneyFormat: '%24%7B%7Bamount%7D%7D',
           options: {
             "product": {
@@ -217,6 +217,8 @@ function loadShopifyProducts(productIds) {
 function main() {
   const productIdsStr = document.getElementById('product-listings')?.getAttribute('data-product-ids')
   const productIds = productIdsStr === '' ? [] : productIdsStr?.split(',');
+  const productIdsSoldOutStr = document.getElementById('product-sold-out-listings')?.getAttribute('data-product-ids')
+  const productIdsSoldOut = productIdsSoldOutStr === '' ? [] : productIdsSoldOutStr?.split(',');
 
   if (!productIds) throw new Error('DOM not yet loaded'); // DOM hasn't loaded yet
 
@@ -225,7 +227,8 @@ function main() {
     return;
   }
 
-  loadShopifyProducts(productIds);
+  loadShopifyProducts('product-listings', productIds);
+  loadShopifyProducts('product-sold-out-listings', productIdsSoldOut);
 };
 
 try {

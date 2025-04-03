@@ -366,7 +366,9 @@ title: Reuben Son Homepage
         }
 
         .card-quote:hover .hover-image {
-          display: block;
+          &:not(.hidden) {
+            display: block;
+          }
         }
       }
 
@@ -446,6 +448,7 @@ title: Reuben Son Homepage
       {# embed annoucements json #}
       const ANNOUNCEMENTS_DATA = {{ announcements | dump | safe }};
       let index = 0;
+      renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
 
       function renderAnnouncement(data) {
         const cardQuote = document.querySelector('.card-quote');

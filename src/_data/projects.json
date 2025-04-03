@@ -1,5 +1,20 @@
 [
   {
+    "id": "airs",
+    "title": "Airs",
+    "description": "",
+    "year": 2025,
+    "url": "",
+    "path": "/projects/airs",
+    "tagline": "Collection of poems accompanied by recordings of the wind",
+    "selected": true,
+    "categories": [],
+    "relatedProjects": [
+      "airports-for-music",
+      "quiet-time"
+    ]
+  },
+  {
     "id": "quiet-time",
     "title": "Quiet Time",
     "description": "",
@@ -10,7 +25,8 @@
     "selected": true,
     "categories": [],
     "relatedProjects": [
-      "frog-chorus"
+      "frog-chorus",
+      "airs"
     ]
   },
   {
