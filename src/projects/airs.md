@@ -2,10 +2,15 @@
 layout: project.njk
 title: Airs
 url: https://reubenson.com/airs
-layoutType: one-column
+layoutType: two-column
 
 ---
 A collection of poems accompanied by recordings of the wind
+
+<figure class="figure-medium">
+  <img src="/public/airs-part-1-12.png" alt="Fragment from 'Part I (The Page)' of Airs">
+  <figcaption>Fragment from "Part I (The Page)" of Airs</figcaption>
+</figure>
 
 "Airs" was published the Spring 2025 issue of The HTML Review, and began as a series of audio recordings made in 2022 while I was catsitting for friends in the Loire Valley. These recordings were made in wide, open spaces, and expressed an ambiguous desire for a kind of _airiness_. During this period of my life,  I contented myself with the metaphor that, as if after a long winter, I was going around the house (of my life) and opening every window I could find.
 

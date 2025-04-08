@@ -303,6 +303,11 @@ title: Reuben Son Homepage
         visibility: hidden;
       }
 
+      .hidden {
+        display: none;
+        visibility: hidden;
+      }
+
       .hover-image {
         display: none;
         position: fixed;
@@ -460,7 +465,7 @@ title: Reuben Son Homepage
         cardQuote.style.width = data.width || '130px';
         header.innerHTML = data.header || '';
         content.innerHTML = data.content || '';
-        footer.innerHTML = data.footer || '';
+        if (footer) footer.innerHTML = data.footer || '';
         hoverImage.src = data.hoverImage || '';
         if (!data.hoverImage) {
           hoverImage.classList.add('hidden');
