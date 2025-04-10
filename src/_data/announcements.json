@@ -1,7 +1,12 @@
 [
   {
+    "header": "<a href='https://naive-yearly.are.na/' target='_blank'>Are.na Editorial x Naive Yearly</a>",
+    "content": "<a href='https://www.are.na/editorial/quiet-time' target='_blank'>Quiet Time</a> published as part of Are.na's editorial program around <a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>",
+    "width": "190px"
+  },
+  {
     "header": "<a href='https://thehtml.review/04' target='_blank'>The HTML Review, Issue No. 4</a>",
-    "content": "\"<a href='https://thehtml.review/04/airs/' target='_blank'>Airs</a>\" published in the 2025 issue of The HTML Review, an annual journal of literature made to exist on the web",
+    "content": "<a href='/projects/airs' target='_blank'>Airs</a> published in the 2025 issue of The HTML Review, an annual journal of literature made to exist on the web",
     "width": "250px"
   },
   {
