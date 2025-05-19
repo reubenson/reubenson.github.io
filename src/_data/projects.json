@@ -70,7 +70,7 @@
     "relatedProjects": [
       "midi-archive",
       "hobo-ufo",
-      "composing-listening"
+      "mixes-for-radio"
     ]
   },
   {
@@ -85,7 +85,7 @@
     "categories": ["on-listening", "publications"],
     "relatedProjects": [
       "weaving-music",
-      "composing-listening",
+      "mixes-for-radio",
       "frog-chorus"
     ]
   },
@@ -137,35 +137,18 @@
     ]
   },
   {
-    "id": "allure-of-inertia",
-    "title": "Allure of Inertia",
+    "id": "mixes-for-radio",
+    "title": "Mixes for Radio",
     "description": "",
     "year": 2024,
     "url": "",
-    "path": "/projects/allure-of-inertia",
-    "tagline": "Mix for NTS Radio",
+    "path": "/projects/mixes-for-radio",
+    "tagline": "Radio broadcasts on NTS and WFMU",
     "selected": true,
     "categories": ["publications"],
     "relatedProjects": [
-      "composing-listening",
       "airports-for-music",
       "meandering-printing"
-    ]
-  },
-  {
-    "id": "composing-listening",
-    "title": "Composing Through Listening",
-    "description": "",
-    "year": 2023,
-    "url": "https://wfmu.org/playlists/shows/119916",
-    "path": "/projects/composing-through-listening",
-    "tagline": "Radio broadcast for WFMU",
-    "selected": true,
-    "categories": ["on-listening", "publications"],
-    "relatedProjects": [
-      "allure-of-inertia",
-      "frog-chorus",
-      "airports-for-music"
     ]
   },
   {
@@ -227,7 +210,7 @@
     "selected": true,
     "categories": ["publications"],
     "relatedProjects": [
-      "composing-listening",
+      "mixes-for-radio",
       "weaving-music",
       "airports-for-music"
     ]
@@ -244,7 +227,8 @@
     "categories": ["publications"],
     "relatedProjects": [
       "private-chronology",
-      "airports-for-music"
+      "airports-for-music",
+      "mixes-for-radio"
     ]
   }
 ]

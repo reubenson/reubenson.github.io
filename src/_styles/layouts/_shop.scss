@@ -1,0 +1,58 @@
+@import '../shared';
+
+.shop-page {
+  margin: 20px auto;
+
+  header {
+    @include page-header;
+  }
+
+  .content h2 {
+    @include content-heading;
+  }
+
+  .shop-top {
+    @include grid-container;
+  }
+
+  .content-wrapper {
+    display: block;
+    // grid-template-columns: repeat(6, 1fr);
+    // gap: 40px;
+    width: 100%;
+    // max-width: 1200px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .content-wrapper p:first-child {
+    width: 100%;
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+
+  .shop-listings {
+    margin: auto;
+    max-width: 720px !important;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    iframe {
+      background-color: #f0f0e6;
+      border-radius: 2px;
+      flex: 1 0 40%;
+      min-width: 200px;
+      filter: sepia(1%) brightness(0.97);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05)
+    }
+  }
+
+  .newsletter-signup-intro {
+    margin-top: 20px;
+  }
+} 

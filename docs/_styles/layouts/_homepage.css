@@ -1,0 +1,304 @@
+.homepage {
+  background-color: #f0f0e6;
+  font-weight: 100;
+  margin: 0;
+  width: 100%;
+  /* styling for promoting card from homepage */
+}
+.homepage .cards {
+  font-family: Courier New;
+}
+.homepage .table-of-contents {
+  margin-top: 30px;
+}
+.homepage .project-border {
+  height: calc(100% - 20px);
+  width: calc(100vw - 20px);
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  margin: 10px;
+}
+.homepage .cards .content {
+  margin: auto;
+  max-width: 600px;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 20px;
+  letter-spacing: 1.15px;
+}
+.homepage .cards p {
+  line-height: 1.3em;
+  text-align: left;
+}
+.homepage .cards h1 a, .homepage h2 a {
+  color: black;
+  text-decoration: none;
+}
+.homepage .cards ul {
+  padding: 0;
+}
+.homepage .cards li {
+  font-weight: 100;
+  font-size: 13px;
+  list-style: none;
+  margin: 25px auto;
+  text-align: left;
+  text-decoration: none;
+}
+.homepage .cards li::before {
+  font-size: 12px;
+  font-family: serif;
+  position: absolute;
+}
+.homepage .cards {
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: calc(100% - 50px);
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.homepage .card-container {
+  background-color: #f0f0e6;
+}
+.homepage .card {
+  box-sizing: border-box;
+  width: 100%;
+  padding-bottom: 228px;
+  margin: 10px auto;
+  max-width: 400px;
+  position: relative;
+}
+.homepage .card-container:nth-child(2) {
+  margin-top: 40px;
+}
+.homepage .card .container {
+  display: flex;
+  align-items: center;
+}
+.homepage .card h1 {
+  background-color: #f0f0e6;
+  display: inline;
+  font-size: 24px;
+  line-height: 24px;
+  height: 28px;
+  padding: 0 5px;
+  position: absolute;
+  width: auto;
+  z-index: 1;
+}
+.homepage .card.front h1 {
+  left: -73px;
+  text-align: center;
+  transform: rotateZ(-90deg);
+  top: 81px;
+}
+.homepage .card.back h1 {
+  right: -73px;
+  top: 81px;
+  transform: rotateZ(90deg) scaleX(-1);
+}
+.homepage .card .container {
+  font-size: 13px;
+  letter-spacing: -1px;
+  line-height: 15px;
+  margin: 20px;
+  padding: 8px;
+  position: absolute;
+  height: calc(100% - 60px);
+  width: calc(100% - 55px);
+  z-index: 1;
+}
+.homepage .container-background {
+  border: solid black 1px;
+  position: absolute;
+  height: calc(100% - 20px);
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+.homepage .card p {
+  margin-top: 0;
+  text-align: justify;
+}
+.homepage .card.front p {
+  text-align: center;
+}
+.homepage .container a {
+  color: black;
+  text-decoration: none;
+}
+.homepage .container a {
+  border-bottom: solid grey 1px;
+}
+.homepage .card ul {
+  margin-top: 0;
+}
+.homepage .card li {
+  line-height: 15px;
+  margin: 0px 0 6px 0;
+}
+.homepage .card .project-description {
+  font-style: italic;
+}
+.homepage .card-quote {
+  display: block;
+  font-style: italic;
+  margin: auto;
+  text-align: justify;
+  width: 177px;
+}
+.homepage .card-quote {
+  width: 130px;
+}
+.homepage .card-quote p {
+  margin: auto;
+}
+.homepage .card-quote-header {
+  font-style: normal;
+  left: 0;
+  letter-spacing: normal;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  text-transform: uppercase;
+}
+.homepage .card-quote-footer {
+  bottom: 0;
+  font-style: normal;
+  left: 0;
+  position: absolute;
+}
+.homepage .left-arrow, .homepage .right-arrow {
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+.homepage .left-arrow {
+  left: 0;
+}
+.homepage .right-arrow {
+  right: 6px;
+  transform: scaleX(-1);
+}
+.homepage .cards .social {
+  display: inline;
+  font-size: 10px;
+  letter-spacing: normal;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  margin: auto;
+  right: 0;
+  text-align: center;
+  z-index: 1;
+}
+.homepage .cards .social p {
+  background: #f0f0e6;
+  display: inline-block;
+  margin: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  width: auto;
+}
+.homepage .card .social a {
+  color: black;
+  text-decoration: none;
+}
+.homepage .cards .glyph {
+  bottom: 27px;
+  line-height: 40px;
+  right: 16px;
+  margin: auto;
+  position: absolute;
+  height: 50px;
+  z-index: 1;
+}
+.homepage .cards .glyph a {
+  text-decoration: none;
+  color: #003000;
+}
+.homepage .cards .glyph img {
+  height: 100%;
+  display: inline-block;
+  background: #003000;
+  -webkit-mask: url("/public/transparent.png") center/contain;
+  mask: url("/public/transparent.png") center/contain;
+}
+.homepage .cards .hidden {
+  display: none;
+  visibility: hidden;
+}
+.homepage .hidden {
+  display: none;
+  visibility: hidden;
+}
+.homepage .hover-image {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  max-width: 380px;
+  padding: 5px;
+  border: solid black 1px;
+  border-radius: 4px;
+  pointer-events: none;
+  background: #f0f0e6;
+  left: 500px;
+  right: 0;
+  margin: auto;
+  bottom: 0;
+  top: 0;
+}
+.homepage .promo .card-container:nth-child(1),
+.homepage .promo h1, .homepage .promo .right-arrow, .homepage .promo .social {
+  display: none;
+}
+.homepage .promo .card-container {
+  height: 450px;
+}
+.homepage .promo .card {
+  height: 430px;
+}
+.homepage .promo .container-background {
+  width: 100%;
+  left: -10px;
+}
+@media screen and (min-height: 550px) {
+  .homepage .cards {
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+@media screen and (min-width: 768px) {
+  .homepage .project-border {
+    background-image: url("/public/riso-maine.png");
+    background-size: cover;
+    background-position: center;
+  }
+  .homepage .cards {
+    max-width: 450px;
+  }
+  .homepage .card-container {
+    border: solid black 1px;
+  }
+  .homepage .card-quote:hover .hover-image:not(.hidden) {
+    display: block;
+  }
+}
+@media screen and (min-width: 1180px) {
+  .homepage .table-of-contents {
+    border: solid black 1px;
+  }
+}

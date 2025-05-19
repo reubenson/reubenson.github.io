@@ -11,7 +11,8 @@ description: Shop description
     <title>Reuben Son | {{ title }}</title>
     <meta name="description" content="{{ description }}">
     <meta name="keywords" content="reuben son, ceramics, son ceramics">
-    <link rel="stylesheet" href="/bundle.css">
+    {# <link rel="stylesheet" href="/bundle.css"> #}
+    <link rel="stylesheet" href="/_styles/main.css">
     <link rel="icon" type="image/png" href="/favicon.png">
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
@@ -29,12 +30,18 @@ description: Shop description
         <a href="{{ url }}">{{url}}</a>
       </header>
       <div class="content-wrapper">
-        {{ content | safe }}
-        <div id="shop-closed" class="hidden">
-          <p>The shop is currently sold out — If you'd like to notified when new items are available again, sign up for the mailing list above!</p>
+        <div class="shop-top">
+          {{ content | safe }}
         </div>
+        <p class="newsletter-signup-intro">
+          If you'd like to keep up to date with updates, sign up for my mailing list below:
+        </p>
+        {% include "newsletter-signup.njk" %}
+        {# <div id="shop-closed" class="hidden">
+          <p>The shop is currently sold out — If you'd like to notified when new items are available again, sign up for the mailing list above!</p>
+        </div> #}
         <section>
-          <h2>Available</h2>
+          {# <h2>Available</h2> #}
           <div class="shop-listings" id="product-listings" data-product-ids="{{ ceramics | join(',') }}"></div>
         </section>
         <section>
@@ -42,12 +49,7 @@ description: Shop description
           <div class="shop-listings" id="product-sold-out-listings" data-product-ids="{{ ceramicsSoldOut | join(',') }}"></div>
         </section>
       </div>
-
-      <script type="text/javascript">
-      
-      </script>
-
     </div>
-    <div class="project-border broider"></div>
+    <div class="page-border broider"></div>
   </body>
 </html>

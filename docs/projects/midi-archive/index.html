@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIDI Archive</title>
-    <meta name="description" content="ML model and archive of music on the early web">
+    <meta name="description" content="Machine learning model and archive of music on the early web">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
-    <link rel="stylesheet" href="/bundle.css">
+    
+    <link rel="stylesheet" href="/_styles/main.css">
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta property="og:title" content="MIDI Archive" />
-    <meta property="og:description" content="ML model and archive of music on the early web" />
+    <meta property="og:description" content="Machine learning model and archive of music on the early web" />
     
     <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
     <meta property="og:type" content="website" />
@@ -55,7 +56,7 @@
     
     
   </head>
-  <body class="project two-column">
+  <body class="project ">
     <button class="toc-button" onclick="handleClick()"></button>
 
 <script>
@@ -160,26 +161,17 @@
   
       
       <li class="project-item">
-      <span class="project-title"><a href="/projects/allure-of-inertia">Allure of Inertia</a></span>
-      <span class="project-index"><a href="/projects/allure-of-inertia">10</a></span>
+      <span class="project-title"><a href="/projects/mixes-for-radio">Mixes for Radio</a></span>
+      <span class="project-index"><a href="/projects/mixes-for-radio">10</a></span>
       <span class="project-line"></span>
-      <span class="project-tagline"><a href="/projects/allure-of-inertia">Mix for NTS Radio</a></span>
-      </li>
-      
-  
-      
-      <li class="project-item">
-      <span class="project-title"><a href="/projects/composing-through-listening">Composing Through Listening</a></span>
-      <span class="project-index"><a href="/projects/composing-through-listening">11</a></span>
-      <span class="project-line"></span>
-      <span class="project-tagline"><a href="/projects/composing-through-listening">Radio broadcast for WFMU</a></span>
+      <span class="project-tagline"><a href="/projects/mixes-for-radio">Radio broadcasts on NTS and WFMU</a></span>
       </li>
       
   
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/collaborations">Collaborations</a></span>
-      <span class="project-index"><a href="/projects/collaborations">12</a></span>
+      <span class="project-index"><a href="/projects/collaborations">11</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/collaborations">Collaborations with Eli Keszler and James Hoff</a></span>
       </li>
@@ -190,7 +182,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/qcvg">QCVG</a></span>
-      <span class="project-index"><a href="/projects/qcvg">14</a></span>
+      <span class="project-index"><a href="/projects/qcvg">13</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/qcvg">Programmable modular synthesizer</a></span>
       </li>
@@ -199,7 +191,7 @@
       
       <li class="project-item">
       <span class="project-title"><a href="/projects/private-chronology">Private Chronology</a></span>
-      <span class="project-index"><a href="/projects/private-chronology">15</a></span>
+      <span class="project-index"><a href="/projects/private-chronology">14</a></span>
       <span class="project-line"></span>
       <span class="project-tagline"><a href="/projects/private-chronology">DIY music label, distributed by Mimaroglu Music Sales</a></span>
       </li>
@@ -217,16 +209,25 @@
         <h1>MIDI Archive</h1>
         <a href="https://reubenson.com/midi-archive/">https://reubenson.com/midi-archive/</a>
       </header>
-      <div class="content-wrapper">
-        <p><em><strong><a href="https://reubenson.com/midi-archive/">MIDI Archive</a></strong></em> is an exploratory prototype of a generative AI model presented alongside a bespoke archive of MIDI music on the early web, which forms the corpus the model is trained on.</p>
-<figure class="figure-medium no-border">
+      <div class="project-meta">
+        <div class="project-media">
+          Media: software, sound
+        </div>
+      </div>
+      <div class="project-description">
+        Machine learning model and archive of music on the early web
+      </div>
+      <div class="content-wrapper ">
+        <p class="project-grid-item-full"><em><strong><a href="https://reubenson.com/midi-archive/">MIDI Archive</a></strong></em> is an exploratory prototype of a generative AI model presented alongside a bespoke archive of MIDI music on the early web, which forms the corpus the model is trained on.</p>
+<p class="project-grid-item-4">Archives seem to have come into a kind of fashion as of late. In an age of planetary-scale existential precarity, they seem to offer solace in feeling knowable, certain, and grounding. The training procedures of AI foundation models like GPT have a close relationship with archives too, but instead rely on their accessibility, volume, and givenness, which allows archives to be composed and instrumentalized as training sets. I developed this project during my residency at Recurse Center in the fall of 2023 as an exploration of the opposing, and yet mutually reinforcing dynamics between building an archive and building a machine learning model. <br/><br/> Music generated from this model was also published by the People’s Coalition of Tandy as part of a <a href="https://midicompetition.pcotandy.org/">catalogue of works celebrating General MIDI</a>.
+<br>
+<br>
+Read more about this project <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">here</a>.</p>
+<figure class="project-grid-item-2">
   <img src="/public/midi-archive-model.png" alt="screenshot of MIDI Archive website">
   <figcaption>Screen capture of <em>MIDI Archive</em></figcaption>
 </figure>
 <!-- MIDI Archive uses machine learning and archiving to give the visitor various entrypoints into the world of music on the early web. -->
-<p>Archives seem to have come into a kind of fashion as of late. In an age of planetary-scale existential precarity, they seem to offer solace in feeling knowable, certain, and grounding. The training procedures of AI foundation models like GPT have a close relationship with archives too, but instead rely on their accessibility, volume, and givenness, which allows archives to be composed and instrumentalized as training sets. I developed this project during my residency at Recurse Center in the fall of 2023 as an exploration of the opposing, and yet mutually reinforcing dynamics between building an archive and building a machine learning model.</p>
-<p>Music generated from this model was also published by the People’s Coalition of Tandy as part of a <a href="https://midicompetition.pcotandy.org/">catalogue of works celebrating General MIDI</a>.</p>
-<p>Read more about this project <a href="https://medium.com/@reubenson/archives-ai-and-music-of-the-early-web-9b2f51fdef47">here</a>.</p>
 
       </div>
 
@@ -255,8 +256,6 @@
                   
                     
                       <a href="/projects/frog-chorus">Frog Chorus</a>
-                    
-                  
                     
                   
                     
@@ -315,8 +314,6 @@
                   
                     
                   
-                    
-                  
                 </li>
               
                 <li class="related-project">
@@ -353,12 +350,8 @@
                   
                     
                   
-                    
-                  
                 </li>
               
-            
-          
             
           
             
@@ -388,6 +381,6 @@
       </section>
       
     </div>
-    <div class="project-border broider"></div>
+    <div class="page-border broider"></div>
   </body>
 </html>

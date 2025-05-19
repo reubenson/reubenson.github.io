@@ -1,0 +1,251 @@
+@import '../shared';
+
+.project {
+  margin: 20px auto;
+
+  .content-wrapper {
+    // display: grid;
+    display: block;
+    // grid-template-columns: repeat(6, 1fr);
+    gap: 40px;
+    width: 100%;
+    // max-width: 1200px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .project-grid-item {
+    &-1,
+    &-2,
+    &-3,
+    &-4,
+    &-5,
+    &-6,
+    &-full {
+      margin: 20px auto;
+      width: 100%;
+    }
+  }
+
+  h1, h1 a {
+    border-bottom: none;
+    line-height: 34px;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0 20px 0 0;
+    text-decoration: none;
+    color: #000;
+  }
+
+  header a {
+    font-size: 16px;
+    border-bottom: none;
+    text-decoration: none;
+    word-break: break-all;
+    color: #000;
+  }
+
+  h2 a {
+    border-bottom: none;
+    text-decoration: none;
+    color: #000;
+  }
+
+  h3 {
+    border-bottom: 1px solid #000;
+    font-weight: 300;
+  }
+
+  p {
+    // text-align: justify;
+  }
+  
+  figure {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .project-more {
+    margin: 30px auto;
+    max-width: 720px;
+    border-top: solid black 1px;
+    margin-top: 20px;
+    clear: both;
+  }
+
+  .all-projects-link {
+    list-style: none;
+  }
+
+  .all-projects-link::before {
+    content: '↪';
+  }
+
+  .content {
+    margin: 10px auto;
+  }
+  
+  // .content p:first-child {
+  //   width: 100%;
+  //   font-size: 18px;
+  //   line-height: 24px;
+  //   margin-top: 10px;
+  //   font-style: italic;
+  // }
+
+  blockquote {
+    margin: auto;
+    border-bottom: solid black 1px;
+    border-top: solid black 1px;
+    clear: both;
+    display: flex;
+    font-style: italic;
+    padding: 0 20px;
+    text-align: justify;
+  }
+
+  blockquote p {
+    padding: 0 20px;
+  }
+
+  .figure-full-width img {
+    width: 720px;
+    max-width: calc(100vw - 80px);
+  }
+
+  // .project-border {
+  //   height: calc(100% - 20px);
+  //   width: calc(100vw - 20px);
+  //   position: fixed;
+  //   z-index: -1;
+  //   top: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   right: 0;
+  //   box-sizing: border-box;
+  //   margin: 10px;
+  // }
+
+  &.one-column {
+    .content .content-wrapper {
+      max-width: 720px;
+      margin-right: auto;
+    } 
+  }
+
+  &.two-column {
+    .content-wrapper {
+      min-height: 680px;
+    }
+  }
+  
+  header {
+    @include page-header;
+  }
+
+  .content h2 {
+    @include content-heading;
+  }
+
+  .project-description {
+    // font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px auto;
+    font-size: 22px;
+  }
+
+  .project-media {
+    font-family: Courier New;
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 720px) {
+    .content-wrapper:not(.no-grid) {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    .project-grid-item {
+      &-1 {
+        margin: auto;
+        grid-column: span 1;
+      }
+  
+      &-2 {
+        margin: auto;
+        grid-column: span 2;
+      }
+  
+      &-3 {
+        margin: auto;
+        grid-column: span 3;
+      }
+  
+      &-4 {
+        margin: auto;
+        grid-column: span 4;
+      }
+      
+      &-5 {
+        margin: auto;
+        grid-column: span 5;
+      }
+  
+      &-6 {
+        margin: auto;
+        grid-column: span 6;
+      }
+  
+      &-full {
+        margin: auto;
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  @media print {
+    * {
+      // this seems to help with multi-page printing
+      position: static !important;
+    }
+
+    .project-more {
+      display: none;
+    }
+
+    figure {
+      // max-width: 10cm;
+    }
+
+    header {
+      margin-top: 0;
+    }
+  }
+}
+
+// .project {
+//   &-border {
+//     border: 1px solid $primary-color;
+//   }
+
+//   &-more {
+//     margin-top: 2rem;
+    
+//     h2 {
+//       font-size: 1.5rem;
+//       margin-bottom: 1rem;
+//     }
+//   }
+// }
+
+// .content-wrapper {
+//   max-width: 800px;
+//   margin: 0 auto;
+//   padding: 1rem;
+// }
