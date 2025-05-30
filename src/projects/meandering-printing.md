@@ -3,6 +3,7 @@ layout: project.njk
 title: Ceramic Meandering
 description: 3D printing ceramics at the Haystack Mountain School of Crafts
 media: software, ceramics
+year: 2023
 ---
 
 _Meandering Ceramics_ represent my experimentation with 3D-printing porcelain, using this technology to frame an inquiry into site-specificity and the expression of the line via the Greek meander motif.

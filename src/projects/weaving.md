@@ -4,6 +4,7 @@ title: Weaving Music
 description: Sound as a woven textile
 url: https://reubenson.com/weaving
 media: software, sound
+year: 2019
 ---
 
 **[Weaving Music](/weaving)** is an exploration of the materiality of sound through the metaphor of weaving, the loom re-imagined as a music sequencer.

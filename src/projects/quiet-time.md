@@ -1,9 +1,10 @@
 ---
 layout: project.njk
 title: Quiet Time
-description: Lecture-Performance-Essay for Naive Yearly 2024
+description: Lecture-Performance-Essay for Naive Yearly
 url: https://www.are.na/editorial/quiet-time
 media: software, sound, writing
+year: 2024
 ---
 
 <figure class="figure-medium project-grid-item-2">
@@ -11,13 +12,13 @@ media: software, sound, writing
   <figcaption></figcaption>
 </figure>
 
-Along the Ljubljanica River at Lubljiana's Museum of Architecture and Design, I gave a talk on background music and the web. This talk was organized as part of the [Naive Yearly](https://naiveyearly.com/) conference, featuring other talks by [Nathalie Lawhead](http://www.nathalielawhead.com/), [Kim Kleinert](https://kim-kleinert.digitale-grafik.com/), [Agnes Cameron](https://agnescameron.info/), [Daniel Murray](https://loom.cafe/), [Charmaine Li](https://charmaineli.ca/), [Koloyan Kolev](https://kaloyankolev.com/), and [Tiger Dingsun](https://www.tiger.exposed/).
+Along the river at Lubljiana's Museum of Architecture and Design, I gave a talk on background music and the web. This talk was organized as part of the [Naive Yearly](https://naiveyearly.com/) conference, featuring other talks by [Nathalie Lawhead](http://www.nathalielawhead.com/), [Kim Kleinert](https://kim-kleinert.digitale-grafik.com/), [Agnes Cameron](https://agnescameron.info/), [Daniel Murray](https://loom.cafe/), [Charmaine Li](https://charmaineli.ca/), [Koloyan Kolev](https://kaloyankolev.com/), and [Tiger Dingsun](https://www.tiger.exposed/).
 {.project-grid-item-4}
 
-An essay, titled _Quiet Time_, based on the talk has been published by [Are.na Editorial](https://www.are.na/editorial/quiet-time), which surveys the industrial history of background music and raises questions about ambient music as a commodity in the ecosystem of streaming platforms while looking to phenomenology around our disparate modes of attention (focused and environmental) towards a more humanistic framing of our sonic experiences amongst the monoliths of techno-culture.
+An essay, titled _Quiet Time_, based on the talk has been published by [Are.na Editorial](https://www.are.na/editorial/quiet-time). It surveys the industrial history of background music and raises questions about ambient music as a commodity within the logics of streaming platforms. It also makes the case for a more humanistic framing of the our experiences of background media through the examination of phenomenology and our disparate modes of attention (focused vs environmental).
 {.project-grid-item-6}
 
-The talk concluded with a performance of a _group listening performance_ piece titled "River Song". audience members were directed to a webpage that randomly assigned each of their phones a single note to play from a larger harmonic chord structure. These notes slowly diminished in volume until reaching silence while audience members roamed along the Ljubljanica River.
+The talk concluded a _group listening performance_ titled "River Song". Audience members were directed to a webpage that randomly assigned each of their phones a single note to play from a larger harmonic chord structure. These notes slowly diminished in volume until reaching silence while audience members roamed along the Ljubljanica River.
 {.project-grid-item-2}
 
 <figure class="project-grid-item-4">

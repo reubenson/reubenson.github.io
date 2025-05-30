@@ -739,10 +739,11 @@ h3 {
   margin: 30px auto;
   font-size: 22px;
 }
-.project .project-media {
+.project .project-meta {
   font-family: Courier New;
   font-size: 12px;
   font-style: italic;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 @media (min-width: 720px) {

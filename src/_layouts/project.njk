@@ -1,6 +1,5 @@
 ---
 title: Project Title
-description: Project description
 ---
 
 <!doctype html>
@@ -43,9 +42,15 @@ description: Project description
         <a href="{{ url }}">{{url}}</a>
       </header>
       <div class="project-meta">
-        <div class="project-media">
-          Media: {{ media }}
-        </div>
+        {% if media %}
+          <div class="project-media">
+            <strong>Media</strong>: {{ media }}
+            {% if year %}
+              <span class="project-year">| <strong>Year</strong>: {{ year }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+        
       </div>
       <div class="project-description">
         {{ description }}
