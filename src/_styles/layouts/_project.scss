@@ -211,6 +211,8 @@
   }
 
   @media print {
+    margin: 0;
+
     * {
       // this seems to help with multi-page printing
       position: static !important;

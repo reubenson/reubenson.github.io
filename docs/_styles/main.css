@@ -781,6 +781,9 @@ h3 {
   }
 }
 @media print {
+  .project {
+    margin: 0;
+  }
   .project * {
     position: static !important;
   }
