@@ -70,4 +70,8 @@ a {
   .print-page-break {
     break-after: page;
   }
+
+  @page {
+    margin-top: 1in;
+  }
 }

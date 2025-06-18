@@ -1,17 +1,17 @@
 ---
 layout: project.njk
-title: Ceramic Meandering
+title: Ceramic Meande
 description: 3D printing ceramics at the Haystack Mountain School of Crafts
 media: software, ceramics
 year: 2023
 ---
 
-_Ceramic Meandering_ was made with 3D-printed porcelain, using the specific means of this technology to frame the evolution of the line in arts and architecture. Taking advantage of the fact that 3D-printing can make a single continuous line of clay, I used the Greek meander motif to transform the ornamental line into an architectural form.
+_Ceramic Meander_ was made with 3D-printed porcelain, using the specific means of this technology to frame the evolution of the line in arts and architecture. Taking advantage of the fact that 3D-printing can make a single continuous line of clay, I used the Greek meander motif to transform the ornamental line into an architectural form.
 {.project-grid-item-full}
 
 <figure class="figure-body project-grid-item-4">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-installation.jpeg" alt="image from installation of the meandering ceramics">
-  <figcaption>Final installation of meandering ceramics</figcaption>
+  <figcaption>Final installation of <em>Ceramic Meander</em></figcaption>
 </figure>
 
 Over the course of a two-week workshop at The Haystack Mountain School of Crafts, I designed, fabricated, and activated various ceramics sculptures. In this work, I focused on site-specificity and expression of the line, and [wrote a brief essay about my process](https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd).
@@ -29,7 +29,7 @@ As the centerpiece piece in my final show, I assembled a mixed-media sculpture t
 
 <figure class="figure-medium project-grid-item-full">
   <img src="/public/haystack-ceramic-centerpiece.webp">
-  <figcaption>Installation centerpiece</figcaption>
+  <figcaption>Wood boards, porcelain greenware, rock, seaweed, barnacle</figcaption>
 </figure>
 
 <!-- <figure class="figure-medium">

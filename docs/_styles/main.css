@@ -83,13 +83,15 @@ h3 {
   }
 }
 @page {
-  size: A4;
-  margin: 2cm;
+  margin: 50px !important;
 }
 @media print {
   body {
     height: auto;
     overflow: visible;
+  }
+  @page {
+    margin: 50px !important;
   }
 }
 .table-of-contents {
@@ -784,6 +786,12 @@ h3 {
   .project {
     margin: 0;
   }
+  .project header, .project h1, .project a {
+    margin-top: 0;
+  }
+  .project .content {
+    margin: 0 auto;
+  }
   .project * {
     position: static !important;
   }
@@ -933,5 +941,8 @@ a {
 @media print {
   .print-page-break {
     break-after: page;
+  }
+  @page {
+    margin-top: 1in;
   }
 }

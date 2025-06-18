@@ -84,13 +84,17 @@ h3 {
 
 
 @page {
-  size: A4;
-  margin: 2cm;
+  // size: A4;
+  margin: 50px !important;
 }
 
 @media print {
   body {
     height: auto;
     overflow: visible;
+  }
+
+  @page {
+    margin: 50px !important;
   }
 }
