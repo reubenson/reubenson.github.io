@@ -1,26 +1,26 @@
 ---
 layout: project.njk
-title: Ceramic Meande
+title: Ceramic Meander
 description: 3D printing ceramics at the Haystack Mountain School of Crafts
-media: software, ceramics
+media: ceramics, software
 year: 2023
 ---
 
-_Ceramic Meander_ was made with 3D-printed porcelain, using the specific means of this technology to frame the evolution of the line in arts and architecture. Taking advantage of the fact that 3D-printing can make a single continuous line of clay, I used the Greek meander motif to transform the ornamental line into an architectural form.
+_Ceramic Meander_ was made with 3D-printed porcelain, using the specific means of this technology to frame the evolution of the line in arts and architecture. Taking advantage of the fact that 3D-printing can make a single continuous line of clay, I used the Greek meander motif to transform the ornamental line into architectural forms. This work also briefly appears in the July/August 2024 issue of [Ceramic Review](https://www.ceramicreview.com/issues/ceramic-review-issue-328/).
 {.project-grid-item-full}
 
-<figure class="figure-body project-grid-item-4">
+<figure class="figure-body project-grid-item-full">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics/haystack-installation.jpeg" alt="image from installation of the meandering ceramics">
   <figcaption>Final installation of <em>Ceramic Meander</em></figcaption>
 </figure>
 
 Over the course of a two-week workshop at The Haystack Mountain School of Crafts, I designed, fabricated, and activated various ceramics sculptures. In this work, I focused on site-specificity and expression of the line, and [wrote a brief essay about my process](https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd).
-{.project-grid-item-2}
+{.project-grid-item-full}
 
-As the centerpiece piece in my final show, I assembled a mixed-media sculpture that included porcelain (both bisque and greenware), wood boards, a rock, a piece of seaweed, a barnacle shell, and a stencil-print made of porcelain dust. The resulting sculpture plays with the idea of a print (in its different contexts) and gestures at notions of land art (Robert Smithson’s Spiral Jetty, porcelain as earthen material), which came full circle when I brought the brittle, un-fired ceramic sculpture (what we call greenware) to dissolve into the ocean the hour before finally departing from campus.
-{.project-grid-item-4}
+As the centerpiece piece in my final show, I assembled a mixed-media sculpture that included porcelain (both bisque and greenware), wood boards, a rock, a piece of seaweed, a barnacle shell, and a stencil-print made of porcelain dust. The resulting sculpture plays with the idea of a print (in its different contexts) and gestures at notions of land art (Robert Smithson’s Spiral Jetty, porcelain as earthen material), which came full circle when I brought the brittle, unfired ceramic sculpture (what we call greenware) to dissolve into the ocean the hour before finally departing from campus.
+{.project-grid-item-3}
 
-<figure class="figure-medium project-grid-item-2">
+<figure class="figure-medium project-grid-item-3">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/3D-printing.jpeg" alt="WASP 3D printer in action">
   <figcaption>WASP 3D printer in action</figcaption>
 </figure>

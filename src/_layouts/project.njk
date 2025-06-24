@@ -38,15 +38,18 @@ title: Project Title
     <div class="top-spacer"></div>
     <div class="content">
       <header>
-        <h1>{{ title }}</h1>
+        <h1>{{ title }} {% if year %}<span class="project-year">({{ year }})</span>{% endif %}</h1>
         <a href="{{ url }}">{{url}}</a>
       </header>
       <div class="project-meta">
         {% if media %}
           <div class="project-media">
             <strong>Media</strong>: {{ media }}
-            {% if year %}
+            {# {% if year %}
               <span class="project-year">| <strong>Year</strong>: {{ year }}</span>
+            {% endif %} #}
+            {% if dimensions %}
+              <span class="project-dimensions">| <strong>Dimensions</strong>: {{ dimensions }}</span>
             {% endif %}
           </div>
         {% endif %}

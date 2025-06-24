@@ -35,6 +35,10 @@ figcaption {
   margin-top: 5px;
 }
 
+// figure img {
+//   margin: auto;
+// }
+
 ul {
   list-style: none;
   padding-left: 0;
@@ -64,6 +68,14 @@ a {
   right: 0;
   box-sizing: border-box;
   margin: 10px;
+}
+
+.square-crop {
+  aspect-ratio: 1/1;
+
+  img {
+    object-fit: cover;
+  }
 }
 
 @media print {

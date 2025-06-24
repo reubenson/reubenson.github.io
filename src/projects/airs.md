@@ -7,7 +7,7 @@ description: Poems accompanied by recordings of the wind
 year: 2025
 ---
 
-[Airs](https://thehtml.review/04/airs) was published the Spring 2025 issue of [The HTML Review](https://thehtml.review), and began as a series of audio recordings made in quiet, open spaces. It combines typographic distortions and animation with a generative audio environment around the theme of air. The work is intended to facilitate multiple modes of attention, flickering between the atmospheric and the concrete.
+[Airs](https://thehtml.review/04/airs) was published in the Spring 2025 issue of [The HTML Review](https://thehtml.review). It combines typographic distortions and animation with a generative audio environment around the theme of air. The work is intended to facilitate multiple modes of attention, flickering between the atmospheric and the concrete.
 {.project-grid-item-4}
 
 <!-- These recordings were made in wide, open spaces, and expressed an ambiguous desire for a kind of _airiness_. During this period of my life, I contented myself with the metaphor that, as if after a long winter, I was going around and opening every window I could find. -->

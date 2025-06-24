@@ -738,7 +738,7 @@ h3 {
 .project .project-description {
   font-weight: bold;
   text-align: center;
-  margin: 30px auto;
+  margin: 20px auto;
   font-size: 22px;
 }
 .project .project-meta {
@@ -783,14 +783,12 @@ h3 {
   }
 }
 @media print {
-  .project {
-    margin: 0;
-  }
   .project header, .project h1, .project a {
     margin-top: 0;
   }
   .project .content {
     margin: 0 auto;
+    padding: 0;
   }
   .project * {
     position: static !important;
@@ -936,6 +934,13 @@ a {
   right: 0;
   box-sizing: border-box;
   margin: 10px;
+}
+
+.square-crop {
+  aspect-ratio: 1/1;
+}
+.square-crop img {
+  object-fit: cover;
 }
 
 @media print {
