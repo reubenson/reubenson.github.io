@@ -1,8 +1,9 @@
 ---
 layout: project.njk
 title: Projects
-layoutType: one-column
+description: Table of Contents
 hideSeeMore: true
-
+noGrid: true
 ---
+
 {% include "projects-list.njk" %}

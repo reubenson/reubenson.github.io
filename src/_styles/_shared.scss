@@ -1,0 +1,52 @@
+@mixin page-header {
+  align-items: flex-end;
+  border-bottom: solid black 1px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: auto auto 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  max-width: 720px;
+  position: relative;
+}
+
+@mixin content-heading {
+  font-weight: 300;
+  margin: 40px 0 40px;
+  text-align: center;
+} 
+
+@mixin grid-container {
+  display: block;
+  // grid-template-columns: repeat(1, 1fr);
+  gap: 40px;
+
+  .grid-item {
+    &-1 {
+      grid-column: span 1;
+    }
+    &-2 {
+      grid-column: span 2;
+    }
+    &-3 {
+      grid-column: span 3;
+    }
+    &-4 {
+      grid-column: span 4;
+    }
+    &-5 {
+      grid-column: span 5;
+    }
+    &-6 {
+      grid-column: span 6;
+    }
+  }
+
+  @media (min-width: 720px) {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 40px;
+  }
+}

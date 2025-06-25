@@ -4,13 +4,14 @@ title: Reuben Son
 includeBiography: false
 includeDiscography: true
 includePerformances: true
-includeProjects: true
+includeProjects: false
 includeResidencies: true
 # includeEmployment: true
 includeEducation: false
 includeExhibitions: true
 includeTalks: true
 ---
+
 # {{ title }}
 
 <style>

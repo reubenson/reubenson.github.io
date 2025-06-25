@@ -1,0 +1,105 @@
+// Base
+@import 'base/variables';
+@import 'base/reset';
+
+// Components
+@import 'components/table-of-contents';
+@import 'components/newsletter-signup';
+// @import 'components/header';
+// @import 'components/footer';
+
+// Layouts
+@import 'layouts/homepage';
+@import 'layouts/project';
+@import 'layouts/shop';
+
+// general styles on all pages
+body {
+  overflow: hidden;
+}
+
+.content {
+  left: 10px;
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  top: 20px;
+  bottom: 20px;
+  right: 10px;
+  padding: 30px;
+  // max-width: 720px;
+  margin: auto;
+}
+
+figcaption {
+  font-size: 13px;
+  line-height: 1.1em;
+  text-align: justify;
+  margin: auto;
+  margin-top: 5px;
+}
+
+// figure img {
+//   margin: auto;
+// }
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  padding: 0 0 10px 0;
+}
+
+li::before {
+  content: '✺';
+  padding-right: 10px;
+}
+
+a {
+  color: #000;
+}
+
+.page-border {
+  height: calc(100% - 20px);
+  width: calc(100vw - 20px);
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+.square-crop {
+  aspect-ratio: 1/1;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.table-of-contents {
+  border: solid black 1px;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.footnote {
+  font-size: 12px;
+}
+
+@media print {
+  .print-page-break {
+    break-after: page;
+  }
+
+  @page {
+    margin-top: 1in;
+  }
+}

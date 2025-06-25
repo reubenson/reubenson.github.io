@@ -1,9 +1,32 @@
 const { EleventyRenderPlugin } = require("@11ty/eleventy");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const markdownIt = require('markdown-it');
+const sass = require('sass');
+const path = require('path');
+const fs = require('fs');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
+  
+  // Add SCSS template handling
+  eleventyConfig.addTemplateFormats("scss");
+  eleventyConfig.addExtension("scss", {
+    outputFileExtension: "css",
+    compile: async function(inputContent) {
+      return async (data) => {
+        try {
+          const result = sass.compileString(inputContent, {
+            loadPaths: ['src/_styles']
+          });
+          return result.css;
+        } catch (error) {
+          console.error('SCSS Processing Error:', error);
+          return '';
+        }
+      };
+    }
+  });
+
   eleventyConfig.addPassthroughCopy("splide.min.js");
   eleventyConfig.addPassthroughCopy("splide.min.css");
   eleventyConfig.addPassthroughCopy("project-slides.css");
@@ -33,7 +56,9 @@ module.exports = function(eleventyConfig) {
     typographer: true
   };
 
-  eleventyConfig.setLibrary('md', markdownIt(options));
+  let markdownItAttrs = require("markdown-it-attrs");
+  
+  eleventyConfig.setLibrary('md', markdownIt(options).use(markdownItAttrs));
 
   // add RSS
   eleventyConfig.addPlugin(pluginRss);
@@ -43,11 +68,35 @@ module.exports = function(eleventyConfig) {
       "./node_modules/@uriopass/nosleep.js/dist/NoSleep.min.js": "/public/js/nosleep.js"
   });
 
+  eleventyConfig.addFilter("css", function(path) {
+    // Process and return the CSS
+    return `/css/${path}.css`;
+  });
+
+  // Instead of passthrough copy, we'll add a custom collection
+  eleventyConfig.addCollection("styles", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/_styles/**/*.scss");
+  });
+
+  // Add a custom filter to process SCSS
+  // eleventyConfig.addFilter("processScss", function(scssContent) {
+  //   try {
+  //     const result = sass.compileString(scssContent, {
+  //       loadPaths: ['src/_styles']
+  //     });
+  //     return result.css;
+  //   } catch (error) {
+  //     console.error('SCSS Processing Error:', error);
+  //     return '';
+  //   }
+  // });
+
   return {
     dir: {
       input: "src",
-      layouts: "_layouts",
-      output: "docs"
+      output: "docs",
+      includes: "_includes",
+      layouts: "_layouts"
     },
     markdownTemplateEngine: "njk",
   }

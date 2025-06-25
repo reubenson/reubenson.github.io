@@ -1,0 +1,157 @@
+@charset "UTF-8";
+.table-of-contents {
+  font-family: "Ibarra Real Nova", serif;
+  background-color: #f0f0e6;
+  display: none;
+  visibility: hidden;
+  width: 240px;
+  position: fixed;
+  left: 20px;
+  padding: 10px 20px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 100%;
+  max-height: calc(100% - 60px);
+  max-width: 720px;
+  overflow: scroll;
+  top: 0;
+  bottom: 0;
+}
+.table-of-contents > * {
+  max-width: 720px;
+  margin: auto;
+}
+.table-of-contents-header {
+  margin: 30px auto 10px;
+  margin: 40px 0 40px;
+  text-align: center;
+}
+.table-of-contents.open {
+  display: block;
+  visibility: visible;
+  z-index: 9;
+  width: calc(100% - 60px);
+}
+.table-of-contents.open + .content {
+  filter: blur(10px);
+  transition: filter 0.9s ease;
+}
+.table-of-contents nav {
+  margin-top: 20px;
+  text-align: center;
+}
+.table-of-contents nav a {
+  padding: 0 5px;
+}
+.table-of-contents h2.table-of-contents-header {
+  text-align: center;
+  margin: 40px auto;
+}
+@media screen and (min-width: 768px) {
+  .table-of-contents {
+    max-width: 100%;
+  }
+}
+
+.toc-button {
+  background-color: #f0f0e6;
+  right: 34px;
+  position: absolute;
+  top: 34px;
+  font-size: 20px;
+  border: none;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.toc-button:after {
+  content: "☰";
+  color: #000000;
+}
+
+.toc-button.open:after {
+  content: "✕";
+}
+
+@media print {
+  .toc-button {
+    display: none;
+  }
+}
+.projects-list {
+  clear: both;
+}
+
+.projects-list-container .project-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  margin: 20px 0 20px;
+}
+
+.projects-list-container .project-title {
+  font-weight: 400;
+  padding-right: 5px;
+  position: absolute;
+  left: 0;
+}
+
+.projects-list-container .project-title a, .project-index a {
+  text-decoration: none;
+}
+
+.projects-list-container .project-index {
+  font-style: italic;
+  padding-left: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.projects-list-container .project-title, .project-index {
+  z-index: 1;
+  background-color: #f0f0e6;
+  top: -3px;
+}
+
+.projects-list-container .project-line {
+  border-bottom: 2px dotted black;
+  display: block;
+  position: absolute;
+  top: 1cap;
+  width: 100%;
+}
+
+.projects-list-container .project-tagline {
+  font-style: italic;
+  margin-top: 20px;
+  top: 20px;
+}
+
+.projects-list-container .project-tagline a {
+  text-decoration: none;
+}
+
+.projects-list-container .project-tagline::after {
+  content: "↝";
+  margin-left: 5px;
+  font-family: math;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.projects-list-container li::before {
+  display: none;
+}
+
+.projects-list-container a {
+  border-bottom: none;
+}
+
+.homepage .table-of-contents {
+  border: solid #000 1px;
+}

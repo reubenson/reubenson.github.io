@@ -1,6 +1,5 @@
 ---
 title: Project Title
-description: Project description
 ---
 
 <!doctype html>
@@ -11,7 +10,8 @@ description: Project description
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
-    <link rel="stylesheet" href="/bundle.css">
+    {# <link rel="stylesheet" href="/bundle.css"> #}
+    <link rel="stylesheet" href="/_styles/main.css">
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:description" content="{{ description }}" />
@@ -38,10 +38,27 @@ description: Project description
     <div class="top-spacer"></div>
     <div class="content">
       <header>
-        <h1>{{ title }}</h1>
+        <h1>{{ title }} {% if year %}<span class="project-year">({{ year }})</span>{% endif %}</h1>
         <a href="{{ url }}">{{url}}</a>
       </header>
-      <div class="content-wrapper">
+      <div class="project-meta">
+        {% if media %}
+          <div class="project-media">
+            <strong>Media</strong>: {{ media }}
+            {# {% if year %}
+              <span class="project-year">| <strong>Year</strong>: {{ year }}</span>
+            {% endif %} #}
+            {% if dimensions %}
+              <span class="project-dimensions">| <strong>Dimensions</strong>: {{ dimensions }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+      </div>
+      <div class="project-description">
+        {{ description }}
+      </div>
+      <div class="content-wrapper {% if noGrid %}no-grid{% endif %}">
         {{ content | safe }}
       </div>
 
@@ -69,6 +86,6 @@ description: Project description
       </section>
       {% endif %}
     </div>
-    <div class="project-border broider"></div>
+    <div class="page-border broider"></div>
   </body>
 </html>
