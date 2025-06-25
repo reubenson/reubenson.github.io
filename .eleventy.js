@@ -16,7 +16,7 @@ module.exports = function(eleventyConfig) {
       return async (data) => {
         try {
           const result = sass.compileString(inputContent, {
-            loadPaths: ['src/_styles']
+            loadPaths: ['src/styles']
           });
           return result.css;
         } catch (error) {
