@@ -135,12 +135,6 @@
       margin-right: auto;
     } 
   }
-
-  &.two-column {
-    .content-wrapper {
-      min-height: 680px;
-    }
-  }
   
   header {
     @include page-header;

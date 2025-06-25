@@ -720,9 +720,6 @@ h3 {
   max-width: 720px;
   margin-right: auto;
 }
-.project.two-column .content-wrapper {
-  min-height: 680px;
-}
 .project header {
   align-items: flex-end;
   border-bottom: solid black 1px;
