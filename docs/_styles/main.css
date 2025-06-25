@@ -102,13 +102,12 @@ h3 {
   width: 240px;
   position: fixed;
   left: 20px;
-  padding: 20px;
+  padding: 10px 20px;
   left: 0;
   right: 0;
   margin: auto;
-  padding: 10px;
   height: 100%;
-  max-height: calc(100% - 80px);
+  max-height: calc(100% - 60px);
   max-width: 720px;
   overflow: scroll;
   top: 0;
@@ -127,7 +126,7 @@ h3 {
   display: block;
   visibility: visible;
   z-index: 9;
-  width: calc(100% - 80px);
+  width: calc(100% - 60px);
 }
 .table-of-contents.open + .content {
   filter: blur(10px);
@@ -265,13 +264,11 @@ h3 {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  gap: 20px;
-  height: 35px;
+  gap: 10px;
 }
 
 #mc_embed_signup form {
   width: 100%;
-  font-family: "Courier New", Courier, monospace;
 }
 
 #mc_embed_signup input,
@@ -281,9 +278,17 @@ h3 {
 }
 
 #mc_embed_signup .mc-field-group {
-  flex-basis: 50%;
   flex-grow: 1;
   flex-shrink: 0;
+}
+#mc_embed_signup .mc-field-group:nth-child(2) {
+  flex-basis: 100%;
+}
+#mc_embed_signup .mc-field-group:nth-child(3) {
+  flex-basis: 49%;
+}
+#mc_embed_signup .mc-field-group:nth-child(4) {
+  flex-basis: 49%;
 }
 
 #mc_embed_signup .mc-field-group input {
@@ -299,6 +304,7 @@ h3 {
   position: absolute;
   top: -20px;
   color: #6B0505 !important;
+  display: contents;
 }
 
 #mc_embed_signup #mce-responses {
@@ -309,6 +315,10 @@ h3 {
   position: absolute;
   top: 40px;
   color: black !important;
+}
+
+#mc_embed_signup .optionalParent {
+  flex-basis: 100%;
 }
 
 #mc_embed_signup #mc-embedded-subscribe {
@@ -426,11 +436,11 @@ h3 {
   left: -73px;
   text-align: center;
   transform: rotateZ(-90deg);
-  top: 81px;
+  top: 100px;
 }
 .homepage .card.back h1 {
   right: -73px;
-  top: 81px;
+  top: 100px;
   transform: rotateZ(90deg) scaleX(-1);
 }
 .homepage .card .container {
@@ -441,7 +451,7 @@ h3 {
   padding: 8px;
   position: absolute;
   height: calc(100% - 60px);
-  width: calc(100% - 55px);
+  width: calc(100% - 35px);
   z-index: 1;
 }
 .homepage .container-background {
@@ -454,6 +464,7 @@ h3 {
 .homepage .card p {
   margin-top: 0;
   text-align: justify;
+  width: 100%;
 }
 .homepage .card.front p {
   text-align: center;
@@ -500,9 +511,9 @@ h3 {
   text-transform: uppercase;
 }
 .homepage .card-quote-footer {
-  bottom: 0;
+  bottom: -13px;
   font-style: normal;
-  left: 0;
+  left: 7px;
   position: absolute;
 }
 .homepage .left-arrow, .homepage .right-arrow {
@@ -625,11 +636,6 @@ h3 {
     display: block;
   }
 }
-@media screen and (min-width: 1180px) {
-  .homepage .table-of-contents {
-    border: solid black 1px;
-  }
-}
 
 .project {
   margin: 20px auto;
@@ -746,7 +752,8 @@ h3 {
   font-size: 12px;
   font-style: italic;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  max-width: 720px;
 }
 @media (min-width: 720px) {
   .project .content-wrapper:not(.no-grid) {
@@ -885,6 +892,10 @@ h3 {
   margin-top: 20px;
 }
 
+body {
+  overflow: hidden;
+}
+
 .content {
   left: 10px;
   position: absolute;
@@ -894,13 +905,13 @@ h3 {
   bottom: 20px;
   right: 10px;
   padding: 30px;
-  max-width: 720px;
   margin: auto;
 }
 
 figcaption {
   font-size: 13px;
-  line-height: 14px;
+  line-height: 1.1em;
+  text-align: justify;
   margin: auto;
   margin-top: 5px;
 }
@@ -941,6 +952,18 @@ a {
 }
 .square-crop img {
   object-fit: cover;
+}
+
+.table-of-contents {
+  border: solid black 1px;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.footnote {
+  font-size: 12px;
 }
 
 @media print {

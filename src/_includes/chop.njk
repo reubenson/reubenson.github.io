@@ -27,12 +27,13 @@
 <style>
   .chop-container {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     padding: 20px;
     border-radius: 50%;
     margin-top: 100px;
     transform: scaleX(1) rotate(43deg);
+    opacity: 0.2;
   }
 
   .chop-container svg {
@@ -48,8 +49,8 @@
   .chop {
     shape-outside: circle(50%);
     border-radius: 50%;
-    height: 90px;
-    width: 90px;
+    height: 50px;
+    width: 50px;
     background-image: url('/public/chop-crop-alpha.png');
     background-size: contain;
     background-position: center;
@@ -64,10 +65,10 @@
   }
 
   .chop-border {
-    border: solid black 4px;
+    border: solid black 2px;
     border-radius: 50%;
-    height: 80%;
-    width: 80%;
+    height: 70%;
+    width: 70%;
     position: absolute;
     top: 0;
     bottom: 0;

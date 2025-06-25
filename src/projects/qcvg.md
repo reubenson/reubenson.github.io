@@ -20,7 +20,7 @@ The QCVG is comprised of an Arduino Nano microcontroller interfaced to a pair of
 The [software is written in C++](https://github.com/reubenson/qcvg), and an example of music recorded with the QCVG can be heard on [SoundCloud](https://soundcloud.com/reubenson/qcvg-demo-sketch).
 {.project-grid-item-4}
 
-<figure class="project-grid-item-2">
+<figure class="project-grid-item-full">
   <img src="https://s3.amazonaws.com/privatechronology/assets/QCVG_1.jpg" alt="front view of QCVG module" class="flex-half">
   <figcaption>Front view of custom-built module</figcaption>
 </figure>

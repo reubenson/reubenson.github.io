@@ -6,13 +6,13 @@
   width: 240px;
   position: fixed;
   left: 20px;
-  padding: 20px;
+  padding: 10px 20px;
   left: 0;
   right: 0;
   margin: auto;
-  padding: 10px;
+  // padding: 10px;
   height: 100%;
-  max-height: calc(100% - 80px);
+  max-height: calc(100% - 60px);
   max-width: 720px;
   overflow: scroll;
   top: 0;
@@ -33,7 +33,7 @@
     display: block;
     visibility: visible;
     z-index: 9;
-    width: calc(100% - 80px);
+    width: calc(100% - 60px);
 
     + .content {
       filter: blur(10px);

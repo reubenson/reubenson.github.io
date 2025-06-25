@@ -16,13 +16,17 @@ In additional to publishing music by Reuben Son, the label also released music b
 <a href="/private-chronology/10"><em>Still Sleeping</em></a> was the final release on Private Chronology, and consists of electronic music made with a Eurorack modular synthesizer. Although much of the sound design was executed using traditional analogue techniques, control signals were generated algorithmically using software developed for the <a href="/private-chronology/qcvg">QCVG</a>.
 {.project-grid-item-3}
 
-{.project-grid-item-1}
-
-<figure class="project-grid-item-2">
-  <img src="https://s3.amazonaws.com/privatechronology/assets/DSCF3880.JPG" alt="image of cassette tape" class="flex-half">
-  <img src="https://s3.amazonaws.com/privatechronology/assets/PC09_5.JPG" alt="image of cassette tape" class="flex-half">
+<figure class="project-grid-item-3">
+  <img src="https://s3.amazonaws.com/privatechronology/assets/DSCF3880.JPG" alt="image of cassette tape">
   <figcaption>
-    Images of Patrick Emm's <a href="/private-chronology/08"><em>Theta States</em></a> and Park &amp; Tamirisa's <a href="/private-chronology/09"><em>SOTO</em></a> releases on Private Chronology
+    Patrick Emm's <a href="/private-chronology/08"><em>Theta States</em></a>
+  </figcaption>
+</figure>
+
+<figure class="project-grid-item-full">
+  <img src="https://s3.amazonaws.com/privatechronology/assets/PC09_5.JPG" alt="image of cassette tape">
+  <figcaption>
+    Park &amp; Tamirisa's <a href="/private-chronology/09"><em>SOTO</em></a>
   </figcaption>
 </figure>
 

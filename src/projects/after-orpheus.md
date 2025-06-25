@@ -15,8 +15,8 @@ _After Orpheus_ is a mixed media sculpture that combines steel piano wire with c
 <!-- \ -->
 
 <figure class="project-grid-item-5">
-  <img src="/public/after-orpheus/installation.jpg" style="max-width: 88%;" alt="">
-  <figcaption style="max-width: 95%;"><em>After Orpheus</em> installed at Millenium Film Workshop for <em>Quantum Intimacies</em> curated by <a href="https://michelesaintmichel.com/" target="_blank">Michèle Saint-Michel</a></figcaption>
+  <img src="/public/after-orpheus/installation.jpg" style="@print{max-width: 88%};" alt="">
+  <figcaption style="@print{max-width: 95%};"><em>After Orpheus</em> installed at Millenium Film Workshop for <em>Quantum Intimacies</em> curated by <a href="https://michelesaintmichel.com/" target="_blank">Michèle Saint-Michel</a></figcaption>
 </figure>
 
 This sculpture is part of a body of work (in progress) in which ceramic vessels are activated through a variety of physical means. Although this sculpture could be also placed outdoors and activated by the wind, here the indoor installation relies instead on electromagnetic activation (via e-bow).

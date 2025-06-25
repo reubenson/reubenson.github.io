@@ -1,5 +1,21 @@
 [
   {
+    "id": "after-orpheus",
+    "title": "After Orpheus",
+    "description": "",
+    "year": 2025,
+    "url": "",
+    "path": "/projects/after-orpheus",
+    "tagline": "Sound sculpture for 'Quantum Intimacies'",
+    "selected": true,
+    "categories": [],
+    "relatedProjects": [
+      "ceramics",
+      "meandering-printing",
+      "airs"
+    ]
+  },
+  {
     "id": "airs",
     "title": "Airs",
     "description": "",

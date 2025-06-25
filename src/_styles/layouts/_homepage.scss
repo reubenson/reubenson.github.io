@@ -113,12 +113,12 @@
     left: -73px;
     text-align: center;
     transform: rotateZ(-90deg);
-    top: 81px;
+    top: 100px;
   }
   
   .card.back h1 {
     right: -73px;
-    top: 81px;
+    top: 100px;
     transform: rotateZ(90deg) scaleX(-1);
   }
   
@@ -130,7 +130,7 @@
     padding: 8px;
     position: absolute;
     height: calc(100% - 60px);
-    width: calc(100% - 55px);
+    width: calc(100% - 35px);
     z-index: 1;
   }
   
@@ -146,6 +146,7 @@
   .card p {
     margin-top: 0;
     text-align: justify;
+    width: 100%;
   }
   
   .card.front p {
@@ -202,9 +203,9 @@
   }
   
   .card-quote-footer {
-    bottom: 0;
+    bottom: -13px;
     font-style: normal;
-    left: 0;
+    left: 7px;
     position: absolute;
   }
   
@@ -358,9 +359,9 @@
     }
   }
   
-  @media screen and (min-width: 1180px) {
-    .table-of-contents {
-      border: solid black 1px;
-    }
-  }
+  // @media screen and (min-width: 1180px) {
+  //   .table-of-contents {
+  //     border: solid black 1px;
+  //   }
+  // }
 }

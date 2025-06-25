@@ -98,11 +98,11 @@
   left: -73px;
   text-align: center;
   transform: rotateZ(-90deg);
-  top: 81px;
+  top: 100px;
 }
 .homepage .card.back h1 {
   right: -73px;
-  top: 81px;
+  top: 100px;
   transform: rotateZ(90deg) scaleX(-1);
 }
 .homepage .card .container {
@@ -113,7 +113,7 @@
   padding: 8px;
   position: absolute;
   height: calc(100% - 60px);
-  width: calc(100% - 55px);
+  width: calc(100% - 35px);
   z-index: 1;
 }
 .homepage .container-background {
@@ -126,6 +126,7 @@
 .homepage .card p {
   margin-top: 0;
   text-align: justify;
+  width: 100%;
 }
 .homepage .card.front p {
   text-align: center;
@@ -172,9 +173,9 @@
   text-transform: uppercase;
 }
 .homepage .card-quote-footer {
-  bottom: 0;
+  bottom: -13px;
   font-style: normal;
-  left: 0;
+  left: 7px;
   position: absolute;
 }
 .homepage .left-arrow, .homepage .right-arrow {
@@ -295,10 +296,5 @@
   }
   .homepage .card-quote:hover .hover-image:not(.hidden) {
     display: block;
-  }
-}
-@media screen and (min-width: 1180px) {
-  .homepage .table-of-contents {
-    border: solid black 1px;
   }
 }

@@ -11,13 +11,13 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  gap: 20px;
-  height: 35px;
+  gap: 10px;
+  // height: 35px;
 }
 
 #mc_embed_signup form {
   width: 100%;
-  font-family:'Courier New', Courier, monospace;
+  // font-family:'Courier New', Courier, monospace;
 }
 
 #mc_embed_signup input,
@@ -27,7 +27,16 @@
 }
 
 #mc_embed_signup .mc-field-group {
-  flex-basis: 50%;
+  &:nth-child(2) {
+    flex-basis: 100%;
+  }
+  &:nth-child(3) {
+    flex-basis: 49%;
+  }
+  &:nth-child(4) {
+    flex-basis: 49%;
+    // min-width: 100%;
+  }
   flex-grow: 1;
   flex-shrink: 0;
 }
@@ -45,6 +54,7 @@
   position: absolute;
   top: -20px;
   color: #6B0505 !important;
+  display: contents;
 }
 
 #mc_embed_signup #mce-responses {
@@ -55,6 +65,10 @@
   position: absolute;
   top: 40px;
   color: black !important;
+}
+
+#mc_embed_signup .optionalParent {
+  flex-basis: 100%;
 }
 
 #mc_embed_signup #mc-embedded-subscribe {

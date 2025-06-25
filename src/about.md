@@ -6,8 +6,8 @@ hideSeeMore: true
 ---
 
 I'm a software engineer and artist based in New York City, with a multi-disciplinary background in research science and humanities.
-{.project-grid-item-full}
-
+\
+\
 When I was younger, I wanted to be a filmmaker, or a furniture designer, or a concert guitarist. While my fantasies of _becoming_ have shifted over the years, I still feel drawn to certain kinds of objects and forms of aesthetic experience. Over the last decade, my energies have settled, through desire paths and streams, into software, sound, and ceramics.
 {.project-grid-item-4}
 
@@ -17,18 +17,16 @@ When I was younger, I wanted to be a filmmaker, or a furniture designer, or a co
 </figure>
 
 I'm interested in the interplay of phenomonologically irreducible elements of surface and structure, of object and affect, of screen and software. I think of my methodology as broadly sculptural, in which form and content are not determined _a priori_, and the final work emerges in negotation with the materiality and poetics of the medium.
-{.project-grid-item-full}
-
-<figure class="project-grid-item-3">
-  <!-- <img src="/public/strategist-screenshot.png" alt="Screenshot of The Strategist"> -->
-  <figcaption><strong>1.</strong> From <em>The Spirit of the Object as the Hand of Fate</em> in <a href="https://www.goodreads.com/book/show/968010.The_Shadow_of_the_Object" target="_blank"><em>The Shadow of the Object</em></a>. You can see <a href="https://www.are.na/block/27704381" target="_blank">this passage</a>, and others like it that I've underlined in my readings over recent years over on <a href="https://www.are.na/reuben-son/passages-m7zf9-4vnu4" target="_blank">Are.na</a>.</figcaption>
-</figure>
-
-The British psychoanalyst Christopher Bollas writes that "the aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object" [1]. In our daily lives, these moments of transformative _caesura_ come unbeckoned, or not at all, and a life well-lived might be one in which the possibility of such moments feel close at hand.
-{.project-grid-item-full}
-
+\
+\
 For more about this website, see [Colophon](/colophon). If you'd like to support my work, please consider buying something from my [shop](/shop)!
 {.project-grid-item-full}
+
+<!-- The British psychoanalyst Christopher Bollas writes that "the aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object" [1]. In our daily lives, these moments of transformative _caesura_ come unbeckoned, or not at all, and a life well-lived might be one in which the possibility of such moments feel close at hand. -->
+<!-- {.project-grid-item-4} -->
+
+<!-- <strong>1.</strong> From <em>The Spirit of the Object as the Hand of Fate</em> in <a href="https://www.goodreads.com/book/show/968010.The_Shadow_of_the_Object" target="_blank"><em>The Shadow of the Object</em></a>. You can see <a href="https://www.are.na/block/27704381" target="_blank">this passage</a>, and others like it that I've underlined in my readings over recent years over on <a href="https://www.are.na/reuben-son/passages-m7zf9-4vnu4" target="_blank">Are.na</a>. -->
+<!-- {.project-grid-item-2 .footnote} -->
 
 <!-- <h3 class="project-grid-item-full" id="work">Professional Practice</h3> -->
 
@@ -45,25 +43,25 @@ For more about this website, see [Colophon](/colophon). If you'd like to support
 
 <!-- [View engineering resume](/engineering-resume) -->
 
-<h3 class="project-grid-item-full" id="creative-practice">Creative Practice</h3>
+<!-- <h3 class="project-grid-item-full" id="creative-practice">Creative Practice</h3> -->
 
-<figure class="project-grid-item-2">
+<!-- <figure class="project-grid-item-2">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/ceramics_casa-mug.jpg" alt="mug in shape of a dwelling">
   <figcaption>
     Hand-carved mug from my <em>casa</em> series.
   </figcaption>
-</figure>
+</figure> -->
 
-Work with sound forms the basis of my creative practice, which has evolved through engagement with materiality and metaphor. In recent work, like [Airports for Music](/projects/airports-for-music) and [Frog Chorus](/projects/frog-chorus), frogs and microphones act as metaphors on the act of listening itself, in both the compositional process and in prompting audiences to attend to their own act of listening. In addition to my solo practice, my sound-based work also includes assisting artists like [Eli Keszler](https://www.elikeszler.com/), [James Hoff](https://www.james-hoff.com/), and [Glenn Jones](https://thrilljockey.com/artists/glenn-jones) on installations, performances, and recordings, for institutions and labels like the Whitney Museum of American Art, PAN, and Thrill Jockey.
-{.project-grid-item-full}
+<!-- Work with sound forms the basis of my creative practice, which has evolved through engagement with materiality and metaphor. In recent work, like [Airports for Music](/projects/airports-for-music) and [Frog Chorus](/projects/frog-chorus), frogs and microphones act as metaphors on the act of listening itself, in both the compositional process and in prompting audiences to attend to their own act of listening. In addition to my solo practice, my sound-based work also includes assisting artists like [Eli Keszler](https://www.elikeszler.com/), [James Hoff](https://www.james-hoff.com/), and [Glenn Jones](https://thrilljockey.com/artists/glenn-jones) on installations, performances, and recordings, for institutions and labels like the Whitney Museum of American Art, PAN, and Thrill Jockey. -->
+<!-- {.project-grid-item-full} -->
 
-<figure class="project-grid-item-full">
-  <!-- <img src="/public/strategist-screenshot.png" alt="Screenshot of The Strategist"> -->
+<!-- <figure class="project-grid-item-full">
   <figcaption><strong>2.</strong> “… we think of language as daemonic. We think of ourselves as doing things with words, while language does things to us,”<a href="https://www.are.na/block/27704091" target="_blank"> Adam Phillips, <em>On Wanting to Change</em></a></figcaption>
-</figure>
+</figure> -->
 
-In my web-based practice, I'm interested in ways in which [interfaces construct users](https://academic.oup.com/mit-press-scholarship-online/book/23681/chapter-abstract/184886856?redirectedFrom=fulltext&login=false), and I've developed a number of personal projects that experiment with user interfaces as strategies for using technology in more expansive ways: [the phone as a frog](https://frogchor.us), [AI as an interface to an archive](/midi-archive), and [weaving music](/weaving). Just as poetry may undo the instrumentalization of language [2], poetic interfaces may allow us to move beyond software that is merely instrumental and instrumentalizing.
-{.project-grid-item-full}
+<!-- In my web-based practice, I'm interested in ways in which [interfaces construct users](https://academic.oup.com/mit-press-scholarship-online/book/23681/chapter-abstract/184886856?redirectedFrom=fulltext&login=false), and I've developed a number of personal projects that experiment with user interfaces as strategies for using technology in more expansive ways: [the phone as a frog](https://frogchor.us), [AI as an interface to an archive](/midi-archive), and [weaving music](/weaving). Just as poetry may undo the instrumentalization of language [2], poetic interfaces may allow us to move beyond software that is merely instrumental and instrumentalizing. -->
+
+<!-- {.project-grid-item-full} -->
 
 <!-- [View artist resume](/artist-resume) -->
 
