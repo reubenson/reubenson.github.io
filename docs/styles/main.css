@@ -642,7 +642,8 @@ h3 {
 }
 .project .content-wrapper {
   display: block;
-  gap: 40px;
+  column-gap: 40px;
+  row-gap: 20px;
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
