@@ -24,7 +24,7 @@ title: Reuben Son
       h1 {
         margin: 0 auto;
         text-align: center;
-        font-size: 36px;
+        font-size: 32px;
       }
 
       h2 {
@@ -74,7 +74,7 @@ title: Reuben Son
 
       .resume-content {
         li {
-          margin-bottom: 5px;
+          margin-bottom: 4px;
         }
 
         li a {
@@ -152,11 +152,11 @@ title: Reuben Son
       {% if includeExhibitions %}
         {% renderFile "./src/_includes/resume/selected_exhibitions.md" %}
       {% endif %}
-      {% if includePerformances %}
-        {% renderFile "./src/_includes/resume/selected_performances.md" %}
-      {% endif %}
       {% if includeDiscography %}
         {% renderFile "./src/_includes/resume/selected_discography.md" %}
+      {% endif %}
+      {% if includePerformances %}
+        {% renderFile "./src/_includes/resume/selected_performances.md" %}
       {% endif %}
       {% if includeResidencies %}
         {% renderFile "./src/_includes/resume/residencies.md" %}

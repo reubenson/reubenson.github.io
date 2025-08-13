@@ -69,6 +69,14 @@
     flex-wrap: wrap;
   }
 
+  figure img {
+    border-radius: 2px;
+  }
+
+  figure img:not(:first-child) {
+    margin-top: 5px;
+  }
+
   .project-more {
     margin: 30px auto;
     max-width: 720px;

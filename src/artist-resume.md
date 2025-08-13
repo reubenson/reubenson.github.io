@@ -38,7 +38,7 @@ includeTalks: true
   }
   
   h1 {
-    font-size: 42px;
+    font-size: 32px;
     margin-top: 10px;
   }
 </style>

@@ -684,6 +684,12 @@ h3 {
   flex-direction: row;
   flex-wrap: wrap;
 }
+.project figure img {
+  border-radius: 2px;
+}
+.project figure img:not(:first-child) {
+  margin-top: 5px;
+}
 .project .project-more {
   margin: 30px auto;
   max-width: 720px;
