@@ -21,3 +21,6 @@ Please note that shipping is currently limited to the U.S.
   <img src="/public/pocket-vase.jpg" alt="photo of a travel vase on a windowsill">
   <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm while I was attending a <a href="/projects/weaving" target="_blank">music studio residency at EMS</a>.</figcaption>
 </figure>
+
+The shop is currently **sold out**, check back in September for new pieces :)
+{.grid-item-6}
