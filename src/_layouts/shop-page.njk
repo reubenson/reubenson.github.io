@@ -33,21 +33,33 @@ description: Shop description
         <div class="shop-top">
           {{ content | safe }}
         </div>
+        {# <div id="shop-closed" class="hidden">
+          <p>The shop is currently sold out — If you'd like to notified when new items are available again, sign up for the mailing list above!</p>
+        </div> #}
+        <section class="shop-collection">
+          <h2>{{ Travel Vases }}</h2>
+          <p class="collection-description">
+            I’ve gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It’s a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of being away. Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They have a height of no more than 2 inches (5 cm), and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
+          </p>
+          <figure class="collection-image">
+            <img src="/public/ceramics/ceramics-wide-1.jpg" alt="Travel Vases collection image">
+          </figure>
+          <div class="shop-listings" data-collection-id="278257860680" data-show-title="false"></div>
+        </section>
+
+        <section class="shop-collection">
+          <h2>{{ One-offs }}</h2>
+          <p class="collection-description">Miscellaneous one-off pieces, mostly made for fun or as experiments</p>
+          <figure class="collection-image">
+            <img src="/public/ceramics/ceramics-wide-2.jpg" alt="One-offs collection image">
+          </figure>
+          <div class="shop-listings" id="product-listings-278356557896" data-collection-id="278356557896" data-show-title="true"></div>
+        </section>
+
         <p class="newsletter-signup-intro">
           If you'd like to keep up to date with updates, sign up for my mailing list below:
         </p>
         {% include "newsletter-signup.njk" %}
-        {# <div id="shop-closed" class="hidden">
-          <p>The shop is currently sold out — If you'd like to notified when new items are available again, sign up for the mailing list above!</p>
-        </div> #}
-        <section>
-          {# <h2>Available</h2> #}
-          <div class="shop-listings" id="product-listings" data-product-ids="{{ ceramics | join(',') }}"></div>
-        </section>
-        <section>
-          {# <h2>Sold Out</h2> #}
-          <div class="shop-listings" id="product-sold-out-listings" data-product-ids="{{ ceramicsSoldOut | join(',') }}"></div>
-        </section>
       </div>
     </div>
     <div class="page-border broider"></div>

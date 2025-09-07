@@ -11,6 +11,26 @@
     @include content-heading;
   }
 
+  .collection-description {
+    font-size: 18px;
+    line-height: 26px;
+    margin: 10px 0 20px 0;
+    font-style: italic;
+    color: #333;
+  }
+
+  .collection-image {
+    margin: 20px 0;
+    text-align: center;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
   .shop-top {
     @include grid-container;
   }
@@ -35,15 +55,16 @@
 
   .shop-listings {
     margin: auto;
-    max-width: 720px !important;
-    width: 100%;
+    // max-width: 720px !important;
+    // width: calc(100vw - 80px);
+    // margin-left: calc((720px - 100vw + 80px)/2);
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: space-between;
 
     iframe {
-      background-color: #f0f0e6;
+      // background-color: #f0f0e6;
       border-radius: 2px;
       flex: 1 0 40%;
       min-width: 200px;
@@ -55,4 +76,14 @@
   .newsletter-signup-intro {
     margin-top: 20px;
   }
-} 
+  @media screen and (min-width: 1080px) {
+    .shop-listings {
+      width: calc(100vw - 80px);
+      margin-left: calc((720px - 100vw + 80px)/2);
+      // width: 1024px !important;
+      // max-width: 1024px !important;
+      // margin-left: calc((720px - 1024px) / 2);
+    }
+  }
+
+}
