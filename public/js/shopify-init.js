@@ -13,7 +13,7 @@ function showShopClosedMessage() {
   document.querySelector('#product-listings')?.classList.add('hidden');
 }
 
-function loadShopifyProducts(nodeId, collectionId) {
+function loadShopifyProducts(nodeId, collectionId, showTitle) {
   var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
     if (window.ShopifyBuy.UI) {
@@ -37,11 +37,6 @@ function loadShopifyProducts(nodeId, collectionId) {
       storefrontAccessToken: atob(__T)
     });
     const node = document.getElementById(nodeId);
-    const showTitle = node.getAttribute('data-show-title');
-
-    console.log('nodeId', nodeId);
-    console.log('showTitle', showTitle);
-    
     ShopifyBuy.UI.onReady(client).then(function (ui) {
         ui.createComponent('collection', {
           id: collectionId,
@@ -56,15 +51,14 @@ function loadShopifyProducts(nodeId, collectionId) {
                   "flex-basis": "31%",
                   "flex-grow": "1",
                   "max-width": "400px",
+                  "box-shadow": "0px 4px 8px rgba(0, 0, 0, 0.1)",
                   "@media (min-width: 601px)": {
-                    // "max-width": "calc(25% - 20px)",
                     "margin-left": "20px",
                     "margin-bottom": "50px"
                   }
                 },
                 "button": {
                   "border-radius": "2px",
-                  // "box-shadow": `0px 0px 500px #${randomColor}`,
                   "box-shadow": "0px 0px 500px #f0f0e6",
                   "border": "solid black 1px",
                   "color": "#000000",
@@ -101,23 +95,17 @@ function loadShopifyProducts(nodeId, collectionId) {
                   "font-size": "16px",
                   "font-family": "Ibarra Real Nova, sans-serif",
                   "color": "#000000",
-                  // "margin-top": "19px",
                   "position": "absolute",
-                  // "left": "25%",
                   "right": "2px",
                   "top": "0",
                   "font-weight": "100",
-                  // "bottom": "60px",
                   "z-index": "100",
                   "border": "solid black 1px",
                   "border-radius": "5px",
                   "box-shadow": "1px 2px black",
                   "background-color": "#f0f0e6",
-                  // "display": "inline",
                   "padding": "10px",
-                  // "display": "inline-block",
                   "opacity": "0.9",
-                  // "border-radius": "10px",
                 },
                 "prices": {
                   "margin": "0",
@@ -161,7 +149,6 @@ function loadShopifyProducts(nodeId, collectionId) {
               "styles": {
                 "products": {
                   "@media (min-width: 601px)": {
-                    // "margin-left": "-20px"
                     "display": "flex",
                     "flex-direction": "row",
                     "flex-wrap": "wrap",
@@ -249,30 +236,29 @@ function loadShopifyProducts(nodeId, collectionId) {
             }
           },
         });
-      // }
     });
   }
 }
 
 function main() {
-  // const collectionContainers = document.querySelectorAll('[id^="product-listings-"]');
   const collectionContainers = document.querySelectorAll('.shop-listings');
 
-  // const productIdsSoldOutStr = document.getElementById('product-sold-out-listings')?.getAttribute('data-product-ids')
-  // const productIdsSoldOut = productIdsSoldOutStr === '' ? [] : productIdsSoldOutStr?.split(',');
-
-  // if (!collectionContainers.length) throw new Error('DOM not yet loaded'); // DOM hasn't loaded yet
+  if (!collectionContainers.length) throw new Error('DOM not yet loaded'); // DOM hasn't loaded yet
 
   let hasAnyProducts = false;
 
   // Load products for each collection
-  collectionContainers.forEach(container => {
+  collectionContainers.forEach((container, index) => {
     const collectionId = container.getAttribute('data-collection-id');
-    // const productIds = productIdsStr === '' ? [] : productIdsStr?.split(',');
+    const showTitle = container.getAttribute('data-show-title');
     
     if (collectionId && collectionId.length > 0) {
-      // hasAnyProducts = true;
-      loadShopifyProducts(container.id, collectionId);
+      hasAnyProducts = true;
+      // Create a unique ID for each container if it doesn't have one
+      if (!container.id) {
+        container.id = `product-listings-${collectionId}-${index}`;
+      }
+      loadShopifyProducts(container.id, collectionId, showTitle);
     }
   });
 
@@ -280,8 +266,6 @@ function main() {
     showShopClosedMessage();
     return;
   }
-
-  // loadShopifyProducts('product-sold-out-listings', productIdsSoldOut);
 };
 
 try {

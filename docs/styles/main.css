@@ -34,6 +34,7 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
+  border-radius: 2px;
 }
 
 input,
@@ -820,9 +821,6 @@ h3 {
   }
 }
 
-.shop-page {
-  margin: 20px auto;
-}
 .shop-page header {
   align-items: flex-end;
   border-bottom: solid black 1px;
@@ -835,17 +833,45 @@ h3 {
   width: 100%;
   max-width: 720px;
   position: relative;
+  position: sticky;
+  top: 0;
+  background-color: #f0f0e6;
+  z-index: 1;
+  max-width: calc(100vw - 40px);
+  padding-top: 10px;
 }
-.shop-page .content h2 {
+.shop-page header nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: auto auto;
+  padding: 10px;
+  width: 100%;
+  max-width: 720px;
+  position: relative;
+  font-size: 22px;
+}
+.shop-page header nav a {
+  text-decoration: none;
+  font-weight: normal;
+}
+.shop-page header nav a.selected {
+  font-weight: bold;
+}
+.shop-page .content {
+  padding-top: 0;
+}
+.shop-page .content .shop-collection-header {
   font-weight: 300;
   margin: 40px 0 40px;
   text-align: center;
+  margin: 10px auto;
 }
 .shop-page .collection-description {
   font-size: 18px;
   line-height: 26px;
   margin: 10px 0 20px 0;
-  font-style: italic;
   color: #333;
 }
 .shop-page .collection-image {
@@ -858,33 +884,41 @@ h3 {
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
-.shop-page .shop-top {
+.shop-page .shop-top,
+.shop-page .shop-collection {
   display: block;
-  gap: 40px;
+  gap: 20px;
 }
-.shop-page .shop-top .project-grid-item-1 {
+.shop-page .shop-top .project-grid-item-1,
+.shop-page .shop-collection .project-grid-item-1 {
   grid-column: span 1;
 }
-.shop-page .shop-top .project-grid-item-2 {
+.shop-page .shop-top .project-grid-item-2,
+.shop-page .shop-collection .project-grid-item-2 {
   grid-column: span 2;
 }
-.shop-page .shop-top .project-grid-item-3 {
+.shop-page .shop-top .project-grid-item-3,
+.shop-page .shop-collection .project-grid-item-3 {
   grid-column: span 3;
 }
-.shop-page .shop-top .project-grid-item-4 {
+.shop-page .shop-top .project-grid-item-4,
+.shop-page .shop-collection .project-grid-item-4 {
   grid-column: span 4;
 }
-.shop-page .shop-top .project-grid-item-5 {
+.shop-page .shop-top .project-grid-item-5,
+.shop-page .shop-collection .project-grid-item-5 {
   grid-column: span 5;
 }
-.shop-page .shop-top .project-grid-item-6 {
+.shop-page .shop-top .project-grid-item-6, .shop-page .shop-top .project-grid-item-full,
+.shop-page .shop-collection .project-grid-item-6,
+.shop-page .shop-collection .project-grid-item-full {
   grid-column: span 6;
 }
 @media (min-width: 720px) {
-  .shop-page .shop-top {
+  .shop-page .shop-top,
+  .shop-page .shop-collection {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 40px;
   }
 }
 .shop-page .content-wrapper {
@@ -911,8 +945,6 @@ h3 {
   border-radius: 2px;
   flex: 1 0 40%;
   min-width: 200px;
-  filter: sepia(1%) brightness(0.97);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
 }
 .shop-page .newsletter-signup-intro {
   margin-top: 20px;

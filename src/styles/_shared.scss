@@ -21,7 +21,7 @@
 @mixin grid-container {
   display: block;
   // grid-template-columns: repeat(1, 1fr);
-  gap: 40px;
+  gap: 20px;
 
   .project-grid-item {
     &-1 {
@@ -39,7 +39,8 @@
     &-5 {
       grid-column: span 5;
     }
-    &-6 {
+    &-6,
+    &-full {
       grid-column: span 6;
     }
   }
@@ -47,6 +48,6 @@
   @media (min-width: 720px) {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 40px;
+    // gap: 40px;
   }
 }
