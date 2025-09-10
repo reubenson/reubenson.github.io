@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reuben Son | Travel Vases</title>
+    <title>Reuben Son | Shoppe</title>
     <meta name="description" content="Shop for ceramics and other goods made by Reuben Son">
     <meta name="keywords" content="reuben son, ceramics, son ceramics">
     
@@ -208,27 +208,61 @@
 </section>
     <div class="content">
       <header>
-        <h1>Travel Vases</h1>
-        <a href=""></a>
+        <nav>
+          <a href="#travel-vases">Travel Vases</a>
+          <a href="#one-offs">One-offs</a>
+        </nav>
       </header>
       <div class="content-wrapper">
         <div class="shop-top">
-          <p class="grid-item-6">I’ve gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It’s a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of <em>being away</em>.</p>
-<p class="grid-item-4">Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They range from about 1.5 to 3 inches in height, and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
-<br>
-<br>
-You can also check out a collection of photos from friends and family of these vessels <a href="/projects/travel-vases">out in the field</a> 🌻 🏺
+          <p class="project-grid-item-full">The shop is currently going through an update as I change things up a bit. In the meanwhile, you can use <strong>TENOFF</strong> to apply a $10 discount to your order :)</p>
+<!-- I've gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It's a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of _being away_. -->
+<!-- {.project-grid-item-6} -->
+<!-- Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They range from about 1.5 to 3 inches in height, and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
+\
+\
+You can also check out a collection of photos from friends and family of these vessels [out in the field](/projects/travel-vase-gallery) 🌻 🏺
 Please note that shipping is currently limited to the U.S.
-<br>
-<br>
-</p>
-<figure class="grid-item-2" >
+\
+\
+{.project-grid-item-4} -->
+<!-- <figure class="project-grid-item-2" >
   <img src="/public/pocket-vase.jpg" alt="photo of a travel vase on a windowsill">
   <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm while I was attending a <a href="/projects/weaving" target="_blank">music studio residency at EMS</a>.</figcaption>
-</figure>
-<p class="grid-item-6">The shop is currently <strong>sold out</strong>, check back in September for new pieces :)</p>
+</figure> -->
+<!-- The shop is currently **sold out**, check back in September for new pieces :)
+{.project-grid-item-6} -->
 
         </div>
+        
+        <section class="shop-collection" id="travel-vases">
+          <h2 class="shop-collection-header project-grid-item-full">Travel Vases</h2>
+          <p class="collection-description project-grid-item-4">
+            I’ve gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It’s a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of being away.<br/><br/>
+            Each vase (<a href="/projects/travel-vases" target="_blank">see gallery</a>) is no taller than 2 inches (5cm), and made on my miniature wheel at home, perched at my kitchen windowsill.
+            
+          </p>
+          
+          <figure class="project-grid-item-2" >
+            <img src="/public/pocket-vase.jpg" alt="photo of a travel vase on a windowsill">
+            <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm.
+               
+              </figcaption>
+          </figure>
+          <div class="shopify-container project-grid-item-full">
+            <div class="shop-listings" data-collection-id="278257860680" data-show-title="false"></div>
+          </div>
+        </section>
+
+        <section class="shop-collection" id="one-offs">
+          <h2 class="shop-collection-header project-grid-item-full">One-offs</h2>
+          <p class="collection-description project-grid-item-full">Miscellaneous one-off pieces, mostly made for fun or as experiments</p>
+          
+          <div class="shopify-container project-grid-item-full">
+            <div class="shop-listings" data-collection-id="278356557896" data-show-title="true"></div>
+          </div>
+        </section>
+
         <p class="newsletter-signup-intro">
           If you'd like to keep up to date with updates, sign up for my mailing list below:
         </p>
@@ -262,17 +296,152 @@ Please note that shipping is currently limited to the U.S.
 </div>
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='MSG';ftypes[5]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
 
-        
-        <section>
-          
-          <div class="shop-listings" id="product-listings" data-product-ids=""></div>
-        </section>
-        <section>
-          
-          <div class="shop-listings" id="product-sold-out-listings" data-product-ids="6930285920328,6930286084168,6930286116936,6930286149704,6930286182472,6930286379080,6930286248008"></div>
-        </section>
       </div>
     </div>
     <div class="page-border broider"></div>
+     <script>
+       (function() {
+         'use strict';
+         
+         // Throttle function to limit scroll event frequency
+         function throttle(func, limit) {
+           let inThrottle;
+           return function() {
+             const args = arguments;
+             const context = this;
+             if (!inThrottle) {
+               func.apply(context, args);
+               inThrottle = true;
+               setTimeout(() => inThrottle = false, limit);
+             }
+           }
+         }
+         
+         // Get the section that's currently in view
+         function getCurrentSection() {
+           const sections = document.querySelectorAll('.shop-collection');
+           const navLinks = document.querySelectorAll('header nav a');
+           
+           if (sections.length === 0) {
+             return null;
+           }
+           
+           let currentSection = null;
+           const scrollContainer = document.querySelector('.content');
+           const viewportHeight = window.innerHeight;
+           
+           // Get scroll position from the correct container
+           const scrollY = scrollContainer ? scrollContainer.scrollTop : window.scrollY;
+           const scrollPosition = scrollY + (viewportHeight / 2); // Section is "in view" when its top is at middle of viewport
+           
+           sections.forEach((section, index) => {
+             const sectionTop = section.offsetTop;
+             const sectionHeight = section.offsetHeight;
+             const sectionId = section.id;
+             
+             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+               currentSection = section;
+             }
+           });
+           
+           // If no section is found, check if we're past the last section
+           if (!currentSection) {
+             const lastSection = sections[sections.length - 1];
+             if (scrollPosition >= lastSection.offsetTop) {
+               currentSection = lastSection;
+             } else {
+               currentSection = sections[0];
+             }
+           }
+
+           return currentSection;
+         }
+         
+         // Update selected nav based on current section
+         function updateSelectedNavFromScroll() {
+           const currentSection = getCurrentSection();
+           if (!currentSection) {
+             return;
+           }
+
+           const sectionId = currentSection.id;
+           const navLinks = document.querySelectorAll('header nav a');
+
+           // Remove 'selected' class from all nav links
+           navLinks.forEach(link => link.classList.remove('selected'));
+
+           const activeLink = document.querySelector(`header nav a[href="#${sectionId}"]`);
+           if (activeLink) {
+             activeLink.classList.add('selected');
+           }
+         }
+         
+         function updateSelectedNavFromHash() {
+           const navLinks = document.querySelectorAll('header nav a');
+           navLinks.forEach(link => link.classList.remove('selected'));
+           
+           // Get current hash or default to first section
+           const currentHash = window.location.hash || '#travel-vases';
+           
+           const activeLink = document.querySelector(`header nav a[href="${currentHash}"]`);
+           if (activeLink) {
+             activeLink.classList.add('selected');
+           }
+         }
+         
+         function initNavigation() {
+           const navLinks = document.querySelectorAll('header nav a');
+           const sections = document.querySelectorAll('.shop-collection');
+           
+           if (navLinks.length === 0) {
+             setTimeout(initNavigation, 100);
+             return;
+           }
+           
+           if (sections.length === 0) {
+             setTimeout(initNavigation, 100);
+             return;
+           }
+           
+           // Add click handlers to nav links
+           navLinks.forEach(link => {
+             link.addEventListener('click', function(e) {
+               // Remove 'selected' from all links
+               navLinks.forEach(l => l.classList.remove('selected'));
+               // Add 'selected' to clicked link
+               this.classList.add('selected');
+             });
+           });
+           
+           updateSelectedNavFromHash();
+           
+           window.addEventListener('hashchange', updateSelectedNavFromHash);
+           
+           const scrollContainer = document.querySelector('.content');
+           
+           if (scrollContainer) {
+             scrollContainer.addEventListener('scroll', function() {
+               updateSelectedNavFromScroll();
+             });
+           }
+         }
+         
+         if (document.readyState === 'loading') {
+           document.addEventListener('DOMContentLoaded', initNavigation);
+         } else {
+           initNavigation();
+         }
+         
+         // Fallback: try again after a short delay
+         setTimeout(() => {
+           const navLinks = document.querySelectorAll('header nav a');
+           const sections = document.querySelectorAll('.shop-collection');
+           if (navLinks.length > 0 && sections.length > 0) {
+             initNavigation();
+           }
+         }, 500);
+         
+       })();
+     </script>
   </body>
 </html>

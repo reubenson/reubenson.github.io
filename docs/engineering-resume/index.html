@@ -54,7 +54,9 @@
 
       h4 {
         font-size: 16px;
-        margin: 0px;
+        margin: 0 0 5px 0;
+        border-bottom: solid #bbb 1px;
+        display: inline-block;
       }
 
       a {
@@ -75,6 +77,7 @@
       li {
         list-style-position: inside;
         padding-left: 6px;
+        line-height: 1.4em;
       }
       
       li a {
@@ -134,6 +137,12 @@
           margin: 20px auto;
         }
       }
+
+      @media print {
+        .resume-content a {
+          display: none;
+        }
+      }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
@@ -148,9 +157,9 @@
   <body>
     <ul class="resume-contact-list">
       <li><a href="https://reubenson.com" target="_blank">reubenson.com</a></li>
-      <li>reubenson@gmail.com</li>
+      <li><a href="mailto:reubenson@gmail.com" target="_blank">reubenson@gmail.com</a></li>
       <li><a href="https://github.com/reubenson/" target="_blank">github.com/reubenson</a></li>
-      <li>(206) 245-8892</li>
+      <li>+1 2062458892</li>
       <li>NYC</li>
     </ul>
     <section class="resume-content">
@@ -194,10 +203,11 @@
       
       
       
+      
         <h3>Talks</h3>
 <ul>
-<li><span class="resume-year">2024</span> Artist talk at Digital Design @ Parsons <a href="https://www.eventbrite.com/e/talk-with-reuben-son-tickets-1066237869169">link</a></li>
-<li><span class="resume-year">2024</span> On background music at Naive Yearly (Ljubljana, Slovenia) <a href="/projects/quiet-time">link</a></li>
+<li><span class="resume-year">2024</span> Artist talk — Digital Design @ Parsons <a href="https://www.eventbrite.com/e/talk-with-reuben-son-tickets-1066237869169"></a></li>
+<li><span class="resume-year">2024</span> <em>Quiet Time</em> — Museum of Architecture and Design (Slovenia) <a href="/projects/quiet-time"></a></li>
 </ul>
   
       
@@ -220,6 +230,7 @@
 <li>Weaving Music — Algorithmic music generator based on weaving, built with Nuxt + Vue.js — <a href="https://github.com/reubenson/weaving">link</a></li>
 </ul>
   
+      
       
     </section>
   </body>

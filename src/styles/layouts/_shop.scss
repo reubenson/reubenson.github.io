@@ -1,17 +1,73 @@
 @import '../shared';
 
 .shop-page {
-  margin: 20px auto;
+  // margin: 20px auto;
 
   header {
     @include page-header;
+    position: sticky;
+    top: 0;
+    background-color: #f0f0e6;
+    z-index: 1;
+    max-width: calc(100vw - 40px);
+    padding-top: 10px;
+    // margin-top: 60px;
+    
+    nav {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      margin: auto auto;
+      padding: 10px;
+      width: 100%;
+      max-width: 720px;
+      position: relative;
+      font-size: 22px;
+
+      a {
+        text-decoration: none;
+        font-weight: normal;
+      }
+      
+      a.selected {
+        font-weight: bold;
+      }
+    }
   }
 
-  .content h2 {
+  .content {
+    padding-top: 0;
+    // margin-top: 30px;
+  }
+
+  .content .shop-collection-header {
     @include content-heading;
+    margin: 10px auto;
   }
 
-  .shop-top {
+  .collection-description {
+    font-size: 18px;
+    line-height: 26px;
+    margin: 10px 0 20px 0;
+    // font-style: italic;
+    color: #333;
+  }
+
+  .collection-image {
+    margin: 20px 0;
+    text-align: center;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .shop-top,
+  .shop-collection {
     @include grid-container;
   }
 
@@ -35,24 +91,35 @@
 
   .shop-listings {
     margin: auto;
-    max-width: 720px !important;
-    width: 100%;
+    // max-width: 720px !important;
+    // width: calc(100vw - 80px);
+    // margin-left: calc((720px - 100vw + 80px)/2);
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: space-between;
 
     iframe {
-      background-color: #f0f0e6;
+      // background-color: #f0f0e6;
       border-radius: 2px;
       flex: 1 0 40%;
       min-width: 200px;
-      filter: sepia(1%) brightness(0.97);
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05)
+      // filter: sepia(1%) brightness(0.97);
+      // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05)
     }
   }
 
   .newsletter-signup-intro {
     margin-top: 20px;
   }
-} 
+  @media screen and (min-width: 1080px) {
+    .shop-listings {
+      width: calc(100vw - 80px);
+      margin-left: calc((720px - 100vw + 80px)/2);
+      // width: 1024px !important;
+      // max-width: 1024px !important;
+      // margin-left: calc((720px - 1024px) / 2);
+    }
+  }
+
+}

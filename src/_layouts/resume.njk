@@ -41,7 +41,9 @@ title: Reuben Son
 
       h4 {
         font-size: 16px;
-        margin: 0px;
+        margin: 0 0 5px 0;
+        border-bottom: solid #bbb 1px;
+        display: inline-block;
       }
 
       a {
@@ -62,6 +64,7 @@ title: Reuben Son
       li {
         list-style-position: inside;
         padding-left: 6px;
+        line-height: 1.4em;
       }
       
       li a {
@@ -121,6 +124,12 @@ title: Reuben Son
           margin: 20px auto;
         }
       }
+
+      @media print {
+        .resume-content a {
+          display: none;
+        }
+      }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
@@ -135,9 +144,9 @@ title: Reuben Son
   <body>
     <ul class="resume-contact-list">
       <li><a href="https://reubenson.com" target="_blank">reubenson.com</a></li>
-      <li>reubenson@gmail.com</li>
+      <li><a href="mailto:reubenson@gmail.com" target="_blank">reubenson@gmail.com</a></li>
       <li><a href="https://github.com/reubenson/" target="_blank">github.com/reubenson</a></li>
-      <li>(206) 245-8892</li>
+      <li>+1 2062458892</li>
       <li>NYC</li>
     </ul>
     <section class="resume-content">
@@ -151,6 +160,9 @@ title: Reuben Son
       {% endif %}
       {% if includeExhibitions %}
         {% renderFile "./src/_includes/resume/selected_exhibitions.md" %}
+      {% endif %}
+      {% if includePublications %}
+        {% renderFile "./src/_includes/resume/publications.md" %}
       {% endif %}
       {% if includeDiscography %}
         {% renderFile "./src/_includes/resume/selected_discography.md" %}
@@ -172,6 +184,9 @@ title: Reuben Son
       {% endif %}
       {% if includeEngProjects %}
         {% renderFile "./src/_includes/resume/eng-projects.md" %}  
+      {% endif %}
+      {% if includeBibliography %}
+        {% renderFile "./src/_includes/resume/bibliography.md" %}  
       {% endif %}
     </section>
   </body>

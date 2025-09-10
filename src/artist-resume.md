@@ -10,6 +10,8 @@ includeResidencies: true
 includeEducation: false
 includeExhibitions: true
 includeTalks: true
+includePublications: true
+includeBibliography: true
 ---
 
 # {{ title }}

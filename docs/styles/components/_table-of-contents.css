@@ -66,6 +66,7 @@
   height: 44px;
   padding: 0;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .toc-button:after {

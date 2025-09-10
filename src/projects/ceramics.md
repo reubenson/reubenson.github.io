@@ -4,6 +4,7 @@ title: Untitled Ceramics
 description: Objects in miniature
 media: ceramics
 year: 2019—
+dimensions: variable 1 to 4 cu.in.
 # url: https://reubenson.com/portfolio/ceramics/
 ---
 

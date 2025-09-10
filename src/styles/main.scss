@@ -95,6 +95,19 @@ a {
   font-size: 12px;
 }
 
+.project-grid-item {
+  &-1,
+  &-2,
+  &-3,
+  &-4,
+  &-5,
+  &-6,
+  &-full {
+    margin: 20px auto;
+    width: 100%;
+  }
+}
+
 @media print {
   .print-page-break {
     break-after: page;

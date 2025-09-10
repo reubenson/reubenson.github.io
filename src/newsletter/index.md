@@ -10,3 +10,4 @@ noGrid: true
 ### Past Newsletters
 
 - [Newsletter 01 -- April 12, 2025](/newsletter/01)
+- [Newsletter 02 -- August 21, 2025](/newsletter/02)

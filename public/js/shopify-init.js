@@ -13,7 +13,7 @@ function showShopClosedMessage() {
   document.querySelector('#product-listings')?.classList.add('hidden');
 }
 
-function loadShopifyProducts(nodeId, productIds) {
+function loadShopifyProducts(nodeId, collectionId, showTitle) {
   var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
     if (window.ShopifyBuy.UI) {
@@ -36,33 +36,30 @@ function loadShopifyProducts(nodeId, productIds) {
       domain: atob(__D),
       storefrontAccessToken: atob(__T)
     });
-    
+    const node = document.getElementById(nodeId);
     ShopifyBuy.UI.onReady(client).then(function (ui) {
-      // const productIds = document.getElementById('product-listings')?.getAttribute('data-product-ids').split(',') || [];
-      let randomColor;
-      
-      for (let i in productIds ) {
-        const productId = productIds[i];
-        randomColor = Math.floor(Math.random() * 16777215).toString(16);
-
-        ui.createComponent('product', {
-          id: productId,
-          node: document.getElementById(nodeId),
+        ui.createComponent('collection', {
+          id: collectionId,
+          node,
           moneyFormat: '%24%7B%7Bamount%7D%7D',
           options: {
             "product": {
               "styles": {
                 "product": {
                   "padding": "0px",
+                  "position": "relative",
+                  "flex-basis": "31%",
+                  "flex-grow": "1",
+                  "max-width": "400px",
+                  "box-shadow": "0px 4px 8px rgba(0, 0, 0, 0.1)",
                   "@media (min-width: 601px)": {
-                    "max-width": "calc(25% - 20px)",
                     "margin-left": "20px",
                     "margin-bottom": "50px"
                   }
                 },
                 "button": {
                   "border-radius": "2px",
-                  "box-shadow": `0px 0px 500px #${randomColor}`,
+                  "box-shadow": "0px 0px 500px #f0f0e6",
                   "border": "solid black 1px",
                   "color": "#000000",
                   "font-family": "Ibarra Real Nova, sans-serif",
@@ -78,20 +75,37 @@ function loadShopifyProducts(nodeId, productIds) {
                   },
                   "padding": "10px 15px",
                   "margin-top": "-14px !important"
-
                 },
                 "img": {
                   "margin-bottom": "5px",
                   "position": "relative",
                   "z-index": "1",
                   "background-image": "url(/public/riso-maine.png)",
-                  "zoom": "0.5",
+                  // "zoom": "0.5",
+                  "aspect-ratio": "1/1",
+                  "object-fit": "cover",
+                  "height": "auto",
+                  "border-radius": "5px"
                 },
                 "imgWrapper": {
                   "padding": "20px"
                 },
                 "title": {
-                  "display": "none"
+                  "display": showTitle === 'true' ? 'inline' : 'none',
+                  "font-size": "16px",
+                  "font-family": "Ibarra Real Nova, sans-serif",
+                  "color": "#000000",
+                  "position": "absolute",
+                  "right": "2px",
+                  "top": "0",
+                  "font-weight": "100",
+                  "z-index": "100",
+                  "border": "solid black 1px",
+                  "border-radius": "5px",
+                  "box-shadow": "1px 2px black",
+                  "background-color": "#f0f0e6",
+                  "padding": "10px",
+                  "opacity": "0.9",
                 },
                 "prices": {
                   "margin": "0",
@@ -101,12 +115,22 @@ function loadShopifyProducts(nodeId, productIds) {
                   "border": "solid black 1px",
                   "background-color": "#f0f0e6",
                   "padding": "6px",
+                  "padding-left": "10px",
                   "border-radius": "5px",
-                  "box-shadow": "2px 2px black",
+                  "box-shadow": "1px 2px black",
                   "letter-spacing": "2.5px",
-                  "width": "40px",
+                  "width": "50px",
                   "overflow": "hidden",
-                  "z-index": "1"
+                  "z-index": "1",
+                  ":after": {
+                    "content": "''",
+                    "position": "absolute",
+                    "top": "0",
+                    "right": "-30px",
+                    "width": "40px",
+                    "height": "100%",
+                    "background-color": "#f0f0e6",
+                  }
                 },
                 "buttonWrapper": {
                   "margin": "11px 0 21px"
@@ -125,7 +149,10 @@ function loadShopifyProducts(nodeId, productIds) {
               "styles": {
                 "products": {
                   "@media (min-width: 601px)": {
-                    "margin-left": "-20px"
+                    "display": "flex",
+                    "flex-direction": "row",
+                    "flex-wrap": "wrap",
+                    "justify-content": "center",
                   }
                 }
               }
@@ -209,26 +236,36 @@ function loadShopifyProducts(nodeId, productIds) {
             }
           },
         });
-      }
     });
   }
 }
 
 function main() {
-  const productIdsStr = document.getElementById('product-listings')?.getAttribute('data-product-ids')
-  const productIds = productIdsStr === '' ? [] : productIdsStr?.split(',');
-  const productIdsSoldOutStr = document.getElementById('product-sold-out-listings')?.getAttribute('data-product-ids')
-  const productIdsSoldOut = productIdsSoldOutStr === '' ? [] : productIdsSoldOutStr?.split(',');
+  const collectionContainers = document.querySelectorAll('.shop-listings');
 
-  if (!productIds) throw new Error('DOM not yet loaded'); // DOM hasn't loaded yet
+  if (!collectionContainers.length) throw new Error('DOM not yet loaded'); // DOM hasn't loaded yet
 
-  if (!productIds.length) {
+  let hasAnyProducts = false;
+
+  // Load products for each collection
+  collectionContainers.forEach((container, index) => {
+    const collectionId = container.getAttribute('data-collection-id');
+    const showTitle = container.getAttribute('data-show-title');
+    
+    if (collectionId && collectionId.length > 0) {
+      hasAnyProducts = true;
+      // Create a unique ID for each container if it doesn't have one
+      if (!container.id) {
+        container.id = `product-listings-${collectionId}-${index}`;
+      }
+      loadShopifyProducts(container.id, collectionId, showTitle);
+    }
+  });
+
+  if (!hasAnyProducts) {
     showShopClosedMessage();
     return;
   }
-
-  loadShopifyProducts('product-listings', productIds);
-  loadShopifyProducts('product-sold-out-listings', productIdsSoldOut);
 };
 
 try {
