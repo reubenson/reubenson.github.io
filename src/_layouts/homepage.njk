@@ -60,7 +60,7 @@ title: Reuben Son Homepage
               </p>
               {% if announcements[0].footer %}
                 <p class="card-quote-footer">
-                  {{ announcements[0].footer | safe }}
+                  {# {{ announcements[0].footer | safe }} #}
                 </p>
               {% endif %}
               <img src="{{ announcements[0].hoverImage }}" class="hover-image" alt="" />
@@ -76,7 +76,9 @@ title: Reuben Son Homepage
       </div>
     </div>
     {# {% include "chop.njk" %} #}
-    <div class="project-border broider"></div>
+    <div class="broider">
+      <div class="project-border"></div>
+    </div>
     <script>
       {# add GA #}
       window.dataLayer = window.dataLayer || [];

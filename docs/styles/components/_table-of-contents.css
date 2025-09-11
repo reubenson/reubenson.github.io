@@ -69,6 +69,13 @@
   border-radius: 2px;
 }
 
+.homepage .toc-button {
+  border: solid black 1px;
+}
+.homepage .toc-button.open {
+  border: none;
+}
+
 .toc-button:after {
   content: "☰";
   color: #000000;

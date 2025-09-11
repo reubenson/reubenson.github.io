@@ -7,11 +7,13 @@
 }
 .homepage .cards {
   font-family: Courier New;
+  max-width: 450px;
 }
 .homepage .table-of-contents {
   margin-top: 30px;
 }
-.homepage .project-border {
+.homepage .project-border,
+.homepage .broider {
   height: calc(100% - 20px);
   width: calc(100vw - 20px);
   position: fixed;
@@ -22,6 +24,11 @@
   right: 0;
   box-sizing: border-box;
   margin: 10px;
+}
+.homepage .project-border {
+  height: calc(100% - 38px);
+  width: calc(100vw - 38px);
+  margin: 19px;
 }
 .homepage .cards .content {
   margin: auto;
@@ -60,13 +67,15 @@
   margin: auto;
   position: absolute;
   right: 0;
-  width: calc(100% - 50px);
+  width: calc(100% - 60px);
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 .homepage .card-container {
   background-color: #f0f0e6;
+  border: solid black 1px;
+  border-radius: 2px;
 }
 .homepage .card {
   box-sizing: border-box;
@@ -88,7 +97,7 @@
   display: inline;
   font-size: 24px;
   line-height: 24px;
-  height: 28px;
+  height: 30px;
   padding: 0 5px;
   position: absolute;
   width: auto;
@@ -112,7 +121,7 @@
   margin: 20px;
   padding: 8px;
   position: absolute;
-  height: calc(100% - 60px);
+  height: calc(100% - 40px);
   width: calc(100% - 35px);
   z-index: 1;
 }
@@ -173,7 +182,7 @@
   text-transform: uppercase;
 }
 .homepage .card-quote-footer {
-  bottom: -13px;
+  bottom: 2px;
   font-style: normal;
   left: 7px;
   position: absolute;
@@ -249,13 +258,13 @@
   display: none;
   position: fixed;
   z-index: 100;
-  max-width: 380px;
+  max-width: 260px;
   padding: 5px;
   border: solid black 1px;
   border-radius: 4px;
   pointer-events: none;
   background: #f0f0e6;
-  left: 500px;
+  left: 480px;
   right: 0;
   margin: auto;
   bottom: 0;
@@ -275,6 +284,11 @@
   width: 100%;
   left: -10px;
 }
+.homepage .project-border {
+  background-image: url("/public/riso-maine.png");
+  background-size: cover;
+  background-position: center;
+}
 @media screen and (min-height: 550px) {
   .homepage .cards {
     top: 50%;
@@ -283,14 +297,6 @@
   }
 }
 @media screen and (min-width: 768px) {
-  .homepage .project-border {
-    background-image: url("/public/riso-maine.png");
-    background-size: cover;
-    background-position: center;
-  }
-  .homepage .cards {
-    max-width: 450px;
-  }
   .homepage .card-container {
     border: solid black 1px;
   }

@@ -6,13 +6,15 @@
 
   .cards {
     font-family: Courier New;
+    max-width: 450px;
   }
   
   .table-of-contents {
     margin-top: 30px;
   }
   
-  .project-border {
+  .project-border,
+  .broider {
     height: calc(100% - 20px);
     width: calc(100vw - 20px);
     position: fixed;
@@ -23,6 +25,12 @@
     right: 0;
     box-sizing: border-box;
     margin: 10px;
+  }
+
+  .project-border {
+    height: calc(100% - 38px);
+    width: calc(100vw - 38px);
+    margin: 19px;
   }
   
   .cards .content {
@@ -69,7 +77,7 @@
     margin: auto;
     position: absolute;
     right: 0;
-    width: calc(100% - 50px);
+    width: calc(100% - 60px);
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -77,6 +85,8 @@
   
   .card-container {
     background-color: #f0f0e6;
+    border: solid black 1px;
+    border-radius: 2px;
   }
   
   .card {
@@ -102,7 +112,7 @@
     display: inline;
     font-size: 24px;
     line-height: 24px;
-    height: 28px;
+    height: 30px;
     padding: 0 5px;
     position: absolute;
     width: auto;
@@ -129,7 +139,7 @@
     margin: 20px;
     padding: 8px;
     position: absolute;
-    height: calc(100% - 60px);
+    height: calc(100% - 40px);
     width: calc(100% - 35px);
     z-index: 1;
   }
@@ -203,7 +213,7 @@
   }
   
   .card-quote-footer {
-    bottom: -13px;
+    bottom: 2px;
     font-style: normal;
     left: 7px;
     position: absolute;
@@ -292,14 +302,14 @@
     display: none;
     position: fixed;
     z-index: 100;
-    max-width: 380px;
+    max-width: 260px;
     // {# box-shadow: 0 2px 8px rgba(0,0,0,0.15); #}
     padding: 5px;
     border: solid black 1px;
     border-radius: 4px;
     pointer-events: none;
     background: #f0f0e6;
-    left: 500px;
+    left: 480px;
     right: 0;
     margin: auto;
     bottom: 0;
@@ -327,7 +337,11 @@
     }
   }
   
-  
+  .project-border {
+    background-image: url('/public/riso-maine.png');
+    background-size: cover;
+    background-position: center;
+  }
   
   @media screen and (min-height: 550px) {
     .cards {
@@ -338,15 +352,15 @@
   }
   
   @media screen and (min-width: 768px) {
-    .project-border {
-      background-image: url('/public/riso-maine.png');
-      background-size: cover;
-      background-position: center;
-    }
+    // .project-border {
+    //   background-image: url('/public/riso-maine.png');
+    //   background-size: cover;
+    //   background-position: center;
+    // }
   
-    .cards {
-      max-width: 450px;
-    }
+    // .cards {
+    //   max-width: 450px;
+    // }
   
     .card-container {
       border: solid black 1px;
