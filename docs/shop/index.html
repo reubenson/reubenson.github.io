@@ -216,9 +216,65 @@
       <div class="content-wrapper">
         <div class="shop-top">
           <p class="project-grid-item-full">The shop is currently going through an update as I change things up a bit. In the meanwhile, you can use <strong>TENOFF</strong> to apply a $10 discount to your order :)</p>
+ <!-- images to cycle through above the fold -->
+<div class="project-grid-item-full">
+  <div class="image-sequence project-grid-item-full" data-path="/public/ceramics/travel-vase-series" data-length="20">
+    <img src="/public/ceramics/travel-vase-series/1.JPG" alt="photo of a travel vase on a windowsill" class="sequence-image" style="opacity: 1.0;">
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const delay = 5000;
+    const imageSequence = document.querySelector('.image-sequence');
+    const path = imageSequence.dataset.path;
+    const length = imageSequence.dataset.length;
+    const images = document.querySelectorAll('.sequence-image');
+    let currentIndex = 0;
+    let previousImage = images[0];
+
+    function findOrCreateImage(parent,index) {
+      let element = document.querySelector(`img[src="${path}/${index + 1}.JPG"]`);
+      if (element) {
+        return element;
+      }
+
+      element = document.createElement('img');
+      element.src = `${path}/${index + 1}.JPG`;
+      element.alt = `photo of a travel vase on a windowsill`;
+      element.style.opacity = '0.0';
+      element.classList.add('sequence-image');
+      parent.appendChild(element);
+      return element;
+    }
+    
+    function nextImage() {
+      // previousImage?.classList.remove('active');
+      currentIndex = Math.floor(Math.random() * length);
+      const element = findOrCreateImage(imageSequence, currentIndex);
+      // const element = document.createElement('img');
+      // element.src = `${path}/${currentIndex + 1}.JPG`;
+      // element.alt = `photo of a travel vase on a windowsill`;
+      // element.style.opacity = '0.0';
+      // element.classList.add('sequence-image');
+      // element.classList.add('active');
+      // imageSequence.appendChild(element);
+      setTimeout(() => {
+        previousImage.style.opacity = '0.1';
+        previousImage?.classList.remove('active');
+        element.style.opacity = '1.0';
+        // element.classList.add('active');
+      }, delay);
+      previousImage = element;
+    }
+
+    setTimeout(() => {
+      setInterval(nextImage, delay);
+    }, 0); // Initial delay of 2 seconds
+  });
+</script>
 <!-- I've gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It's a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of _being away_. -->
 <!-- {.project-grid-item-6} -->
-<!-- Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They range from about 1.5 to 3 inches in height, and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
+<!-- Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They range from abo`ut 1.5 to 3 inches in height, and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
 \
 \
 You can also check out a collection of photos from friends and family of these vessels [out in the field](/projects/travel-vase-gallery) 🌻 🏺
@@ -236,27 +292,22 @@ Please note that shipping is currently limited to the U.S.
         </div>
         
         <section class="shop-collection" id="travel-vases">
-          <h2 class="shop-collection-header project-grid-item-full">Travel Vases</h2>
+          <h2 class="shop-collection-header project-grid-item-2">Travel Vases</h2>
           <p class="collection-description project-grid-item-4">
             I’ve gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It’s a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of being away.<br/><br/>
             Each vase (<a href="/projects/travel-vases" target="_blank">see gallery</a>) is no taller than 2 inches (5cm), and made on my miniature wheel at home, perched at my kitchen windowsill.
             
           </p>
           
-          <figure class="project-grid-item-2" >
-            <img src="/public/pocket-vase.jpg" alt="photo of a travel vase on a windowsill">
-            <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm.
-               
-              </figcaption>
-          </figure>
+          
           <div class="shopify-container project-grid-item-full">
             <div class="shop-listings" data-collection-id="278257860680" data-show-title="false"></div>
           </div>
         </section>
 
         <section class="shop-collection" id="one-offs">
-          <h2 class="shop-collection-header project-grid-item-full">One-offs</h2>
-          <p class="collection-description project-grid-item-full">Miscellaneous one-off pieces, mostly made for fun or as experiments</p>
+          <h2 class="shop-collection-header project-grid-item-2">One-offs</h2>
+          <p class="collection-description project-grid-item-4">Miscellaneous one-off pieces, mostly made for fun or as experiments</p>
           
           <div class="shopify-container project-grid-item-full">
             <div class="shop-listings" data-collection-id="278356557896" data-show-title="true"></div>

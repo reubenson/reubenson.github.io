@@ -3,16 +3,18 @@
   background-color: #f0f0e6;
   display: none;
   visibility: hidden;
-  width: 240px;
+  // width: 240px;
+  width: 100%;
   position: fixed;
   left: 20px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   left: 0;
   right: 0;
-  margin: auto;
+  // margin: auto;
+  margin: 18px;
   // padding: 10px;
   height: 100%;
-  max-height: calc(100% - 60px);
+  max-height: calc(100% - 36px);
   max-width: 720px;
   overflow: scroll;
   top: 0;
@@ -33,7 +35,7 @@
     display: block;
     visibility: visible;
     z-index: 9;
-    width: calc(100% - 60px);
+    width: calc(100% - 36px);
 
     + .content {
       filter: blur(10px);
@@ -42,12 +44,22 @@
   }
 
   nav {
-    margin-top: 20px;
+    // margin-top: 20px;
     text-align: center;
+    position: sticky;
+    top: -10px;
+    background-color: #f0f0e6;
+    // height: 40px;
+    padding: 6px 0 16px;
+    border-bottom: solid black 1px;
+    z-index: 2;
+    font-size: 20px;
   }
 
   nav a {
     padding: 0 5px;
+    text-decoration: none;
+    font-weight: bold;
   }
   
   h2.table-of-contents-header {
@@ -62,9 +74,9 @@
 
 .toc-button {
   background-color: #f0f0e6;
-  right: 34px;
+  right: 26px;
   position: absolute;
-  top: 34px;
+  top: 26px;
   font-size: 20px;
   border: none;
   z-index: 10;
@@ -86,6 +98,11 @@
 .toc-button:after {
   content: '☰';
   color: #000000;
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .toc-button.open:after {

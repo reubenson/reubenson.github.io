@@ -1,7 +1,6 @@
 @import '../shared';
 
 .shop-page {
-  // margin: 20px auto;
 
   header {
     @include page-header;
@@ -11,7 +10,7 @@
     z-index: 1;
     max-width: calc(100vw - 40px);
     padding-top: 10px;
-    // margin-top: 60px;
+    padding: 6px 0;
     
     nav {
       display: flex;
@@ -23,7 +22,7 @@
       width: 100%;
       max-width: 720px;
       position: relative;
-      font-size: 22px;
+      font-size: 20px;
 
       a {
         text-decoration: none;
@@ -38,7 +37,7 @@
 
   .content {
     padding-top: 0;
-    // margin-top: 30px;
+    scroll-padding-top: 60px;
   }
 
   .content .shop-collection-header {
@@ -50,7 +49,6 @@
     font-size: 18px;
     line-height: 26px;
     margin: 10px 0 20px 0;
-    // font-style: italic;
     color: #333;
   }
 
@@ -66,6 +64,10 @@
     }
   }
 
+  .shop-top {
+    margin-bottom: 20px;
+  }
+
   .shop-top,
   .shop-collection {
     @include grid-container;
@@ -73,10 +75,7 @@
 
   .content-wrapper {
     display: block;
-    // grid-template-columns: repeat(6, 1fr);
-    // gap: 40px;
     width: 100%;
-    // max-width: 1200px;
     max-width: 720px;
     margin: 0 auto;
   }
@@ -91,34 +90,55 @@
 
   .shop-listings {
     margin: auto;
-    // max-width: 720px !important;
-    // width: calc(100vw - 80px);
-    // margin-left: calc((720px - 100vw + 80px)/2);
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: space-between;
 
     iframe {
-      // background-color: #f0f0e6;
       border-radius: 2px;
       flex: 1 0 40%;
       min-width: 200px;
-      // filter: sepia(1%) brightness(0.97);
-      // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05)
     }
   }
 
   .newsletter-signup-intro {
     margin-top: 20px;
   }
-  @media screen and (min-width: 1080px) {
-    .shop-listings {
-      width: calc(100vw - 80px);
-      margin-left: calc((720px - 100vw + 80px)/2);
-      // width: 1024px !important;
-      // max-width: 1024px !important;
-      // margin-left: calc((720px - 1024px) / 2);
+
+  .image-sequence {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    border-radius: 2px;
+    width: 100%;
+    
+    .sequence-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.1;
+      transition: opacity 6.5s linear;
+      filter: brightness(1) contrast(1.0);
+    }
+  }
+
+  @media screen and (min-width: 720px) {
+    .shop-listings,
+    .image-sequence {
+      width: calc(100vw - 80px) !important;
+      margin-left: calc((720px - 100vw + 80px)/2) !important;
+    }
+  }
+
+  @media screen and (min-width: 1180px) {
+    .image-sequence {
+      width: 1024px !important;
+      margin-left: calc((720px - 1024px) / 2) !important;
     }
   }
 

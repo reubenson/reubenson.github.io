@@ -100,15 +100,15 @@ h3 {
   background-color: #f0f0e6;
   display: none;
   visibility: hidden;
-  width: 240px;
+  width: 100%;
   position: fixed;
   left: 20px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 18px;
   height: 100%;
-  max-height: calc(100% - 60px);
+  max-height: calc(100% - 36px);
   max-width: 720px;
   overflow: scroll;
   top: 0;
@@ -127,18 +127,26 @@ h3 {
   display: block;
   visibility: visible;
   z-index: 9;
-  width: calc(100% - 60px);
+  width: calc(100% - 36px);
 }
 .table-of-contents.open + .content {
   filter: blur(10px);
   transition: filter 0.9s ease;
 }
 .table-of-contents nav {
-  margin-top: 20px;
   text-align: center;
+  position: sticky;
+  top: -10px;
+  background-color: #f0f0e6;
+  padding: 6px 0 16px;
+  border-bottom: solid black 1px;
+  z-index: 2;
+  font-size: 20px;
 }
 .table-of-contents nav a {
   padding: 0 5px;
+  text-decoration: none;
+  font-weight: bold;
 }
 .table-of-contents h2.table-of-contents-header {
   text-align: center;
@@ -152,9 +160,9 @@ h3 {
 
 .toc-button {
   background-color: #f0f0e6;
-  right: 34px;
+  right: 26px;
   position: absolute;
-  top: 34px;
+  top: 26px;
   font-size: 20px;
   border: none;
   z-index: 10;
@@ -175,6 +183,11 @@ h3 {
 .toc-button:after {
   content: "☰";
   color: #000000;
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .toc-button.open:after {
@@ -355,9 +368,6 @@ h3 {
 .homepage .cards {
   font-family: Courier New;
   max-width: 450px;
-}
-.homepage .table-of-contents {
-  margin-top: 30px;
 }
 .homepage .project-border,
 .homepage .broider {
@@ -852,6 +862,7 @@ h3 {
   z-index: 1;
   max-width: calc(100vw - 40px);
   padding-top: 10px;
+  padding: 6px 0;
 }
 .shop-page header nav {
   display: flex;
@@ -863,7 +874,7 @@ h3 {
   width: 100%;
   max-width: 720px;
   position: relative;
-  font-size: 22px;
+  font-size: 20px;
 }
 .shop-page header nav a {
   text-decoration: none;
@@ -874,6 +885,7 @@ h3 {
 }
 .shop-page .content {
   padding-top: 0;
+  scroll-padding-top: 60px;
 }
 .shop-page .content .shop-collection-header {
   font-weight: 300;
@@ -897,34 +909,44 @@ h3 {
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
+.shop-page .shop-top {
+  margin-bottom: 20px;
+}
 .shop-page .shop-top,
 .shop-page .shop-collection {
-  display: block;
+  display: grid;
   gap: 20px;
+  row-gap: 20px;
 }
 .shop-page .shop-top .project-grid-item-1,
 .shop-page .shop-collection .project-grid-item-1 {
+  margin: auto;
   grid-column: span 1;
 }
 .shop-page .shop-top .project-grid-item-2,
 .shop-page .shop-collection .project-grid-item-2 {
+  margin: auto;
   grid-column: span 2;
 }
 .shop-page .shop-top .project-grid-item-3,
 .shop-page .shop-collection .project-grid-item-3 {
+  margin: auto;
   grid-column: span 3;
 }
 .shop-page .shop-top .project-grid-item-4,
 .shop-page .shop-collection .project-grid-item-4 {
+  margin: auto;
   grid-column: span 4;
 }
 .shop-page .shop-top .project-grid-item-5,
 .shop-page .shop-collection .project-grid-item-5 {
+  margin: auto;
   grid-column: span 5;
 }
 .shop-page .shop-top .project-grid-item-6, .shop-page .shop-top .project-grid-item-full,
 .shop-page .shop-collection .project-grid-item-6,
 .shop-page .shop-collection .project-grid-item-full {
+  margin: auto;
   grid-column: span 6;
 }
 @media (min-width: 720px) {
@@ -962,10 +984,36 @@ h3 {
 .shop-page .newsletter-signup-intro {
   margin-top: 20px;
 }
-@media screen and (min-width: 1080px) {
-  .shop-page .shop-listings {
-    width: calc(100vw - 80px);
-    margin-left: calc((720px - 100vw + 80px) / 2);
+.shop-page .image-sequence {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  border-radius: 2px;
+  width: 100%;
+}
+.shop-page .image-sequence .sequence-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.1;
+  transition: opacity 6.5s linear;
+  filter: brightness(1) contrast(1);
+}
+@media screen and (min-width: 720px) {
+  .shop-page .shop-listings,
+  .shop-page .image-sequence {
+    width: calc(100vw - 80px) !important;
+    margin-left: calc((720px - 100vw + 80px) / 2) !important;
+  }
+}
+@media screen and (min-width: 1180px) {
+  .shop-page .image-sequence {
+    width: 1024px !important;
+    margin-left: -152px !important;
   }
 }
 

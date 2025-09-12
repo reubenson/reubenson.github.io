@@ -9,9 +9,6 @@
   font-family: Courier New;
   max-width: 450px;
 }
-.homepage .table-of-contents {
-  margin-top: 30px;
-}
 .homepage .project-border,
 .homepage .broider {
   height: calc(100% - 20px);
