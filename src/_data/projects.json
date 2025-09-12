@@ -50,12 +50,16 @@
     "title": "Travel Vases",
     "description": "",
     "year": 2024,
-    "url": "/shop/",
-    "path": "/shop",
+    "url": "",
+    "path": "/projects/travel-vases",
     "tagline": "Pocket-sized ceramic vessels for vacation wildflowers",
     "selected": true,
     "categories": [],
-    "relatedProjects": []
+    "relatedProjects": [
+      "meandering-printing",
+      "after-orpheus",
+      "echea"
+    ]
   },
   {
     "id": "midi-archive",

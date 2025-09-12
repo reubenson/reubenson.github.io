@@ -771,6 +771,7 @@ h3 {
   width: 100%;
   max-width: 720px;
   position: relative;
+  margin-top: 20px;
 }
 .project .content h2 {
   font-weight: 300;
@@ -884,7 +885,6 @@ h3 {
   font-weight: bold;
 }
 .shop-page .content {
-  padding-top: 0;
   scroll-padding-top: 60px;
 }
 .shop-page .content .shop-collection-header {
@@ -892,6 +892,9 @@ h3 {
   margin: 40px 0 40px;
   text-align: center;
   margin: 10px auto;
+  border-bottom: solid black 1px;
+  border-top: solid black 1px;
+  padding: 10px 0;
 }
 .shop-page .collection-description {
   font-size: 18px;
@@ -999,8 +1002,7 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.1;
-  transition: opacity 6.5s linear;
+  transition: opacity 3.5s linear;
   filter: brightness(1) contrast(1);
 }
 @media screen and (min-width: 720px) {
@@ -1022,14 +1024,14 @@ body {
 }
 
 .content {
-  left: 10px;
-  position: absolute;
+  left: 19px;
+  position: fixed;
   overflow-x: hidden;
   overflow-y: scroll;
-  top: 20px;
-  bottom: 20px;
-  right: 10px;
-  padding: 20px;
+  top: 19px;
+  bottom: 19px;
+  right: 19px;
+  padding: 0 20px 20px 20px;
   margin: auto;
 }
 

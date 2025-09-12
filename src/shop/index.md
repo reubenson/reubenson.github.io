@@ -11,7 +11,7 @@ The shop is currently going through an update as I change things up a bit. In th
  <!-- images to cycle through above the fold -->
 <div class="project-grid-item-full">
   <div class="image-sequence project-grid-item-full" data-path="/public/ceramics/travel-vase-series" data-length="20">
-    <img src="/public/ceramics/travel-vase-series/1.JPG" alt="photo of a travel vase on a windowsill" class="sequence-image" style="opacity: 1.0;">
+    <img src="/public/ceramics/travel-vase-series/20.JPG" alt="photo of a travel vase on a windowsill" class="sequence-image" style="opacity: 1.0;">
   </div>
 </div>
 
@@ -23,7 +23,8 @@ The shop is currently going through an update as I change things up a bit. In th
     const length = imageSequence.dataset.length;
     const images = document.querySelectorAll('.sequence-image');
     let currentIndex = 0;
-    let previousImage = images[0];
+    let previousIndex = null;
+    let secondPreviousIndex = null;
 
     function findOrCreateImage(parent,index) {
       let element = document.querySelector(`img[src="${path}/${index + 1}.JPG"]`);
@@ -41,23 +42,25 @@ The shop is currently going through an update as I change things up a bit. In th
     }
     
     function nextImage() {
-      // previousImage?.classList.remove('active');
       currentIndex = Math.floor(Math.random() * length);
       const element = findOrCreateImage(imageSequence, currentIndex);
-      // const element = document.createElement('img');
-      // element.src = `${path}/${currentIndex + 1}.JPG`;
-      // element.alt = `photo of a travel vase on a windowsill`;
-      // element.style.opacity = '0.0';
-      // element.classList.add('sequence-image');
-      // element.classList.add('active');
-      // imageSequence.appendChild(element);
+      let previousElement = null;
+      let secondPreviousElement = null;
+      if (previousIndex >= 0) {
+        previousElement = findOrCreateImage(imageSequence, previousIndex);
+      }
+      if (secondPreviousIndex >= 0) {
+        secondPreviousElement = findOrCreateImage(imageSequence, secondPreviousIndex);
+      }
       setTimeout(() => {
-        previousImage.style.opacity = '0.1';
-        previousImage?.classList.remove('active');
+        // const secondPreviousImage = 
+        if (secondPreviousElement) secondPreviousElement.style.opacity = '0.0';
+        if (previousElement) previousElement.style.opacity = '0.5';
         element.style.opacity = '1.0';
-        // element.classList.add('active');
-      }, delay);
-      previousImage = element;
+      }, 100);
+      secondPreviousIndex = previousIndex;
+      previousIndex = currentIndex;
+      // previousImage = element;
     }
 
     setTimeout(() => {
