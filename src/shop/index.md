@@ -5,9 +5,6 @@ description: Shop for ceramics and other goods made by Reuben Son
 socialImg: /public/pocket-vase.jpg
 ---
 
-The shop is currently going through an update as I change things up a bit. In the meanwhile, you can use **TENOFF** to apply a $10 discount to your order :)
-{.project-grid-item-full}
-
  <!-- images to cycle through above the fold -->
 <div class="project-grid-item-full">
   <div class="image-sequence project-grid-item-full" data-path="/public/ceramics/travel-vase-series" data-length="20">
@@ -15,9 +12,16 @@ The shop is currently going through an update as I change things up a bit. In th
   </div>
 </div>
 
+{.project-grid-item-1}
+
+Through the end of September, 50% of proceeds from all sales will be donated to a [GoFundMe for the artists affected by the recent fire in Red Hook](https://www.gofundme.com/f/help-red-hook-artists-and-businesses-rebuild-after-fire).
+{.project-grid-item-4}
+
+{.project-grid-item-1}
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const delay = 5000;
+    const delay = 4000;
     const imageSequence = document.querySelector('.image-sequence');
     const path = imageSequence.dataset.path;
     const length = imageSequence.dataset.length;
