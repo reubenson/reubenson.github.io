@@ -82,6 +82,10 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
+
+  .toc-button.open ~ .cards {
+    display: none;
+  }
   
   .card-container {
     background-color: #f0f0e6;

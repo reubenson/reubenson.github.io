@@ -14,8 +14,8 @@ socialImg: /public/pocket-vase.jpg
 
 {.project-grid-item-1}
 
-Through the end of September, 50% of proceeds from all sales will be donated to a [GoFundMe for the artists affected by the recent fire in Red Hook](https://www.gofundme.com/f/help-red-hook-artists-and-businesses-rebuild-after-fire).
-{.project-grid-item-4}
+Through the end of September, 50% of proceeds from all sales will be donated to a [GoFundMe for the artists affected by the recent fire in Red Hook](https://www.gofundme.com/f/help-red-hook-artists-and-businesses-rebuild-after-fire). You can also use **TENOFF** to apply a $10 discount to your order.
+{.project-grid-item-full}
 
 {.project-grid-item-1}
 
