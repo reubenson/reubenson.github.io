@@ -10,10 +10,10 @@ dimensions: variable 1 to 2 cu.in.
 
  <!-- such that they can be brought closer within one's field of vision, as if a small creature. -->
 
-I often work at very small scale, of 1-2 inches. As small objects, they are portable and meant to be handled, harkening back to the water jugs that these forms evolved from. I call them _travel vases_, as in that they are meant to travel with you.
+"Travel Vases" are an ongoing series of miniature vases produced at a scale of 1-2 inches tall. As small objects, they are portable and meant to be handled, harkening back to the water jugs that these forms evolved from. I call them _travel vases_, as in that they are meant to travel with you.
 \
 \
-They fit easily in the hand and brought up to the eye. At this scale, what might otherwise register as surface, texture, or ornamentation becomes more difficult to distinguish from the form itself. The small aperture of the opening almost precludes the possibility of **interiority**, which one is left to discover by foraging for a wildflower of appropriately narrow stem.
+The small aperture of the opening almost precludes the possibility of **interiority**, which one is left to discover by foraging for a wildflower of appropriately narrow stem.
 {.project-grid-item-4}
 
 <figure class="project-grid-item-2" >

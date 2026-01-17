@@ -7,7 +7,7 @@ dimensions: 8" x 7" x 4"
 year: 2023
 ---
 
-_Meander_ uses the single, continuous line of the 3D-printer to apply the Greek key ornament to the **form** of a porcelain vessel, as opposed to the surface. It offers an invitation to the eye to meander with the vessel while _blurring the line_ betweeen interior and exterior space.
+_Meander_ uses the single, continuous line of a ceramic 3D-printer to translate the Greek key ornamentation into the **form** of a porcelain vessel. It offers an invitation to the eye to meander with the vessel while _blurring the line_ between interior and exterior space.
 {.project-grid-item-full}
 
 <!-- which now requires tracing to distinguish, a surprising invitation for the viewer's eye to enter. -->

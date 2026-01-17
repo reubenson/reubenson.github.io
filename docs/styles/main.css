@@ -1097,6 +1097,16 @@ a {
   width: 100%;
 }
 
+.cursive {
+  font-family: cursive;
+}
+
+.space-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 @media print {
   .print-page-break {
     break-after: page;

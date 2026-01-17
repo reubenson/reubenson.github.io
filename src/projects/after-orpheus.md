@@ -9,7 +9,7 @@ dimensions: 32" x 32" x 80"
 
 <div class="project-grid-item-2">
   <p>
-    <em>After Orpheus</em> is a mixed media sculpture that combines ceramic vessels with steel piano wire and electronics to produce acoustically amplified sound without speakers. A molded paper cup held against the self-oscillating wire allows for an intimate mode of listening while shifting the vibrational mode of the wire.
+    <em>After Orpheus</em> is a mixed media sculpture that combines ceramics with chrome armature, steel piano wire and electronics to produce acoustically amplified sound without speakers. A molded paper cup held against the self-oscillating wire allows for an intimate mode of listening while also affecting the vibrational modes of the wire.
   </p>
   <img src="/public/after-orpheus/cup.jpg" alt="" style="margin-top: 100px;">
 </div>
