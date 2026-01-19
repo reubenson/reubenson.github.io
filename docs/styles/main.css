@@ -216,9 +216,11 @@ h3 {
   padding-right: 5px;
   position: absolute;
   left: 0;
+  font-style: italic;
 }
 
-.projects-list-container .project-title a, .project-index a {
+.projects-list-container .project-title a,
+.project-index a {
   text-decoration: none;
 }
 
@@ -229,7 +231,8 @@ h3 {
   right: 0;
 }
 
-.projects-list-container .project-title, .project-index {
+.projects-list-container .project-title,
+.project-index {
   z-index: 1;
   background-color: #f0f0e6;
   top: -3px;
@@ -244,9 +247,9 @@ h3 {
 }
 
 .projects-list-container .project-tagline {
-  font-style: italic;
   margin-top: 20px;
   top: 20px;
+  font-size: 15px;
 }
 
 .projects-list-container .project-tagline a {
@@ -254,7 +257,6 @@ h3 {
 }
 
 .projects-list-container .project-tagline::after {
-  content: "↝";
   margin-left: 5px;
   font-family: math;
   font-size: 18px;
@@ -676,7 +678,8 @@ h3 {
   max-width: 720px;
   margin: 0 auto;
 }
-.project h1, .project h1 a {
+.project h1,
+.project h1 a {
   border-bottom: none;
   line-height: 34px;
   font-size: 30px;
@@ -830,7 +833,9 @@ h3 {
   }
 }
 @media print {
-  .project header, .project h1, .project a {
+  .project header,
+  .project h1,
+  .project a {
     margin-top: 0;
   }
   .project .content {

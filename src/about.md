@@ -5,11 +5,25 @@ layoutType: two-column
 hideSeeMore: true
 ---
 
-Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is a software engineer and artist based in New York City.
+Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is an artist based in New York City.
 \
 \
-His work deals with the _air_ as both material and metaphor, explores the sculptural interplay between surface and structure, and examines the exchanges between object and affect.
+As an artist, his work deals with the _air_ as both material and metaphor, explores the sculptural interplay between surface and structure, and examines the exchanges between object and affect.
 {.project-grid-item-4}
+
+<figure class="project-grid-item-2">
+  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" alt="photo of Reuben on his couch">
+  <figcaption>Photo by <a href="https://laurelschwulst.com/">Laurel Schwulst</a></figcaption>
+</figure>
+
+As a software engineer, he is currently doing mobile development at Slate, and previously built The Strategist at New York Magazine and was a researcher at the Harvard-MIT Health Sciences and Technology.
+{.project-grid-item-6}
+
+For more about this website, see [colophon](/colophon).
+{.project-grid-item-full}
+
+<!-- To support this work, please consider reaching out with opportunities or consider buying something from the [shop](/shop)!
+{.project-grid-item-full} -->
 
 <!-- He thinks of his methodology as broadly sculptural, in which form and content are not determined _a priori_, and the final work emerges in negotation with the materiality and poetics of the medium. -->
 
@@ -17,18 +31,8 @@ His work deals with the _air_ as both material and metaphor, explores the sculpt
 
 <!-- When I was younger, I wanted to be a filmmaker, or a furniture designer, or a concert guitarist. While my fantasies of _becoming_ have shifted over the years, I still feel drawn to certain kinds of objects and forms of aesthetic experience. Over the last decade, my energies have settled, through desire paths and streams, into software, sound, and ceramics. -->
 
-<figure class="project-grid-item-2">
-  <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" alt="photo of Reuben on his couch">
-  <figcaption>Photo by <a href="https://laurelschwulst.com/">Laurel Schwulst</a></figcaption>
-</figure>
-
 <!-- I'm interested in the interplay of phenomonologically irreducible elements of surface and structure, of object and affect, of screen and software. I think of my methodology as broadly sculptural, in which form and content are not determined _a priori_, and the final work emerges in negotation with the materiality and poetics of the medium. -->
 
-For more about this website, see [colophon](/colophon).
-{.project-grid-item-full}
-
-To support this work, please consider reaching out with opportunities or consider buying something from the [shop](/shop)!
-{.project-grid-item-full}
 
 <!-- The British psychoanalyst Christopher Bollas writes that "the aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object" [1]. In our daily lives, these moments of transformative _caesura_ come unbeckoned, or not at all, and a life well-lived might be one in which the possibility of such moments feel close at hand. -->
 <!-- {.project-grid-item-4} -->

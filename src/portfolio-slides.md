@@ -34,7 +34,7 @@ title: Selected Works
           <iframe width="100%" height="480px" src="https://www.youtube-nocookie.com/embed/ERbfczLUr-A?controls=0&amp;start=483" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           <figcaption>
             Software developed for a project by the artist James Hoff, utlizing algorithmic control of Google Maps Street View to animate audio-responsive site-specific work, in this case at Chernobyl. 
-            {% renderFile "./src/projects/hobo-ufo.md" %}
+            {% renderFile "./src/works/hobo-ufo.md" %}
           </figcaption>
         </figure>
       </li>

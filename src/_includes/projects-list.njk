@@ -1,14 +1,31 @@
 <div class="projects-list-container">
+  {% set index = 0 %}
+  <h2>Works</h2>
   <ul class="projects-list">
   {% for project in projects %}
-      {% if project.selected %}
+    {% if project.selected %}
+      {% set index = index + 1 %}
       <li class="project-item">
-      <span class="project-title"><a href="{{ project.path }}">{{ project.title }}</a></span>
-      <span class="project-index"><a href="{{ project.path }}">{{ loop.index }}</a></span>
-      <span class="project-line"></span>
-      <span class="project-tagline"><a href="{{ project.path }}">{{ project.tagline | safe }}</a></span>
+        <span class="project-title"><a href="{{ project.path }}">{{ project.title }}</a> ({{ project.year }})</span>
+        <span class="project-index"><a href="{{ project.path }}">{{ index }}</a></span>
+        <span class="project-line"></span>
+        <span class="project-tagline"><a href="{{ project.path }}">{{ project.tagline | safe }}</a></span>
       </li>
       {% endif %}
-  {% endfor %}
   </ul>
+  {% endfor %}
+  <h2>Radio Mixes</h2>
+  {% for project in projects %}
+  <ul class="projects-list">
+    {% if "mixes" in project.categories %}
+    {% set index = index + 1 %}
+    <li class="project-item">
+      <span class="project-title"><a href="{{ project.path }}">{{ project.title }}</a> ({{ project.year }})</span>
+      <span class="project-index"><a href="{{ project.path }}">{{ index }}</a></span>
+      <span class="project-line"></span>
+      <span class="project-tagline"><a href="{{ project.path }}">{{ project.tagline | safe }}</a></span>
+    </li>
+    {% endif %}
+  </ul>
+  {% endfor %}
 </div>

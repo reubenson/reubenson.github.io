@@ -5,22 +5,27 @@ description: Radio broadcast for WFMU
 url: https://wfmu.org/playlists/shows/119916
 layoutType: two-column
 ---
-_**[Composing Through Listening]({{ url }})**_ is a one-hour radio broadcast composed for the [WFMU](https://wfmu.org/), historic free-form community radio station based in Jersey City.
+_**[Composing Through Listening]({{ url }})**_ is a one-hour radio broadcast composed for the [WFMU](https://wfmu.org/), the historic free-form community radio station based in Jersey City.
+{.project-grid-item-full}
 
-<figure class="figure-medium">
+<figure class="project-grid-item-full">
   <img src="https://maison-ona.com/img/works/116_slideshow_4.jpg" alt="photo of Luc Ferrari's score for Presque Rien">
-  <figcaption>Luc Ferrari's score for <em>Presque Rien No. 1</em>, courtesy of <a href="https://maison-ona.com/catalog-0059ONA">Maison ONA</a></figcaption>
+  <figcaption>Luc Ferrari's score for <em>Presque Rien No. 1</em> (<a href="https://maison-ona.com/catalog-0059ONA">Maison ONA</a>)</figcaption>
 </figure>
 
 This program was composed, mixed, and edited specifically for radio, presenting a survey of works by composers who deal with the phenomenology of listening directly in their compositional practices. 
+{.project-grid-item-full}
 
 At one extreme, Jakob Ullmann and Luc Ferrari explore composition at the threshold of being reduced to almost nothing. In his liner notes, Ullmann often suggests to "set the volume so as to just barely mask the ambient sounds in the room".
+{.project-grid-item-full}
 
 Along a different paradigm, Jana Winderen and Felix Hess use non-traditional recording methods to work with sound beyond the natural limits of human hearing, and Yukio Fujimoto uses sculptural devices to augment his own hearing.
+{.project-grid-item-full}
 
 Perhaps more so than other works of music and sound art, these pieces seem to suggest something about _how_ to listen to sounds, through listening to the composers' own act of listening.
+{.project-grid-item-full}
 
-<blockquote style="display: block">
+<div class="project-grid-item-full" style="display: block">
 
   **Program Notes**
 
@@ -51,4 +56,4 @@ Perhaps more so than other works of music and sound art, these pieces seem to su
   56’00” — Alvin Curran, _Songs and Views From the Magnetic Garden_
 
   56’42” — **Last voice break**
-</blockquote>
+</div>

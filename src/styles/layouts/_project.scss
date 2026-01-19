@@ -28,7 +28,8 @@
   //   }
   // }
 
-  h1, h1 a {
+  h1,
+  h1 a {
     border-bottom: none;
     line-height: 34px;
     font-size: 30px;
@@ -60,7 +61,7 @@
   p {
     // text-align: justify;
   }
-  
+
   figure {
     margin: auto;
     display: flex;
@@ -115,7 +116,7 @@
   .content {
     margin: 10px auto;
   }
-  
+
   // .content p:first-child {
   //   width: 100%;
   //   font-size: 18px;
@@ -167,12 +168,13 @@
     .content .content-wrapper {
       max-width: 720px;
       margin-right: auto;
-    } 
+    }
   }
-  
+
   header {
     @include page-header;
     margin-top: 20px;
+    // margin-bottom: 40px;
   }
 
   .content h2 {
@@ -197,7 +199,8 @@
     max-width: 720px;
   }
 
-  @media (min-width: 720px), print {
+  @media (min-width: 720px),
+  print {
     .content-wrapper:not(.no-grid) {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -208,32 +211,32 @@
         margin: auto;
         grid-column: span 1;
       }
-  
+
       &-2 {
         margin: auto;
         grid-column: span 2;
       }
-  
+
       &-3 {
         margin: auto;
         grid-column: span 3;
       }
-  
+
       &-4 {
         margin: auto;
         grid-column: span 4;
       }
-      
+
       &-5 {
         margin: auto;
         grid-column: span 5;
       }
-  
+
       &-6 {
         margin: auto;
         grid-column: span 6;
       }
-  
+
       &-full {
         margin: auto;
         grid-column: 1 / -1;
@@ -245,7 +248,9 @@
     // margin: 0;
     // padding: 0;
 
-    header, h1, a {
+    header,
+    h1,
+    a {
       margin-top: 0;
     }
 
@@ -280,7 +285,7 @@
 
 //   &-more {
 //     margin-top: 2rem;
-    
+
 //     h2 {
 //       font-size: 1.5rem;
 //       margin-bottom: 1rem;

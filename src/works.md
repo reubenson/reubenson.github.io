@@ -1,7 +1,7 @@
 ---
 layout: project.njk
-title: Projects
-description: Table of Contents
+title: 
+description: 
 hideSeeMore: true
 noGrid: true
 ---

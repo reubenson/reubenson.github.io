@@ -1,12 +1,27 @@
 [
   {
+    "id": "udu",
+    "title": "Moon Udu",
+    "description": "",
+    "year": "2025",
+    "url": "",
+    "path": "/works/moon-udu",
+    "tagline": "Psychosynthetic Ceramics",
+    "selected": true,
+    "categories": [],
+    "relatedProjects": [
+      "meandering-printing",
+      "travel-vases"
+    ]
+  },
+  {
     "id": "after-orpheus",
     "title": "After Orpheus",
     "description": "",
     "year": 2025,
     "url": "",
-    "path": "/projects/after-orpheus",
-    "tagline": "Sound sculpture for 'Quantum Intimacies'",
+    "path": "/works/after-orpheus",
+    "tagline": "Mixed media sound sculpture",
     "selected": true,
     "categories": [],
     "relatedProjects": [
@@ -21,8 +36,8 @@
     "description": "",
     "year": 2025,
     "url": "",
-    "path": "/projects/airs",
-    "tagline": "Collection of poems accompanied by recordings of the wind",
+    "path": "/works/airs",
+    "tagline": "Wind as poetry, poetry as wind",
     "selected": true,
     "categories": [],
     "relatedProjects": [
@@ -36,7 +51,7 @@
     "description": "",
     "year": 2024,
     "url": "",
-    "path": "/projects/quiet-time",
+    "path": "/works/quiet-time",
     "tagline": "Essay and lecture at Naive Yearly 2024",
     "selected": true,
     "categories": [],
@@ -46,19 +61,34 @@
     ]
   },
   {
-    "id": "travel-vases",
-    "title": "Travel Vases",
+    "id": "echea",
+    "title": "Echea",
     "description": "",
     "year": 2024,
     "url": "",
-    "path": "/projects/travel-vases",
-    "tagline": "Pocket-sized ceramic vessels for vacation wildflowers",
+    "path": "/works/echea",
+    "tagline": "Ceramic sound sculpture w/ Eli Keszler",
     "selected": true,
     "categories": [],
     "relatedProjects": [
-      "meandering-printing",
-      "after-orpheus",
-      "echea"
+      "frog-chorus",
+      "midi-archive",
+      "meandering-printing"
+    ]
+  },
+  {
+    "id": "surface-tension",
+    "title": "Surface Tension",
+    "description": "",
+    "year": 2024,
+    "url": "",
+    "path": "/works/surface-tension",
+    "tagline": "Essay on surfaces for Are.na Annual",
+    "selected": true,
+    "categories": [],
+    "relatedProjects": [
+      "airs",
+      "quiet-time"
     ]
   },
   {
@@ -67,10 +97,13 @@
     "description": "",
     "year": 2023,
     "url": "/midi-archive/",
-    "path": "/projects/midi-archive",
+    "path": "/works/midi-archive",
     "tagline": "ML model and archive of music on the early web",
     "selected": true,
-    "categories": ["algorithm-audible", "interfaces"],
+    "categories": [
+      "algorithm-audible",
+      "interfaces"
+    ],
     "relatedProjects": [
       "frog-chorus",
       "airports-for-music",
@@ -83,10 +116,13 @@
     "description": "",
     "year": 2023,
     "url": "https://frogchor.us/",
-    "path": "/projects/frog-chorus",
+    "path": "/works/frog-chorus",
     "tagline": "Summon a chorus of frogs from your phone",
     "selected": true,
-    "categories": ["algorithm-audible", "on-listening"],
+    "categories": [
+      "algorithm-audible",
+      "on-listening"
+    ],
     "relatedProjects": [
       "midi-archive",
       "hobo-ufo",
@@ -99,10 +135,13 @@
     "description": "",
     "year": 2023,
     "url": "https://www.ninaprotocol.com/hubs/airportsformusic",
-    "path": "/projects/airports-for-music",
+    "path": "/works/airports-for-music",
     "tagline": "Sound as fragrance",
     "selected": true,
-    "categories": ["on-listening", "publications"],
+    "categories": [
+      "on-listening",
+      "publications"
+    ],
     "relatedProjects": [
       "weaving-music",
       "mixes-for-radio",
@@ -110,81 +149,21 @@
     ]
   },
   {
-    "id": "weaving-music",
-    "title": "Weaving Music",
-    "description": "",
-    "year": 2019,
-    "url": "https://reubenson.com/weaving",
-    "path": "/projects/weaving",
-    "tagline": "Sound as a woven textile",
-    "selected": true,
-    "categories": ["on-grid", "algorithm-audible"],
-    "relatedProjects": [
-      "airports-for-music",
-      "qcvg",
-      "private-chronology"
-    ]
-  },
-  {
     "id": "meandering-printing",
-    "title": "Ceramic Meandering",
+    "title": "Meander",
     "description": "",
     "year": 2023,
     "url": "https://medium.com/@reubenson/foray-into-3d-printing-with-clay-at-haystack-207064511cd",
-    "path": "/projects/meandering-printing",
-    "tagline": "3D printing ceramics at Haystack Mountain School of Crafts",
+    "path": "/works/meandering-printing",
+    "tagline": "3D printed ceramics at Haystack Mountain School of Crafts",
     "selected": true,
-    "categories": ["meander"],
+    "categories": [
+      "meander"
+    ],
     "relatedProjects": [
       "ceramics",
       "weaving-music",
       "hobo-ufo"
-    ]
-  },
-  {
-    "id": "ceramics",
-    "title": "Selected Ceramic Works",
-    "description": "",
-    "year": 2023,
-    "url": "",
-    "path": "/projects/ceramics",
-    "tagline": "Material explorations into surface and form",
-    "selected": true,
-    "categories": [],
-    "relatedProjects": [
-      "meandering-printing",
-      "travel-vases"
-    ]
-  },
-  {
-    "id": "mixes-for-radio",
-    "title": "Mixes for Radio",
-    "description": "",
-    "year": 2024,
-    "url": "",
-    "path": "/projects/mixes-for-radio",
-    "tagline": "Radio broadcasts on NTS and WFMU",
-    "selected": true,
-    "categories": ["publications"],
-    "relatedProjects": [
-      "airports-for-music",
-      "meandering-printing"
-    ]
-  },
-  {
-    "id": "collaborations",
-    "title": "Collaborations",
-    "description": "",
-    "year": 2019,
-    "url": "",
-    "path": "/projects/collaborations",
-    "tagline": "Collaborations with Eli Keszler and James Hoff",
-    "selected": true,
-    "categories": ["on-grid", "publications"],
-    "relatedProjects": [
-      "frog-chorus",
-      "midi-archive",
-      "meandering-printing"
     ]
   },
   {
@@ -193,13 +172,64 @@
     "description": "",
     "year": 2019,
     "url": "https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/",
-    "path": "/projects/hobo-ufo",
+    "path": "/works/hobo-ufo",
     "tagline": "Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a>",
-    "selected": false,
-    "categories": ["on-grid", "publications"],
+    "selected": true,
+    "categories": [],
     "relatedProjects": [
       "frog-chorus",
       "midi-archive",
+      "meandering-printing"
+    ]
+  },
+  {
+    "id": "weaving-music",
+    "title": "Weaving Music",
+    "description": "",
+    "year": 2019,
+    "url": "https://reubenson.com/weaving",
+    "path": "/works/weaving",
+    "tagline": "Sound as a woven textile",
+    "selected": true,
+    "categories": [
+      "on-grid",
+      "algorithm-audible"
+    ],
+    "relatedProjects": [
+      "airports-for-music",
+      "qcvg",
+      "private-chronology"
+    ]
+  },
+  {
+    "id": "travel-vases",
+    "title": "Travel Vases",
+    "description": "",
+    "year": "2019 —",
+    "url": "",
+    "path": "/works/travel-vases",
+    "tagline": "Pocket-sized ceramic vessels for vacation wildflowers",
+    "selected": true,
+    "categories": [],
+    "relatedProjects": [
+      "meandering-printing",
+      "echea"
+    ]
+  },
+  {
+    "id": "mixes-for-radio",
+    "title": "Mixes for Radio",
+    "description": "",
+    "year": 2024,
+    "url": "",
+    "path": "/works/mixes-for-radio",
+    "tagline": "Radio broadcasts on NTS and WFMU",
+    "selected": false,
+    "categories": [
+      "publications"
+    ],
+    "relatedProjects": [
+      "airports-for-music",
       "meandering-printing"
     ]
   },
@@ -209,10 +239,13 @@
     "description": "",
     "year": 2012,
     "url": "",
-    "path": "/projects/qcvg",
+    "path": "/works/qcvg",
     "tagline": "Programmable modular synthesizer",
     "selected": true,
-    "categories": ["algorithm-audble", "interfaces"],
+    "categories": [
+      "algorithm-audble",
+      "interfaces"
+    ],
     "relatedProjects": [
       "weaving-music",
       "midi-archive",
@@ -225,10 +258,12 @@
     "description": "",
     "year": 2009,
     "url": "https://reubenson.com/private-chronology",
-    "path": "/projects/private-chronology",
+    "path": "/works/private-chronology",
     "tagline": "DIY music label, distributed by Mimaroglu Music Sales",
     "selected": true,
-    "categories": ["publications"],
+    "categories": [
+      "publications"
+    ],
     "relatedProjects": [
       "mixes-for-radio",
       "weaving-music",
@@ -241,14 +276,48 @@
     "description": "",
     "year": 2009,
     "url": "https://www.discogs.com/artist/1649287-Reuben-Son",
-    "path": "/projects/discography",
+    "path": "/works/discography",
     "tagline": "Published music",
     "selected": false,
-    "categories": ["publications"],
+    "categories": [
+      "publications"
+    ],
     "relatedProjects": [
       "private-chronology",
       "airports-for-music",
       "mixes-for-radio"
+    ]
+  },
+  {
+    "id": "nts-mix",
+    "title": "Allure of Inertia",
+    "description": "",
+    "year": 2024,
+    "url": "",
+    "path": "/works/allure-of-inertia",
+    "tagline": "Radio broadcast on NTS",
+    "selected": false,
+    "categories": [
+      "mixes"
+    ],
+    "relatedProjects": [
+      "wfmu-mix"
+    ]
+  },
+  {
+    "id": "wfmu-mix",
+    "title": "Composing Through Listening",
+    "description": "",
+    "year": 2019,
+    "url": "",
+    "path": "/works/composing-through-listening",
+    "tagline": "Radio broadcast on WFMU",
+    "selected": false,
+    "categories": [
+      "mixes"
+    ],
+    "relatedProjects": [
+      "nts-mix"
     ]
   }
 ]
