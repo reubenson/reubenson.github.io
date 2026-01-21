@@ -33,13 +33,14 @@
   position: relative;
   overflow-x: hidden;
   padding: 0 20px;
-  letter-spacing: 1.15px;
 }
 .homepage .cards p {
   line-height: 1.3em;
   text-align: left;
+  letter-spacing: -0.5px;
 }
-.homepage .cards h1 a, .homepage h2 a {
+.homepage .cards h1 a,
+.homepage h2 a {
   color: black;
   text-decoration: none;
 }
@@ -76,14 +77,15 @@
   background-color: #f0f0e6;
   border: solid black 1px;
   border-radius: 2px;
+  aspect-ratio: 8/5;
+  contain: strict;
 }
 .homepage .card {
   box-sizing: border-box;
   width: 100%;
-  padding-bottom: 228px;
-  margin: 10px auto;
-  max-width: 400px;
+  margin: auto;
   position: relative;
+  height: 100%;
 }
 .homepage .card-container:nth-child(2) {
   margin-top: 40px;
@@ -92,27 +94,9 @@
   display: flex;
   align-items: center;
 }
-.homepage .card h1 {
-  background-color: #f0f0e6;
-  display: inline;
-  font-size: 24px;
-  line-height: 24px;
-  height: 30px;
-  padding: 0 5px;
-  position: absolute;
-  width: auto;
-  z-index: 1;
-}
-.homepage .card.front h1 {
-  left: -73px;
-  text-align: center;
-  transform: rotateZ(-90deg);
-  top: 100px;
-}
-.homepage .card.back h1 {
-  right: -73px;
-  top: 100px;
-  transform: rotateZ(90deg) scaleX(-1);
+.homepage .card.front h1 a {
+  visibility: hidden;
+  display: none;
 }
 .homepage .card .container {
   font-size: 13px;
@@ -122,8 +106,7 @@
   padding: 8px;
   position: absolute;
   height: calc(100% - 40px);
-  width: calc(100% - 35px);
-  z-index: 1;
+  width: calc(100% - 40px);
 }
 .homepage .container-background {
   border: solid black 1px;
@@ -131,6 +114,8 @@
   height: calc(100% - 20px);
   margin: 10px;
   width: calc(100% - 20px);
+  border-radius: 2px;
+  z-index: -1;
 }
 .homepage .card p {
   margin-top: 0;
@@ -187,19 +172,33 @@
   left: 7px;
   position: absolute;
 }
-.homepage .left-arrow, .homepage .right-arrow {
+.homepage .left-arrow,
+.homepage .right-arrow {
   cursor: pointer;
-  font-size: 20px;
+  font-size: 24px;
   position: absolute;
-  top: 0;
+  top: -1px;
+  right: -1px;
   z-index: 10;
+  font-style: normal;
+  background: #f0f0e6;
+  width: 24px;
+  height: 24px;
 }
 .homepage .left-arrow {
   left: 0;
 }
 .homepage .right-arrow {
-  right: 6px;
-  transform: scaleX(-1);
+  transform: rotate(45deg);
+  border-bottom: solid black 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.homepage .right-arrow span {
+  transform: rotate(-45deg);
+  display: block;
+  opacity: 0.8;
 }
 .homepage .cards .social {
   display: inline;
@@ -232,7 +231,7 @@
   right: 16px;
   margin: auto;
   position: absolute;
-  height: 50px;
+  height: 40px;
   z-index: 1;
 }
 .homepage .cards .glyph a {
@@ -271,7 +270,9 @@
   top: 0;
 }
 .homepage .promo .card-container:nth-child(1),
-.homepage .promo h1, .homepage .promo .right-arrow, .homepage .promo .social {
+.homepage .promo h1,
+.homepage .promo .right-arrow,
+.homepage .promo .social {
   display: none;
 }
 .homepage .promo .card-container {

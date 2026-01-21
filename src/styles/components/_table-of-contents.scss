@@ -3,16 +3,14 @@
   background-color: #f0f0e6;
   display: none;
   visibility: hidden;
-  // width: 240px;
   width: 100%;
   position: fixed;
   left: 20px;
   padding: 10px 10px;
   left: 0;
   right: 0;
-  // margin: auto;
   margin: 18px;
-  // padding: 10px;
+  padding: 0 20px;
   height: 100%;
   max-height: calc(100% - 36px);
   max-width: 720px;
@@ -26,8 +24,8 @@
   }
 
   &-header {
-    margin: 30px auto 10px;
-    margin: 40px 0 40px;
+    // margin: 30px auto 10px;
+    // margin: 40px 0 40px;
     text-align: center;
   }
 
@@ -44,16 +42,15 @@
   }
 
   nav {
-    // margin-top: 20px;
     text-align: center;
     position: sticky;
-    top: -10px;
+    top: 0;
     background-color: #f0f0e6;
-    // height: 40px;
-    padding: 6px 0 16px;
+    padding: 6px 0 10px;
     border-bottom: solid black 1px;
     z-index: 2;
     font-size: 20px;
+    margin-bottom: 20px;
   }
 
   nav a {
@@ -80,15 +77,16 @@
   font-size: 20px;
   border: none;
   z-index: 10;
-  width: 44px;
-  height: 44px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   cursor: pointer;
   border-radius: 2px;
 }
 
 .homepage .toc-button {
-  border: solid black 1px;
+  background-color: transparent;
+  // border: solid black 1px;
 
   &.open {
     border: none;
@@ -99,7 +97,7 @@
   content: '☰';
   color: #000000;
   position: absolute;
-  top: 8px;
+  top: 0px;
   left: 0;
   right: 0;
   margin: auto;

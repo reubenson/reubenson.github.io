@@ -24,11 +24,10 @@ title: Reuben Son Homepage
   <body class="homepage">
     {% include "toc-button.njk" %}
     {% include "table-of-contents.njk" %}
-    {# {% include "table-of-contents.njk" %} #}
+    <h1 class="visually-hidden">Reuben Son</h1>
     <div class="cards">
       <div class="card-container">
         <div class="card front broider-cancel">
-          <h1><a href="/about">Reuben Son</a></h1>
           <div class="container">
             {% renderFile './src/_includes/tiny-bio.md' %}
           </div>
@@ -40,7 +39,10 @@ title: Reuben Son Homepage
       </div>
       <div class="card-container">
         <div class="card back broider-cancel">
-          <h1><a href="/about">Reuben Son</a></h1>
+          <div class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">
+            <span>⥻</span>
+          </div>
+          {# <h1><a href="/about">Reuben Son</a></h1> #}
           <div class="glyph">
             <a href="https://frogchor.us" target="_blank">
               <img src="/public/frog-glyph.png">
@@ -49,7 +51,7 @@ title: Reuben Son Homepage
           <div class="container">
             <div class="card-quote" style="width: {{ announcements[0].width | safe}}">
               {# <span class="left-arrow hidden" onclick="handleLeftArrow()">&#x2190;</span> #}
-              <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span>
+              {# <span class="right-arrow" onclick="handleRightArrow()" title="see previous announcements">⥻</span> #}
               {% if announcements[0].header %}
                 <header class="card-quote-header">
                   {{ announcements[0].header | safe }}
@@ -74,8 +76,8 @@ title: Reuben Son Homepage
           <div class="container-background"></div>
         </div>
       </div>
+      {% include "chop.njk" %}
     </div>
-    {# {% include "chop.njk" %} #}
     <div class="broider">
       <div class="project-border"></div>
     </div>

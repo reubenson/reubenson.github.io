@@ -1,39 +1,56 @@
 <div class="chop-container">
-  <div class="chop-border"></div>
-  <div class="chop-border inner"></div>
-  <svg viewBox="0 0 400 400" width="200" height="200">
-  <path id="topPath"
-    d="M200,200 m-150,0 a150,150 0 1,1 300,0"
-    fill="none"
-    transform="rotate(11, 200, 200)"/>
-  <path id="bottomPath"
-    d="M200,200 m150,0 a150,150 0 1,1 -300,0"
-    fill="none"
-    transform="rotate(28, 200, 200)"/>
-  <text>
-    <textPath href="#topPath">
-    REUBEN
-    </textPath>
-  </text>
-  <text>
-    <textPath href="#bottomPath">
-    NOS
-    </textPath>
-  </text>
+  <div class="chop-wrapper">
+    <div class="chop-border"></div>
+    <div class="chop-border inner"></div>
+    <svg viewBox="0 0 400 400" width="200" height="200">
+    <path id="topPath"
+      d="M200,200 m-150,0 a150,150 0 1,1 300,0"
+      fill="none"
+      transform="rotate(11, 200, 200)"/>
+    <path id="bottomPath"
+      d="M200,200 m150,0 a150,150 0 1,1 -300,0"
+      fill="none"
+      transform="rotate(28, 200, 200)"/>
+    <text>
+      <textPath href="#topPath">
+      REUBEN
+      </textPath>
+    </text>
+    <text>
+      <textPath href="#bottomPath">
+      NOS
+      </textPath>
+    </text>
+    </svg>
+    <div class="chop"></div>
+  </div>
+  <svg style="display: none;">
+    <filter id="white-to-transparent">
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        -1 -1 -1 1 1
+      "/>
+    </filter>
   </svg>
-  <div class="chop"></div>
 </div>
 
 <style>
   .chop-container {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    padding: 20px;
-    border-radius: 50%;
-    margin-top: 100px;
-    transform: scaleX(1) rotate(43deg);
-    opacity: 0.2;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    z-index: 100;
+    opacity: 0.8;
+  }
+
+  .chop-wrapper {
+    filter: blur(1.1px) contrast(5) url(#white-to-transparent);
+    background-color: white;
+    height: 100%;
+    width: 100%;
   }
 
   .chop-container svg {
@@ -47,11 +64,8 @@
   }
 
   .chop {
-    shape-outside: circle(50%);
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    background-image: url('/public/chop-crop-alpha.png');
+    width: 30%;
+    background-image: url('/public/chop-2.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -62,6 +76,7 @@
     top: 0;
     left: 0;
     margin: auto;
+    opacity: 0.9;
   }
 
   .chop-border {
@@ -87,18 +102,23 @@
     font-size: 40px !important;
     letter-spacing: 10px;
     font-weight: bold;
-    font-family: monospace;
-  }
-
-  .chop-container {
-    position: relative;
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-  }
-
-  .chop-container p {
-    margin: 0;
-    line-height: 1.5;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 0.9;
   }
 </style>
+
+<script>
+  // randomize position
+  const leftRange = [5, 60];
+  const topRange = [-30, -10];
+  const chopContainer = document.querySelector('.chop-container');
+  const randomX = Math.random() * (leftRange[1] - leftRange[0]) + leftRange[0];
+  const randomY = Math.random() * (topRange[1] - topRange[0]) + topRange[0];
+  chopContainer.style.left = `${randomX}%`;
+  chopContainer.style.top = `${randomY}%`;
+
+  // randomize rotation
+  const rotationRange = [-50, 100];
+  const randomRotation = Math.random() * (rotationRange[1] - rotationRange[0]) + rotationRange[0];
+  chopContainer.style.transform = `rotate(${randomRotation}deg)`;
+</script>

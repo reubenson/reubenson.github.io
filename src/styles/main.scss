@@ -83,10 +83,6 @@ a {
   }
 }
 
-.table-of-contents {
-  border: solid black 1px;
-}
-
 .no-scroll {
   overflow: hidden;
 }
@@ -96,6 +92,7 @@ a {
 }
 
 .project-grid-item {
+
   &-1,
   &-2,
   &-3,
@@ -116,6 +113,17 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 @media print {
