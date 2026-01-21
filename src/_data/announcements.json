@@ -1,9 +1,14 @@
 [
   {
+    "content": "Coming out to close the gate I end up listening to frogs",
+    "footer": "Masaoka Shiki (1866-1902)",
+    "width": "140px"
+  },
+  {
     "header": "<a href='https://www.instagram.com/p/DNjChA9u1d9/' target='_blank'>In Good Company</a>",
     "content": "Two-day ceramics pop-up at <a href='https://pyperbleu.com/' target='_blank'>Pyperbleu</a>. Opening reception Saturday August 23rd at 3pm, installed through August 24th.",
     "footer": "<a href='https://www.instagram.com/p/DNjChA9u1d9/' target='_blank'>117 Grattan St, Brooklyn NY</a>",
-    "width": "252px"
+    "width": "220px"
   },
   {
     "header": "<a href='https://www.instagram.com/p/DK2ear1xTBS/' target='_blank'>Quantum Intimacies</a>",
@@ -14,12 +19,12 @@
   {
     "header": "<a href='https://naive-yearly.are.na/' target='_blank'>Are.na Editorial x Naive Yearly</a>",
     "content": "<a href='https://www.are.na/editorial/quiet-time' target='_blank'>Quiet Time</a> published as part of Are.na's editorial program around <a href='https://naiveyearly.com' target='_blank'>Naive Yearly</a>",
-    "width": "190px"
+    "width": "200px"
   },
   {
     "header": "<a href='https://thehtml.review/04' target='_blank'>The HTML Review, Issue No. 4</a>",
     "content": "<a href='/projects/airs' target='_blank'>Airs</a> published in the 2025 issue of The HTML Review, an annual journal of literature made to exist on the web",
-    "width": "250px"
+    "width": "337px"
   },
   {
     "header": "<a href='https://withfriends.co/event/22981305/wordhack_feat_maya_man_herdimas_anggara_reuben_son_blair_johnson_and_luke_williams' target='_blank'>Wordhack, March 20, 2025</a>",
@@ -71,12 +76,7 @@
     "width": "240px"
   },
   {
-    "content": "Coming out to close the gate I end up listening to frogs",
-    "footer": "Masaoka Shiki (1866-1902)",
-    "width": "150px"
-  },
-  {
     "content": "Left blank for a work expressing modern feeling.",
-    "width": "180px"
+    "width": "190px"
   }
 ]
