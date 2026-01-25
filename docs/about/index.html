@@ -11,6 +11,8 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta property="og:title" content="Reuben Son" />
     <meta property="og:description" content="" />
+    <link rel="preload" as="image" href="/public/pocket-vase.jpg">
+    <link rel="preload" as="image" href="/public/html-review/santa-ana-winds.jpg">
     
     <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
     <meta property="og:type" content="website" />
@@ -56,325 +58,127 @@
     
   </head>
   <body class="project two-column">
-    <button class="toc-button" onclick="handleClick()"></button>
+    <img src="/public/html-review/santa-ana-winds.jpg" alt="" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" />
 
-<script>
-  function handleClick() {
-    const content = document.querySelector('.content');
-    const toc = document.querySelector('body > .table-of-contents');
-    const tocBtn = document.querySelector('.toc-button');
-    toc.classList.toggle('open');
-    tocBtn.classList.toggle('open');
-    content.classList.toggle('no-scroll');
-  }
-</script>
+    <nav>
+  <a class="home" href="/">Home</a>
+  <a class="about" href="/about">About</a>
+  <a class="works" href="/works">Works</a>
+  <a class="shop" href="/shop">Shop</a>
+  <script>
+    const path = window.location.pathname.replace(/\//g, '');
+    const navLinks = document.querySelectorAll('nav a');
+
+    if (path === '') {
+      navLinks[0].classList.add('active');
+    } else {
+      navLinks.forEach(link => {
+        if (link.href.includes(path)) {
+          link.classList.add('active');
+        }
+      });
+    }
+  </script>
+</nav>
+
+    
     <section class="table-of-contents">
   <nav>
-    <a href="/">Home</a> | <a href="/about">About</a> | <a href="/shop">Shop</a>
-  </nav>
-  <h2 class="table-of-contents-header visually-hidden"><a href="/works">Table of Contents</a></h2>
-  <div class="projects-list-container">
-  
-  <h2>Works</h2>
-  <ul class="projects-list">
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/moon-udu">Moon Udu</a> (2025)</span>
-        <span class="project-index"><a href="/works/moon-udu">1</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/moon-udu">Psychosynthetic Ceramics</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/after-orpheus">After Orpheus</a> (2025)</span>
-        <span class="project-index"><a href="/works/after-orpheus">2</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/after-orpheus">Mixed media sound sculpture</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/airs">Airs</a> (2025)</span>
-        <span class="project-index"><a href="/works/airs">3</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/airs">Wind as poetry, poetry as wind</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/quiet-time">Quiet Time</a> (2024)</span>
-        <span class="project-index"><a href="/works/quiet-time">4</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/quiet-time">Essay and lecture at Naive Yearly 2024</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/echea">Echea</a> (2024)</span>
-        <span class="project-index"><a href="/works/echea">5</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/echea">Ceramic sound sculpture w/ Eli Keszler</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/surface-tension">Surface Tension</a> (2024)</span>
-        <span class="project-index"><a href="/works/surface-tension">6</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/surface-tension">Essay on surfaces for Are.na Annual</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/midi-archive">MIDI Archive</a> (2023)</span>
-        <span class="project-index"><a href="/works/midi-archive">7</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/midi-archive">ML model and archive of music on the early web</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/frog-chorus">Frog Chorus</a> (2023)</span>
-        <span class="project-index"><a href="/works/frog-chorus">8</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/frog-chorus">Summon a chorus of frogs from your phone</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/airports-for-music">Airports for Music</a> (2023)</span>
-        <span class="project-index"><a href="/works/airports-for-music">9</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/airports-for-music">Sound as fragrance</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/meandering-printing">Meander</a> (2023)</span>
-        <span class="project-index"><a href="/works/meandering-printing">10</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/meandering-printing">3D printed ceramics at Haystack Mountain School of Crafts</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/hobo-ufo">HOBO UFO</a> (2019)</span>
-        <span class="project-index"><a href="/works/hobo-ufo">11</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/hobo-ufo">Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a></a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/weaving">Weaving Music</a> (2019)</span>
-        <span class="project-index"><a href="/works/weaving">12</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/weaving">Sound as a woven textile</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/travel-vases">Travel Vases</a> (2019 —)</span>
-        <span class="project-index"><a href="/works/travel-vases">13</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/travel-vases">Pocket-sized ceramic vessels for vacation wildflowers</a></span>
-      </li>
-      
-  </ul>
-  
-    
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/qcvg">QCVG</a> (2012)</span>
-        <span class="project-index"><a href="/works/qcvg">14</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/qcvg">Programmable modular synthesizer</a></span>
-      </li>
-      
-  </ul>
-  
-    
-      
-      <li class="project-item">
-        <span class="project-title"><a href="/works/private-chronology">Private Chronology</a> (2009)</span>
-        <span class="project-index"><a href="/works/private-chronology">15</a></span>
-        <span class="project-line"></span>
-        <span class="project-tagline"><a href="/works/private-chronology">DIY music label, distributed by Mimaroglu Music Sales</a></span>
-      </li>
-      
-  </ul>
-  
-    
-  </ul>
-  
-    
-  </ul>
-  
-    
-  </ul>
-  
-  <h2>Radio Mixes</h2>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-    
-    <li class="project-item">
-      <span class="project-title"><a href="/works/allure-of-inertia">Allure of Inertia</a> (2024)</span>
-      <span class="project-index"><a href="/works/allure-of-inertia">16</a></span>
-      <span class="project-line"></span>
-      <span class="project-tagline"><a href="/works/allure-of-inertia">Radio broadcast on NTS</a></span>
-    </li>
-    
-  </ul>
-  
-  <ul class="projects-list">
-    
-    
-    <li class="project-item">
-      <span class="project-title"><a href="/works/composing-through-listening">Composing Through Listening</a> (2019)</span>
-      <span class="project-index"><a href="/works/composing-through-listening">17</a></span>
-      <span class="project-line"></span>
-      <span class="project-tagline"><a href="/works/composing-through-listening">Radio broadcast on WFMU</a></span>
-    </li>
-    
-  </ul>
-  
-</div>
+  <a class="home" href="/">Home</a>
+  <a class="about" href="/about">About</a>
+  <a class="works" href="/works">Works</a>
+  <a class="shop" href="/shop">Shop</a>
+  <script>
+    const path = window.location.pathname.replace(/\//g, '');
+    const navLinks = document.querySelectorAll('nav a');
 
+    if (path === '') {
+      navLinks[0].classList.add('active');
+    } else {
+      navLinks.forEach(link => {
+        if (link.href.includes(path)) {
+          link.classList.add('active');
+        }
+      });
+    }
+  </script>
+</nav>
+
+  
+  
+  
 </section>
     <div class="top-spacer"></div>
     <div class="content">
       <header>
-        <h1>Reuben Son </h1>
+        <h1>Reuben Son</h1>
         <a href=""></a>
       </header>
+      
       <div class="project-meta">
         
         
+          <div class="project-media">
+            <em>latin</em> son: <strong>sound</strong>, <em>korean</em> 손: <strong>hand</strong>
+          </div>
+        
       </div>
+      
       <div class="project-description">
         
       </div>
       <div class="content-wrapper ">
-        <p class="project-grid-item-4">Reuben Son (<em>latin</em> son : <strong>sound</strong>, <em>korean</em> 손 : <strong>hand</strong> ) is an artist based in New York City.
+        <!-- Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is an artist based in New York City.
+\
+\
+As an artist, his work deals with the _air_ as both material and metaphor, explores the sculptural interplay between surface and structure, and examines the exchanges between object and affect.
+{.project-grid-item-4} -->
+<div class="project-grid-item-full">
+  <!-- I make software, sound, and ceramics.  -->
+<p>I’m a Korean-American artist based in New York City working primarily with sound, ceramics, and software. My practice centers on the poetics of air: as environment made audible, as force upon language, and as the sonorous potentiality of ceramic vessels.
 <br>
 <br>
-As an artist, his work deals with the <em>air</em> as both material and metaphor, explores the sculptural interplay between surface and structure, and examines the exchanges between object and affect.</p>
+My work expresses an interest in the core phenomenon of the aesthetic experience, and in particular the generative act of listening. Through recent projects, I’ve experimented with strategies of choreographing listening. In “After Orpheus” (2025), the exhibition visitor interacts with the sculpture by holding a paper cup. In the “Airs” (2025) poems, the reader moves the collection like the blowing wind.
+<br>
+<br>
+Expanding this body of work, I’m currently developing a series of sculptures and text-based scores that further explore exchanges between object and affect. I believe that the aesthetic experience is irreducible to the object, and the act of multi-attentional listening can be used towards creative and liberatory ends more broadly.</p>
+<!-- In recent work, I've  -->
+<!-- Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is a Korean-American artist based in New York City. -->
+<!-- Reuben Son (lives in New York City) is a Korean-American artist who primarily makes software, ceramics, and sound. His multidisciplinary practice is rooted in sound art, in which he engages the somatic materiality of sound and focuses attention on the act of listening itself. He has presented work in the form of recordings, performances, talks, sculpture, websites, and publications. -->
+<!-- He is a longtime collaborator with Eli Keszler, whom he has worked with on installations, performances, and recordings since 2011. -->
+<!-- As an artist, his work deals with the _air_ as both material and metaphor, explores the sculptural interplay between surface and structure, and examines the exchanges between object and affect. -->
+</div>
+<!-- 
+Consolidate artist statement and inject above
+Key themese and interests:
+* atmosphere
+* attention
+* air as material and metaphor
+* conspire as in to breathe together
+* aesthetic experience
+* individuation
+* quiet
+* background vs foreground attention
+* embodiment and somatics
+* tension between mechanical and organic
+* affective technology
+* psychoanalysis (holding, object relations)
+* intimacy of sound
+* choreography / composing listening
+* resonant bodies
+* brain hemispheres
+* sensory synesthesia
+
+
+ -->
+<p class="project-grid-item-4">In addition to my solo practice, I’ve assisted the artists Eli Keszler and James Hoff for performances and installations at The Whitney Museum of American Art, the MIT List Visual Arts Center, Eyebeam, and the London ICA.
+<br>
+<br>
+I’m currently working as a mobile app developer at Slate, and previously led engineering for The Strategist at New York Magazine and was a researcher at the Harvard-MIT Health Sciences and Technology.</p>
 <figure class="project-grid-item-2">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" alt="photo of Reuben on his couch">
   <figcaption>Photo by <a href="https://laurelschwulst.com/">Laurel Schwulst</a></figcaption>
 </figure>
-<p class="project-grid-item-6">As a software engineer, he is currently doing mobile development at Slate, and previously built The Strategist at New York Magazine and was a researcher at the Harvard-MIT Health Sciences and Technology.</p>
 <p class="project-grid-item-full">For more about this website, see <a href="/colophon">colophon</a>.</p>
 <!-- To support this work, please consider reaching out with opportunities or consider buying something from the [shop](/shop)!
 {.project-grid-item-full} -->
@@ -419,11 +223,313 @@ As an artist, his work deals with the <em>air</em> as both material and metaphor
 {.project-grid-item-full} -->
 <!-- > "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." <br/><br/> - Christopher Bollas, _The Shadow of the Object_ <br/><br/> ([✶✶ Passages](https://www.are.na/reuben-son/passages-m7zf9-4vnu4)) -->
 <!-- I have found that the locus of vitality exists in material engagement with the world, within only a loose framework of epistemology, a minimum viable ontology. Regarding this, I find myself somewhere in the continuum of Simone Weil, who wrote "[to work in order to eat, to eat in order to work [...] only the cycle contains the truth](https://theanarchistlibrary.org/library/simone-weil-gravity-and-grace#:~:text=%27Work%20makes%20us%20experience%20in,the%20cycle%20contains%20the%20truth.)", and Ray Peat, who wrote "[energy creates organization and structure](https://www.functionalps.com/blog/2011/04/23/energy-structure-and-carbon-dioxide-a-realistic-view-of-the-organism/#:~:text=energy%20creates%20organization%20and%20structure)".  -->
+<!-- {.project-grid-item-1}
 
+<div class="project-grid-item-4">
+  <div class="projects-list-container">
+  
+  
+  <ul class="projects-list">
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/moon-udu">
+          <span class="project-title">Moon Udu (2025)</span>
+          <span class="project-index">1</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Psychosynthetic Ceramics</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/after-orpheus">
+          <span class="project-title">After Orpheus (2025)</span>
+          <span class="project-index">2</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Mixed media sound sculpture</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/airs">
+          <span class="project-title">Airs (2025)</span>
+          <span class="project-index">3</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Wind as poetry, poetry as wind</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/quiet-time">
+          <span class="project-title">Quiet Time (2024)</span>
+          <span class="project-index">4</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Essay and lecture at Naive Yearly 2024</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/echea">
+          <span class="project-title">Echea (2024)</span>
+          <span class="project-index">5</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Ceramic sound sculpture w/ Eli Keszler</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/surface-tension">
+          <span class="project-title">Surface Tension (2024)</span>
+          <span class="project-index">6</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Essay on surfaces for Are.na Annual</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/midi-archive">
+          <span class="project-title">MIDI Archive (2023)</span>
+          <span class="project-index">7</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">ML model and archive of music on the early web</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/frog-chorus">
+          <span class="project-title">Frog Chorus (2023)</span>
+          <span class="project-index">8</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Summon a chorus of frogs from your phone</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/airports-for-music">
+          <span class="project-title">Airports for Music (2023)</span>
+          <span class="project-index">9</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Sound as fragrance</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/meandering-printing">
+          <span class="project-title">Meander (2023)</span>
+          <span class="project-index">10</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">3D printed ceramics at Haystack Mountain School of Crafts</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/hobo-ufo">
+          <span class="project-title">Hobo UFO (2019)</span>
+          <span class="project-index">11</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Audio-reactive Street View built for James Hoff</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/weaving">
+          <span class="project-title">Weaving Music (2019)</span>
+          <span class="project-index">12</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Sound as a woven textile</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/travel-vases">
+          <span class="project-title">Travel Vases (2019 —)</span>
+          <span class="project-index">13</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Pocket-sized ceramic vessels for vacation wildflowers</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/qcvg">
+          <span class="project-title">QCVG (2012)</span>
+          <span class="project-index">14</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Programmable modular synthesizer</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/private-chronology">
+          <span class="project-title">Private Chronology (2009)</span>
+          <span class="project-index">15</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">DIY music label, distributed by Mimaroglu Music Sales</span>
+        </a>
+      </li>
+      
+  </ul>
+  
+    
+  </ul>
+  
+    
+  </ul>
+  
+    
+  </ul>
+  
+  <h3>Radio Mixes</h2>
+  <ul class="projects-list">
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/allure-of-inertia">
+          <span class="project-title">Allure of Inertia (2024)</span>
+          <span class="project-index">16</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Radio broadcast on NTS</span>
+        </a>
+      </li>
+    
+  
+    
+      
+      <li class="project-item">
+        <a href="/works/composing-through-listening">
+          <span class="project-title">Composing Through Listening (2019)</span>
+          <span class="project-index">17</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">Radio broadcast on WFMU</span>
+        </a>
+      </li>
+    
+  
+</div>
+
+</div>
+
+{.project-grid-item-1} -->
       </div>
 
       
     </div>
     <div class="page-border broider"></div>
+        <svg xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
+      <defs>
+        <filter id="wind-filter-sm" x="0%" y="0%" width="100%" height="100%">
+          
+          
+          <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
+                   result="slide-0"
+                   preserveAspectRatio="none"
+                   x="0" 
+                   y="0"
+                   height="1300px" 
+                   width="500px">
+          </feImage>
+          <feDisplacementMap in2="slide-0" 
+                             in="SourceGraphic" 
+                             scale="2"
+                             xChannelSelector="R" 
+                             yChannelSelector="G">
+          </feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
   </body>
 </html>

@@ -1,0 +1,20 @@
+<nav>
+  <a class="home" href="/">Home</a>
+  <a class="about" href="/about">About</a>
+  <a class="works" href="/works">Works</a>
+  <a class="shop" href="/shop">Shop</a>
+  <script>
+    const path = window.location.pathname.replace(/\//g, '');
+    const navLinks = document.querySelectorAll('nav a');
+
+    if (path === '') {
+      navLinks[0].classList.add('active');
+    } else {
+      navLinks.forEach(link => {
+        if (link.href.includes(path)) {
+          link.classList.add('active');
+        }
+      });
+    }
+  </script>
+</nav>

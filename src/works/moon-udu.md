@@ -33,3 +33,6 @@ Roberto Assagioli's seven regions of the psyche: **1**: _The Lower Unconscious_,
 <figure class="project-grid-item-6">
   <img src="/public/udu/udu-2.jpg">
 </figure>
+
+_Price available upon request_
+{.project-grid-item-full}

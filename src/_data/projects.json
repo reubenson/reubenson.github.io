@@ -168,12 +168,12 @@
   },
   {
     "id": "hobo-ufo",
-    "title": "HOBO UFO",
+    "title": "Hobo UFO",
     "description": "",
     "year": 2019,
     "url": "https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/",
     "path": "/works/hobo-ufo",
-    "tagline": "Audio-reactive Street View built for <a href='https://jameshoff.com'>James Hoff</a>",
+    "tagline": "Audio-reactive Street View built for James Hoff",
     "selected": true,
     "categories": [],
     "relatedProjects": [

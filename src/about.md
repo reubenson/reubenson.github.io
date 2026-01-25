@@ -2,22 +2,54 @@
 layout: project.njk
 title: Reuben Son
 layoutType: two-column
+meta: "<em>latin</em> son: <strong>sound</strong>, <em>korean</em> 손: <strong>hand</strong>"
 hideSeeMore: true
 ---
 
-Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is an artist based in New York City.
+<!-- Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is an artist based in New York City.
 \
 \
 As an artist, his work deals with the _air_ as both material and metaphor, explores the sculptural interplay between surface and structure, and examines the exchanges between object and affect.
+{.project-grid-item-4} -->
+
+<div class="project-grid-item-full">
+  {% renderFile './src/_includes/resume/artist-bio.md' %}
+</div>
+
+<!-- 
+Consolidate artist statement and inject above
+Key themese and interests:
+* atmosphere
+* attention
+* air as material and metaphor
+* conspire as in to breathe together
+* aesthetic experience
+* individuation
+* quiet
+* background vs foreground attention
+* embodiment and somatics
+* tension between mechanical and organic
+* affective technology
+* psychoanalysis (holding, object relations)
+* intimacy of sound
+* choreography / composing listening
+* resonant bodies
+* brain hemispheres
+* sensory synesthesia
+
+
+ -->
+
+In addition to my solo practice, I've assisted the artists Eli Keszler and James Hoff for performances and installations at The Whitney Museum of American Art, the MIT List Visual Arts Center, Eyebeam, and the London ICA.
+\
+\
+I'm currently working as a mobile app developer at Slate, and previously led engineering for The Strategist at New York Magazine and was a researcher at the Harvard-MIT Health Sciences and Technology.
 {.project-grid-item-4}
 
 <figure class="project-grid-item-2">
   <img src="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" alt="photo of Reuben on his couch">
   <figcaption>Photo by <a href="https://laurelschwulst.com/">Laurel Schwulst</a></figcaption>
 </figure>
-
-As a software engineer, he is currently doing mobile development at Slate, and previously built The Strategist at New York Magazine and was a researcher at the Harvard-MIT Health Sciences and Technology.
-{.project-grid-item-6}
 
 For more about this website, see [colophon](/colophon).
 {.project-grid-item-full}
@@ -91,3 +123,11 @@ For more about this website, see [colophon](/colophon).
 <!-- > "The aesthetic moment is a caesura in time when the subject feels held in symmetry and solitude by the spirit of the object." <br/><br/> - Christopher Bollas, _The Shadow of the Object_ <br/><br/> ([✶✶ Passages](https://www.are.na/reuben-son/passages-m7zf9-4vnu4)) -->
 
 <!-- I have found that the locus of vitality exists in material engagement with the world, within only a loose framework of epistemology, a minimum viable ontology. Regarding this, I find myself somewhere in the continuum of Simone Weil, who wrote "[to work in order to eat, to eat in order to work [...] only the cycle contains the truth](https://theanarchistlibrary.org/library/simone-weil-gravity-and-grace#:~:text=%27Work%20makes%20us%20experience%20in,the%20cycle%20contains%20the%20truth.)", and Ray Peat, who wrote "[energy creates organization and structure](https://www.functionalps.com/blog/2011/04/23/energy-structure-and-carbon-dioxide-a-realistic-view-of-the-organism/#:~:text=energy%20creates%20organization%20and%20structure)".  -->
+
+<!-- {.project-grid-item-1}
+
+<div class="project-grid-item-4">
+  {% include "projects-list.njk" %}
+</div>
+
+{.project-grid-item-1} -->

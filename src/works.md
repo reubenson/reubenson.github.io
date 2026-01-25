@@ -1,9 +1,10 @@
 ---
 layout: project.njk
-title: 
-description: 
+title: Works
+description:
 hideSeeMore: true
 noGrid: true
+hideMeta: true
 ---
 
 {% include "projects-list.njk" %}

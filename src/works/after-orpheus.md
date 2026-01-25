@@ -2,7 +2,8 @@
 layout: project.njk
 title: After Orpheus
 # description: Mixed media sculpture
-media: ceramics, steel, paper, electronics
+# media: ceramics, steel, paper, electronics
+media: mixed media
 year: 2025
 dimensions: 32" x 32" x 80"
 ---

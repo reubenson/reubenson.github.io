@@ -22,14 +22,18 @@ title: Reuben Son Homepage
     {% include "gtm.njk" %}
   </head>
   <body class="homepage">
+    {% include "nav.njk" %}
     {% include "toc-button.njk" %}
-    {% include "table-of-contents.njk" %}
+    {# {% include "table-of-contents.njk" %} #}
     <h1 class="visually-hidden">Reuben Son</h1>
     <div class="cards">
       <div class="card-container">
         <div class="card front broider-cancel">
           <div class="container">
             {% renderFile './src/_includes/tiny-bio.md' %}
+              {# <p class="card-quote-footer">
+                test
+              </p #}
           </div>
           <div class="social">
             {% renderFile './src/_includes/social.md' %}

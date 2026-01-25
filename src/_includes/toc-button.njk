@@ -1,6 +1,6 @@
 <button class="toc-button" onclick="handleClick()"></button>
 
-<script>
+{# <script>
   function handleClick() {
     const content = document.querySelector('.content');
     const toc = document.querySelector('body > .table-of-contents');
@@ -8,5 +8,15 @@
     toc.classList.toggle('open');
     tocBtn.classList.toggle('open');
     content.classList.toggle('no-scroll');
+  }
+</script> #}
+
+<script>
+  function handleClick() {
+    {# find nav and unhide it #}
+    const nav = document.querySelector('nav');
+    nav.classList.toggle('open');
+    const tocButton = document.querySelector('.toc-button');
+    tocButton.style.display = 'none';
   }
 </script>

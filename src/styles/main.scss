@@ -5,6 +5,7 @@
 // Components
 @import 'components/table-of-contents';
 @import 'components/newsletter-signup';
+@import 'components/nav';
 // @import 'components/header';
 // @import 'components/footer';
 
@@ -19,16 +20,17 @@ body {
 }
 
 .content {
-  left: 19px;
+  left: 10px;
   position: fixed;
   overflow-x: hidden;
   overflow-y: scroll;
-  top: 19px;
+  top: 10px;
   bottom: 19px;
-  right: 19px;
+  right: 10px;
   padding: 0 20px 20px 20px;
-  // max-width: 720px;
   margin: auto;
+  height: calc(100dvh - 48px);
+
 }
 
 figcaption {
@@ -63,7 +65,7 @@ a {
 }
 
 .page-border {
-  height: calc(100% - 20px);
+  height: calc(100dvh - 20px);
   width: calc(100vw - 20px);
   position: fixed;
   z-index: -1;

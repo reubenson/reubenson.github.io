@@ -1,8 +1,8 @@
 ---
 layout: project.njk
 title: Airports for Music
-url: https://www.ninaprotocol.com/hubs/airportsformusic
-description: Site-specific sound as fragrance
+# url: https://www.ninaprotocol.com/hubs/airportsformusic
+# description: Site-specific sound as fragrance
 media: sound
 year: 2023
 ---
