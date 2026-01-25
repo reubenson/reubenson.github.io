@@ -12,7 +12,7 @@ year: 2024
 
 {.project-grid-item-1}
 
-[_Surface Tension_](/public/downloads/surface-tension.pdf) is an essay for Voluem 6 of the Are.na Annual.
+[_Surface Tension_](/public/downloads/surface-tension.pdf) is an essay for Volume 6 of the Are.na Annual.
 {.project-grid-item-full}
 
 <figure class="project-grid-item-full">
