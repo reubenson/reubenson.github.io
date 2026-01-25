@@ -6,6 +6,14 @@ media: ceramics, bluetooth speakers, audio
 dimensions: approx. 4' x 4' x 3'
 year: 2024
 # url: https://reubenson.com/portfolio/ceramics/
+id: echea
+tagline: Ceramic sound sculpture w/ Eli Keszler
+selected: true
+categories: []
+relatedProjects:
+  - udu
+  - after-orpheus
+  - hobo-ufo
 ---
 
 _Echea_ is a mixed media sculpture produced in collaboration with the artist and composer Eli Keszler for an eponymous exhibition at Galerie Pepe (Mexico City). Four large earthenware vessels (produced by an artisan in Guadalajara) provide _interiors_ arranged with my ceramic tongue sculptures and an audio playback system we devised and programmed for the sculpture. These tongues gesture towards both sound and silence, a sussuration of voices and echoes sputtering out to the velvet-lined walls of the gallery; sound is a body searching for its surface.

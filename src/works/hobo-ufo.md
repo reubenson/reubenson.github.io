@@ -5,6 +5,14 @@ description: Audio-reactive Street View built for James Hoff
 url: https://p-a-n.org/release/james-hoff-hobo-ufo-v-chernobyl/
 media: software
 year: 2016 — 2019
+id: hobo-ufo
+tagline: Audio-reactive Street View built for James Hoff
+selected: true
+categories: []
+relatedProjects:
+  - frog-chorus
+  - midi-archive
+  - echea
 ---
 
 Audio-visual software built for artist/publisher James Hoff, using realtime audio analysis to programmatically détourn Google Maps Street View into audio-reactive cinematography reminiscent of Michael Snow's [_La Région Centrale_](https://www.youtube.com/watch?v=uYr_SvIKKuI).

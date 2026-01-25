@@ -1,12 +1,12 @@
 <!-- I make software, sound, and ceramics.  -->
 
-I'm a Korean-American artist based in New York City working primarily with sound, ceramics, and software. My practice centers on the poetics of air: as environment made audible, as force upon language, and as the sonorous potentiality of ceramic vessels. 
-\
-\
-My work expresses an interest in the core phenomenon of the aesthetic experience, and in particular the generative act of listening. Through recent projects, I've experimented with strategies of choreographing listening. In "After Orpheus" (2025), the exhibition visitor interacts with the sculpture by holding a paper cup. In the "Airs" (2025) poems, the reader moves the collection like the blowing wind. 
-\
-\
-Expanding this body of work, I'm currently developing a series of sculptures and text-based scores that further explore exchanges between object and affect. I believe that the aesthetic experience is irreducible to the object, and the act of multi-attentional listening can be used towards creative and liberatory ends more broadly.
+I'm a Korean-American artist and technologist based in New York City, working primarily with software, sound, and ceramics. My current practice centers on the poetics of air: as environment made audible, as a force upon language, and in the sonorous potentiality of ceramic vessels. Air is both material and metaphor; like meaning itself, it cannot exist in a vacuum. To pay attention to the air is to attend to the liminal, the relational, and the dynamic.
+
+My work is rooted in a background in sound art, and in particular the act of listening itself as a generative space for aesthetic experience. I've been developing work around this through what I call "choreographies of listening." In "After Orpheus" (2025), the exhibition visitor interacts with the sculpture by holding a paper cup. In the "Airs" (2025) poems, the reader moves the collection like the blowing wind. 
+
+Expanding this body of work, I'm currently developing a series of ceramic sculptures and text-based scores that activate the air through listening.
+
+<!-- further explore exchanges between object and affect. I believe that the aesthetic experience is irreducible to the object, and the act of multi-attentional listening can be used towards creative and liberatory ends more broadly. -->
 
 <!-- In recent work, I've  -->
 

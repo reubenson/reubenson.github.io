@@ -5,6 +5,14 @@ title: Quiet Time
 url: https://www.are.na/editorial/quiet-time
 media: talk, sound, writing
 year: 2024
+id: quiet-time
+tagline: Essay and lecture at Naive Yearly 2024
+selected: true
+categories: []
+relatedProjects:
+  - frog-chorus
+  - airs
+  - airports-for-music
 ---
 
 <figure class="figure-medium project-grid-item-3">

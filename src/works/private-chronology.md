@@ -6,6 +6,15 @@ media: sound, website
 year: 2009 — 2015
 url: https://reubenson.com/private-chronology
 # url: /private-chronology
+id: private-chronology
+tagline: DIY music label, distributed by Mimaroglu Music Sales
+selected: true
+categories:
+  - publications
+relatedProjects:
+  - airports-for-music
+  - mixes-for-radio
+  - weaving-music
 ---
 
 **Private Chronology** was a small music label operated from Boston, MA between 2009 and 2015, with 10 editions published in cassette, vinyl, and digital formats.

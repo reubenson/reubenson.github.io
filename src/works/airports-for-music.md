@@ -5,6 +5,16 @@ url: https://www.ninaprotocol.com/hubs/airportsformusic
 # description: Site-specific sound as fragrance
 media: sound
 year: 2023
+id: airports-for-music
+tagline: Sound as fragrance
+selected: true
+categories:
+  - on-listening
+  - publications
+relatedProjects:
+  - weaving-music
+  - mixes-for-radio
+  - frog-chorus
 ---
 
 _**[Airports for Music]({{ url }})**_ is an ongoing collection of compositions that juxtapose location recordings with synthetic sound, produced under the metaphor of sound as a fragrance drifting gently from speakers into the air.

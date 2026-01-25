@@ -2,33 +2,34 @@
   {% set index = 0 %}
   {# <h2>Works</h2> #}
   <ul class="projects-list">
-  {% for project in projects %}
-    {% if project.selected %}
+  {% for project in collections.projects %}
+    {% if project.data.selected %}
       {% set index = index + 1 %}
       <li class="project-item">
-        <a href="{{ project.path }}">
-          <span class="project-title">{{ project.title }} ({{ project.year }})</span>
+        <a href="{{ project.url }}">
+          <span class="project-title">{{ project.data.title }} ({{ project.data.year }})</span>
           <span class="project-index">{{ index }}</span>
           <span class="project-line"></span>
-          <span class="project-tagline">{{ project.tagline | safe }}</span>
-        </a>
-      </li>
-      {% endif %}
-  </ul>
-  {% endfor %}
-  <h3>Radio Mixes</h2>
-  <ul class="projects-list">
-  {% for project in projects %}
-    {% if "mixes" in project.categories %}
-      {% set index = index + 1 %}
-      <li class="project-item">
-        <a href="{{ project.path }}">
-          <span class="project-title">{{ project.title }} ({{ project.year }})</span>
-          <span class="project-index">{{ index }}</span>
-          <span class="project-line"></span>
-          <span class="project-tagline">{{ project.tagline | safe }}</span>
+          <span class="project-tagline">{{ project.data.tagline | safe }}</span>
         </a>
       </li>
     {% endif %}
   {% endfor %}
+  </ul>
+  <h3>Radio Mixes</h3>
+  <ul class="projects-list">
+  {% for project in collections.projects %}
+    {% if project.data.categories and "mixes" in project.data.categories %}
+      {% set index = index + 1 %}
+      <li class="project-item">
+        <a href="{{ project.url }}">
+          <span class="project-title">{{ project.data.title }}</span>
+          <span class="project-index">{{ index }}</span>
+          <span class="project-line"></span>
+          <span class="project-tagline">{{ project.data.tagline | safe }}</span>
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
 </div>

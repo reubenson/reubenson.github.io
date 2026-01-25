@@ -63,6 +63,10 @@ dd {
   margin: 0;
 }
 
+p {
+  margin: 0 0 20px 0;
+}
+
 h3 {
   margin: 10px 0
 }
@@ -73,6 +77,7 @@ h3 {
 
 /* Remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

@@ -5,6 +5,16 @@ description: Sound as a woven textile
 url: https://reubenson.com/weaving
 media: website, sound
 year: 2019
+id: weaving-music
+tagline: Sound as a woven textile
+selected: true
+categories:
+  - on-grid
+  - algorithm-audible
+relatedProjects:
+  - airports-for-music
+  - frog-chorus
+  - qcvg
 ---
 
 **[Weaving Music](/weaving)** is an exploration of the materiality of sound through the metaphor of weaving, the loom re-imagined as a music sequencer.

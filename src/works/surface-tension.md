@@ -5,6 +5,13 @@ url: https://store.are.na/products/are-na-annual-2025
 media: text
 # description: Writing samples
 year: 2024
+id: surface-tension
+tagline: Essay on surfaces for Are.na Annual
+selected: true
+categories: []
+relatedProjects:
+  - quiet-time
+  - airs
 ---
 
 {.project-grid-item-1}

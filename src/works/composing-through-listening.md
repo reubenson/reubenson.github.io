@@ -4,6 +4,14 @@ title: Composing Through Listening
 description: Radio broadcast for WFMU
 url: https://wfmu.org/playlists/shows/119916
 layoutType: two-column
+year: 2019
+id: wfmu-mix
+tagline: Radio broadcast on WFMU
+selected: false
+categories:
+  - mixes
+relatedProjects:
+  - nts-mix
 ---
 _**[Composing Through Listening]({{ url }})**_ is a one-hour radio broadcast composed for the [WFMU](https://wfmu.org/), the historic free-form community radio station based in Jersey City.
 {.project-grid-item-full}

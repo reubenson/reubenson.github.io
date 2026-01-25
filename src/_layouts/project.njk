@@ -43,10 +43,10 @@ title: Project Title
     <div class="content">
       <header>
         <h1>{{ title | safe }}</h1>
+        {%if subtitle %}<p>{{ subtitle | safe }}</p>{% endif %}
       </header>
       {% if not hideMeta %}
       <div class="project-meta">
-        {# {% include "chop.njk" %} #}
         {% if year %}<span class="project-year"><span class="project-meta-label">Year</span> 
           <span class="project-meta-value">
             {{ year }}
@@ -58,9 +58,6 @@ title: Project Title
             <span class="project-meta-value">
               {{ media }}
             </span>
-            {# {% if year %}
-              <span class="project-year">| <strong>Year</strong>: {{ year }}</span>
-            {% endif %} #}
           </span>
           {% if dimensions %}
             <span class="project-dimensions">
@@ -71,9 +68,14 @@ title: Project Title
             </span>
           {% endif %}
         {% elif meta %}
-          <div class="project-media">
-            {{ meta | safe }}
-          </div>
+          {% for item in meta %}
+            <span class="project-meta-item">
+              <span class="project-meta-label">{{ item.label | safe }}</span> 
+              <span class="project-meta-value">
+                {{ item.value | safe }}
+              </span>
+            </span>
+          {% endfor %}
         {% endif %}
         {% if url %}
           <span class="project-meta-url">
@@ -101,13 +103,13 @@ title: Project Title
       <section class="project-more">
         <h2>See also</h2>
         <ul>
-          {% for project in projects %}
-            {% if project.title == title %}
-              {% for relatedProjectId in project.relatedProjects %}
+          {% for project in collections.projects %}
+            {% if project.data.title == title %}
+              {% for relatedProjectId in project.data.relatedProjects %}
                 <li class="related-project">
-                  {% for project in projects %}
-                    {% if project.id == relatedProjectId %}
-                      <a href="{{ project.path }}">{{ project.title }}</a>
+                  {% for relatedProject in collections.projects %}
+                    {% if relatedProject.data.id == relatedProjectId %}
+                      <a href="{{ relatedProject.url }}">{{ relatedProject.data.title }}</a>
                     {% endif %}
                   {% endfor %}
                 </li>

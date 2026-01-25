@@ -5,14 +5,14 @@ const sass = require('sass');
 const path = require('path');
 const fs = require('fs');
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
-  
+
   // Add SCSS template handling
   eleventyConfig.addTemplateFormats("scss");
   eleventyConfig.addExtension("scss", {
     outputFileExtension: "css",
-    compile: async function(inputContent) {
+    compile: async function (inputContent) {
       return async (data) => {
         try {
           const result = sass.compileString(inputContent, {
@@ -35,7 +35,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("bundle.css");
   eleventyConfig.addPassthroughCopy("public");
   eleventyConfig.addPassthroughCopy({ "favicon.png": "/" });
-  
+
   // chrome-extension versions
   eleventyConfig.addPassthroughCopy('extensions');
 
@@ -57,7 +57,7 @@ module.exports = function(eleventyConfig) {
   };
 
   let markdownItAttrs = require("markdown-it-attrs");
-  
+
   eleventyConfig.setLibrary('md', markdownIt(options).use(markdownItAttrs));
 
   // add RSS
@@ -65,17 +65,39 @@ module.exports = function(eleventyConfig) {
 
   // add no-sleep
   eleventyConfig.addPassthroughCopy({
-      "./node_modules/@uriopass/nosleep.js/dist/NoSleep.min.js": "/public/js/nosleep.js"
+    "./node_modules/@uriopass/nosleep.js/dist/NoSleep.min.js": "/public/js/nosleep.js"
   });
 
-  eleventyConfig.addFilter("css", function(path) {
+  eleventyConfig.addFilter("css", function (path) {
     // Process and return the CSS
     return `/css/${path}.css`;
   });
 
   // Instead of passthrough copy, we'll add a custom collection
-  eleventyConfig.addCollection("styles", function(collectionApi) {
+  eleventyConfig.addCollection("styles", function (collectionApi) {
     return collectionApi.getFilteredByGlob("src/_styles/**/*.scss");
+  });
+
+  // Projects collection sorted reverse-chronologically by year
+  eleventyConfig.addCollection("projects", function (collectionApi) {
+    const projects = collectionApi.getFilteredByGlob("src/works/*.md");
+
+    // Helper function to extract numeric year for sorting
+    const getYearForSorting = (year) => {
+      if (typeof year === 'number') return year;
+      if (typeof year === 'string') {
+        // Extract first year from ranges like "2019 —"
+        const match = year.match(/^(\d{4})/);
+        return match ? parseInt(match[1], 10) : 0;
+      }
+      return 0;
+    };
+
+    return projects.sort((a, b) => {
+      const yearA = getYearForSorting(a.data.year);
+      const yearB = getYearForSorting(b.data.year);
+      return yearB - yearA; // Reverse chronological (newest first)
+    });
   });
 
   // Add a custom filter to process SCSS

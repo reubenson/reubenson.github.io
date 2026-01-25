@@ -5,6 +5,13 @@ title: Moon Udu
 media: ceramics
 year: 2025
 dimensions: 14" x 14" x 36"
+id: udu
+tagline: Psychosynthetic Ceramics
+selected: true
+categories: []
+relatedProjects:
+  - meandering-printing
+  - travel-vases
 ---
 
 Stoneware ceramic drum with apertures on the side and the top. The instrument is based on the traditional Nigerian udu, but made with the Korean moon jar technique. Its egg-shaped form pays homage to Assagioli's model of _psychosynthesis_, while also functioning ergonomically to to sit comfortably on the lap.

@@ -4,7 +4,17 @@ title: MIDI Archive
 description: Machine learning model and archive of music on the early web
 url: https://reubenson.com/midi-archive/
 media: website, sound
-year: 2024
+year: 2023
+id: midi-archive
+tagline: ML model and archive of music on the early web
+selected: true
+categories:
+  - algorithm-audible
+  - interfaces
+relatedProjects:
+  - frog-chorus
+  - airports-for-music
+  - weaving-music
 ---
 
 _**[MIDI Archive]({{ url }})**_ is an exploratory prototype of a generative AI model presented alongside a bespoke archive of MIDI music on the early web, which forms the corpus the model is trained on.

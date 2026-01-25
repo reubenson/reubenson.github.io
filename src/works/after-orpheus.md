@@ -6,6 +6,14 @@ title: After Orpheus
 media: mixed media
 year: 2025
 dimensions: 32" x 32" x 80"
+id: after-orpheus
+tagline: Mixed media sound sculpture
+selected: true
+categories: []
+relatedProjects:
+  - ceramics
+  - meandering-printing
+  - airs
 ---
 
 <div class="project-grid-item-2">

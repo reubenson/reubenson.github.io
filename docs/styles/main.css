@@ -64,6 +64,10 @@ dd {
   margin: 0;
 }
 
+p {
+  margin: 0 0 20px 0;
+}
+
 h3 {
   margin: 10px 0;
 }
@@ -700,7 +704,7 @@ nav.main-nav .active {
   row-gap: 20px;
   width: 100%;
   max-width: 720px;
-  margin: 0 auto;
+  margin: 20px auto auto;
 }
 .project h1 {
   border-bottom: none;
@@ -788,6 +792,10 @@ nav.main-nav .active {
   padding: 20px;
   border: solid black 1px;
   margin-bottom: -1px;
+}
+.project header p {
+  margin: 0;
+  font-size: 16px;
 }
 .project .content h2 {
   font-weight: 300;
@@ -1059,6 +1067,7 @@ figcaption {
   text-align: justify;
   margin: auto;
   margin-top: 8px;
+  margin-bottom: 10px;
   padding: 0 5px;
 }
 

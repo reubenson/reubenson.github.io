@@ -2,6 +2,7 @@
 layout: project.njk
 title: Colophon
 hideSeeMore: true
+hideMeta: true
 # layoutType: two-column
 ---
 

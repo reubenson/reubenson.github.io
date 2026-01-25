@@ -3,6 +3,15 @@ layout: project.njk
 title: Mixes for radio
 description: Audio broadcasts produced for NTS and WFMU
 media: sound
+year: 2024
+id: mixes-for-radio
+tagline: Radio broadcasts on NTS and WFMU
+selected: false
+categories:
+  - publications
+relatedProjects:
+  - airports-for-music
+  - meandering-printing
 ---
 
 [_Allure of Inertia_](<(https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024)>) is a one-hour radio broadcast composed for NTS, a community radio station based in London. This mix was produced on the theme of _metamorphosis_.

@@ -154,7 +154,8 @@
           <div class="container-background"></div>
         </div>
       </div>
-      <div class="chop-container">
+    </div>
+    <div class="chop-container">
   <div class="chop-wrapper">
     <div class="chop-border"></div>
     <div class="chop-border inner"></div>
@@ -266,7 +267,7 @@
 <script>
   // randomize position
   const leftRange = [5, 60];
-  const topRange = [-30, -10];
+  const topRange = [-5, 15];
   const chopContainer = document.querySelector('.chop-container');
   const randomX = Math.random() * (leftRange[1] - leftRange[0]) + leftRange[0];
   const randomY = Math.random() * (topRange[1] - topRange[0]) + topRange[0];
@@ -278,7 +279,6 @@
   const randomRotation = Math.random() * (rotationRange[1] - rotationRange[0]) + rotationRange[0];
   chopContainer.style.transform = `rotate(${randomRotation}deg)`;
 </script>
-    </div>
     <div class="broider">
       <div class="project-border"></div>
     </div>

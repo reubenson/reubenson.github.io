@@ -5,6 +5,13 @@ url: https://thehtml.review/04/airs/
 media: website, text, sound
 description: Poems accompanied by recordings of the wind
 year: 2025
+id: airs
+tagline: Wind as poetry, poetry as wind
+selected: true
+categories: []
+relatedProjects:
+  - airports-for-music
+  - quiet-time
 ---
 
 [Airs](https://thehtml.review/04/airs) was published in the Spring 2025 issue of [The HTML Review](https://thehtml.review). It combines typographic distortions and animation with a generative audio environment around the theme of air. The work is intended to facilitate multiple modes of attention, flickering between the atmospheric and the concrete.

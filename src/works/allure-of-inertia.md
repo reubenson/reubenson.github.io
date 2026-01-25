@@ -4,6 +4,14 @@ title: Allure of Inertia
 # description: Mix for NTS Radio
 url: https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024
 layoutType: two-column
+year: 2024
+id: nts-mix
+tagline: Radio broadcast on NTS
+selected: false
+categories:
+  - mixes
+relatedProjects:
+  - wfmu-mix
 ---
 
 Mix for NTS Radio, on the theme of _metamorphosis_ ([download link](https://www.dropbox.com/s/zebvsqnx1qu3aam/Allure%20of%20Inertia.mp3?dl=0)).

@@ -6,6 +6,14 @@ media: ceramics
 year: 2019 —
 dimensions: variable 1 to 2 cu.in.
 # url: https://reubenson.com/portfolio/ceramics/
+id: travel-vases
+tagline: Pocket-sized ceramic vessels for vacation wildflowers
+selected: true
+categories: []
+relatedProjects:
+  - meandering-printing
+  - udu
+  - echea
 ---
 
  <!-- such that they can be brought closer within one's field of vision, as if a small creature. -->

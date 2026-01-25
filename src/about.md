@@ -1,8 +1,15 @@
 ---
 layout: project.njk
 title: Reuben Son
+subtitle: "<em>latin</em> son: <strong>sound</strong>, <em>korean</em> 손: <strong>hand</strong>"
 layoutType: two-column
-meta: "<em>latin</em> son: <strong>sound</strong>, <em>korean</em> 손: <strong>hand</strong>"
+media: "software, sound, ceramics (and sentences)"
+# meta:
+#   - label: "<em>latin</em> son"
+#     value: " <strong>sound</strong>"
+#   - label: "<em>korean</em> 손"
+#     value: "<strong>hand</strong>"
+# hideMeta: true
 hideSeeMore: true
 ---
 
@@ -40,7 +47,7 @@ Key themese and interests:
 
  -->
 
-In addition to my solo practice, I've assisted the artists Eli Keszler and James Hoff for performances and installations at The Whitney Museum of American Art, the MIT List Visual Arts Center, Eyebeam, and the London ICA.
+In addition to my solo practice, I've assisted the artists Eli Keszler, James Hoff, and Glenn Jones for projects at The Whitney Museum of American Art, the MIT List Visual Arts Center, Eyebeam, and the London ICA, and the record labels PAN and Thrill Jockey.
 \
 \
 I'm currently working as a mobile app developer at Slate, and previously led engineering for The Strategist at New York Magazine and was a researcher at the Harvard-MIT Health Sciences and Technology.

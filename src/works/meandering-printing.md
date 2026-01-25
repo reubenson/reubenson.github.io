@@ -5,6 +5,15 @@ title: Meander
 media: ceramics
 dimensions: 8" x 7" x 4"
 year: 2023
+id: meandering-printing
+tagline: 3D printed ceramics at Haystack Mountain School of Crafts
+selected: true
+categories:
+  - meander
+relatedProjects:
+  - travel-vases
+  - weaving-music
+  - udu
 ---
 
 _Meander_ uses the single, continuous line of a ceramic 3D-printer to translate the Greek key ornamentation into the **form** of a porcelain vessel. It offers an invitation to the eye to meander with the vessel while _blurring the line_ between interior and exterior space.
