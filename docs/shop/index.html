@@ -51,11 +51,32 @@
   </head>
   <body class="shop-page ">
     <div class="top-spacer"></div>
+    <nav>
+  <a class="home" href="/">Home</a>
+  <a class="about" href="/about">About</a>
+  <a class="works" href="/works">Works</a>
+  <a class="shop" href="/shop">Shop</a>
+  <script>
+    const path = window.location.pathname.replace(/\//g, '');
+    const navLinks = document.querySelectorAll('nav a');
+
+    if (path === '') {
+      navLinks[0].classList.add('active');
+    } else {
+      navLinks.forEach(link => {
+        if (link.href.includes(path)) {
+          link.classList.add('active');
+        }
+      });
+    }
+  </script>
+</nav>
+
     
     <div class="content">
       <header>
         <nav>
-          <a href="/">Home</a>
+          
           <a href="#travel-vases">Travel Vases</a>
           <a href="#one-offs">One-offs</a>
         </nav>

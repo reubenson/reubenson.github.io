@@ -2,8 +2,9 @@
 layout: project.njk
 title: Private Chronology
 description: DIY music label, distributed by Mimaroglu Music Sales
-media: sound
-year: 2009-2015
+media: sound, website
+year: 2009 — 2015
+url: https://reubenson.com/private-chronology
 # url: /private-chronology
 ---
 

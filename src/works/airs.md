@@ -1,8 +1,8 @@
 ---
 layout: project.njk
 title: Airs
-url: https://reubenson.com/airs
-media: website, sound, writing
+url: https://thehtml.review/04/airs/
+media: website, text, sound
 description: Poems accompanied by recordings of the wind
 year: 2025
 ---

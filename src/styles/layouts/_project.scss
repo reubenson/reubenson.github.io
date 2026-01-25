@@ -29,16 +29,17 @@
   //   }
   // }
 
-  h1,
-  h1 a {
+  h1 {
     border-bottom: none;
     line-height: 34px;
-    font-size: 26px;
+    font-size: 34px;
     // font-weight: 300;
     font-weight: bold;
     // margin: 0 20px 0 0;
     text-decoration: none;
     color: #000;
+    // filter: blur(1px) contrast(5);
+    // background-color: white;
     // filter: url(#wind-filter-sm);
   }
 
@@ -173,7 +174,12 @@
 
   header {
     @include page-header;
-    margin-top: 65px;
+    margin-top: 54px;
+    padding: 20px;
+    border: solid black 1px;
+    margin-bottom: -1px;
+    // background-color: white;
+    // filter: url(#white-to-transparent);
     // margin-bottom: 40px;
   }
 
@@ -183,10 +189,10 @@
 
   .project-description {
     // font-style: italic;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px auto;
-    font-size: 22px;
+    // font-weight: bold;
+    // text-align: center;
+    // margin: 20px auto;
+    // font-size: 22px;
   }
 
   .project-meta {
@@ -204,26 +210,31 @@
     padding: 10px;
     border: solid black 1px;
     // margin-left: 20px;
-    // display: flex;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+    gap: 0;
 
     >span {
       // border: solid black 1px;
-      display: block;
+      display: contents;
       // padding-bottom: 10px;
       // margin-bottom: 10px;
     }
 
     &-label {
       opacity: 1;
-      display: inline-block;
-      width: 80px;
-      border-right: solid black 1px;
       // border-bottom: solid black 1px;
       padding-right: 10px;
+      align-self: start;
     }
 
     &-value {
+      border-left: solid grey 1px;
+      padding-left: 10px;
       // border-top: solid black 1px;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
   }
 

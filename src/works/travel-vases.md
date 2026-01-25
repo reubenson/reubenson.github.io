@@ -3,7 +3,7 @@ layout: project.njk
 title: Travel Vases
 # description: Objects in miniature
 media: ceramics
-year: 2019—
+year: 2019 —
 dimensions: variable 1 to 2 cu.in.
 # url: https://reubenson.com/portfolio/ceramics/
 ---

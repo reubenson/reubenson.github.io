@@ -1,6 +1,8 @@
 ---
 layout: project.njk
 title: Surface Tension
+url: https://store.are.na/products/are-na-annual-2025
+media: text
 # description: Writing samples
 year: 2024
 ---

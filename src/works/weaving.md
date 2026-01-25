@@ -3,7 +3,7 @@ layout: project.njk
 title: Weaving Music
 description: Sound as a woven textile
 url: https://reubenson.com/weaving
-media: software, sound
+media: website, sound
 year: 2019
 ---
 

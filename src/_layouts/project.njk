@@ -14,8 +14,8 @@ title: Project Title
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:description" content="{{ description }}" />
-    <link rel="preload" as="image" href="/public/pocket-vase.jpg">
-    <link rel="preload" as="image" href="/public/html-review/santa-ana-winds.jpg">
+    {# <link rel="preload" as="image" href="/public/pocket-vase.jpg"> #}
+    {# <link rel="preload" as="image" href="/public/html-review/santa-ana-winds.jpg"> #}
     {# <meta property="og:image" content="https://reubenson.com/public/card_july2024.jpg"> #}
     <meta property="og:image" content="https://reubenson-portfolio.s3.us-east-1.amazonaws.com/assets/portrait_2024.jpg" />
     <meta property="og:type" content="website" />
@@ -43,10 +43,10 @@ title: Project Title
     <div class="content">
       <header>
         <h1>{{ title | safe }}</h1>
-        <a href="{{ url }}">{{url}}</a>
       </header>
       {% if not hideMeta %}
       <div class="project-meta">
+        {# {% include "chop.njk" %} #}
         {% if year %}<span class="project-year"><span class="project-meta-label">Year</span> 
           <span class="project-meta-value">
             {{ year }}
@@ -75,11 +75,24 @@ title: Project Title
             {{ meta | safe }}
           </div>
         {% endif %}
+        {% if url %}
+          <span class="project-meta-url">
+            <span class="project-meta-label">URL</span> 
+            <span class="project-meta-value">
+              <a href="{{ url }}">{{url | replace('https://', '')}}</a>
+            </span> 
+          </span>
+        {% endif %}
+        {% if description %}
+          <span class="project-description">
+            <span class="project-meta-label">Description</span> 
+            <span class="project-meta-value">
+              {{ description }}
+            </span>
+          </span>
+        {% endif %}
       </div>
       {% endif %}
-      <div class="project-description">
-        {{ description }}
-      </div>
       <div class="content-wrapper {% if noGrid %}no-grid{% endif %}">
         {{ content | safe }}
       </div>

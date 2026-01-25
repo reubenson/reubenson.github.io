@@ -705,12 +705,10 @@ nav .active {
   margin: 0 auto;
 }
 .project h1,
-.project h1 a,
-.shop-page h1,
-.shop-page h1 a {
+.shop-page h1 {
   border-bottom: none;
   line-height: 34px;
-  font-size: 26px;
+  font-size: 34px;
   font-weight: bold;
   text-decoration: none;
   color: #000;
@@ -804,20 +802,16 @@ nav .active {
   max-width: 720px;
   position: relative;
   text-align: center;
-  margin-top: 65px;
+  margin-top: 54px;
+  padding: 20px;
+  border: solid black 1px;
+  margin-bottom: -1px;
 }
 .project .content h2,
 .shop-page .content h2 {
   font-weight: 300;
   margin: 40px 0 40px;
   text-align: center;
-}
-.project .project-description,
-.shop-page .project-description {
-  font-weight: bold;
-  text-align: center;
-  margin: 20px auto;
-  font-size: 22px;
 }
 .project .project-meta,
 .shop-page .project-meta {
@@ -829,18 +823,27 @@ nav .active {
   opacity: 0.7;
   padding: 10px;
   border: solid black 1px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  gap: 0;
 }
 .project .project-meta > span,
 .shop-page .project-meta > span {
-  display: block;
+  display: contents;
 }
 .project .project-meta-label,
 .shop-page .project-meta-label {
   opacity: 1;
-  display: inline-block;
-  width: 80px;
-  border-right: solid black 1px;
   padding-right: 10px;
+  align-self: start;
+}
+.project .project-meta-value,
+.shop-page .project-meta-value {
+  border-left: solid grey 1px;
+  padding-left: 10px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 @media (min-width: 720px), print {
   .project .content-wrapper:not(.no-grid),
