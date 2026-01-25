@@ -2,22 +2,34 @@
 
 .shop-page {
 
+  // Override top-level nav to scroll normally instead of being fixed
+  >nav {
+    position: relative;
+    top: auto;
+    margin: 20px auto;
+  }
+
   header {
     // @include page-header;
     position: sticky;
     top: 0;
     background-color: #f0f0e6;
-    z-index: 1;
+    z-index: 10;
     font-size: 20px;
     max-width: calc(100vw - 40px);
-    // padding-top: 10px;f
+    padding: 10px 20px;
+    border-bottom: solid black 1px;
+    margin-top: 57px; // padding-top: 10px;f
+    // height: 56px;
+    // margin: 20px;
     // margin-top: -19px;
 
     nav {
-      // display: flex;
-      // flex-direction: row;
-      // flex-wrap: wrap;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-evenly;
+      padding: 6px;
       // margin: auto auto;
       // padding: 10px;
       // width: 100%;
@@ -29,6 +41,10 @@
       //   text-decoration: none;
       //   font-weight: normal;
       // }
+
+      a {
+        text-decoration: none;
+      }
 
       a.selected {
         font-weight: bold;

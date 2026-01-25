@@ -1,4 +1,4 @@
-nav {
+nav.main-nav {
     font-size: 20px;
     font-weight: normal;
     text-align: center;
@@ -34,7 +34,7 @@ nav {
     }
 }
 
-.homepage nav {
+.homepage nav.main-nav {
     display: none;
     // justify-content: space-around;
 

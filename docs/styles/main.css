@@ -342,7 +342,7 @@ h3 {
   text-align: left;
 }
 
-nav {
+nav.main-nav {
   font-size: 20px;
   font-weight: normal;
   text-align: center;
@@ -360,25 +360,25 @@ nav {
   display: flex;
   justify-content: space-between;
 }
-nav a {
+nav.main-nav a {
   text-decoration: none;
   padding: 5px;
 }
-nav .active {
+nav.main-nav .active {
   border-bottom: solid black 1px;
 }
 
-.homepage nav {
+.homepage nav.main-nav {
   display: none;
   background-color: transparent;
 }
-.homepage nav a {
+.homepage nav.main-nav a {
   background-color: #f0f0e6;
   border-radius: 2px;
   border: solid black 1px;
   box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.6);
 }
-.homepage nav.open {
+.homepage nav.main-nav.open {
   display: flex;
 }
 
@@ -691,12 +691,10 @@ nav .active {
   }
 }
 
-.project,
-.shop-page {
+.project {
   margin: 20px auto;
 }
-.project .content-wrapper,
-.shop-page .content-wrapper {
+.project .content-wrapper {
   display: block;
   column-gap: 20px;
   row-gap: 20px;
@@ -704,8 +702,7 @@ nav .active {
   max-width: 720px;
   margin: 0 auto;
 }
-.project h1,
-.shop-page h1 {
+.project h1 {
   border-bottom: none;
   line-height: 34px;
   font-size: 34px;
@@ -713,64 +710,53 @@ nav .active {
   text-decoration: none;
   color: #000;
 }
-.project h2 a,
-.shop-page h2 a {
+.project h2 a {
   border-bottom: none;
   text-decoration: none;
   color: #000;
 }
-.project h3,
-.shop-page h3 {
+.project h3 {
   border-bottom: 1px solid #000;
   font-weight: 300;
 }
-.project figure,
-.shop-page figure {
+.project figure {
   margin: auto;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.project figure img,
-.shop-page figure img {
+.project figure img {
   border-radius: 2px;
   object-fit: cover;
   height: auto;
 }
-.project figure.project-grid-item-full.horizontal,
-.shop-page figure.project-grid-item-full.horizontal {
+.project figure.project-grid-item-full.horizontal {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.project figure.project-grid-item-full.horizontal img,
-.shop-page figure.project-grid-item-full.horizontal img {
+.project figure.project-grid-item-full.horizontal img {
   flex-basis: 40%;
   max-width: 49%;
 }
-.project figure.project-grid-item-full.horizontal figcaption,
-.shop-page figure.project-grid-item-full.horizontal figcaption {
+.project figure.project-grid-item-full.horizontal figcaption {
   flex-basis: 100%;
 }
-.project .project-more,
-.shop-page .project-more {
+.project .project-more {
   margin: 30px auto;
   max-width: 720px;
   border-top: solid black 1px;
   margin-top: 20px;
   clear: both;
 }
-.project .all-projects-link,
-.shop-page .all-projects-link {
+.project .all-projects-link {
   list-style: none;
 }
-.project .all-projects-link::before,
-.shop-page .all-projects-link::before {
+.project .all-projects-link::before {
   content: "↪";
 }
-.project blockquote,
-.shop-page blockquote {
+.project blockquote {
   margin: auto;
   border-bottom: solid black 1px;
   border-top: solid black 1px;
@@ -780,22 +766,18 @@ nav .active {
   padding: 0 20px;
   text-align: justify;
 }
-.project blockquote p,
-.shop-page blockquote p {
+.project blockquote p {
   padding: 0 20px;
 }
-.project .figure-full-width img,
-.shop-page .figure-full-width img {
+.project .figure-full-width img {
   width: 720px;
   max-width: calc(100vw - 80px);
 }
-.project.one-column .content .content-wrapper,
-.shop-page.one-column .content .content-wrapper {
+.project.one-column .content .content-wrapper {
   max-width: 720px;
   margin-right: auto;
 }
-.project header,
-.shop-page header {
+.project header {
   align-items: flex-end;
   margin: auto auto 10px;
   width: 100%;
@@ -807,14 +789,12 @@ nav .active {
   border: solid black 1px;
   margin-bottom: -1px;
 }
-.project .content h2,
-.shop-page .content h2 {
+.project .content h2 {
   font-weight: 300;
   margin: 40px 0 40px;
   text-align: center;
 }
-.project .project-meta,
-.shop-page .project-meta {
+.project .project-meta {
   font-family: Courier New;
   font-size: 12px;
   font-weight: bold;
@@ -828,61 +808,50 @@ nav .active {
   align-items: center;
   gap: 0;
 }
-.project .project-meta > span,
-.shop-page .project-meta > span {
+.project .project-meta > span {
   display: contents;
 }
-.project .project-meta-label,
-.shop-page .project-meta-label {
+.project .project-meta-label {
   opacity: 1;
   padding-right: 10px;
   align-self: start;
 }
-.project .project-meta-value,
-.shop-page .project-meta-value {
+.project .project-meta-value {
   border-left: solid grey 1px;
   padding-left: 10px;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 @media (min-width: 720px), print {
-  .project .content-wrapper:not(.no-grid),
-  .shop-page .content-wrapper:not(.no-grid) {
+  .project .content-wrapper:not(.no-grid) {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
   }
-  .project .project-grid-item-1,
-  .shop-page .project-grid-item-1 {
+  .project .project-grid-item-1 {
     margin: auto;
     grid-column: span 1;
   }
-  .project .project-grid-item-2,
-  .shop-page .project-grid-item-2 {
+  .project .project-grid-item-2 {
     margin: auto;
     grid-column: span 2;
   }
-  .project .project-grid-item-3,
-  .shop-page .project-grid-item-3 {
+  .project .project-grid-item-3 {
     margin: auto;
     grid-column: span 3;
   }
-  .project .project-grid-item-4,
-  .shop-page .project-grid-item-4 {
+  .project .project-grid-item-4 {
     margin: auto;
     grid-column: span 4;
   }
-  .project .project-grid-item-5,
-  .shop-page .project-grid-item-5 {
+  .project .project-grid-item-5 {
     margin: auto;
     grid-column: span 5;
   }
-  .project .project-grid-item-6,
-  .shop-page .project-grid-item-6 {
+  .project .project-grid-item-6 {
     margin: auto;
     grid-column: span 6;
   }
-  .project .project-grid-item-full,
-  .shop-page .project-grid-item-full {
+  .project .project-grid-item-full {
     margin: auto;
     grid-column: 1/-1;
   }
@@ -890,41 +859,49 @@ nav .active {
 @media print {
   .project header,
   .project h1,
-  .project a,
-  .shop-page header,
-  .shop-page h1,
-  .shop-page a {
+  .project a {
     margin-top: 0;
   }
-  .project .content,
-  .shop-page .content {
+  .project .content {
     margin: 0 auto;
     padding: 0;
   }
-  .project *,
-  .shop-page * {
+  .project * {
     position: static !important;
   }
-  .project .project-more,
-  .shop-page .project-more {
+  .project .project-more {
     display: none;
   }
-  .project header,
-  .shop-page header {
+  .project header {
     margin-top: 0;
   }
 }
 
+.shop-page > nav {
+  position: relative;
+  top: auto;
+  margin: 20px auto;
+}
 .shop-page header {
   position: sticky;
   top: 0;
   background-color: #f0f0e6;
-  z-index: 1;
+  z-index: 10;
   font-size: 20px;
   max-width: calc(100vw - 40px);
+  padding: 10px 20px;
+  border-bottom: solid black 1px;
+  margin-top: 57px;
 }
 .shop-page header nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-evenly;
+  padding: 6px;
+}
+.shop-page header nav a {
+  text-decoration: none;
 }
 .shop-page header nav a.selected {
   font-weight: bold;

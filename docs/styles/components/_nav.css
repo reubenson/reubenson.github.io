@@ -1,4 +1,4 @@
-nav {
+nav.main-nav {
   font-size: 20px;
   font-weight: normal;
   text-align: center;
@@ -16,24 +16,24 @@ nav {
   display: flex;
   justify-content: space-between;
 }
-nav a {
+nav.main-nav a {
   text-decoration: none;
   padding: 5px;
 }
-nav .active {
+nav.main-nav .active {
   border-bottom: solid black 1px;
 }
 
-.homepage nav {
+.homepage nav.main-nav {
   display: none;
   background-color: transparent;
 }
-.homepage nav a {
+.homepage nav.main-nav a {
   background-color: #f0f0e6;
   border-radius: 2px;
   border: solid black 1px;
   box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.6);
 }
-.homepage nav.open {
+.homepage nav.main-nav.open {
   display: flex;
 }
