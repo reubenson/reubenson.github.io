@@ -12,8 +12,8 @@ categories:
   - on-listening
   - publications
 relatedProjects:
+  - quiet-time
   - weaving-music
-  - mixes-for-radio
   - frog-chorus
 ---
 

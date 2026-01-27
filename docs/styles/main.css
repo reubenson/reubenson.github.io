@@ -351,7 +351,7 @@ nav.main-nav {
   font-weight: normal;
   text-align: center;
   z-index: 10;
-  padding: 10px;
+  padding: 0px;
   position: fixed;
   top: 20px;
   left: 0;
@@ -363,6 +363,7 @@ nav.main-nav {
   background-color: #f0f0e6;
   display: flex;
   justify-content: space-between;
+  height: 36px;
 }
 nav.main-nav a {
   text-decoration: none;
@@ -375,11 +376,12 @@ nav.main-nav .active {
 .homepage nav.main-nav {
   display: none;
   background-color: transparent;
+  opacity: 0.95;
+  padding-bottom: 5px;
 }
 .homepage nav.main-nav a {
   background-color: #f0f0e6;
   border-radius: 2px;
-  border: solid black 1px;
   box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.6);
 }
 .homepage nav.main-nav.open {
@@ -425,7 +427,7 @@ nav.main-nav .active {
 .homepage .cards p {
   line-height: 1.3em;
   text-align: left;
-  letter-spacing: -0.5px;
+  margin: 0 auto;
 }
 .homepage .cards h1 a,
 .homepage h2 a {
@@ -457,6 +459,8 @@ nav.main-nav .active {
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  z-index: 1;
+  opacity: 0.95;
 }
 .homepage .toc-button.open ~ .cards {
   display: none;
@@ -483,13 +487,15 @@ nav.main-nav .active {
   display: flex;
   align-items: center;
 }
+.homepage .card header {
+  width: 100%;
+}
 .homepage .card.front h1 a {
   visibility: hidden;
   display: none;
 }
 .homepage .card .container {
   font-size: 13px;
-  letter-spacing: -1px;
   line-height: 15px;
   margin: 20px;
   padding: 8px;
@@ -508,7 +514,7 @@ nav.main-nav .active {
 }
 .homepage .card p {
   margin-top: 0;
-  text-align: justify;
+  text-align: center;
   width: 100%;
 }
 .homepage .card.front p {
@@ -535,7 +541,7 @@ nav.main-nav .active {
   display: block;
   font-style: italic;
   margin: auto;
-  text-align: justify;
+  text-align: center;
   width: 177px;
 }
 .homepage .card-quote {
@@ -555,11 +561,13 @@ nav.main-nav .active {
   top: 0;
   text-transform: uppercase;
 }
-.homepage .card-quote-footer {
-  bottom: 2px;
+.homepage p.card-quote-footer {
+  bottom: 0;
   font-style: normal;
-  left: 7px;
+  left: 0;
   position: absolute;
+  text-align: left;
+  font-size: 12px;
 }
 .homepage .left-arrow,
 .homepage .right-arrow {
@@ -589,10 +597,34 @@ nav.main-nav .active {
   display: block;
   opacity: 0.8;
 }
-.homepage .cards .social {
+.homepage .card .card-header {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
   display: inline;
-  font-size: 10px;
-  letter-spacing: normal;
+  text-align: center;
+}
+.homepage .card .card-header p {
+  margin: 6px auto !important;
+  display: flex !important;
+  width: fit-content !important;
+  justify-content: center;
+  gap: 14px;
+}
+.homepage .card .card-header a:not(:last-child)::after {
+  content: "✺";
+  position: absolute;
+  position: absolute;
+  margin-left: 5px;
+  font-size: 5px;
+}
+.homepage .card .card-header a {
+  color: black;
+  text-decoration: none;
+}
+.homepage .cards .card-footer {
+  display: inline;
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -601,18 +633,17 @@ nav.main-nav .active {
   text-align: center;
   z-index: 1;
 }
-.homepage .cards .social p {
+.homepage .cards .card-footer p,
+.homepage .card .card-header p {
   background: #f0f0e6;
+  font-size: 10px;
   display: inline-block;
   margin: 6px;
   padding-left: 5px;
   padding-right: 5px;
   text-align: center;
   width: auto;
-}
-.homepage .card .social a {
-  color: black;
-  text-decoration: none;
+  text-transform: lowercase;
 }
 .homepage .cards .glyph {
   bottom: 27px;
@@ -661,7 +692,7 @@ nav.main-nav .active {
 .homepage .promo .card-container:nth-child(1),
 .homepage .promo h1,
 .homepage .promo .right-arrow,
-.homepage .promo .social {
+.homepage .promo .card-header {
   display: none;
 }
 .homepage .promo .card-container {
@@ -788,14 +819,16 @@ nav.main-nav .active {
   max-width: 720px;
   position: relative;
   text-align: center;
-  margin-top: 54px;
+  margin-top: 35px;
   padding: 20px;
   border: solid black 1px;
   margin-bottom: -1px;
+  font-style: italic;
 }
 .project header p {
   margin: 0;
   font-size: 16px;
+  font-style: normal;
 }
 .project .content h2 {
   font-weight: 300;
@@ -897,9 +930,7 @@ nav.main-nav .active {
   z-index: 10;
   font-size: 20px;
   max-width: calc(100vw - 40px);
-  padding: 10px 20px;
-  border-bottom: solid black 1px;
-  margin-top: 57px;
+  margin-top: 37px;
 }
 .shop-page header nav {
   display: flex;
@@ -907,6 +938,8 @@ nav.main-nav .active {
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 6px;
+  padding: 11px 20px 10px;
+  border-bottom: solid black 1px;
 }
 .shop-page header nav a {
   text-decoration: none;
@@ -1030,6 +1063,10 @@ nav.main-nav .active {
   filter: brightness(1) contrast(1);
 }
 @media screen and (min-width: 720px) {
+  .shop-page header nav {
+    max-width: 1024px;
+    margin: auto;
+  }
   .shop-page .shop-listings,
   .shop-page .image-sequence {
     width: calc(100vw - 80px) !important;

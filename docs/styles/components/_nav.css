@@ -3,7 +3,7 @@ nav.main-nav {
   font-weight: normal;
   text-align: center;
   z-index: 10;
-  padding: 10px;
+  padding: 0px;
   position: fixed;
   top: 20px;
   left: 0;
@@ -15,6 +15,7 @@ nav.main-nav {
   background-color: #f0f0e6;
   display: flex;
   justify-content: space-between;
+  height: 36px;
 }
 nav.main-nav a {
   text-decoration: none;
@@ -27,11 +28,12 @@ nav.main-nav .active {
 .homepage nav.main-nav {
   display: none;
   background-color: transparent;
+  opacity: 0.95;
+  padding-bottom: 5px;
 }
 .homepage nav.main-nav a {
   background-color: #f0f0e6;
   border-radius: 2px;
-  border: solid black 1px;
   box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.6);
 }
 .homepage nav.main-nav.open {

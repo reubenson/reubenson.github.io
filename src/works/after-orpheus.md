@@ -11,7 +11,7 @@ tagline: Mixed media sound sculpture
 selected: true
 categories: []
 relatedProjects:
-  - ceramics
+  - echea
   - meandering-printing
   - airs
 ---

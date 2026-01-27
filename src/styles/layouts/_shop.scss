@@ -17,9 +17,8 @@
     z-index: 10;
     font-size: 20px;
     max-width: calc(100vw - 40px);
-    padding: 10px 20px;
-    border-bottom: solid black 1px;
-    margin-top: 57px; // padding-top: 10px;f
+    // padding: 10px 20px;
+    margin-top: 37px;
     // height: 56px;
     // margin: 20px;
     // margin-top: -19px;
@@ -30,6 +29,8 @@
       flex-wrap: wrap;
       justify-content: space-evenly;
       padding: 6px;
+      padding: 11px 20px 10px;
+      border-bottom: solid black 1px;
       // margin: auto auto;
       // padding: 10px;
       // width: 100%;
@@ -141,6 +142,11 @@
   }
 
   @media screen and (min-width: 720px) {
+    header nav {
+      max-width: 1024px;
+      // margin-left: calc((100vw - 1024px - 60px)/2) !important;
+      margin: auto;
+    }
 
     .shop-listings,
     .image-sequence {

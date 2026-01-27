@@ -22,13 +22,10 @@ description: Shop description
   </head>
   <body class="shop-page {{ layoutType }}">
     <div class="top-spacer"></div>
-    {# {% include "toc-button.njk" %}
-    {% include "table-of-contents.njk" %} #}
     <div class="content">
       {% include "nav.njk" %}
       <header>
         <nav>
-          {# <a href="/">Home</a> #}
           <a href="#travel-vases">Travel Vases</a>
           <a href="#one-offs">One-offs</a>
         </nav>
@@ -224,5 +221,6 @@ description: Shop description
          
        })();
      </script>
+     {% include "chop.njk" %}
   </body>
 </html>

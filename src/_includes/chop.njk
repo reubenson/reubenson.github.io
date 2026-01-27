@@ -42,7 +42,6 @@
     width: 150px;
     height: 150px;
     overflow: hidden;
-    z-index: 100;
     opacity: 0.8;
   }
 
@@ -105,6 +104,17 @@
     font-family: Arial, Helvetica, sans-serif;
     opacity: 0.9;
   }
+
+  .homepage .chop-container {
+    z-index: 0;
+  }
+
+  .project .chop-container,
+  .shop-page .chop-container {
+    opacity: 0.025;
+    z-index: -1;
+  }
+
 </style>
 
 <script>

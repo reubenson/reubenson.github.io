@@ -24,19 +24,23 @@ title: Reuben Son Homepage
   <body class="homepage">
     {% include "nav.njk" %}
     {% include "toc-button.njk" %}
-    {# {% include "table-of-contents.njk" %} #}
     <h1 class="visually-hidden">Reuben Son</h1>
     <div class="cards">
       <div class="card-container">
         <div class="card front broider-cancel">
           <div class="container">
-            {% renderFile './src/_includes/tiny-bio.md' %}
-              {# <p class="card-quote-footer">
-                test
-              </p #}
+            <header>
+              <h1><a href="/about">Reuben Son</a></h1>
+              {% renderFile './src/_includes/tiny-bio.md' %}
+            </header>
           </div>
-          <div class="social">
-            {% renderFile './src/_includes/social.md' %}
+            <div class="card-header">
+              {% renderFile './src/_includes/social.md' %}
+            </div>
+          <div class="card-footer">
+            <p>
+              site last updated {{ timestamp }}
+            </p>
           </div>
           <div class="container-background"></div>
         </div>
@@ -47,7 +51,7 @@ title: Reuben Son Homepage
             <span>⥻</span>
           </div>
           {# <h1><a href="/about">Reuben Son</a></h1> #}
-          <div class="glyph">
+          <div class="glyph{% if not announcements[0].frog %} hidden{% endif %}">
             <a href="https://frogchor.us" target="_blank">
               <img src="/public/frog-glyph.png">
             </a>
@@ -72,10 +76,8 @@ title: Reuben Son Homepage
               <img src="{{ announcements[0].hoverImage }}" class="hover-image" alt="" />
             </div>
           </div>
-          <div class="social">
-            <p>
-              last updated {{ timestamp }}
-            </p>
+          <div class="card-footer">
+            <p class="expired-date hidden"></p>
           </div>
           <div class="container-background"></div>
         </div>
@@ -98,12 +100,42 @@ title: Reuben Son Homepage
       let index = 0;
       renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
 
+      function formatExpiredDate(expiryDateStr) {
+        if (!expiryDateStr) return null;
+        
+        const expiryDate = new Date(expiryDateStr);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        expiryDate.setHours(0, 0, 0, 0);
+        
+        if (expiryDate < today) {
+          const monthNames = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 
+                             'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+          const month = monthNames[expiryDate.getMonth()];
+          const year = expiryDate.getFullYear();
+          
+          // Check if the original string contains a day (has a comma, which indicates "Month Day, Year" format)
+          // or has a number between month and year
+          const hasDay = expiryDateStr.includes(',') || /\w+\s+\d{1,2}\s+\d{4}/.test(expiryDateStr);
+          
+          if (hasDay) {
+            const day = expiryDate.getDate();
+            return `${day} ${month} ${year}`;
+          } else {
+            return `${month} ${year}`;
+          }
+        }
+        return null;
+      }
+
       function renderAnnouncement(data) {
         const cardQuote = document.querySelector('.card-quote');
         const content = document.querySelector('.card-quote-content');
         const header = document.querySelector('.card-quote-header');
         const footer = document.querySelector('.card-quote-footer');
         const hoverImage = document.querySelector('.hover-image');
+        const glyph = document.querySelector('.glyph');
+        const expiredDate = document.querySelector('.card.back .expired-date');
         
         cardQuote.style.width = data.width || '130px';
         header.innerHTML = data.header || '';
@@ -114,6 +146,22 @@ title: Reuben Son Homepage
           hoverImage.classList.add('hidden');
         } else {
           hoverImage.classList.remove('hidden');
+        }
+        if (glyph) {
+          if (data.frog) {
+            glyph.classList.remove('hidden');
+          } else {
+            glyph.classList.add('hidden');
+          }
+        }
+        if (expiredDate) {
+          const formattedDate = formatExpiredDate(data.expiryDate);
+          if (formattedDate) {
+            expiredDate.textContent =`announcement posted ${formattedDate}`;
+            expiredDate.classList.remove('hidden');
+          } else {
+            expiredDate.classList.add('hidden');
+          }
         }
       }
 

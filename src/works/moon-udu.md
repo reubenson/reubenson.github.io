@@ -1,27 +1,25 @@
 ---
 layout: project.njk
-title: Moon Udu
+title: Psychosynthesis
 # description: Mixed media sculpture
 media: ceramics
-year: 2025
+year: 2026
 dimensions: 14" x 14" x 36"
 id: udu
-tagline: Psychosynthetic Ceramics
+tagline: Egg-shaped udu instrument made with the moon jar technique
 selected: true
 categories: []
 relatedProjects:
+  - echea
   - meandering-printing
-  - travel-vases
+  - after-orpheus
 ---
 
-Stoneware ceramic drum with apertures on the side and the top. The instrument is based on the traditional Nigerian udu, but made with the Korean moon jar technique. Its egg-shaped form pays homage to Assagioli's model of _psychosynthesis_, while also functioning ergonomically to to sit comfortably on the lap.
+Stoneware ceramic drum with apertures on the side and the top. The instrument is based on the traditional Nigerian udu, but made with a technique borrowed from Korean moon jars, in two bowls are thrown separately and joined at the midsection.
 {.project-grid-item-full}
 
-<!-- <div class="project-grid-item-2">
-  <p>
-    <em>After Orpheus</em> is a mixed media sculpture that combines ceramics with chrome armature, steel piano wire and electronics to produce acoustically amplified sound without speakers. A molded paper cup held against the self-oscillating wire allows for an intimate mode of listening while also affecting the vibrational modes of the wire.
-  </p>
-</div> -->
+The egg-shaped form pays homage to the parapsycholgist Roberto Assagioli who developed **psychosynthesis**. In his diagram of the human psyche as an egg, he makes the distinction of seven regions, of which only the center region represents the field of consciousness and the top
+{.project-grid-item-full}
 
 <figure class="project-grid-item-3" style="aspect-ratio: 3/4; object-fit: cover; height: auto;">
   <img src="/public/udu/udu-3.jpg">

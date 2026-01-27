@@ -34,11 +34,8 @@ title: Project Title
     {# <script async src="/bundle.js"></script> #}
   </head>
   <body class="project {{ layoutType }}">
-    <img src="/public/html-review/santa-ana-winds.jpg" alt="" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" />
-
+    {# <img src="/public/html-review/santa-ana-winds.jpg" alt="" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" /> #}
     {% include "nav.njk" %}
-    {# {% include "toc-button.njk" %} #}
-    {% include "table-of-contents.njk" %}
     <div class="top-spacer"></div>
     <div class="content">
       <header>
@@ -47,21 +44,21 @@ title: Project Title
       </header>
       {% if not hideMeta %}
       <div class="project-meta">
-        {% if year %}<span class="project-year"><span class="project-meta-label">Year</span> 
+        {% if year %}<span class="project-year"><span class="project-meta-label">year</span> 
           <span class="project-meta-value">
             {{ year }}
           </span>
         </span>{% endif %}
         {% if media %}
           <span class="project-media">
-            <span class="project-meta-label">Media</span> 
+            <span class="project-meta-label">media</span> 
             <span class="project-meta-value">
               {{ media }}
             </span>
           </span>
           {% if dimensions %}
             <span class="project-dimensions">
-              <span class="project-meta-label">Dimensions</span> 
+              <span class="project-meta-label">dimensions</span> 
               <span class="project-meta-value">
                 {{ dimensions | safe }}
               </span>
@@ -79,7 +76,7 @@ title: Project Title
         {% endif %}
         {% if url %}
           <span class="project-meta-url">
-            <span class="project-meta-label">URL</span> 
+            <span class="project-meta-label">url</span> 
             <span class="project-meta-value">
               <a href="{{ url }}">{{url | replace('https://', '')}}</a>
             </span> 
@@ -123,28 +120,7 @@ title: Project Title
       </section>
       {% endif %}
     </div>
+    {% include "chop.njk" %}
     <div class="page-border broider"></div>
-        <svg xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
-      <defs>
-        <filter id="wind-filter-sm" x="0%" y="0%" width="100%" height="100%">
-          {# <feImage xlink:href="/public/riso-maine.png"  #}
-          {# <feImage xlink:href="/public/pocket-vase.jpg"  #}
-          <feImage xlink:href="/public/html-review/santa-ana-winds.jpg" 
-                   result="slide-0"
-                   preserveAspectRatio="none"
-                   x="0" 
-                   y="0"
-                   height="1300px" 
-                   width="500px">
-          </feImage>
-          <feDisplacementMap in2="slide-0" 
-                             in="SourceGraphic" 
-                             scale="2"
-                             xChannelSelector="R" 
-                             yChannelSelector="G">
-          </feDisplacementMap>
-        </filter>
-      </defs>
-    </svg>
   </body>
 </html>

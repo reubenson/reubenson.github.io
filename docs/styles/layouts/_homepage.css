@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .homepage {
   background-color: #f0f0e6;
   font-weight: 100;
@@ -37,7 +38,7 @@
 .homepage .cards p {
   line-height: 1.3em;
   text-align: left;
-  letter-spacing: -0.5px;
+  margin: 0 auto;
 }
 .homepage .cards h1 a,
 .homepage h2 a {
@@ -69,6 +70,8 @@
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  z-index: 1;
+  opacity: 0.95;
 }
 .homepage .toc-button.open ~ .cards {
   display: none;
@@ -95,13 +98,15 @@
   display: flex;
   align-items: center;
 }
+.homepage .card header {
+  width: 100%;
+}
 .homepage .card.front h1 a {
   visibility: hidden;
   display: none;
 }
 .homepage .card .container {
   font-size: 13px;
-  letter-spacing: -1px;
   line-height: 15px;
   margin: 20px;
   padding: 8px;
@@ -120,7 +125,7 @@
 }
 .homepage .card p {
   margin-top: 0;
-  text-align: justify;
+  text-align: center;
   width: 100%;
 }
 .homepage .card.front p {
@@ -147,7 +152,7 @@
   display: block;
   font-style: italic;
   margin: auto;
-  text-align: justify;
+  text-align: center;
   width: 177px;
 }
 .homepage .card-quote {
@@ -167,11 +172,13 @@
   top: 0;
   text-transform: uppercase;
 }
-.homepage .card-quote-footer {
-  bottom: 2px;
+.homepage p.card-quote-footer {
+  bottom: 0;
   font-style: normal;
-  left: 7px;
+  left: 0;
   position: absolute;
+  text-align: left;
+  font-size: 12px;
 }
 .homepage .left-arrow,
 .homepage .right-arrow {
@@ -201,10 +208,34 @@
   display: block;
   opacity: 0.8;
 }
-.homepage .cards .social {
+.homepage .card .card-header {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
   display: inline;
-  font-size: 10px;
-  letter-spacing: normal;
+  text-align: center;
+}
+.homepage .card .card-header p {
+  margin: 6px auto !important;
+  display: flex !important;
+  width: fit-content !important;
+  justify-content: center;
+  gap: 14px;
+}
+.homepage .card .card-header a:not(:last-child)::after {
+  content: "✺";
+  position: absolute;
+  position: absolute;
+  margin-left: 5px;
+  font-size: 5px;
+}
+.homepage .card .card-header a {
+  color: black;
+  text-decoration: none;
+}
+.homepage .cards .card-footer {
+  display: inline;
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -213,18 +244,17 @@
   text-align: center;
   z-index: 1;
 }
-.homepage .cards .social p {
+.homepage .cards .card-footer p,
+.homepage .card .card-header p {
   background: #f0f0e6;
+  font-size: 10px;
   display: inline-block;
   margin: 6px;
   padding-left: 5px;
   padding-right: 5px;
   text-align: center;
   width: auto;
-}
-.homepage .card .social a {
-  color: black;
-  text-decoration: none;
+  text-transform: lowercase;
 }
 .homepage .cards .glyph {
   bottom: 27px;
@@ -273,7 +303,7 @@
 .homepage .promo .card-container:nth-child(1),
 .homepage .promo h1,
 .homepage .promo .right-arrow,
-.homepage .promo .social {
+.homepage .promo .card-header {
   display: none;
 }
 .homepage .promo .card-container {

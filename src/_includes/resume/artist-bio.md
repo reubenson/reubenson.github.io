@@ -1,4 +1,5 @@
-<!-- I make software, sound, and ceramics.  -->
+<!-- how to give this a better hook, that grabs attention without overexplicaiton? -->
+<!-- and the last line should be a single sentence that captures essence? -->
 
 I'm a Korean-American artist and technologist based in New York City, working primarily with software, sound, and ceramics. My current practice centers on the poetics of air: as environment made audible, as a force upon language, and in the sonorous potentiality of ceramic vessels. Air is both material and metaphor; like meaning itself, it cannot exist in a vacuum. To pay attention to the air is to attend to the liminal, the relational, and the dynamic.
 
