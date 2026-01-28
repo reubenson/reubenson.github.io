@@ -18,7 +18,7 @@ relatedProjects:
 Stoneware ceramic drum with apertures on the side and the top. The instrument is based on the traditional Nigerian udu, but made with a technique borrowed from Korean moon jars, in two bowls are thrown separately and joined at the midsection.
 {.project-grid-item-full}
 
-The egg-shaped form pays homage to the parapsycholgist Roberto Assagioli who developed **psychosynthesis**. In his diagram of the human psyche as an egg, he makes the distinction of seven regions, of which only the center region represents the field of consciousness and the top
+The egg-shaped form pays homage to the parapsycholgist Roberto Assagioli who developed **psychosynthesis**. In his diagram of the human psyche as an egg, he makes the distinction of seven regions, of which only the center region represents the field of consciousness and the top.
 {.project-grid-item-full}
 
 <figure class="project-grid-item-3" style="aspect-ratio: 3/4; object-fit: cover; height: auto;">
@@ -33,6 +33,8 @@ The egg-shaped form pays homage to the parapsycholgist Roberto Assagioli who dev
 </figure>
 
 Roberto Assagioli's seven regions of the psyche: **1**: _The Lower Unconscious_, **2**: _The Middle Unconscious_, **3**: _The Higher Unconscious or Superconscious_, **4**: _The Field of Consciousness_, **5**: _The Conscious Self or "I"_, **6**: _The Higher Self_, **7**: _The Collective Unconscious_
+\
+(Source: [Wikipedia](https://en.wikipedia.org/wiki/Psychosynthesis)).
 {.project-grid-item-full}
 
 <figure class="project-grid-item-6">

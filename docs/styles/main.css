@@ -396,7 +396,7 @@ nav.main-nav .active {
   /* styling for promoting card from homepage */
 }
 .homepage .cards {
-  font-family: Courier New;
+  font-family: "Ibarra Real Nova", serif;
   max-width: 450px;
 }
 .homepage .project-border,
@@ -490,6 +490,9 @@ nav.main-nav .active {
 .homepage .card header {
   width: 100%;
 }
+.homepage .card.front header {
+  font-size: 14px;
+}
 .homepage .card.front h1 a {
   visibility: hidden;
   display: none;
@@ -534,12 +537,8 @@ nav.main-nav .active {
   line-height: 15px;
   margin: 0px 0 6px 0;
 }
-.homepage .card .project-description {
-  font-style: italic;
-}
 .homepage .card-quote {
   display: block;
-  font-style: italic;
   margin: auto;
   text-align: center;
   width: 177px;
@@ -551,7 +550,7 @@ nav.main-nav .active {
   margin: auto;
 }
 .homepage .card-quote-header {
-  font-style: normal;
+  font-style: italic;
   left: 0;
   letter-spacing: normal;
   margin: auto;
@@ -559,7 +558,7 @@ nav.main-nav .active {
   right: 0;
   text-align: center;
   top: 0;
-  text-transform: uppercase;
+  font-size: 14px;
 }
 .homepage p.card-quote-footer {
   bottom: 0;
@@ -644,6 +643,7 @@ nav.main-nav .active {
   text-align: center;
   width: auto;
   text-transform: lowercase;
+  font-family: "Courier New";
 }
 .homepage .cards .glyph {
   bottom: 27px;
