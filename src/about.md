@@ -23,6 +23,9 @@ As an artist, his work deals with the _air_ as both material and metaphor, explo
   {% renderFile './src/_includes/resume/artist-bio.md' %}
 </div>
 
+<div class="divider-line project-grid-item-full">✺ ✺ ✺</div>
+
+
 <!-- 
 Consolidate artist statement and inject above
 Key themese and interests:

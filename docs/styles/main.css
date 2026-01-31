@@ -1180,6 +1180,13 @@ a {
   white-space: nowrap;
 }
 
+.divider-line {
+  text-align: center;
+  margin: 20px auto;
+  letter-spacing: 20px;
+  font-weight: bold;
+}
+
 @media print {
   .print-page-break {
     break-after: page;
