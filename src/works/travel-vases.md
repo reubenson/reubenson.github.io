@@ -8,6 +8,7 @@ dimensions: variable 1 to 2 cu.in.
 # url: https://reubenson.com/portfolio/ceramics/
 id: travel-vases
 tagline: Pocket-sized ceramic vessels for vacation wildflowers
+# description: An ongoing series of miniature vases produced at a scale of 1-2 inches tall. They are portable and meant to travel, harkening back to the water jugs that these forms evolved from.
 selected: true
 categories: []
 relatedProjects:
@@ -16,9 +17,7 @@ relatedProjects:
   - echea
 ---
 
- <!-- such that they can be brought closer within one's field of vision, as if a small creature. -->
-
-"Travel Vases" are an ongoing series of miniature vases produced at a scale of 1-2 inches tall. As small objects, they are portable and meant to be handled, harkening back to the water jugs that these forms evolved from. I call them _travel vases_, as in that they are meant to travel with you.
+An ongoing series of miniature vases produced at a scale of 1-2 inches tall. They are portable and meant to travel, harkening back to the water jugs that these forms evolved from.
 \
 \
 The small aperture of the opening almost precludes the possibility of **interiority**, which one is left to discover by foraging for a wildflower of appropriately narrow stem.
@@ -175,7 +174,5 @@ The small aperture of the opening almost precludes the possibility of **interior
 </figure>
 
 <!-- ... throwing the inside of the pot ... -->
-
-<!-- And as with playing music, I'm thrilled by the tactile aspects of being able to think through my hands. -->
 
 <!-- Looking back, my <a href="https://reubenson.com/weaving">Weaving Music</a> project is perhaps the clearest bridge from my sound-based work to ceramics. -->

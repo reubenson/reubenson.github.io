@@ -4,21 +4,8 @@ title: Reuben Son
 subtitle: "<em>latin</em> son: <strong>sound</strong>, <em>korean</em> 손: <strong>hand</strong>"
 layoutType: two-column
 media: "software, sound, ceramics (and sentences)"
-# meta:
-#   - label: "<em>latin</em> son"
-#     value: " <strong>sound</strong>"
-#   - label: "<em>korean</em> 손"
-#     value: "<strong>hand</strong>"
-# hideMeta: true
 hideSeeMore: true
 ---
-
-<!-- Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is an artist based in New York City.
-\
-\
-As an artist, his work deals with the _air_ as both material and metaphor, explores the sculptural interplay between surface and structure, and examines the exchanges between object and affect.
-{.project-grid-item-4} -->
-
 <div class="project-grid-item-full">
   {% renderFile './src/_includes/resume/artist-bio.md' %}
 </div>
@@ -66,8 +53,6 @@ For more about this website, see [colophon](/colophon).
 
 <!-- To support this work, please consider reaching out with opportunities or consider buying something from the [shop](/shop)!
 {.project-grid-item-full} -->
-
-<!-- He thinks of his methodology as broadly sculptural, in which form and content are not determined _a priori_, and the final work emerges in negotation with the materiality and poetics of the medium. -->
 
 <!-- I'm a software engineer and artist based in New York City, with a multi-disciplinary background in research science and humanities. -->
 

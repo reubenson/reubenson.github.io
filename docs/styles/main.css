@@ -1187,6 +1187,10 @@ a {
   font-weight: bold;
 }
 
+.courier-new {
+  font-family: "Courier New";
+}
+
 @media print {
   .print-page-break {
     break-after: page;

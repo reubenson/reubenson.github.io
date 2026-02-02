@@ -3,6 +3,7 @@ layout: project.njk
 title: Meander
 # description: 3D printing ceramics at the Haystack Mountain School of Crafts
 media: ceramics
+# description: '"Meander" uses the single, continuous line of a ceramic 3D-printer to translate the Greek key motif into a porcelain form. It offers an invitation to the eye to meander with the vessel while blurring the line between interior and exterior space.'
 dimensions: 8" x 7" x 4"
 year: 2023
 id: meandering-printing

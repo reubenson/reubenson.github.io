@@ -1,8 +1,19 @@
-I'm a Korean-American artist and technologist based in New York City, working primarily with software, sound, and ceramics. My recent and ongoing body of work engages what I call "choreographies of listening", in which the act of listening situates the body within the larger environment of the sculptural artwork. For both my ceramics- and software-based works, this emphasis on listening introduces a somatic consideration of materiality and phenomenology beyond traditional qualities of surface and form. 
+I’m a Korean-American artist and technologist based in New York City, working primarily with software, sound, and ceramics. My recent and ongoing body of work engages what I call “**choreographies of listening**”, in which the act of listening situates the body to both the artwork and the larger environment.
+
+For both my ceramic and software-based works, this emphasis on listening manifests a somatic consideration of materiality and phenomenology beyond traditional qualities of surface and form. In “[_After Orpheus_](/works/after-orpheus)” (2025), the exhibition visitor interacts with a sound sculpture both through the reverberations emanating from the ceramic bell, and transduced through a paper cup that is held against the vibrating piano wire. The poetry-sound collection “[_Airs_](/works/airs)” (2025), emerged from my private practice of plein air listening and uses text and sound together to structure an experience of the moving air as a force upon both language and sound. And in the software-performance “[_Frog Chorus_](/works/frog-chorus)” (2023), smartphones generate an interactive sound installation that folds machine listening into a choreography of listening.
+
+Across disparate media, my aims tend towards prioritizing the poetics of contingency, whereby works cannot be reduced to exercises in abstraction or conceptualism. While my works are often motivated by research into the art and science of consciousness, my studio practice is essentially an experimental one, through which an originating idea or spark may eventually find its form.
+
+
+<!-- I'm a Korean-American artist and technologist based in New York City, working primarily with software, sound, and ceramics. My recent and ongoing body of work engages what I call "choreographies of listening", in which the act of listening situates the body within the larger environment of the sculptural artwork. For both my ceramics- and software-based works, this emphasis on listening introduces a somatic consideration of materiality and phenomenology beyond traditional qualities of surface and form. 
 
 In "After Orpheus" (2025), the exhibition visitor interacts with a sound sculpture first through its reverberations in the air, and then through a paper cup held against its vibrating steel wire. The poetry-sound collection "Airs" (2025), emerged from my private practice of plein air listening and uses text and sound together to structure an experience of the moving air as a force upon both language and sound. And in the software "Frog Chorus", smartphones generate an interactive sound installation that positions the human act of listening itself alongside that of the machine.
 
-My working methods across various media are unified in prioritizing the poetics of contingency, whereby works cannot be reduced to the conceptual or exercises in abstraction. While my works are often motivated by my readings in poetry, psychoanalysis, and the history of science, my studio practice is essentially an experimental one, through which an originating idea or spark must eventually find its form.
+My working methods across various media are unified in prioritizing the poetics of contingency, whereby works cannot be reduced to the conceptual or exercises in abstraction. While my works are often motivated by my readings in poetry, psychoanalysis, and the history of science, my studio practice is essentially an experimental one, through which an originating idea or spark must eventually find its form. -->
+
+<!-- I still want to squeeze in something about the aeolian, and an aesthetic tradition that considers art living and in motion, as opposed to static and inert. -->
+
+<!-- He has presented work in the form of recordings, performances, talks, sculpture, websites, and publications.  -->
 
 <!-- how to give this a better hook, that grabs attention without overexplicaiton? -->
 <!-- and the last line should be a single sentence that captures essence? -->
@@ -20,6 +31,7 @@ What you want viewers to understand or experience
 How your current work fits into your broader practice
  -->
 
+<!-- He thinks of his methodology as broadly sculptural, in which form and content are not determined _a priori_, and the final work emerges in negotation with the materiality and poetics of the medium. -->
 
 
 <!-- My studio practice is rooted in research and experimentation, in which I treat myself as the "first listener". -->
@@ -51,10 +63,6 @@ My work is rooted in a background in sound art, and in particular the act of lis
 Expanding this body of work, I'm currently developing a series of ceramic sculptures and text-based scores that activate the air through listening. -->
 
 <!-- further explore exchanges between object and affect. I believe that the aesthetic experience is irreducible to the object, and the act of multi-attentional listening can be used towards creative and liberatory ends more broadly. -->
-
-<!-- In recent work, I've  -->
-
-<!-- Reuben Son (_latin_ son : **sound**, _korean_ 손 : **hand** ) is a Korean-American artist based in New York City. -->
 
 <!-- Reuben Son (lives in New York City) is a Korean-American artist who primarily makes software, ceramics, and sound. His multidisciplinary practice is rooted in sound art, in which he engages the somatic materiality of sound and focuses attention on the act of listening itself. He has presented work in the form of recordings, performances, talks, sculpture, websites, and publications. -->
 

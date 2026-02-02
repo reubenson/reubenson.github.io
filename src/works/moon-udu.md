@@ -3,8 +3,8 @@ layout: project.njk
 title: Psychosynthesis
 # description: Mixed media sculpture
 media: ceramics
-year: 2026
-dimensions: 14" x 14" x 36"
+year: 2025
+dimensions: 9" x 9" x 14"
 id: udu
 tagline: Egg-shaped udu instrument made with the moon jar technique
 selected: true

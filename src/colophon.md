@@ -25,7 +25,7 @@ I've never really felt at home online, and maybe for this reason, I've found it 
 
 <!-- <div class="divider-line project-grid-item-full">✺ ✺ ✺</div> -->
 
-This website has been built with the [Eleventy](https://www.11ty.dev/) static site generator, and is deployed on Github Pages. Content has largely been written in markdown, and typeset in <span class="ibarra">Ibarra Real Nova</span>. The [shop](/shop) page has been created with a Shopify embed.
+This website has been built with the [Eleventy](https://www.11ty.dev/) static site generator, and deployed to Github Pages. Text has largely been written in markdown, and typeset in <span class="ibarra">Ibarra Real Nova</span> and <span class="courier-new">Courier New</span>. The [shop](/shop) uses Shopify for e-commerce.
 \
 \
 Special thanks to [Laurel Schwulst](https://laurelschwulst.com/) for all the micro-hangs and big-picture conversations that helped guide the development of this site.
