@@ -5,7 +5,7 @@ subtitle: Web-app for summoning a chorus of frogs with your phone
 description: Summon a chorus of frogs from your phone
 url: https://frogchor.us
 media: website, sound, performance
-year: 2023
+year: 2024
 id: frog-chorus
 tagline: Summon a chorus of frogs from your phone
 selected: true
