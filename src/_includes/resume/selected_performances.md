@@ -1,10 +1,10 @@
 ### Selected Performances
 
-- <span class="resume-year">2025</span> _Airs_ — Wordhack
-- <span class="resume-year">2024</span> _River Song_ — Naive Yearly
-- <span class="resume-year">2024</span> _Frog Chorus_ — Fruitful School
-- <span class="resume-year">2019</span> _A View of a Landscape_ (w/ Eli Keszler) — Whitney Museum
-- <span class="resume-year">2013</span> Boston Waterworks Museum
-- <span class="resume-year">2013</span> Contemporary Arts International [](https://contemporaryartsinternational.org/gallery/past-artists/)
-- <span class="resume-year">2012</span> _L-Carrier_ (w/ Eli Keszler) — Eyebeam Art & Technology Center [](https://www.nytimes.com/2012/06/11/arts/music/eli-keszlers-l-carrier-at-eyebeam-in-chelsea.html)
-- <span class="resume-year">2010</span> Goethe-Institut Boston [](https://www.nonevent.org/past-events-2010)
+- <span class="resume-year">2025</span>"Airs," _Wordhack_
+- <span class="resume-year">2024</span> "Quiet Time," _Naive Yearly_
+- <span class="resume-year">2024</span> "Frog Chorus," _Fruitful School_
+- <span class="resume-year">2019</span> Beaseley, Kevin and Keslzer, Eli, "A View of a Landscape," _Whitney Museum of American Art_
+- <span class="resume-year">2013</span> _Boston Waterworks Museum_
+- <span class="resume-year">2013</span> _Contemporary Arts International_ [](https://contemporaryartsinternational.org/gallery/past-artists/)
+- <span class="resume-year">2012</span> Keszler, Eli, "L-Carrier," _Eyebeam Art & Technology Center_ [](https://www.nytimes.com/2012/06/11/arts/music/eli-keszlers-l-carrier-at-eyebeam-in-chelsea.html)
+- <span class="resume-year">2010</span> _Goethe-Institut Boston_ [](https://www.nonevent.org/past-events-2010)
