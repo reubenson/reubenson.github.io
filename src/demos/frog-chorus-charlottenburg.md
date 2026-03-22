@@ -1,8 +1,8 @@
 ---
 layout: project.njk
-title: Airtime
+title: Frog Chorus
 hideSeeMore: true
-year: 2023
+year: 2026
 ---
 
 Suddenly, you notice the light; it's doing something beautiful. You reach for your phone and take a photo. But what if it's the air itself, and not the light, that has suddenly caught your attention? The AIRTIME mobile app is a way of using your phone as a prompt to be situated within the world through attention to the most diffuse of commons: the air we share.
