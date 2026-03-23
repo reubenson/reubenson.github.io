@@ -1,0 +1,671 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Drawing</title>
+    <meta name="description" content="Project description">
+    <meta name="keywords" content="">
+    <meta name="author" content="Reuben Son">
+    <meta property="og:type" content="website" />
+    
+    <meta property="og:title" content="Line Drawing" />
+    <meta property="og:description" content="Project description" />
+    
+    <meta property="og:type" content="website" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Ibarra Real Nova", serif;
+    font-weight: 300;
+  }
+</style>
+
+    
+    
+    
+    
+  </head>
+  <body class="">
+    <style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 12px;
+    background: #f5f5f5;
+    font-family: monospace;
+    font-size: 13px;
+    user-select: none;
+}
+
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+button {
+    font-family: monospace;
+    font-size: 12px;
+    padding: 4px 10px;
+    cursor: pointer;
+    border: 1px solid #999;
+    background: #fff;
+}
+
+button.active {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+#status {
+    color: #666;
+    font-size: 12px;
+}
+
+#canvas-wrap {
+    overflow: auto;
+    border: 1px solid #ccc;
+    background: #fff;
+    display: inline-block;
+    cursor: crosshair;
+}
+
+svg {
+    display: block;
+}
+
+.grid-line {
+    stroke: #ddd;
+    stroke-width: 0.5;
+}
+
+.path-line {
+    fill: none;
+    stroke: #111;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.mirror-line {
+    fill: none;
+    stroke: #555;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.cursor-dot {
+    fill: #000;
+}
+
+.origin-cell {
+    fill: rgba(80, 80, 255, 0.3);
+}
+
+#config-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+#config-row label {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+#config-row input[type=number] {
+    width: 52px;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 3px 5px;
+    border: 1px solid #999;
+}
+</style>
+<div id="config-row">
+  <label>cols <input type="number" id="cfg-cols" value="40" min="4" max="400"></label>
+  <label>rows <input type="number" id="cfg-rows" value="80" min="4" max="400"></label>
+  <label>cell px <input type="number" id="cfg-cell" value="10" min="4" max="40"></label>
+  <label>line width <input type="number" id="cfg-lw" value="1.5" min="0.5" max="20" step="0.5"></label>
+  <button id="btn-resize">resize canvas</button>
+</div>
+<div id="controls">
+  <button id="btn-grid" class="active">grid: on</button>
+  <button id="btn-mirror">mirror: off</button>
+  <button id="btn-mirror-shift">mirror shift: off</button>
+  <button id="btn-undo">undo (Z)</button>
+  <button id="btn-clear">clear</button>
+  <button id="btn-export-svg">export SVG</button>
+  <button id="btn-export-moves">export moves</button>
+  <button id="btn-import-moves">import moves</button>
+  <button id="btn-repeat">repeat: off</button>
+  <input type="file" id="file-input" accept=".json" style="display:none">
+  <span id="status">click canvas to place origin</span>
+</div>
+<div id="canvas-wrap">
+  <svg id="svg"></svg>
+</div>
+<script>
+const state = {
+  cols: 40,
+  rows: 80,
+  cellSize: 10,
+  lineWidth: 1.5,
+  origin: null,   // {col, row}
+  moves: [],      // ["right","left","up","down", ...]
+  showGrid: true,
+  mirrorMode: 0,  // 0=off, 1=flavor1 (reflect over horizontal axis at E), 2=flavor2 (180° rotation at E)
+  mirrorShift: { x: 0, y: 0 },
+  mirrorShiftActive: false,
+  repeatMode: false,
+};
+
+// ── DOM refs ──────────────────────────────────────────────────────────────────
+const svg       = document.getElementById('svg');
+const btnGrid   = document.getElementById('btn-grid');
+const btnMirror      = document.getElementById('btn-mirror');
+const btnMirrorShift = document.getElementById('btn-mirror-shift');
+const btnUndo   = document.getElementById('btn-undo');
+const btnClear  = document.getElementById('btn-clear');
+const btnSvg    = document.getElementById('btn-export-svg');
+const btnMoves  = document.getElementById('btn-export-moves');
+const btnRepeat = document.getElementById('btn-repeat');
+const btnResize = document.getElementById('btn-resize');
+const status    = document.getElementById('status');
+
+// ── Geometry helpers ──────────────────────────────────────────────────────────
+function cellCorner(col, row) {
+  const cs = state.cellSize;
+  return { x: col * cs, y: row * cs };
+}
+
+function getPoints() {
+  if (!state.origin) return [];
+  const pts = [{ col: state.origin.col, row: state.origin.row }];
+  let col = state.origin.col, row = state.origin.row;
+  for (const m of state.moves) {
+    if (m === 'right') col++;
+    else if (m === 'left')  col--;
+    else if (m === 'up')    row--;
+    else if (m === 'down')  row++;
+    pts.push({ col, row });
+  }
+  return pts;
+}
+
+function getRepeatedPoints() {
+  const pts = getPoints();
+  if (pts.length < 2) return [];
+  const E = pts[pts.length - 1];
+  const repeated = [E];
+  let col = E.col, row = E.row;
+  for (const m of state.moves) {
+    if (m === 'right') col++;
+    else if (m === 'left')  col--;
+    else if (m === 'up')    row--;
+    else if (m === 'down')  row++;
+    repeated.push({ col, row });
+  }
+  return repeated;
+}
+
+// Returns the terminal point used for mirroring (end of repeat if active, else end of path)
+function terminalPoint() {
+  if (state.repeatMode) {
+    const rep = getRepeatedPoints();
+    if (rep.length > 0) return rep[rep.length - 1];
+  }
+  const pts = getPoints();
+  return pts.length > 0 ? pts[pts.length - 1] : null;
+}
+
+function pointsToPolylineStr(pts) {
+  return pts.map(p => {
+    const c = cellCorner(p.col, p.row);
+    return `${c.x},${c.y}`;
+  }).join(' ');
+}
+
+// ── SVG element helpers ───────────────────────────────────────────────────────
+function svgEl(tag, attrs) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  return el;
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function render() {
+  const { cols, rows, cellSize, showGrid, mirrorMode } = state;
+  const W = cols * cellSize;
+  const H = rows * cellSize;
+
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', H);
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = '';
+
+  // Grid
+  if (showGrid) {
+    const g = svgEl('g', { id: 'grid-layer' });
+    for (let c = 0; c <= cols; c++) {
+      g.appendChild(svgEl('line', {
+        class: 'grid-line',
+        x1: c * cellSize, y1: 0,
+        x2: c * cellSize, y2: H,
+      }));
+    }
+    for (let r = 0; r <= rows; r++) {
+      g.appendChild(svgEl('line', {
+        class: 'grid-line',
+        x1: 0, y1: r * cellSize,
+        x2: W, y2: r * cellSize,
+      }));
+    }
+    svg.appendChild(g);
+  }
+
+  const pts = getPoints();
+  const repPts = state.repeatMode ? getRepeatedPoints() : [];
+  const terminal = terminalPoint();
+
+  // Mirror layer
+  if (mirrorMode > 0 && pts.length >= 2 && terminal) {
+    const ec = cellCorner(terminal.col, terminal.row);
+    const transform = mirrorTransform(mirrorMode, ec.x, ec.y);
+    const allSegments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
+    for (const seg of allSegments) {
+      svg.appendChild(svgEl('polyline', {
+        class: 'mirror-line',
+        points: pointsToPolylineStr(seg),
+        transform,
+        'stroke-width': state.lineWidth,
+      }));
+    }
+  }
+
+  // Origin marker
+  if (state.origin) {
+    const cs = cellSize;
+    svg.appendChild(svgEl('rect', {
+      class: 'origin-cell',
+      x: state.origin.col * cs,
+      y: state.origin.row * cs,
+      width: cs,
+      height: cs,
+    }));
+  }
+
+  // Canonical path
+  if (pts.length >= 2) {
+    svg.appendChild(svgEl('polyline', {
+      class: 'path-line',
+      points: pointsToPolylineStr(pts),
+      'stroke-width': state.lineWidth,
+    }));
+  }
+
+  // Repeated path
+  if (repPts.length >= 2) {
+    svg.appendChild(svgEl('polyline', {
+      class: 'path-line',
+      points: pointsToPolylineStr(repPts),
+      'stroke-width': state.lineWidth,
+    }));
+  }
+
+  // Cursor (endpoint)
+  const cursorPts = repPts.length > 0 ? repPts : pts;
+  if (cursorPts.length > 0) {
+    const tail = cursorPts[cursorPts.length - 1];
+    const tc = cellCorner(tail.col, tail.row);
+    svg.appendChild(svgEl('circle', {
+      class: 'cursor-dot',
+      cx: tc.x,
+      cy: tc.y,
+      r: Math.max(3, cellSize * 0.3),
+    }));
+  }
+
+  updateStatus();
+}
+
+function updateStatus() {
+  const pts = getPoints();
+  if (!state.origin) {
+    status.textContent = 'click canvas to place origin';
+  } else if (pts.length === 1) {
+    status.textContent = `origin set at (${state.origin.col}, ${state.origin.row}) — use arrow keys to draw`;
+  } else {
+    const tail = pts[pts.length - 1];
+    status.textContent = `${state.moves.length} moves — head at (${tail.col}, ${tail.row}) — click path to rewind`;
+  }
+}
+
+// ── Canvas sizing ─────────────────────────────────────────────────────────────
+function applyConfig() {
+  const newRows = Math.max(4, parseInt(document.getElementById('cfg-rows').value) || 80);
+  const addedRows = newRows - state.rows;
+
+  state.cols      = Math.max(4, parseInt(document.getElementById('cfg-cols').value) || 40);
+  state.rows      = newRows;
+  state.cellSize  = Math.max(4, parseInt(document.getElementById('cfg-cell').value) || 10);
+  state.lineWidth = Math.max(0.5, parseFloat(document.getElementById('cfg-lw').value) || 1.5);
+
+  // Shift existing drawing down when rows are added at the top
+  if (addedRows !== 0 && state.origin) {
+    state.origin = { col: state.origin.col, row: state.origin.row + addedRows };
+  }
+
+  render();
+}
+
+btnResize.addEventListener('click', applyConfig);
+
+// ── Click handling ────────────────────────────────────────────────────────────
+document.getElementById('canvas-wrap').addEventListener('click', (e) => {
+  const rect = svg.getBoundingClientRect();
+  const col = Math.floor((e.clientX - rect.left) / state.cellSize);
+  const row = Math.floor((e.clientY - rect.top)  / state.cellSize);
+
+  if (col < 0 || col > state.cols || row < 0 || row > state.rows) return;
+
+  if (!state.origin) {
+    // Place origin
+    state.origin = { col, row };
+    render();
+    return;
+  }
+
+  // Check if clicked cell is on the existing path
+  const pts = getPoints();
+  const idx = pts.findIndex(p => p.col === col && p.row === row);
+
+  if (idx === -1) return; // not on path, no-op
+
+  if (idx === 0) {
+    // Clicked origin — clear moves, keep origin
+    state.moves = [];
+  } else {
+    // Truncate to this point
+    state.moves = state.moves.slice(0, idx);
+  }
+  render();
+});
+
+// ── Keyboard ──────────────────────────────────────────────────────────────────
+const dirMap = {
+  ArrowRight: 'right',
+  ArrowLeft:  'left',
+  ArrowUp:    'up',
+  ArrowDown:  'down',
+};
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'z' || e.key === 'Z') {
+    if (e.metaKey || e.ctrlKey) {
+      e.preventDefault();
+      doUndo();
+      return;
+    }
+  }
+
+  if (e.key === 'g' || e.key === 'G') {
+    toggleGrid();
+    return;
+  }
+
+  const dir = dirMap[e.key];
+  if (!dir) return;
+
+  // Mirror shift mode: arrow keys translate the mirror, not the drawing
+  if (state.mirrorShiftActive) {
+    e.preventDefault();
+    if (dir === 'right') state.mirrorShift.x++;
+    else if (dir === 'left')  state.mirrorShift.x--;
+    else if (dir === 'down')  state.mirrorShift.y++;
+    else if (dir === 'up')    state.mirrorShift.y--;
+    render();
+    return;
+  }
+
+  if (!state.origin) return;
+
+  e.preventDefault();
+
+  const pts = getPoints();
+  const tail = pts[pts.length - 1];
+  let nc = tail.col, nr = tail.row;
+  if (dir === 'right') nc++;
+  else if (dir === 'left')  nc--;
+  else if (dir === 'up')    nr--;
+  else if (dir === 'down')  nr++;
+
+  // Clamp to canvas
+  if (nc < 0 || nc > state.cols || nr < 0 || nr > state.rows) return;
+
+  // Prevent self-intersection
+  if (pts.some(p => p.col === nc && p.row === nr)) return;
+
+  state.moves.push(dir);
+  render();
+});
+
+// ── Controls ──────────────────────────────────────────────────────────────────
+function doUndo() {
+  if (state.moves.length > 0) {
+    state.moves.pop();
+    render();
+  }
+}
+
+function toggleGrid() {
+  state.showGrid = !state.showGrid;
+  btnGrid.textContent = `grid: ${state.showGrid ? 'on' : 'off'}`;
+  btnGrid.classList.toggle('active', state.showGrid);
+  render();
+}
+
+const mirrorLabels = ['mirror: off', 'mirror: flip-y', 'mirror: rotate-180'];
+
+function cycleMirror() {
+  state.mirrorMode = (state.mirrorMode + 1) % 3;
+  if (state.mirrorMode === 0) {
+    state.mirrorShift = { x: 0, y: 0 };
+    state.mirrorShiftActive = false;
+    btnMirrorShift.textContent = 'mirror shift: off';
+    btnMirrorShift.classList.remove('active');
+  }
+  btnMirror.textContent = mirrorLabels[state.mirrorMode];
+  btnMirror.classList.toggle('active', state.mirrorMode > 0);
+  render();
+}
+
+function toggleMirrorShift() {
+  if (!state.mirrorMode) return; // no-op if mirror is off
+  state.mirrorShiftActive = !state.mirrorShiftActive;
+  btnMirrorShift.classList.toggle('active', state.mirrorShiftActive);
+  btnMirrorShift.textContent = state.mirrorShiftActive ? 'mirror shift: on' : 'mirror shift: off';
+}
+
+btnGrid.addEventListener('click', toggleGrid);
+btnMirror.addEventListener('click', cycleMirror);
+btnMirrorShift.addEventListener('click', toggleMirrorShift);
+btnRepeat.addEventListener('click', () => {
+  state.repeatMode = !state.repeatMode;
+  btnRepeat.textContent = `repeat: ${state.repeatMode ? 'on' : 'off'}`;
+  btnRepeat.classList.toggle('active', state.repeatMode);
+  render();
+});
+btnUndo.addEventListener('click', doUndo);
+btnClear.addEventListener('click', () => {
+  state.origin = null;
+  state.moves = [];
+  render();
+});
+
+// ── Mirror transform ──────────────────────────────────────────────────────────
+// When the last move is horizontal, the path has no vertical transition into E,
+// so we offset the reflection axis by one cell in the direction of the last
+// vertical move. When the last move is already vertical, no extra cell is needed.
+function mirrorYOffset() {
+  const lastMove = state.moves[state.moves.length - 1];
+  if (lastMove === 'down') return 0;
+  if (lastMove === 'up')   return state.cellSize; // shift down so mirror overlaps final segment
+  for (let i = state.moves.length - 1; i >= 0; i--) {
+    if (state.moves[i] === 'down') return  2 * state.cellSize;
+    if (state.moves[i] === 'up')   return -2 * state.cellSize;
+  }
+  return 2 * state.cellSize; // default if no vertical move exists yet
+}
+
+function mirrorTransform(mode, ex, ey) {
+  const yOff = mirrorYOffset();
+  const cs = state.cellSize;
+  const sx = state.mirrorShift.x * cs;
+  const sy = state.mirrorShift.y * cs;
+  if (mode === 1) {
+    return `translate(${sx},${2 * ey + yOff + sy}) scale(1,-1)`;
+  } else {
+    return `translate(${2 * ex + sx},${2 * ey + yOff + sy}) scale(-1,-1)`;
+  }
+}
+
+// ── Export ────────────────────────────────────────────────────────────────────
+function buildExportSvg() {
+  const { cols, rows, cellSize, mirrorMode } = state;
+  const W = cols * cellSize;
+  const H = rows * cellSize;
+  const pts = getPoints();
+  if (pts.length < 2) return null;
+
+  const repPts = state.repeatMode ? getRepeatedPoints() : [];
+  const terminal = terminalPoint();
+
+  const ns = 'http://www.w3.org/2000/svg';
+  const exportSvg = document.createElementNS(ns, 'svg');
+  exportSvg.setAttribute('xmlns', ns);
+  exportSvg.setAttribute('width', W);
+  exportSvg.setAttribute('height', H);
+  exportSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const lw = state.lineWidth;
+  const style = `fill:none;stroke:#111;stroke-width:${lw};stroke-linecap:round;stroke-linejoin:round`;
+  const mirrorStyle = `fill:none;stroke:#555;stroke-width:${lw};stroke-linecap:round;stroke-linejoin:round`;
+
+  if (mirrorMode > 0 && terminal) {
+    const ec = cellCorner(terminal.col, terminal.row);
+    const transform = mirrorTransform(mirrorMode, ec.x, ec.y);
+    const allSegments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
+    for (const seg of allSegments) {
+      const m = document.createElementNS(ns, 'polyline');
+      m.setAttribute('points', pointsToPolylineStr(seg));
+      m.setAttribute('transform', transform);
+      m.setAttribute('style', mirrorStyle);
+      exportSvg.appendChild(m);
+    }
+  }
+
+  const p = document.createElementNS(ns, 'polyline');
+  p.setAttribute('points', pointsToPolylineStr(pts));
+  p.setAttribute('style', style);
+  exportSvg.appendChild(p);
+
+  if (repPts.length >= 2) {
+    const r = document.createElementNS(ns, 'polyline');
+    r.setAttribute('points', pointsToPolylineStr(repPts));
+    r.setAttribute('style', style);
+    exportSvg.appendChild(r);
+  }
+
+  return exportSvg;
+}
+
+function download(filename, content, mime) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([content], { type: mime }));
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+btnSvg.addEventListener('click', () => {
+  const exportSvg = buildExportSvg();
+  if (!exportSvg) { alert('Nothing to export — draw something first.'); return; }
+  const xml = new XMLSerializer().serializeToString(exportSvg);
+  download('line-drawing.svg', xml, 'image/svg+xml');
+});
+
+btnMoves.addEventListener('click', () => {
+  if (!state.origin || state.moves.length === 0) {
+    alert('Nothing to export — draw something first.');
+    return;
+  }
+  const payload = JSON.stringify({
+    origin: state.origin,
+    cols: state.cols,
+    rows: state.rows,
+    moves: state.moves,
+  }, null, 2);
+  download('line-drawing.json', payload, 'application/json');
+});
+
+// ── Import ────────────────────────────────────────────────────────────────────
+const btnImport = document.getElementById('btn-import-moves');
+const fileInput = document.getElementById('file-input');
+
+btnImport.addEventListener('click', () => fileInput.click());
+
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      const validMoves = new Set(['right', 'left', 'up', 'down']);
+
+      if (
+        !data.origin ||
+        typeof data.origin.col !== 'number' ||
+        typeof data.origin.row !== 'number' ||
+        !Array.isArray(data.moves) ||
+        !data.moves.every(m => validMoves.has(m))
+      ) {
+        alert('Invalid moves JSON.');
+        return;
+      }
+
+      if (data.cols) {
+        state.cols = data.cols;
+        document.getElementById('cfg-cols').value = data.cols;
+      }
+      if (data.rows) {
+        state.rows = data.rows;
+        document.getElementById('cfg-rows').value = data.rows;
+      }
+      state.origin = { col: data.origin.col, row: data.origin.row };
+      state.moves = data.moves;
+      render();
+    } catch {
+      alert('Could not parse JSON file.');
+    }
+    fileInput.value = '';
+  };
+  reader.readAsText(file);
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+render();
+</script>
+
+  </body>
+</html>
