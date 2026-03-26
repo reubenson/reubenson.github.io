@@ -9,109 +9,117 @@ year: 2026
 * { box-sizing: border-box; }
 
 body {
-    margin: 0;
-    padding: 12px;
-    background: #f5f5f5;
-    font-family: monospace;
-    font-size: 13px;
-    user-select: none;
+  margin: 0;
+  padding: 12px;
+  background: #f5f5f5;
+  font-family: monospace;
+  font-size: 13px;
+  user-select: none;
 }
 
 #controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 button {
-    font-family: monospace;
-    font-size: 12px;
-    padding: 4px 10px;
-    cursor: pointer;
-    border: 1px solid #999;
-    background: #fff;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border: 1px solid #999;
+  background: #fff;
 }
 
 button.active {
-    background: #222;
-    color: #fff;
-    border-color: #222;
+  background: #222;
+  color: #fff;
+  border-color: #222;
 }
 
 #status {
-    color: #666;
-    font-size: 12px;
+  color: #666;
+  font-size: 12px;
 }
 
 #canvas-wrap {
-    overflow: auto;
-    border: 1px solid #ccc;
-    background: #fff;
-    display: inline-block;
-    cursor: crosshair;
+  overflow: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  display: inline-block;
+  cursor: crosshair;
 }
 
 svg {
-    display: block;
+  display: block;
 }
 
 .grid-line {
-    stroke: #ddd;
-    stroke-width: 0.5;
+  stroke: #ddd;
+  stroke-width: 0.5;
 }
 
 .path-line {
-    fill: none;
-    stroke: #111;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  fill: none;
+  stroke: #111;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .mirror-line {
-    fill: none;
-    stroke: #555;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  fill: none;
+  stroke: #555;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .cursor-dot {
-    fill: #000;
+  fill: #000;
 }
 
 .origin-cell {
-    fill: rgba(80, 80, 255, 0.3);
+  fill: rgba(80, 80, 255, 0.3);
+}
+
+#main-container {
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 #config-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 #config-row label {
-    display: flex;
-    gap: 4px;
-    align-items: center;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 #config-row input[type=number] {
-    width: 52px;
-    font-family: monospace;
-    font-size: 12px;
-    padding: 3px 5px;
-    border: 1px solid #999;
+  width: 52px;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 3px 5px;
+  border: 1px solid #999;
 }
 </style>
+
+<div id="main-container">
 
 <div id="config-row">
   <label>cols <input type="number" id="cfg-cols" value="40" min="4" max="400"></label>
   <label>rows <input type="number" id="cfg-rows" value="80" min="4" max="400"></label>
-  <label>cell px <input type="number" id="cfg-cell" value="10" min="4" max="40"></label>
-  <label>line width <input type="number" id="cfg-lw" value="1.5" min="0.5" max="20" step="0.5"></label>
+  <label>mm/cell <input type="number" id="cfg-mm" value="2" min="0.1" max="50" step="0.1"></label>
   <button id="btn-resize">resize canvas</button>
 </div>
 
@@ -133,12 +141,20 @@ svg {
   <svg id="svg"></svg>
 </div>
 
+</div>
+
 <script>
+const PX_PER_MM = 96 / 25.4; // standard CSS pixel density
+
+function mmToPx(mm) {
+  return Math.max(4, Math.round(mm * PX_PER_MM));
+}
+
 const state = {
   cols: 40,
   rows: 80,
-  cellSize: 10,
-  lineWidth: 1.5,
+  mmPerCell: 2,
+  get cellSize() { return mmToPx(this.mmPerCell); },
   origin: null,   // {col, row}
   moves: [],      // ["right","left","up","down", ...]
   showGrid: true,
@@ -221,16 +237,50 @@ function svgEl(tag, attrs) {
   return el;
 }
 
+function svgText(x, y, text, attrs) {
+  const el = svgEl('text', attrs);
+  el.textContent = text;
+  el.setAttribute('x', x);
+  el.setAttribute('y', y);
+  return el;
+}
+
+// Returns a round interval in cells such that labels appear roughly every ~60px
+function niceInterval(totalCells, cellSize) {
+  const targetCells = Math.max(1, Math.round(60 / cellSize));
+  const magnitude = Math.pow(10, Math.floor(Math.log10(targetCells)));
+  const n = targetCells / magnitude;
+  const nice = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+  return Math.max(1, nice * magnitude);
+}
+
 // ── Render ────────────────────────────────────────────────────────────────────
+const LABEL_MARGIN = 24; // px reserved for axis labels
+
 function render() {
-  const { cols, rows, cellSize, showGrid, mirrorMode } = state;
+  const { cols, rows, cellSize, showGrid, mirrorMode, mmPerCell } = state;
   const W = cols * cellSize;
   const H = rows * cellSize;
 
-  svg.setAttribute('width', W);
-  svg.setAttribute('height', H);
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width',   W + LABEL_MARGIN * 2);
+  svg.setAttribute('height',  H + LABEL_MARGIN * 2);
+  svg.setAttribute('viewBox', `-${LABEL_MARGIN} -${LABEL_MARGIN} ${W + LABEL_MARGIN * 2} ${H + LABEL_MARGIN * 2}`);
   svg.innerHTML = '';
+
+  // Axis labels — origin at bottom-left, x increases right, y increases upward
+  const labelAttrs = { 'font-size': 7, 'font-family': 'monospace', fill: '#aaa' };
+  const xStep = niceInterval(cols, cellSize);
+  for (let c = 0; c <= cols; c += xStep) {
+    const x = c * cellSize;
+    const mm = (c * mmPerCell).toFixed(0);
+    svg.appendChild(svgText(x, H + LABEL_MARGIN - 4, mm, { ...labelAttrs, 'text-anchor': 'middle' }));
+  }
+  const yStep = niceInterval(rows, cellSize);
+  for (let r = 0; r <= rows; r += yStep) {
+    const y = r * cellSize;
+    const mm = ((rows - r) * mmPerCell).toFixed(0);
+    svg.appendChild(svgText(-4, y + 2.5, mm, { ...labelAttrs, 'text-anchor': 'end' }));
+  }
 
   // Grid
   if (showGrid) {
@@ -266,7 +316,6 @@ function render() {
         class: 'mirror-line',
         points: pointsToPolylineStr(seg),
         transform,
-        'stroke-width': state.lineWidth,
       }));
     }
   }
@@ -288,7 +337,6 @@ function render() {
     svg.appendChild(svgEl('polyline', {
       class: 'path-line',
       points: pointsToPolylineStr(pts),
-      'stroke-width': state.lineWidth,
     }));
   }
 
@@ -297,7 +345,6 @@ function render() {
     svg.appendChild(svgEl('polyline', {
       class: 'path-line',
       points: pointsToPolylineStr(repPts),
-      'stroke-width': state.lineWidth,
     }));
   }
 
@@ -336,8 +383,7 @@ function applyConfig() {
 
   state.cols      = Math.max(4, parseInt(document.getElementById('cfg-cols').value) || 40);
   state.rows      = newRows;
-  state.cellSize  = Math.max(4, parseInt(document.getElementById('cfg-cell').value) || 10);
-  state.lineWidth = Math.max(0.5, parseFloat(document.getElementById('cfg-lw').value) || 1.5);
+  state.mmPerCell = Math.max(0.1, parseFloat(document.getElementById('cfg-mm').value) || 2);
 
   // Shift existing drawing down when rows are added at the top
   if (addedRows !== 0 && state.origin) {
@@ -352,8 +398,8 @@ btnResize.addEventListener('click', applyConfig);
 // ── Click handling ────────────────────────────────────────────────────────────
 document.getElementById('canvas-wrap').addEventListener('click', (e) => {
   const rect = svg.getBoundingClientRect();
-  const col = Math.floor((e.clientX - rect.left) / state.cellSize);
-  const row = Math.floor((e.clientY - rect.top)  / state.cellSize);
+  const col = Math.floor((e.clientX - rect.left - LABEL_MARGIN) / state.cellSize);
+  const row = Math.floor((e.clientY - rect.top  - LABEL_MARGIN) / state.cellSize);
 
   if (col < 0 || col > state.cols || row < 0 || row > state.rows) return;
 
@@ -519,32 +565,79 @@ function mirrorTransform(mode, ex, ey) {
 }
 
 // ── Export ────────────────────────────────────────────────────────────────────
+
+// Apply the mirror transform mathematically to get actual pixel coordinates
+function applyMirrorToPixelPts(pixelPts, mode, ex, ey) {
+  const yOff = mirrorYOffset();
+  const cs = state.cellSize;
+  const sx = state.mirrorShift.x * cs;
+  const sy = state.mirrorShift.y * cs;
+  return pixelPts.map(({ x, y }) => {
+    if (mode === 1) return { x: x + sx,          y: 2 * ey + yOff + sy - y };
+    else            return { x: 2 * ex + sx - x,  y: 2 * ey + yOff + sy - y };
+  });
+}
+
+function pixelBBox(groups) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const pts of groups) {
+    for (const { x, y } of pts) {
+      if (x < minX) minX = x;
+      if (y < minY) minY = y;
+      if (x > maxX) maxX = x;
+      if (y > maxY) maxY = y;
+    }
+  }
+  return { minX, minY, maxX, maxY };
+}
+
 function buildExportSvg() {
-  const { cols, rows, cellSize, mirrorMode } = state;
-  const W = cols * cellSize;
-  const H = rows * cellSize;
+  const { cellSize, mirrorMode, mmPerCell } = state;
   const pts = getPoints();
   if (pts.length < 2) return null;
 
   const repPts = state.repeatMode ? getRepeatedPoints() : [];
   const terminal = terminalPoint();
 
+  // Collect all pixel-coordinate point groups
+  const allPixelGroups = [
+    pts.map(p => cellCorner(p.col, p.row)),
+    ...(repPts.length >= 2 ? [repPts.map(p => cellCorner(p.col, p.row))] : []),
+  ];
+
+  if (mirrorMode > 0 && terminal) {
+    const ec = cellCorner(terminal.col, terminal.row);
+    for (const g of [...allPixelGroups]) {
+      allPixelGroups.push(applyMirrorToPixelPts(g, mirrorMode, ec.x, ec.y));
+    }
+  }
+
+  const pad = 0.75; // half stroke-width to avoid clipping
+  const { minX, minY, maxX, maxY } = pixelBBox(allPixelGroups);
+  const vbX = minX - pad, vbY = minY - pad;
+  const vbW = maxX - minX + pad * 2;
+  const vbH = maxY - minY + pad * 2;
+
+  // Physical dimensions: scale px → mm via mmPerCell/cellSize
+  const pxToMm = mmPerCell / cellSize;
+  const wMm = (vbW * pxToMm).toFixed(3);
+  const hMm = (vbH * pxToMm).toFixed(3);
+
   const ns = 'http://www.w3.org/2000/svg';
   const exportSvg = document.createElementNS(ns, 'svg');
   exportSvg.setAttribute('xmlns', ns);
-  exportSvg.setAttribute('width', W);
-  exportSvg.setAttribute('height', H);
-  exportSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  exportSvg.setAttribute('width', `${wMm}mm`);
+  exportSvg.setAttribute('height', `${hMm}mm`);
+  exportSvg.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
 
-  const lw = state.lineWidth;
-  const style = `fill:none;stroke:#111;stroke-width:${lw};stroke-linecap:round;stroke-linejoin:round`;
-  const mirrorStyle = `fill:none;stroke:#555;stroke-width:${lw};stroke-linecap:round;stroke-linejoin:round`;
+  const style = 'fill:none;stroke:#111;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round';
+  const mirrorStyle = 'fill:none;stroke:#555;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round';
 
   if (mirrorMode > 0 && terminal) {
     const ec = cellCorner(terminal.col, terminal.row);
     const transform = mirrorTransform(mirrorMode, ec.x, ec.y);
-    const allSegments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
-    for (const seg of allSegments) {
+    const segments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
+    for (const seg of segments) {
       const m = document.createElementNS(ns, 'polyline');
       m.setAttribute('points', pointsToPolylineStr(seg));
       m.setAttribute('transform', transform);
