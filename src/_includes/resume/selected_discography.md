@@ -24,5 +24,5 @@
 
 <h4 class="music-optional">Radio Mixes</h4>
 
-- <span class="resume-year music-optional">2024</span> "Allure of Inertia," [_NTS Radio_](https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024)
-- <span class="resume-year music-optional">2022</span> "Composing Through Listening," [_WFMU_](https://wfmu.org/playlists/shows/119916)
+- <span class="resume-year music-optional">2024</span> "Allure of Inertia," _NTS Radio_ [](https://www.nts.live/shows/metamorphosis-2024/episodes/metamorphosis-2024-allure-of-inertia-w-reuben-son-6th-may-2024)
+- <span class="resume-year music-optional">2022</span> "Composing Through Listening," _WFMU_ [](https://wfmu.org/playlists/shows/119916)

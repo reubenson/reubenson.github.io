@@ -64,7 +64,7 @@ svg {
 
 .path-line {
   fill: none;
-  stroke: #111;
+  stroke: #000;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -72,7 +72,7 @@ svg {
 
 .mirror-line {
   fill: none;
-  stroke: #555;
+  stroke: #000;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -119,7 +119,7 @@ svg {
 <div id="config-row">
   <label>cols <input type="number" id="cfg-cols" value="40" min="4" max="400"></label>
   <label>rows <input type="number" id="cfg-rows" value="80" min="4" max="400"></label>
-  <label>mm/cell <input type="number" id="cfg-mm" value="2" min="0.1" max="50" step="0.1"></label>
+  <label>mm/cell <input type="number" id="cfg-mm" value="1" min="0.1" max="50" step="0.1"></label>
   <button id="btn-resize">resize canvas</button>
 </div>
 
@@ -130,6 +130,7 @@ svg {
   <button id="btn-undo">undo (Z)</button>
   <button id="btn-clear">clear</button>
   <button id="btn-export-svg">export SVG</button>
+  <button id="btn-invert-export">invert export: off</button>
   <button id="btn-export-moves">export moves</button>
   <button id="btn-import-moves">import moves</button>
   <button id="btn-repeat">repeat: off</button>
@@ -152,8 +153,8 @@ function mmToPx(mm) {
 
 const state = {
   cols: 40,
-  rows: 80,
-  mmPerCell: 2,
+  rows: 60,
+  mmPerCell: 1,
   get cellSize() { return mmToPx(this.mmPerCell); },
   origin: null,   // {col, row}
   moves: [],      // ["right","left","up","down", ...]
@@ -162,6 +163,7 @@ const state = {
   mirrorShift: { x: 0, y: 0 },
   mirrorShiftActive: false,
   repeatMode: false,
+  invertExport: false,
 };
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
@@ -171,7 +173,8 @@ const btnMirror      = document.getElementById('btn-mirror');
 const btnMirrorShift = document.getElementById('btn-mirror-shift');
 const btnUndo   = document.getElementById('btn-undo');
 const btnClear  = document.getElementById('btn-clear');
-const btnSvg    = document.getElementById('btn-export-svg');
+const btnSvg          = document.getElementById('btn-export-svg');
+const btnInvertExport = document.getElementById('btn-invert-export');
 const btnMoves  = document.getElementById('btn-export-moves');
 const btnRepeat = document.getElementById('btn-repeat');
 const btnResize = document.getElementById('btn-resize');
@@ -383,7 +386,7 @@ function applyConfig() {
 
   state.cols      = Math.max(4, parseInt(document.getElementById('cfg-cols').value) || 40);
   state.rows      = newRows;
-  state.mmPerCell = Math.max(0.1, parseFloat(document.getElementById('cfg-mm').value) || 2);
+  state.mmPerCell = Math.max(0.1, parseFloat(document.getElementById('cfg-mm').value) || 1);
 
   // Shift existing drawing down when rows are added at the top
   if (addedRows !== 0 && state.origin) {
@@ -530,6 +533,11 @@ btnRepeat.addEventListener('click', () => {
   btnRepeat.classList.toggle('active', state.repeatMode);
   render();
 });
+btnInvertExport.addEventListener('click', () => {
+  state.invertExport = !state.invertExport;
+  btnInvertExport.textContent = `invert export: ${state.invertExport ? 'on' : 'off'}`;
+  btnInvertExport.classList.toggle('active', state.invertExport);
+});
 btnUndo.addEventListener('click', doUndo);
 btnClear.addEventListener('click', () => {
   state.origin = null;
@@ -592,7 +600,7 @@ function pixelBBox(groups) {
 }
 
 function buildExportSvg() {
-  const { cellSize, mirrorMode, mmPerCell } = state;
+  const { cellSize, mirrorMode, mmPerCell, invertExport } = state;
   const pts = getPoints();
   if (pts.length < 2) return null;
 
@@ -612,7 +620,7 @@ function buildExportSvg() {
     }
   }
 
-  const pad = 0.75; // half stroke-width to avoid clipping
+  const pad = 0.75 + cellSize; // half stroke-width + one cell of padding
   const { minX, minY, maxX, maxY } = pixelBBox(allPixelGroups);
   const vbX = minX - pad, vbY = minY - pad;
   const vbW = maxX - minX + pad * 2;
@@ -630,32 +638,45 @@ function buildExportSvg() {
   exportSvg.setAttribute('height', `${hMm}mm`);
   exportSvg.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
 
-  const style = 'fill:none;stroke:#111;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round';
-  const mirrorStyle = 'fill:none;stroke:#555;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round';
+  const lineStyle = 'fill:none;stroke:#000;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round';
 
-  if (mirrorMode > 0 && terminal) {
-    const ec = cellCorner(terminal.col, terminal.row);
-    const transform = mirrorTransform(mirrorMode, ec.x, ec.y);
-    const segments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
-    for (const seg of segments) {
-      const m = document.createElementNS(ns, 'polyline');
-      m.setAttribute('points', pointsToPolylineStr(seg));
-      m.setAttribute('transform', transform);
-      m.setAttribute('style', mirrorStyle);
-      exportSvg.appendChild(m);
+  function appendPolylines(parent, strokeColor) {
+    const s = lineStyle.replace('stroke:#000', `stroke:${strokeColor}`);
+    if (mirrorMode > 0 && terminal) {
+      const ec = cellCorner(terminal.col, terminal.row);
+      const transform = mirrorTransform(mirrorMode, ec.x, ec.y);
+      const segments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
+      for (const seg of segments) {
+        const m = document.createElementNS(ns, 'polyline');
+        m.setAttribute('points', pointsToPolylineStr(seg));
+        m.setAttribute('transform', transform);
+        m.setAttribute('style', s);
+        parent.appendChild(m);
+      }
+    }
+    const p = document.createElementNS(ns, 'polyline');
+    p.setAttribute('points', pointsToPolylineStr(pts));
+    p.setAttribute('style', s);
+    parent.appendChild(p);
+    if (repPts.length >= 2) {
+      const r = document.createElementNS(ns, 'polyline');
+      r.setAttribute('points', pointsToPolylineStr(repPts));
+      r.setAttribute('style', s);
+      parent.appendChild(r);
     }
   }
 
-  const p = document.createElementNS(ns, 'polyline');
-  p.setAttribute('points', pointsToPolylineStr(pts));
-  p.setAttribute('style', style);
-  exportSvg.appendChild(p);
-
-  if (repPts.length >= 2) {
-    const r = document.createElementNS(ns, 'polyline');
-    r.setAttribute('points', pointsToPolylineStr(repPts));
-    r.setAttribute('style', style);
-    exportSvg.appendChild(r);
+  if (invertExport) {
+    const bg = document.createElementNS(ns, 'rect');
+    bg.setAttribute('x', vbX);
+    bg.setAttribute('y', vbY);
+    bg.setAttribute('width', vbW);
+    bg.setAttribute('height', vbH);
+    bg.setAttribute('fill', 'black');
+    exportSvg.appendChild(bg);
+    appendPolylines(exportSvg, '#fff');
+  } else {
+    appendPolylines(exportSvg, '#000');
   }
 
   return exportSvg;

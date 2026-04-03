@@ -1,7 +1,7 @@
 ---
 layout: resume.njk
 title: Reuben Son
-includeBiography: true
+includeBiography: false
 includeDiscography: true
 includePerformances: true
 includeProjects: false
