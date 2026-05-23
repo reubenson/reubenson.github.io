@@ -642,27 +642,52 @@ function buildExportSvg() {
 
   function appendPolylines(parent, strokeColor) {
     const s = lineStyle.replace('stroke:#000', `stroke:${strokeColor}`);
-    if (mirrorMode > 0 && terminal) {
-      const ec = cellCorner(terminal.col, terminal.row);
-      const transform = mirrorTransform(mirrorMode, ec.x, ec.y);
-      const segments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
-      for (const seg of segments) {
-        const m = document.createElementNS(ns, 'polyline');
-        m.setAttribute('points', pointsToPolylineStr(seg));
-        m.setAttribute('transform', transform);
-        m.setAttribute('style', s);
-        parent.appendChild(m);
-      }
+    const segments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
+
+    function emitPoly(pxPts) {
+      const el = document.createElementNS(ns, 'polyline');
+      el.setAttribute('points', pxPts.map(({ x, y }) => `${x},${y}`).join(' '));
+      el.setAttribute('style', s);
+      parent.appendChild(el);
     }
-    const p = document.createElementNS(ns, 'polyline');
-    p.setAttribute('points', pointsToPolylineStr(pts));
-    p.setAttribute('style', s);
-    parent.appendChild(p);
-    if (repPts.length >= 2) {
-      const r = document.createElementNS(ns, 'polyline');
-      r.setAttribute('points', pointsToPolylineStr(repPts));
-      r.setAttribute('style', s);
-      parent.appendChild(r);
+
+    for (const seg of segments) {
+      const pixelPts = seg.map(p => cellCorner(p.col, p.row));
+
+      if (mirrorMode > 0 && terminal) {
+        const ec = cellCorner(terminal.col, terminal.row);
+        // Use applyMirrorToPixelPts (with yOff) to match the display exactly.
+        const mirroredPts = applyMirrorToPixelPts(pixelPts, mirrorMode, ec.x, ec.y);
+        // Reverse the mirror so it starts at the terminal end and works back.
+        const reversedMirror = [...mirroredPts].reverse();
+
+        // Find the longest k where orig[-k:] === rev[:k].
+        // yOff shifts the reflection axis, which can cause the junction to overlap
+        // by 0 pts (yOff=2*cs, paths disconnect), 1 pt (yOff=0, share E),
+        // or 2 pts (yOff=cs, last segment traversed in both directions).
+        let k = 0;
+        const maxK = Math.min(pixelPts.length, reversedMirror.length);
+        for (let i = 1; i <= maxK; i++) {
+          let match = true;
+          for (let j = 0; j < i; j++) {
+            const op = pixelPts[pixelPts.length - i + j];
+            const rp = reversedMirror[j];
+            if (op.x !== rp.x || op.y !== rp.y) { match = false; break; }
+          }
+          if (match) k = i;
+        }
+
+        if (k > 0) {
+          // Paths share a junction: single contiguous stroke with overlap deduplicated.
+          emitPoly([...pixelPts, ...reversedMirror.slice(k)]);
+        } else {
+          // Paths don't connect (yOff creates a gap): emit as two separate strokes.
+          emitPoly(pixelPts);
+          emitPoly(reversedMirror);
+        }
+      } else {
+        emitPoly(pixelPts);
+      }
     }
   }
 
