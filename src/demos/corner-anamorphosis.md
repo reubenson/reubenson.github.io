@@ -107,6 +107,7 @@ svg { display: block; }
   <button id="btn-export-a">export Wall A</button>
   <button id="btn-export-b">export Wall B</button>
   <button id="btn-export-floor">export Floor</button>
+  <button id="btn-export-json">export JSON</button>
 </div>
 
 <div id="views">
@@ -717,6 +718,80 @@ function exportFloor() {
   download('corner-anamorphosis-floor.svg', xml, 'image/svg+xml');
 }
 
+function exportJSON() {
+  const S  = cfg.size;
+  const sg = cfg.cornerOut ? -1 : 1;
+  const segs      = computeSegments();
+  const floorSegs = computeFloorSegments();
+
+  // All segments exported in panel-local XY space (mm, y increasing downward).
+  // Wall segments: clip to [0,S]×[0,S] in SVG space (x=u, y=S−z) — that IS
+  // the plottable XY, so no further conversion is needed in the harness.
+  function clipWallSegs(wallSegs) {
+    const out = [];
+    for (const seg of wallSegs) {
+      const [u1, z1] = seg.from;
+      const [u2, z2] = seg.to;
+      const c = clipLine(u1, S - z1, u2, S - z2, 0, 0, S, S);
+      if (!c) continue;
+      out.push({ from: [c[0], c[1]], to: [c[2], c[3]], hidden: seg.hidden });
+    }
+    return out;
+  }
+
+  // Floor segments: normalise from world-space to [0,S]×[0,S] panel XY.
+  // computeFloorSegments stores world-space coords; sg restores normalised sign.
+  function normFloorSegs(floorSegs) {
+    return floorSegs.map(s => ({
+      from:   [sg * s.from[0], sg * s.from[1]],
+      to:     [sg * s.to[0],   sg * s.to[1]],
+      hidden: s.hidden,
+    }));
+  }
+
+  // Default layout: layers arranged on the bed with a 20 mm gutter.
+  // Adjust each layer's origin to match your physical panel placement on the bed.
+  const gutter = 20;
+  const job = {
+    meta: {
+      tool:      'corner-anamorphosis',
+      version:   1,
+      size:      S,
+      dist:      cfg.dist,
+      height:    cfg.height,
+      angle:     cfg.angle,
+      cornerOut: cfg.cornerOut,
+    },
+    // Each layer: id (label only), origin (mm from plotter home), segments in
+    // panel-local XY. The harness adds origin to each coordinate — no special
+    // coord type needed.
+    layers: [
+      { id: 'wall_a', origin: [gutter,              gutter],              segments: clipWallSegs(segs.A) },
+      { id: 'wall_b', origin: [gutter + S + gutter, gutter],              segments: clipWallSegs(segs.B) },
+      { id: 'floor',  origin: [gutter + S + gutter, gutter + S + gutter], segments: normFloorSegs(floorSegs) },
+    ],
+    procedure: {
+      passes: [
+        { label: 'light',  pen_pos_down: 38, speed_pendown: 25 },
+        { label: 'medium', pen_pos_down: 44, speed_pendown: 20 },
+        { label: 'dark',   pen_pos_down: 50, speed_pendown: 15 },
+      ],
+      refill: {
+        enabled:          false,
+        well_pos:         [5, 5],
+        dwell_ms:         1200,
+        strokes_per_dip:  15,
+      },
+      pen: {
+        pos_up:       60,
+        speed_penup:  75,
+      },
+    },
+  };
+
+  download('corner-anamorphosis.json', JSON.stringify(job, null, 2), 'application/json');
+}
+
 // ─── 3D view ──────────────────────────────────────────────────────────────────
 // Observer mode: camera at the actual observer position looking at the cube center.
 // The marks on the walls (black) should exactly coincide with the cube wireframe
@@ -924,6 +999,7 @@ document.getElementById('btn-3d-mode').addEventListener('click', () => {
 document.getElementById('btn-export-a').addEventListener('click', () => exportWall('A'));
 document.getElementById('btn-export-b').addEventListener('click', () => exportWall('B'));
 document.getElementById('btn-export-floor').addEventListener('click', exportFloor);
+document.getElementById('btn-export-json').addEventListener('click', exportJSON);
 
 render();
 </script>

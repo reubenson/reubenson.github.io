@@ -1,0 +1,29 @@
+{
+  "layers": [
+    {
+      "id": "test_square",
+      "origin": [20, 20],
+      "segments": [
+        { "from": [0, 0], "to": [5, 0], "hidden": false },
+        { "from": [5, 0], "to": [5, 5], "hidden": false },
+        { "from": [5, 5], "to": [0, 5], "hidden": false },
+        { "from": [0, 5], "to": [0, 0], "hidden": false }
+      ]
+    }
+  ],
+  "procedure": {
+    "passes": [
+      { "label": "test", "pen_pos_down": 40, "speed_pendown": 25 }
+    ],
+    "refill": {
+      "enabled": false,
+      "well_pos": [5, 5],
+      "dwell_ms": 1200,
+      "strokes_per_dip": 15
+    },
+    "pen": {
+      "pos_up": 60,
+      "speed_penup": 75
+    }
+  }
+}
