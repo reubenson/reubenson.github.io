@@ -82,6 +82,46 @@ button {
 
 button:hover { background: #f0f0f0; }
 button.active { background: #222; color: #fff; border-color: #222; }
+button:disabled { opacity: 0.4; cursor: default; }
+button:disabled:hover { background: #fff; }
+
+#plotter {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#plotter-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#plotter-state {
+  font-size: 11px;
+  color: #888;
+  margin-left: 4px;
+}
+#plotter-state.running { color: #b07000; }
+#plotter-state.done    { color: #2a7a2a; }
+#plotter-state.error   { color: #a00; }
+
+#plotter-log {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #444;
+  background: #fafafa;
+  border: 1px solid #eee;
+  padding: 6px 8px;
+  max-height: 140px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  display: none;
+}
 
 #info {
   margin-top: 10px;
@@ -108,6 +148,9 @@ svg { display: block; }
   <button id="btn-export-b">export Wall B</button>
   <button id="btn-export-floor">export Floor</button>
   <button id="btn-export-json">export JSON</button>
+  <span class="ctrl-sep">|</span>
+  <button id="btn-plot">plot</button>
+  <button id="btn-dry-run">dry run</button>
 </div>
 
 <div id="views">
@@ -123,6 +166,14 @@ svg { display: block; }
     <div class="view-title">3D model &nbsp;<button id="btn-3d-mode">observer</button></div>
     <canvas id="view3d"></canvas>
   </div>
+</div>
+
+<div id="plotter">
+  <div id="plotter-controls">
+    <button id="btn-stop" disabled>stop</button>
+    <span id="plotter-state">idle</span>
+  </div>
+  <div id="plotter-log"></div>
 </div>
 
 <div id="info">
@@ -718,15 +769,12 @@ function exportFloor() {
   download('corner-anamorphosis-floor.svg', xml, 'image/svg+xml');
 }
 
-function exportJSON() {
+function buildJobJSON() {
   const S  = cfg.size;
   const sg = cfg.cornerOut ? -1 : 1;
   const segs      = computeSegments();
   const floorSegs = computeFloorSegments();
 
-  // All segments exported in panel-local XY space (mm, y increasing downward).
-  // Wall segments: clip to [0,S]×[0,S] in SVG space (x=u, y=S−z) — that IS
-  // the plottable XY, so no further conversion is needed in the harness.
   function clipWallSegs(wallSegs) {
     const out = [];
     for (const seg of wallSegs) {
@@ -739,20 +787,16 @@ function exportJSON() {
     return out;
   }
 
-  // Floor segments: normalise from world-space to [0,S]×[0,S] panel XY.
-  // computeFloorSegments stores world-space coords; sg restores normalised sign.
-  function normFloorSegs(floorSegs) {
-    return floorSegs.map(s => ({
+  function normFloorSegs(fs) {
+    return fs.map(s => ({
       from:   [sg * s.from[0], sg * s.from[1]],
       to:     [sg * s.to[0],   sg * s.to[1]],
       hidden: s.hidden,
     }));
   }
 
-  // Default layout: layers arranged on the bed with a 20 mm gutter.
-  // Adjust each layer's origin to match your physical panel placement on the bed.
   const gutter = 20;
-  const job = {
+  return {
     meta: {
       tool:      'corner-anamorphosis',
       version:   1,
@@ -762,9 +806,6 @@ function exportJSON() {
       angle:     cfg.angle,
       cornerOut: cfg.cornerOut,
     },
-    // Each layer: id (label only), origin (mm from plotter home), segments in
-    // panel-local XY. The harness adds origin to each coordinate — no special
-    // coord type needed.
     layers: [
       { id: 'wall_a', origin: [gutter,              gutter],              segments: clipWallSegs(segs.A) },
       { id: 'wall_b', origin: [gutter + S + gutter, gutter],              segments: clipWallSegs(segs.B) },
@@ -776,20 +817,94 @@ function exportJSON() {
         { label: 'medium', pen_pos_down: 44, speed_pendown: 20 },
         { label: 'dark',   pen_pos_down: 50, speed_pendown: 15 },
       ],
-      refill: {
-        enabled:          false,
-        well_pos:         [5, 5],
-        dwell_ms:         1200,
-        strokes_per_dip:  15,
-      },
-      pen: {
-        pos_up:       60,
-        speed_penup:  75,
-      },
+      refill: { enabled: false, dwell_s: 2, strokes_per_dip: 15 },
+      pen:    { pos_up: 60, speed_penup: 75 },
     },
   };
+}
 
-  download('corner-anamorphosis.json', JSON.stringify(job, null, 2), 'application/json');
+function exportJSON() {
+  download('corner-anamorphosis.json', JSON.stringify(buildJobJSON(), null, 2), 'application/json');
+}
+
+// ─── Plotter API ──────────────────────────────────────────────────────────────
+const SERVER = 'http://localhost:8765';
+let _pollTimer = null;
+
+const elState  = document.getElementById('plotter-state');
+const elLog    = document.getElementById('plotter-log');
+const btnPlot  = document.getElementById('btn-plot');
+const btnDry   = document.getElementById('btn-dry-run');
+const btnStop  = document.getElementById('btn-stop');
+
+function setPlotterBusy(busy) {
+  btnPlot.disabled = busy;
+  btnDry.disabled  = busy;
+  btnStop.disabled = !busy;
+}
+
+function appendLog(lines) {
+  elLog.style.display = 'block';
+  elLog.textContent = lines.join('\n');
+  elLog.scrollTop = elLog.scrollHeight;
+}
+
+function setState(state) {
+  elState.textContent = state;
+  elState.className   = state;
+}
+
+function startPolling(jobId) {
+  clearInterval(_pollTimer);
+  _pollTimer = setInterval(async () => {
+    try {
+      const res  = await fetch(`${SERVER}/status/${jobId}`);
+      const data = await res.json();
+      if (data.log) appendLog(data.log);
+      setState(data.state);
+      if (data.state === 'done' || data.state === 'error') {
+        clearInterval(_pollTimer);
+        setPlotterBusy(false);
+      }
+    } catch {
+      // server went away — stop polling
+      clearInterval(_pollTimer);
+      setState('error');
+      setPlotterBusy(false);
+    }
+  }, 1000);
+}
+
+async function plotJob(dryRun) {
+  readInputs();
+  const job = buildJobJSON();
+  elLog.textContent = '';
+  setState('sending…');
+  setPlotterBusy(true);
+  try {
+    const res  = await fetch(`${SERVER}/plot?dry_run=${dryRun}`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(job),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || res.statusText);
+    }
+    const { job_id } = await res.json();
+    setState('running');
+    startPolling(job_id);
+  } catch (err) {
+    setState('error');
+    appendLog([`Error: ${err.message}`, 'Is the server running?  uvicorn server:app --port 8765']);
+    setPlotterBusy(false);
+  }
+}
+
+async function stopJob() {
+  try {
+    await fetch(`${SERVER}/stop`, { method: 'POST' });
+  } catch { /* ignore */ }
 }
 
 // ─── 3D view ──────────────────────────────────────────────────────────────────
@@ -1000,6 +1115,9 @@ document.getElementById('btn-export-a').addEventListener('click', () => exportWa
 document.getElementById('btn-export-b').addEventListener('click', () => exportWall('B'));
 document.getElementById('btn-export-floor').addEventListener('click', exportFloor);
 document.getElementById('btn-export-json').addEventListener('click', exportJSON);
+btnPlot.addEventListener('click', () => plotJob(false));
+btnDry.addEventListener('click',  () => plotJob(true));
+btnStop.addEventListener('click', stopJob);
 
 render();
 </script>

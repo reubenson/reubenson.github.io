@@ -17,8 +17,7 @@
     ],
     "refill": {
       "enabled": false,
-      "well_pos": [5, 5],
-      "dwell_ms": 1200,
+      "dwell_s": 2,
       "strokes_per_dip": 15
     },
     "pen": {
