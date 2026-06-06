@@ -22,7 +22,12 @@ Job JSON format:
         "refill": {
           "enabled":         false,
           "dwell_s":         2,
-          "strokes_per_dip": 15
+          "strokes_per_dip": 15,
+          "well": {
+            "x":            10,
+            "y":            10,
+            "pen_pos_down": 55
+          }
         },
         "pen": {
           "pos_up":      60,
@@ -207,8 +212,43 @@ def chunked(items, size):
         yield items[i:i + size]
 
 
-def plot_flat(flat_segs, pen_options, axicli_path, refill, dry_run, save_svg=False):
-    """Plot a flat list of (seg, origin) tuples, with refill pauses if enabled."""
+def dip_at_well(well, pen, axicli_path, dry_run):
+    """Move arm to well position, lower pen to dip, dwell, then raise."""
+    wx, wy   = well['x'], well['y']
+    dip_down = well['pen_pos_down']
+    dwell    = well.get('dwell_s', 0)
+
+    # A 0.1mm line forces axicli to travel to the well and execute a pen-down stroke.
+    dip_svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg"'
+        f' width="{BED_W}mm" height="{BED_H}mm"'
+        f' viewBox="0 0 {BED_W} {BED_H}">'
+        f'<line x1="{wx:.4f}" y1="{wy:.4f}"'
+        f' x2="{wx + 0.1:.4f}" y2="{wy:.4f}"'
+        f' style="fill:none;stroke:#000000;stroke-width:0.1"/>'
+        f'</svg>'
+    )
+    with tempfile.NamedTemporaryFile(suffix='.svg', mode='w',
+                                     delete=False, prefix='axi_dip_') as f:
+        f.write(dip_svg)
+        svg_path = f.name
+    dip_options = {
+        'pen_pos_down':  dip_down,
+        'speed_pendown': 10,
+        'pen_pos_up':    pen['pos_up'],
+        'speed_penup':   pen['speed_penup'],
+    }
+    print(f"  → dipping at well ({wx}, {wy}) pen_down={dip_down}")
+    try:
+        run_axicli(svg_path, dip_options, axicli_path, dry_run)
+    finally:
+        os.unlink(svg_path)
+    if dwell > 0 and not dry_run:
+        time.sleep(dwell)
+
+
+def plot_flat(flat_segs, pen_options, pen, axicli_path, refill, dry_run, save_svg=False):
+    """Plot a flat list of (seg, origin) tuples, with automatic well dips if enabled."""
     if not flat_segs:
         return
 
@@ -220,9 +260,7 @@ def plot_flat(flat_segs, pen_options, axicli_path, refill, dry_run, save_svg=Fal
 
     for idx, chunk in enumerate(chunks):
         if refill['enabled'] and idx > 0:
-            input(f"  → refill pause (chunk {idx+1}/{len(chunks)}) — "
-                  f"dip brush, then press Enter to continue...")
-            time.sleep(refill.get('dwell_s', 0))
+            dip_at_well(refill['well'], pen, axicli_path, dry_run)
 
         svg = make_svg(chunk)
         down_mm, up_mm, lifts = travel_stats(chunk)
@@ -281,14 +319,14 @@ def plot(job_path, layer_filter=None, pass_filter=None, dry_run=False, save_svg=
             'pen_pos_up':    pen['pos_up'],
             'speed_penup':   pen['speed_penup'],
         }
-        plot_flat(visible_segs, pen_options, axicli_path, refill, dry_run, save_svg)
+        plot_flat(visible_segs, pen_options, pen, axicli_path, refill, dry_run, save_svg)
 
         # Hidden lines on the final pass only, at reduced pressure.
         if i == len(passes) - 1 and hidden_segs:
             print(f"  hidden lines (pen_down={max(p['pen_pos_down'] - 8, 20)})")
             hidden_options = dict(pen_options)
             hidden_options['pen_pos_down'] = max(p['pen_pos_down'] - 8, 20)
-            plot_flat(hidden_segs, hidden_options, axicli_path,
+            plot_flat(hidden_segs, hidden_options, pen, axicli_path,
                       {'enabled': False}, dry_run, save_svg)
 
     print("\nDisabling motors...")

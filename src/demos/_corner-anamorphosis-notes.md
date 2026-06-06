@@ -288,6 +288,39 @@ Key functions:
 - `stopJob()` — sends `POST /stop` to the local server
 
 
+## Automatic Brush Dipping (plot.py)
+
+When `refill.enabled` is true, `plot.py` automatically drives the arm to a paint
+well between segment chunks — no manual intervention or keyboard press required.
+
+**How it works:** `dip_at_well()` generates a minimal SVG containing a 0.1mm line
+at the well's XY position and calls axicli on it. The arm travels to the well
+(pen up), lowers the pen to the dip depth (pen down), holds for `dwell_s` seconds,
+then raises. The main job resumes from wherever the arm happens to be next.
+
+**Job JSON — refill block with well:**
+```json
+"refill": {
+  "enabled":         true,
+  "dwell_s":         2,
+  "strokes_per_dip": 8,
+  "well": {
+    "x":            10,
+    "y":            10,
+    "pen_pos_down": 55
+  }
+}
+```
+
+- `x`, `y` — well position in mm from plotter home. Place the physical paint well
+  at this location on the bed before starting the job.
+- `pen_pos_down` — dip depth (0–100 axicli units), set independently from the draw
+  depth so you can control how far into the well the brush descends.
+- `dwell_s` — seconds to hold the pen down at the well (soak time).
+- `strokes_per_dip` — number of segments between dips. Set this to the number of
+  segments in one logical stroke (e.g. one quadrant of a circle arc).
+
+
 ## Local Server (Plotter Integration)
 
 The webapp can drive the AxiDraw directly via a local FastAPI server running

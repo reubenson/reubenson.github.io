@@ -1,0 +1,64 @@
+{
+  "layers": [
+    {
+      "id": "circle",
+      "origin": [0, 0],
+      "segments": [
+        { "from": [120.00, 70.00], "to": [119.04, 79.76], "hidden": false },
+        { "from": [119.04, 79.76], "to": [116.20, 89.14], "hidden": false },
+        { "from": [116.20, 89.14], "to": [111.58, 97.78], "hidden": false },
+        { "from": [111.58, 97.78], "to": [105.36, 105.36], "hidden": false },
+        { "from": [105.36, 105.36], "to": [ 97.78, 111.58], "hidden": false },
+        { "from": [ 97.78, 111.58], "to": [ 89.14, 116.20], "hidden": false },
+        { "from": [ 89.14, 116.20], "to": [ 79.76, 119.04], "hidden": false },
+        { "from": [ 79.76, 119.04], "to": [ 70.00, 120.00], "hidden": false },
+
+        { "from": [ 70.00, 120.00], "to": [ 60.25, 119.04], "hidden": false },
+        { "from": [ 60.25, 119.04], "to": [ 50.87, 116.20], "hidden": false },
+        { "from": [ 50.87, 116.20], "to": [ 42.22, 111.58], "hidden": false },
+        { "from": [ 42.22, 111.58], "to": [ 34.65, 105.36], "hidden": false },
+        { "from": [ 34.65, 105.36], "to": [ 28.43,  97.78], "hidden": false },
+        { "from": [ 28.43,  97.78], "to": [ 23.81,  89.14], "hidden": false },
+        { "from": [ 23.81,  89.14], "to": [ 20.96,  79.76], "hidden": false },
+        { "from": [ 20.96,  79.76], "to": [ 20.00,  70.00], "hidden": false },
+
+        { "from": [ 20.00,  70.00], "to": [ 20.96,  60.25], "hidden": false },
+        { "from": [ 20.96,  60.25], "to": [ 23.81,  50.87], "hidden": false },
+        { "from": [ 23.81,  50.87], "to": [ 28.43,  42.22], "hidden": false },
+        { "from": [ 28.43,  42.22], "to": [ 34.65,  34.65], "hidden": false },
+        { "from": [ 34.65,  34.65], "to": [ 42.22,  28.43], "hidden": false },
+        { "from": [ 42.22,  28.43], "to": [ 50.87,  23.81], "hidden": false },
+        { "from": [ 50.87,  23.81], "to": [ 60.25,  20.96], "hidden": false },
+        { "from": [ 60.25,  20.96], "to": [ 70.00,  20.00], "hidden": false },
+
+        { "from": [ 70.00,  20.00], "to": [ 79.76,  20.96], "hidden": false },
+        { "from": [ 79.76,  20.96], "to": [ 89.14,  23.81], "hidden": false },
+        { "from": [ 89.14,  23.81], "to": [ 97.78,  28.43], "hidden": false },
+        { "from": [ 97.78,  28.43], "to": [105.36,  34.65], "hidden": false },
+        { "from": [105.36,  34.65], "to": [111.58,  42.22], "hidden": false },
+        { "from": [111.58,  42.22], "to": [116.20,  50.87], "hidden": false },
+        { "from": [116.20,  50.87], "to": [119.04,  60.25], "hidden": false },
+        { "from": [119.04,  60.25], "to": [120.00,  70.00], "hidden": false }
+      ]
+    }
+  ],
+  "procedure": {
+    "passes": [
+      { "label": "paint", "pen_pos_down": 42, "speed_pendown": 20 }
+    ],
+    "refill": {
+      "enabled": true,
+      "dwell_s": 2,
+      "strokes_per_dip": 8,
+      "well": {
+        "x": 10,
+        "y": 10,
+        "pen_pos_down": 55
+      }
+    },
+    "pen": {
+      "pos_up": 60,
+      "speed_penup": 75
+    }
+  }
+}
