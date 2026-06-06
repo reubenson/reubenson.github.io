@@ -262,8 +262,9 @@ Visible faces from observer at (ox>0, oy>0, oz>0):
 
 ## Implementation
 
-Self-contained 11ty markdown file. No external dependencies. All geometry
-computed in vanilla JavaScript. SVG elements created with `createElementNS`.
+Self-contained 11ty markdown file (`corner-anamorphosis.md`). No external
+dependencies. All geometry computed in vanilla JavaScript. SVG elements created
+with `createElementNS`.
 
 Key functions:
 - `getObserver()` — returns O = (+D·cosα, +D·sinα, H)
@@ -275,8 +276,50 @@ Key functions:
 - `projectFloorPoint(O, P)` — projects a 3D point onto the floor (z=0)
 - `computeFloorSegments()` — projects all 12 edges onto the floor, clipped to [0,S]×[0,S]
 - `clipLine(x1,y1,x2,y2,xmin,ymin,xmax,ymax)` — Liang-Barsky 2D segment clip
+- `buildJobJSON()` — assembles the full plotter job object (layers + procedure);
+  shared by `exportJSON()` and `plotJob()`
 - `buildExportSvg(wall)` — constructs the clipped export SVG for one wall panel
 - `buildFloorSvg()` — constructs the export SVG for the floor tile
 - `renderPreview()` — draws the unfolded three-panel preview in the page
 - `renderSchematic()` — draws the top-down scene diagram
 - `renderView3D()` — draws the 3D model (observer and overview modes)
+- `plotJob(dryRun)` — POSTs the current job JSON to the local server, then polls
+  for status and streams log lines into the status panel
+- `stopJob()` — sends `POST /stop` to the local server
+
+
+## Local Server (Plotter Integration)
+
+The webapp can drive the AxiDraw directly via a local FastAPI server running
+alongside the 11ty dev server. The webapp builds the job JSON entirely
+client-side; the server is a thin plotter driver only.
+
+**Files:**
+- `corner-anamorphosis/server.py` — FastAPI app; exposes three endpoints
+- `corner-anamorphosis/requirements.txt` — `fastapi`, `uvicorn[standard]`
+- `corner-anamorphosis/plot.py` — plotter harness; imported directly by the server
+
+**Endpoints:**
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/plot?dry_run=false` | Accept job JSON body, start background thread, return `{job_id}` |
+| GET  | `/status/{job_id}`   | Return `{state, log[]}` — state: `queued\|running\|done\|error` |
+| POST | `/stop`              | Send `KeyboardInterrupt` to the worker thread (best-effort) |
+
+Only one job runs at a time; a second `POST /plot` while a job is running
+returns HTTP 409.
+
+**Running the server:**
+```bash
+cd corner-anamorphosis
+pip install -r requirements.txt
+uvicorn server:app --port 8765
+```
+
+The webapp polls `GET /status/<id>` every second, appending log lines to
+a scrollable panel below the views. CORS is restricted to `localhost:8080`.
+
+**Motor disable:** `plot.py` always calls `axicli --mode=align` after every
+job (including dry runs) to disengage the stepper motors so the carriage
+can be moved freely.

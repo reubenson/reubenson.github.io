@@ -2,3 +2,4 @@
 *node_modules/**
 /airs
 /docs/airs
+/src/demos/corner-anamorphosis/__pycache__
