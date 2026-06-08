@@ -17,9 +17,38 @@ body {
   user-select: none;
 }
 
-#main-container { max-width: 900px; margin: 0 auto; }
+/* ── App layout ── */
+#app {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
 
-#controls {
+#sidebar {
+  width: 88px;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.project-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #555;
+  border-bottom: 1px solid #eee;
+  user-select: none;
+}
+.project-item:last-child { border-bottom: none; }
+.project-item:hover { background: #f0f0f0; }
+.project-item.active { background: #fff; color: #111; font-weight: bold; }
+
+#main-content { flex: 1; min-width: 0; }
+
+/* ── Controls bar (shared style) ── */
+.controls-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 14px;
@@ -50,6 +79,7 @@ input[type=number] {
   border: 1px solid #bbb;
 }
 
+/* ── Views ── */
 #views {
   display: flex;
   gap: 12px;
@@ -71,6 +101,7 @@ input[type=number] {
   background: #fafafa;
 }
 
+/* ── Buttons ── */
 button {
   font-family: monospace;
   font-size: 12px;
@@ -85,6 +116,7 @@ button.active { background: #222; color: #fff; border-color: #222; }
 button:disabled { opacity: 0.4; cursor: default; }
 button:disabled:hover { background: #fff; }
 
+/* ── Plotter (shared) ── */
 #plotter {
   margin-top: 10px;
   padding: 8px 12px;
@@ -123,6 +155,7 @@ button:disabled:hover { background: #fff; }
   display: none;
 }
 
+/* ── Corner info ── */
 #info {
   margin-top: 10px;
   font-size: 11px;
@@ -130,12 +163,46 @@ button:disabled:hover { background: #fff; }
   line-height: 1.6;
 }
 
+/* ── Paint project ── */
+#paint-preview-box {
+  margin-bottom: 12px;
+}
+
+#paint-preview {
+  padding: 16px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 11px;
+  overflow: auto;
+}
+
+#paint-preview svg {
+  max-width: 100%;
+  max-height: 440px;
+  display: block;
+}
+
+#paint-hidden { display: none; }
+
 svg { display: block; }
 </style>
 
-<div id="main-container">
+<div id="app">
 
-<div id="controls">
+<div id="sidebar">
+  <div class="project-item active" data-project="corner">Corner</div>
+  <div class="project-item"        data-project="paint">Paint</div>
+</div>
+
+<div id="main-content">
+
+<!-- ── Corner project ── -->
+<div id="project-corner">
+
+<div class="controls-bar">
   <label><span>size (mm)</span><input type="number" id="cfg-size"   value="150" min="20"  max="500"  step="5"></label>
   <span class="ctrl-sep">|</span>
   <label><span>dist (mm)</span><input type="number" id="cfg-dist"   value="350" min="50"  max="2000" step="10"></label>
@@ -149,8 +216,8 @@ svg { display: block; }
   <button id="btn-export-floor">export Floor</button>
   <button id="btn-export-json">export JSON</button>
   <span class="ctrl-sep">|</span>
-  <button id="btn-plot">plot</button>
-  <button id="btn-dry-run">dry run</button>
+  <button class="plot-btn" id="btn-plot">plot</button>
+  <button class="plot-btn" id="btn-dry-run">dry run</button>
 </div>
 
 <div id="views">
@@ -168,14 +235,6 @@ svg { display: block; }
   </div>
 </div>
 
-<div id="plotter">
-  <div id="plotter-controls">
-    <button id="btn-stop" disabled>stop</button>
-    <span id="plotter-state">idle</span>
-  </div>
-  <div id="plotter-log"></div>
-</div>
-
 <div id="info">
   Angle° is the observer's horizontal angle from the x-axis (45° = symmetric between walls).
   <b>corner: in</b> — fold points toward observer (inside room corner, concave).
@@ -184,10 +243,76 @@ svg { display: block; }
   viewed from the specified position.
 </div>
 
+</div><!-- #project-corner -->
+
+<!-- ── Paint project ── -->
+<div id="project-paint" style="display:none">
+
+<div class="controls-bar">
+  <label>
+    <span>SVG</span>
+    <input type="file" id="paint-file" accept=".svg" style="font-family:monospace;font-size:11px;width:auto;">
+  </label>
+  <span class="ctrl-sep">|</span>
+  <label><span>width (mm)</span> <input type="number" id="paint-width"    value="100" min="10"  max="500" step="5"></label>
+  <label><span>origin x</span>  <input type="number" id="paint-origin-x" value="20"  min="0"   max="400" step="5"></label>
+  <label><span>origin y</span>  <input type="number" id="paint-origin-y" value="20"  min="0"   max="300" step="5"></label>
+  <label><span>segs/path</span> <input type="number" id="paint-segs"     value="50"  min="5"   max="500" step="5"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>dip mode</span></label>
+  <button id="btn-paint-dip-mode">strokes</button>
+  <label id="paint-travel-label" style="display:none"><span>travel (mm)</span><input type="number" id="paint-travel-mm" value="500" min="10" max="9999" step="50"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>pen down</span>  <input type="number" id="paint-pen-down" value="44"  min="10"  max="90"  step="1"></label>
+  <label><span>pen up</span>    <input type="number" id="paint-pen-up"   value="75"  min="10"  max="100" step="1"></label>
+  <label><span>speed</span>     <input type="number" id="paint-speed"    value="20"  min="1"   max="100" step="1"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>well x</span>    <input type="number" id="paint-well-x"   value="10"  min="0"   max="400" step="5"></label>
+  <label><span>well y</span>    <input type="number" id="paint-well-y"   value="10"  min="0"   max="300" step="5"></label>
+  <label><span>dip down</span>  <input type="number" id="paint-dip-down" value="55"  min="10"  max="90"  step="1"></label>
+  <label><span>dwell (s)</span> <input type="number" id="paint-dwell"    value="2"   min="0"   max="10"  step="0.5"></label>
+  <span class="ctrl-sep">|</span>
+  <button id="btn-paint-export-json">export JSON</button>
+  <button class="plot-btn" id="btn-paint-plot">plot</button>
+  <button class="plot-btn" id="btn-paint-dry-run">dry run</button>
 </div>
 
+<div id="paint-preview-box" class="view-box">
+  <div class="view-title">SVG preview — <span id="paint-path-count">0</span> paths loaded</div>
+  <div id="paint-preview">no SVG loaded</div>
+</div>
+
+<div id="paint-hidden"></div>
+
+</div><!-- #project-paint -->
+
+<!-- ── Shared plotter ── -->
+<div id="plotter">
+  <div id="plotter-controls">
+    <button id="btn-stop" disabled>stop</button>
+    <span id="plotter-state">idle</span>
+  </div>
+  <div id="plotter-log"></div>
+</div>
+
+</div><!-- #main-content -->
+</div><!-- #app -->
+
 <script>
-// ─── State ────────────────────────────────────────────────────────────────────
+// ─── Project switching ─────────────────────────────────────────────────────────
+let currentProject = 'corner';
+
+document.querySelectorAll('.project-item').forEach(item => {
+  item.addEventListener('click', () => {
+    currentProject = item.dataset.project;
+    document.querySelectorAll('.project-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    document.getElementById('project-corner').style.display = currentProject === 'corner' ? '' : 'none';
+    document.getElementById('project-paint').style.display  = currentProject === 'paint'  ? '' : 'none';
+  });
+});
+
+// ─── Corner state ─────────────────────────────────────────────────────────────
 // Coordinate system:
 //   Corner fold at origin (0,0,0), Z = up.
 //   Wall A: plane y=0 (printable surface at x≥0 corner-in, x≤0 corner-out).
@@ -197,11 +322,11 @@ svg { display: block; }
 //   Corner-out cube: x∈[−S,0], y∈[−S,0], z∈[0,S]. Same topology, negative quadrant.
 
 const cfg = {
-  size:     150,    // panel size (mm) — square; cube face exactly fills each panel
+  size:     150,
   dist:     350,
   height:    80,
   angle:     45,
-  cornerOut: false,   // false = concave/room corner; true = convex/box corner
+  cornerOut: false,
 };
 
 function readInputs() {
@@ -214,70 +339,51 @@ function readInputs() {
 // ─── Geometry ─────────────────────────────────────────────────────────────────
 function getObserver() {
   const rad = cfg.angle * Math.PI / 180;
-  // Observer always in positive x,y quadrant. Corner-out cube is in negative quadrant.
   return [cfg.dist * Math.cos(rad), cfg.dist * Math.sin(rad), cfg.height];
 }
 
 function getVertices() {
   const S = cfg.size;
-  // V[0] = fold corner (farthest from observer) = cube local origin.
-  // V[7] = far corner from fold (closest to observer for corner-in).
-  // Corner-in: cube in +x,+y; corner-out: cube in -x,-y.
   const sg = cfg.cornerOut ? -1 : 1;
   return [
-    [0,    0,    0], // 0: fold corner, floor  ← cube local origin (farthest from observer)
-    [sg*S, 0,    0], // 1: Wall A far edge, floor  (on y=0 plane)
-    [0,    sg*S, 0], // 2: Wall B far edge, floor  (on x=0 plane)
-    [sg*S, sg*S, 0], // 3: far floor corner  (HIDDEN — only on hidden faces)
+    [0,    0,    0], // 0: fold corner, floor
+    [sg*S, 0,    0], // 1: Wall A far edge, floor
+    [0,    sg*S, 0], // 2: Wall B far edge, floor
+    [sg*S, sg*S, 0], // 3: far floor corner (HIDDEN)
     [0,    0,    S], // 4: fold corner, top
     [sg*S, 0,    S], // 5: Wall A far edge, top
     [0,    sg*S, S], // 6: Wall B far edge, top
-    [sg*S, sg*S, S], // 7: far top corner  (closest to observer)
+    [sg*S, sg*S, S], // 7: far top corner
   ];
 }
 
 // [vi, vj, isHidden]
-// Hidden edges: the three edges through V[3] (far floor corner).
-// V[3] lies only on hidden faces (z=0 bottom, x=S far-x, y=S far-y).
-// All other edges lie on at least one visible face (Wall A y=0, Wall B x=0, or top z=S).
 const EDGES = [
-  [0,1,false],  // fold corner → Wall A far edge, floor
-  [0,2,false],  // fold corner → Wall B far edge, floor
-  [0,4,false],  // fold corner vertical
-  [1,3,true ],  // HIDDEN: Wall A floor → far floor corner
-  [1,5,false],  // Wall A vertical
-  [2,3,true ],  // HIDDEN: Wall B floor → far floor corner
-  [2,6,false],  // Wall B vertical
-  [3,7,true ],  // HIDDEN: far floor corner vertical
-  [4,5,false],  // top face
-  [4,6,false],  // top face
-  [5,7,false],  // top face
-  [6,7,false],  // top face
+  [0,1,false],
+  [0,2,false],
+  [0,4,false],
+  [1,3,true ],
+  [1,5,false],
+  [2,3,true ],
+  [2,6,false],
+  [3,7,true ],
+  [4,5,false],
+  [4,6,false],
+  [5,7,false],
+  [6,7,false],
 ];
 
 // ─── Projection ───────────────────────────────────────────────────────────────
-// For a point P in the cube, cast a ray from observer O through P.
-// The ray hits exactly one wall's inside surface (or the shared corner line).
-//
-// Wall A (y=0): t_A = oy/(oy−py); u_A = x at intersection. Valid if sg·x_A ≥ 0.
-// Wall B (x=0): t_B = ox/(ox−px); u_B = y at intersection. Valid if sg·y_B ≥ 0.
-//   sg = +1 corner-in (cube in +x,+y), sg = −1 corner-out (cube in −x,−y).
-//
-// Returns { wall:'A'|'B'|'corner', u, z }
-//   u = distance from fold (always ≥ 0 = |x_A| or |y_B|).
-
 function projectPoint(O, P) {
   const [ox, oy, oz] = O;
   const [px, py, pz] = P;
 
   let xA, zA, yB, zB;
 
-  // Wall A: y=0 plane
   const dA = oy - py;
   if (Math.abs(dA) < 1e-12) { xA = px; zA = pz; }
   else { const tA = oy / dA; xA = ox + tA * (px - ox); zA = oz + tA * (pz - oz); }
 
-  // Wall B: x=0 plane
   const dB = ox - px;
   if (Math.abs(dB) < 1e-12) { yB = py; zB = pz; }
   else { const tB = ox / dB; yB = oy + tB * (py - oy); zB = oz + tB * (pz - oz); }
@@ -292,8 +398,6 @@ function projectPoint(O, P) {
   return null;
 }
 
-// Returns s ∈ (0,1) where the projection of the edge P1→P2 switches walls.
-// Switch condition: py(s)·ox = oy·px(s)
 function edgeSplitS(O, P1, P2) {
   const [ox, oy] = O;
   const denom = (P2[1] - P1[1]) * ox - oy * (P2[0] - P1[0]);
@@ -313,7 +417,6 @@ function getUZ(proj, preferWall) {
   return [proj.u, proj.z];
 }
 
-// Returns [{wall:'A'|'B', from:[u,z], to:[u,z], hidden}, ...]
 function projectEdge(O, V, edgeDef) {
   const [i, j, hidden] = edgeDef;
   const P1 = V[i], P2 = V[j];
@@ -324,7 +427,6 @@ function projectEdge(O, V, edgeDef) {
   const w1 = pr1.wall, w2 = pr2.wall;
 
   if (w1 === 'corner' && w2 === 'corner') {
-    // Edge along corner line — draw on both walls at u=0
     return [
       { wall: 'A', from: [pr1.uA, pr1.z], to: [pr2.uA, pr2.z], hidden },
       { wall: 'B', from: [pr1.uB, pr1.z], to: [pr2.uB, pr2.z], hidden },
@@ -340,7 +442,6 @@ function projectEdge(O, V, edgeDef) {
     return [{ wall: w1, from: [pr1.u, pr1.z], to: [pr2.u, pr2.z], hidden }];
   }
 
-  // Different walls — find the split point
   const s = edgeSplitS(O, P1, P2);
   if (s === null) {
     return [{ wall: w1, from: [pr1.u, pr1.z], to: [pr1.u, pr1.z], hidden }];
@@ -369,10 +470,6 @@ function computeSegments() {
 }
 
 // ─── Floor projection ─────────────────────────────────────────────────────────
-// Projects a 3D point onto the floor plane (z=0). Valid only when observer is
-// strictly above the point (oz > pz). Returns [xF, yF] in world space.
-// For corner-in: xF ∈ [0,S], yF ∈ [0,S]. For corner-out: xF ∈ [-S,0], yF ∈ [-S,0].
-
 function projectFloorPoint(O, P) {
   const [ox, oy, oz] = O;
   const [px, py, pz] = P;
@@ -381,13 +478,6 @@ function projectFloorPoint(O, P) {
   return [ox + tF * (px - ox), oy + tF * (py - oy)];
 }
 
-// Projects all cube edges onto the floor plane (z=0), clipped to the printable
-// tile area [0,S]×[0,S].  When the observer is low (oz < S), only the z=0 face
-// edges fall within bounds (they project to themselves, tF=1).  As observer
-// height rises above S, top-face rays that would exit the wall panels below z=0
-// instead hit the floor within bounds, and those segments appear here.
-// Segments are stored as raw world-space [xF, yF] so floorToXY / buildFloorSvg
-// can apply the same sg-normalisation they already use.
 function computeFloorSegments() {
   const O = getObserver();
   const V = getVertices();
@@ -404,12 +494,10 @@ function computeFloorSegments() {
     const f2 = projectFloorPoint(O, P2);
     if (!f1 || !f2) continue;
 
-    // Clip in normalised [0,S]×[0,S] space (sg turns corner-out negatives positive)
     const clipped = clipLine(sg*f1[0], sg*f1[1], sg*f2[0], sg*f2[1], 0, 0, S, S);
     if (!clipped) continue;
     const [cx1, cy1, cx2, cy2] = clipped;
 
-    // Convert back to raw world coords (sg*normalised = original sign)
     segs.push({ from: [sg*cx1, sg*cy1], to: [sg*cx2, sg*cy2], hidden });
   }
   return segs;
@@ -430,7 +518,6 @@ function svgTxt(parent, x, y, content, attrs) {
 }
 
 // Liang-Barsky 2D line clip against [xmin,ymin]–[xmax,ymax].
-// Returns [x1,y1,x2,y2] of the clipped segment, or null if entirely outside.
 function clipLine(x1, y1, x2, y2, xmin, ymin, xmax, ymax) {
   const dx = x2 - x1, dy = y2 - y1;
   let tMin = 0, tMax = 1;
@@ -451,32 +538,21 @@ function clipLine(x1, y1, x2, y2, xmin, ymin, xmax, ymax) {
 
 // ─── Preview: unfolded walls ──────────────────────────────────────────────────
 const preview  = document.getElementById('preview');
-const PSCALE   = 2.2;   // px per mm for preview display
-const PPAD     = 24;    // px margin
-const FOLDGAP  = 16;    // px gap at fold line
+const PSCALE   = 2.2;
+const PPAD     = 24;
+const FOLDGAP  = 16;
 
 function wallAtoXY(u, z) {
-  // u = |x_A| ∈ [0,S]. Fold edge (u=0) at right; far edge (u=S) at left.
   const S = cfg.size;
-  return [
-    PPAD + (S - u) * PSCALE,
-    PPAD + (S - z) * PSCALE,
-  ];
+  return [PPAD + (S - u) * PSCALE, PPAD + (S - z) * PSCALE];
 }
 
 function wallBtoXY(u, z) {
-  // u = |y_B| ∈ [0,S]. Fold edge (u=0) at left; far edge (u=S) at right.
   const S = cfg.size;
-  return [
-    PPAD + S * PSCALE + FOLDGAP + u * PSCALE,
-    PPAD + (S - z) * PSCALE,
-  ];
+  return [PPAD + S * PSCALE + FOLDGAP + u * PSCALE, PPAD + (S - z) * PSCALE];
 }
 
 function floorToXY(xF, yF) {
-  // Floor panel is positioned below Wall B (shares the x=0 fold on its left edge).
-  // xF=0 (Wall B fold) at left; xF=S at right. yF=0 (Wall A fold) at top; yF=S at bottom.
-  // sg normalises corner-out coords (negative quadrant) into the [0,S] display range.
   const S  = cfg.size;
   const sg = cfg.cornerOut ? -1 : 1;
   return [
@@ -497,17 +573,13 @@ function renderPreview() {
   const floorTop = PPAD + S * PSCALE + FOLDGAP;
   const floorLeft = foldX + FOLDGAP;
 
-  // Wall panel backgrounds
   svgEl('rect', { x: PPAD, y: PPAD, width: S * PSCALE, height: S * PSCALE,
     fill: '#fafafa', stroke: '#ccc', 'stroke-width': 1 }, preview);
   svgEl('rect', { x: foldX + FOLDGAP, y: PPAD, width: S * PSCALE, height: S * PSCALE,
     fill: '#fafafa', stroke: '#ccc', 'stroke-width': 1 }, preview);
-
-  // Floor panel background (below Wall B, sharing the x=0 fold on its left edge)
   svgEl('rect', { x: floorLeft, y: floorTop, width: S * PSCALE, height: S * PSCALE,
     fill: '#fdf8f0', stroke: '#ccc', 'stroke-width': 1 }, preview);
 
-  // Fold line (vertical, between Wall A and Wall B)
   svgEl('line', {
     x1: foldX + FOLDGAP / 2, y1: PPAD - 8,
     x2: foldX + FOLDGAP / 2, y2: PPAD + S * PSCALE + 8,
@@ -515,18 +587,15 @@ function renderPreview() {
   }, preview);
 
   const labelAttrs = { 'font-size': 11, 'font-family': 'monospace', fill: '#aaa', 'text-anchor': 'middle' };
-  svgTxt(preview, PPAD + S * PSCALE / 2,              PPAD - 8,  'Wall A', labelAttrs);
-  svgTxt(preview, foldX + FOLDGAP + S * PSCALE / 2,   PPAD - 8,  'Wall B', labelAttrs);
-  svgTxt(preview, foldX + FOLDGAP / 2, PPAD + S * PSCALE + 14,   'fold',
+  svgTxt(preview, PPAD + S * PSCALE / 2,             PPAD - 8,  'Wall A', labelAttrs);
+  svgTxt(preview, foldX + FOLDGAP + S * PSCALE / 2,  PPAD - 8,  'Wall B', labelAttrs);
+  svgTxt(preview, foldX + FOLDGAP / 2, PPAD + S * PSCALE + 14,  'fold',
     { ...labelAttrs, 'font-size': 10 });
   svgTxt(preview, floorLeft + S * PSCALE / 2, floorTop - 6, 'Floor', labelAttrs);
 
-  // Draw projected edge segments
   const segs = computeSegments();
   const floorSegs = computeFloorSegments();
 
-  // clip=true clips the segment to [0,S]×[0,S] in its domain (u,z) before
-  // converting to screen coords.  Floor segments are pre-clipped by computeFloorSegments.
   function drawSeg(seg, toXY, clip) {
     let from = seg.from, to = seg.to;
     if (clip) {
@@ -558,12 +627,10 @@ const SCH_W = 230, SCH_H = 230, SCH_PAD = 20;
 function renderSchematic() {
   const S   = cfg.size;
   const rad = cfg.angle * Math.PI / 180;
-  // Observer always at positive x,y. Corner-out cube is in negative quadrant.
   const cubeSg = cfg.cornerOut ? -1 : 1;
   const ox  = cfg.dist * Math.cos(rad);
   const oy  = cfg.dist * Math.sin(rad);
 
-  // Bounding box: fit observer, cube footprint, and origin.
   const keyPts = [[ox, oy], [cubeSg*S, 0], [0, cubeSg*S], [cubeSg*S, cubeSg*S], [0, 0]];
   const xs = keyPts.map(p => p[0]);
   const ys = keyPts.map(p => p[1]);
@@ -576,7 +643,6 @@ function renderSchematic() {
   const avail = Math.min(SCH_W, SCH_H) - SCH_PAD * 2;
   const sc = Math.min(avail / (maxWX - minWX), avail / (maxWY - minWY));
 
-  // World origin → screen position
   const px0 = SCH_PAD + (0 - minWX) * sc;
   const py0 = SCH_H - SCH_PAD - (0 - minWY) * sc;
 
@@ -586,7 +652,6 @@ function renderSchematic() {
   schematic.setAttribute('height', SCH_H);
   schematic.innerHTML = '';
 
-  // Arrowhead markers for axes
   const defs = svgEl('defs', {}, schematic);
   function mkArrow(id, color) {
     const m = svgEl('marker', {
@@ -600,7 +665,6 @@ function renderSchematic() {
 
   svgEl('rect', { x: 0, y: 0, width: SCH_W, height: SCH_H, fill: '#fff' }, schematic);
 
-  // Cube footprint
   const cubePoly = [[0,0],[cubeSg*S,0],[cubeSg*S,cubeSg*S],[0,cubeSg*S]]
     .map(([x,y]) => w2s(x,y).join(',')).join(' ');
   svgEl('polygon', {
@@ -610,50 +674,40 @@ function renderSchematic() {
     'stroke-width': 1.5,
   }, schematic);
 
-  // Walls: Wall A along cubeSg*x axis (y=0 plane), Wall B along cubeSg*y axis (x=0 plane)
   const wallStyle = { stroke: '#333', 'stroke-width': 2.5, 'stroke-linecap': 'round' };
-  const [fcx, fcy] = w2s(0, 0);  // fold corner = cube local origin (0,0,0)
-  const [ax, ay] = w2s(cubeSg * S, 0);   // Wall A runs along x-axis (y=0 plane)
-  const [bx, by] = w2s(0, cubeSg * S);   // Wall B runs along y-axis (x=0 plane)
+  const [fcx, fcy] = w2s(0, 0);
+  const [ax, ay] = w2s(cubeSg * S, 0);
+  const [bx, by] = w2s(0, cubeSg * S);
   svgEl('line', { x1: fcx, y1: fcy, x2: ax, y2: ay, ...wallStyle }, schematic);
   svgEl('line', { x1: fcx, y1: fcy, x2: bx, y2: by, ...wallStyle }, schematic);
 
-  // Axes: origin at fold corner (cube local origin V[0]=(0,0,0)), pointing toward cube.
-  // x-axis toward V[1]=(cubeSg*S,0,0); y-axis toward V[2]=(0,cubeSg*S,0).
-  const axWL = S * 0.28;  // axis world-length
+  const axWL = S * 0.28;
   const axLa = { 'font-size': 9, 'font-family': 'monospace', 'font-weight': 'bold' };
-  // x-axis: from fold corner toward (cubeSg*axWL, 0)
   const [axx2, axy2] = w2s(cubeSg * axWL, 0);
   svgEl('line', { x1: fcx, y1: fcy, x2: axx2, y2: axy2,
     stroke: '#c44', 'stroke-width': 1, 'stroke-dasharray': '3,2',
     'marker-end': 'url(#arr-x)' }, schematic);
   svgTxt(schematic, axx2 + 3, axy2 + 12, 'x', { ...axLa, fill: '#c44' });
-  // y-axis: from fold corner toward (0, cubeSg*axWL)
   const [ayx2, ayy2] = w2s(0, cubeSg * axWL);
   svgEl('line', { x1: fcx, y1: fcy, x2: ayx2, y2: ayy2,
     stroke: '#4a4', 'stroke-width': 1, 'stroke-dasharray': '3,2',
     'marker-end': 'url(#arr-y)' }, schematic);
   svgTxt(schematic, ayx2 - 12, ayy2 - 3, 'y', { ...axLa, fill: '#4a4' });
 
-  // Fold corner dot (cube local origin)
   svgEl('circle', { cx: fcx, cy: fcy, r: 3, fill: '#333' }, schematic);
 
-  // Ray from observer to fold corner
   const [osx, osy] = w2s(ox, oy);
   svgEl('line', {
     x1: osx, y1: osy, x2: fcx, y2: fcy,
     stroke: 'rgba(220,80,80,0.35)', 'stroke-width': 1, 'stroke-dasharray': '5,3',
   }, schematic);
 
-  // Observer
   svgEl('circle', { cx: osx, cy: osy, r: 5, fill: '#e44', stroke: '#b00', 'stroke-width': 1.5 }, schematic);
 
-  // Labels
   const la = { 'font-size': 9, 'font-family': 'monospace', fill: '#666' };
   svgTxt(schematic, osx + 7, osy + 3, 'obs', { ...la, fill: '#b00' });
   svgTxt(schematic, fcx + 4, fcy - 5,  'fold (0,0)', la);
 
-  // Wall labels at midpoints: Wall A on x-axis, Wall B on y-axis
   const [amx, amy] = w2s(cubeSg * S * 0.5, 0);
   svgTxt(schematic, amx, amy + 12, 'A',
     { ...la, 'font-size': 11, 'font-weight': 'bold', 'text-anchor': 'middle' });
@@ -663,11 +717,6 @@ function renderSchematic() {
 }
 
 // ─── Export ───────────────────────────────────────────────────────────────────
-// Export coordinate mapping (same for both walls and both modes):
-//   SVG x = |u|        (distance from fold edge; corner at x=0, extends right)
-//   SVG y = wallH − z  (floor → y=wallH; top of wall → y=0)
-// All values in mm — viewBox matches physical dimensions exactly.
-
 function buildExportSvg(wall) {
   const segs = computeSegments()[wall];
   if (!segs.length) return null;
@@ -685,7 +734,6 @@ function buildExportSvg(wall) {
     const [u1, z1] = seg.from;
     const [u2, z2] = seg.to;
 
-    // Clip to the panel's printable square in SVG space (x=u, y=S−z)
     const clipped = clipLine(u1, S-z1, u2, S-z2, 0, 0, S, S);
     if (!clipped) continue;
     const [x1, y1, x2, y2] = clipped;
@@ -744,7 +792,6 @@ function buildFloorSvg() {
     const [xF2, yF2] = seg.to;
 
     const lineEl = document.createElementNS(ns, 'line');
-    // sg normalises corner-out (negative-quadrant) coords into the [0,S] export range.
     lineEl.setAttribute('x1', (sg * xF1).toFixed(4));
     lineEl.setAttribute('y1', (sg * yF1).toFixed(4));
     lineEl.setAttribute('x2', (sg * xF2).toFixed(4));
@@ -769,7 +816,7 @@ function exportFloor() {
   download('corner-anamorphosis-floor.svg', xml, 'image/svg+xml');
 }
 
-function buildJobJSON() {
+function buildCornerJobJSON() {
   const S  = cfg.size;
   const sg = cfg.cornerOut ? -1 : 1;
   const segs      = computeSegments();
@@ -824,22 +871,157 @@ function buildJobJSON() {
 }
 
 function exportJSON() {
-  download('corner-anamorphosis.json', JSON.stringify(buildJobJSON(), null, 2), 'application/json');
+  readInputs();
+  download('corner-anamorphosis.json', JSON.stringify(buildCornerJobJSON(), null, 2), 'application/json');
 }
+
+// ─── Paint project ────────────────────────────────────────────────────────────
+// Each SVG <path> becomes its own layer with N sampled line segments.
+// strokes_per_dip = N so plot.py dips the brush after each complete path.
+
+let paintPaths = [];  // SVGPathElement[] from the loaded SVG
+let paintDipMode = 'strokes';
+
+document.getElementById('btn-paint-dip-mode').addEventListener('click', () => {
+  paintDipMode = paintDipMode === 'strokes' ? 'travel' : 'strokes';
+  const btn = document.getElementById('btn-paint-dip-mode');
+  btn.textContent = paintDipMode;
+  btn.classList.toggle('active', paintDipMode === 'travel');
+  document.getElementById('paint-travel-label').style.display = paintDipMode === 'travel' ? '' : 'none';
+});
+const paintHidden = document.getElementById('paint-hidden');
+
+document.getElementById('paint-file').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(ev.target.result, 'image/svg+xml');
+
+    // Attach to a DOM container so getTotalLength() is reliable across browsers
+    paintHidden.innerHTML = '';
+    paintHidden.appendChild(doc.documentElement.cloneNode(true));
+    paintPaths = Array.from(paintHidden.querySelectorAll('path'))
+      .filter(p => p.getTotalLength() > 1e-6);
+
+    // Preview: clone the root SVG, remove fixed dimensions so it scales to container
+    const previewSvg = doc.documentElement.cloneNode(true);
+    previewSvg.removeAttribute('width');
+    previewSvg.removeAttribute('height');
+    previewSvg.style.cssText = 'max-width:100%;max-height:440px;display:block';
+    const previewDiv = document.getElementById('paint-preview');
+    previewDiv.innerHTML = '';
+    previewDiv.appendChild(previewSvg);
+
+    document.getElementById('paint-path-count').textContent = paintPaths.length;
+  };
+  reader.readAsText(file);
+});
+
+// Return the accumulated transform matrix from a path element up to (but not
+// including) svgRoot, using the SVG DOM transform API. Works even when the
+// element tree has display:none, unlike getCTM().
+function pathToSVGMatrix(path, svgRoot) {
+  let m = svgRoot.createSVGMatrix(); // identity SVGMatrix
+  for (let el = path; el && el !== svgRoot; el = el.parentElement) {
+    try {
+      const tl = el.transform && el.transform.baseVal;
+      if (tl && tl.numberOfItems > 0) {
+        const consolidated = tl.consolidate();
+        if (consolidated) m = consolidated.matrix.multiply(m);
+      }
+    } catch { /* skip elements without SVG transform API */ }
+  }
+  return m;
+}
+
+function buildPaintJobJSON() {
+  if (!paintPaths.length) return null;
+
+  const widthMm  = +document.getElementById('paint-width').value     || 100;
+  const originX  = +document.getElementById('paint-origin-x').value  || 20;
+  const originY  = +document.getElementById('paint-origin-y').value  || 20;
+  const N        = +document.getElementById('paint-segs').value      || 50;
+  const penDown  = +document.getElementById('paint-pen-down').value  || 44;
+  const penUp    = +document.getElementById('paint-pen-up').value    || 75;
+  const speed    = +document.getElementById('paint-speed').value     || 20;
+  const wellX    = +document.getElementById('paint-well-x').value    || 10;
+  const wellY    = +document.getElementById('paint-well-y').value    || 10;
+  const dipDown  = +document.getElementById('paint-dip-down').value  || 55;
+  const dwell    = +document.getElementById('paint-dwell').value     ?? 2;
+  const travelMm = +document.getElementById('paint-travel-mm').value || 500;
+
+  // Derive scale from the SVG's viewBox or width attribute
+  const svgRoot = paintHidden.querySelector('svg');
+  const vb    = svgRoot && svgRoot.viewBox && svgRoot.viewBox.baseVal;
+  const svgW  = (vb && vb.width > 0) ? vb.width
+              : parseFloat(svgRoot && svgRoot.getAttribute('width') || '100');
+  const scale = widthMm / svgW;
+
+  // Each path → one layer; N equal-arc-length segments sample the path curve.
+  // plot.py flattens layers sequentially, so with strokes_per_dip=N the arm
+  // dips exactly once between each path.
+  const layers = paintPaths.map((path, i) => {
+    const totalLen = path.getTotalLength();
+    // Accumulate parent <g transform="..."> matrices so that coordinates are
+    // in the SVG's viewBox space, not the path's local space. This is necessary
+    // because getPointAtLength() returns local coordinates without applying any
+    // ancestor transforms.
+    const toSVG   = pathToSVGMatrix(path, svgRoot);
+    const segments = [];
+    for (let k = 0; k < N; k++) {
+      const p1 = path.getPointAtLength((k / N) * totalLen).matrixTransform(toSVG);
+      const p2 = path.getPointAtLength(((k + 1) / N) * totalLen).matrixTransform(toSVG);
+      segments.push({
+        from:   [+(p1.x * scale).toFixed(4), +(p1.y * scale).toFixed(4)],
+        to:     [+(p2.x * scale).toFixed(4), +(p2.y * scale).toFixed(4)],
+        hidden: false,
+      });
+    }
+    return { id: `path_${i}`, origin: [originX, originY], segments };
+  });
+
+  return {
+    meta: { tool: 'paint', version: 1, widthMm, segsPerPath: N },
+    layers,
+    procedure: {
+      passes:  [{ label: 'draw', pen_pos_down: penDown, speed_pendown: speed }],
+      refill:  {
+        enabled:         true,
+        mode:            paintDipMode,
+        dwell_s:         dwell,
+        strokes_per_dip: N,
+        travel_mm:       travelMm,
+        start_with_dip:  true,
+        well:            { x: wellX, y: wellY, pen_pos_down: dipDown },
+      },
+      pen:     { pos_up: penUp, speed_penup: 75 },
+    },
+  };
+}
+
+function exportPaintJSON() {
+  const job = buildPaintJobJSON();
+  if (!job) { alert('No SVG loaded.'); return; }
+  download('paint.json', JSON.stringify(job, null, 2), 'application/json');
+}
+
+document.getElementById('btn-paint-export-json').addEventListener('click', exportPaintJSON);
+document.getElementById('btn-paint-plot').addEventListener('click',    () => plotJob(false, 'paint'));
+document.getElementById('btn-paint-dry-run').addEventListener('click', () => plotJob(true,  'paint'));
 
 // ─── Plotter API ──────────────────────────────────────────────────────────────
 const SERVER = 'http://localhost:8765';
 let _pollTimer = null;
 
-const elState  = document.getElementById('plotter-state');
-const elLog    = document.getElementById('plotter-log');
-const btnPlot  = document.getElementById('btn-plot');
-const btnDry   = document.getElementById('btn-dry-run');
-const btnStop  = document.getElementById('btn-stop');
+const elState = document.getElementById('plotter-state');
+const elLog   = document.getElementById('plotter-log');
+const btnStop = document.getElementById('btn-stop');
 
+// Disable/enable all plot-triggering buttons across both projects
 function setPlotterBusy(busy) {
-  btnPlot.disabled = busy;
-  btnDry.disabled  = busy;
+  document.querySelectorAll('.plot-btn').forEach(b => b.disabled = busy);
   btnStop.disabled = !busy;
 }
 
@@ -867,7 +1049,6 @@ function startPolling(jobId) {
         setPlotterBusy(false);
       }
     } catch {
-      // server went away — stop polling
       clearInterval(_pollTimer);
       setState('error');
       setPlotterBusy(false);
@@ -875,14 +1056,21 @@ function startPolling(jobId) {
   }, 1000);
 }
 
-async function plotJob(dryRun) {
-  readInputs();
-  const job = buildJobJSON();
+async function plotJob(dryRun, project) {
+  const proj = project || currentProject;
   elLog.textContent = '';
   setState('sending…');
   setPlotterBusy(true);
   try {
-    const res  = await fetch(`${SERVER}/plot?dry_run=${dryRun}`, {
+    let job;
+    if (proj === 'paint') {
+      job = buildPaintJobJSON();
+      if (!job) { alert('No SVG loaded.'); setPlotterBusy(false); setState('idle'); return; }
+    } else {
+      readInputs();
+      job = buildCornerJobJSON();
+    }
+    const res = await fetch(`${SERVER}/plot?dry_run=${dryRun}`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(job),
@@ -908,11 +1096,6 @@ async function stopJob() {
 }
 
 // ─── 3D view ──────────────────────────────────────────────────────────────────
-// Observer mode: camera at the actual observer position looking at the cube center.
-// The marks on the walls (black) should exactly coincide with the cube wireframe
-// (blue) when viewed from the correct position — mismatch indicates a bug.
-// Overview mode: elevated external view showing the full scene geometry.
-
 const canvas3d = document.getElementById('view3d');
 const ctx3d    = canvas3d.getContext('2d');
 canvas3d.width  = 280;
@@ -927,7 +1110,7 @@ function norm3(a) {
   return l < 1e-12 ? [1, 0, 0] : [a[0]/l, a[1]/l, a[2]/l];
 }
 
-let view3dObserver = true;  // true = from observer position, false = overview
+let view3dObserver = true;
 
 function renderView3D() {
   const W = canvas3d.width, H = canvas3d.height;
@@ -938,18 +1121,12 @@ function renderView3D() {
   const S = cfg.size;
   const [ox, oy, oz] = getObserver();
 
-  // Camera setup — two distinct perspectives
   let eye, lookAt, fovY;
   if (view3dObserver) {
-    // Observer view: stand at the actual observer position.
-    // Look at the corner fold at mid-wall height — centering the view between both panels.
-    // From this exact position, the printed marks should look like a 3D cube.
     eye    = [ox, oy, oz];
     lookAt = [0, 0, S / 2];
     fovY   = 40;
   } else {
-    // Overview: elevated external view, looking at the cube center.
-    // Observer always at positive x,y; corner-out cube is in negative quadrant.
     const D = cfg.dist;
     const cubeSg3 = cfg.cornerOut ? -1 : 1;
     eye    = [D * 0.4, D * 0.3, D * 0.85];
@@ -983,7 +1160,6 @@ function renderView3D() {
     if (stk){ctx3d.strokeStyle=stk;ctx3d.lineWidth=lw||1;ctx3d.setLineDash([]);ctx3d.stroke();}
   }
 
-  // Wall A: y=0 plane. Wall B: x=0 plane. Floor: z=0 plane. All extend in cubeSg direction.
   const sg3 = cfg.cornerOut ? -1 : 1;
   const wAc = [[0,0,0],[sg3*S,0,0],[sg3*S,0,S],[0,0,S]];
   const wBc = [[0,0,0],[0,sg3*S,0],[0,sg3*S,S],[0,0,S]];
@@ -993,24 +1169,14 @@ function renderView3D() {
   const V         = getVertices();
 
   if (view3dObserver) {
-    // ── Observer mode ─────────────────────────────────────────────────────────
-    // Camera is at the actual observer position. From here, the anamorphic marks
-    // on the panels should coalesce into the shape of the virtual cube.
-    // Marks are drawn on opaque paper panels; the blue cube sits behind them.
-    // If marks and cube edges coincide on screen, the projection is correct.
-
-    // 1. Virtual cube behind panels
     for (const [i,j,hid] of EDGES)
       ln3(V[i], V[j], hid?'rgba(40,80,220,0.2)':'rgba(40,80,220,0.5)',
         hid?0.8:1.4, hid?[4,3]:[]);
 
-    // 2. Opaque panels (simulating physical paper)
-    poly3(wFc, '#f5f5ee', '#ccc', 0.6);   // floor first (behind walls from above)
+    poly3(wFc, '#f5f5ee', '#ccc', 0.6);
     poly3(wAc, '#f2f2f2', '#ccc', 0.6);
     poly3(wBc, '#f2f2f2', '#ccc', 0.6);
 
-    // 3. Anamorphic marks on panels
-    // Wall A: x=sg3*u, y=0, z. Wall B: x=0, y=sg3*u, z. Floor: x=xF, y=yF, z=0.
     for (const s of segs.A)
       ln3([sg3*s.from[0],0,s.from[1]], [sg3*s.to[0],0,s.to[1]],
         s.hidden?'#bbb':'#111', s.hidden?0.7:1.5, s.hidden?[3,2]:[]);
@@ -1025,21 +1191,14 @@ function renderView3D() {
     ctx3d.fillText('observer view — marks should read as a cube from this position', 4, H-5);
 
   } else {
-    // ── Overview mode ──────────────────────────────────────────────────────────
-    // External vantage point showing the full scene geometry.
-    // Cube (blue) and panels are shown; marks not drawn (only meaningful from observer).
-
-    // 1. Virtual cube (prominent)
     for (const [i,j,hid] of EDGES)
       ln3(V[i], V[j], hid?'rgba(40,80,220,0.3)':'rgba(30,70,210,0.88)',
         hid?0.8:2, hid?[4,3]:[]);
 
-    // 2. Semi-transparent panels
-    poly3(wFc, 'rgba(255,220,130,0.2)',  '#ccaa55', 0.8);   // floor tile
+    poly3(wFc, 'rgba(255,220,130,0.2)',  '#ccaa55', 0.8);
     poly3(wAc, 'rgba(190,205,255,0.2)', '#8899cc', 0.8);
     poly3(wBc, 'rgba(190,235,205,0.2)', '#88aa99', 0.8);
 
-    // 3. Observer position
     const obsP = prj([ox, oy, oz]);
     if (obsP) {
       ctx3d.beginPath(); ctx3d.arc(obsP[0],obsP[1],5,0,Math.PI*2);
@@ -1052,9 +1211,6 @@ function renderView3D() {
     ctx3d.fillText('overview — cube in corner; switch to observer to check marks', 4, H-5);
   }
 
-  // ── Axes (drawn in both modes) ────────────────────────────────────────────────
-  // Origin at V[0] (fold corner = cube local origin). Directions from V[0] toward
-  // V[1] (world x), V[2] (world y), V[4] (world z = up).
   function axis3(p1, p2, col, label) {
     ln3(p1, p2, col, 1.5, []);
     const sp1 = prj(p1), sp2 = prj(p2); if (!sp1 || !sp2) return;
@@ -1074,7 +1230,6 @@ function renderView3D() {
     ctx3d.fillText(label, sp2[0]+5, sp2[1]+3);
   }
 
-  // Cube-local axis directions in world space: unit vectors from V[0] toward V[1], V[2], V[4]
   function axDir(from, to, axLen) {
     const dx = to[0]-from[0], dy = to[1]-from[1], dz = to[2]-from[2];
     const l = Math.hypot(dx,dy,dz);
@@ -1115,8 +1270,8 @@ document.getElementById('btn-export-a').addEventListener('click', () => exportWa
 document.getElementById('btn-export-b').addEventListener('click', () => exportWall('B'));
 document.getElementById('btn-export-floor').addEventListener('click', exportFloor);
 document.getElementById('btn-export-json').addEventListener('click', exportJSON);
-btnPlot.addEventListener('click', () => plotJob(false));
-btnDry.addEventListener('click',  () => plotJob(true));
+document.getElementById('btn-plot').addEventListener('click',    () => plotJob(false, 'corner'));
+document.getElementById('btn-dry-run').addEventListener('click', () => plotJob(true,  'corner'));
 btnStop.addEventListener('click', stopJob);
 
 render();

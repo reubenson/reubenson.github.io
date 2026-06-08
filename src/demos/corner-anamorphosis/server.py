@@ -17,7 +17,7 @@ import io
 import sys
 import threading
 import uuid
-from contextlib import redirect_stdout
+from contextlib import redirect_stdout, redirect_stderr
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -41,19 +41,21 @@ _current_thread: threading.Thread | None = None
 def _run_job(job_id: str, job_dict: dict, dry_run: bool):
     buf = io.StringIO()
     _jobs[job_id]["state"] = "running"
+    original_load = plotter.load_job
     try:
         # plot() expects a file path; we inject the dict via a monkey-patch
         # on load_job so we never touch the filesystem.
-        original_load = plotter.load_job
         plotter.load_job = lambda _path: job_dict
-        with redirect_stdout(buf):
+        with redirect_stdout(buf), redirect_stderr(buf):
             plotter.plot("_inline_", dry_run=dry_run)
-        plotter.load_job = original_load
         _jobs[job_id]["state"] = "done"
-    except Exception as exc:
+    except BaseException as exc:
+        # Catch SystemExit (from sys.exit() calls in plot.py) in addition to
+        # regular exceptions so the job state is always updated.
         _jobs[job_id]["state"] = "error"
-        buf.write(f"\nERROR: {exc}")
+        buf.write(f"\nERROR: {type(exc).__name__}: {exc}")
     finally:
+        plotter.load_job = original_load
         _jobs[job_id]["log"] = buf.getvalue().splitlines()
 
 
