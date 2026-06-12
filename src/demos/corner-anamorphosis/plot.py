@@ -39,6 +39,11 @@ Job JSON format:
 All coordinates are mm. Segment coordinates are in layer-local space;
 each layer's origin is added before plotting.
 
+Refill modes:
+    "strokes" (default): dip after every `strokes_per_dip` segments.
+    "travel":            dip after `travel_mm` of cumulative pen-down
+                         distance; `strokes_per_dip` is ignored in this mode.
+
 Usage:
     python plot.py job.json
     python plot.py job.json --layers wall_a wall_b   # skip floor
@@ -98,6 +103,8 @@ import time
 # axicli clips to actual travel limits on the hardware.
 BED_W, BED_H = 500, 400
 
+MM_PER_INCH = 25.4
+
 def _seg_to_line(seg, ox, oy):
     x1 = ox + seg['from'][0]
     y1 = oy + seg['from'][1]
@@ -140,6 +147,36 @@ def travel_stats(flat_segs):
         pen_down += math.hypot(sx2 - sx1, sy2 - sy1)
         prev_end = (sx2, sy2)
     return pen_down, pen_up, lifts
+
+
+# ── vpype ─────────────────────────────────────────────────────────────────────
+
+DEFAULT_VPYPE_PIPELINE = 'linemerge --tolerance 0.5 linesort'
+
+def vpype_optimize(svg_str, pipeline):
+    """Run an SVG string through a vpype pipeline; return the result SVG string."""
+    if not shutil.which('vpype'):
+        print('  [vpype not found on PATH — skipping optimization]')
+        return svg_str
+    with tempfile.NamedTemporaryFile(suffix='.svg', mode='w',
+                                     delete=False, prefix='vpy_in_') as f:
+        f.write(svg_str)
+        inp = f.name
+    out = inp.replace('vpy_in_', 'vpy_out_')
+    try:
+        cmd = ['vpype', 'read', inp] + pipeline.split() + ['write', out]
+        result = subprocess.run(cmd, text=True, capture_output=True)
+        if result.returncode != 0:
+            print(f'  [vpype error: {result.stderr.strip()}]')
+            return svg_str
+        with open(out) as f:
+            return f.read()
+    finally:
+        for p in (inp, out):
+            try:
+                os.unlink(p)
+            except FileNotFoundError:
+                pass
 
 
 # ── axicli ────────────────────────────────────────────────────────────────────
@@ -194,6 +231,167 @@ def disable_motors(axicli_path, dry_run):
         os.unlink(svg_path)
 
 
+# ── Calibration ───────────────────────────────────────────────────────────────
+
+def _run_manual(axicli_path, svg_path, cmd, extra_flags, dry_run, fd=None, old_tty=None):
+    """Run an axicli manual command, re-applying raw mode afterwards if fd/old_tty given."""
+    import tty
+    import termios
+    full_cmd = [axicli_path, svg_path, '--mode=manual', f'--manual_cmd={cmd}'] + extra_flags
+    sys.stdout.write(f'\r\n  $ {" ".join(full_cmd)}\r\n')
+    sys.stdout.flush()
+    if dry_run:
+        if fd is not None:
+            tty.setraw(fd)
+        return
+    # Restore normal mode so axicli's own I/O works correctly
+    if fd is not None and old_tty is not None:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_tty)
+    result = subprocess.run(full_cmd, text=True, capture_output=True)
+    # Re-enter raw mode before any further reads
+    if fd is not None:
+        tty.setraw(fd)
+    if result.stdout:
+        sys.stdout.write(result.stdout.rstrip() + '\r\n')
+        sys.stdout.flush()
+    if result.returncode != 0:
+        sys.stdout.write(result.stderr.rstrip() + '\r\n')
+        sys.stdout.flush()
+
+
+def calibrate(job_path, dry_run=False):
+    """
+    Interactive calibration.
+
+    w/a/s/d   – move plotter head (up/left/down/right)
+    [ / ]     – raise / lower pen  (decrease / increase pen_pos_down)
+    + / -     – double / halve XY step size
+    t         – test pen: draw a 0.5 mm mark at current position
+    Enter / q – accept and exit
+
+    Returns (x_offset_mm, y_offset_mm, pen_pos_down).
+    The caller adds the XY offset to every layer origin before plotting.
+    """
+    try:
+        import tty
+        import termios
+    except ImportError:
+        sys.exit("calibration requires tty/termios (Unix/macOS only)")
+
+    job         = load_job(job_path)
+    proc        = job['procedure']
+    pen         = proc['pen']
+    axicli_path = find_axicli()
+
+    minimal_svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg"'
+        f' width="{BED_W}mm" height="{BED_H}mm"'
+        f' viewBox="0 0 {BED_W} {BED_H}"></svg>'
+    )
+    with tempfile.NamedTemporaryFile(suffix='.svg', mode='w',
+                                     delete=False, prefix='axi_cal_') as f:
+        f.write(minimal_svg)
+        svg_path = f.name
+
+    x_mm     = 0.0
+    y_mm     = 0.0
+    pen_down = proc['passes'][0]['pen_pos_down']
+    step_mm  = 5.0
+
+    fd  = sys.stdin.fileno()
+    old = termios.tcgetattr(fd)
+
+    def status():
+        sys.stdout.write(
+            f'\r\033[K'
+            f'  pos=({x_mm:+.1f}, {y_mm:+.1f}) mm'
+            f'  pen_pos_down={pen_down}'
+            f'  step={step_mm:.1f} mm  '
+        )
+        sys.stdout.flush()
+
+    def walk(axis, dist_mm):
+        inches = dist_mm / MM_PER_INCH
+        _run_manual(axicli_path, svg_path,
+                    'walk_x' if axis == 'x' else 'walk_y',
+                    [f'--dist={inches:.6f}'], dry_run, fd, old)
+
+    def test_pen():
+        # axicli does not persist position between walk_x/walk_y invocations, so
+        # it always thinks it's at (0,0). Drawing a mark at (0,0) in the SVG means
+        # zero commanded travel — the pen dips right where the head physically is.
+        sys.stdout.write(f'\r\n  testing pen_pos_down={pen_down} ...\r\n')
+        sys.stdout.flush()
+        test_svg = make_svg([({'from': [0, 0], 'to': [0.1, 0]}, (0.0, 0.0))])
+        with tempfile.NamedTemporaryFile(suffix='.svg', mode='w',
+                                         delete=False, prefix='axi_test_') as f:
+            f.write(test_svg)
+            test_path = f.name
+        pen_opts = {
+            'pen_pos_down':  pen_down,
+            'speed_pendown': 25,
+            'pen_pos_up':    pen['pos_up'],
+            'speed_penup':   pen['speed_penup'],
+        }
+        termios.tcsetattr(fd, termios.TCSADRAIN, old)
+        try:
+            run_axicli(test_path, pen_opts, axicli_path, dry_run)
+        finally:
+            tty.setraw(fd)
+            os.unlink(test_path)
+
+    print("\n=== AxiDraw Calibration ===")
+    print("  w / s       move plotter up / down (Y axis)")
+    print("  a / d       move plotter left / right (X axis)")
+    print("  [ / ]       pen up / pen down  (decrease / increase pen_pos_down)")
+    print("  + / -       double / halve XY step size")
+    print("  t           test pen: draw 0.5 mm mark at current position")
+    print("  Enter / q   accept calibration and continue")
+    print("  Ctrl-C      abort")
+    print()
+    status()
+
+    try:
+        tty.setraw(fd)
+        while True:
+            ch = os.read(fd, 1).decode('utf-8', errors='replace')
+
+            if ch in ('\r', '\n', 'q'):
+                break
+            elif ch == '\x03':  # Ctrl-C
+                sys.stdout.write('\r\nCalibration aborted.\r\n')
+                sys.exit(0)
+            elif ch == 'w':
+                walk('y', -step_mm);  y_mm -= step_mm
+            elif ch == 's':
+                walk('y',  step_mm);  y_mm += step_mm
+            elif ch == 'd':
+                walk('x',  step_mm);  x_mm += step_mm
+            elif ch == 'a':
+                walk('x', -step_mm);  x_mm -= step_mm
+            elif ch == '[':
+                pen_down = max(0,   pen_down - 1)
+            elif ch == ']':
+                pen_down = min(100, pen_down + 1)
+            elif ch == '+':
+                step_mm = min(50.0, step_mm * 2)
+            elif ch == '-':
+                step_mm = max(0.5,  step_mm / 2)
+            elif ch == 't':
+                test_pen()
+
+            status()
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old)
+        try:
+            os.unlink(svg_path)
+        except FileNotFoundError:
+            pass
+
+    print(f"\n\nCalibrated: offset=({x_mm:+.1f}, {y_mm:+.1f}) mm  pen_pos_down={pen_down}\n")
+    return x_mm, y_mm, pen_down
+
+
 # ── Plotting ──────────────────────────────────────────────────────────────────
 
 def flatten_layers(layers, hidden=False):
@@ -212,19 +410,43 @@ def chunked(items, size):
         yield items[i:i + size]
 
 
+def chunked_by_travel(flat_segs, travel_mm):
+    """Split segments into chunks where each chunk's pen-down distance <= travel_mm."""
+    chunks, current, current_travel = [], [], 0.0
+    for seg, origin in flat_segs:
+        sx1 = origin[0] + seg['from'][0]; sy1 = origin[1] + seg['from'][1]
+        sx2 = origin[0] + seg['to'][0];   sy2 = origin[1] + seg['to'][1]
+        dist = math.hypot(sx2 - sx1, sy2 - sy1)
+        if current and current_travel + dist > travel_mm:
+            chunks.append(current)
+            current, current_travel = [], 0.0
+        current.append((seg, origin))
+        current_travel += dist
+    if current:
+        chunks.append(current)
+    return chunks if chunks else [[]]
+
+
 def dip_at_well(well, pen, axicli_path, dry_run):
     """Move arm to well position, lower pen to dip, dwell, then raise."""
     wx, wy   = well['x'], well['y']
     dip_down = well['pen_pos_down']
     dwell    = well.get('dwell_s', 0)
 
-    # A 0.1mm line forces axicli to travel to the well and execute a pen-down stroke.
+    # Back-and-forth 20mm sweep × 2 to load the brush before the next stroke.
+    sweep = 20.0
+    pts = (
+        f'{wx:.4f},{wy:.4f} '
+        f'{wx:.4f},{wy+sweep:.4f} '
+        f'{wx:.4f},{wy:.4f} '
+        f'{wx:.4f},{wy+sweep:.4f} '
+        f'{wx:.4f},{wy:.4f}'
+    )
     dip_svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg"'
         f' width="{BED_W}mm" height="{BED_H}mm"'
         f' viewBox="0 0 {BED_W} {BED_H}">'
-        f'<line x1="{wx:.4f}" y1="{wy:.4f}"'
-        f' x2="{wx + 0.1:.4f}" y2="{wy:.4f}"'
+        f'<polyline points="{pts}"'
         f' style="fill:none;stroke:#000000;stroke-width:0.1"/>'
         f'</svg>'
     )
@@ -247,22 +469,28 @@ def dip_at_well(well, pen, axicli_path, dry_run):
         time.sleep(dwell)
 
 
-def plot_flat(flat_segs, pen_options, pen, axicli_path, refill, dry_run, save_svg=False):
+def plot_flat(flat_segs, pen_options, pen, axicli_path, refill, dry_run,
+             save_svg=False, vpype_pipeline=None):
     """Plot a flat list of (seg, origin) tuples, with automatic well dips if enabled."""
     if not flat_segs:
         return
 
     if refill['enabled']:
-        size = refill['strokes_per_dip']
-        chunks = list(chunked(flat_segs, size))
+        mode = refill.get('mode', 'strokes')
+        if mode == 'travel':
+            chunks = chunked_by_travel(flat_segs, refill['travel_mm'])
+        else:
+            chunks = list(chunked(flat_segs, refill['strokes_per_dip']))
     else:
         chunks = [flat_segs]
 
     for idx, chunk in enumerate(chunks):
-        if refill['enabled'] and idx > 0:
+        if refill['enabled'] and (idx > 0 or refill.get('start_with_dip', False)):
             dip_at_well(refill['well'], pen, axicli_path, dry_run)
 
         svg = make_svg(chunk)
+        if vpype_pipeline:
+            svg = vpype_optimize(svg, vpype_pipeline)
         down_mm, up_mm, lifts = travel_stats(chunk)
         print(f"    {len(chunk)} segments | "
               f"draw {down_mm:.1f}mm | travel {up_mm:.1f}mm | {lifts} lifts")
@@ -284,13 +512,20 @@ def plot_flat(flat_segs, pen_options, pen, axicli_path, refill, dry_run, save_sv
             os.unlink(svg_path)
 
 
-def plot(job_path, layer_filter=None, pass_filter=None, dry_run=False, save_svg=False):
+def plot(job_path, layer_filter=None, pass_filter=None, dry_run=False, save_svg=False,
+         x_offset=0.0, y_offset=0.0, pen_down_override=None, vpype_pipeline=None):
     job    = load_job(job_path)
     layers = job['layers']
     proc   = job['procedure']
     pen    = proc['pen']
     refill = proc['refill']
     passes = proc['passes']
+
+    # vpype pipeline: CLI arg takes precedence; fall back to job JSON setting.
+    if vpype_pipeline is None:
+        vpype_cfg = proc.get('vpype', {})
+        if vpype_cfg.get('enabled'):
+            vpype_pipeline = vpype_cfg.get('pipeline', DEFAULT_VPYPE_PIPELINE)
 
     if layer_filter:
         layers = [l for l in layers if l['id'] in layer_filter]
@@ -301,6 +536,14 @@ def plot(job_path, layer_filter=None, pass_filter=None, dry_run=False, save_svg=
         passes = [p for p in passes if p['label'] in pass_filter]
         if not passes:
             sys.exit(f"No passes matched: {pass_filter}")
+
+    if x_offset or y_offset:
+        layers = [dict(l, origin=[l['origin'][0] + x_offset,
+                                   l['origin'][1] + y_offset])
+                  for l in layers]
+
+    if pen_down_override is not None:
+        passes = [dict(p, pen_pos_down=pen_down_override) for p in passes]
 
     axicli_path = find_axicli()
     if dry_run:
@@ -319,7 +562,8 @@ def plot(job_path, layer_filter=None, pass_filter=None, dry_run=False, save_svg=
             'pen_pos_up':    pen['pos_up'],
             'speed_penup':   pen['speed_penup'],
         }
-        plot_flat(visible_segs, pen_options, pen, axicli_path, refill, dry_run, save_svg)
+        plot_flat(visible_segs, pen_options, pen, axicli_path, refill, dry_run,
+                  save_svg, vpype_pipeline)
 
         # Hidden lines on the final pass only, at reduced pressure.
         if i == len(passes) - 1 and hidden_segs:
@@ -327,7 +571,7 @@ def plot(job_path, layer_filter=None, pass_filter=None, dry_run=False, save_svg=
             hidden_options = dict(pen_options)
             hidden_options['pen_pos_down'] = max(p['pen_pos_down'] - 8, 20)
             plot_flat(hidden_segs, hidden_options, pen, axicli_path,
-                      {'enabled': False}, dry_run, save_svg)
+                      {'enabled': False}, dry_run, save_svg, vpype_pipeline)
 
     print("\nDisabling motors...")
     disable_motors(axicli_path, dry_run)
@@ -351,5 +595,24 @@ if __name__ == '__main__':
                     help='Print axicli commands without running them')
     ap.add_argument('--save-svg',          action='store_true',
                     help='Write each intermediate SVG to disk for inspection')
+    ap.add_argument('--calibrate',         action='store_true',
+                    help='Run interactive calibration before plotting '
+                         '(arrow keys move pen; Tab toggles XY/pen-height mode)')
+    ap.add_argument('--calibrate-only',    action='store_true',
+                    help='Run calibration and exit without plotting')
+    ap.add_argument('--vpype',             action='store_true',
+                    help='Optimize SVG with vpype before each axicli call')
+    ap.add_argument('--vpype-pipeline',    default=DEFAULT_VPYPE_PIPELINE,
+                    metavar='CMDS',
+                    help=f'vpype pipeline string (default: {DEFAULT_VPYPE_PIPELINE!r})')
     args = ap.parse_args()
-    plot(args.job, args.layers, args.passes, args.dry_run, args.save_svg)
+
+    x_off = y_off = 0.0
+    pen_override = None
+    if args.calibrate or args.calibrate_only:
+        x_off, y_off, pen_override = calibrate(args.job, dry_run=args.dry_run)
+
+    if not args.calibrate_only:
+        plot(args.job, args.layers, args.passes, args.dry_run, args.save_svg,
+             x_offset=x_off, y_offset=y_off, pen_down_override=pen_override,
+             vpype_pipeline=args.vpype_pipeline if args.vpype else None)

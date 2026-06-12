@@ -291,6 +291,11 @@ svg { display: block; }
   <div id="plotter-controls">
     <button id="btn-stop" disabled>stop</button>
     <span id="plotter-state">idle</span>
+    <span class="ctrl-sep">|</span>
+    <button id="btn-vpype-toggle">vpype: off</button>
+    <input type="text" id="vpype-pipeline" value="linemerge --tolerance 0.5 linesort"
+           style="font-family:monospace;font-size:11px;width:260px;padding:3px 5px;border:1px solid #bbb;display:none"
+           placeholder="vpype pipeline">
   </div>
   <div id="plotter-log"></div>
 </div>
@@ -866,6 +871,7 @@ function buildCornerJobJSON() {
       ],
       refill: { enabled: false, dwell_s: 2, strokes_per_dip: 15 },
       pen:    { pos_up: 60, speed_penup: 75 },
+      vpype:  vpypeProcedure(),
     },
   };
 }
@@ -914,7 +920,12 @@ document.getElementById('paint-file').addEventListener('change', e => {
     previewDiv.innerHTML = '';
     previewDiv.appendChild(previewSvg);
 
-    document.getElementById('paint-path-count').textContent = paintPaths.length;
+    const subpathTotal = paintPaths.reduce((n, p) =>
+      n + splitPathIntoSubpaths(p.getAttribute('d') || '').length, 0);
+    document.getElementById('paint-path-count').textContent =
+      subpathTotal !== paintPaths.length
+        ? `${paintPaths.length} (${subpathTotal} sub-paths)`
+        : paintPaths.length;
   };
   reader.readAsText(file);
 });
@@ -934,6 +945,38 @@ function pathToSVGMatrix(path, svgRoot) {
     } catch { /* skip elements without SVG transform API */ }
   }
   return m;
+}
+
+// Split a compound SVG path d-string into individual sub-path d-strings,
+// each starting with an absolute M so they can be used as standalone paths.
+// Inkscape often emits one <path> with many disconnected sub-paths joined
+// by `m` commands; this separates them so the plotter lifts between shapes.
+function splitPathIntoSubpaths(d) {
+  const result = [];
+  const tokens = [];
+  d.replace(/([MmZzLlHhVvCcSsQqTtAa])([^MmZzLlHhVvCcSsQqTtAa]*)/g,
+    (_, cmd, rest) => tokens.push({ cmd, args: rest.trim().split(/[\s,]+/).filter(Boolean).map(Number) })
+  );
+  let cx = 0, cy = 0, sx = 0, sy = 0, cur = [];
+  function startSub(ax, ay) {
+    if (cur.length > 1) result.push(cur.join(' '));
+    cur = [`M ${ax} ${ay}`]; cx = ax; cy = ay; sx = ax; sy = ay;
+  }
+  function trackEnd(cmd, args) {
+    const l = args.length, uc = cmd.toUpperCase(), rel = cmd !== uc;
+    if (!l) return;
+    if (uc === 'H') cx = rel ? cx + args[l-1] : args[l-1];
+    else if (uc === 'V') cy = rel ? cy + args[l-1] : args[l-1];
+    else if (l >= 2) { if (rel) { cx += args[l-2]; cy += args[l-1]; } else { cx = args[l-2]; cy = args[l-1]; } }
+  }
+  for (const { cmd, args } of tokens) {
+    if (cmd === 'M') { startSub(args[0], args[1]); for (let i=2;i+1<args.length;i+=2){cx=args[i];cy=args[i+1];cur.push(`L ${cx} ${cy}`);} }
+    else if (cmd === 'm') { startSub(cx+args[0], cy+args[1]); for(let i=2;i+1<args.length;i+=2){cx+=args[i];cy+=args[i+1];cur.push(`L ${cx} ${cy}`);} }
+    else if (cmd === 'Z' || cmd === 'z') { cur.push('Z'); cx = sx; cy = sy; }
+    else { if (!cur.length) startSub(0,0); cur.push(cmd+(args.length?' '+args.join(' '):'')); trackEnd(cmd,args); }
+  }
+  if (cur.length > 1) result.push(cur.join(' '));
+  return result;
 }
 
 function buildPaintJobJSON() {
@@ -959,27 +1002,38 @@ function buildPaintJobJSON() {
               : parseFloat(svgRoot && svgRoot.getAttribute('width') || '100');
   const scale = widthMm / svgW;
 
-  // Each path → one layer; N equal-arc-length segments sample the path curve.
-  // plot.py flattens layers sequentially, so with strokes_per_dip=N the arm
-  // dips exactly once between each path.
-  const layers = paintPaths.map((path, i) => {
-    const totalLen = path.getTotalLength();
-    // Accumulate parent <g transform="..."> matrices so that coordinates are
-    // in the SVG's viewBox space, not the path's local space. This is necessary
-    // because getPointAtLength() returns local coordinates without applying any
-    // ancestor transforms.
-    const toSVG   = pathToSVGMatrix(path, svgRoot);
-    const segments = [];
-    for (let k = 0; k < N; k++) {
-      const p1 = path.getPointAtLength((k / N) * totalLen).matrixTransform(toSVG);
-      const p2 = path.getPointAtLength(((k + 1) / N) * totalLen).matrixTransform(toSVG);
-      segments.push({
-        from:   [+(p1.x * scale).toFixed(4), +(p1.y * scale).toFixed(4)],
-        to:     [+(p2.x * scale).toFixed(4), +(p2.y * scale).toFixed(4)],
-        hidden: false,
-      });
-    }
-    return { id: `path_${i}`, origin: [originX, originY], segments };
+  // Split each <path> into its sub-paths (Inkscape often packs many disconnected
+  // shapes into one compound path). Each sub-path becomes its own layer so the
+  // plotter lifts between shapes. Sampling uses a temporary path element appended
+  // to svgRoot (inside paintHidden) so getTotalLength/getPointAtLength work
+  // reliably; the parent-group transform matrix (toSVG) is taken from the
+  // original element and applied via matrixTransform.
+  const NS = 'http://www.w3.org/2000/svg';
+  const layers = [];
+  paintPaths.forEach((path, pathIdx) => {
+    const toSVG = pathToSVGMatrix(path, svgRoot);
+    const subDs = splitPathIntoSubpaths(path.getAttribute('d') || '');
+
+    subDs.forEach((subD, subIdx) => {
+      const tmp = document.createElementNS(NS, 'path');
+      tmp.setAttribute('d', subD);
+      svgRoot.appendChild(tmp);
+      const len = tmp.getTotalLength();
+      if (len < 1e-6) { svgRoot.removeChild(tmp); return; }
+
+      const segments = [];
+      for (let k = 0; k < N; k++) {
+        const p1 = tmp.getPointAtLength((k / N) * len).matrixTransform(toSVG);
+        const p2 = tmp.getPointAtLength(((k + 1) / N) * len).matrixTransform(toSVG);
+        segments.push({
+          from: [+(p1.x * scale).toFixed(4), +(p1.y * scale).toFixed(4)],
+          to:   [+(p2.x * scale).toFixed(4), +(p2.y * scale).toFixed(4)],
+          hidden: false,
+        });
+      }
+      svgRoot.removeChild(tmp);
+      layers.push({ id: `path_${pathIdx}_${subIdx}`, origin: [originX, originY], segments });
+    });
   });
 
   return {
@@ -997,6 +1051,7 @@ function buildPaintJobJSON() {
         well:            { x: wellX, y: wellY, pen_pos_down: dipDown },
       },
       pen:     { pos_up: penUp, speed_penup: 75 },
+      vpype:   vpypeProcedure(),
     },
   };
 }
@@ -1010,6 +1065,26 @@ function exportPaintJSON() {
 document.getElementById('btn-paint-export-json').addEventListener('click', exportPaintJSON);
 document.getElementById('btn-paint-plot').addEventListener('click',    () => plotJob(false, 'paint'));
 document.getElementById('btn-paint-dry-run').addEventListener('click', () => plotJob(true,  'paint'));
+
+// ─── vpype ────────────────────────────────────────────────────────────────────
+let vpypeEnabled = false;
+
+document.getElementById('btn-vpype-toggle').addEventListener('click', () => {
+  vpypeEnabled = !vpypeEnabled;
+  const btn = document.getElementById('btn-vpype-toggle');
+  btn.textContent = `vpype: ${vpypeEnabled ? 'on' : 'off'}`;
+  btn.classList.toggle('active', vpypeEnabled);
+  document.getElementById('vpype-pipeline').style.display = vpypeEnabled ? '' : 'none';
+});
+
+function vpypeProcedure() {
+  if (!vpypeEnabled) return { enabled: false };
+  return {
+    enabled:  true,
+    pipeline: document.getElementById('vpype-pipeline').value.trim() ||
+              'linemerge --tolerance 0.5 linesort',
+  };
+}
 
 // ─── Plotter API ──────────────────────────────────────────────────────────────
 const SERVER = 'http://localhost:8765';

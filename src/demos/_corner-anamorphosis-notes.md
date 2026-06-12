@@ -287,6 +287,18 @@ switches the visible content area; the plotter controls at the bottom are shared
 - `renderSchematic()` — draws the top-down scene diagram
 - `renderView3D()` — draws the 3D model (observer and overview modes)
 
+### Paint project — key functions
+- `splitPathIntoSubpaths(d)` — tokenises an SVG path `d` string and returns an
+  array of sub-path `d` strings, each starting with an absolute `M`. Tracks
+  current position through all command types so that relative `m` after `z`
+  resolves to the correct absolute coordinate.
+- `pathToSVGMatrix(path, svgRoot)` — accumulates parent `<g transform="..."`
+  attribute matrices from the path element up to the SVG root, returning an
+  `SVGMatrix` for use with `SVGPoint.matrixTransform()`.
+- `buildPaintJobJSON()` — for each `<path>` in `paintPaths`, splits it into
+  sub-paths, samples each as N segments via a temporary DOM path element, applies
+  the accumulated transform, and emits one layer per sub-path.
+
 ### Shared plotter functions
 - `plotJob(dryRun, project)` — builds the appropriate job JSON for the active
   project, POSTs it to the local server, then polls for status
@@ -307,16 +319,28 @@ path. Intended for watercolor or ink painting with the AxiDraw.
 2. All `<path>` elements with non-zero length are collected. Other element types
    (circles, rects, etc.) are ignored — convert them to paths in your SVG editor
    first if needed.
-3. Each path is sampled into exactly N equal-arc-length line segments using
-   `SVGPathElement.getPointAtLength()`. This linearises curves. Parent `<g
+3. Each `<path>` is split into individual sub-paths by `splitPathIntoSubpaths()`,
+   which tokenises the `d` attribute and starts a new sub-path at every `M`/`m`
+   command, converting the starting coordinate to an absolute `M` so each
+   sub-path can be used as a standalone path element. This is necessary because
+   Inkscape frequently packs many disconnected shapes into a single compound
+   `<path>`; without splitting, the plotter draws spurious lines across every
+   pen-up gap and loses most of the detail due to coarse arc-length sampling.
+4. Each sub-path is sampled into N equal-arc-length line segments using a
+   temporary `<path>` element appended to the hidden SVG root (so
+   `getTotalLength` / `getPointAtLength` are reliable). Parent `<g
    transform="...">` attributes are applied via `pathToSVGMatrix()` (walks the
-   DOM using `SVGTransformList` so it works even on `display:none` elements and
-   returns a native `SVGMatrix` compatible with `SVGPoint.matrixTransform()`).
-4. Each path becomes its own **layer** in the output JSON, with all N segments
-   sharing the same `origin` offset.
-5. `strokes_per_dip` is set to N. Because `plot.py` flattens layers
+   DOM using `SVGTransformList`, returns a native `SVGMatrix` compatible with
+   `SVGPoint.matrixTransform()`).
+5. Each sub-path becomes its own **layer** in the output JSON, with all N
+   segments sharing the same `origin` offset.
+6. `strokes_per_dip` is set to N. Because `plot.py` flattens layers
    sequentially before chunking, each layer's N segments form one chunk — so the
-   arm dips exactly once between every path (in strokes mode).
+   arm dips exactly once between every sub-path (in strokes mode).
+
+The path count shown in the UI reports both the number of `<path>` elements and
+the total number of sub-paths, e.g. `1 (32 sub-paths)`, so the split is visible
+before exporting or plotting.
 
 ### Controls
 
@@ -353,7 +377,8 @@ path. Intended for watercolor or ink painting with the AxiDraw.
       "start_with_dip":  true,
       "well": { "x": 10, "y": 10, "pen_pos_down": 55 }
     },
-    "pen":     { "pos_up": 60, "speed_penup": 75 }
+    "pen":     { "pos_up": 60, "speed_penup": 75 },
+    "vpype":   { "enabled": false, "pipeline": "linemerge --tolerance 0.5 linesort" }
   }
 }
 ```
@@ -467,7 +492,7 @@ client-side; the server is a thin plotter driver only.
 
 **Files:**
 - `corner-anamorphosis/server.py` — FastAPI app; exposes three endpoints
-- `corner-anamorphosis/requirements.txt` — `fastapi`, `uvicorn[standard]`
+- `corner-anamorphosis/requirements.txt` — `fastapi`, `uvicorn[standard]`, `vpype`, `shapely`, `pillow`
 - `corner-anamorphosis/plot.py` — plotter harness; imported directly by the server
 
 **Endpoints:**
@@ -504,6 +529,62 @@ can be moved freely.
   `contextlib.redirect_stdout` / `redirect_stderr`.
 - The `load_job` monkey-patch is always restored in `finally`, so a failed job
   does not corrupt the next one.
+
+
+## vpype Optimization
+
+[vpype](https://github.com/abey79/vpype) is an optional pre-processing step that runs between SVG generation and axicli. It reduces pen lifts and minimises pen-up travel before each plot chunk is sent to the hardware.
+
+### What it does
+
+| Command | Effect |
+|---------|--------|
+| `linemerge --tolerance <mm>` | Connects line endpoints within tolerance into polylines, reducing pen lifts |
+| `linesort` | Reorders strokes to minimise total pen-up travel distance |
+| `linesimplify --tolerance <mm>` | Reduces vertex count on curves (less relevant for straight-line geometry) |
+
+The default pipeline is `linemerge --tolerance 0.5 linesort`.
+
+### CLI usage
+
+```bash
+# Enable with default pipeline
+python plot.py job.json --vpype
+
+# Custom pipeline
+python plot.py job.json --vpype --vpype-pipeline "linemerge --tolerance 0.5 linesort"
+
+# Inspect optimized SVGs without plotting (chunks saved to disk)
+python plot.py job.json --dry-run --save-svg --vpype
+
+# Standalone vpype inspection
+vpype read corner-wall-a.svg linemerge linesort show
+vpype read corner-wall-a.svg linemerge --tolerance 0.5 linesort write optimized.svg
+```
+
+### Job JSON field
+
+vpype can also be configured in the job JSON `procedure` object, which is the path used by the webapp:
+
+```json
+"procedure": {
+  "vpype": {
+    "enabled": true,
+    "pipeline": "linemerge --tolerance 0.5 linesort"
+  },
+  ...
+}
+```
+
+If `enabled` is false (or the field is absent), vpype is skipped. The CLI `--vpype` flag takes precedence over the JSON field; the JSON field is what the webapp writes.
+
+### Webapp
+
+A **vpype: off/on** toggle in the shared `#plotter` bar enables optimization for any plot job (Corner or Paint). When toggled on, an editable pipeline text input appears pre-filled with the default. The setting is included in every job JSON sent to the server — including `export JSON` downloads.
+
+### Graceful degradation
+
+If `vpype` is not on PATH, `plot.py` prints a warning and continues without optimization. No error is raised.
 
 
 ## Potential Future Work
