@@ -931,15 +931,15 @@ nav.main-nav .active {
   font-size: 20px;
   max-width: calc(100vw - 40px);
   margin-top: 37px;
+  border-bottom: solid black 1px;
 }
 .shop-page header nav {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding: 6px;
-  padding: 11px 20px 10px;
-  border-bottom: solid black 1px;
+  justify-content: space-between;
+  padding: 11px 0 10px;
+  max-width: 720px;
 }
 .shop-page header nav a {
   text-decoration: none;
@@ -949,6 +949,9 @@ nav.main-nav .active {
 }
 .shop-page .content {
   scroll-padding-top: 60px;
+}
+.shop-page .content .shop-collection {
+  margin-bottom: 20px;
 }
 .shop-page .content .shop-collection-header {
   font-weight: 300;
@@ -972,7 +975,7 @@ nav.main-nav .active {
 .shop-page .collection-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 .shop-page .shop-top {
@@ -1035,10 +1038,109 @@ nav.main-nav .active {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.shop-page .shop-listings iframe {
+.shop-page .shop-empty {
+  font-size: 18px;
+  color: #333;
+  margin: 10px 0;
+}
+.shop-page .product-card {
+  position: relative;
+  flex: 1 0 31%;
+  min-width: 220px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
-  flex: 1 0 40%;
-  min-width: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f0f0e6;
+  transition: opacity 0.2s ease;
+}
+.shop-page .product-card.in-cart .add-to-cart {
+  opacity: 0.6;
+}
+.shop-page .product-image-wrapper {
+  position: relative;
+}
+.shop-page .product-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 2px;
+  background-image: url(/public/riso-maine.png);
+  background-size: cover;
+  margin-bottom: 5px;
+}
+.shop-page .product-price {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  padding: 6px 10px;
+  border: solid black 1px;
+  border-radius: 5px;
+  box-shadow: 1px 2px black;
+  background-color: #f0f0e6;
+  letter-spacing: 2.5px;
+  font-size: 15px;
+}
+.shop-page .product-title {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  max-width: 70%;
+  padding: 10px;
+  border: solid black 1px;
+  border-radius: 5px;
+  background-color: #f0f0e6;
+  box-shadow: 1px 2px black;
+  opacity: 0.9;
+  font-family: "Ibarra Real Nova", sans-serif;
+  font-size: 16px;
+  font-weight: 100;
+  color: #000000;
+}
+.shop-page .product-card.sold-out {
+  opacity: 0.6;
+}
+.shop-page .product-card.sold-out .product-sold-out-badge {
+  display: block;
+}
+.shop-page .product-variant-select {
+  display: block;
+  width: 100%;
+  margin: 10px 0 0;
+  padding: 8px;
+  border: solid black 1px;
+  border-radius: 2px;
+  background-color: #f0f0e6;
+  font-family: "Ibarra Real Nova", sans-serif;
+  font-size: 15px;
+}
+.shop-page .add-to-cart {
+  display: block;
+  margin: 10px auto auto;
+  padding: 10px 15px;
+  border: solid black 1px;
+  border-radius: 5px;
+  box-shadow: 1px 2px black;
+  background-color: #f0f0e6;
+  color: #000000;
+  font-family: "Ibarra Real Nova", sans-serif;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.shop-page .add-to-cart:hover, .shop-page .add-to-cart:focus {
+  background-color: #000000;
+  color: #f0f0e6;
+}
+.shop-page .add-to-cart:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.shop-page .add-to-cart:disabled:hover, .shop-page .add-to-cart:disabled:focus {
+  background-color: #f0f0e6;
+  color: #000000;
 }
 .shop-page .newsletter-signup-intro {
   margin-top: 20px;
@@ -1047,9 +1149,9 @@ nav.main-nav .active {
   position: relative;
   width: 100%;
   height: auto;
-  aspect-ratio: 9/16;
+  aspect-ratio: 3/4;
   border-radius: 2px;
-  width: 100%;
+  overflow: hidden;
 }
 .shop-page .image-sequence .sequence-image {
   position: absolute;
@@ -1058,26 +1160,259 @@ nav.main-nav .active {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 53% 50%;
   transition: opacity 3.5s linear;
   filter: brightness(1) contrast(1);
 }
+.shop-page .image-sequence .sequence-title-container {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: 10px auto;
+  text-align: center;
+  width: calc(100% - 20px);
+  max-width: 400px;
+}
+.shop-page .image-sequence .sequence-title-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.shop-page .image-sequence .sequence-title-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: var(--sequence-title-filter) blur(0.5px);
+  border: solid black 1px;
+  padding: 10px;
+}
+.shop-page .image-sequence .sequence-title {
+  flex: 0 1 auto;
+  margin: auto 15px;
+  text-align: center;
+  font-family: "Ibarra Real Nova", sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: black;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.shop-page .image-sequence .sequence-title-description {
+  flex: 1 1 auto;
+  border-top: solid black 1px;
+  margin: 5px 0 0;
+}
+.shop-page .image-sequence .sequence-title-dimensions {
+  flex: 0 1 auto;
+}
 @media screen and (min-width: 720px) {
   .shop-page header nav {
-    max-width: 1024px;
     margin: auto;
   }
-  .shop-page .shop-listings,
+  .shop-page .shop-listings {
+    width: min(100vw - 120px, 1280px) !important;
+    margin-left: calc((720px - min(100vw - 120px, 1280px)) / 2) !important;
+    justify-content: flex-start;
+  }
+  .shop-page .product-card {
+    flex-grow: 0;
+  }
   .shop-page .image-sequence {
-    width: calc(100vw - 80px) !important;
-    margin-left: calc((720px - 100vw + 80px) / 2) !important;
-    aspect-ratio: 16/9;
+    width: min(100vw - 60px, 1280px) !important;
+    margin-left: calc((720px - min(100vw - 60px, 1280px)) / 2) !important;
+    aspect-ratio: 2/1;
   }
 }
-@media screen and (min-width: 1180px) {
-  .shop-page .image-sequence {
-    width: 1024px !important;
-    margin-left: -152px !important;
+/* --- Cart drawer (appended to <body>, so scoped outside .shop-page) --- */
+.shop-cart-toggle {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  z-index: 1000;
+  padding: 6px 10px;
+  border: solid black 1px;
+  border-radius: 4px;
+  background-color: #f0f0e6;
+  color: black;
+  font-family: "Ibarra Real Nova", sans-serif;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 1px 2px black;
+  margin: auto;
+  display: inline-flex;
+  align-items: end;
+}
+.shop-cart-toggle .cart-basket-icon {
+  display: block;
+}
+.shop-cart-toggle .shop-cart-count {
+  display: inline-block;
+  min-width: 18px;
+  margin-left: 4px;
+  text-align: center;
+}
+
+.shop-cart-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+.shop-cart-overlay[hidden] {
+  display: none;
+}
+
+.shop-cart-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  max-width: 90vw;
+  height: 100%;
+  background-color: #f0f0e6;
+  border-left: solid black 1px;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+  font-family: "Ibarra Real Nova", sans-serif;
+}
+.shop-cart-drawer[hidden] {
+  display: none;
+}
+.shop-cart-drawer .shop-cart-header {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: solid black 1px;
+}
+.shop-cart-drawer .shop-cart-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 100;
+}
+.shop-cart-drawer .shop-cart-close {
+  border: none;
+  background: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.shop-cart-drawer .shop-cart-empty {
+  padding: 20px;
+  color: #333;
+}
+.shop-cart-drawer .shop-cart-lines {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.shop-cart-drawer .shop-cart-line {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: solid #ccc 1px;
+}
+.shop-cart-drawer .shop-cart-line:before {
+  display: none;
+}
+.shop-cart-drawer .shop-cart-line-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: solid black 1px;
+}
+.shop-cart-drawer .shop-cart-line-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.shop-cart-drawer .shop-cart-line-title {
+  font-size: 16px;
+}
+.shop-cart-drawer .shop-cart-line-variant {
+  font-size: 14px;
+  color: #555;
+}
+.shop-cart-drawer .shop-cart-line-price {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.shop-cart-drawer .shop-cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.shop-cart-drawer .shop-cart-qty button {
+  min-width: 26px;
+  padding: 2px 6px;
+  border: solid black 1px;
+  border-radius: 3px;
+  background-color: #f0f0e6;
+  cursor: pointer;
+  font-family: inherit;
+}
+.shop-cart-drawer .shop-cart-qty .shop-cart-remove {
+  min-width: 0;
+  margin-left: 0;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  font-size: 13px;
+  color: #555;
+  padding: 0;
+}
+.shop-cart-drawer .shop-cart-footer {
+  padding: 20px;
+  border-top: solid black 1px;
+}
+.shop-cart-drawer .shop-cart-subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 18px;
+}
+.shop-cart-drawer .shop-cart-checkout {
+  display: block;
+  padding: 12px;
+  border: solid black 1px;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #f0f0e6;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+.shop-cart-drawer .shop-cart-checkout:hover, .shop-cart-drawer .shop-cart-checkout:focus {
+  background-color: #333;
+}
+
+#travel-vases .image-sequence img {
+  transform: scale(1.05);
+  object-position: 53% 8%;
+  filter: brightness(1.1);
+}
+
+#incense-trays .image-sequence img {
+  transform: scale(1.1) translate(0, 0%);
+  object-position: 49% 54%;
+  filter: brightness(1.4);
+}
+@media screen and (max-width: 600px) {
+  #incense-trays .image-sequence img {
+    transform: scale(1) translate(0, 0);
   }
 }
 

@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -48,6 +49,7 @@
   gtag('config', 'G-90GXJSKXY9');
 </script>
     <script async src="/public/js/shopify-init.js" defer></script>
+    <script src="/public/js/image-sequence.js" defer></script>
   </head>
   <body class="shop-page ">
     <div class="top-spacer"></div>
@@ -76,73 +78,15 @@
       <header>
         <nav>
           <a href="#travel-vases">Travel Vases</a>
-          <a href="#one-offs">One-offs</a>
+          <a href="#incense-trays">Incense Trays</a>
         </nav>
       </header>
       <div class="content-wrapper no-grid">
         <div class="shop-top">
-           <!-- images to cycle through above the fold -->
-<div class="project-grid-item-full">
-  <div class="image-sequence project-grid-item-full" data-path="/public/ceramics/travel-vase-series" data-length="20">
-    <img src="/public/ceramics/travel-vase-series/20.JPG" alt="photo of a travel vase on a windowsill" class="sequence-image" style="opacity: 1.0;">
-  </div>
-</div>
-<p class="project-grid-item-1"></p>
-<p class="project-grid-item-full">Through the end of September, 50% of proceeds from all sales will be donated to a <a href="https://www.gofundme.com/f/help-red-hook-artists-and-businesses-rebuild-after-fire">GoFundMe for the artists affected by the recent fire in Red Hook</a>. You can also use <strong>TENOFF</strong> to apply a $10 discount to your order.</p>
-<p class="project-grid-item-1"></p>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const delay = 4000;
-    const imageSequence = document.querySelector('.image-sequence');
-    const path = imageSequence.dataset.path;
-    const length = imageSequence.dataset.length;
-    const images = document.querySelectorAll('.sequence-image');
-    let currentIndex = 0;
-    let previousIndex = null;
-    let secondPreviousIndex = null;
-
-    function findOrCreateImage(parent,index) {
-      let element = document.querySelector(`img[src="${path}/${index + 1}.JPG"]`);
-      if (element) {
-        return element;
-      }
-
-      element = document.createElement('img');
-      element.src = `${path}/${index + 1}.JPG`;
-      element.alt = `photo of a travel vase on a windowsill`;
-      element.style.opacity = '0.0';
-      element.classList.add('sequence-image');
-      parent.appendChild(element);
-      return element;
-    }
-    
-    function nextImage() {
-      currentIndex = Math.floor(Math.random() * length);
-      const element = findOrCreateImage(imageSequence, currentIndex);
-      let previousElement = null;
-      let secondPreviousElement = null;
-      if (previousIndex >= 0) {
-        previousElement = findOrCreateImage(imageSequence, previousIndex);
-      }
-      if (secondPreviousIndex >= 0) {
-        secondPreviousElement = findOrCreateImage(imageSequence, secondPreviousIndex);
-      }
-      setTimeout(() => {
-        // const secondPreviousImage = 
-        if (secondPreviousElement) secondPreviousElement.style.opacity = '0.0';
-        if (previousElement) previousElement.style.opacity = '0.5';
-        element.style.opacity = '1.0';
-      }, 100);
-      secondPreviousIndex = previousIndex;
-      previousIndex = currentIndex;
-      // previousImage = element;
-    }
-
-    setTimeout(() => {
-      setInterval(nextImage, delay);
-    }, 0); // Initial delay of 2 seconds
-  });
-</script>
+          <!-- {.project-grid-item-1} -->
+<!-- Through the end of September, 50% of proceeds from all sales will be donated to a [GoFundMe for the artists affected by the recent fire in Red Hook](https://www.gofundme.com/f/help-red-hook-artists-and-businesses-rebuild-after-fire). You can also use **TENOFF** to apply a $10 discount to your order. -->
+<!-- {.project-grid-item-full} -->
+<!-- {.project-grid-item-1} -->
 <!-- I've gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It's a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of _being away_. -->
 <!-- {.project-grid-item-6} -->
 <!-- Each vase is made on my miniature wheel at home, perched on my kitchen windowsill in fact. They range from abo`ut 1.5 to 3 inches in height, and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series.
@@ -161,32 +105,410 @@ Please note that shipping is currently limited to the U.S.
 {.project-grid-item-6} -->
 
         </div>
-        
         <section class="shop-collection" id="travel-vases">
-          <h2 class="shop-collection-header project-grid-item-2">Travel Vases</h2>
-          <p class="collection-description project-grid-item-4">
-            I’ve gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It’s a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of being away.
-          </p>
-          <p class="collection-description project-grid-item-full">
-            Each vase (<a href="/projects/travel-vases" target="_blank">see gallery</a>) is no taller than 2 inches (5cm), and made on my miniature wheel at home, perched at my kitchen windowsill.
-            
-          </p>
-          
-          
+          <div class="project-grid-item-full">
+            <div class="image-sequence" data-alt="photo of a travel vase on a windowsill" data-randomize="false" data-images="[&quot;/public/ceramics/travel-vase-series/1.JPG&quot;,&quot;/public/ceramics/travel-vase-series/2.JPG&quot;,&quot;/public/ceramics/travel-vase-series/3.JPG&quot;,&quot;/public/ceramics/travel-vase-series/4.JPG&quot;,&quot;/public/ceramics/travel-vase-series/5.JPG&quot;,&quot;/public/ceramics/travel-vase-series/6.JPG&quot;,&quot;/public/ceramics/travel-vase-series/7.JPG&quot;,&quot;/public/ceramics/travel-vase-series/8.JPG&quot;,&quot;/public/ceramics/travel-vase-series/9.JPG&quot;,&quot;/public/ceramics/travel-vase-series/10.JPG&quot;,&quot;/public/ceramics/travel-vase-series/11.JPG&quot;,&quot;/public/ceramics/travel-vase-series/12.JPG&quot;,&quot;/public/ceramics/travel-vase-series/13.JPG&quot;,&quot;/public/ceramics/travel-vase-series/14.JPG&quot;,&quot;/public/ceramics/travel-vase-series/15.JPG&quot;,&quot;/public/ceramics/travel-vase-series/16.JPG&quot;,&quot;/public/ceramics/travel-vase-series/17.JPG&quot;,&quot;/public/ceramics/travel-vase-series/18.JPG&quot;,&quot;/public/ceramics/travel-vase-series/19.JPG&quot;,&quot;/public/ceramics/travel-vase-series/20.JPG&quot;]"><div class="sequence-title-container" style="--sequence-title-filter:url(#sequence-title-displace-travel-vases)">
+    <div class="sequence-title-backdrop" aria-hidden="true"></div>
+    <div class="sequence-title-content">
+      <span id="travel-vases" class="sequence-title">Travel Vases</span><span class="sequence-title-dimensions">height: approx 2 in</span><p class="sequence-title-description">Pocket-sized vases — perfect for collecting tiny wildflowers on your travels</p>
+    </div>
+  </div>
+  <img src="/public/ceramics/travel-vase-series/1.JPG" alt="photo of a travel vase on a windowsill" class="sequence-image" style="opacity: 1.0;">
+</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="sequence-title-displace-travel-vases" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+    <feImage href="/public/ceramics/travel-vase-series/1.JPG" x="0" y="0" width="100%" height="130" preserveAspectRatio="xMidYMin slice" result="displacementImage"/>
+    <feDisplacementMap in="SourceGraphic" in2="displacementImage" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+          </div>
           <div class="shopify-container project-grid-item-full">
-            <div class="shop-listings" data-collection-id="278257860680" data-show-title="false"></div>
+            <div class="shop-listings" data-collection-id="278257860680" data-show-title="false">
+              
+  
+    
+      
+      <article
+        class="product-card sold-out"
+        data-product-id="gid://shopify/Product/6985437511752"
+        data-product-legacy-id="6985437511752"
+        data-product-handle="travel-vase-5">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/04A8DF68-E64E-499A-A96B-1AAAD6E1BB44_1_201_a_59b760f0-aaf9-4eaf-a7fb-aa9dc46dbe96.jpg?v=1756743135"
+              alt="Travel Vase"
+              loading="lazy"
+              width="2587"
+              height="1940">
+          
+          <span class="product-price">$35</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="travel-vase-5"
+          data-variant-id="40664154013768"
+          disabled>
+          Sold Out
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7111772471368"
+        data-product-legacy-id="7111772471368"
+        data-product-handle="travel-vase-19">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6894DA20-4638-40DD-BAA6-495D14EAC885_1_201_a_de81945e-9ca3-41ef-b48f-65124d3ea0a7.jpg?v=1786554145"
+              alt="Travel Vase"
+              loading="lazy"
+              width="1633"
+              height="1633">
+          
+          <span class="product-price">$30</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="travel-vase-19"
+          data-variant-id="41308345139272"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7111772405832"
+        data-product-legacy-id="7111772405832"
+        data-product-handle="travel-vase-18">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/88AED9F1-6CC7-444E-8A41-D930AA30F1F9_1_201_a_ad87e399-ea51-4bee-91dc-d88564a1b439.jpg?v=1786554159"
+              alt="Travel Vase"
+              loading="lazy"
+              width="1718"
+              height="1718">
+          
+          <span class="product-price">$30</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="travel-vase-18"
+          data-variant-id="41308345008200"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7111772373064"
+        data-product-legacy-id="7111772373064"
+        data-product-handle="travel-vase-17">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/B0887069-3CF5-45BD-9FB3-CDD600D8AFDE_1_201_a.jpg?v=1786554176"
+              alt="Travel Vase"
+              loading="lazy"
+              width="1724"
+              height="1724">
+          
+          <span class="product-price">$30</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="travel-vase-17"
+          data-variant-id="41308344942664"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7111772307528"
+        data-product-legacy-id="7111772307528"
+        data-product-handle="travel-vase-16">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/F885D647-A36A-4CC1-82C8-9093FC329E29_1_201_a.jpg?v=1786554185"
+              alt="Travel Vase"
+              loading="lazy"
+              width="1485"
+              height="1485">
+          
+          <span class="product-price">$30</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="travel-vase-16"
+          data-variant-id="41308344844360"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7111772274760"
+        data-product-legacy-id="7111772274760"
+        data-product-handle="travel-vase-15">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/CE611941-C68B-4F00-A87C-C1C00898E54E_1_201_a.jpg?v=1786554210"
+              alt="Travel Vase"
+              loading="lazy"
+              width="1477"
+              height="1477">
+          
+          <span class="product-price">$30</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="travel-vase-15"
+          data-variant-id="41308344811592"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7111772176456"
+        data-product-legacy-id="7111772176456"
+        data-product-handle="travel-vase-14">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/E1DE6AA3-FF65-4EFC-BD37-2C12927CEF44_1_201_a.jpg?v=1786554228"
+              alt="Travel Vase"
+              loading="lazy"
+              width="1432"
+              height="1432">
+          
+          <span class="product-price">$30</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="travel-vase-14"
+          data-variant-id="41308344549448"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+  
+
+            </div>
           </div>
         </section>
-
-        <section class="shop-collection" id="one-offs">
-          <h2 class="shop-collection-header project-grid-item-2">One-offs</h2>
-          <p class="collection-description project-grid-item-4">Miscellaneous pieces, and generally more functional than the travel vase series</p>
-          
+        <section class="shop-collection" id="incense-trays">
+          <div class="project-grid-item-full">
+            <div class="image-sequence" data-alt="photo of an incense tray" data-randomize="false" data-images="[&quot;/public/ceramics/incense-tray-series/frame_0002.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0003.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0004.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0005.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0006.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0007.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0008.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0009.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0010.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0011.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0012.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0013.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0014.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0015.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0016.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0017.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0018.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0019.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0020.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0021.png&quot;,&quot;/public/ceramics/incense-tray-series/frame_0022.png&quot;]"><div class="sequence-title-container" style="--sequence-title-filter:url(#sequence-title-displace-incense-trays)">
+    <div class="sequence-title-backdrop" aria-hidden="true"></div>
+    <div class="sequence-title-content">
+      <span id="incense-trays" class="sequence-title">Incense Trays</span><span class="sequence-title-dimensions">width: approx 6 in</span><p class="sequence-title-description">Thin floating forms inspired by speaker cones with a small aperture for incense sticks</p>
+    </div>
+  </div>
+  <img src="/public/ceramics/incense-tray-series/frame_0002.png" alt="photo of an incense tray" class="sequence-image" style="opacity: 1.0;">
+</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="sequence-title-displace-incense-trays" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+    <feImage href="/public/ceramics/incense-tray-series/frame_0002.png" x="0" y="0" width="100%" height="130" preserveAspectRatio="xMidYMin slice" result="displacementImage"/>
+    <feDisplacementMap in="SourceGraphic" in2="displacementImage" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+          </div>
           <div class="shopify-container project-grid-item-full">
-            <div class="shop-listings" data-collection-id="278356557896" data-show-title="true"></div>
+            <div class="shop-listings" data-collection-id="282400391240" data-show-title="false">
+              
+  
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7110763085896"
+        data-product-legacy-id="7110763085896"
+        data-product-handle="incense-tray-2">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6723E009-BD34-4898-B3A4-EC0FA781CCED_1_201_a_fd6e9e3e-b1cf-4e05-8db2-cfd4fb793ce1.jpg?v=1786554016"
+              alt="Incense Tray"
+              loading="lazy"
+              width="1650"
+              height="1650">
+          
+          <span class="product-price">$40</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="incense-tray-2"
+          data-variant-id="41304809406536"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7110762922056"
+        data-product-legacy-id="7110762922056"
+        data-product-handle="incense-tray-copy">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/1EE33EC4-E082-450C-9B0F-4D4DACEBA520_1_201_a_198a9fe4-edff-41cf-a91b-6f272ddba0fb.jpg?v=1786554253"
+              alt="Incense Tray"
+              loading="lazy"
+              width="1703"
+              height="1703">
+          
+          <span class="product-price">$40</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="incense-tray-copy"
+          data-variant-id="41304809242696"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7110762692680"
+        data-product-legacy-id="7110762692680"
+        data-product-handle="incense-tray-1">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/3DA10B62-728B-4A81-BF6D-26752F9A042B_1_201_a_5f6a78ae-3960-475a-b2ee-da50f232eb99.jpg?v=1786554270"
+              alt="Incense Tray"
+              loading="lazy"
+              width="1567"
+              height="1567">
+          
+          <span class="product-price">$40</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="incense-tray-1"
+          data-variant-id="41304809013320"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+      
+      <article
+        class="product-card"
+        data-product-id="gid://shopify/Product/7099292745800"
+        data-product-legacy-id="7099292745800"
+        data-product-handle="incense-tray">
+        <div class="product-image-wrapper">
+          
+            <img
+              class="product-image"
+              src="https://cdn.shopify.com/s/files/1/0567/0915/2840/files/702FEBB5-5611-4144-A4DF-6B271D2823B7_1_201_a_a7d4d41f-87d6-4ffa-bc99-dd97c13a3ce5.jpg?v=1786554288"
+              alt="Incense Tray"
+              loading="lazy"
+              width="1687"
+              height="1687">
+          
+          <span class="product-price">$40</span>
+          
+        </div>
+
+        
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="incense-tray"
+          data-variant-id="41256653389896"
+          >
+          Add to Cart
+        </button>
+      </article>
+    
+  
+
+            </div>
           </div>
         </section>
-
         <p class="newsletter-signup-intro">
           If you'd like to stay up to date, sign up for my mailing list below:
         </p>
@@ -222,6 +544,34 @@ Please note that shipping is currently limited to the U.S.
 
       </div>
     </div>
+    
+<button class="shop-cart-toggle" type="button">
+  <svg class="cart-basket-icon" viewBox="0 0 25 25" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <defs><pattern id="basket-weave" width="3.2" height="3.2" patternUnits="userSpaceOnUse">
+        <path d="M-0.8 0.8 L0.8 -0.8 M0 3.2 L3.2 0 M2.4 4 L4 2.4" stroke="currentColor" stroke-width="0.55"/>
+        <path d="M-0.8 2.4 L0.8 4 M0 0 L3.2 3.2 M2.4 -0.8 L4 0.8" stroke="currentColor" stroke-width="0.55"/>
+      </pattern><clipPath id="basket-body-clip">
+        <path d="M4 9.5 H20 L18 19.6 A1.6 1.6 0 0 1 16.4 21 H7.6 A1.6 1.6 0 0 1 6 19.6 Z"/>
+      </clipPath>
+    </defs><path d="M6.6 8.4 C6.6 4.6 10.4 4.6 10.4 8.4"/>
+    <path d="M13.6 8.4 C13.6 4.6 17.4 4.6 17.4 8.4"/><rect x="4" y="9.5" width="16" height="11.5" fill="url(#basket-weave)" stroke="none" clip-path="url(#basket-body-clip)"/><rect x="3" y="7.2" width="18" height="2.3" rx="1.15"/><path d="M4 9.5 H20 L18 19.6 A1.6 1.6 0 0 1 16.4 21 H7.6 A1.6 1.6 0 0 1 6 19.6 Z"/>
+  </svg>
+  <span class="shop-cart-count">0</span>
+</button>
+<div class="shop-cart-overlay" hidden></div>
+<aside class="shop-cart-drawer" aria-label="Shopping cart" hidden>
+  <header class="shop-cart-header">
+    <h2>Cart</h2>
+    <button class="shop-cart-close" type="button" aria-label="Close cart">&times;</button>
+  </header>
+  <p class="shop-cart-empty">Your cart is empty.</p>
+  <ul class="shop-cart-lines"></ul>
+  <footer class="shop-cart-footer" hidden>
+    <div class="shop-cart-subtotal"><span>Subtotal</span><span class="shop-cart-subtotal-value"></span></div>
+    <a class="shop-cart-checkout" href="#">Checkout</a>
+  </footer>
+</aside>
+
     <div class="page-border broider"></div>
      <script>
        (function() {

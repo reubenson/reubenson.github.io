@@ -2,7 +2,8 @@
 title: Shop Title
 description: Shop description
 ---
-
+{% from "shop-product-grid.njk" import productGrid %}
+{% from "image-sequence.njk" import imageSequence %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,6 +20,7 @@ description: Shop description
     <meta property="og:image" content="{{ socialImg }}">
     {% include "gtm.njk" %}
     <script async src="/public/js/shopify-init.js" defer></script>
+    <script src="/public/js/image-sequence.js" defer></script>
   </head>
   <body class="shop-page {{ layoutType }}">
     <div class="top-spacer"></div>
@@ -27,55 +29,40 @@ description: Shop description
       <header>
         <nav>
           <a href="#travel-vases">Travel Vases</a>
-          <a href="#one-offs">One-offs</a>
+          <a href="#incense-trays">Incense Trays</a>
         </nav>
       </header>
       <div class="content-wrapper no-grid">
         <div class="shop-top">
           {{ content | safe }}
         </div>
-        {# <div id="shop-closed" class="hidden">
-          <p>The shop is currently sold out — If you'd like to notified when new items are available again, sign up for the mailing list above!</p>
-        </div> #}
         <section class="shop-collection" id="travel-vases">
-          <h2 class="shop-collection-header project-grid-item-2">Travel Vases</h2>
-          <p class="collection-description project-grid-item-4">
-            I’ve gotten in the habit of bringing a pocket-size vase with me when I travel, collecting wildflowers as I go. It’s a simple gesture towards making a temporary home within dislocation, a tiny bulwark against the sometimes overwhelming feeling of being away.
-          </p>
-          <p class="collection-description project-grid-item-full">
-            Each vase (<a href="/projects/travel-vases" target="_blank">see gallery</a>) is no taller than 2 inches (5cm), and made on my miniature wheel at home, perched at my kitchen windowsill.
-            {# They have a height of no more than 2 inches (5 cm), and have been produced as small experiments in form and glaze application. As such, each vase is unique and not expected to repeat within the series. #}
-          </p>
-          {# <figure class="collection-image project-grid-item-2">
-            <img src="/public/ceramics/ceramics-wide-1.jpg" alt="Travel Vases collection image">
-          </figure> #}
-          {# <figure class="project-grid-item-2" >
-            <img src="/public/pocket-vase.jpg" alt="photo of a travel vase on a windowsill">
-            <figcaption>My first travel vase (2019), sitting on the windowsill of an apartment rental in Stockholm.
-              </figcaption>
-          </figure> #}
+          <div class="project-grid-item-full">
+            {{ imageSequence("/public/ceramics/travel-vase-series", "photo of a travel vase on a windowsill", false, "Travel Vases", "Pocket-sized vases — perfect for collecting tiny wildflowers on your travels", "height: approx 2 in") }}
+          </div>
           <div class="shopify-container project-grid-item-full">
-            <div class="shop-listings" data-collection-id="278257860680" data-show-title="false"></div>
+            <div class="shop-listings" data-collection-id="278257860680" data-show-title="false">
+              {{ productGrid(shopCollectionsById["278257860680"], false) }}
+            </div>
           </div>
         </section>
-
-        <section class="shop-collection" id="one-offs">
-          <h2 class="shop-collection-header project-grid-item-2">One-offs</h2>
-          <p class="collection-description project-grid-item-4">Miscellaneous pieces, and generally more functional than the travel vase series</p>
-          {# <figure class="collection-image project-grid-item-2">
-            <img src="/public/ceramics/ceramics-wide-2.jpg" alt="One-offs collection image">
-          </figure> #}
+        <section class="shop-collection" id="incense-trays">
+          <div class="project-grid-item-full">
+            {{ imageSequence("/public/ceramics/incense-tray-series", "photo of an incense tray", false, "Incense Trays", "Thin floating forms inspired by speaker cones with a small aperture for incense sticks", "width: approx 6 in") }}
+          </div>
           <div class="shopify-container project-grid-item-full">
-            <div class="shop-listings" data-collection-id="278356557896" data-show-title="true"></div>
+            <div class="shop-listings" data-collection-id="282400391240" data-show-title="false">
+              {{ productGrid(shopCollectionsById["282400391240"], false) }}
+            </div>
           </div>
         </section>
-
         <p class="newsletter-signup-intro">
           If you'd like to stay up to date, sign up for my mailing list below:
         </p>
         {% include "newsletter-signup.njk" %}
       </div>
     </div>
+    {% include "shop-cart.njk" %}
     <div class="page-border broider"></div>
      <script>
        (function() {

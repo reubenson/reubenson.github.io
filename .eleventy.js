@@ -73,6 +73,36 @@ module.exports = function (eleventyConfig) {
     return `/css/${path}.css`;
   });
 
+  // Format a decimal-string amount (e.g. "45.00") as localized currency
+  eleventyConfig.addFilter("money", function (amount, currency = "USD") {
+    const value = Number(amount);
+    if (Number.isNaN(value)) return amount;
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      minimumFractionDigits: value % 1 === 0 ? 0 : 2
+    }).format(value);
+  });
+
+  // List the image files in a public directory as URL paths, natural-sorted.
+  // Used by the image-sequence component (src/_includes/image-sequence.njk) so
+  // it works with any filename convention. `urlPath` is a site-absolute path
+  // like "/public/ceramics/travel-vase-series".
+  eleventyConfig.addFilter("sequenceImages", function (urlPath) {
+    const dir = path.join(__dirname, urlPath.replace(/^\//, ""));
+    let files;
+    try {
+      files = fs.readdirSync(dir);
+    } catch (err) {
+      console.warn(`[sequenceImages] cannot read ${dir}: ${err.message}`);
+      return [];
+    }
+    return files
+      .filter((f) => /\.(jpe?g|png|gif|webp|avif)$/i.test(f))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }))
+      .map((f) => `${urlPath}/${f}`);
+  });
+
   // Instead of passthrough copy, we'll add a custom collection
   eleventyConfig.addCollection("styles", function (collectionApi) {
     return collectionApi.getFilteredByGlob("src/_styles/**/*.scss");

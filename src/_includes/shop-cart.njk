@@ -1,0 +1,43 @@
+{#
+  Static cart drawer shell. The dynamic parts (line items, subtotal, count,
+  checkout href, open/close state) are populated by /public/js/shopify-init.js,
+  which queries these elements by class.
+#}
+<button class="shop-cart-toggle" type="button">
+  <svg class="cart-basket-icon" viewBox="0 0 25 25" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <defs>
+      {#- Woven crosshatch: two sets of diagonal strokes tiled into a diamond mesh -#}
+      <pattern id="basket-weave" width="3.2" height="3.2" patternUnits="userSpaceOnUse">
+        <path d="M-0.8 0.8 L0.8 -0.8 M0 3.2 L3.2 0 M2.4 4 L4 2.4" stroke="currentColor" stroke-width="0.55"/>
+        <path d="M-0.8 2.4 L0.8 4 M0 0 L3.2 3.2 M2.4 -0.8 L4 0.8" stroke="currentColor" stroke-width="0.55"/>
+      </pattern>
+      {#- Clip so the weave fills only the basket body -#}
+      <clipPath id="basket-body-clip">
+        <path d="M4 9.5 H20 L18 19.6 A1.6 1.6 0 0 1 16.4 21 H7.6 A1.6 1.6 0 0 1 6 19.6 Z"/>
+      </clipPath>
+    </defs>
+    {#- Two arched handles rising from the rim -#}
+    <path d="M6.6 8.4 C6.6 4.6 10.4 4.6 10.4 8.4"/>
+    <path d="M13.6 8.4 C13.6 4.6 17.4 4.6 17.4 8.4"/>
+    {#- Weave texture, clipped to the body -#}
+    <rect x="4" y="9.5" width="16" height="11.5" fill="url(#basket-weave)" stroke="none" clip-path="url(#basket-body-clip)"/>
+    {#- Rim -#}
+    <rect x="3" y="7.2" width="18" height="2.3" rx="1.15"/>
+    {#- Basket body -#}
+    <path d="M4 9.5 H20 L18 19.6 A1.6 1.6 0 0 1 16.4 21 H7.6 A1.6 1.6 0 0 1 6 19.6 Z"/>
+  </svg>
+  <span class="shop-cart-count">0</span>
+</button>
+<div class="shop-cart-overlay" hidden></div>
+<aside class="shop-cart-drawer" aria-label="Shopping cart" hidden>
+  <header class="shop-cart-header">
+    <h2>Cart</h2>
+    <button class="shop-cart-close" type="button" aria-label="Close cart">&times;</button>
+  </header>
+  <p class="shop-cart-empty">Your cart is empty.</p>
+  <ul class="shop-cart-lines"></ul>
+  <footer class="shop-cart-footer" hidden>
+    <div class="shop-cart-subtotal"><span>Subtotal</span><span class="shop-cart-subtotal-value"></span></div>
+    <a class="shop-cart-checkout" href="#">Checkout</a>
+  </footer>
+</aside>

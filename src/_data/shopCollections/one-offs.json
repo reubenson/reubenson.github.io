@@ -1,0 +1,153 @@
+{
+  "id": "gid://shopify/Collection/278356557896",
+  "legacyId": "278356557896",
+  "handle": "one-offs",
+  "title": "One-offs",
+  "descriptionHtml": "",
+  "currencyCode": "USD",
+  "productCount": 3,
+  "generatedAt": "2026-08-12T18:52:03.396Z",
+  "products": [
+    {
+      "id": "gid://shopify/Product/6993280565320",
+      "legacyId": "6993280565320",
+      "handle": "garlic-vase-7-tall",
+      "title": "Garlic Vase (7\" tall)",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": false,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/AC0E48B2-0954-4614-A05B-9FE2ED6964C1_1_201_a.jpg?v=1758381994",
+        "altText": null,
+        "width": 3291,
+        "height": 2468
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/AC0E48B2-0954-4614-A05B-9FE2ED6964C1_1_201_a.jpg?v=1758381994",
+          "altText": "",
+          "width": 3291,
+          "height": 2468
+        }
+      ],
+      "price": {
+        "min": "60.0",
+        "max": "60.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/40734055628872",
+          "legacyId": "40734055628872",
+          "title": "Default Title",
+          "price": "60.00",
+          "availableForSale": false,
+          "inventoryQuantity": 0,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/6904301551688",
+      "legacyId": "6904301551688",
+      "handle": "small-vase-6",
+      "title": "Vase (3\" height)",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": false,
+      "description": "Bigger than a travel vase",
+      "descriptionHtml": "<p>Bigger than a travel vase</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/D7D4CBB5-650E-46BA-8494-ED776F7C3695_1_201_a.jpg?v=1757379723",
+        "altText": null,
+        "width": 1387,
+        "height": 1387
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/D7D4CBB5-650E-46BA-8494-ED776F7C3695_1_201_a.jpg?v=1757379723",
+          "altText": "",
+          "width": 1387,
+          "height": 1387
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/40382411210824",
+          "legacyId": "40382411210824",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": false,
+          "inventoryQuantity": 0,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/6993280630856",
+      "legacyId": "6993280630856",
+      "handle": "vase-7-tall",
+      "title": "Vase (7\" tall)",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": false,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/617740F3-5C7D-471A-A309-0E97EC7F531D_1_201_a.jpg?v=1758382039",
+        "altText": null,
+        "width": 3333,
+        "height": 2500
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/617740F3-5C7D-471A-A309-0E97EC7F531D_1_201_a.jpg?v=1758382039",
+          "altText": "",
+          "width": 3333,
+          "height": 2500
+        }
+      ],
+      "price": {
+        "min": "60.0",
+        "max": "60.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/40734055825480",
+          "legacyId": "40734055825480",
+          "title": "Default Title",
+          "price": "60.00",
+          "availableForSale": false,
+          "inventoryQuantity": 0,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    }
+  ]
+}

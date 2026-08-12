@@ -2,6 +2,7 @@
   "name": "Reuben Son",
   "scripts": {
     "dev": "npx @11ty/eleventy --serve",
+    "fetch-shop": "node scripts/fetch-shop-collections.mjs",
     "lint": "eslint \"**/*.ts\"",
     "lint-fix": "eslint \"**/*.ts\" --fix",
     "upload-to-s3": "aws s3 cp ./assets s3://reubenson-portfolio/assets --recursive",

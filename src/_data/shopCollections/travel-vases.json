@@ -1,0 +1,341 @@
+{
+  "id": "gid://shopify/Collection/278257860680",
+  "legacyId": "278257860680",
+  "handle": "travel-vases",
+  "title": "Travel Vases",
+  "descriptionHtml": "<p>Travel vases ...</p>",
+  "currencyCode": "USD",
+  "productCount": 7,
+  "generatedAt": "2026-08-12T18:52:03.025Z",
+  "products": [
+    {
+      "id": "gid://shopify/Product/6985437511752",
+      "legacyId": "6985437511752",
+      "handle": "travel-vase-5",
+      "title": "Travel Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": false,
+      "description": "",
+      "descriptionHtml": "<p><img></p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/04A8DF68-E64E-499A-A96B-1AAAD6E1BB44_1_201_a_59b760f0-aaf9-4eaf-a7fb-aa9dc46dbe96.jpg?v=1756743135",
+        "altText": null,
+        "width": 2587,
+        "height": 1940
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/04A8DF68-E64E-499A-A96B-1AAAD6E1BB44_1_201_a_59b760f0-aaf9-4eaf-a7fb-aa9dc46dbe96.jpg?v=1756743135",
+          "altText": "",
+          "width": 2587,
+          "height": 1940
+        }
+      ],
+      "price": {
+        "min": "35.0",
+        "max": "35.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/40664154013768",
+          "legacyId": "40664154013768",
+          "title": "Default Title",
+          "price": "35.00",
+          "availableForSale": false,
+          "inventoryQuantity": 0,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7111772471368",
+      "legacyId": "7111772471368",
+      "handle": "travel-vase-19",
+      "title": "Travel Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6894DA20-4638-40DD-BAA6-495D14EAC885_1_201_a_de81945e-9ca3-41ef-b48f-65124d3ea0a7.jpg?v=1786554145",
+        "altText": null,
+        "width": 1633,
+        "height": 1633
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6894DA20-4638-40DD-BAA6-495D14EAC885_1_201_a_de81945e-9ca3-41ef-b48f-65124d3ea0a7.jpg?v=1786554145",
+          "altText": "",
+          "width": 1633,
+          "height": 1633
+        }
+      ],
+      "price": {
+        "min": "30.0",
+        "max": "30.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41308345139272",
+          "legacyId": "41308345139272",
+          "title": "Default Title",
+          "price": "30.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7111772405832",
+      "legacyId": "7111772405832",
+      "handle": "travel-vase-18",
+      "title": "Travel Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/88AED9F1-6CC7-444E-8A41-D930AA30F1F9_1_201_a_ad87e399-ea51-4bee-91dc-d88564a1b439.jpg?v=1786554159",
+        "altText": null,
+        "width": 1718,
+        "height": 1718
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/88AED9F1-6CC7-444E-8A41-D930AA30F1F9_1_201_a_ad87e399-ea51-4bee-91dc-d88564a1b439.jpg?v=1786554159",
+          "altText": "",
+          "width": 1718,
+          "height": 1718
+        }
+      ],
+      "price": {
+        "min": "30.0",
+        "max": "30.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41308345008200",
+          "legacyId": "41308345008200",
+          "title": "Default Title",
+          "price": "30.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7111772373064",
+      "legacyId": "7111772373064",
+      "handle": "travel-vase-17",
+      "title": "Travel Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/B0887069-3CF5-45BD-9FB3-CDD600D8AFDE_1_201_a.jpg?v=1786554176",
+        "altText": null,
+        "width": 1724,
+        "height": 1724
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/B0887069-3CF5-45BD-9FB3-CDD600D8AFDE_1_201_a.jpg?v=1786554176",
+          "altText": "",
+          "width": 1724,
+          "height": 1724
+        }
+      ],
+      "price": {
+        "min": "30.0",
+        "max": "30.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41308344942664",
+          "legacyId": "41308344942664",
+          "title": "Default Title",
+          "price": "30.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7111772307528",
+      "legacyId": "7111772307528",
+      "handle": "travel-vase-16",
+      "title": "Travel Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/F885D647-A36A-4CC1-82C8-9093FC329E29_1_201_a.jpg?v=1786554185",
+        "altText": null,
+        "width": 1485,
+        "height": 1485
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/F885D647-A36A-4CC1-82C8-9093FC329E29_1_201_a.jpg?v=1786554185",
+          "altText": "",
+          "width": 1485,
+          "height": 1485
+        }
+      ],
+      "price": {
+        "min": "30.0",
+        "max": "30.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41308344844360",
+          "legacyId": "41308344844360",
+          "title": "Default Title",
+          "price": "30.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7111772274760",
+      "legacyId": "7111772274760",
+      "handle": "travel-vase-15",
+      "title": "Travel Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/CE611941-C68B-4F00-A87C-C1C00898E54E_1_201_a.jpg?v=1786554210",
+        "altText": null,
+        "width": 1477,
+        "height": 1477
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/CE611941-C68B-4F00-A87C-C1C00898E54E_1_201_a.jpg?v=1786554210",
+          "altText": "",
+          "width": 1477,
+          "height": 1477
+        }
+      ],
+      "price": {
+        "min": "30.0",
+        "max": "30.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41308344811592",
+          "legacyId": "41308344811592",
+          "title": "Default Title",
+          "price": "30.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7111772176456",
+      "legacyId": "7111772176456",
+      "handle": "travel-vase-14",
+      "title": "Travel Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/E1DE6AA3-FF65-4EFC-BD37-2C12927CEF44_1_201_a.jpg?v=1786554228",
+        "altText": null,
+        "width": 1432,
+        "height": 1432
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/E1DE6AA3-FF65-4EFC-BD37-2C12927CEF44_1_201_a.jpg?v=1786554228",
+          "altText": "",
+          "width": 1432,
+          "height": 1432
+        }
+      ],
+      "price": {
+        "min": "30.0",
+        "max": "30.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41308344549448",
+          "legacyId": "41308344549448",
+          "title": "Default Title",
+          "price": "30.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{#
+  Reusable image-sequence component. Cross-fades through the images in a
+  directory. The advancing logic lives in /public/js/image-sequence.js, which
+  initializes every .image-sequence on the page from its data-images list.
+
+  Usage:
+    {% from "image-sequence.njk" import imageSequence %}
+    {{ imageSequence("/public/ceramics/travel-vase-series", "alt text") }}
+    {{ imageSequence("/public/ceramics/incense-tray-series", "alt text", false) }}
+
+  `dirPath` is a site-absolute path to a directory under /public. The file list
+  is resolved at build time, so any filename convention works.
+
+  `randomize` (default true) picks the next image at random; when false the
+  sequence advances linearly through the images in alphabetical order.
+
+  `title` (optional) is overlaid on top of the rotating images, with
+  `description` and then `dimensions` (both optional) rendered beneath it.
+#}
+{% macro imageSequence(dirPath, alt="", randomize=true, title="", description="", dimensions="") %}
+{%- set images = dirPath | sequenceImages -%}
+{%- if images | length -%}
+<div class="image-sequence" data-alt="{{ alt }}" data-randomize="{{ randomize | dump }}" data-images="{{ images | dump | escape }}">
+  
+  {%- if title %}{%- set slug = title | slugify -%}
+  <div class="sequence-title-container" style="--sequence-title-filter:url(#sequence-title-displace-{{ slug }})">
+    <div class="sequence-title-backdrop" aria-hidden="true"></div>
+    <div class="sequence-title-content">
+      <span id="{{ slug }}" class="sequence-title">{{ title }}</span>
+      {%- if dimensions %}<span class="sequence-title-dimensions">{{ dimensions }}</span>{% endif -%}
+      <p class="sequence-title-description">{{ description }}</p>
+    </div>
+  </div>
+  {% endif -%}
+  <img src="{{ images[0] }}" alt="{{ alt }}" class="sequence-image" style="opacity: 1.0;">
+</div>
+{#-
+  Per-instance SVG filter for .sequence-title: feImage loads this sequence's
+  first image and feDisplacementMap warps the title's pixels using the image's
+  R/G channels. Filter-primitive coords are in the element's CSS pixels (the
+  default userSpaceOnUse), so height="40" + "xMidYMin slice" samples only the
+  top 40px band of the (top-anchored) image. Each instance gets a unique id,
+  referenced from CSS via the --sequence-title-filter custom property set above.
+-#}
+{%- if title %}<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="sequence-title-displace-{{ slug }}" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+    <feImage href="{{ images[0] }}" x="0" y="0" width="100%" height="130" preserveAspectRatio="xMidYMin slice" result="displacementImage"/>
+    <feDisplacementMap in="SourceGraphic" in2="displacementImage" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>{% endif -%}
+{%- endif -%}
+{% endmacro %}

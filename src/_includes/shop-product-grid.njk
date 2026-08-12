@@ -1,0 +1,59 @@
+{#
+  Renders a collection's product cards from build-time data
+  (shopCollectionsById["<legacy-id>"]). Cart + live stock are wired up by
+  /public/js/shopify-init.js, which keys off the data-* attributes below.
+
+  Usage:
+    {% from "shop-product-grid.njk" import productGrid %}
+    {{ productGrid(shopCollectionsById["278257860680"], false) }}
+#}
+{% macro productGrid(collection, showTitle) %}
+  {% if not collection or (collection.products | length) === 0 %}
+    <p class="shop-empty">Currently unavailable — check back soon.</p>
+  {% else %}
+    {% for product in collection.products %}
+      {% set firstVariant = product.variants[0] %}
+      <article
+        class="product-card{% if not product.availableForSale %} sold-out{% endif %}"
+        data-product-id="{{ product.id }}"
+        data-product-legacy-id="{{ product.legacyId }}"
+        data-product-handle="{{ product.handle }}">
+        <div class="product-image-wrapper">
+          {% if product.featuredImage %}
+            <img
+              class="product-image"
+              src="{{ product.featuredImage.url }}"
+              alt="{{ product.featuredImage.altText or product.title }}"
+              loading="lazy"
+              {% if product.featuredImage.width %}width="{{ product.featuredImage.width }}"{% endif %}
+              {% if product.featuredImage.height %}height="{{ product.featuredImage.height }}"{% endif %}>
+          {% endif %}
+          <span class="product-price">{{ product.price.min | money(product.price.currencyCode) }}</span>
+          {% if showTitle %}<span class="product-title">{{ product.title }}</span>{% endif %}
+        </div>
+
+        {% if (product.variants | length) > 1 %}
+          <select class="product-variant-select" aria-label="Choose an option for {{ product.title }}">
+            {% for v in product.variants %}
+              <option
+                value="{{ v.legacyId }}"
+                data-price="{{ v.price }}"
+                {% if not v.availableForSale %}disabled{% endif %}>
+                {{ v.title }}{% if not v.availableForSale %} — Sold Out{% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        {% endif %}
+
+        <button
+          class="add-to-cart"
+          type="button"
+          data-product-handle="{{ product.handle }}"
+          data-variant-id="{{ firstVariant.legacyId }}"
+          {% if not product.availableForSale %}disabled{% endif %}>
+          {% if product.availableForSale %}Add to Cart{% else %}Sold Out{% endif %}
+        </button>
+      </article>
+    {% endfor %}
+  {% endif %}
+{% endmacro %}

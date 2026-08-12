@@ -1,5 +1,8 @@
 **/.DS_Store
 *node_modules/**
+.env
 /airs
 /docs/airs
 /src/demos/corner-anamorphosis/__pycache__
+/docs/demos/**/.venv
+/src/demos/**/node_modules

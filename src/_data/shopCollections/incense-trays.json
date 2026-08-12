@@ -1,0 +1,200 @@
+{
+  "id": "gid://shopify/Collection/282400391240",
+  "legacyId": "282400391240",
+  "handle": "incense-trays",
+  "title": "Incense Trays",
+  "descriptionHtml": "<p>incense trays</p>",
+  "currencyCode": "USD",
+  "productCount": 4,
+  "generatedAt": "2026-08-12T18:52:03.206Z",
+  "products": [
+    {
+      "id": "gid://shopify/Product/7110763085896",
+      "legacyId": "7110763085896",
+      "handle": "incense-tray-2",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "Incense tray",
+      "descriptionHtml": "<p>Incense tray</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6723E009-BD34-4898-B3A4-EC0FA781CCED_1_201_a_fd6e9e3e-b1cf-4e05-8db2-cfd4fb793ce1.jpg?v=1786554016",
+        "altText": null,
+        "width": 1650,
+        "height": 1650
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6723E009-BD34-4898-B3A4-EC0FA781CCED_1_201_a_fd6e9e3e-b1cf-4e05-8db2-cfd4fb793ce1.jpg?v=1786554016",
+          "altText": "",
+          "width": 1650,
+          "height": 1650
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41304809406536",
+          "legacyId": "41304809406536",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7110762922056",
+      "legacyId": "7110762922056",
+      "handle": "incense-tray-copy",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "Incense tray",
+      "descriptionHtml": "<p>Incense tray</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/1EE33EC4-E082-450C-9B0F-4D4DACEBA520_1_201_a_198a9fe4-edff-41cf-a91b-6f272ddba0fb.jpg?v=1786554253",
+        "altText": null,
+        "width": 1703,
+        "height": 1703
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/1EE33EC4-E082-450C-9B0F-4D4DACEBA520_1_201_a_198a9fe4-edff-41cf-a91b-6f272ddba0fb.jpg?v=1786554253",
+          "altText": "",
+          "width": 1703,
+          "height": 1703
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41304809242696",
+          "legacyId": "41304809242696",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7110762692680",
+      "legacyId": "7110762692680",
+      "handle": "incense-tray-1",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/3DA10B62-728B-4A81-BF6D-26752F9A042B_1_201_a_5f6a78ae-3960-475a-b2ee-da50f232eb99.jpg?v=1786554270",
+        "altText": null,
+        "width": 1567,
+        "height": 1567
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/3DA10B62-728B-4A81-BF6D-26752F9A042B_1_201_a_5f6a78ae-3960-475a-b2ee-da50f232eb99.jpg?v=1786554270",
+          "altText": "",
+          "width": 1567,
+          "height": 1567
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41304809013320",
+          "legacyId": "41304809013320",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7099292745800",
+      "legacyId": "7099292745800",
+      "handle": "incense-tray",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": null,
+      "availableForSale": true,
+      "description": "Incense tray",
+      "descriptionHtml": "<p>Incense tray</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/702FEBB5-5611-4144-A4DF-6B271D2823B7_1_201_a_a7d4d41f-87d6-4ffa-bc99-dd97c13a3ce5.jpg?v=1786554288",
+        "altText": null,
+        "width": 1687,
+        "height": 1687
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/702FEBB5-5611-4144-A4DF-6B271D2823B7_1_201_a_a7d4d41f-87d6-4ffa-bc99-dd97c13a3ce5.jpg?v=1786554288",
+          "altText": "",
+          "width": 1687,
+          "height": 1687
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41256653389896",
+          "legacyId": "41256653389896",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    }
+  ]
+}
