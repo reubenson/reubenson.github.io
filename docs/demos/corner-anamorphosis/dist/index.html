@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corner Anamorphosis</title>
+  <script type="module" crossorigin src="/draw/assets/index-B91yOdJq.js"></script>
+  <link rel="stylesheet" crossorigin href="/draw/assets/index-H6OTpx5V.css">
+</head>
+<body>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 12px;
+  background: #f5f5f5;
+  font-family: monospace;
+  font-size: 13px;
+  user-select: none;
+}
+
+/* ── App layout ── */
+#app {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+#sidebar {
+  width: 88px;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.project-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #555;
+  border-bottom: 1px solid #eee;
+  user-select: none;
+}
+.project-item:last-child { border-bottom: none; }
+.project-item:hover { background: #f0f0f0; }
+.project-item.active { background: #fff; color: #111; font-weight: bold; }
+
+#main-content { flex: 1; min-width: 0; }
+
+/* ── Controls bar (shared style) ── */
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.ctrl-sep { color: #ddd; padding: 0 2px; }
+
+label {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 12px;
+  color: #333;
+}
+
+label span { color: #888; }
+
+input[type=number] {
+  width: 56px;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 3px 5px;
+  border: 1px solid #bbb;
+}
+
+/* ── Views ── */
+#views {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.view-box {
+  border: 1px solid #ccc;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.view-title {
+  font-size: 11px;
+  color: #777;
+  padding: 4px 8px;
+  border-bottom: 1px solid #eee;
+  background: #fafafa;
+}
+
+/* ── Buttons ── */
+button {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 3px 10px;
+  cursor: pointer;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+button:hover { background: #f0f0f0; }
+button.active { background: #222; color: #fff; border-color: #222; }
+button:disabled { opacity: 0.4; cursor: default; }
+button:disabled:hover { background: #fff; }
+
+/* ── Plotter (shared) ── */
+#plotter {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#plotter-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#plotter-state {
+  font-size: 11px;
+  color: #888;
+  margin-left: 4px;
+}
+#plotter-state.running { color: #b07000; }
+#plotter-state.done    { color: #2a7a2a; }
+#plotter-state.error   { color: #a00; }
+
+#plotter-log {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #444;
+  background: #fafafa;
+  border: 1px solid #eee;
+  padding: 6px 8px;
+  max-height: 140px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  display: none;
+}
+
+/* ── Corner info ── */
+#info {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* ── Paint project ── */
+#paint-preview-box {
+  margin-bottom: 12px;
+}
+
+#paint-preview {
+  padding: 16px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 11px;
+  overflow: auto;
+}
+
+#paint-preview svg {
+  max-width: 100%;
+  max-height: 440px;
+  display: block;
+}
+
+#paint-hidden { display: none; }
+
+/* ── Dip project ── */
+#dip-preview-box { margin-bottom: 12px; }
+#dip-preview {
+  padding: 16px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+#dip-preview canvas {
+  max-width: 100%;
+  max-height: 440px;
+  background: #fff;
+  image-rendering: pixelated;
+}
+#dip-hidden { display: none; }
+
+/* ── Lissajous project ── */
+#liss-superimposed { background: #fff; }
+#liss-panels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  max-width: 480px;
+  align-content: flex-start;
+}
+.liss-panel {
+  border: 1px solid #ddd;
+  background: #fff;
+}
+.liss-panel-label {
+  font-size: 9px;
+  color: #999;
+  text-align: center;
+  padding: 1px 0;
+  border-top: 1px solid #eee;
+}
+
+svg { display: block; }
+</style>
+
+<div id="app">
+
+<div id="sidebar">
+  <div class="project-item active" data-project="corner">Corner</div>
+  <div class="project-item"        data-project="paint">Paint</div>
+  <div class="project-item"        data-project="dip">Dip</div>
+  <div class="project-item"        data-project="lissajous">Lissajous</div>
+  <div class="project-item"        data-project="web">Web</div>
+  <div class="project-item"        data-project="tessellation">Tessellation</div>
+</div>
+
+<div id="main-content">
+
+<!-- ── Corner project ── -->
+<div id="project-corner">
+
+<div class="controls-bar">
+  <label><span>size (mm)</span><input type="number" id="cfg-size"   value="150" min="20"  max="500"  step="5"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>dist (mm)</span><input type="number" id="cfg-dist"   value="350" min="50"  max="2000" step="10"></label>
+  <label><span>height</span>  <input type="number" id="cfg-height" value="80"  min="0"   max="500"  step="5"></label>
+  <label><span>angle °</span> <input type="number" id="cfg-angle"  value="45"  min="5"   max="85"   step="1"></label>
+  <span class="ctrl-sep">|</span>
+  <button id="btn-corner-mode">corner: in</button>
+  <button id="btn-show-cube" class="active">cube: on</button>
+  <span class="ctrl-sep">|</span>
+  <button id="btn-export-a">export Wall A</button>
+  <button id="btn-export-b">export Wall B</button>
+  <button id="btn-export-floor">export Floor</button>
+</div>
+
+<div class="controls-bar">
+  <label>
+    <span>image SVG</span>
+    <input type="file" id="img-file" accept=".svg" style="font-family:monospace;font-size:11px;width:auto;">
+  </label>
+  <span class="ctrl-sep">|</span>
+  <label><span>depth</span>     <input type="number" id="img-depth" value="0.7" min="0.1" max="0.95" step="0.05"></label>
+  <label><span>scale (mm)</span><input type="number" id="img-scale" value="100" min="5"  max="1000" step="5"></label>
+  <label><span>center x</span>  <input type="number" id="img-cx"    value="0"   min="-500" max="500" step="5"></label>
+  <label><span>center y</span>  <input type="number" id="img-cy"    value="0"   min="-500" max="500" step="5"></label>
+  <label><span>segs/path</span><input type="number" id="img-segs"   value="60"  min="2"  max="500" step="5"></label>
+  <span class="ctrl-sep">|</span>
+  <button id="btn-img-show" class="active">image: on</button>
+  <button id="btn-img-clear">clear</button>
+  <span id="img-count" style="font-size:11px;color:#888;">no image</span>
+</div>
+
+<div id="image-hidden" style="display:none"></div>
+
+<div id="views">
+  <div class="view-box">
+    <div class="view-title">top-down view</div>
+    <svg id="schematic"></svg>
+  </div>
+  <div class="view-box">
+    <div class="view-title">unfolded — A (left) · fold · B (right) · floor (lower-right)</div>
+    <svg id="preview"></svg>
+  </div>
+  <div class="view-box">
+    <div class="view-title">3D model &nbsp;<button id="btn-3d-mode">observer</button></div>
+    <canvas id="view3d"></canvas>
+  </div>
+</div>
+
+<div id="info">
+  Angle° is the observer's horizontal angle from the x-axis (45° = symmetric between walls).
+  <b>corner: in</b> — fold points toward observer (inside room corner, concave).
+  <b>corner: out</b> — fold points away from observer (outside box corner, convex).
+  When exported and folded at the center line, the drawings create the illusion of a cube
+  viewed from the specified position.
+</div>
+
+</div><!-- #project-corner -->
+
+<!-- ── Paint project ── -->
+<div id="project-paint" style="display:none">
+
+<div class="controls-bar">
+  <label>
+    <span>SVG</span>
+    <input type="file" id="paint-file" accept=".svg" style="font-family:monospace;font-size:11px;width:auto;">
+  </label>
+  <span class="ctrl-sep">|</span>
+  <button id="btn-paint-doc-size" class="active" title="Plot at the SVG's declared physical size (mm/cm/in); falls back to width (mm) when the file has no absolute size">doc size: on</button>
+  <label><span>width (mm)</span> <input type="number" id="paint-width"    value="100" min="10"  max="500" step="5"></label>
+  <label><span>origin x</span>  <input type="number" id="paint-origin-x" value="20"  min="0"   max="400" step="5"></label>
+  <label><span>origin y</span>  <input type="number" id="paint-origin-y" value="20"  min="0"   max="300" step="5"></label>
+  <label><span>segs/path</span> <input type="number" id="paint-segs"     value="50"  min="5"   max="500" step="5"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>dip mode</span></label>
+  <button id="btn-paint-dip-mode">strokes</button>
+  <label id="paint-travel-label" style="display:none"><span>travel (mm)</span><input type="number" id="paint-travel-mm" value="500" min="10" max="9999" step="50"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>pen down</span>  <input type="number" id="paint-pen-down" value="44"  min="10"  max="90"  step="1"></label>
+  <label><span>pen up</span>    <input type="number" id="paint-pen-up"   value="75"  min="10"  max="100" step="1"></label>
+  <label><span>speed</span>     <input type="number" id="paint-speed"    value="20"  min="1"   max="100" step="1"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>well x</span>    <input type="number" id="paint-well-x"   value="10"  min="0"   max="400" step="5"></label>
+  <label><span>well y</span>    <input type="number" id="paint-well-y"   value="10"  min="0"   max="300" step="5"></label>
+  <label><span>dip down</span>  <input type="number" id="paint-dip-down" value="55"  min="10"  max="90"  step="1"></label>
+  <label><span>dwell (s)</span> <input type="number" id="paint-dwell"    value="2"   min="0"   max="10"  step="0.5"></label>
+</div>
+
+<div id="paint-preview-box" class="view-box">
+  <div class="view-title">SVG preview — <span id="paint-path-count">0</span> paths loaded</div>
+  <div id="paint-preview">no SVG loaded</div>
+</div>
+
+<div id="paint-hidden"></div>
+
+</div><!-- #project-paint -->
+
+<!-- ── Tessellation project ── -->
+<div id="project-tessellation" style="display:none">
+
+<div class="controls-bar">
+  <label>
+    <span>tile SVG</span>
+    <input type="file" id="tess-file" accept=".svg" title="An SVG whose outline already tiles four ways (its left edge matches its right, top matches bottom)." style="font-family:monospace;font-size:11px;width:auto;">
+  </label>
+  <span class="ctrl-sep">|</span>
+  <label><span>step x (mm)</span><input type="number" id="tess-dx" value="60" min="1" max="500" step="0.5"></label>
+  <label><span>step y (mm)</span><input type="number" id="tess-dy" value="60" min="1" max="500" step="0.5"></label>
+  <button id="btn-tess-fit" title="Reset the repeat step to the SVG's bounding-box size">fit step to SVG</button>
+  <span class="ctrl-sep">|</span>
+  <label><span>cols</span>      <input type="number" id="tess-cols"   value="4"  min="1" max="100" step="1"></label>
+  <label><span>rows</span>      <input type="number" id="tess-rows"   value="4"  min="1" max="100" step="1"></label>
+  <label><span>segs/path</span> <input type="number" id="tess-segs"   value="60" min="2" max="500" step="2"></label>
+  <label><span>origin x</span>  <input type="number" id="tess-origin-x" value="20" min="0" max="400" step="5"></label>
+  <label><span>origin y</span>  <input type="number" id="tess-origin-y" value="20" min="0" max="300" step="5"></label>
+</div>
+
+<div class="controls-bar">
+  <button id="btn-tess-clip"   title="Clip the pattern to the plotter bed rectangle">clip to bed: off</button>
+  <label><span>bed w (mm)</span><input type="number" id="tess-bed-w" value="300" min="10" max="1000" step="10"></label>
+  <label><span>bed h (mm)</span><input type="number" id="tess-bed-h" value="218" min="10" max="1000" step="10"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>pen down</span> <input type="number" id="tess-pen-down" value="44" min="10" max="90"  step="1"></label>
+  <label><span>pen up</span>   <input type="number" id="tess-pen-up"   value="75" min="10" max="100" step="1"></label>
+  <label><span>speed</span>    <input type="number" id="tess-speed"    value="20" min="1"  max="100" step="1"></label>
+</div>
+
+<div class="view-box">
+  <div class="view-title">tessellation preview — <span id="tess-count">no tile loaded</span></div>
+  <div id="tess-preview">no SVG loaded</div>
+</div>
+
+<div id="tess-hidden" style="display:none"></div>
+
+</div><!-- #project-tessellation -->
+
+<!-- ── Dip project ── -->
+<div id="project-dip" style="display:none">
+
+<div class="controls-bar">
+  <label>
+    <span>SVG</span>
+    <input type="file" id="dip-file" accept=".svg" style="font-family:monospace;font-size:11px;width:auto;">
+  </label>
+  <span class="ctrl-sep">|</span>
+  <label><span>width (mm)</span> <input type="number" id="dip-width"    value="100" min="10"  max="500" step="5"></label>
+  <label><span>origin x</span>  <input type="number" id="dip-origin-x" value="20"  min="0"   max="400" step="5"></label>
+  <label><span>origin y</span>  <input type="number" id="dip-origin-y" value="20"  min="0"   max="300" step="5"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>pitch (mm)</span><input type="number" id="dip-pitch"     value="2"   min="0.3" max="20"  step="0.1"></label>
+  <label><span>gamma</span>     <input type="number" id="dip-gamma"     value="1"   min="0.2" max="4"   step="0.1"></label>
+  <label><span>jitter</span>    <input type="number" id="dip-jitter"    value="0"   min="0"   max="1"   step="0.05"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>pen down</span>  <input type="number" id="dip-pen-down"  value="44"  min="10"  max="90"  step="1"></label>
+  <label><span>pen up</span>    <input type="number" id="dip-pen-up"    value="75"  min="10"  max="100" step="1"></label>
+  <label><span>speed</span>     <input type="number" id="dip-speed"     value="20"  min="1"   max="100" step="1"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>refill in well</span></label>
+  <button id="btn-dip-use-well">well: off</button>
+  <span id="dip-well-group" style="display:none">
+    <label><span>dabs/dip</span>  <input type="number" id="dip-dabs"      value="3"   min="1"   max="999" step="1"></label>
+    <label><span>well x</span>    <input type="number" id="dip-well-x"    value="10"  min="0"   max="400" step="5"></label>
+    <label><span>well y</span>    <input type="number" id="dip-well-y"    value="10"  min="0"   max="300" step="5"></label>
+    <label><span>dip down</span>  <input type="number" id="dip-dip-down"  value="55"  min="10"  max="90"  step="1"></label>
+    <label><span>dwell (s)</span> <input type="number" id="dip-dwell"     value="1"   min="0"   max="10"  step="0.5"></label>
+  </span>
+</div>
+
+<div id="dip-preview-box" class="view-box">
+  <div class="view-title">dab preview — <span id="dip-count">0</span> dabs</div>
+  <div id="dip-preview"><canvas id="dip-canvas"></canvas></div>
+</div>
+
+<div id="info" style="margin-top:6px">
+  Greyscale → dab density. Black fills every grid cell (max density at the chosen
+  <b>pitch</b>); lighter regions thin out via ordered dithering. Set <b>pitch</b> to the
+  smallest spacing your brush/motor can resolve. <b>gamma</b> &lt;1 darkens mid-tones,
+  &gt;1 lightens. <b>jitter</b> randomizes dab position within its cell. By default the
+  needle just dabs each cell (pen down/up) with no well trips; turn on
+  <b>refill in well</b> only for a tool that needs reloading between dabs. Keep
+  <b>vpype</b> off (or linesort-only) — linemerge would fuse dabs into lines.
+</div>
+
+<div id="dip-hidden" style="display:none"></div>
+
+</div><!-- #project-dip -->
+
+<!-- ── Lissajous project ── -->
+<div id="project-lissajous" style="display:none">
+
+<div class="controls-bar">
+  <label><span>freq a (x)</span>  <input type="number" id="liss-a"       value="3"  min="0.1" max="40" step="0.1"></label>
+  <label><span>freq b (y)</span>  <input type="number" id="liss-b"       value="2"  min="0.1" max="40" step="0.1"></label>
+  <label><span>base phase °</span><input type="number" id="liss-phase"   value="0"  min="0"  max="360" step="5"></label>
+  <label><span>delta °</span>     <input type="number" id="liss-delta"   value="20" min="0"  max="360" step="1"></label>
+  <label><span>layers</span>      <input type="number" id="liss-layers"  value="6"  min="1"  max="64"  step="1"></label>
+  <label><span>samples</span>     <input type="number" id="liss-samples" value="400" min="20" max="4000" step="20"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>delta on</span></label>
+  <button id="btn-liss-delta-mode">phase</button>
+  <span class="ctrl-sep">|</span>
+  <label><span>size (mm)</span>  <input type="number" id="liss-size"      value="100" min="10" max="500" step="5"></label>
+  <label><span>origin x</span>  <input type="number" id="liss-origin-x"  value="20"  min="0"  max="400" step="5"></label>
+  <label><span>origin y</span>  <input type="number" id="liss-origin-y"  value="20"  min="0"  max="300" step="5"></label>
+  <label><span>gutter (mm)</span><input type="number" id="liss-gutter"   value="10"  min="0"  max="100" step="1"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>layout</span></label>
+  <button id="btn-liss-layout">grid</button>
+  <span class="ctrl-sep">|</span>
+  <label><span>pen down</span> <input type="number" id="liss-pen-down" value="44" min="10" max="90"  step="1"></label>
+  <label><span>pen up</span>   <input type="number" id="liss-pen-up"   value="75" min="10" max="100" step="1"></label>
+  <label><span>speed</span>    <input type="number" id="liss-speed"    value="20" min="1"  max="100" step="1"></label>
+</div>
+
+<div id="views">
+  <div class="view-box">
+    <div class="view-title">superimposed — <span id="liss-layer-count">0</span> layers</div>
+    <svg id="liss-superimposed"></svg>
+  </div>
+  <div class="view-box">
+    <div class="view-title">individual panels</div>
+    <div id="liss-panels"></div>
+  </div>
+</div>
+
+<div id="info">
+  Lissajous figure: <b>x(t)=sin(a·t+φ)</b>, <b>y(t)=sin(b·t)</b> over t∈[0,2π].
+  <b>freq a / freq b</b> set the frequency ratio. Each of the <b>layers</b> is drawn at
+  an incremented <b>delta</b>: when delta acts on <b>phase</b> it shifts the x-component
+  phase φ (changing the figure's shape); on <b>time</b> it offsets the start parameter
+  (a moving trace of the same closed curve). The <b>superimposed</b> view overlays every
+  layer in one square; <b>grid</b> layout lays them out as separate square panels for
+  plotting (use <b>stacked</b> to plot them all on one square).
+</div>
+
+<div id="liss-hidden" style="display:none"></div>
+
+</div><!-- #project-lissajous -->
+
+<!-- ── Web project ── -->
+<div id="project-web" style="display:none">
+
+<div class="controls-bar">
+  <label><span>radii</span>      <input type="number" id="web-radii"     value="16" min="3"   max="64"  step="1"></label>
+  <label><span>rings</span>      <input type="number" id="web-rings"     value="14" min="1"   max="80"  step="1"></label>
+  <label><span>hub rings</span>  <input type="number" id="web-hub"       value="3"  min="0"   max="20"  step="1"></label>
+  <label><span>inner %</span>    <input type="number" id="web-inner"     value="8"  min="1"   max="40"  step="1"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>angle jit</span>  <input type="number" id="web-angle-jit" value="0.25" min="0" max="1" step="0.01"></label>
+  <label><span>radius jit</span> <input type="number" id="web-rad-jit"   value="0.12" min="0" max="1" step="0.01"></label>
+  <label><span>frame jit</span>  <input type="number" id="web-frame-jit" value="0.18" min="0" max="1" step="0.01"></label>
+  <label><span>sag</span>        <input type="number" id="web-sag"       value="0.15" min="0" max="1" step="0.01"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>chords</span></label>
+  <button id="btn-web-chord">sag</button>
+  <span class="ctrl-sep">|</span>
+  <label><span>seed</span>       <input type="number" id="web-seed"      value="1"  min="0"   max="999999999" step="1"></label>
+  <button id="btn-web-randomize">randomize</button>
+  <label><span>samples/chord</span><input type="number" id="web-samples" value="6" min="1" max="40" step="1"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>size (mm)</span>  <input type="number" id="web-size"      value="120" min="10" max="500" step="5"></label>
+  <label><span>origin x</span>   <input type="number" id="web-origin-x"  value="20"  min="0"  max="400" step="5"></label>
+  <label><span>origin y</span>   <input type="number" id="web-origin-y"  value="20"  min="0"  max="300" step="5"></label>
+  <span class="ctrl-sep">|</span>
+  <label><span>pen down</span>   <input type="number" id="web-pen-down"  value="44" min="10" max="90"  step="1"></label>
+  <label><span>pen up</span>     <input type="number" id="web-pen-up"    value="75" min="10" max="100" step="1"></label>
+  <label><span>speed</span>      <input type="number" id="web-speed"     value="20" min="1"  max="100" step="1"></label>
+</div>
+
+<div id="views">
+  <div class="view-box">
+    <div class="view-title">spiderweb — <span id="web-seg-count">0</span> segments</div>
+    <svg id="web-preview"></svg>
+  </div>
+</div>
+
+<div id="info">
+  Stochastic orb web. <b>radii</b> are the straight spokes from the hub to an irregular
+  outer <b>frame</b>; <b>rings</b> is the number of capture-spiral revolutions (line
+  density). The jitter controls add randomness: <b>angle jit</b> wobbles spoke angles,
+  <b>radius jit</b> roughens each spiral vertex, <b>frame jit</b> varies anchor distance,
+  and <b>sag</b> droops each spiral chord inward toward the hub. The web is fully
+  determined by <b>seed</b> — the preview and the plotted job match exactly; press
+  <b>randomize</b> for a fresh one. Output layers: <b>web_frame</b>, <b>web_radii</b>,
+  <b>web_spiral</b>.
+</div>
+
+</div><!-- #project-web -->
+
+<!-- ── Shared plotter footer (Svelte: PlotterFooter mounts here) ── -->
+<div id="plotter-mount"></div>
+
+</div><!-- #main-content -->
+</div><!-- #app -->
+
+
+</body>
+</html>

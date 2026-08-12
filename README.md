@@ -12,3 +12,10 @@ npm run dev
 
 ## Deployments
 `npm run dev` already handles static site generation, so all you need to do is push to origin.
+
+## Line Drawing demo
+`src/demos/line-drawing.md` is a grid-based rectilinear path editor with a few export options:
+
+- **export SVG** — the drawn path (with mirror/repeat applied). Respects the **invert export** toggle, which renders white lines on a black background.
+- **export KiCad PCB** — the path as `F.Cu` route segments in a KiCad 9/10 `.kicad_pcb` file. This export always emits the line itself as tracks and **ignores the invert toggle**. For an inverted (negative) copper fill, draw a zone over the area in KiCad and add a zone cutout tracing the exported tracks.
+- **export/import moves** — JSON round-trip of the origin, canvas size, and move list.

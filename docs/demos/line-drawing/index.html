@@ -153,6 +153,7 @@ svg {
   <button id="btn-clear">clear</button>
   <button id="btn-export-svg">export SVG</button>
   <button id="btn-invert-export">invert export: off</button>
+  <button id="btn-export-kicad" title="Exports the line as F.Cu route segments (KiCad 9/10). Ignores 'invert export' — for an inverted copper fill, add a zone cutout manually in KiCad.">export KiCad PCB</button>
   <button id="btn-export-moves">export moves</button>
   <button id="btn-import-moves">import moves</button>
   <button id="btn-repeat">repeat: off</button>
@@ -194,6 +195,7 @@ const btnUndo   = document.getElementById('btn-undo');
 const btnClear  = document.getElementById('btn-clear');
 const btnSvg          = document.getElementById('btn-export-svg');
 const btnInvertExport = document.getElementById('btn-invert-export');
+const btnKicad        = document.getElementById('btn-export-kicad');
 const btnMoves  = document.getElementById('btn-export-moves');
 const btnRepeat = document.getElementById('btn-repeat');
 const btnResize = document.getElementById('btn-resize');
@@ -605,6 +607,72 @@ function applyMirrorToPixelPts(pixelPts, mode, ex, ey) {
   });
 }
 
+// Drops interior points of straight runs — the path is all horizontal/vertical
+// unit moves, so only direction changes need anchors.
+function simplifyStroke(pts) {
+  if (pts.length <= 2) return pts;
+  const out = [pts[0]];
+  for (let i = 1; i < pts.length - 1; i++) {
+    const a = out[out.length - 1], b = pts[i], c = pts[i + 1];
+    const collinear = (a.x === b.x && b.x === c.x) || (a.y === b.y && b.y === c.y);
+    if (!collinear) out.push(b);
+  }
+  out.push(pts[pts.length - 1]);
+  return out;
+}
+
+// Computes the final export strokes as arrays of pixel-coordinate points,
+// applying mirror + repeat exactly as the display does (with junction dedup),
+// then simplified so straight runs keep only their endpoints.
+function computeExportStrokes() {
+  const { mirrorMode } = state;
+  const pts = getPoints();
+  const repPts = state.repeatMode ? getRepeatedPoints() : [];
+  const terminal = terminalPoint();
+  const segments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
+  const strokes = [];
+
+  for (const seg of segments) {
+    const pixelPts = seg.map(p => cellCorner(p.col, p.row));
+
+    if (mirrorMode > 0 && terminal) {
+      const ec = cellCorner(terminal.col, terminal.row);
+      // Use applyMirrorToPixelPts (with yOff) to match the display exactly.
+      const mirroredPts = applyMirrorToPixelPts(pixelPts, mirrorMode, ec.x, ec.y);
+      // Reverse the mirror so it starts at the terminal end and works back.
+      const reversedMirror = [...mirroredPts].reverse();
+
+      // Find the longest k where orig[-k:] === rev[:k].
+      // yOff shifts the reflection axis, which can cause the junction to overlap
+      // by 0 pts (yOff=2*cs, paths disconnect), 1 pt (yOff=0, share E),
+      // or 2 pts (yOff=cs, last segment traversed in both directions).
+      let k = 0;
+      const maxK = Math.min(pixelPts.length, reversedMirror.length);
+      for (let i = 1; i <= maxK; i++) {
+        let match = true;
+        for (let j = 0; j < i; j++) {
+          const op = pixelPts[pixelPts.length - i + j];
+          const rp = reversedMirror[j];
+          if (op.x !== rp.x || op.y !== rp.y) { match = false; break; }
+        }
+        if (match) k = i;
+      }
+
+      if (k > 0) {
+        // Paths share a junction: single contiguous stroke with overlap deduplicated.
+        strokes.push([...pixelPts, ...reversedMirror.slice(k)]);
+      } else {
+        // Paths don't connect (yOff creates a gap): emit as two separate strokes.
+        strokes.push(pixelPts);
+        strokes.push(reversedMirror);
+      }
+    } else {
+      strokes.push(pixelPts);
+    }
+  }
+  return strokes.map(simplifyStroke);
+}
+
 function pixelBBox(groups) {
   let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
   for (const pts of groups) {
@@ -661,52 +729,11 @@ function buildExportSvg() {
 
   function appendPolylines(parent, strokeColor) {
     const s = lineStyle.replace('stroke:#000', `stroke:${strokeColor}`);
-    const segments = [pts, ...(repPts.length >= 2 ? [repPts] : [])];
-
-    function emitPoly(pxPts) {
+    for (const stroke of computeExportStrokes()) {
       const el = document.createElementNS(ns, 'polyline');
-      el.setAttribute('points', pxPts.map(({ x, y }) => `${x},${y}`).join(' '));
+      el.setAttribute('points', stroke.map(({ x, y }) => `${x},${y}`).join(' '));
       el.setAttribute('style', s);
       parent.appendChild(el);
-    }
-
-    for (const seg of segments) {
-      const pixelPts = seg.map(p => cellCorner(p.col, p.row));
-
-      if (mirrorMode > 0 && terminal) {
-        const ec = cellCorner(terminal.col, terminal.row);
-        // Use applyMirrorToPixelPts (with yOff) to match the display exactly.
-        const mirroredPts = applyMirrorToPixelPts(pixelPts, mirrorMode, ec.x, ec.y);
-        // Reverse the mirror so it starts at the terminal end and works back.
-        const reversedMirror = [...mirroredPts].reverse();
-
-        // Find the longest k where orig[-k:] === rev[:k].
-        // yOff shifts the reflection axis, which can cause the junction to overlap
-        // by 0 pts (yOff=2*cs, paths disconnect), 1 pt (yOff=0, share E),
-        // or 2 pts (yOff=cs, last segment traversed in both directions).
-        let k = 0;
-        const maxK = Math.min(pixelPts.length, reversedMirror.length);
-        for (let i = 1; i <= maxK; i++) {
-          let match = true;
-          for (let j = 0; j < i; j++) {
-            const op = pixelPts[pixelPts.length - i + j];
-            const rp = reversedMirror[j];
-            if (op.x !== rp.x || op.y !== rp.y) { match = false; break; }
-          }
-          if (match) k = i;
-        }
-
-        if (k > 0) {
-          // Paths share a junction: single contiguous stroke with overlap deduplicated.
-          emitPoly([...pixelPts, ...reversedMirror.slice(k)]);
-        } else {
-          // Paths don't connect (yOff creates a gap): emit as two separate strokes.
-          emitPoly(pixelPts);
-          emitPoly(reversedMirror);
-        }
-      } else {
-        emitPoly(pixelPts);
-      }
     }
   }
 
@@ -726,6 +753,81 @@ function buildExportSvg() {
   return exportSvg;
 }
 
+// ── KiCad PCB export ────────────────────────────────────────────────────────
+// Each polyline is broken into individual (segment ...) tracks on a copper
+// layer. KiCad's Y axis grows downward like our pixel coords, so no flip.
+// NOTE: this export ignores `invertExport` — it always emits the line itself as
+// route segments. For an inverted (negative) copper fill, draw a zone over the
+// area in KiCad and add a zone cutout tracing these tracks.
+const KICAD_TRACE_WIDTH = 0.25; // mm
+const KICAD_LAYER = 'F.Cu';
+
+function buildKicadPcb() {
+  const pts = getPoints();
+  if (pts.length < 2) return null;
+
+  const { mmPerCell, cellSize } = state;
+  const pxToMm = mmPerCell / cellSize;
+
+  // Strokes in mm (same geometry as the SVG export, including mirror/repeat).
+  const strokesMm = computeExportStrokes().map(stroke =>
+    stroke.map(({ x, y }) => ({ x: x * pxToMm, y: y * pxToMm }))
+  );
+
+  // Offset so the drawing sits near (100,100)mm rather than the board origin.
+  let minX = Infinity, minY = Infinity;
+  for (const s of strokesMm) for (const p of s) {
+    if (p.x < minX) minX = p.x;
+    if (p.y < minY) minY = p.y;
+  }
+  const ox = 100 - minX, oy = 100 - minY;
+
+  const uuid = () =>
+    (crypto.randomUUID ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+          const r = (Date.now() + Math.floor(performance.now() * 1000)) % 16;
+          return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+        }));
+
+  const segments = [];
+  for (const stroke of strokesMm) {
+    for (let i = 0; i + 1 < stroke.length; i++) {
+      const a = stroke[i], b = stroke[i + 1];
+      const sx = (a.x + ox).toFixed(4), sy = (a.y + oy).toFixed(4);
+      const ex = (b.x + ox).toFixed(4), ey = (b.y + oy).toFixed(4);
+      segments.push(
+        `  (segment (start ${sx} ${sy}) (end ${ex} ${ey}) (width ${KICAD_TRACE_WIDTH}) (layer "${KICAD_LAYER}") (net 0) (uuid "${uuid()}"))`
+      );
+    }
+  }
+
+  // KiCad 9/10 format: date-based version token, generator_version, and the
+  // renumbered copper layer stack (B.Cu is 2, not 31).
+  const header = `(kicad_pcb
+  (version 20241229)
+  (generator "line-drawing")
+  (generator_version "9.0")
+  (general
+    (thickness 1.6)
+    (legacy_teardrops no)
+  )
+  (paper "A4")
+  (layers
+    (0 "F.Cu" signal)
+    (2 "B.Cu" signal)
+    (9 "F.SilkS" user "F.Silkscreen")
+    (11 "B.SilkS" user "B.Silkscreen")
+    (44 "Edge.Cuts" user)
+  )
+  (setup
+    (pad_to_mask_clearance 0)
+  )
+  (net 0 "")
+`;
+
+  return header + segments.join('\n') + '\n)\n';
+}
+
 function download(filename, content, mime) {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([content], { type: mime }));
@@ -739,6 +841,12 @@ btnSvg.addEventListener('click', () => {
   if (!exportSvg) { alert('Nothing to export — draw something first.'); return; }
   const xml = new XMLSerializer().serializeToString(exportSvg);
   download('line-drawing.svg', xml, 'image/svg+xml');
+});
+
+btnKicad.addEventListener('click', () => {
+  const pcb = buildKicadPcb();
+  if (!pcb) { alert('Nothing to export — draw something first.'); return; }
+  download('line-drawing.kicad_pcb', pcb, 'application/octet-stream');
 });
 
 btnMoves.addEventListener('click', () => {
