@@ -160,6 +160,35 @@ $shop-max-width: 1280px;
     margin-bottom: 5px;
   }
 
+  // Second product image, stacked over the first and revealed on hover. Only
+  // active where the pointer can actually hover (desktop) via the @media below,
+  // so it never obscures the featured image on touch devices.
+  .product-image-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    .product-image-wrapper:hover .product-image-hover {
+      opacity: 1;
+    }
+  }
+
+  .product-description {
+    margin: 8px 0 0;
+    font-family: 'Ibarra Real Nova', sans-serif;
+    font-size: 12px;
+    line-height: 13px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
   .product-price {
     position: absolute;
     top: -15px;
@@ -270,6 +299,14 @@ $shop-max-width: 1280px;
       // opacity: 0.1;
       transition: opacity 3.5s linear;
       filter: brightness(1) contrast(1.0);
+      // The global prefers-reduced-motion reset (base/_reset.scss) forces every
+      // transition-duration to ~0ms !important, which turns this cross-fade into
+      // a hard cut on any device reporting reduced motion (that was the whole
+      // "snapping on mobile Safari" bug). A slow opacity fade isn't the
+      // vestibular motion that setting targets, so re-assert the duration here.
+      @media (prefers-reduced-motion: reduce) {
+        transition-duration: 3.5s !important;
+      }
       // Fade all four edges to transparent. Two gradients (vertical +
       // horizontal) intersected so the corners fade too; alpha-based, so it's
       // background-agnostic. Tune the 12%/88% stops to change the fade depth.

@@ -40,6 +40,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('extensions');
 
   eleventyConfig.addGlobalData("myStatic", "static");
+  // URL-safe build id for cache-busting linked assets (?v={{ buildId }}), so a
+  // changed main.css/JS is actually refetched instead of served stale from the
+  // browser cache. Evaluated once per build.
+  eleventyConfig.addGlobalData('buildId', () => Date.now());
   // https://www.stefanjudis.com/snippets/how-to-display-the-build-date-in-eleventy/
   eleventyConfig.addGlobalData('timestamp', () => {
     let now = new Date();

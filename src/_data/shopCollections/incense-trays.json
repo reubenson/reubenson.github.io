@@ -6,7 +6,7 @@
   "descriptionHtml": "<p>incense trays</p>",
   "currencyCode": "USD",
   "productCount": 4,
-  "generatedAt": "2026-08-12T20:45:47.941Z",
+  "generatedAt": "2026-08-13T16:44:04.243Z",
   "products": [
     {
       "id": "gid://shopify/Product/7110763085896",
@@ -16,8 +16,8 @@
       "status": "ACTIVE",
       "onlineStoreUrl": null,
       "availableForSale": true,
-      "description": "Incense tray",
-      "descriptionHtml": "<p>Incense tray</p>",
+      "description": "",
+      "descriptionHtml": "",
       "featuredImage": {
         "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6723E009-BD34-4898-B3A4-EC0FA781CCED_1_201_a_fd6e9e3e-b1cf-4e05-8db2-cfd4fb793ce1.jpg?v=1786554016",
         "altText": null,
@@ -63,8 +63,8 @@
       "status": "ACTIVE",
       "onlineStoreUrl": null,
       "availableForSale": true,
-      "description": "Incense tray",
-      "descriptionHtml": "<p>Incense tray</p>",
+      "description": "",
+      "descriptionHtml": "",
       "featuredImage": {
         "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/1EE33EC4-E082-450C-9B0F-4D4DACEBA520_1_201_a_198a9fe4-edff-41cf-a91b-6f272ddba0fb.jpg?v=1786554253",
         "altText": null,
@@ -157,8 +157,8 @@
       "status": "ACTIVE",
       "onlineStoreUrl": null,
       "availableForSale": true,
-      "description": "Incense tray",
-      "descriptionHtml": "<p>Incense tray</p>",
+      "description": "",
+      "descriptionHtml": "",
       "featuredImage": {
         "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/702FEBB5-5611-4144-A4DF-6B271D2823B7_1_201_a_a7d4d41f-87d6-4ffa-bc99-dd97c13a3ce5.jpg?v=1786554288",
         "altText": null,

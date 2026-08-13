@@ -13,14 +13,14 @@ description: Shop description
     <meta name="description" content="{{ description }}">
     <meta name="keywords" content="reuben son, ceramics, son ceramics">
     {# <link rel="stylesheet" href="/bundle.css"> #}
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css?v={{ buildId }}">
     <link rel="icon" type="image/png" href="/favicon.png">
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
     <meta property="og:image" content="{{ socialImg }}">
     {% include "gtm.njk" %}
     <script async src="/public/js/shopify-init.js" defer></script>
-    <script src="/public/js/image-sequence.js" defer></script>
+    <script src="/public/js/image-sequence.js?v={{ buildId }}" defer></script>
   </head>
   <body class="shop-page {{ layoutType }}">
     <div class="top-spacer"></div>
@@ -30,6 +30,7 @@ description: Shop description
         <nav>
           <a href="#travel-vases">Travel Vases</a>
           <a href="#incense-trays">Incense Trays</a>
+          <a href="#misc">Misc</a>
         </nav>
       </header>
       <div class="content-wrapper no-grid">
@@ -53,6 +54,21 @@ description: Shop description
           <div class="shopify-container project-grid-item-full">
             <div class="shop-listings" data-collection-id="282400391240" data-show-title="false">
               {{ productGrid(shopCollectionsById["282400391240"], false) }}
+            </div>
+          </div>
+        </section>
+        <section class="shop-collection" id="misc">
+          <div class="project-grid-item-full">
+            <h2 class="shop-collection-header">Misc</h2>
+          </div>
+          <div class="project-grid-item-full">
+            <p>
+              Experimenting with some weedpot and bottle forms that have yet to settle into new series ...
+            </p>
+          </div>
+          <div class="shopify-container project-grid-item-full">
+            <div class="shop-listings" data-collection-id="278356557896" data-show-title="false">
+              {{ productGrid(shopCollectionsById["278356557896"], false) }}
             </div>
           </div>
         </section>

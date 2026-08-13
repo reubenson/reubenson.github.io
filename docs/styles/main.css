@@ -1071,6 +1071,29 @@ nav.main-nav .active {
   background-size: cover;
   margin-bottom: 5px;
 }
+.shop-page .product-image-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .shop-page .product-image-wrapper:hover .product-image-hover {
+    opacity: 1;
+  }
+}
+.shop-page .product-description {
+  margin: 8px 0 0;
+  font-family: "Ibarra Real Nova", sans-serif;
+  font-size: 12px;
+  line-height: 13px;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+}
 .shop-page .product-price {
   position: absolute;
   top: -15px;
@@ -1162,6 +1185,11 @@ nav.main-nav .active {
   object-fit: cover;
   transition: opacity 3.5s linear;
   filter: brightness(1) contrast(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .shop-page .image-sequence .sequence-image {
+    transition-duration: 3.5s !important;
+  }
 }
 .shop-page .image-sequence .sequence-title-container {
   position: absolute;

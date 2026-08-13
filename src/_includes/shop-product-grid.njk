@@ -28,9 +28,25 @@
               {% if product.featuredImage.width %}width="{{ product.featuredImage.width }}"{% endif %}
               {% if product.featuredImage.height %}height="{{ product.featuredImage.height }}"{% endif %}>
           {% endif %}
+          {# Second image, revealed on hover (desktop only — see .product-image-hover in _shop.scss). Decorative, so hidden from AT. #}
+          {% if (product.images | length) > 1 %}
+            {% set hoverImage = product.images[1] %}
+            <img
+              class="product-image product-image-hover"
+              src="{{ hoverImage.url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              {% if hoverImage.width %}width="{{ hoverImage.width }}"{% endif %}
+              {% if hoverImage.height %}height="{{ hoverImage.height }}"{% endif %}>
+          {% endif %}
           <span class="product-price">{{ product.price.min | money(product.price.currencyCode) }}</span>
           {% if showTitle %}<span class="product-title">{{ product.title }}</span>{% endif %}
         </div>
+
+        {% if product.description %}
+          <p class="product-description">{{ product.description }}</p>
+        {% endif %}
 
         {% if (product.variants | length) > 1 %}
           <select class="product-variant-select" aria-label="Choose an option for {{ product.title }}">
