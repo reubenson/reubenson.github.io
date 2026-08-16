@@ -160,8 +160,8 @@ I have practiced ceramics for six years, but my creative practice is grounded in
     </svg>
     <div class="chop"></div>
   </div>
-  <svg style="display: none;">
-    <filter id="white-to-transparent">
+  <svg width="0" height="0" style="position: absolute; overflow: hidden;">
+    <filter id="white-to-transparent" color-interpolation-filters="sRGB">
       <feColorMatrix type="matrix" values="
         1 0 0 0 0
         0 1 0 0 0
@@ -184,6 +184,8 @@ I have practiced ceramics for six years, but my creative practice is grounded in
   .chop-wrapper {
     filter: blur(1.1px) contrast(5) url(#white-to-transparent);
     background-color: white;
+    
+    
     height: 100%;
     width: 100%;
   }

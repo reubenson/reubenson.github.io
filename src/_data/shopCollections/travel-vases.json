@@ -9,53 +9,6 @@
   "generatedAt": "2026-08-16T17:42:06.352Z",
   "products": [
     {
-      "id": "gid://shopify/Product/7111772176456",
-      "legacyId": "7111772176456",
-      "handle": "travel-vase-14",
-      "title": "Travel Vase",
-      "status": "ACTIVE",
-      "onlineStoreUrl": "https://shop.reubenson.com/products/travel-vase-14",
-      "availableForSale": false,
-      "description": "",
-      "descriptionHtml": "",
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/E1DE6AA3-FF65-4EFC-BD37-2C12927CEF44_1_201_a.jpg?v=1786554228",
-        "altText": null,
-        "width": 1432,
-        "height": 1432
-      },
-      "images": [
-        {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/E1DE6AA3-FF65-4EFC-BD37-2C12927CEF44_1_201_a.jpg?v=1786554228",
-          "altText": "",
-          "width": 1432,
-          "height": 1432
-        }
-      ],
-      "price": {
-        "min": "30.0",
-        "max": "30.0",
-        "currencyCode": "USD"
-      },
-      "variants": [
-        {
-          "id": "gid://shopify/ProductVariant/41308344549448",
-          "legacyId": "41308344549448",
-          "title": "Default Title",
-          "price": "30.00",
-          "availableForSale": false,
-          "inventoryQuantity": 0,
-          "selectedOptions": [
-            {
-              "name": "Title",
-              "value": "Default Title"
-            }
-          ],
-          "imageUrl": null
-        }
-      ]
-    },
-    {
       "id": "gid://shopify/Product/6985437511752",
       "legacyId": "6985437511752",
       "handle": "travel-vase-5",
