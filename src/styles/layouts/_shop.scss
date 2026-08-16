@@ -20,9 +20,10 @@ $shop-max-width: 1280px;
     background-color: #f0f0e6;
     z-index: 10;
     font-size: 20px;
-    max-width: calc(100vw - 40px);
+    // max-width: calc(100vw - 40px);
+    max-width: 1280px;
     // padding: 10px 20px;
-    margin-top: 37px;
+    margin: 37px auto 0;;
     border-bottom: solid black 1px;
     // height: 56px;
     // margin: 20px;
@@ -33,8 +34,8 @@ $shop-max-width: 1280px;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
-      // padding: 6px;
-      padding: 11px 0 10px;
+      padding: 6px 0;;
+      // padding: 11px 0 10px;
       max-width: 720px;
       // border-bottom: solid black 1px;
       // margin: auto auto;
@@ -287,6 +288,28 @@ $shop-max-width: 1280px;
     aspect-ratio: 3/4;
     border-radius: 2px;
     overflow: hidden;
+    // Fixed side length of the cut-out square. Both the hole punched in the
+    // images and the title-container revealed through it use this exact value
+    // (as a centered square), so they line up regardless of container size.
+    // --cutout-size: 240px;
+    --cutout-width: 260px;
+    --cutout-height: 140px;
+    --cutout-top: 10px;
+
+
+
+    // Static bottom layer (the first image) in cut-out mode: never masked,
+    // always visible beneath the title and the cross-fading images above it.
+    // First in the DOM, so it paints below its siblings at the same stacking
+    // level.
+    .sequence-base {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
     .sequence-image {
       position: absolute;
@@ -318,18 +341,51 @@ $shop-max-width: 1280px;
       // mask-composite: intersect;
     }
 
+    // Wrapper holding the cross-fading images in cut-out mode. It fills the
+    // container and is never transformed, so the cut-out hole masked onto it
+    // stays put — unlike the images inside, which the per-section
+    // `transform: scale()` zoom scales and shifts.
+    .sequence-frames {
+      position: absolute;
+      inset: 0;
+    }
+
+    // Punch the rectangular hole through the (un-transformed) frames wrapper so
+    // the .sequence-title-container stacked beneath shows through, like a layered
+    // cut-out. Two opaque mask layers — one filling the wrapper, one the window —
+    // combined with `exclude` (webkit `xor`) cancel where they overlap, leaving
+    // a hole. The window sits 20px from the top, centered horizontally, matching
+    // the .sequence-title-container below.
+    &--cutout .sequence-frames {
+      $hole-width: var(--cutout-width);
+      $hole-height: var(--cutout-height);
+      -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+      -webkit-mask-repeat: no-repeat, no-repeat;
+      -webkit-mask-position: center, center var(--cutout-top);
+      -webkit-mask-size: 100% 100%, #{$hole-width} #{$hole-height};
+      -webkit-mask-composite: xor;
+      mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+      mask-repeat: no-repeat, no-repeat;
+      mask-position: center, center var(--cutout-top);
+      mask-size: 100% 100%, #{$hole-width} #{$hole-height};
+      mask-composite: exclude;
+    }
+
     .sequence-title-container {
       position: absolute;
       z-index: 2;
       top: 0;
       right: 0;
       left: 0;
-      margin: 10px auto;
+      // margin: 10px auto;
       text-align: center;
       // border: solid black 1px;
       // padding: 10px;
-      width: calc(100% - 20px);
-      max-width: 400px;
+      width: --cutout-width;
+      height: --cutout-height;
+      padding: 4px;
+      // width: calc(100% - 20px);
+      // max-width: 400px;
       // NOTE: no `filter` here — a filter on this container would isolate the
       // backdrop root and stop .sequence-title-backdrop from blurring the image
       // below. The displacement filter lives on .sequence-title-content instead.
@@ -338,6 +394,7 @@ $shop-max-width: 1280px;
     // Blur layer that fills the container and blurs the image showing through,
     // so the text on top reads distinctly from the photo below.
     .sequence-title-backdrop {
+      display: none;
       position: absolute;
       inset: 0;
       z-index: 0;
@@ -354,11 +411,39 @@ $shop-max-width: 1280px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      height: 100%;
       // Per-instance displacement filter (set via the --sequence-title-filter
       // custom property on the container); sits above the blur layer.
-      filter: var(--sequence-title-filter) blur(0.5px);
+      filter: var(--sequence-title-filter) blur(0.3px);
       border: solid black 1px;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
       padding: 10px;
+    }
+
+    // In cut-out mode the title is the layer revealed through the hole: it sits
+    // BELOW the images (it precedes them in the DOM, so an equal stacking level
+    // paints it behind) and is a centered square of the exact same size as the
+    // hole, so the two line up precisely. These come AFTER the base
+    // .sequence-title-container / -content rules above so they win on source
+    // order (same specificity), overriding the top-anchored full-width layout.
+    &--cutout .sequence-title-container {
+      z-index: 0;
+      top: var(--cutout-top);
+      right: auto;
+      bottom: auto;
+      left: 50%;
+      margin: 0;
+      width: var(--cutout-width);
+      max-width: var(--cutout-width);
+      height: var(--cutout-height);
+      transform: translateX(-50%);
+    }
+
+    // Fill the square window and center the title within it.
+    &--cutout .sequence-title-content {
+      box-sizing: border-box;
+      // height: 100%;
+      justify-content: center;
     }
 
     .sequence-title {
@@ -393,11 +478,14 @@ $shop-max-width: 1280px;
       // color: black;
       // white-space: nowrap;
       // pointer-events: none;
-      margin: 5px 0 0;
+      margin: 4px 0 0;
+      font-size: 16px;
     }
 
     .sequence-title-dimensions {
       flex: 0 1 auto;
+      font-style: italic;
+      font-size: 14px;
       // border-top: solid black 1px;
       // display: block;
     }
@@ -640,7 +728,7 @@ $cart-cream: #f0f0e6;
 }
 
 #travel-vases .image-sequence img {
-  transform: scale(1.05);
+  transform: scale(1.05) translate(-2%, 2.5%);
   object-position: 53% 8%;
   filter: brightness(1.1);
 }

@@ -7,14 +7,21 @@
  *
  * Run manually — this is NOT part of the Eleventy build:
  *
- *   SHOPIFY_ADMIN_TOKEN=shpat_xxx npm run fetch-shop
+ *   npm run fetch-shop
  *
- * or put the token in a `.env` file at the repo root (git-ignored):
+ * Auth: put the custom app's client id/secret in a `.env` file at the repo root
+ * (git-ignored). The script exchanges them for a short-lived Admin API access
+ * token via the client-credentials grant (POST /admin/oauth/access_token):
  *
- *   SHOPIFY_ADMIN_TOKEN=shpat_xxx
+ *   SHOPIFY_CLIENT_ID=xxxxxxxx
+ *   SHOPIFY_CLIENT_SECRET=xxxxxxxx
  *   SHOPIFY_STORE_DOMAIN=024775-ae.myshopify.com   # optional, this is the default
  *
- * The token comes from a Shopify custom app (Settings → Apps and sales
+ * Alternatively, skip the exchange by supplying a token directly:
+ *
+ *   SHOPIFY_ADMIN_TOKEN=shpat_xxx
+ *
+ * The credentials come from a Shopify custom app (Settings → Apps and sales
  * channels → Develop apps) with the Admin API scope `read_products`.
  * Requires Node 18+ (uses global fetch).
  */
@@ -65,6 +72,41 @@ async function loadDotEnv() {
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Exchange the custom app's client credentials for a short-lived Admin API
+ * access token via the client-credentials grant (POST /admin/oauth/access_token).
+ * @param {string} domain e.g. "024775-ae.myshopify.com"
+ * @param {string} clientId SHOPIFY_CLIENT_ID
+ * @param {string} clientSecret SHOPIFY_CLIENT_SECRET
+ * @returns {Promise<string>} the Admin API access token
+ */
+async function fetchAccessToken(domain, clientId, clientSecret) {
+  const res = await fetch(`https://${domain}/admin/oauth/access_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: 'client_credentials'
+    })
+  });
+
+  if (!res.ok) {
+    const detail = (await res.text().catch(() => '')).trim();
+    throw new Error(
+      `Token request failed (${res.status}). Check SHOPIFY_CLIENT_ID / SHOPIFY_CLIENT_SECRET` +
+        ` and that the app is installed on ${domain}.` +
+        (detail ? `\n${detail}` : '')
+    );
+  }
+
+  const json = await res.json();
+  if (!json.access_token) {
+    throw new Error(`Token response missing access_token: ${JSON.stringify(json)}`);
+  }
+  return json.access_token;
+}
 
 /**
  * POST a query to the Admin GraphQL API, retrying on throttling.
@@ -240,13 +282,28 @@ async function fetchCollection(endpoint, token, legacyId) {
 async function main() {
   await loadDotEnv();
 
-  const token = process.env.SHOPIFY_ADMIN_TOKEN;
   const domain = process.env.SHOPIFY_STORE_DOMAIN || '024775-ae.myshopify.com';
+
+  // Prefer a directly-supplied token; otherwise exchange the app's client
+  // credentials for one via /admin/oauth/access_token.
+  let token = process.env.SHOPIFY_ADMIN_TOKEN;
   if (!token) {
-    console.error(
-      'Missing SHOPIFY_ADMIN_TOKEN. Set it in the environment or a .env file at the repo root.'
-    );
-    process.exit(1);
+    const clientId = process.env.SHOPIFY_CLIENT_ID;
+    const clientSecret = process.env.SHOPIFY_CLIENT_SECRET;
+    if (!clientId || !clientSecret) {
+      console.error(
+        'Missing credentials. Set SHOPIFY_CLIENT_ID and SHOPIFY_CLIENT_SECRET (or a ready-made' +
+          ' SHOPIFY_ADMIN_TOKEN) in the environment or a .env file at the repo root.'
+      );
+      process.exit(1);
+    }
+    try {
+      token = await fetchAccessToken(domain, clientId, clientSecret);
+      console.log('Obtained Admin API access token via client-credentials grant.');
+    } catch (err) {
+      console.error(err.message);
+      process.exit(1);
+    }
   }
 
   const endpoint = `https://${domain}/admin/api/${API_VERSION}/graphql.json`;

@@ -27,10 +27,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // bleeds through faintly beneath later frames during transitions.
     var previousIndex = 0;
     var secondPreviousIndex = null;
+    // In cut-out mode the frames live in a non-transformed wrapper so the mask
+    // hole stays aligned; append/query there. Falls back to the container when
+    // there's no wrapper (non-cutout sequences).
+    var frameHost = container.querySelector('.sequence-frames') || container;
 
     function findOrCreateImage(index) {
       var src = images[index];
-      var element = container.querySelector('img[src="' + src + '"]');
+      var element = frameHost.querySelector('img[src="' + src + '"]');
       if (element) return element;
 
       element = document.createElement('img');
@@ -38,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
       element.alt = alt;
       element.style.opacity = '0.0';
       element.className = 'sequence-image';
-      container.appendChild(element);
+      frameHost.appendChild(element);
       return element;
     }
 

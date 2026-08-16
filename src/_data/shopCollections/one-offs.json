@@ -5,16 +5,228 @@
   "title": "Misc",
   "descriptionHtml": "",
   "currencyCode": "USD",
-  "productCount": 5,
-  "generatedAt": "2026-08-13T16:44:04.398Z",
+  "productCount": 9,
+  "generatedAt": "2026-08-16T17:42:06.853Z",
   "products": [
+    {
+      "id": "gid://shopify/Product/7113225273416",
+      "legacyId": "7113225273416",
+      "handle": "vase",
+      "title": "Vase",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/vase",
+      "availableForSale": true,
+      "description": "height approx. 3 in ... soda-fired and very orb",
+      "descriptionHtml": "<p>height approx. 3 in ... soda-fired and very orb</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/EC8279A8-E679-4E5E-9FA7-C66F6E77607D_1_105_c.jpg?v=1786899970",
+        "altText": null,
+        "width": 886,
+        "height": 886
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/EC8279A8-E679-4E5E-9FA7-C66F6E77607D_1_105_c.jpg?v=1786899970",
+          "altText": "",
+          "width": 886,
+          "height": 886
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/954381FD-6B80-4C89-B23B-0274224AC6DA_1_105_c.jpg?v=1786899970",
+          "altText": "",
+          "width": 886,
+          "height": 886
+        }
+      ],
+      "price": {
+        "min": "80.0",
+        "max": "80.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41314069774408",
+          "legacyId": "41314069774408",
+          "title": "Default Title",
+          "price": "80.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7113220489288",
+      "legacyId": "7113220489288",
+      "handle": "tray",
+      "title": "Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/tray",
+      "availableForSale": true,
+      "description": "Incense tray (without hole) height approx. 5 in",
+      "descriptionHtml": "<p>Incense tray (without hole) height approx. 5 in</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/DEE9C651-6A47-4729-87D1-8AAAEBFC5AF0_1_201_a.jpg?v=1786899544",
+        "altText": null,
+        "width": 2014,
+        "height": 2014
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/DEE9C651-6A47-4729-87D1-8AAAEBFC5AF0_1_201_a.jpg?v=1786899544",
+          "altText": "",
+          "width": 2014,
+          "height": 2014
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/F4FA5ABA-0ED8-450B-86EA-6955907B83C4_1_201_a.jpg?v=1786899544",
+          "altText": "",
+          "width": 2041,
+          "height": 2041
+        }
+      ],
+      "price": {
+        "min": "30.0",
+        "max": "30.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41314061025352",
+          "legacyId": "41314061025352",
+          "title": "Default Title",
+          "price": "30.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7113220194376",
+      "legacyId": "7113220194376",
+      "handle": "cup",
+      "title": "Cup",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/cup",
+      "availableForSale": true,
+      "description": "height approx. 3.5 in",
+      "descriptionHtml": "<p>height approx. 3.5 in</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/27C47E0C-C1EE-4686-A6DC-9A7812A91B20_1_201_a.jpg?v=1786899458",
+        "altText": null,
+        "width": 1758,
+        "height": 1758
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/27C47E0C-C1EE-4686-A6DC-9A7812A91B20_1_201_a.jpg?v=1786899458",
+          "altText": "",
+          "width": 1758,
+          "height": 1758
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/911C7E09-C931-475D-96CB-2F3498166004_1_201_a.jpg?v=1786899347",
+          "altText": "",
+          "width": 1812,
+          "height": 1812
+        }
+      ],
+      "price": {
+        "min": "60.0",
+        "max": "60.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41314058666056",
+          "legacyId": "41314058666056",
+          "title": "Default Title",
+          "price": "60.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7113220128840",
+      "legacyId": "7113220128840",
+      "handle": "bottle",
+      "title": "Bottle",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/bottle",
+      "availableForSale": true,
+      "description": "height approx. 5.5 in",
+      "descriptionHtml": "<p>height approx. 5.5 in</p>",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/D25B60D9-1A60-487A-8041-7627B8AF6054_1_201_a_54760825-475b-4999-9e90-8a7ebbc68923.jpg?v=1786899943",
+        "altText": null,
+        "width": 1743,
+        "height": 1743
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/D25B60D9-1A60-487A-8041-7627B8AF6054_1_201_a_54760825-475b-4999-9e90-8a7ebbc68923.jpg?v=1786899943",
+          "altText": "",
+          "width": 1743,
+          "height": 1743
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/7DF3EA83-10C0-4F58-BF63-637367AA9DAF_1_201_a_22aaf7c8-b16b-4d61-9fa9-6acfbacbcf96.jpg?v=1786899943",
+          "altText": "",
+          "width": 1781,
+          "height": 1781
+        }
+      ],
+      "price": {
+        "min": "80.0",
+        "max": "80.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/41314058010696",
+          "legacyId": "41314058010696",
+          "title": "Default Title",
+          "price": "80.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
     {
       "id": "gid://shopify/Product/7112081080392",
       "legacyId": "7112081080392",
       "handle": "bottle-vase-1",
       "title": "Bottle vase",
       "status": "ACTIVE",
-      "onlineStoreUrl": null,
+      "onlineStoreUrl": "https://shop.reubenson.com/products/bottle-vase-1",
       "availableForSale": true,
       "description": "Bottle — height approx. 7 in",
       "descriptionHtml": "<p>Bottle — height approx. 7 in</p>",
@@ -67,7 +279,7 @@
       "handle": "bottle-vase",
       "title": "Bottle vase",
       "status": "ACTIVE",
-      "onlineStoreUrl": null,
+      "onlineStoreUrl": "https://shop.reubenson.com/products/bottle-vase",
       "availableForSale": true,
       "description": "Bottle — height approx. 8 in",
       "descriptionHtml": "<p>Bottle — height approx. 8 in</p>",
@@ -120,7 +332,7 @@
       "handle": "weedpot-2",
       "title": "Weedpot",
       "status": "ACTIVE",
-      "onlineStoreUrl": null,
+      "onlineStoreUrl": "https://shop.reubenson.com/products/weedpot-2",
       "availableForSale": true,
       "description": "Weedpot — height approx. 2.5 in",
       "descriptionHtml": "<p>Weedpot — height approx. 2.5 in</p>",
@@ -145,8 +357,8 @@
         }
       ],
       "price": {
-        "min": "80.0",
-        "max": "80.0",
+        "min": "50.0",
+        "max": "50.0",
         "currencyCode": "USD"
       },
       "variants": [
@@ -154,7 +366,7 @@
           "id": "gid://shopify/ProductVariant/41309382180936",
           "legacyId": "41309382180936",
           "title": "Default Title",
-          "price": "80.00",
+          "price": "50.00",
           "availableForSale": true,
           "inventoryQuantity": 1,
           "selectedOptions": [
@@ -173,7 +385,7 @@
       "handle": "weedpot-1",
       "title": "Weedpot",
       "status": "ACTIVE",
-      "onlineStoreUrl": null,
+      "onlineStoreUrl": "https://shop.reubenson.com/products/weedpot-1",
       "availableForSale": true,
       "description": "\"Chair\" weedpot — height approx. 4 in",
       "descriptionHtml": "<p>\"Chair\" weedpot — height approx. 4 in</p>",
@@ -226,7 +438,7 @@
       "handle": "weedpot",
       "title": "Weedpot",
       "status": "ACTIVE",
-      "onlineStoreUrl": null,
+      "onlineStoreUrl": "https://shop.reubenson.com/products/weedpot",
       "availableForSale": true,
       "description": "Weedpot — height approx. 5 in",
       "descriptionHtml": "<p>Weedpot — height approx. 5 in</p>",

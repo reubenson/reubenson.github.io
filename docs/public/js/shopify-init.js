@@ -334,37 +334,82 @@ function bindAddToCartButtons() {
 }
 
 /**
- * Refresh sold-out state from live Storefront availability. Silently leaves the
- * baked state in place for any collection that isn't published (returns null).
+ * Update a single product card from a live Storefront product node: sold-out
+ * state, the displayed (minimum) price, and each variant option's price and
+ * availability. The baked markup (see shop-product-grid.njk) is only as fresh
+ * as the last `npm run fetch-shop`, so this reconciles it on load.
+ * @param {Element} card
+ * @param {object} product Storefront product node
  */
-async function refreshAvailability() {
+function applyProductData(card, product) {
+  card.classList.toggle('sold-out', !product.availableForSale);
+
+  // Card price reflects the minimum variant price (matches the build-time
+  // `product.price.min` render).
+  const minPrice = product.priceRange?.minVariantPrice;
+  const priceEl = card.querySelector('.product-price');
+  if (priceEl && minPrice) priceEl.textContent = formatMoney(minPrice);
+
+  // Per-variant price + availability in the option list, keyed by legacy id
+  // (the option's value; see shop-product-grid.njk).
+  const variants = product.variants?.nodes || [];
+  const byLegacyId = new Map(variants.map((v) => [numericId(v.id), v]));
+  card.querySelectorAll('.product-variant-select option').forEach((option) => {
+    const v = byLegacyId.get(option.value);
+    if (!v) return;
+    if (v.price) option.dataset.price = v.price.amount;
+    option.disabled = !v.availableForSale;
+    option.textContent = v.title + (v.availableForSale ? '' : ' — Sold Out');
+  });
+}
+
+/**
+ * Refresh sold-out state and prices from live Storefront data.
+ *
+ * Queried by the set of product ids present on the page (via the `nodes` root
+ * field) rather than by collection: some collections aren't published to the
+ * Buy Button sales channel and so can't be read via `collection(id:)`, but their
+ * individual products still can. Any id that isn't readable comes back null and
+ * that card keeps its baked build-time state.
+ */
+async function refreshProductData() {
+  const cards = document.querySelectorAll('.product-card[data-product-legacy-id]');
+  if (!cards.length) return;
+
+  const legacyIds = [
+    ...new Set(
+      Array.from(cards, (card) => card.getAttribute('data-product-legacy-id')).filter(Boolean)
+    )
+  ];
+  if (!legacyIds.length) return;
+
   const query = `
-    query CollectionAvailability($id: ID!) {
-      collection(id: $id) {
-        products(first: 250) { nodes { id availableForSale } }
+    query ProductsByIds($ids: [ID!]!) {
+      nodes(ids: $ids) {
+        ... on Product {
+          id
+          availableForSale
+          priceRange { minVariantPrice { amount currencyCode } }
+          variants(first: 100) {
+            nodes { id title availableForSale price { amount currencyCode } }
+          }
+        }
       }
     }`;
 
-  const containers = document.querySelectorAll('.shop-listings[data-collection-id]');
-  for (const container of containers) {
-    const collectionId = container.getAttribute('data-collection-id');
-    if (!collectionId) continue;
-    try {
-      const data = await storefrontGraphQL(query, {
-        id: `gid://shopify/Collection/${collectionId}`
-      });
-      const nodes = data.collection?.products?.nodes;
-      if (!nodes) continue; // not published to this channel — keep baked state
-      nodes.forEach((product) => {
-        const card = container.querySelector(
-          `.product-card[data-product-legacy-id="${numericId(product.id)}"]`
-        );
-        if (!card) return;
-        card.classList.toggle('sold-out', !product.availableForSale);
-      });
-    } catch (err) {
-      console.warn(`[shopify] availability refresh failed for ${collectionId}`, err);
-    }
+  try {
+    const data = await storefrontGraphQL(query, {
+      ids: legacyIds.map((id) => `gid://shopify/Product/${id}`)
+    });
+    (data.nodes || []).forEach((product) => {
+      if (!product) return; // not readable on this channel — keep baked state
+      const legacyId = numericId(product.id);
+      document
+        .querySelectorAll(`.product-card[data-product-legacy-id="${legacyId}"]`)
+        .forEach((card) => applyProductData(card, product));
+    });
+  } catch (err) {
+    console.warn('[shopify] product refresh failed', err);
   }
   syncAddButtons(); // reconcile labels with refreshed sold-out state
 }
@@ -374,7 +419,7 @@ async function main() {
   if (!initCartUI()) return; // cart drawer markup missing
   bindAddToCartButtons();
   loadCart(); // restore any saved cart
-  refreshAvailability();
+  refreshProductData();
 }
 
 if (document.readyState === 'loading') {

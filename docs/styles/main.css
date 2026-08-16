@@ -929,8 +929,8 @@ nav.main-nav .active {
   background-color: #f0f0e6;
   z-index: 10;
   font-size: 20px;
-  max-width: calc(100vw - 40px);
-  margin-top: 37px;
+  max-width: 1280px;
+  margin: 37px auto 0;
   border-bottom: solid black 1px;
 }
 .shop-page header nav {
@@ -938,7 +938,7 @@ nav.main-nav .active {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 11px 0 10px;
+  padding: 6px 0;
   max-width: 720px;
 }
 .shop-page header nav a {
@@ -1175,6 +1175,17 @@ nav.main-nav .active {
   aspect-ratio: 3/4;
   border-radius: 2px;
   overflow: hidden;
+  --cutout-width: 260px;
+  --cutout-height: 140px;
+  --cutout-top: 10px;
+}
+.shop-page .image-sequence .sequence-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .shop-page .image-sequence .sequence-image {
   position: absolute;
@@ -1191,18 +1202,35 @@ nav.main-nav .active {
     transition-duration: 3.5s !important;
   }
 }
+.shop-page .image-sequence .sequence-frames {
+  position: absolute;
+  inset: 0;
+}
+.shop-page .image-sequence--cutout .sequence-frames {
+  -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  -webkit-mask-repeat: no-repeat, no-repeat;
+  -webkit-mask-position: center, center var(--cutout-top);
+  -webkit-mask-size: 100% 100%, var(--cutout-width) var(--cutout-height);
+  -webkit-mask-composite: xor;
+  mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  mask-repeat: no-repeat, no-repeat;
+  mask-position: center, center var(--cutout-top);
+  mask-size: 100% 100%, var(--cutout-width) var(--cutout-height);
+  mask-composite: exclude;
+}
 .shop-page .image-sequence .sequence-title-container {
   position: absolute;
   z-index: 2;
   top: 0;
   right: 0;
   left: 0;
-  margin: 10px auto;
   text-align: center;
-  width: calc(100% - 20px);
-  max-width: 400px;
+  width: --cutout-width;
+  height: --cutout-height;
+  padding: 4px;
 }
 .shop-page .image-sequence .sequence-title-backdrop {
+  display: none;
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -1216,9 +1244,27 @@ nav.main-nav .active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  filter: var(--sequence-title-filter) blur(0.5px);
+  height: 100%;
+  filter: var(--sequence-title-filter) blur(0.3px);
   border: solid black 1px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
   padding: 10px;
+}
+.shop-page .image-sequence--cutout .sequence-title-container {
+  z-index: 0;
+  top: var(--cutout-top);
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  margin: 0;
+  width: var(--cutout-width);
+  max-width: var(--cutout-width);
+  height: var(--cutout-height);
+  transform: translateX(-50%);
+}
+.shop-page .image-sequence--cutout .sequence-title-content {
+  box-sizing: border-box;
+  justify-content: center;
 }
 .shop-page .image-sequence .sequence-title {
   flex: 0 1 auto;
@@ -1234,10 +1280,13 @@ nav.main-nav .active {
 .shop-page .image-sequence .sequence-title-description {
   flex: 1 1 auto;
   border-top: solid black 1px;
-  margin: 5px 0 0;
+  margin: 4px 0 0;
+  font-size: 16px;
 }
 .shop-page .image-sequence .sequence-title-dimensions {
   flex: 0 1 auto;
+  font-style: italic;
+  font-size: 14px;
 }
 @media screen and (min-width: 720px) {
   .shop-page header nav {
@@ -1428,7 +1477,7 @@ nav.main-nav .active {
 }
 
 #travel-vases .image-sequence img {
-  transform: scale(1.05);
+  transform: scale(1.05) translate(-2%, 2.5%);
   object-position: 53% 8%;
   filter: brightness(1.1);
 }
