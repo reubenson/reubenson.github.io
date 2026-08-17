@@ -1329,7 +1329,7 @@ nav.main-nav .active {
   .shop-page .shop-listings {
     width: min(100vw - 120px, 1280px) !important;
     margin-left: calc((720px - min(100vw - 120px, 1280px)) / 2) !important;
-    justify-content: flex-start;
+    justify-content: space-between;
   }
   .shop-page .product-card {
     flex-grow: 0;

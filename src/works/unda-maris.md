@@ -23,7 +23,7 @@ The sound-world of Unda Maris straddles both the church organ [^2] and the glass
 <iframe class="project-grid-item-full" width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2382862113&color=%23697481&inverse=false&auto_play=false&show_user=false">
 </iframe>
 
-The slowed-down strategy of medieval polyphony affords the experience of a core perceptual object in the undulations themselves. When listening on headphones, these undulations exist purely within the listener's head, the source of which is neither acoustic nor electrical. Is it easier to accept that these undulations are not present in the air, or should we otherwise insist that we be able to perceive such sounds as they could not be acoustically heard? And if we were to intercede upon the brainstem directly, could we have it another way?
+The slowed-down strategy of medieval polyphony affords the experience of a core perceptual object in the undulations themselves. When listening on headphones, these undulations exist purely within the listener's head, the source of which is neither acoustic nor electronic. Is it easier to accept that these undulations are not present in the air, or should we otherwise insist that we be able to perceive such sounds as they could not be acoustically heard? And if we were to intercede upon the brainstem directly, could we have it another way?
 {.project-grid-item-full}
 
 {.project-grid-item-1}
