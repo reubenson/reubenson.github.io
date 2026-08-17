@@ -61,8 +61,9 @@ module.exports = function (eleventyConfig) {
   };
 
   let markdownItAttrs = require("markdown-it-attrs");
+  let markdownItFootnote = require("markdown-it-footnote");
 
-  eleventyConfig.setLibrary('md', markdownIt(options).use(markdownItAttrs));
+  eleventyConfig.setLibrary('md', markdownIt(options).use(markdownItAttrs).use(markdownItFootnote));
 
   // add RSS
   eleventyConfig.addPlugin(pluginRss);

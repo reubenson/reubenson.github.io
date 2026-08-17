@@ -16,6 +16,47 @@
     margin: 20px auto auto;
   }
 
+  // markdown-it-footnote output: a `<hr class="footnotes-sep">` plus a
+  // `<section class="footnotes">` appended at the end of the document
+  .footnotes-sep {
+    border: 0;
+    border-top: solid grey 1px;
+    margin: 40px 0 20px;
+    width: 100%;
+  }
+
+  .footnote-ref {
+    vertical-align: middle;
+    font-size: 0.85em;
+  }
+
+  .footnotes {
+    font-size: 0.85em;
+
+    .footnotes-list {
+      // the global `ol { list-style: none }` reset would drop the numbering
+      list-style: decimal;
+      margin: 0;
+      padding-left: 1.5em;
+    }
+
+    .footnote-item:before {
+      display: none;
+    }
+
+    .footnote-item p {
+      margin: 0 0 10px;
+    }
+  }
+
+  .footnote-ref a {
+    text-decoration: none;
+  }
+
+  .footnote-backref {
+    text-decoration: none;
+  }
+
   // .project-grid-item {
   //   &-1,
   //   &-2,
@@ -287,6 +328,12 @@
         margin: auto;
         grid-column: 1 / -1;
       }
+    }
+
+    // the footnote block is generated, so it can't carry a {.project-grid-item-*} class
+    .footnotes-sep,
+    .footnotes {
+      grid-column: 1 / -1;
     }
   }
 

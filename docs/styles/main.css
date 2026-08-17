@@ -737,6 +737,36 @@ nav.main-nav .active {
   max-width: 720px;
   margin: 20px auto auto;
 }
+.project .footnotes-sep {
+  border: 0;
+  border-top: solid grey 1px;
+  margin: 40px 0 20px;
+  width: 100%;
+}
+.project .footnote-ref {
+  vertical-align: middle;
+  font-size: 0.85em;
+}
+.project .footnotes {
+  font-size: 0.85em;
+}
+.project .footnotes .footnotes-list {
+  list-style: decimal;
+  margin: 0;
+  padding-left: 1.5em;
+}
+.project .footnotes .footnote-item:before {
+  display: none;
+}
+.project .footnotes .footnote-item p {
+  margin: 0 0 10px;
+}
+.project .footnote-ref a {
+  text-decoration: none;
+}
+.project .footnote-backref {
+  text-decoration: none;
+}
 .project h1 {
   border-bottom: none;
   line-height: 34px;
@@ -894,6 +924,10 @@ nav.main-nav .active {
   }
   .project .project-grid-item-full {
     margin: auto;
+    grid-column: 1/-1;
+  }
+  .project .footnotes-sep,
+  .project .footnotes {
     grid-column: 1/-1;
   }
 }
@@ -1513,11 +1547,13 @@ body {
 figcaption {
   font-size: 13px;
   line-height: 1.1em;
-  text-align: justify;
   margin: auto;
   margin-top: 8px;
   margin-bottom: 10px;
   padding: 0 5px;
+}
+figcaption > p {
+  margin: 0;
 }
 
 ul {
@@ -1569,6 +1605,7 @@ a {
 .project-grid-item-1, .project-grid-item-2, .project-grid-item-3, .project-grid-item-4, .project-grid-item-5, .project-grid-item-6, .project-grid-item-full {
   margin: 20px auto;
   width: 100%;
+  text-align: justify;
 }
 
 .cursive {

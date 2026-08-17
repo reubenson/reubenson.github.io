@@ -36,11 +36,16 @@ body {
 figcaption {
   font-size: 13px;
   line-height: 1.1em;
-  text-align: justify;
+  // text-align: justify;
   margin: auto;
   margin-top: 8px;
   margin-bottom: 10px;
   padding: 0 5px;
+
+  // captions containing markdown (e.g. a footnote ref) get wrapped in a <p>
+  >p {
+    margin: 0;
+  }
 }
 
 // figure img {
@@ -95,7 +100,6 @@ a {
 }
 
 .project-grid-item {
-
   &-1,
   &-2,
   &-3,
@@ -105,6 +109,7 @@ a {
   &-full {
     margin: 20px auto;
     width: 100%;
+    text-align: justify;
   }
 }
 
