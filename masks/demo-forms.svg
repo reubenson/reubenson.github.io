@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Test mask for scripts/svg-text-flow.js. Deliberately exercises the cases a CSS
+  float cannot express:
+    - an annulus (one path, two subpaths, fill-rule="evenodd") so text runs
+      through the middle of a form as well as around it
+    - two more forms disjoint from the first, so a single row can break into
+      several separate runs
+    - a group transform, to check that inherited transforms are composed
+  Masks are build inputs, not site assets, so this directory is not published.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">
+  <path
+    fill-rule="evenodd"
+    d="M 20 60 A 40 40 0 1 0 100 60 A 40 40 0 1 0 20 60 Z
+       M 38 60 A 22 22 0 1 0 82 60 A 22 22 0 1 0 38 60 Z" />
+
+  <g transform="translate(-6 0)">
+    <circle cx="145" cy="38" r="17" />
+    <ellipse cx="162" cy="88" rx="26" ry="20" />
+  </g>
+</svg>

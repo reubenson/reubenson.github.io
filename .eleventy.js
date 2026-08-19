@@ -4,6 +4,7 @@ const markdownIt = require('markdown-it');
 const sass = require('sass');
 const path = require('path');
 const fs = require('fs');
+const { flowTextIntoSvg, toHtml } = require('./scripts/lib/svg-text-flow');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -106,6 +107,48 @@ module.exports = function (eleventyConfig) {
       .filter((f) => /\.(jpe?g|png|gif|webp|avif)$/i.test(f))
       .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }))
       .map((f) => `${urlPath}/${f}`);
+  });
+
+  // Pour a block of text into the negative space of an SVG, on a monospaced
+  // character grid. The SVG may hold any number of closed forms, and they may
+  // have holes; every filled region becomes whitespace in the text.
+  //
+  //   {% shapedText "demo-forms", cols=84, repeat=true %}
+  //   Suppose instead that you are perched on a dock facing the sea...
+  //   {% endshapedText %}
+  //
+  // The body must be plain text: it lands in a <pre>, so markdown syntax inside
+  // it would show up as literal characters. Preview and tune with
+  // `node scripts/svg-text-flow.js masks/<name>.svg --mask` before wiring it up.
+  eleventyConfig.addWatchTarget("./masks");
+  eleventyConfig.addPairedShortcode("shapedText", function (content, mask, options = {}) {
+    // accept either "demo-forms" (looked up in masks/) or an explicit path
+    const maskPath = mask.endsWith(".svg") ? mask : path.join("masks", `${mask}.svg`);
+    const absolute = path.join(__dirname, maskPath);
+
+    let svg;
+    try {
+      svg = fs.readFileSync(absolute, "utf8");
+    } catch (err) {
+      throw new Error(`[shapedText] cannot read mask ${maskPath}: ${err.message}`);
+    }
+
+    // Nunjucks hands keyword arguments over with this marker attached;
+    // flowTextIntoSvg only reads keys it knows, so it's harmless either way.
+    const result = flowTextIntoSvg({ svg, text: content, ...options });
+
+    // Fit is the thing that goes wrong here, and it goes wrong silently — a
+    // dropped tail just looks like a shorter poem. Say so at build time.
+    for (const warning of result.warnings) {
+      console.warn(`[shapedText] ${maskPath}: ${warning}`);
+    }
+
+    return toHtml(result, {
+      text: content,
+      maxFontSize: options.maxFontSize,
+      // so the block can also be a grid item, e.g. class="project-grid-item-full"
+      className: options.class ? `shaped-text ${options.class}` : "shaped-text",
+    });
   });
 
   // Instead of passthrough copy, we'll add a custom collection

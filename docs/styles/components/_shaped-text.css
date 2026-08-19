@@ -1,0 +1,24 @@
+.shaped-text {
+  container-type: inline-size;
+  margin: 20px auto;
+}
+.shaped-text > pre {
+  font-family: var(--shaped-text-font, "Courier New", Courier, monospace);
+  font-size: min(var(--shaped-text-max-size, 15px), 100cqi / (var(--shaped-text-cols, 72) * var(--shaped-text-advance, 0.6)));
+  line-height: var(--shaped-text-line-height, 1.15);
+  white-space: pre;
+  font-variant-ligatures: none;
+  font-variant-numeric: tabular-nums;
+  font-kerning: none;
+  letter-spacing: 0;
+  word-spacing: 0;
+  font-feature-settings: "liga" 0, "clig" 0, "calt" 0;
+  margin: 0;
+  overflow-x: auto;
+}
+@media print {
+  .shaped-text > pre {
+    font-size: 8pt;
+    overflow: visible;
+  }
+}

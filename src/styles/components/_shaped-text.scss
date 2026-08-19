@@ -1,0 +1,71 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Shaped text
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// Presentation for the output of scripts/lib/svg-text-flow.js: a block of text
+// poured into a monospaced character grid, with the filled areas of an SVG left
+// as whitespace.
+//
+// The layout is already finished by the time it gets here — every line is
+// exactly `--shaped-text-cols` characters wide, spaces included. All this
+// stylesheet has to do is not disturb the grid, which means two things:
+//
+//   1. Every glyph must occupy exactly one cell. Ligatures, kerning, letter
+//      spacing and proportional figures all break that, so they're switched off
+//      rather than left to the font's defaults.
+//   2. The cell must have the same proportions the mask was rasterized with.
+//      `--shaped-text-advance` and `--shaped-text-line-height` are emitted by
+//      the tool from the values it used, so the two cannot drift apart. Swap the
+//      font family without updating the advance and the drawing skews.
+//
+// Advance widths, as a fraction of the em, for the usual suspects:
+//   Courier New / Courier  0.6      SF Mono / Menlo / Monaco  0.6
+//   Andale Mono            0.6      IBM Plex Mono             0.6
+//   DejaVu Sans Mono       0.602    JetBrains Mono            0.6
+// 0.6 is close to universal, but verify before trusting it.
+
+.shaped-text {
+  // establishes the container that `cqi` below resolves against
+  container-type: inline-size;
+  margin: 20px auto;
+
+  >pre {
+    font-family: var(--shaped-text-font, 'Courier New', Courier, monospace);
+
+    // Scale the type so the grid exactly fills the available width: the block is
+    // `cols × advance × font-size` wide, so solving for font-size against the
+    // container's inline size makes it fit by construction, at any width,
+    // without reflowing (it can't reflow — the line breaks are baked in).
+    // Capped so a wide container doesn't blow the drawing up to poster size.
+    font-size: min(
+      var(--shaped-text-max-size, 15px),
+      calc(100cqi / (var(--shaped-text-cols, 72) * var(--shaped-text-advance, 0.6)))
+    );
+    line-height: var(--shaped-text-line-height, 1.15);
+
+    // preserve the spaces that *are* the drawing
+    white-space: pre;
+
+    // anything that alters a glyph's advance width would shear the grid
+    font-variant-ligatures: none;
+    font-variant-numeric: tabular-nums;
+    font-kerning: none;
+    letter-spacing: 0;
+    word-spacing: 0;
+    font-feature-settings: 'liga' 0, 'clig' 0, 'calt' 0;
+
+    margin: 0;
+    // the block is sized to fit, so this should never trigger; it's here so a
+    // mismatched advance width degrades to a scrollbar instead of a broken layout
+    overflow-x: auto;
+  }
+
+  @media print {
+    >pre {
+      // no container queries to rely on for paper; pin to a measure that fits
+      // the print column
+      font-size: 8pt;
+      overflow: visible;
+    }
+  }
+}

@@ -22,8 +22,10 @@
   "dependencies": {
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "@uriopass/nosleep.js": "^0.12.2",
+    "fast-xml-parser": "^4.5.7",
     "markdown-it": "^14.0.0",
     "markdown-it-attrs": "^4.3.1",
-    "markdown-it-footnote": "^4.0.0"
+    "markdown-it-footnote": "^4.0.0",
+    "svgpath": "^2.6.0"
   }
 }
