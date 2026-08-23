@@ -143,6 +143,7 @@ svg {
   <label>cols <input type="number" id="cfg-cols" value="40" min="4" max="400"></label>
   <label>rows <input type="number" id="cfg-rows" value="80" min="4" max="400"></label>
   <label>mm/cell <input type="number" id="cfg-mm" value="1" min="0.1" max="50" step="0.1"></label>
+  <label>pcb line mm <input type="number" id="cfg-kicad-w" value="0.25" min="0.05" max="10" step="0.05"></label>
   <button id="btn-resize">resize canvas</button>
 </div>
 <div id="controls">
@@ -152,8 +153,8 @@ svg {
   <button id="btn-undo">undo (Z)</button>
   <button id="btn-clear">clear</button>
   <button id="btn-export-svg">export SVG</button>
-  <button id="btn-invert-export">invert export: off</button>
-  <button id="btn-export-kicad" title="Exports the line as F.Cu route segments (KiCad 9/10). Ignores 'invert export' — for an inverted copper fill, add a zone cutout manually in KiCad.">export KiCad PCB</button>
+  <button id="btn-invert-export" title="Inverts both exports: white-on-black for SVG, keepout-in-a-pour for KiCad.">invert export: off</button>
+  <button id="btn-export-kicad">export KiCad PCB</button>
   <button id="btn-export-moves">export moves</button>
   <button id="btn-import-moves">import moves</button>
   <button id="btn-repeat">repeat: off</button>
@@ -554,11 +555,23 @@ btnRepeat.addEventListener('click', () => {
   btnRepeat.classList.toggle('active', state.repeatMode);
   render();
 });
+const KICAD_TIPS = {
+  positive: 'Exports the line as F.Cu route segments (KiCad 9/10).',
+  negative: 'Exports the line as F.Cu copper-keepout rule areas inside a GND pour '
+          + '(KiCad 9/10). Press B in KiCad to fill the zone and see the negative.',
+};
+
+function syncKicadTip() {
+  btnKicad.title = KICAD_TIPS[state.invertExport ? 'negative' : 'positive'];
+}
+
 btnInvertExport.addEventListener('click', () => {
   state.invertExport = !state.invertExport;
   btnInvertExport.textContent = `invert export: ${state.invertExport ? 'on' : 'off'}`;
   btnInvertExport.classList.toggle('active', state.invertExport);
+  syncKicadTip();
 });
+syncKicadTip();
 btnUndo.addEventListener('click', doUndo);
 btnClear.addEventListener('click', () => {
   state.origin = null;
@@ -754,50 +767,174 @@ function buildExportSvg() {
 }
 
 // ── KiCad PCB export ────────────────────────────────────────────────────────
-// Each polyline is broken into individual (segment ...) tracks on a copper
-// layer. KiCad's Y axis grows downward like our pixel coords, so no flip.
-// NOTE: this export ignores `invertExport` — it always emits the line itself as
-// route segments. For an inverted (negative) copper fill, draw a zone over the
-// area in KiCad and add a zone cutout tracing these tracks.
-const KICAD_TRACE_WIDTH = 0.25; // mm
+// Two modes, selected by `invertExport`:
+//   off — the line becomes (segment ...) tracks on F.Cu (positive artwork)
+//   on  — the line becomes copper-keepout rule areas sitting inside a GND pour,
+//         so it reads as bare substrate etched out of the plane (negative)
+// KiCad's Y axis grows downward like our pixel coords, so no flip is needed.
 const KICAD_LAYER = 'F.Cu';
+const POUR_MARGIN_MM = 2; // pour extends this far past the drawing bbox
+const EDGE_MARGIN_MM = 1; // board edge extends this far past the pour
 
-function buildKicadPcb() {
-  const pts = getPoints();
-  if (pts.length < 2) return null;
+const f4 = n => n.toFixed(4);
 
-  const { mmPerCell, cellSize } = state;
-  const pxToMm = mmPerCell / cellSize;
+const kicadUuid = () =>
+  (crypto.randomUUID ? crypto.randomUUID()
+    : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = (Date.now() + Math.floor(performance.now() * 1000)) % 16;
+        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      }));
 
-  // Strokes in mm (same geometry as the SVG export, including mirror/repeat).
-  const strokesMm = computeExportStrokes().map(stroke =>
-    stroke.map(({ x, y }) => ({ x: x * pxToMm, y: y * pxToMm }))
+function kicadLineWidth() {
+  const v = parseFloat(document.getElementById('cfg-kicad-w').value);
+  return Math.min(10, Math.max(0.05, v || 0.25));
+}
+
+// Export strokes in mm, offset so the drawing sits near (100,100) rather than
+// the board origin. Same geometry as the SVG export, including mirror/repeat.
+function kicadStrokesMm() {
+  if (getPoints().length < 2) return null;
+  const pxToMm = state.mmPerCell / state.cellSize;
+  const strokes = computeExportStrokes().map(s =>
+    s.map(({ x, y }) => ({ x: x * pxToMm, y: y * pxToMm }))
   );
-
-  // Offset so the drawing sits near (100,100)mm rather than the board origin.
   let minX = Infinity, minY = Infinity;
-  for (const s of strokesMm) for (const p of s) {
+  for (const s of strokes) for (const p of s) {
     if (p.x < minX) minX = p.x;
     if (p.y < minY) minY = p.y;
   }
   const ox = 100 - minX, oy = 100 - minY;
+  return strokes.map(s => s.map(p => ({ x: p.x + ox, y: p.y + oy })));
+}
 
-  const uuid = () =>
-    (crypto.randomUUID ? crypto.randomUUID()
-      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-          const r = (Date.now() + Math.floor(performance.now() * 1000)) % 16;
-          return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+function strokesBBox(strokes) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const s of strokes) for (const { x, y } of s) {
+    if (x < minX) minX = x;
+    if (y < minY) minY = y;
+    if (x > maxX) maxX = x;
+    if (y > maxY) maxY = y;
+  }
+  return { minX, minY, maxX, maxY };
+}
+
+function inflate(b, m) {
+  return { minX: b.minX - m, minY: b.minY - m, maxX: b.maxX + m, maxY: b.maxY + m };
+}
+
+function rectPtsBlock(b, indent) {
+  const pad = ' '.repeat(indent);
+  const corners = [
+    [b.minX, b.minY], [b.maxX, b.minY], [b.maxX, b.maxY], [b.minX, b.maxY],
+  ];
+  return `${pad}(pts\n`
+    + corners.map(([x, y]) => `${pad}  (xy ${f4(x)} ${f4(y)})`).join('\n')
+    + `\n${pad})`;
+}
+
+// A rule area with copper pour disallowed. Overlapping keepouts simply union
+// when the pour is filled, so one per straight run is enough.
+function keepoutZone(b) {
+  return `  (zone
+    (net 0)
+    (net_name "")
+    (layer "${KICAD_LAYER}")
+    (uuid "${kicadUuid()}")
+    (name "line-keepout")
+    (hatch edge 0.5)
+    (connect_pads (clearance 0))
+    (min_thickness 0.25)
+    (filled_areas_thickness no)
+    (keepout
+      (tracks allowed)
+      (vias allowed)
+      (pads allowed)
+      (copperpour not_allowed)
+      (footprints allowed)
+    )
+    (fill
+      (thermal_gap 0.5)
+      (thermal_bridge_width 0.5)
+    )
+    (polygon
+${rectPtsBlock(b, 6)}
+    )
+  )`;
+}
+
+// island_removal_mode 1 = keep all islands, so copper enclosed by a closed
+// loop in the drawing survives instead of being dropped as unconnected.
+function pourZone(b) {
+  return `  (zone
+    (net 1)
+    (net_name "GND")
+    (layer "${KICAD_LAYER}")
+    (uuid "${kicadUuid()}")
+    (name "gnd_pour")
+    (hatch edge 0.5)
+    (priority 0)
+    (connect_pads (clearance 0.5))
+    (min_thickness 0.25)
+    (filled_areas_thickness no)
+    (fill yes
+      (thermal_gap 0.5)
+      (thermal_bridge_width 0.5)
+      (island_removal_mode 1)
+    )
+    (polygon
+${rectPtsBlock(b, 6)}
+    )
+  )`;
+}
+
+// Zone fills are clipped to the board outline, so the pour needs one to exist.
+function edgeCutsRect(b) {
+  return `  (gr_rect
+    (start ${f4(b.minX)} ${f4(b.minY)})
+    (end ${f4(b.maxX)} ${f4(b.maxY)})
+    (stroke (width 0.1) (type solid))
+    (fill no)
+    (layer "Edge.Cuts")
+    (uuid "${kicadUuid()}")
+  )`;
+}
+
+function buildKicadPcb() {
+  const strokes = kicadStrokesMm();
+  if (!strokes) return null;
+
+  const w = kicadLineWidth();
+  const nets = ['  (net 0 "")'];
+  const body = [];
+
+  if (state.invertExport) {
+    const hw = w / 2;
+    const pour = inflate(strokesBBox(strokes), POUR_MARGIN_MM);
+
+    nets.push('  (net 1 "GND")');
+    body.push(edgeCutsRect(inflate(pour, EDGE_MARGIN_MM)));
+    body.push(pourZone(pour));
+
+    // One axis-aligned rule area per straight run. Extending each rectangle by
+    // half the line width at both ends makes the right-angle corners mitre
+    // exactly, so the union traces the stroked path with no gaps or nubs.
+    for (const stroke of strokes) {
+      for (let i = 0; i + 1 < stroke.length; i++) {
+        const a = stroke[i], b = stroke[i + 1];
+        body.push(keepoutZone({
+          minX: Math.min(a.x, b.x) - hw, minY: Math.min(a.y, b.y) - hw,
+          maxX: Math.max(a.x, b.x) + hw, maxY: Math.max(a.y, b.y) + hw,
         }));
-
-  const segments = [];
-  for (const stroke of strokesMm) {
-    for (let i = 0; i + 1 < stroke.length; i++) {
-      const a = stroke[i], b = stroke[i + 1];
-      const sx = (a.x + ox).toFixed(4), sy = (a.y + oy).toFixed(4);
-      const ex = (b.x + ox).toFixed(4), ey = (b.y + oy).toFixed(4);
-      segments.push(
-        `  (segment (start ${sx} ${sy}) (end ${ex} ${ey}) (width ${KICAD_TRACE_WIDTH}) (layer "${KICAD_LAYER}") (net 0) (uuid "${uuid()}"))`
-      );
+      }
+    }
+  } else {
+    for (const stroke of strokes) {
+      for (let i = 0; i + 1 < stroke.length; i++) {
+        const a = stroke[i], b = stroke[i + 1];
+        body.push(
+          `  (segment (start ${f4(a.x)} ${f4(a.y)}) (end ${f4(b.x)} ${f4(b.y)}) (width ${w}) (layer "${KICAD_LAYER}") (net 0) (uuid "${kicadUuid()}"))`
+        );
+      }
     }
   }
 
@@ -822,10 +959,9 @@ function buildKicadPcb() {
   (setup
     (pad_to_mask_clearance 0)
   )
-  (net 0 "")
 `;
 
-  return header + segments.join('\n') + '\n)\n';
+  return header + nets.join('\n') + '\n' + body.join('\n') + '\n)\n';
 }
 
 function download(filename, content, mime) {
@@ -846,7 +982,8 @@ btnSvg.addEventListener('click', () => {
 btnKicad.addEventListener('click', () => {
   const pcb = buildKicadPcb();
   if (!pcb) { alert('Nothing to export — draw something first.'); return; }
-  download('line-drawing.kicad_pcb', pcb, 'application/octet-stream');
+  const name = state.invertExport ? 'line-drawing-keepout.kicad_pcb' : 'line-drawing.kicad_pcb';
+  download(name, pcb, 'application/octet-stream');
 });
 
 btnMoves.addEventListener('click', () => {
