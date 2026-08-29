@@ -7,427 +7,55 @@ title: Reuben Son Homepage
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reuben Son | Calling card for {{ addressee }}</title>
+    <title>{{ title }}</title>
     <meta name="description" content="Reuben Son: software developer, sound artist, and ceramist">
     <meta name="keywords" content="reuben son, nyc, software engineer, private chronology, electronic music, ceramics">
-    <link rel="icon" type="image/png" href="/favicon.png">
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:description" content="Reuben Son: software developer, sound artist, and ceramist" />
-    <meta property="og:image" content="https://reubenson.com/public/card_july2024.jpg">
+    <meta property="og:image" content="https://reubenson.com/public/homepage-minimal.jpeg" />
+    <link rel="icon" type="image/png" href="/favicon.png">
     {% include "open-font.njk" %}
     {% include "broider.njk" %}
     <link rel="stylesheet" href="/bundle.css">
-    <style type="text/css">
-      .homepage {
-        background-color: #f0f0e6;
-        font-weight: 100;
-        margin: 0;
-        width: 100%;
+    <link rel="stylesheet" href="/styles/main.css">
+    <style>
+      .homepage .project-border {
+        background-image: url('{{ backgroundImage }}') !important;
       }
-
-      .homepage .cards {
-        font-family: Courier New;
-      }
-
-      .homepage .table-of-contents {
-        margin-top: 30px;
-      }
-
-      .project-border {
-        height: calc(100% - 20px);
-        width: calc(100vw - 20px);
-        position: fixed;
-        z-index: -1;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        box-sizing: border-box;
-        margin: 10px;
-      }
-
-      .cards .content {
-        margin: auto;
-        max-width: 600px;
-        position: relative;
-        overflow-x: hidden;
-        padding: 0 20px;
-        letter-spacing: 1.15px;
-      }
-
-      .cards p {
-        line-height: 1.3em;
-        text-align: left;
-      }
-
-      .cards h1 a, h2 a {
-        color: black;
-        text-decoration: none;
-      }  
-
-      .cards ul {
-        padding: 0;
-      }
-
-      .cards li {
-        font-weight: 100;
-        font-size: 13px;
-        list-style: none;
-        margin: 25px auto;
-        text-align: left;
-        text-decoration: none;
-      }
-
-      {# .cards li::before {
-        font-size: 12px;
-        font-family: serif;
-        position: absolute;
-      } #}
-
-      {# card styling #}
-      .cards {
-        left: 0;
-        margin: auto;
-        position: absolute;
-        right: 0;
-        width: calc(100% - 50px);
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-      }
-
-      .card-container {
-        background-color: #f0f0e6;
-      }
-
-      .card {
-        box-sizing: border-box;
-        width: 100%;
-        {# padding-bottom: 228px; #}
-        margin: 10px auto;
-        max-width: 400px;
-        position: relative;
-      }
-
-      .card-container:nth-child(2) {
-        margin-top: 40px;
-      }
-
-      .card.back .container {
-        display: flex;
-        align-items: center;
-      }
-
-      .card h1 {
-        background-color: #f0f0e6;
-        display: inline;
-        font-size: 24px;
-        line-height: 24px;
-        height: 28px;
-        padding: 0 5px;
-        position: absolute;
-        width: auto;
-        z-index: 1;
-      }
-
-      .card.front h1 {
-        left: -73px;
-        text-align: center;
-        transform: rotateZ(-90deg);
-        top: 0;
-        bottom: 0;
-        margin: auto;
-      }
-
-      .card.back h1 {
-        right: -73px;
-        top: 81px;
-        transform: rotateZ(90deg) scaleX(-1);
-      }
-
-      .card .container {
-        font-size: 13px;
-        letter-spacing: -1px;
-        line-height: 15px;
-        margin: 20px;
-        padding: 20px 8px 10px;
-        position: relative;
-        {# height: calc(100% - 60px); #}
-        width: calc(100% - 55px);
-        z-index: 1;
-      }
-
-      .container-background {
-        border: solid black 1px;
-        position: absolute;
-        height: 100%;
-        {# height: calc(100% - 20px); #}
-        margin: 10px;
-        width: calc(100% - 20px);
-        {# z-index: -1; #}
-        top: -10px;
-      }
-
-      .card p {
-        margin-top: 0;
-        text-align: justify;
-      }
-
-      .container a {
-        color: black;
-        text-decoration: none;
-      }
-
-      .container a {
-        border-bottom: solid grey 1px;
-      }
-
-      .card ul {
-        margin-top: 0;
-      }
-
-      .card li {
-        line-height: 15px;
-        margin: 0px 0 6px 0;
-      }
-
-      .card .project-description {
-        font-style: italic;
-      }
-
-      .card-quote {
-        display: block;
-        font-style: italic;
-        margin: auto;
-        text-align: justify;
-        width: 177px;
-      }
-
-      .card-quote {
-        width: 130px;
-      }
-      .card-quote p {
-        margin: auto;
-      }
-
-      .card-quote-header {
-        font-style: normal;
-        left: 0;
-        letter-spacing: normal;
-        margin: auto;
-        position: absolute;
-        right: 0;
-        text-align: center;
-        top: 0;
-        text-transform: uppercase;
-      }
-
-      .card-quote-footer {
-        bottom: 0;
-        font-style: normal;
-        left: 0;
-        position: absolute;
-      }
-
-      .left-arrow, .right-arrow {
-        cursor: pointer;
-        font-size: 20px;
-        position: absolute;
-        top: 0;
-        z-index: 10;
-      }
-.
-      .left-arrow {
-        left: 0;
-      }
-
-      .right-arrow {
-        right: 6px;
-        transform: scaleX(-1);
-      }
-
-      .cards .social {
-        {# font-family: "Ibarra Real Nova, serif"; #}
-        display: inline;
-        font-size: 10px;
-        letter-spacing: normal;
-        position: absolute;
-        bottom: -13px;
-        left: 0;
-        margin: auto;
-        right: 0;
-        text-align: center;
-        z-index: 1;
-      }
-
-      .cards .social p {
-        background: #f0f0e6;
-        display: inline-block;
-        margin: 5px;
-        padding-left: 5px;
-        padding-right: 5px;
-        text-align: center;
-        width: auto;
-      }
-
-      .card .social a {
-        color: black;
-        text-decoration: none;
-      }
-
-      .cards .glyph {
-        bottom: 27px;
-        line-height: 40px;
-        right: 16px;
-        margin: auto;
-        position: absolute;
-        height: 50px;
-        z-index: 1;
-      }
-
-      .cards .glyph a {
-        text-decoration: none;
-        color: #003000;
-      }
-
-      .cards .glyph img {
-        height: 100%;
-        display:inline-block;
-        background: #003000;
-        -webkit-mask:url("/public/transparent.png") center/contain;
-        mask:url("/public/transparent.png") center/contain;
-      }
-
-      .cards .hidden {
-        display: none;
-        visibility: hidden;
-      }
-
-      /* styling for promoting card from homepage */
-      .promo {
-        .card-container:nth-child(1),
-        h1, .right-arrow, .social {
-          display: none;
-        }
-
-        .card-container {
-          {# height: 450px; #}
-        }
-
-        .card {
-          height: 430px;
-        }
-
-        .container-background {
-          width: 100%;
-          left: -10px;
-        }
-        
-      }
-
-      @media screen and (min-height: 550px) {
-        .cards {
-          top: 50%;
-          -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-        }
-      }
-
-      @media screen and (min-width: 768px) {
-        .project-border {
-          background-image: url('/public/riso-maine.png');
-          background-size: cover;
-          background-position: center;
-        }
-
-        .cards {
-          max-width: 450px;
-        }
-
-        .card-container {
-          border: solid black 1px;
-        }
-      }
-
-      @media screen and (min-width: 1180px) {
-        .table-of-contents {
-          border: solid black 1px;
-        }
-      }
-
-
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120208217-1"></script>
+    
+    {% include "gtm.njk" %}
   </head>
-  <body class="card-page homepage">
+  <body class="homepage">
+    {% include "nav.njk" %}
     {% include "toc-button.njk" %}
-    {% include "table-of-contents.njk" %}
+    <h1 class="visually-hidden">{{ title }}</h1>
     <div class="cards">
       <div class="card-container">
         <div class="card front broider-cancel">
-          <h1><a href="/about">{{ title }}</a></h1>
           <div class="container">
-            {{ content | safe }}
+            <header>
+              <h1><a href="/about">{{ title }}</a></h1>
+              {{ content | safe }}
+              {# {% renderFile './src/_includes/tiny-bio.md' %} #}
+            </header>
           </div>
-          <div class="social">
-            {# {% renderFile './src/_includes/social.md' %} #}
-            <ul>
-              {% for social in socials %}
-                <li>{{ social }}</li>
-              {% endfor %}
-              {# <a href="mailto:reubenson@gmail.com">e-mail</a> ~ <a href="https://www.instagram.com/not_not_reuben" rel="me">instagram</a> ~ <a href="https://www.are.na/reuben-son" rel="me">are.na</a> ~ <a href="https://read.cv/not_not_reuben" rel="me">read.cv</a> ~ <a href="/engineering-resume" rel="me">resume</a> #}
-            </ul>
+            <div class="card-header">
+              <p>{{ header | safe}}</p>
+              {# {% renderFile './src/_includes/social.md' %} #}
+            </div>
+          <div class="card-footer">
+            <p>
+              {{ footer }}
+            </p>
           </div>
           <div class="container-background"></div>
         </div>
       </div>
     </div>
-    <div class="project-border broider"></div>
-    <script>
-      {# add GA #}
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-120208217-1');
-
-      {# embed annoucements json #}
-      const ANNOUNCEMENTS_DATA = {{ announcements | dump | safe }};
-      let index = 0;
-
-      function renderAnnouncement(data) {
-        const cardQuote = document.querySelector('.card-quote');
-        const content = document.querySelector('.card-quote-content');
-        const header = document.querySelector('.card-quote-header');
-        const footer = document.querySelector('.card-quote-footer');
-        
-        cardQuote.style.width = data.width || '130px';
-        header.innerHTML = data.header || '';
-        content.innerHTML = data.content || '';
-        footer.innerHTML = data.footer || '';
-      }
-
-      function handleLeftArrow() {
-        index--;
-        index = Math.max(0, index);
-        renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
-        if (index === 0) {
-          document.querySelector('.left-arrow').classList.add('hidden');
-        }
-      }
-
-      function handleRightArrow() {
-        index++;
-        renderAnnouncement(ANNOUNCEMENTS_DATA[index]);
-        if (index > 0) {
-          // leave off right arrow
-          // document.querySelector('.left-arrow').classList.remove('hidden');
-        }
-        if (index === ANNOUNCEMENTS_DATA.length - 1) {
-          document.querySelector('.right-arrow').classList.add('hidden');
-        }
-      }
-
-    </script>
+    {# {% include "chop.njk" %} #}
+    <div class="broider">
+      <div class="project-border"></div>
+    </div>
   </body>
 </html>
