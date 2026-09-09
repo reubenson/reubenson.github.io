@@ -7,20 +7,24 @@ media: audio device
 year: coming soon
 ---
 
-**Unda Maris** is a USB-powered audio device, purpose-built for the psychoacoustic phenomenon commonly known as binaural beats [^1]. It is both a composition and a MIDI instrument.
+**Unda Maris** is a USB-powered audio device, designed for polyphonic production of the psychoacoustic phenomenon commonly known as binaural beats [^1]. It is both a touch-responsive composition and a MIDI instrument.
 {.project-grid-item-full}
 
 <!-- Following the tradition of _musica speculativa_, it traces the machine in the garden that is the history of musical intonation and harmony. -->
 
-<figure class="project-grid-item-2">
-    <img src="/public/unda-maris/demo-2.jpeg" alt="screenshot of the app" style="border: solid black 1px; margin-top: 0px; padding: 15px" />
+<figure
+    class="project-grid-item-2"
+>
+    <img src="/public/unda-maris/unda-maris-touchplate.jpg" style="border: solid black 1px; margin-top: 0px; padding: 2px" />
     <figcaption>
-        Dissassembled prototype, the capacitive touchplate (left) is still being worked out. The board on the right is a custom expansion for the <a href="https://daisy.audio/" target="_blank">Daisy Seed</a> microcontroller.
-    </figcaption>
+
+The device matches the dimensions of a cassette tape and housed in a standard norelco tape case. The top circuit board serves as a capacitive touchplate with a non-standard design in which three meandering lines divide the ground plane into four distinct yet overlapping electrodes. The lines have been adapted from a system of drawings by the early twentieth century architect Wacław Szpakowski [^5].
+
+</figcaption>
 </figure>
 
 The engine of Unda Maris follows a fairly standard synthesizer architecture, in which each voice (eight in total) is comprised of a pair of sinewave oscillators, detuned mathematically and panned hard left-right. The extent of the detuning is not fixed across all registers, but instead follows the exponential relationship between frequency and pitch: doubling the frequency of a note (an octave) also doubles the binaural beating frequency. The generative composition executes a slowly meandering organum; descant voices ebb and flow over a wavering tenor, detuning as they emerge and returning to unison as they recede. Harmony is held in place only by wavering gossamer threads of intonation, and sound gathers in pools of perpetual flux.
-{.project-grid-item-4}
+{.project-grid-item-3}
 
 <div class="project-grid-item-3">
     <iframe class="project-grid-item-full" width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2382862113&color=%23697481&inverse=false&auto_play=false&show_user=false">
@@ -34,20 +38,12 @@ If it seems difficult to accept that these undulations are not physically presen
 
 </div>
 
-<!-- {.project-grid-item-3} -->
-
-<figure
-    class="project-grid-item-3"
->
-    <img src="/public/unda-maris/demo-1.jpeg" style="border: solid black 1px; margin-top: 0px; padding: 15px" />
+<figure class="project-grid-item-3">
+    <img src="/public/unda-maris/demo-2.jpeg" alt="screenshot of the app" style="border: solid black 1px; margin-top: 0px; padding: 2px" />
     <figcaption>
-
-Capacitive touchplate with a non-standard design in which meandering lines divide the ground plane into distinct yet overlapping electrodes. The lines have been adapted from a system of drawings by the early twentieth century architect Wacław Szpakowski [^5].
-
-</figcaption>
+        Dissassembled prototype; the board on the right is a custom expansion for the <a href="https://daisy.audio/" target="_blank">Daisy Seed</a> microcontroller.
+    </figcaption>
 </figure>
-
-<!-- {.project-grid-item-1} -->
 
 <!-- “To disappear into deep water or to disappear toward a far horizon, to become a part of depth or infinity, such is the destiny of man that finds its image in the destiny of water”
 \
