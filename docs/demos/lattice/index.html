@@ -64,6 +64,20 @@ body {
   border: 1px solid #999;
 }
 
+#controls select {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 3px 4px;
+  border: 1px solid #999;
+  background: #fff;
+  max-width: 190px;
+}
+
+#midi-status {
+  color: #888;
+  font-size: 11px;
+}
+
 button {
   font-family: monospace;
   font-size: 12px;
@@ -157,6 +171,13 @@ canvas { display: block; }
   <button id="btn-reset-view">reset view</button>
   <button id="btn-reseed">reseed</button>
   <button id="btn-svg">export svg</button>
+  <button id="btn-midi">midi: off</button>
+  <select id="midi-out" disabled><option>no midi outputs</option></select>
+  <label>ch <input type="number" id="cfg-midi-ch" value="1" min="1" max="14" step="1"></label>
+  <label>vel <input type="number" id="cfg-midi-vel" value="96" min="1" max="127" step="1"></label>
+  <label>bend ± <input type="number" id="cfg-midi-bend" value="2" min="1" max="48" step="1"></label>
+  <button id="btn-midi-glide">midi glide: off</button>
+  <span id="midi-status"></span>
 </div>
 <div id="canvas-wrap">
   <canvas id="view"></canvas>
@@ -165,7 +186,8 @@ canvas { display: block; }
 <div id="legend">x · +1 degree (step)    y · +2 degrees (third)    z · +6 degrees (octave)    —    scale: D F G A B♭ C
 Because the scale is uneven, a y step is a minor third, major third or fourth depending where you stand.
 drag to orbit, wheel to zoom, space to pause · click <em>sound</em> to start audio
-<em>export svg</em> saves the current projection as line paths plus note labels — no dots or trails</div>
+<em>export svg</em> saves the current projection as line paths plus note labels — no dots or trails
+<em>midi</em> sends each voice out on its own channel (ch, ch+1, ch+2) as note-on/note-off, with pitch bend carrying the fraction of a semitone so a just-intoned scale arrives intact — set the synth's bend range to match, or let the RPN we send do it. <em>midi glide</em> streams the bend across the same window the dots move in, turning each step into portamento; it needs at least ±12 to clear an octave step, and raises the range itself.</div>
 <script>
 // ─── Config / state ───────────────────────────────────────────────────────────
 // Three sine voices, one per coordinate plane. Each is confined to a 3×3 square
@@ -814,6 +836,13 @@ function setMuted(v, muted) {
   btn.textContent = muted ? 'muted' : 'mute';
   btn.classList.toggle('active', muted);
 
+  // Mute is audio-and-MIDI: silence the synth too, but the voice keeps walking,
+  // so unmuting picks it up wherever it has got to.
+  if (midiOut.on && midiOut.port) {
+    if (muted) midiNoteOff(v.i);
+    else midiNoteOn(v.i, midiPitchOf(v.next));
+  }
+
   if (!audio.ac) return;
   const t = audio.ac.currentTime;
   const g = audio.nodes[v.i].mute.gain;
@@ -871,6 +900,10 @@ function glideTo(node, fromF, toF, seconds) {
 
 /** Move every voice onto the pitch it is currently showing. Used when tuning changes. */
 function retune() {
+  // Ahead of the audio guard: the tuning still has to reach MIDI with sound off.
+  // Re-articulating rather than bending, because transpose reaches ±24 semitones
+  // and only the fractional part belongs in a pitch bend.
+  midiRetune();
   if (!audio.ac) return;
   const t = audio.ac.currentTime;
   voices.forEach((v, i) => {
@@ -910,14 +943,290 @@ document.addEventListener('visibilitychange', () => {
   else if (audio.on) audio.ac.resume();
 });
 
+// ─── MIDI out ─────────────────────────────────────────────────────────────────
+// What this piece actually is — three continuous drones sliding between lattice
+// pitches — is not what note-on/note-off describes, so the mapping has to make
+// some choices. They are:
+//
+//   · One channel per voice. Pitch bend is a per-channel message and the three
+//     voices move independently, so they cannot share one.
+//   · A step is note-off (the old note) then note-on (the new), so the synth
+//     articulates exactly where the dot jumps.
+//   · Pitch bend carries the fractional part of the pitch. `midiAt` is allowed
+//     to return a non-integer — SCALE.notes may hold just intervals, and a just
+//     major third above D3 is 50 + 3.8631 — so rounding to the nearest semitone
+//     would silently discard the tuning that is the whole subject here.
+//   · With `midi glide` on, bend is streamed across the same window the audio
+//     and the dots use, so the portamento survives the trip out. The note number
+//     is the *destination*, and bend covers the journey into it, which keeps the
+//     required bend range bounded by one interval rather than by the whole walk.
+
+const CC_ALL_NOTES_OFF = 123;
+const BEND_CENTRE = 8192;
+
+const midiOut = {
+  access: null,
+  port: null,
+  on: false,
+  base: 0,          // 0-indexed channel of voice 0; voice i uses base + i
+  velocity: 96,
+  bendRange: 2,     // semitones, announced to the synth over RPN 0
+  glide: false,
+  held: voices.map(() => null),      // note number sounding per voice, or null
+  lastBend: voices.map(() => null),  // so a held pitch doesn't re-send every frame
+};
+
+const midiChannel = i => (midiOut.base + i) & 0x0f;
+
+/** A lattice point as a (possibly fractional) MIDI note number. */
+const midiPitchOf = p => midiAt(p) + tuning.transpose;
+
+function midiSend(bytes) {
+  if (!midiOut.port) return;
+  try { midiOut.port.send(bytes); } catch { /* port disappeared mid-send */ }
+}
+
+/** RPN 0,0 is pitch bend sensitivity; park the RPN afterwards so a stray data
+ *  entry cannot land on it. Without this the synth's own default range decides
+ *  how far our bends actually go, and the tuning would be wrong by a factor. */
+function sendBendRange(ch, semis) {
+  const n = Math.max(1, Math.min(48, Math.round(semis)));
+  midiSend([0xb0 | ch, 101, 0]);
+  midiSend([0xb0 | ch, 100, 0]);
+  midiSend([0xb0 | ch, 6, n]);
+  midiSend([0xb0 | ch, 38, 0]);
+  midiSend([0xb0 | ch, 101, 127]);
+  midiSend([0xb0 | ch, 100, 127]);
+}
+
+// Six CC messages per channel, and several paths want to be sure the synth has
+// been told. Announce only when the answer has actually changed, so a MIDI
+// monitor shows the RPN once per change rather than twice per enable.
+let bendRangeAnnounced = null;
+
+function announceBendRange() {
+  if (!midiOut.port) return;
+  const stamp = `${midiOut.port.id}:${midiOut.bendRange}:${midiOut.base}`;
+  if (stamp === bendRangeAnnounced) return;
+  bendRangeAnnounced = stamp;
+  for (let i = 0; i < voices.length; i++) sendBendRange(midiChannel(i), midiOut.bendRange);
+}
+
+function sendBend(i, semis) {
+  const r = midiOut.bendRange;
+  // Clamp rather than wrap: an interval wider than the range should flatten out
+  // at the edge, not leap to the opposite one.
+  const clamped = Math.max(-r, Math.min(r, semis));
+  const value = Math.max(0, Math.min(16383, Math.round(BEND_CENTRE + (clamped / r) * BEND_CENTRE)));
+  if (midiOut.lastBend[i] === value) return;
+  midiOut.lastBend[i] = value;
+  midiSend([0xe0 | midiChannel(i), value & 0x7f, (value >> 7) & 0x7f]);
+}
+
+function midiNoteOff(i) {
+  const n = midiOut.held[i];
+  if (n === null) return;
+  midiSend([0x80 | midiChannel(i), n, 0]);
+  midiOut.held[i] = null;
+}
+
+/** `startPitch` differs from `targetPitch` only in glide mode, where the note is
+ *  articulated at its destination but bent back to where the voice is coming
+ *  from, then swept forward by midiGlideFrame. */
+function midiNoteOn(i, targetPitch, startPitch = targetPitch) {
+  const note = Math.max(0, Math.min(127, Math.round(targetPitch)));
+  sendBend(i, startPitch - note);   // before the note-on, so it never sounds untuned
+  midiSend([0x90 | midiChannel(i), note, midiOut.velocity]);
+  midiOut.held[i] = note;
+}
+
+/** Belt and braces: an explicit note-off for what we know we're holding, plus
+ *  All Notes Off for anything a dropped message left sounding. A stuck note on
+ *  someone's synth outlives the tab, so this runs on every exit path. */
+function midiAllOff() {
+  for (let i = 0; i < voices.length; i++) {
+    midiNoteOff(i);
+    midiOut.lastBend[i] = null;
+    sendBend(i, 0);
+    midiSend([0xb0 | midiChannel(i), CC_ALL_NOTES_OFF, 0]);
+  }
+}
+
+function midiVoiceTick(v) {
+  if (!midiOut.on || !midiOut.port) return;
+  midiNoteOff(v.i);
+  if (v.muted) return;
+  const to = midiPitchOf(v.next);
+  midiNoteOn(v.i, to, midiOut.glide ? midiPitchOf(v.prev) : to);
+}
+
+/** Re-articulate every voice where it currently stands. Used when the tuning
+ *  changes under a held note, and when MIDI is switched on mid-walk so the
+ *  synth doesn't wait up to lcm(mults) ticks to hear from the slowest voice. */
+function midiRetune() {
+  if (!midiOut.on || !midiOut.port) return;
+  for (const v of voices) {
+    midiNoteOff(v.i);
+    if (!v.muted) midiNoteOn(v.i, midiPitchOf(v.next));
+  }
+}
+
+/** Called every frame while gliding: sweep the bend along the voice's own eased
+ *  journey. Pitch is linear in semitones, which is the same curve the audio
+ *  walks geometrically in Hz. */
+function midiGlideFrame() {
+  if (!midiOut.on || !midiOut.port || !midiOut.glide || !state.playing) return;
+  for (const v of voices) {
+    const note = midiOut.held[v.i];
+    if (note === null || v.muted) continue;
+    const ph = state.glide > 0 ? Math.min(1, voicePhase(v) / state.glide) : 1;
+    const a = midiPitchOf(v.prev);
+    const b = midiPitchOf(v.next);
+    sendBend(v.i, a + (b - a) * easeInOutCubic(ph) - note);
+  }
+}
+
+// ── Ports and UI ──────────────────────────────────────────────────────────────
+
+const btnMidi      = document.getElementById('btn-midi');
+const btnMidiGlide = document.getElementById('btn-midi-glide');
+const midiSelect   = document.getElementById('midi-out');
+const midiStatusEl = document.getElementById('midi-status');
+
+function midiStatus(text) { midiStatusEl.textContent = text; }
+
+function describeMidi() {
+  if (!midiOut.on) return '';
+  if (!midiOut.port) return 'no output selected';
+  return `ch ${voices.map((_, i) => midiChannel(i) + 1).join('·')} → ${midiOut.port.name}`;
+}
+
+function selectMidiPort(id) {
+  if (midiOut.port) midiAllOff();          // never strand notes on the old port
+  midiOut.port = (midiOut.access && midiOut.access.outputs.get(id)) || null;
+  midiOut.lastBend = voices.map(() => null);
+  if (midiOut.port) {
+    announceBendRange();
+    if (midiOut.on) midiRetune();
+  }
+  midiStatus(describeMidi());
+}
+
+function refreshMidiPorts() {
+  const outs = midiOut.access ? [...midiOut.access.outputs.values()] : [];
+  const previous = midiOut.port && midiOut.port.id;
+  midiSelect.innerHTML = '';
+
+  if (outs.length === 0) {
+    midiSelect.appendChild(new Option('no midi outputs'));
+    midiSelect.disabled = true;
+    midiOut.port = null;
+    midiStatus(midiOut.on ? 'no output selected' : '');
+    return;
+  }
+
+  midiSelect.disabled = false;
+  for (const out of outs) midiSelect.appendChild(new Option(out.name, out.id));
+  // Hold onto the current port across a hotplug if it's still there.
+  const keep = outs.find(o => o.id === previous) || outs[0];
+  midiSelect.value = keep.id;
+  if (keep.id !== previous) selectMidiPort(keep.id);
+  else midiStatus(describeMidi());
+}
+
+async function enableMidi() {
+  if (!navigator.requestMIDIAccess) {
+    midiStatus('web midi unavailable in this browser');
+    return false;
+  }
+  try {
+    midiOut.access = await navigator.requestMIDIAccess({ sysex: false });
+  } catch {
+    midiStatus('midi access denied');
+    return false;
+  }
+  midiOut.access.onstatechange = refreshMidiPorts;
+  refreshMidiPorts();
+  return true;
+}
+
+async function setMidi(on) {
+  if (on && !midiOut.access && !(await enableMidi())) on = false;
+  midiOut.on = on;
+  btnMidi.textContent = `midi: ${on ? 'on' : 'off'}`;
+  btnMidi.classList.toggle('active', on);
+  if (!on) { midiAllOff(); midiStatus(''); return; }
+  if (midiOut.port) {
+    announceBendRange();
+    midiRetune();
+  }
+  midiStatus(describeMidi());
+}
+
+btnMidi.addEventListener('click', () => setMidi(!midiOut.on));
+midiSelect.addEventListener('change', () => selectMidiPort(midiSelect.value));
+
+btnMidiGlide.addEventListener('click', () => {
+  midiOut.glide = !midiOut.glide;
+  btnMidiGlide.textContent = `midi glide: ${midiOut.glide ? 'on' : 'off'}`;
+  btnMidiGlide.classList.toggle('active', midiOut.glide);
+  // A glide has to bend across a whole interval, and a z step is an octave. At
+  // the default ±2 the sweep would just flatten out, so open the range up.
+  if (midiOut.glide && midiOut.bendRange < 12) setBendRange(12);
+});
+
+function setBendRange(semis) {
+  midiOut.bendRange = Math.max(1, Math.min(48, Math.round(semis)));
+  bendInput.value = midiOut.bendRange;
+  midiOut.lastBend = voices.map(() => null);
+  if (midiOut.port) announceBendRange();
+}
+
+const chInput   = document.getElementById('cfg-midi-ch');
+const velInput  = document.getElementById('cfg-midi-vel');
+const bendInput = document.getElementById('cfg-midi-bend');
+
+chInput.addEventListener('change', () => {
+  const n = parseInt(chInput.value, 10);
+  if (!Number.isInteger(n) || n < 1 || n > 14) { chInput.value = midiOut.base + 1; return; }
+  midiAllOff();                 // release on the old channels before moving
+  midiOut.base = n - 1;
+  if (midiOut.port) announceBendRange();
+  midiRetune();
+  midiStatus(describeMidi());
+});
+
+velInput.addEventListener('change', () => {
+  const n = parseInt(velInput.value, 10);
+  if (Number.isInteger(n) && n >= 1 && n <= 127) midiOut.velocity = n;
+  else velInput.value = midiOut.velocity;
+});
+
+bendInput.addEventListener('change', () => {
+  const n = parseInt(bendInput.value, 10);
+  if (Number.isInteger(n) && n >= 1 && n <= 48) setBendRange(n);
+  else bendInput.value = midiOut.bendRange;
+});
+
+// A backgrounded tab freezes the clock, so release rather than leave three notes
+// hanging on the synth; re-articulate on the way back.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) midiAllOff();
+  else if (midiOut.on) midiRetune();
+});
+
+window.addEventListener('pagehide', midiAllOff);
+
 // ─── Clock ────────────────────────────────────────────────────────────────────
 // One master pulse. A voice steps every `mult` master ticks, so the three run at
 // different rates but stay phase-locked — every voice's step lands on a master
 // tick, and all three coincide exactly every lcm(mults) ticks.
 
-/** Called once per step of a single voice, after it moves. Readout, then audio. */
+/** Called once per step of a single voice, after it moves. Readout, then audio,
+ *  then MIDI — MIDI before the audio guard, so it works with sound off. */
 function onVoiceTick(v) {
   renderReadout();
+  midiVoiceTick(v);
   if (!audio.ac || !audio.on) return;
   glideTo(audio.nodes[v.i],
     hzAt(v.prev),
@@ -947,6 +1256,7 @@ function frame(now) {
     }
   }
 
+  midiGlideFrame();
   drawFrame();
   requestAnimationFrame(frame);
 }

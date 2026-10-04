@@ -1,0 +1,512 @@
+---
+layout: demo.njk
+title: Organum
+description: Visualize interlocking L/S rhythmic modes across four organum voices.
+year: 2026
+---
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 12px;
+  background: #f5f5f5;
+  font-family: monospace;
+  font-size: 13px;
+  user-select: none;
+}
+
+#app {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+#voices {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#voices label {
+  color: #333;
+}
+
+#voices input[type=text] {
+  width: 100%;
+  font-family: monospace;
+  font-size: 13px;
+  padding: 4px 6px;
+  border: 1px solid #999;
+  background: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#controls label {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+#controls input[type=number] {
+  width: 52px;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 3px 5px;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+button {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+button:hover { border-color: #555; }
+
+button.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+#canvas-wrap {
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 0;
+}
+
+svg { display: block; width: 100%; height: auto; }
+
+#status {
+  margin-top: 8px;
+  color: #666;
+  font-size: 11px;
+  min-height: 1.4em;
+}
+
+#legend {
+  margin-top: 18px;
+  white-space: pre-wrap;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.6;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+</style>
+
+<!-- No blank lines inside this block: markdown-it ends an HTML block at the
+     first one and wraps whatever follows in a stray <p>. -->
+<div id="app">
+  <div id="voices">
+    <label for="v1">v1</label>
+    <input id="v1" type="text" spellcheck="false" autocomplete="off">
+    <label for="v2">v2</label>
+    <input id="v2" type="text" spellcheck="false" autocomplete="off">
+    <label for="v3">v3</label>
+    <input id="v3" type="text" spellcheck="false" autocomplete="off">
+    <label for="v4">v4</label>
+    <input id="v4" type="text" spellcheck="false" autocomplete="off">
+  </div>
+  <div id="controls">
+    <label>cycles <input id="cycles" type="number" min="1" max="16" step="1"></label>
+    <button id="btn-linear">view: linear</button>
+    <button id="btn-circular">view: circular</button>
+    <button id="btn-link">copy link</button>
+  </div>
+  <div id="canvas-wrap"><svg id="svg"></svg></div>
+  <div id="status"></div>
+</div>
+
+<div id="legend">Four-part organum as interlocking rhythmic modes. Each voice is a repeating sequence of longs and shorts — <em>L</em> lasts twice as long as <em>S</em>. The canvas stretches to an integer multiple of the lowest common multiple of the four cycle lengths, so phase relationships that close only after several repetitions stay readable. <em>linear</em> stacks the voices as tracks; <em>circular</em> wraps the same span once around four concentric rings.</div>
+
+<script>
+// ─── Defaults ─────────────────────────────────────────────────────────────────
+
+const DEFAULTS = {
+  voices: ['LS', 'SL', 'LSS', 'SLSL'],
+  cycles: 2,
+  view: 'linear',  // 'linear' | 'circular'
+};
+
+function defaultCfg() {
+  return {
+    voices: DEFAULTS.voices.slice(),
+    cycles: DEFAULTS.cycles,
+    view: DEFAULTS.view,
+  };
+}
+
+let cfg = defaultCfg();
+
+// ─── Pure math ────────────────────────────────────────────────────────────────
+// S = 1, L = 2. Empty voices contribute nothing to the LCM so the page still
+// renders when a field is cleared mid-edit.
+
+function parsePattern(str) {
+  const out = [];
+  for (const ch of String(str).toUpperCase()) {
+    if (ch === 'L' || ch === 'S') out.push(ch);
+  }
+  return out;
+}
+
+function noteDuration(kind) {
+  return kind === 'L' ? 2 : 1;
+}
+
+function cycleLength(pattern) {
+  let n = 0;
+  for (const k of pattern) n += noteDuration(k);
+  return n;
+}
+
+function gcd(a, b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  while (b) {
+    const t = a % b;
+    a = b;
+    b = t;
+  }
+  return a;
+}
+
+function lcm(a, b) {
+  if (a === 0 || b === 0) return 0;
+  return Math.abs(a / gcd(a, b) * b);
+}
+
+function lcmMany(nums) {
+  let n = 0;
+  for (const x of nums) {
+    if (x <= 0) continue;
+    n = n === 0 ? x : lcm(n, x);
+  }
+  return n;
+}
+
+/** Repeat a voice's pattern until it covers [0, span). Last note may be clipped. */
+function expandVoice(pattern, span) {
+  const events = [];
+  if (!pattern.length || span <= 0) return events;
+  let t = 0;
+  let i = 0;
+  while (t < span) {
+    const kind = pattern[i % pattern.length];
+    const dur = noteDuration(kind);
+    const clipped = Math.min(dur, span - t);
+    events.push({ kind, start: t, dur: clipped });
+    t += dur;
+    i++;
+  }
+  return events;
+}
+
+function analyze(cfg) {
+  const patterns = cfg.voices.map(parsePattern);
+  const lengths = patterns.map(cycleLength);
+  const period = lcmMany(lengths);
+  const span = period > 0 ? period * Math.max(1, cfg.cycles | 0) : 0;
+  const voices = patterns.map((p) => expandVoice(p, span));
+  return { patterns, lengths, period, span, voices };
+}
+
+// ─── SVG markup ───────────────────────────────────────────────────────────────
+// Same expanded events feed both views. Geometry only — no DOM.
+
+const VOICE_COLORS = ['#1a1a1a', '#444', '#666', '#888'];
+const L_FILL = '#222';
+const S_FILL = '#ddd';
+const S_STROKE = '#888';
+
+function r2(n) {
+  return Math.round(n * 100) / 100;
+}
+
+function markupLinear(analysis) {
+  const { voices, span, period } = analysis;
+  const labelW = 28;
+  const padR = 8;
+  const padT = 8;
+  const padB = 8;
+  const rowH = 36;
+  const gap = 10;
+  const trackH = 22;
+  const W = 900;
+  const H = padT + padB + voices.length * rowH + (voices.length - 1) * gap;
+  const plotW = W - labelW - padR;
+  const unit = span > 0 ? plotW / span : 0;
+
+  let inner = '';
+
+  // Unit ticks (only when they won't dissolve into a solid rule).
+  if (span > 0 && span <= 96) {
+    for (let u = 0; u <= span; u++) {
+      const x = labelW + u * unit;
+      inner += `<line x1="${r2(x)}" y1="${padT}" x2="${r2(x)}" y2="${H - padB}" ` +
+        `stroke="#eee" stroke-width="1"/>`;
+    }
+  }
+
+  // LCM boundaries — the phase-lock points.
+  if (period > 0) {
+    for (let t = 0; t <= span; t += period) {
+      const x = labelW + t * unit;
+      inner += `<line x1="${r2(x)}" y1="${padT - 2}" x2="${r2(x)}" y2="${H - padB + 2}" ` +
+        `stroke="#999" stroke-width="1"/>`;
+    }
+  }
+
+  for (let v = 0; v < voices.length; v++) {
+    const y0 = padT + v * (rowH + gap);
+    const y = y0 + (rowH - trackH) / 2;
+    inner += `<text x="0" y="${r2(y0 + rowH / 2 + 4)}" font-family="monospace" ` +
+      `font-size="11" fill="${VOICE_COLORS[v]}">v${v + 1}</text>`;
+    inner += `<rect x="${labelW}" y="${r2(y)}" width="${r2(plotW)}" height="${trackH}" ` +
+      `fill="#fafafa" stroke="#ddd" stroke-width="1"/>`;
+
+    for (const ev of voices[v]) {
+      const x = labelW + ev.start * unit;
+      const w = Math.max(ev.dur * unit - 0.5, 0.5);
+      if (ev.kind === 'L') {
+        inner += `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(w)}" height="${trackH}" ` +
+          `fill="${L_FILL}"/>`;
+      } else {
+        inner += `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(w)}" height="${trackH}" ` +
+          `fill="${S_FILL}" stroke="${S_STROKE}" stroke-width="1"/>`;
+      }
+    }
+  }
+
+  return { viewBox: `0 0 ${W} ${H}`, inner };
+}
+
+/** Arc path for a ring segment. Angles in radians, 0 at 12 o'clock, clockwise. */
+function arcPath(cx, cy, r, a0, a1) {
+  // Full circle as a single arc is undefined in SVG; leave that to the caller.
+  const x0 = cx + r * Math.sin(a0);
+  const y0 = cy - r * Math.cos(a0);
+  const x1 = cx + r * Math.sin(a1);
+  const y1 = cy - r * Math.cos(a1);
+  const large = (a1 - a0) > Math.PI ? 1 : 0;
+  return `M ${r2(x0)} ${r2(y0)} A ${r2(r)} ${r2(r)} 0 ${large} 1 ${r2(x1)} ${r2(y1)}`;
+}
+
+function markupCircular(analysis) {
+  const { voices, span, period } = analysis;
+  const S = 640;
+  const cx = S / 2;
+  const cy = S / 2;
+  const outer = 280;
+  const ringGap = 42;
+  const strokeW = 28;
+
+  let inner = '';
+
+  // Background rings so empty voices still show their track.
+  for (let v = 0; v < voices.length; v++) {
+    const r = outer - v * ringGap;
+    inner += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" ` +
+      `stroke="#eee" stroke-width="${strokeW}"/>`;
+    inner += `<text x="${cx}" y="${r2(cy - r)}" dy="-2" text-anchor="middle" ` +
+      `font-family="monospace" font-size="10" fill="${VOICE_COLORS[v]}">v${v + 1}</text>`;
+  }
+
+  if (span > 0) {
+    for (let v = 0; v < voices.length; v++) {
+      const r = outer - v * ringGap;
+      for (const ev of voices[v]) {
+        const a0 = (ev.start / span) * Math.PI * 2;
+        const a1 = ((ev.start + ev.dur) / span) * Math.PI * 2;
+        // A note that fills the whole span would need a full circle; draw one.
+        if (ev.dur >= span) {
+          const stroke = ev.kind === 'L' ? L_FILL : S_STROKE;
+          const op = ev.kind === 'L' ? 1 : 0.45;
+          inner += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" ` +
+            `stroke="${stroke}" stroke-width="${strokeW}" opacity="${op}"/>`;
+          continue;
+        }
+        if (a1 - a0 < 1e-6) continue;
+        const d = arcPath(cx, cy, r, a0, a1);
+        if (ev.kind === 'L') {
+          inner += `<path d="${d}" fill="none" stroke="${L_FILL}" ` +
+            `stroke-width="${strokeW}" stroke-linecap="butt"/>`;
+        } else {
+          inner += `<path d="${d}" fill="none" stroke="${S_STROKE}" ` +
+            `stroke-width="${strokeW}" stroke-linecap="butt" opacity="0.45"/>`;
+        }
+      }
+    }
+
+    // Radial LCM ticks from centre out past the outer ring.
+    if (period > 0) {
+      const tickN = Math.max(1, Math.round(span / period));
+      for (let i = 0; i < tickN; i++) {
+        const a = (i / tickN) * Math.PI * 2;
+        const x0 = cx + 20 * Math.sin(a);
+        const y0 = cy - 20 * Math.cos(a);
+        const x1 = cx + (outer + strokeW / 2 + 6) * Math.sin(a);
+        const y1 = cy - (outer + strokeW / 2 + 6) * Math.cos(a);
+        inner += `<line x1="${r2(x0)}" y1="${r2(y0)}" x2="${r2(x1)}" y2="${r2(y1)}" ` +
+          `stroke="#999" stroke-width="1"/>`;
+      }
+    }
+  }
+
+  // 12 o'clock marker — phase origin.
+  inner += `<line x1="${cx}" y1="${cy - outer - strokeW / 2 - 10}" ` +
+    `x2="${cx}" y2="${cy - outer - strokeW / 2 - 2}" stroke="#222" stroke-width="2"/>`;
+
+  return { viewBox: `0 0 ${S} ${S}`, inner };
+}
+
+// ─── URL state ────────────────────────────────────────────────────────────────
+// Only non-defaults go in the hash, so a link stays short.
+
+function syncUrl() {
+  const base = defaultCfg();
+  const parts = [];
+  for (let i = 0; i < 4; i++) {
+    if (cfg.voices[i] !== base.voices[i]) parts.push(`v${i + 1}=${encodeURIComponent(cfg.voices[i])}`);
+  }
+  if (cfg.cycles !== base.cycles) parts.push(`cycles=${cfg.cycles}`);
+  if (cfg.view !== base.view) parts.push(`view=${cfg.view}`);
+  const hash = parts.length ? '#' + parts.join('&') : '';
+  history.replaceState(null, '', location.pathname + location.search + hash);
+}
+
+function readUrl() {
+  const hash = location.hash.replace(/^#/, '');
+  if (!hash) return;
+  for (const pair of hash.split('&')) {
+    const eq = pair.indexOf('=');
+    if (eq < 0) continue;
+    const k = pair.slice(0, eq);
+    const v = decodeURIComponent(pair.slice(eq + 1));
+    if (/^v[1-4]$/.test(k)) {
+      cfg.voices[parseInt(k[1], 10) - 1] = v.toUpperCase().replace(/[^LS]/g, '');
+    } else if (k === 'cycles') {
+      const n = parseInt(v, 10);
+      if (Number.isFinite(n)) cfg.cycles = Math.min(16, Math.max(1, n));
+    } else if (k === 'view' && (v === 'linear' || v === 'circular')) {
+      cfg.view = v;
+    }
+  }
+}
+
+// ─── DOM wiring ───────────────────────────────────────────────────────────────
+
+const voiceInputs = [1, 2, 3, 4].map((i) => document.getElementById('v' + i));
+const cyclesInput = document.getElementById('cycles');
+const btnLinear = document.getElementById('btn-linear');
+const btnCircular = document.getElementById('btn-circular');
+const btnLink = document.getElementById('btn-link');
+const svg = document.getElementById('svg');
+const statusEl = document.getElementById('status');
+
+function syncControls() {
+  for (let i = 0; i < 4; i++) voiceInputs[i].value = cfg.voices[i];
+  cyclesInput.value = cfg.cycles;
+  btnLinear.classList.toggle('active', cfg.view === 'linear');
+  btnCircular.classList.toggle('active', cfg.view === 'circular');
+  btnLinear.textContent = 'view: linear';
+  btnCircular.textContent = 'view: circular';
+}
+
+function render() {
+  const analysis = analyze(cfg);
+  const drawn = cfg.view === 'circular'
+    ? markupCircular(analysis)
+    : markupLinear(analysis);
+
+  svg.setAttribute('viewBox', drawn.viewBox);
+  svg.innerHTML = drawn.inner;
+
+  const lens = analysis.lengths.map((n, i) => `v${i + 1}=${n || '—'}`).join(' · ');
+  const notes = analysis.voices.map((evs) => evs.length).reduce((a, b) => a + b, 0);
+  if (analysis.period === 0) {
+    statusEl.textContent = 'no patterned voices — enter L and S in at least one field';
+  } else {
+    statusEl.textContent =
+      `${lens} · lcm=${analysis.period} · span=${analysis.span} ` +
+      `(${cfg.cycles}×) · ${notes} notes · ${cfg.view}`;
+  }
+}
+
+for (let i = 0; i < 4; i++) {
+  voiceInputs[i].addEventListener('input', () => {
+    // Keep typing fluid: strip invalid chars for the model, leave the field alone
+    // until blur so mid-edit spaces don't fight the caret.
+    cfg.voices[i] = voiceInputs[i].value.toUpperCase().replace(/[^LS]/g, '');
+    render();
+    syncUrl();
+  });
+  voiceInputs[i].addEventListener('change', () => {
+    cfg.voices[i] = voiceInputs[i].value.toUpperCase().replace(/[^LS]/g, '');
+    voiceInputs[i].value = cfg.voices[i];
+    render();
+    syncUrl();
+  });
+}
+
+cyclesInput.addEventListener('change', () => {
+  const n = parseInt(cyclesInput.value, 10);
+  cfg.cycles = Number.isFinite(n) ? Math.min(16, Math.max(1, n)) : DEFAULTS.cycles;
+  cyclesInput.value = cfg.cycles;
+  render();
+  syncUrl();
+});
+
+btnLinear.addEventListener('click', () => {
+  cfg.view = 'linear';
+  syncControls();
+  render();
+  syncUrl();
+});
+
+btnCircular.addEventListener('click', () => {
+  cfg.view = 'circular';
+  syncControls();
+  render();
+  syncUrl();
+});
+
+function flash(btn, text) {
+  const was = btn.textContent;
+  btn.textContent = text;
+  setTimeout(() => { btn.textContent = was; }, 1100);
+}
+
+btnLink.addEventListener('click', async () => {
+  syncUrl();
+  try {
+    await navigator.clipboard.writeText(location.href);
+    flash(btnLink, 'copied ✓');
+  } catch {
+    flash(btnLink, location.href);
+  }
+});
+
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+
+readUrl();
+syncControls();
+render();
+</script>

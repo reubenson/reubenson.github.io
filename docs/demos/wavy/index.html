@@ -1,0 +1,761 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavy</title>
+    <meta name="description" content="A parameterized SVG generator for fields of noise-displaced lines.">
+    <meta name="keywords" content="">
+    <meta name="author" content="Reuben Son">
+    <meta property="og:type" content="website" />
+    
+    <meta property="og:title" content="Wavy" />
+    <meta property="og:description" content="A parameterized SVG generator for fields of noise-displaced lines." />
+    
+    <meta property="og:type" content="website" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Ibarra Real Nova", serif;
+    font-weight: 300;
+  }
+</style>
+
+    
+    
+    
+    
+  </head>
+  <body class="">
+    <style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 12px;
+  background: #f5f5f5;
+  font-family: monospace;
+  font-size: 13px;
+  user-select: none;
+}
+
+#app {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+#panel {
+  flex: 0 0 246px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#stage {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pgroup h2 {
+  margin: 0 0 6px;
+  /* open-font.njk sits in every demo.njk head and sets h1–h6 to a serif face,
+     so a heading has to opt back into the panel's monospace explicitly. */
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 3px;
+}
+
+.prow {
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  grid-template-areas: "label num" "range range";
+  gap: 2px 6px;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.prow .pname { grid-area: label; color: #333; }
+.prow input[type=number] {
+  grid-area: num;
+  width: 100%;
+  font-family: monospace;
+  font-size: 11px;
+  padding: 2px 3px;
+  border: 1px solid #bbb;
+  background: #fff;
+}
+.prow input[type=range] {
+  grid-area: range;
+  width: 100%;
+  margin: 0;
+  height: 14px;
+  accent-color: #222;
+}
+
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+button {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+button:hover { border-color: #555; }
+
+button.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+#presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+#presets button { font-size: 11px; padding: 3px 8px; }
+
+#canvas-wrap {
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 0;
+}
+
+svg { display: block; width: 100%; height: auto; }
+
+#status {
+  margin-top: 8px;
+  color: #666;
+  font-size: 11px;
+  min-height: 1.4em;
+}
+
+#legend {
+  max-width: 1060px;
+  margin: 18px auto 0;
+  white-space: pre-wrap;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.6;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+#legend a { color: #555; }
+
+@media (max-width: 720px) {
+  #app { flex-direction: column-reverse; }
+  #panel { flex: 1 1 auto; width: 100%; }
+}
+</style>
+<!-- No blank lines inside this block: markdown-it ends an HTML block at the
+     first one and wraps whatever follows in a stray <p>. -->
+<div id="app">
+  <aside id="panel"></aside>
+  <div id="stage">
+    <div id="presets"></div>
+    <div id="controls">
+      <button id="btn-occlude">occlude: off</button>
+      <button id="btn-invert">invert: off</button>
+      <button id="btn-drift">drift: off</button>
+      <button id="btn-reseed">reseed</button>
+      <button id="btn-reset">reset</button>
+      <button id="btn-link">copy link</button>
+      <button id="btn-svg">export svg</button>
+    </div>
+    <div id="canvas-wrap"><svg id="svg"></svg></div>
+    <div id="status"></div>
+  </div>
+</div>
+<div id="legend">After <a href="https://turtletoy.net/turtle/65cb465053" target="_blank" rel="noopener">way wavy way</a> by ge1doot — a stack of horizontal lines, each one pushed off its baseline by a shared 2D noise field. The lines are close enough together that their overlap, not any single line, is what draws the form.
+Every number below feeds one generator; the SVG on screen <em>is</em> the export, so what you tune is what you plot. State lives in the URL — <em>copy link</em> hands someone the exact drawing.
+The <em>celeste</em> group adds a second layer: two ranks of a sine wave detuned against each other, after the organ stop of the same name. The detune is in cents and acts on the rate down the stack, so where the ranks fall out of phase the lines cancel to unison and a node prints as a line of stillness across the drawing. <em>drift</em> hands the detune to the noise field, so the ranks open out and close again.</div>
+<script>
+// ─── Parameter schema ─────────────────────────────────────────────────────────
+// The single source of truth: the panel UI, the defaults, the URL serialization
+// and the clamping are all generated from this list. Adding a knob is one line
+// here plus one use of `cfg.<id>` down in buildField().
+
+const PARAMS = [
+  { group: 'field', id: 'lines',     label: 'lines',     min: 1,     max: 600,  step: 1,     value: 300 },
+  { group: 'field', id: 'samples',   label: 'samples',   min: 2,     max: 400,  step: 1,     value: 201 },
+  { group: 'field', id: 'spacing',   label: 'spacing',   min: -2,    max: 2,    step: 0.01,  value: 0.1 },
+  { group: 'field', id: 'amplitude', label: 'amplitude', min: 0,     max: 400,  step: 1,     value: 200 },
+
+  { group: 'noise', id: 'scaleX',    label: 'scale x',   min: 0.001, max: 0.2,  step: 0.001, value: 0.01 },
+  { group: 'noise', id: 'scaleY',    label: 'scale y',   min: 0.001, max: 0.2,  step: 0.001, value: 0.01 },
+  { group: 'noise', id: 'octaves',   label: 'octaves',   min: 1,     max: 8,    step: 1,     value: 3 },
+  { group: 'noise', id: 'warp',      label: 'warp',      min: 0,     max: 200,  step: 1,     value: 0 },
+  { group: 'noise', id: 'envelope',  label: 'envelope',  min: 0,     max: 6,    step: 0.1,   value: 0 },
+  { group: 'noise', id: 'seed',      label: 'seed',      min: 0,     max: 9999, step: 1,     value: 1 },
+
+  // Two ranks of a sine wave, detuned against each other — an organ celeste.
+  // `amp` 0 switches the whole layer off, so it costs nothing when unused.
+  { group: 'celeste', id: 'celAmp',    label: 'amp mm',    min: 0,   max: 100,  step: 0.5,   value: 0 },
+  { group: 'celeste', id: 'celCycles', label: 'cycles x',  min: 0,   max: 80,   step: 0.25,  value: 3 },
+  { group: 'celeste', id: 'celPeriod', label: 'lines/cyc', min: 2,   max: 64,   step: 0.5,   value: 8 },
+  { group: 'celeste', id: 'celDetune', label: 'detune ¢',  min: 0,   max: 1200, step: 1,     value: 14 },
+
+  { group: 'ink',   id: 'weight',    label: 'weight mm', min: 0.05,  max: 4,    step: 0.05,  value: 0.4 },
+  { group: 'ink',   id: 'opacity',   label: 'opacity',   min: 0.02,  max: 1,    step: 0.01,  value: 0.33 },
+
+  { group: 'page',  id: 'width',     label: 'width mm',  min: 20,    max: 1000, step: 1,     value: 200 },
+  { group: 'page',  id: 'height',    label: 'height mm', min: 20,    max: 1000, step: 1,     value: 200 },
+  // Left/right only: the vertical extent belongs to amplitude and spacing, and
+  // reserving space there could only mean clipping the drawing.
+  { group: 'page',  id: 'margin',    label: 'side mm',   min: 0,     max: 100,  step: 1,     value: 0 },
+];
+
+// Booleans live outside PARAMS because they render as buttons, not sliders.
+const TOGGLES = [
+  { id: 'occlude', value: false, btn: 'btn-occlude', label: 'occlude' },
+  { id: 'invert',  value: false, btn: 'btn-invert',  label: 'invert' },
+  // Hand the detune over to the noise field, so the two ranks drift apart and
+  // return to unison instead of holding a fixed interval.
+  { id: 'drift',   value: false, btn: 'btn-drift',   label: 'drift' },
+];
+
+const PARAM_BY_ID = Object.fromEntries(PARAMS.map(p => [p.id, p]));
+
+function defaultCfg() {
+  const cfg = {};
+  for (const p of PARAMS) cfg[p.id] = p.value;
+  for (const t of TOGGLES) cfg[t.id] = t.value;
+  return cfg;
+}
+
+// Named corners of the parameter space. Each is a sparse patch over the
+// defaults, so a preset only names what it actually changes.
+const PRESETS = {
+  'original': {},
+  'ridges':   { lines: 120, samples: 300, spacing: 1.2, amplitude: 60, scaleX: 0.02,
+                scaleY: 0.05, octaves: 4, opacity: 1, weight: 0.3, occlude: true },
+  'weave':    { lines: 400, samples: 240, spacing: 0.4, amplitude: 120, scaleX: 0.008,
+                scaleY: 0.09, octaves: 2, opacity: 0.25, weight: 0.3 },
+  'dunes':    { lines: 240, samples: 300, spacing: 0.5, amplitude: 150, scaleX: 0.006,
+                scaleY: 0.012, octaves: 6, warp: 60, envelope: 1.2, opacity: 0.3 },
+  'combing':  { lines: 300, samples: 320, spacing: 0.66, amplitude: 40, scaleX: 0.05,
+                scaleY: 0.004, octaves: 2, opacity: 0.5, weight: 0.25 },
+
+  // An honest 14¢ organ detune, made visible by spending 600 lines at 4 per
+  // cycle — 150 cycles down the stack, where a line affords only ~40 across.
+  // No noise at all: this one is pure interference.
+  // 240 samples, not 400: at 3 cycles across the page that is still 80 per
+  // cycle, and the saving halves the heaviest preset in the set.
+  'unda maris': { lines: 600, samples: 240, spacing: 0.28, amplitude: 0, celAmp: 18,
+                  celCycles: 3, celPeriod: 4, celDetune: 14, weight: 0.25, opacity: 0.5 },
+  // The node widened to a semitone and laid over noise terrain, so the line of
+  // stillness meanders with the landscape instead of running straight.
+  'celeste':    { lines: 260, samples: 300, spacing: 0.5, amplitude: 90, scaleX: 0.012,
+                  celAmp: 16, celCycles: 3, celPeriod: 8, celDetune: 100,
+                  weight: 0.3, opacity: 0.5 },
+  // Detune handed to the noise field: pools where the ranks open out, and
+  // passages where they close back to unison and the node dissolves.
+  'still lines':{ lines: 260, samples: 300, spacing: 0.5, amplitude: 60, scaleX: 0.008,
+                  scaleY: 0.006, celAmp: 20, celCycles: 4, celPeriod: 7, celDetune: 220,
+                  drift: true, weight: 0.3, opacity: 0.5 },
+};
+
+const cfg = defaultCfg();
+
+// ─── Noise ────────────────────────────────────────────────────────────────────
+// ge1doot's gradient-ish value noise, with the permutation table filled from a
+// seeded PRNG instead of Math.random so a given `seed` always redraws the same
+// field. The table is random bytes rather than a shuffled permutation — that's
+// the original, and the slight bias in it is part of the look.
+
+function mulberry32(a) {
+  return function () {
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+class Noise {
+  constructor(seed, octaves) {
+    const rnd = mulberry32(seed | 0);
+    this.p = new Uint8Array(512);
+    for (let i = 0; i < 512; i++) this.p[i] = rnd() * 256;
+    this.octaves = octaves;
+    // Octave amplitudes are 1/2, 1/4, 1/8 … so the sum falls short of 1 and
+    // shrinks the field as octaves drop. Dividing it out keeps `amplitude`
+    // meaning the same thing at every octave count.
+    let e = 1, s = 0;
+    for (let i = 0; i < octaves; i++) { e *= 0.5; s += e; }
+    this.norm = s;
+  }
+
+  lerp(t, a, b) { return a + t * (b - a); }
+
+  grad2d(i, x, y) {
+    const v = (i & 1) === 0 ? x : y;
+    return (i & 2) === 0 ? -v : v;
+  }
+
+  noise2d(x2d, y2d) {
+    const X = Math.floor(x2d) & 255;
+    const Y = Math.floor(y2d) & 255;
+    const x = x2d - Math.floor(x2d);
+    const y = y2d - Math.floor(y2d);
+    const fx = (3 - 2 * x) * x * x;   // smoothstep
+    const fy = (3 - 2 * y) * y * y;
+    const p0 = this.p[X] + Y;
+    const p1 = this.p[X + 1] + Y;
+    return this.lerp(
+      fy,
+      this.lerp(fx, this.grad2d(this.p[p0], x, y), this.grad2d(this.p[p1], x - 1, y)),
+      this.lerp(fx, this.grad2d(this.p[p0 + 1], x, y - 1), this.grad2d(this.p[p1 + 1], x - 1, y - 1))
+    );
+  }
+
+  /** Fractal sum, normalized to roughly [0, 1]. */
+  noise(x, y) {
+    let e = 1, k = 1, s = 0;
+    for (let i = 0; i < this.octaves; ++i) {
+      e *= 0.5;
+      s += e * (1 + this.noise2d(k * x, k * y)) / 2;
+      k *= 2;
+    }
+    return s / this.norm;
+  }
+}
+
+// ─── Field ────────────────────────────────────────────────────────────────────
+// Every line is sampled at the same x positions, and with warp off it is drawn
+// there too, so all rows share one `xs` array. Warp pushes each point sideways,
+// giving every row its own x positions — hence `xrows` alongside `rows`.
+
+const NOISE_ORIGIN = 100;  // keep sampling away from the table's 0,0 corner
+const TAU = Math.PI * 2;
+
+// Detune is carried in cents, not as an absolute offset, so the beat rate scales
+// with the carrier the way it does on an organ: double the frequency and the
+// beating doubles with it. An offset in raw units would lose that.
+const centsToRatio = cents => Math.pow(2, cents / 1200);
+
+function buildField(c) {
+  const N = Math.max(1, Math.round(c.lines));
+  const S = Math.max(2, Math.round(c.samples));
+  const field = new Noise(c.seed, Math.round(c.octaves));
+  // A second, independent field displaces where the first one gets sampled.
+  const warpField = c.warp > 0 ? new Noise(c.seed + 7919, Math.round(c.octaves)) : null;
+
+  // ── Celeste: two ranks of a sine wave, detuned against each other ──────────
+  // sin θ + sin(θr) = 2·sin(θ(1+r)/2)·cos(θ(r−1)/2): a carrier at the mean
+  // frequency inside an envelope at half the difference. Where the envelope
+  // crosses zero the ranks cancel and the whole stack collapses to unison — a
+  // node, which prints as a line of stillness running across the drawing.
+  //
+  // The ratio acts on the *stack* rate, not on x, and that is the load-bearing
+  // choice. Nulls across the drawing are `cycles·δ` along x but `lines·δ/period`
+  // down the stack, and a page affords ~40 visible cycles along a line against
+  // 600 lines here — so only the stack has the headroom to show an honest organ
+  // detune (14¢ is δ≈0.008, needing lines/period ≳ 123) rather than an interval
+  // wide enough to have stopped being a detune.
+  const celeste = c.celAmp !== 0;
+  const ratio = centsToRatio(c.celDetune);
+  // Low octave count: the modulator wants to be a slow swell, not weather.
+  const detuneField = celeste && c.drift ? new Noise(c.seed + 104729, 2) : null;
+
+  // A narrow page and a wide margin can meet in the middle; keep a live strip
+  // rather than letting x1 cross x0 and draw the field backwards.
+  const margin = Math.min(c.margin, (c.width - 1) / 2);
+  const x0 = margin;
+  const x1 = c.width - margin;
+  const cy = c.height / 2;
+
+  const xs = new Float64Array(S);
+  for (let j = 0; j < S; j++) xs[j] = x0 + (j / (S - 1)) * (x1 - x0);
+
+  const rows = [];
+  const xrows = [];
+  for (let i = 0; i < N; i++) {
+    const ny = NOISE_ORIGIN + i * c.scaleY;
+    // Baseline drift, centered so changing `lines` doesn't walk the stack off
+    // the page the way a raw i * spacing would.
+    const base = cy + (i - (N - 1) / 2) * c.spacing;
+    const ys = new Float64Array(S);
+    const wx = warpField ? new Float64Array(S) : xs;
+
+    for (let j = 0; j < S; j++) {
+      const u = j / (S - 1);
+      const sx = xs[j];
+      if (warpField) {
+        // Half-frequency warp: broad pushes rather than jitter. The terrain is
+        // still sampled at sx, so the point carries its height sideways, and
+        // the drawing itself shifts rather than just the lookup.
+        const dx = (warpField.noise(NOISE_ORIGIN + sx * c.scaleX * 0.5, ny * 0.5) - 0.5) * c.warp;
+        // Soft-limit the push to the room left before the page side it heads
+        // toward: small pushes pass through untouched, big ones compress
+        // against the edge instead of being clipped, and the ends stay pinned
+        // to the margins because there is no room there at all.
+        const room = dx > 0 ? x1 - sx : sx - x0;
+        wx[j] = room > 0 ? sx + room * Math.tanh(dx / room) : sx;
+      }
+      const h = field.noise(NOISE_ORIGIN + sx * c.scaleX, ny) - 0.5;
+
+      let cel = 0;
+      if (celeste) {
+        const theta = TAU * (u * c.celCycles + i / c.celPeriod);
+        // With drift on the detune is driven by the field, so the ranks open out
+        // and close back to unison; noise stops being the terrain and becomes
+        // the modulator. noise() lands in ~[0,1], so 0 cents is reachable.
+        const r = detuneField
+          ? centsToRatio(c.celDetune * detuneField.noise(2 * NOISE_ORIGIN + sx * c.scaleX,
+                                                         2 * NOISE_ORIGIN + i * c.scaleY))
+          : ratio;
+        // Both ranks share the spatial wave; only the stack rate is detuned.
+        const theta2 = TAU * (u * c.celCycles + (i / c.celPeriod) * r);
+        cel = c.celAmp * (Math.sin(theta) + Math.sin(theta2)) / 2;
+      }
+
+      // envelope 0 → sin^0 → flat 1. Higher values pinch the field shut at the
+      // left and right edges, so the stack resolves back into plain rules.
+      // It has to take the celeste with it, or the edges keep ringing.
+      const env = c.envelope > 0 ? Math.pow(Math.sin(Math.PI * u), c.envelope) : 1;
+      ys[j] = base + (h * c.amplitude + cel) * env;
+    }
+    rows.push(ys);
+    xrows.push(wx);
+  }
+
+  return { xrows, rows, S };
+}
+
+// ─── Occlusion ────────────────────────────────────────────────────────────────
+// Read the stack as a terrain lit from the front: the last line is nearest the
+// viewer and every line hides whatever sits below its crest. Walking front to
+// back with a per-column horizon turns the field from a transparent weave into
+// a solid landscape, and breaks each line into the runs that survive.
+//
+// Warp gives each row its own x positions, so the horizon can't be indexed by
+// sample. It lives on a fixed grid of page columns instead: each row is tested
+// against it by interpolation, then rasterized into it segment by segment.
+
+const HORIZON_OVERSAMPLE = 4;  // columns per sample: enough to hold a crest
+
+function computeRuns(c, field) {
+  const { xrows, rows, S } = field;
+  const perRow = rows.map(() => []);
+
+  if (!c.occlude) {
+    for (let i = 0; i < rows.length; i++) perRow[i].push([0, S - 1]);
+    return perRow;
+  }
+
+  const C = S * HORIZON_OVERSAMPLE;
+  const scale = (C - 1) / c.width;
+  const horizon = new Float64Array(C).fill(Infinity);
+
+  const horizonAt = x => {
+    const f = Math.min(C - 1, Math.max(0, x * scale));
+    const k = Math.min(C - 2, Math.floor(f));
+    const a = horizon[k], b = horizon[k + 1];
+    // An unset column on either side means the horizon ends here: visible.
+    if (a === Infinity || b === Infinity) return Infinity;
+    return a + (f - k) * (b - a);
+  };
+
+  for (let i = rows.length - 1; i >= 0; i--) {
+    const xs = xrows[i];
+    const ys = rows[i];
+
+    // Test the whole row before writing any of it, so a line folded back by
+    // warp can't hide itself.
+    let start = -1;
+    for (let j = 0; j < S; j++) {
+      if (ys[j] < horizonAt(xs[j])) {
+        if (start < 0) start = j;
+      } else if (start >= 0) {
+        if (j - 1 > start) perRow[i].push([start, j - 1]);
+        start = -1;
+      }
+    }
+    if (start >= 0 && S - 1 > start) perRow[i].push([start, S - 1]);
+
+    for (let j = 0; j < S - 1; j++) {
+      let xa = xs[j] * scale, ya = ys[j];
+      let xb = xs[j + 1] * scale, yb = ys[j + 1];
+      if (xa > xb) { [xa, xb] = [xb, xa]; [ya, yb] = [yb, ya]; }
+      const span = xb - xa;
+      const kEnd = Math.min(C - 1, Math.floor(xb));
+      for (let k = Math.max(0, Math.ceil(xa)); k <= kEnd; k++) {
+        const y = span > 0 ? ya + ((k - xa) / span) * (yb - ya) : Math.min(ya, yb);
+        if (y < horizon[k]) horizon[k] = y;
+      }
+    }
+  }
+  return perRow;
+}
+
+// ─── SVG ──────────────────────────────────────────────────────────────────────
+
+const r2 = v => Math.round(v * 100) / 100;
+
+// One <path> per line rather than one for the whole field: a self-overlapping
+// path strokes as a single shape, so the overlaps would stop accumulating and
+// `opacity` would lose its meaning. Runs from one line never overlap each
+// other, so grouping them into that line's path is free.
+function markup(c, field, perRow) {
+  const { xrows, rows } = field;
+  const paths = [];
+
+  for (let i = 0; i < rows.length; i++) {
+    const runs = perRow[i];
+    if (runs.length === 0) continue;
+    const xs = xrows[i];
+    const ys = rows[i];
+    const d = [];
+    for (const [a, b] of runs) {
+      const pts = new Array(b - a + 1);
+      for (let j = a; j <= b; j++) pts[j - a] = `${r2(xs[j])} ${r2(ys[j])}`;
+      d.push('M' + pts.join('L'));
+    }
+    paths.push(`<path d="${d.join('')}"/>`);
+  }
+
+  const bg = c.invert
+    ? `<rect x="0" y="0" width="${r2(c.width)}" height="${r2(c.height)}" fill="#000"/>`
+    : `<rect x="0" y="0" width="${r2(c.width)}" height="${r2(c.height)}" fill="#fff"/>`;
+
+  const g = `<g fill="none" stroke="${c.invert ? '#fff' : '#000'}" stroke-width="${r2(c.weight)}"` +
+            ` stroke-opacity="${r2(c.opacity)}" stroke-linecap="round" stroke-linejoin="round">` +
+            paths.join('') + '</g>';
+
+  return { inner: bg + g, pathCount: paths.length };
+}
+
+function exportSvg(c, inner) {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" ` +
+    `width="${r2(c.width)}mm" height="${r2(c.height)}mm" ` +
+    `viewBox="0 0 ${r2(c.width)} ${r2(c.height)}">\n${inner}\n</svg>\n`;
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+
+const svg = document.getElementById('svg');
+const statusEl = document.getElementById('status');
+let lastInner = '';
+let pending = false;
+
+function render() {
+  const t0 = performance.now();
+
+  const field = buildField(cfg);
+  const perRow = computeRuns(cfg, field);
+  const { inner, pathCount } = markup(cfg, field, perRow);
+
+  svg.setAttribute('viewBox', `0 0 ${r2(cfg.width)} ${r2(cfg.height)}`);
+  svg.innerHTML = inner;
+  lastInner = inner;
+
+  const runCount = perRow.reduce((n, r) => n + r.length, 0);
+  const pointCount = perRow.reduce((n, r) => n + r.reduce((m, [a, b]) => m + (b - a + 1), 0), 0);
+  statusEl.textContent =
+    `${pathCount} paths · ${runCount} strokes · ${pointCount.toLocaleString()} points · ` +
+    `${Math.round(performance.now() - t0)} ms`;
+}
+
+// Sliders fire far faster than a 300-line field can be rebuilt; coalesce to one
+// render per frame so dragging stays responsive at the top of the ranges.
+function scheduleRender() {
+  if (pending) return;
+  pending = true;
+  requestAnimationFrame(() => { pending = false; render(); syncUrl(); });
+}
+
+// ─── URL state ────────────────────────────────────────────────────────────────
+// Only non-defaults go in the hash, so a link stays short and a preset that
+// matches the defaults produces a bare URL.
+
+function syncUrl() {
+  const base = defaultCfg();
+  const parts = [];
+  for (const p of PARAMS) if (cfg[p.id] !== base[p.id]) parts.push(`${p.id}=${cfg[p.id]}`);
+  for (const t of TOGGLES) if (cfg[t.id] !== base[t.id]) parts.push(`${t.id}=${cfg[t.id] ? 1 : 0}`);
+  const hash = parts.length ? '#' + parts.join('&') : '';
+  history.replaceState(null, '', location.pathname + location.search + hash);
+}
+
+function readUrl() {
+  const hash = location.hash.replace(/^#/, '');
+  if (!hash) return;
+  for (const pair of hash.split('&')) {
+    const [k, v] = pair.split('=');
+    if (PARAM_BY_ID[k]) {
+      const n = parseFloat(v);
+      if (Number.isFinite(n)) cfg[k] = clamp(PARAM_BY_ID[k], n);
+    } else if (TOGGLES.some(t => t.id === k)) {
+      cfg[k] = v === '1' || v === 'true';
+    }
+  }
+}
+
+function clamp(p, n) {
+  return Math.min(p.max, Math.max(p.min, n));
+}
+
+// ─── Panel ────────────────────────────────────────────────────────────────────
+
+const panel = document.getElementById('panel');
+const inputs = {};  // id → { range, number }
+
+for (const groupName of [...new Set(PARAMS.map(p => p.group))]) {
+  const section = document.createElement('div');
+  section.className = 'pgroup';
+
+  const heading = document.createElement('h2');
+  heading.textContent = groupName;
+  section.appendChild(heading);
+
+  for (const p of PARAMS.filter(q => q.group === groupName)) {
+    const row = document.createElement('div');
+    row.className = 'prow';
+
+    const name = document.createElement('span');
+    name.className = 'pname';
+    name.textContent = p.label;
+
+    const number = document.createElement('input');
+    number.type = 'number';
+    Object.assign(number, { min: p.min, max: p.max, step: p.step, value: cfg[p.id] });
+
+    const range = document.createElement('input');
+    range.type = 'range';
+    Object.assign(range, { min: p.min, max: p.max, step: p.step, value: cfg[p.id] });
+
+    const commit = (raw) => {
+      const n = parseFloat(raw);
+      if (!Number.isFinite(n)) return;
+      cfg[p.id] = clamp(p, n);
+      range.value = cfg[p.id];
+      number.value = cfg[p.id];
+      scheduleRender();
+    };
+
+    range.addEventListener('input', () => commit(range.value));
+    // `change` rather than `input` on the number field, so a half-typed "12"
+    // on the way to "120" doesn't trigger a render at 12.
+    number.addEventListener('change', () => commit(number.value));
+
+    row.append(name, number, range);
+    section.appendChild(row);
+    inputs[p.id] = { range, number };
+  }
+
+  panel.appendChild(section);
+}
+
+/** Push cfg back out to every control — after a preset, reseed or reset. */
+function syncPanel() {
+  for (const p of PARAMS) {
+    inputs[p.id].range.value = cfg[p.id];
+    inputs[p.id].number.value = cfg[p.id];
+  }
+  for (const t of TOGGLES) {
+    const btn = document.getElementById(t.btn);
+    btn.textContent = `${t.label}: ${cfg[t.id] ? 'on' : 'off'}`;
+    btn.classList.toggle('active', cfg[t.id]);
+  }
+}
+
+// ─── Presets ──────────────────────────────────────────────────────────────────
+
+const presetsEl = document.getElementById('presets');
+for (const [name, patch] of Object.entries(PRESETS)) {
+  const btn = document.createElement('button');
+  btn.textContent = name;
+  btn.addEventListener('click', () => {
+    Object.assign(cfg, defaultCfg(), patch);
+    syncPanel();
+    scheduleRender();
+  });
+  presetsEl.appendChild(btn);
+}
+
+// ─── Controls ─────────────────────────────────────────────────────────────────
+
+for (const t of TOGGLES) {
+  document.getElementById(t.btn).addEventListener('click', () => {
+    cfg[t.id] = !cfg[t.id];
+    syncPanel();
+    scheduleRender();
+  });
+}
+
+document.getElementById('btn-reseed').addEventListener('click', () => {
+  cfg.seed = Math.floor(Math.random() * 10000);
+  syncPanel();
+  scheduleRender();
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  Object.assign(cfg, defaultCfg());
+  syncPanel();
+  scheduleRender();
+});
+
+function flash(btn, text) {
+  const was = btn.textContent;
+  btn.textContent = text;
+  setTimeout(() => { btn.textContent = was; }, 1100);
+}
+
+const btnLink = document.getElementById('btn-link');
+btnLink.addEventListener('click', async () => {
+  syncUrl();
+  try {
+    await navigator.clipboard.writeText(location.href);
+    flash(btnLink, 'copied ✓');
+  } catch {
+    flash(btnLink, location.href);
+  }
+});
+
+const btnSvg = document.getElementById('btn-svg');
+btnSvg.addEventListener('click', () => {
+  const blob = new Blob([exportSvg(cfg, lastInner)], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `wavy-${cfg.seed}-${Date.now().toString(36)}.svg`;
+  a.click();
+  // Some browsers read the blob asynchronously after click(), so don't revoke yet.
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  flash(btnSvg, 'svg saved ✓');
+});
+
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+
+readUrl();
+syncPanel();
+render();
+</script>
+
+  </body>
+</html>
