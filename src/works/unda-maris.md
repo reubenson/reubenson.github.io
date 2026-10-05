@@ -3,7 +3,7 @@ layout: project.njk
 title: Unda Maris
 hideSeeMore: true
 media: audio sculpture
-year: coming soon (late 2026)
+year: coming soon (Oct 2026)
 ---
 
 <!-- Unda Maris is a psychoacoustic audio device. It is designed for the polyphonic expression of the phenomenon known as binaural beating, and can be listened to as a self-generating composition or played with an external MIDI keyboard as an instrument. -->
@@ -13,7 +13,7 @@ year: coming soon (late 2026)
 **Unda Maris** is a psychoacoustic audio sculpture built around polyphonic binaural beating [^1].
 {.project-grid-item-full}
 
-The sculpture is comprised of two printed circuit boards with an embedded touch-responsive generative composition. The device is USB-powered, and connecting a MIDI source switches off the composition and allows for direct playthrough of the underlying binaural digital synthesizer, in which each voice is comprised of two detuned sinewave oscillators panned left-right.
+Unda Maris presents a touch-responsive generative composition in the form of custom electronics and software. The device is USB-powered, and connecting a MIDI source switches off the composition and allows for direct playthrough of the underlying binaural synthesizer, in which each voice is comprised of two detuned sinewave oscillators panned left-right.
 \
 \
 Signed first edition of twenty-five.
@@ -22,10 +22,11 @@ Signed first edition of twenty-five.
 <figure
     class="project-grid-item-full"
 >
-    <img src="/public/unda-maris/unda-maris-sculpture.jpg" style="border: solid black 1px; margin-top: 0px; padding: 2px" />
+    <img src="/public/unda-maris/unda-maris-cover.jpg" style="padding: 2px; width: 50%;" />
+    <img src="/public/unda-maris/unda-maris-inside.jpg" style="padding: 2px; width: 50%;" />
     <figcaption>
 
-_Unda Maris_ comes packaged inside a standard cassette case as a means of paying respects to the eternal return of physical media. The iPod celebrates its 25th year in 2025, and while the original design requirements of either the cassette tape or the iPod are not publicly known, both share the same anecodatal account of the form factor validated in the ability to be placed in a mens breast pocket by Lou Ottens and Steve Jobs respectively.
+_Unda Maris_ comes packaged inside a standard cassette case as a means of paying respects to the eternal return of physical media. The iPod celebrates its 25th year in 2026, and while the original design requirements of either the cassette tape or the iPod are not publicly known, both share the same anecodatal account of the form factor validated in the ability to be placed in a mens breast pocket by Lou Ottens and Steve Jobs respectively.
 
 </figcaption>
 </figure>
@@ -69,18 +70,37 @@ The device matches the dimensions of a cassette tape and housed in a standard no
 
 ### Composition {.project-grid-item-full}
 
-Unda Maris (Latin _wave of the sea_) takes its name from an organ stop popularized in churches starting in the 17th century, in which pipes were tuned slightly out of unison to produce an undulating shimmer. The harmonic structure of Unda Maris is based on a fragment of an unknown composition I heard a church organist rehearsing during a trip to France in 2022. The horizontal movement of the composition is based on medieval four-part organum, and notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. The resulting harmonies are perceptually consonant but exist perpetual microtonal flux.
+The immersive audio environment of Unda Maris expresses the Heraclitian impulse in music as water by other means, an erosive _musica speculativa_ [^6] at the margins of harmony.
+{.project-grid-item-full}
+
+The harmonic architecture of the composition is based on an unknown fragment of music I heard a church organist rehearsing during a trip to France in 2022. Horizontal movement through this harmonic space is based on medieval four-part organum, and notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. Thiss detuning is where Unda Maris (_wave of the sea_) takes its name, which more properly refers to an organ stop popularized by churches in the 1600s, in which pipes were tuned slightly out of unison to produce an undulating shimmer.
 {.project-grid-item-full}
 
 <!-- August afternoon in a church in France in 2022. Following historical convention, meantone temperament has been adopted over equal temperament as the baseline from which binaural beating is calculated. -->
 
 <!-- Unda Maris performs an eponymous generative composition based on four-part organum. Notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. The resulting harmonies are perceptually consonant but subject to perpetual microtonal flux. The melodic and harmonic structure of the composition is based on a fragment of an unknown composition I heard one summer afternoon in a church in France in 2022. Following historical convention, meantone temperament has been adopted over equal temperament as the baseline from which binaural beating is calculated. -->
 
-Intonation is set adrift into an undulating sea, waves lapping in the margins[^7] of harmony, against the shoreline of just intonation and _musica speculativa_[^6]. Each moment proceeds like the last, without overarching form or structure far into the horizon that never arrives. These undulations are the primary perceptual object of the work, in which harmony serves as the means, not the end. When listening on headphones, these undulations are produced in neither the air nor the ear. Instead they originate in the medial superior olive, a specialized region in the brainstem responsible for the spatial perception of sound. You are listening to yourself hearing, though what you hear is not properly a sound, but a stack of spatial distortions in an interpenetration of background and foreground. This perceptual illusion is also translated to the surface of the sculpture, in which three "rhythmical lines" [^5] divide the ground plane into four distinct but interlocking electrodes. This design provides an affordance of physical computation, in which touch can be tracked continuously across the longer axis due to the touch of a fingertip activating 2-3 electrodes at once in different proportions.
+Pools of oscillators drift in a sea of microtonal flux, like waves lapping against the shoreline of just intonation. Eschewing an overarching formal structure, these shifting undulations are the primary perceptual object of the work. Harmony is staged as the means, not the end, the production of post-cochlear polyrhythms.
 {.project-grid-item-full}
 
-Unda Maris presents a post-cochlear, post-intervallic audio environment in which the spatial artifact of hearing is the primary perceptual object. Like a shell held to the ear, sound is the sea by other means, a Heraclitian gateway to the archetypal and the paranormal.
+<!-- . Despite perpetual microtonal flux, the sense of harmony remains consonant and serves as substrate for the production of post-cochlear polyrhythms. -->
+
+ <!-- in the margins[^7] of harmony, -->
+
+<!-- the resulting harmonies remain perceptually consonant despite perpetual microtonal flux.  -->
+
+<!-- In a Intonation is set adrift into an undulating sea, waves lapping in the margins[^7] of harmony, against the shoreline of just intonation and _musica speculativa_[^6].  -->
+
+<!-- Each moment proceeds like the last, without overarching form or structure, far into the horizon that never arrives. These undulations are the primary perceptual object of the work, in which harmony serves as substrate for generating post-cochlear polyrhythms.
+{.project-grid-item-full} -->
+
+When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate in the medial superior olive, a specialized region in the brainstem responsible for the spatial perception of sound. You are listening to yourself hearing, though what you hear is not properly a sound, but spatial distortions through the interpenetration of background and foreground. This perceptual confusion is also translated to the surface of the sculpture, in which three "rhythmical lines" [^5] divide the ground plane into four distinct but interlocking electrodes. At once ornamentatal and functional, the design provides an affordance of physical computation, in which touch can be tracked continuously across the longer axis due to the touch of a fingertip activating 2-3 electrodes at once in different proportions.
 {.project-grid-item-full}
+
+While most binaural music today is marketed as a wellness tool, and has an older history as a means of inducing out of body experiences [^8], Unda Maris makes claims to neither of these categories of experience.
+{.project-grid-item-full}
+
+<!-- Unda Maris presents a post-cochlear audio environment in which the spatial artifact of hearing is the primary perceptual object. Like a shell held to the ear, sound is the sea by other means, a Heraclitian gateway to the archetypal and the paranormal. -->
 
 <!-- Like a shell held to the ear, music is the sea by other means. -->
 
@@ -168,7 +188,7 @@ The superposition of beating frequencies is produced exclusively in the brainste
           <p>The generative composition executes a slowly meandering organum; descant voices ebb and flow over a wavering tenor, detuning as they emerge and returning to unison as they recede. Harmony is held in place only by wavering gossamer threads of intonation, and sound gathers in pools of perpetual flux.</p> -->
   <!-- </ul> -->
 
-[^1]: This phenomenon was first reported in the scientific literature in the early 19th century, in which sounds of slightly different frequencies presented respectively to each ear results in the auditory perception of an undulating tone of a single pitch. This psychoacoustic perception occurs past the ears, at the site of the superior medial olive in the brainstem, which is largely responsible for perceiving the spatial aspect of sound. The beating that is heard is distinct from wave interference, a parallel, and quite similar, operation in the familiar medium of air. And of course, there's a continuum of paranormal offshoots, from the Gateway process developed with CIA funding for Project Stargate to the I-Doser software that fueled the viral strain of affective media known as Audio Drugs in the 2010s.
+[^1]: This phenomenon was first reported in the scientific literature in the early 19th century, in which sounds of slightly different frequencies presented respectively to each ear results in the auditory perception of an undulating tone of a single pitch. The beating that is heard is distinct from wave interference, a parallel, and quite similar, operation in the familiar medium of air.
 [^2]: From the 1600s onwards, European church organs commonly included a voicing comprised of detuned pipes, resulting in a shimmering and resounding vibrato. This voicing was given the name _unda maris_, or wave of the sea.
 [^3]: A musical instrument invented by Benjamin Franklin, made of spinning glass bowls, in which imperfections inevitably result in an undulating resonance comprised of two separate modes of vibration. Reported to be Franklin's favorite invention, it took on a life of its own in Europe, where it was composed for by Mozart and Beethoven, played by Marie Antoinette, and used in theatrical healing workshops by Franz Mesmer. It was soon to also carry the reputation of melancholy, nervous breakdown, and death. After over a century of neglect, the harmonica was revived by Gerhard Finkenbeier, a scientific glassmaker in Massachussetts who began producing new glass harmonicas at scale. In an odd reprisal of the harmonica's earlier reputation, he was last seen flying south from Boston in May 1999 without return, and neither his body nor his single-engine aircraft were recovered from the Atlantic.
 [^4]: First published in 1983, this body of work throughly explores the non-psychoacoustic phenomena of interference waves between sinewaves and acoustic instruments.
@@ -178,3 +198,4 @@ The superposition of beating frequencies is produced exclusively in the brainste
 [^5]: Szapkowski's _rhythmical lines_ drawings belong to a minor canon of proto-Minimalism. In his account of these drawings he traces back to the wind-blown (aeolian) rippling harmonics of long fencing wire that delineated property lines of his childhood home.
 [^6]: The tradition of _musica speculativa_ is a post-Pythagorean philosophy of music in which the music of the spheres is both a mathematical abstraction and a physical phenomenon, which together provide grounds for a speculative political economy describing social harmony.
 [^7]: The word margin first appears in English meaning "edge of a sea or lake".
+[^8]: The Gateway process is a set of listening and breathing exercises that involved the earliest known production of binaural beats electronically. It was developed by the Monroe Institute with financial support from the CIA, and later influenced the development of the I-Doser software that produced the genre of affective media known as Audio Drugs in the 2010s.
