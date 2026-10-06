@@ -26,7 +26,7 @@ Signed first edition of twenty-five.
     <img src="/public/unda-maris/unda-maris-inside.jpg" style="padding: 2px; width: 50%;" />
     <figcaption>
 
-_Unda Maris_ comes packaged inside a standard cassette case as a means of paying respects to the eternal return of physical media. The iPod celebrates its 25th year in 2026, and while the original design requirements of either the cassette tape or the iPod are not publicly known, both share the same anecodatal account of the form factor validated in the ability to be placed in a mens breast pocket by Lou Ottens and Steve Jobs respectively.
+_Unda Maris_ comes packaged inside a standard cassette case, a tribute to the malleability of the tape format and the eternal return of physical media, which has the affordances of being hacked into unintended uses. My earliest electronic music interventions were made with dissassembled cassette tapes and experimental playback systems, and _Unda Maris_ is similarly positioned as both a music and a means.
 
 </figcaption>
 </figure>
@@ -42,6 +42,8 @@ _Unda Maris_ comes packaged inside a standard cassette case as a means of paying
 <!-- {.project-grid-item-3} -->
 
 <!-- The generative composition executes a slowly meandering organum; descant voices ebb and flow over a wavering tenor, detuning as they emerge and returning to unison as they recede. Harmony is held in place only by wavering gossamer threads of intonation, and sound gathers in pools of perpetual flux. -->
+
+s
 
 <!-- Find hamel quote on sound bath -->
 
@@ -64,7 +66,7 @@ The device matches the dimensions of a cassette tape and housed in a standard no
 <!-- The engine of Unda Maris follows a fairly standard synthesizer architecture, in which each voice (eight in total) is comprised of a pair of sinewave oscillators, detuned mathematically and panned hard left-right. The extent of the detuning is not fixed across all registers, but instead follows the exponential relationship between frequency and pitch: doubling the frequency of a note (an octave) also doubles the binaural beating frequency. The generative composition executes a slowly meandering organum; descant voices ebb and flow over a wavering tenor, detuning as they emerge and returning to unison as they recede. Harmony is held in place only by wavering gossamer threads of intonation, and sound gathers in pools of perpetual flux. -->
 
 <div class="project-grid-item-full">
-    <iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2382862113&color=%23697481&inverse=false&auto_play=false&show_user=false">
+    <iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2413841496&color=%23697481&inverse=false&auto_play=false&show_user=false">
     </iframe>
 </div>
 
@@ -198,4 +200,4 @@ The superposition of beating frequencies is produced exclusively in the brainste
 [^5]: Szapkowski's _rhythmical lines_ drawings belong to a minor canon of proto-Minimalism. In his account of these drawings he traces back to the wind-blown (aeolian) rippling harmonics of long fencing wire that delineated property lines of his childhood home.
 [^6]: The tradition of _musica speculativa_ is a post-Pythagorean philosophy of music in which the music of the spheres is both a mathematical abstraction and a physical phenomenon, which together provide grounds for a speculative political economy describing social harmony.
 [^7]: The word margin first appears in English meaning "edge of a sea or lake".
-[^8]: The Gateway process is a set of listening and breathing exercises that involved the earliest known production of binaural beats electronically. It was developed by the Monroe Institute with financial support from the CIA, and later influenced the development of the I-Doser software that produced the genre of affective media known as Audio Drugs in the 2010s.
+[^8]: The Gateway process is means of training to have controlled experiences of astral projection. It consists of a set of listening and breathing exercises utilized binaural beats as part of a technique of modifying patterns of brain activity. It was developed by the Monroe Institute with financial support from the CIA, and later influenced the development of the I-Doser software that produced the genre of affective media known as Audio Drugs in the 2010s.
