@@ -189,7 +189,6 @@ catches markup/script drift.
 | file | what it is |
 |---|---|
 | `wavy.md` | parameterized SVG generator: fields of noise-displaced lines (below) |
-| `arena.md` | slideshow driven live by any public Are.na channel — channel order, Ken Burns drift, captions from the block descriptions |
 | `lattice.md` | a 3×3×3 just-intonation pitch lattice, three voices walking it; sine drones in-page, and Web MIDI out (one channel per voice, pitch bend carrying the microtuning) to drive an external synth |
 | `line-drawing.md` | grid line editor that exports SVG *and* KiCad PCB artwork |
 | `corner-anamorphosis.md` | projection that resolves into an image from one viewpoint |

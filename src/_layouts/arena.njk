@@ -1,9 +1,10 @@
 ---
 layout: demo.njk
-title: Arena
-description: A configurable slideshow driven by any public Are.na channel.
-year: 2026
 ---
+{#- A slideshow of one Are.na channel, for pages under src/arena/. The blocks
+    are `arena` (data.json beside the page, see src/arena/arena.11tydata.js);
+    `slideshow` in the page's frontmatter overrides the defaults in PARAMS and
+    TOGGLES below; the page body, if any, replaces the legend's first line. -#}
 
 <style>
 * { box-sizing: border-box; }
@@ -122,14 +123,6 @@ html, body {
 
 input[type=range] { width: 100%; margin: 0; }
 
-input[type=text] {
-  width: 100%;
-  font: inherit;
-  padding: 2px 4px;
-  background: #fff;
-  border: 1px solid #999;
-}
-
 #toggles {
   display: flex;
   flex-wrap: wrap;
@@ -178,6 +171,8 @@ button.active { background: #000; color: #fff; }
 }
 
 #legend a { color: #666; }
+#legend p { margin: 0 0 6px; }
+#legend p:last-child { margin: 0; }
 </style>
 
 <div id="stage">
@@ -198,18 +193,28 @@ button.active { background: #000; color: #fff; }
     </div>
     <div id="progress"><div id="progress-fill"></div></div>
     <div id="status"></div>
-    <div id="legend">A slideshow of any public <a href="https://www.are.na" target="_blank" rel="noopener">Are.na</a> channel, in channel order, with a Ken Burns drift on each block. Keys: <b>←/→</b> step, <b>space</b> pause, <b>f</b> fullscreen, <b>c</b> captions, <b>h</b> hide panel. Non-default settings are written to the URL, so a configuration is a link.</div>
+    <div id="legend">
+      {%- if content | trim %}{{ content | safe }}{% else -%}
+      <p>{{ arena.channel.title or title }}, from {% if arena.channel.url %}<a href="{{ arena.channel.url }}" target="_blank" rel="noopener">Are.na</a>{% else %}Are.na{% endif %}, in channel order, with a Ken Burns drift on each block.</p>
+      {%- endif %}
+      <p>Keys: <b>←/→</b> step, <b>space</b> pause, <b>f</b> fullscreen, <b>c</b> captions, <b>h</b> hide panel. Non-default settings are written to the URL, so a configuration is a link.</p>
+    </div>
   </div>
 </div>
+
+{#- `<` is escaped so a block description can't close the script tag. #}
+<script type="application/json" id="arena-data">{{ { blocks: arena.blocks, settings: slideshow or {} } | dump | replace("<", "\\u003c") | safe }}</script>
 
 <script>
 // ─── Config ───────────────────────────────────────────────────────────────
 // PARAMS is the single source of truth: the panel, the defaults, the clamping
 // and the URL round-trip are all generated from it. A new knob is one entry
-// here plus one use of cfg.<id>.
+// here plus one use of cfg.<id>. The page's `slideshow` frontmatter replaces
+// any of the `def`s.
+
+const DATA = JSON.parse(document.getElementById('arena-data').textContent);
 
 const PARAMS = [
-  { id: 'channel',  type: 'text',  def: 'unda-maris', label: 'channel' },
   { id: 'interval', type: 'range', def: 5,   min: 1, max: 30,   step: 0.5, unit: 's'  },
   { id: 'fade',     type: 'range', def: 800, min: 0, max: 3000, step: 50,  unit: 'ms' },
   { id: 'zoom',     type: 'range', def: 6,   min: 0, max: 30,   step: 1,   unit: '%'  },
@@ -224,13 +229,10 @@ const TOGGLES = [
   { id: 'loop',     def: true  },
 ];
 
-const API = 'https://api.are.na/v2/channels';
-const PER = 100;
-const CACHE_TTL = 10 * 60 * 1000;
-const IDLE_MS = 2500;
+for (const p of PARAMS) if (p.id in DATA.settings) p.def = clampParam(p, DATA.settings[p.id]);
+for (const t of TOGGLES) if (t.id in DATA.settings) t.def = Boolean(DATA.settings[t.id]);
 
-// Are.na titles an uploaded block with its filename, which is noise on screen.
-const FILENAME = /\.(png|jpe?g|gif|webp|svg|pdf|mp4|m4v|mov|webm|mp3|wav|aiff?|tiff?|heic)$/i;
+const IDLE_MS = 2500;
 
 function defaultCfg() {
   const c = {};
@@ -240,7 +242,6 @@ function defaultCfg() {
 }
 
 function clampParam(p, v) {
-  if (p.type === 'text') return String(v).trim();
   v = Number(v);
   if (!isFinite(v)) return p.def;
   return Math.min(p.max, Math.max(p.min, v));
@@ -285,63 +286,6 @@ function motionFor(id) {
   return { zoomIn, dx: Math.cos(angle), dy: Math.sin(angle) };
 }
 
-function pickSrc(image) {
-  if (!image) return null;
-  // `large` is the CDN's 1800px-inside re-encode; `original` can be several MB
-  // at arbitrary dimensions, so it is only the last resort.
-  for (const k of ['large', 'display', 'original']) {
-    const u = image[k] && image[k].url;
-    if (u) return u;
-  }
-  return null;
-}
-
-function normalize(contents) {
-  const deck = [];
-  let skipped = 0;
-  for (const b of contents) {
-    const src = pickSrc(b.image);
-    if (!src) { skipped++; continue; }
-    const raw = (b.title || '').trim();
-    deck.push({
-      id: b.id,
-      src,
-      title: FILENAME.test(raw) ? '' : raw,
-      description: (b.description || '').trim(),
-      motion: motionFor(b.id),
-    });
-  }
-  return { deck, skipped };
-}
-
-async function fetchChannel(slug) {
-  const contents = [];
-  let page = 1, length = Infinity, title = slug;
-  while (contents.length < length) {
-    const res = await fetch(`${API}/${encodeURIComponent(slug)}?per=${PER}&page=${page}`);
-    if (!res.ok) throw new Error(httpMessage(res.status, slug));
-    const data = await res.json();
-    if (page === 1) { length = data.length || 0; title = data.title || slug; }
-    const batch = data.contents || [];
-    contents.push(...batch);
-    // The API reports `length` for the whole channel but paginates blindly, so
-    // an empty page is the only reliable stop — without it a miscount spins.
-    if (!batch.length) break;
-    page++;
-  }
-  // Channel order is `position` ascending; the API returns it that way, but
-  // sorting makes the guarantee explicit rather than inherited.
-  contents.sort((a, b) => (a.position || 0) - (b.position || 0));
-  return { title, contents };
-}
-
-function httpMessage(status, slug) {
-  if (status === 401 || status === 403) return `“${slug}” is private.\nAre.na only serves public channels to a page like this.`;
-  if (status === 404) return `No channel called “${slug}”.`;
-  if (status === 429) return 'Rate-limited by Are.na. Wait a moment and reload.';
-  return `Are.na returned ${status}.`;
-}
-
 // ─── Motion ───────────────────────────────────────────────────────────────
 
 // k runs 0 → 1 from the *contained* end of the move to the zoomed end (or the
@@ -375,10 +319,12 @@ function effectivePan(zoomPct, panPct) {
 // ─── State ────────────────────────────────────────────────────────────────
 
 let cfg = cfgFromHash(location.hash);
-let deck = [];
+// The blocks were synced into data.json at build time — see scripts/arena-sync.mjs.
+// A block marked `hidden` stays in data.json so the sync doesn't re-add it.
+const deck = DATA.blocks
+  .filter((b) => !b.hidden)
+  .map((b) => ({ ...b, motion: motionFor(b.id) }));
 let order = [];
-let channelTitle = '';
-let skippedCount = 0;
 let idx = 0;
 let frontIdx = 0;
 let t0 = 0;
@@ -422,25 +368,15 @@ for (const p of PARAMS) {
   val.className = 'val';
   head.append(name, val);
   const input = document.createElement('input');
-  if (p.type === 'text') {
-    input.type = 'text';
-    input.value = cfg[p.id];
-    input.addEventListener('change', () => {
-      const v = clampParam(p, input.value);
-      input.value = v;
-      if (v && v !== cfg[p.id]) { cfg[p.id] = v; writeHash(); load(); }
-    });
-  } else {
-    input.type = 'range';
-    input.min = p.min; input.max = p.max; input.step = p.step;
-    input.value = cfg[p.id];
-    input.addEventListener('input', () => {
-      cfg[p.id] = clampParam(p, input.value);
-      syncPanel();
-      writeHash();
-      renderStatus();
-    });
-  }
+  input.type = 'range';
+  input.min = p.min; input.max = p.max; input.step = p.step;
+  input.value = cfg[p.id];
+  input.addEventListener('input', () => {
+    cfg[p.id] = clampParam(p, input.value);
+    syncPanel();
+    writeHash();
+    renderStatus();
+  });
   row.append(head, input);
   controls.appendChild(row);
   inputs[p.id] = { input, val, spec: p };
@@ -463,7 +399,6 @@ for (const t of TOGGLES) {
 function syncPanel() {
   for (const p of PARAMS) {
     const { input, val } = inputs[p.id];
-    if (p.type === 'text') { val.textContent = ''; continue; }
     if (input.value !== String(cfg[p.id])) input.value = cfg[p.id];
     val.textContent = cfg[p.id] + (p.unit || '');
   }
@@ -563,12 +498,10 @@ function renderStatus() {
   if (!deck.length) { statusEl.textContent = ''; return; }
   const parts = [
     `${idx + 1}/${order.length}`,
-    channelTitle,
     `${Number(cfg.interval).toFixed(1)}s`,
   ];
   const eff = effectivePan(cfg.zoom, cfg.pan);
   if (eff < cfg.pan) parts.push(`pan clamped to ${eff.toFixed(1)}%`);
-  if (skippedCount) parts.push(`${skippedCount} block${skippedCount > 1 ? 's' : ''} without an image skipped`);
   statusEl.textContent = parts.join(' · ');
 }
 
@@ -594,61 +527,20 @@ function setPaused(p) {
   syncPanel();
 }
 
-// ─── Load ─────────────────────────────────────────────────────────────────
+// ─── Start ────────────────────────────────────────────────────────────────
 
-function readCache(slug) {
-  try {
-    const raw = sessionStorage.getItem('arena:' + slug);
-    if (!raw) return null;
-    const { t, payload } = JSON.parse(raw);
-    return Date.now() - t < CACHE_TTL ? payload : null;
-  } catch (e) { return null; }
-}
-
-function writeCache(slug, payload) {
-  try {
-    sessionStorage.setItem('arena:' + slug, JSON.stringify({ t: Date.now(), payload }));
-  } catch (e) { /* private mode, or over quota — the slideshow still runs */ }
-}
-
-let loadToken = 0;
-
-async function load() {
-  const slug = cfg.channel;
-  const token = ++loadToken;
-  deck = []; order = []; idx = 0;
-  preloaded.clear();
-  for (const l of layers) { l.style.opacity = 0; l.removeAttribute('src'); }
-  caption.hidden = true;
-  message.hidden = false;
-  message.textContent = `loading ${slug}…`;
-  statusEl.textContent = '';
-  try {
-    let payload = readCache(slug);
-    if (!payload) {
-      payload = await fetchChannel(slug);
-      writeCache(slug, payload);
-    }
-    if (token !== loadToken) return;
-    const norm = normalize(payload.contents);
-    if (!norm.deck.length) throw new Error(`“${slug}” has no blocks with images.`);
-    deck = norm.deck;
-    skippedCount = norm.skipped;
-    channelTitle = payload.title;
-    document.title = `Arena — ${channelTitle}`;
-    reorder();
-    // Every other slide is preloaded a turn ahead, but the first has nothing
-    // in front of it — without this wait its dwell burns down while the image
-    // is still on the wire, and slide one flashes past.
-    await fetchImage(deck[order[0]].src);
-    if (token !== loadToken) return;
-    message.hidden = true;
-    show(0);
-  } catch (err) {
-    if (token !== loadToken) return;
-    message.hidden = false;
-    message.textContent = err.message;
+async function start() {
+  if (!deck.length) {
+    message.textContent = 'No blocks yet — run `npm run arena <name>` and rebuild.';
+    return;
   }
+  reorder();
+  // Every other slide is preloaded a turn ahead, but the first has nothing
+  // in front of it — without this wait its dwell burns down while the image
+  // is still on the wire, and slide one flashes past.
+  await fetchImage(deck[order[0]].src);
+  message.hidden = true;
+  show(0);
 }
 
 // ─── Wiring ───────────────────────────────────────────────────────────────
@@ -681,18 +573,17 @@ function wake() {
 document.addEventListener('mousemove', wake);
 document.addEventListener('mousedown', wake);
 window.addEventListener('hashchange', () => {
-  const next = cfgFromHash(location.hash);
-  const reload = next.channel !== cfg.channel;
-  cfg = next;
+  cfg = cfgFromHash(location.hash);
   syncPanel();
   stage.classList.toggle('cover', cfg.cover);
-  if (reload) load();
-  else { reorder(); renderCaption(); renderStatus(); }
+  reorder();
+  renderCaption();
+  renderStatus();
 });
 
 stage.classList.toggle('cover', cfg.cover);
 syncPanel();
 wake();
 requestAnimationFrame(tick);
-load();
+start();
 </script>
