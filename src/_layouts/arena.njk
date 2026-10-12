@@ -87,6 +87,10 @@ html, body {
   line-height: 1.45;
 }
 
+/* Warped by a riso print texture (see displace-filter.njk). The filter
+   sits on the text, not #caption, so the backdrop stays square. */
+#cap-title, #cap-body { filter: url(#arena-caption-displace); }
+
 /* ─── Panel ─────────────────────────────────────────────────────────────── */
 
 #panel {
@@ -183,7 +187,7 @@ button.active { background: #000; color: #fff; }
     <div id="cap-title"></div>
     <div id="cap-body"></div>
   </div>
-  <div id="panel">
+  <div id="panel" hidden>
     <div id="controls"></div>
     <div id="toggles"></div>
     <div id="transport">
@@ -202,6 +206,9 @@ button.active { background: #000; color: #fff; }
   </div>
 </div>
 
+{%- from "displace-filter.njk" import displaceFilter %}
+{{ displaceFilter("arena-caption-displace", "/public/riso-maine.png", scale=1.5, aspect="xMidYMid slice") }}
+
 {#- `<` is escaped so a block description can't close the script tag. #}
 <script type="application/json" id="arena-data">{{ { blocks: arena.blocks, settings: slideshow or {} } | dump | replace("<", "\\u003c") | safe }}</script>
 
@@ -213,12 +220,16 @@ button.active { background: #000; color: #fff; }
 // any of the `def`s.
 
 const DATA = JSON.parse(document.getElementById('arena-data').textContent);
+const displaceMap = document.querySelector('#arena-caption-displace [data-displace-map]');
 
 const PARAMS = [
   { id: 'interval', type: 'range', def: 5,   min: 1, max: 30,   step: 0.5, unit: 's'  },
   { id: 'fade',     type: 'range', def: 800, min: 0, max: 3000, step: 50,  unit: 'ms' },
   { id: 'zoom',     type: 'range', def: 6,   min: 0, max: 30,   step: 1,   unit: '%'  },
   { id: 'pan',      type: 'range', def: 3,   min: 0, max: 15,   step: 0.5, unit: '%'  },
+  // The default is the `scale` given to displaceFilter() below the stage, so
+  // the macro call is the one place to set it.
+  { id: 'distort',  type: 'range', def: Number(displaceMap.getAttribute('scale')) || 0, min: 0, max: 30, step: 1, unit: 'px' },
 ];
 
 const TOGGLES = [
@@ -331,7 +342,7 @@ let t0 = 0;
 let heldAt = 0;
 let paused = false;
 let idleTimer = 0;
-let panelHidden = false;
+let panelHidden = true;
 
 const $ = (id) => {
   const el = document.getElementById(id);
@@ -376,6 +387,7 @@ for (const p of PARAMS) {
     syncPanel();
     writeHash();
     renderStatus();
+    if (p.id === 'distort') renderCaption();
   });
   row.append(head, input);
   controls.appendChild(row);
@@ -492,6 +504,7 @@ function renderCaption() {
   capBody.textContent = blk.description;
   capBody.hidden = !blk.description;
   caption.hidden = !cfg.captions || (!title && !blk.description);
+  displaceMap.setAttribute('scale', cfg.distort);
 }
 
 function renderStatus() {
