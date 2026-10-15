@@ -17,16 +17,36 @@ slideshow:
 ---
 
 <!-- Notes to Self:
+Theme transitions:
+* Interfaces (PCB)
+* Navigation (Bilaterians)
+* Navigational Scores (Terry Fox, Szpakowski)
+  * The goal of navigation is not simply to respond to the environment, but self-transformation (i.e. feeding, growth)
+* Self and Environment: Living Structures (segue from rhythmical lines)
+* Environmental Sensing (what makes a bat different from a water strider)
+* MSO and experience of space
+* Immersion (Psychologically Ultimate Seashore) / Submersion (Sonic Waters)
+* I've been interested in what kind of interface sound is. The surface of the body is what we think of as a physical interface, and it's interesting to consider that sound has a history of usage as a means of transcending mere embodiment
 
-Where to begin?
-* printed circuit boards (originally developed to enable mass production of an electronic design)
+
+By analogue, what is a sound interface? Like touch, the aim is navigationalin the search for growth.
+
+Section I: Electronic interfaces
 * printed circuit keyboard (a later development that allows the language of the interior to be expressed directly on the surface, meeting human touch)
+* printed circuit boards (originally developed to enable mass production of an electronic design)
 * alternatively, early touchscreen technology at CERN also enabled the combination of touch with an arbitrary underlying visual language
-* take a step back: what is an interface? an exterior point of contact between two interiors
+* take a step back: what is an interface? an exterior point of contact between two interiors -- a point of interaction against a system or environment
+* interaction with an interface produces some state change in the system that is discernible to the user as being either closer or further from a desired state.
+* we can look to the origins of intelligent navigation in the development of bilaterians.
+* our senses, the surface of our bodies, then are also interfaces
 * question: is music itself an interface? or is it a medium through which interfaces can be defined?
 * Alvin Lucier's music deals with sound as a physical medium, which you both listen to and also become more aware of how you hear. it's not about the music itself, but about the phenomenlology of how you experience it.
 * add: phenomenology slide?
 * this mode of listening points back to pre-human forms of listening, as you can also see with things like bats (echolocation) and water striders (hydroacoustics)
+* engagement with interfaces and environments is ultimately not a one-directional process, but one in which the individual also seeks some form of state change, whether one of feeding or another form of growth or integration.
+* topic of navigation could segue here to Terry Fox and Szpakowski
+
+* sound is interesting as a sense, because it allows us to interface with an environment in action and flux. unlike the visual, in which you can see something still, you cannot hear something that is not in motion. it also helps if you stop moving, in order to hear more closely. sound becomes a priviliged medium in which you let the environment act upon you, instead of vice versa.
 * sound is a privileged medium for the experience of environment :: psychologically perfect seashore
 * Redolfi's sonic waters further emphasizes the ways in which the environment is shaped in order to make the experience of sound itself more an environment unto itself
 * Question: if sound is an interface, and one side is the environment, what is the listening subject on the inside of the interface? (segue to more paranormal)
@@ -35,8 +55,10 @@ Where to begin?
 * Monroe's Gateway Process is a set of exercises that leads you into out of body experiences and altered states of consciousness.
 * In Terry Fox's labyrinths, he focuses in on the labyrinth as a journey of experience and transformation, and he transcribes the movemennts of the Chartres into scores for arranging sounds
 * A few decades before him, Wacław Szpakowski's Rhythmical Lines is a score for the visual experience of the work. these lines were themselves a stand-in for music
-* In Christopher Alexander's Fifteen Properties of Living Structures, he includes discussion of deep interlock, which describes a certain kind of interface.
-* Other interpretations of interlock: ornamentation and form, inside-outside, self and environment, foreground-background
+* In these examples of visual art that act as musical scores, the flat and two-dimensional becomes a holographic environment.
+* In Christopher Alexander's Fifteen Properties of Living Structures, he includes discussion of deep interlock, which complicates the notion of an interface. The interface creates a user ... (tk attribution)
+* Other interpretations of interlock: ornamentation and form, inside-outside, self and environment, foreground-background, surface interior
+* maybe from here go to Monroe's Gateway Process
 
 Medium: the material-sensory substrate through which experience is conducted
 Interface: the specific point of contact through which experience is conducted. Interface is the medium-specific interaction of two interiors
@@ -44,8 +66,7 @@ Form: the way in which experience is conducted through a medium, across an inter
 * I'm interested in ways of choreographing experience (form) in ways that situate the interface as a deep interlock, which I would further claim is a general condition of any interfacem in spite of qualities of slickness, flatness, seamlessness (christopher alexander)
 Sound is then a medium through which the other side is the sea as an interpenetrating total environment.
 
-
-
+From interface to environment
 Beyond user experience - user choreography (scores)
 
 What's the hook?

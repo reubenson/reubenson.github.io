@@ -7,18 +7,18 @@
   },
   "blocks": [
     {
+      "id": 50574045,
+      "title": "Hugh Le Caine - Printed Circuit Keyboard (1962)",
+      "description": "Hugh Le Caine's printed circuit keyboard is a pioneering development in the field of electronic interfaces, bring PCB technology to the surface as a means of user interfacing",
+      "src": "https://d2w9rnfcy7mm78.cloudfront.net/50574045/original_e48a2b24010b8d2efaab922a1c019537.gif?1789822886?bc=0",
+      "source": "https://www.hughlecaine.com/en/prcirkb.html"
+    },
+    {
       "id": 51238095,
       "title": "Printed Circuit Boards",
       "description": "Printed circuit boards (PCBs), first developed in 1936 enable mass production of an electronic design",
       "src": "https://www.pcbrunner.com/wp-content/uploads/2026/01/The-First-Breakthrough_-1903-1920s.webp",
       "source": "https://www.pcbrunner.com/circuit-board-manufacturing-history-the-rise-and-impact-of-pcbs/"
-    },
-    {
-      "id": 50574045,
-      "title": "Hugh Le Caine - Printed Circuit Keyboard (1962)",
-      "description": "The visual language of the printed circuit board can also be expressed at the point of human interface. Hugh Le Caine's printed circuit keyboard continued his research and development into tacile musical interfaces",
-      "src": "https://d2w9rnfcy7mm78.cloudfront.net/50574045/original_e48a2b24010b8d2efaab922a1c019537.gif?1789822886?bc=0",
-      "source": "https://www.hughlecaine.com/en/prcirkb.html"
     },
     {
       "id": 51242022,
@@ -30,64 +30,29 @@
     {
       "id": 29332478,
       "title": "First capacitative touch screens at CERN",
-      "description": "",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIyOTMzMjQ5NC9vcmlnaW5hbF9hNGJjNzk0ZDdmMWRmZTk1ZmZiNmY0YTA5NzM5YWJjNS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "description": "Another pioneering effort in the 1970s, CERN developed a touch-sensitive termainl that allowed for the control of procedures in particle accelerator experiments",
+      "src": "https://cerncourier.com/wp-content/uploads/2010/03/CCtou4_04_10.jpg",
       "source": "https://cerncourier.com/a/the-first-capacitative-touch-screens-at-cern/"
     },
     {
       "id": "what-is-an-interface",
       "title": "What IS an interface?",
-      "description": "",
-      "src": "",
+      "description": "Transparent touch screens, of course enable the construction of the interface to an arbitrarily complex system as long as interaction is reducible to binary operations (start/stop, on/off, etc.)",
+      "src": "https://cerncourier.com/wp-content/uploads/2010/03/CCtou6_04_10.jpg",
       "source": ""
     },
     {
-      "id": 15625745,
-      "title": "Alvin Lucier, Chambers",
-      "description": "Alvin Lucier's music deals with sound as a physical medium, which you both listen to and also become more aware of how you hear. it's not about the music itself, but about the phenomenlology of how you experience it.",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIxNTYyNTc0NS9vcmlnaW5hbF9kN2Y5YWFhMDZlOTE1YzRlMjAyMjAzMTctNC16NWV6cjkuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxODAwLCJoZWlnaHQiOjE4MDAsImZpdCI6Imluc2lkZSIsIndpdGhvdXRFbmxhcmdlbWVudCI6dHJ1ZX0sIndlYnAiOnsicXVhbGl0eSI6NzV9LCJqcGVnIjp7InF1YWxpdHkiOjc1fSwicm90YXRlIjpudWxsfX0=?bc=0",
-      "source": "https://monoskop.org/images/0/02/Lucier_Alvin_Chambers_Scores_1980.pdf"
+      "id": 51326386,
+      "title": "Radial vs bilateral navigation",
+      "description": "In Max Bennett's 'A Brief History of Intelligence', he discusses the difference between radial and bilateral navigation, and how the latter is more efficient for navigating complex environments",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiI1MTMyNjM4Ni9vcmlnaW5hbF83MDQ2MmZhMWQ5NDJlNjA4ODlmYjlmOGVkNjI4MTcyYy5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "source": null
     },
     {
-      "id": 30547036,
-      "title": "Water Strider",
-      "description": "This mode of listening points back to pre-human forms of listening, as you can also see with things like bats (echolocation) and water striders (hydroacoustics)",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIzMDU0NzAzNi9vcmlnaW5hbF8xN2ExMDdjMTgzNjBjMGQxNTE5ODYwOWZhNzdmODdhZi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
-      "source": "https://arena-images-temp.s3.amazonaws.com/function+%28t%2Cf%2Cu%29%7Bvar+l%3Df%26%26u%7C%7C0%3B%27string%27%3D%3Dtypeof+t%26%26%28f%3D%27binary%27%3D%3D%3Dt%3Fnew+Array%2816%29%3Anull%2Ct%3Dnull%29%3Bvar+v%3D%28t%3Dt%7C%7C%7B%7D%29.random%7C%7C%28t.rng%7C%7Cn%29%28%29%3Bif%28v%5B6%5D%3D15%26v%5B6%5D%7C64%2Cv%5B8%5D%3D63%26v%5B8%5D%7C128%2Cf%29for%28var+y%3D0%3By%3C16%3B%2B%2By%29f%5Bl%2By%5D%3Dv%5By%5D%3Breturn+f%7C%7Co%28v%29%7D%2Fe33_1.png"
-    },
-    {
-      "id": 26308153,
-      "title": "Environments 1: The Psychologically Ultimate Seashore, by Environments",
-      "description": "Environments 1: The Psychologically Ultimate Seashore by Environments, released 01 January 1969 1. The Psychologically Ultimate Seashore 2. Optimum Aviary 3. The Psychologically Ultimate Seashore (16 rpm) 4.",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIyNjMwODE1My9vcmlnaW5hbF8yMDdlZDI1ZTkyN2FlZDZiMjUxOGMzNDJlZmQyNjlkNS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
-      "source": "https://numeroenvironments.bandcamp.com/album/environments-1-the-psychologically-ultimate-seashore"
-    },
-    {
-      "id": 50877195,
-      "title": "Michel Redolfi, Sonic Waters at Bains de Bruxelles",
-      "description": "Redolfi's sonic waters further emphasizes the ways in which the environment is shaped in order to make the experience of sound itself more an environment unto ",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiI1MDg3NzE5NS9vcmlnaW5hbF9iZjE1MTUzODgyZWFhNWExNTYxNGFjOTBiOTAyOTI1My5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
-      "source": "https://brussels-express.eu/sonic-waters-at-bains-de-bruxelles-a-concert-where-you-can-experience-music-under-water/"
-    },
-    {
-      "id": "what-is-sound",
-      "title": "Is sound a medium or an interface?",
-      "description": "if sound is an interface, and one side is the environment, what is the listening subject on the inside of the interface? (segue to more paranormal)",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiI1MDg3NzE5NS9vcmlnaW5hbF9iZjE1MTUzODgyZWFhNWExNTYxNGFjOTBiOTAyOTI1My5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
-      "source": "https://brussels-express.eu/sonic-waters-at-bains-de-bruxelles-a-concert-where-you-can-experience-music-under-water/"
-    },
-    {
-      "id": 11635626,
-      "title": "What is an environment?",
-      "description": "Neurobiological research identifies the Medial Superior Olive as the site at which sounds perceived at the two ears is combined and used to determine the spatial location of a sound",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIxMTYzNTYyNi9vcmlnaW5hbF9mNWU3YTUxNjUzZmUzMmQ4MWRmYzAxZmQwN2Q1N2MwZC5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
-      "source": "http://www.cns.nyu.edu/~david/courses/perception/lecturenotes/localization/localization.html"
-    },
-    {
-      "id": 21374515,
-      "title": "Gateway Process | Consciousness Energy Grid",
-      "description": "Monroe's Gateway Process is a set of exercises that leads you into out of body experiences and altered states of consciousness.",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIyMTM3NDUxNS9vcmlnaW5hbF9mZmViNWQ5YWZkNjMxNmNjYjM1MGRiNmY2NzFlNTE5NS5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "id": 51326410,
+      "title": "Roomba as bilateral navigator",
+      "description": "The earliest roomba did not construct models of the environment, but instead relied on simple signals to make decisions about when to turn.",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiI1MTMyNjQxMC9vcmlnaW5hbF9lNTY4M2ExYTU0ZTk0M2U2YmI5OTMwMTc2YTVkNDhlMy5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
       "source": null
     },
     {
@@ -112,11 +77,39 @@
       "source": null
     },
     {
-      "id": 44824008,
-      "title": "Glass Harmonica",
-      "description": "Gateways to water",
-      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiI0NDgyNDAwOC9vcmlnaW5hbF8xZTFhM2VhNTZmZjdlNjU2YzkxZDIwNTFkMDdjZmJlYi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
-      "source": "https://en.wikipedia.org/wiki/Glass_harmonica"
+      "id": 30547036,
+      "title": "Water Strider",
+      "description": "This mode of listening points back to pre-human forms of listening, as you can also see with things like bats (echolocation) and water striders (hydroacoustics)",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIzMDU0NzAzNi9vcmlnaW5hbF8xN2ExMDdjMTgzNjBjMGQxNTE5ODYwOWZhNzdmODdhZi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "source": "https://arena-images-temp.s3.amazonaws.com/function+%28t%2Cf%2Cu%29%7Bvar+l%3Df%26%26u%7C%7C0%3B%27string%27%3D%3Dtypeof+t%26%26%28f%3D%27binary%27%3D%3D%3Dt%3Fnew+Array%2816%29%3Anull%2Ct%3Dnull%29%3Bvar+v%3D%28t%3Dt%7C%7C%7B%7D%29.random%7C%7C%28t.rng%7C%7Cn%29%28%29%3Bif%28v%5B6%5D%3D15%26v%5B6%5D%7C64%2Cv%5B8%5D%3D63%26v%5B8%5D%7C128%2Cf%29for%28var+y%3D0%3By%3C16%3B%2B%2By%29f%5Bl%2By%5D%3Dv%5By%5D%3Breturn+f%7C%7Co%28v%29%7D%2Fe33_1.png"
+    },
+    {
+      "id": 11635626,
+      "title": "What is an environment?",
+      "description": "Neurobiological research identifies the Medial Superior Olive as the site at which sounds perceived at the two ears is combined and used to determine the spatial location of a sound",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIxMTYzNTYyNi9vcmlnaW5hbF9mNWU3YTUxNjUzZmUzMmQ4MWRmYzAxZmQwN2Q1N2MwZC5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "source": "http://www.cns.nyu.edu/~david/courses/perception/lecturenotes/localization/localization.html"
+    },
+    {
+      "id": 50877195,
+      "title": "Michel Redolfi, Sonic Waters at Bains de Bruxelles",
+      "description": "Redolfi's sonic waters further emphasizes the ways in which the environment is shaped in order to make the experience of sound itself more an environment unto ",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiI1MDg3NzE5NS9vcmlnaW5hbF9iZjE1MTUzODgyZWFhNWExNTYxNGFjOTBiOTAyOTI1My5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "source": "https://brussels-express.eu/sonic-waters-at-bains-de-bruxelles-a-concert-where-you-can-experience-music-under-water/"
+    },
+    {
+      "id": 26308153,
+      "title": "Environments 1: The Psychologically Ultimate Seashore, by Environments",
+      "description": "Environments 1: The Psychologically Ultimate Seashore by Environments, released 01 January 1969 1. The Psychologically Ultimate Seashore 2. Optimum Aviary 3. The Psychologically Ultimate Seashore (16 rpm) 4.",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIyNjMwODE1My9vcmlnaW5hbF8yMDdlZDI1ZTkyN2FlZDZiMjUxOGMzNDJlZmQyNjlkNS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "source": "https://numeroenvironments.bandcamp.com/album/environments-1-the-psychologically-ultimate-seashore"
+    },
+    {
+      "id": "what-is-sound",
+      "title": "Is sound a medium or an interface?",
+      "description": "if sound is an interface, and one side is the environment, what is the listening subject on the inside of the interface? (segue to more paranormal)",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiI1MDg3NzE5NS9vcmlnaW5hbF9iZjE1MTUzODgyZWFhNWExNTYxNGFjOTBiOTAyOTI1My5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "source": "https://brussels-express.eu/sonic-waters-at-bains-de-bruxelles-a-concert-where-you-can-experience-music-under-water/"
     },
     {
       "id": 7301088,
@@ -229,6 +222,20 @@
       "description": "",
       "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIyNDc1MDQ2Ny9vcmlnaW5hbF85MGJmYmJlYjU5MTlhYWQxOTg0ZTA1Zjc5YTIyMDllMy5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
       "source": "https://arena-images-temp.s3.amazonaws.com/function+%28t%2Cf%2Cu%29%7Bvar+l%3Df%26%26u%7C%7C0%3B%27string%27%3D%3Dtypeof+t%26%26%28f%3D%27binary%27%3D%3D%3Dt%3Fnew+Array%2816%29%3Anull%2Ct%3Dnull%29%3Bvar+v%3D%28t%3Dt%7C%7C%7B%7D%29.random%7C%7C%28t.rng%7C%7Cn%29%28%29%3Bif%28v%5B6%5D%3D15%26v%5B6%5D%7C64%2Cv%5B8%5D%3D63%26v%5B8%5D%7C128%2Cf%29for%28var+y%3D0%3By%3C16%3B%2B%2By%29f%5Bl%2By%5D%3Dv%5By%5D%3Breturn+f%7C%7Co%28v%29%7D%2F0C06D727-FD37-4DF7-B1BF-972EEA099D88.jpg"
+    },
+    {
+      "id": 21374515,
+      "title": "Gateway Process | Consciousness Energy Grid",
+      "description": "Monroe's Gateway Process is a set of exercises that leads you into out of body experiences and altered states of consciousness.",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIyMTM3NDUxNS9vcmlnaW5hbF9mZmViNWQ5YWZkNjMxNmNjYjM1MGRiNmY2NzFlNTE5NS5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE4MDAsImhlaWdodCI6MTgwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfSwid2VicCI6eyJxdWFsaXR5Ijo3NX0sImpwZWciOnsicXVhbGl0eSI6NzV9LCJyb3RhdGUiOm51bGx9fQ==?bc=0",
+      "source": null
+    },
+    {
+      "id": 15625745,
+      "title": "Alvin Lucier, Chambers",
+      "description": "Alvin Lucier's music deals with sound as a physical medium, which you both listen to and also become more aware of how you hear. it's not about the music itself, but about the phenomenlology of how you experience it.",
+      "src": "https://images.are.na/eyJidWNrZXQiOiJhcmVuYV9pbWFnZXMiLCJrZXkiOiIxNTYyNTc0NS9vcmlnaW5hbF9kN2Y5YWFhMDZlOTE1YzRlMjAyMjAzMTctNC16NWV6cjkuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxODAwLCJoZWlnaHQiOjE4MDAsImZpdCI6Imluc2lkZSIsIndpdGhvdXRFbmxhcmdlbWVudCI6dHJ1ZX0sIndlYnAiOnsicXVhbGl0eSI6NzV9LCJqcGVnIjp7InF1YWxpdHkiOjc1fSwicm90YXRlIjpudWxsfX0=?bc=0",
+      "source": "https://monoskop.org/images/0/02/Lucier_Alvin_Chambers_Scores_1980.pdf"
     }
   ]
 }
