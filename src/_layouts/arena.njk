@@ -32,6 +32,15 @@ html, body {
 
 #stage.idle { cursor: none; }
 
+/* The layers drift and zoom inside this, so however far the motion pushes an
+   image it is clipped short of the screen edge — there is always a border.
+   The bottom band is left to the caption, so the text never sits on an image. */
+#frame {
+  position: absolute;
+  inset: 40px 40px 200px;
+  overflow: hidden;
+}
+
 .layer {
   position: absolute;
   inset: 0;
@@ -61,9 +70,10 @@ html, body {
 
 #caption {
   position: absolute;
+  /* Centred in the 200px band below #frame. */
   left: 50%;
-  bottom: 6vh;
-  transform: translateX(-50%);
+  bottom: 100px;
+  transform: translate(-50%, 50%);
   width: min(46em, calc(100vw - 48px));
   display: flex;
   flex-direction: column;
@@ -75,7 +85,17 @@ html, body {
   text-wrap: balance;
 }
 
+/* Centred in the 40px border above #frame, apart from the description. */
 #cap-title {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%, -50%);
+  width: min(46em, calc(100vw - 48px));
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -180,11 +200,13 @@ button.active { background: #000; color: #fff; }
 </style>
 
 <div id="stage">
-  <img class="layer" id="layer-a" alt="">
-  <img class="layer" id="layer-b" alt="">
+  <div id="frame">
+    <img class="layer" id="layer-a" alt="">
+    <img class="layer" id="layer-b" alt="">
+  </div>
   <div id="message">loading…</div>
+  <div id="cap-title" hidden></div>
   <div id="caption" hidden>
-    <div id="cap-title"></div>
     <div id="cap-body"></div>
   </div>
   <div id="panel" hidden>
@@ -497,13 +519,12 @@ function fetchImage(src) {
 
 function renderCaption() {
   const blk = current();
-  if (!blk) { caption.hidden = true; return; }
+  if (!blk) { caption.hidden = capTitle.hidden = true; return; }
   const title = cfg.titles ? blk.title : '';
   capTitle.textContent = title;
-  capTitle.hidden = !title;
+  capTitle.hidden = !cfg.captions || !title;
   capBody.textContent = blk.description;
-  capBody.hidden = !blk.description;
-  caption.hidden = !cfg.captions || (!title && !blk.description);
+  caption.hidden = !cfg.captions || !blk.description;
   displaceMap.setAttribute('scale', cfg.distort);
 }
 
