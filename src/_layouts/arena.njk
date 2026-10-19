@@ -37,7 +37,7 @@ html, body {
    The bottom band is left to the caption, so the text never sits on an image. */
 #frame {
   position: absolute;
-  inset: 40px 40px 200px;
+  inset: 64px 40px 200px;
   overflow: hidden;
 }
 
@@ -74,7 +74,9 @@ html, body {
   left: 50%;
   bottom: 100px;
   transform: translate(-50%, 50%);
-  width: min(46em, calc(100vw - 48px));
+  /* As wide as #frame (up to a readable measure), so long descriptions take
+     fewer lines and stay inside the band instead of running off the bottom. */
+  width: min(1400px, calc(100vw - 80px));
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -85,31 +87,34 @@ html, body {
   text-wrap: balance;
 }
 
-/* Centred in the 40px border above #frame, apart from the description. */
+/* Centred in the 64px border above #frame, apart from the description. */
 #cap-title {
   position: absolute;
   left: 50%;
-  top: 20px;
+  top: 32px;
   transform: translate(-50%, -50%);
   width: min(46em, calc(100vw - 48px));
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 11px;
-  letter-spacing: 0.04em;
+  font-size: 20px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #999;
+  color: #ddd;
 }
 
 #cap-body {
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 /* Warped by a riso print texture (see displace-filter.njk). The filter
-   sits on the text, not #caption, so the backdrop stays square. */
-#cap-title, #cap-body { filter: url(#arena-caption-displace); }
+   sits on the text, not #caption, so the backdrop stays square. The body
+   gets its own, gentler filter: the same warp that roughens the title
+   smears the strokes of smaller running text. */
+#cap-title { filter: url(#arena-caption-displace); }
+#cap-body { filter: url(#arena-body-displace); }
 
 /* ─── Panel ─────────────────────────────────────────────────────────────── */
 
@@ -230,6 +235,8 @@ button.active { background: #000; color: #fff; }
 
 {%- from "displace-filter.njk" import displaceFilter %}
 {{ displaceFilter("arena-caption-displace", "/public/riso-maine.png", scale=1.5, aspect="xMidYMid slice") }}
+{#- Its scale is kept at BODY_DISTORT × the title's by renderCaption(). #}
+{{ displaceFilter("arena-body-displace", "/public/riso-maine.png", scale=0.75, aspect="xMidYMid slice") }}
 
 {#- `<` is escaped so a block description can't close the script tag. #}
 <script type="application/json" id="arena-data">{{ { blocks: arena.blocks, settings: slideshow or {} } | dump | replace("<", "\\u003c") | safe }}</script>
@@ -243,6 +250,10 @@ button.active { background: #000; color: #fff; }
 
 const DATA = JSON.parse(document.getElementById('arena-data').textContent);
 const displaceMap = document.querySelector('#arena-caption-displace [data-displace-map]');
+const bodyDisplaceMap = document.querySelector('#arena-body-displace [data-displace-map]');
+// The description is warped by this fraction of `distort`, so one knob
+// drives both filters but the running text stays legible.
+const BODY_DISTORT = 0.5;
 
 const PARAMS = [
   { id: 'interval', type: 'range', def: 5,   min: 1, max: 30,   step: 0.5, unit: 's'  },
@@ -526,6 +537,7 @@ function renderCaption() {
   capBody.textContent = blk.description;
   caption.hidden = !cfg.captions || !blk.description;
   displaceMap.setAttribute('scale', cfg.distort);
+  bodyDisplaceMap.setAttribute('scale', cfg.distort * BODY_DISTORT);
 }
 
 function renderStatus() {
