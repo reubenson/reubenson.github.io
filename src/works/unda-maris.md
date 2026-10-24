@@ -3,7 +3,7 @@ layout: project.njk
 title: Unda Maris
 hideSeeMore: true
 media: audio sculpture
-year: coming soon (Oct 2026)
+year: coming soon (Nov 2026)
 ---
 
 <!-- Unda Maris is a psychoacoustic audio device. It is designed for the polyphonic expression of the phenomenon known as binaural beating, and can be listened to as a self-generating composition or played with an external MIDI keyboard as an instrument. -->
@@ -13,10 +13,10 @@ year: coming soon (Oct 2026)
 **Unda Maris** is a psychoacoustic audio sculpture built around polyphonic binaural beating [^1].
 {.project-grid-item-full}
 
-Unda Maris presents a touch-responsive generative composition in the form of a boutique USB-powered electronic music device. Connecting a MIDI source switches off the composition and allows for direct playthrough of the underlying binaural synthesizer, in which each voice is comprised of two detuned sinewave oscillators panned left-right.
+Unda Maris is a work of generative electronic music in the form of a touch-responsive audio device with standard line-level and headphone outputs. Connecting a MIDI source switches off the composition and allows for the underlying binaural synthesizer to be played as a standalone instrument. Unlike most tools for generating binaural beats, Unda Maris is polyphonic and allows for more general musical expression. Each voice of synthesizer's twelve voices is comprised of two detuned sinewave oscillators panned left-right.
 \
 \
-Signed first edition of twenty-five.
+First edition of twenty-five.
 {.project-grid-item-full}
 
 <figure
@@ -70,18 +70,33 @@ The device matches the dimensions of a cassette tape and housed in a standard no
 
 ### Composition {.project-grid-item-full}
 
-The immersive audio environment of Unda Maris expresses the Heraclitian impulse in music as water by other means, an erosive _musica speculativa_ [^6] at the margins of harmony.
+Unda Maris takes its name from pipe organs of the 1600s in which the unda maris (_wave of the sea_) organ stop played a pair of pipes slightly out of tune to produce an undulating shimmer.
 {.project-grid-item-full}
 
-The harmonic architecture of the composition is based on an unknown fragment of music I heard a church organist rehearsing during a trip to France in 2022. Horizontal movement through this harmonic space is based on medieval four-part organum, and notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. This detuning is where Unda Maris (_wave of the sea_) takes its name, which more properly refers to an organ stop in which pipes are tuned slightly out of unison to produce an undulating shimmer.
+The composition of _Unda Maris_ is based on an unknown fragment of music I heard a church organist rehearsing during a trip to France in 2022. Movement through the harmonic space of this fragment is adapted from medieval four-part organum, which allows for each voice to naturally meander through harmonic permutations. Through this polyphonic movement, each pitch produces a different binaural beat (lower pitches are slower, higher pitches are faster), so as the harmonic arrangement of sound changes, so does the corresponding psychoacoustic undulations.
+
+When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate in specialized region of the brainstem responsible for the spatial perception of sound [10]. What you hear, then, is not properly a sound, but an epiphenomenon of hearing, like listening to yourself hearing. _Unda Maris_ is then a literally 'immersive' music, in the sense that the perception of space is fundamentally disoriented past the point of distinction between foreground and background. The resulting undulations produced in the brainstem could be considered the primary perceptual object of the work, in which harmony is staged as the means, and not the end, to the production of post-cochlear polyrhythms.
 {.project-grid-item-full}
+
+This also touches on the affective valences of music and infrasound. Most binaural music today is marketed as a wellness tool, and has an older history as a means of inducing out of body experiences [^8]. While _Unda Maris_ makes claims to neither of these categories of experience it aims to express a deeper Heraclitian condition of sound as water by other means.
+{.project-grid-item-full}
+
+ <!-- combined with binaural beating is an attempt to distill the oceanic aspects of music, of sound as water by other means.  -->
+
+<!-- The immersive audio environment of Unda Maris expresses the Heraclitian impulse in music as water by other means, an erosive _musica speculativa_ [^6] at the margins of harmony. -->
+<!-- {.project-grid-item-full} -->
+
+<!-- , and notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. This detuning is where 
+{.project-grid-item-full} -->
+
+<!-- Pools of oscillators drift in a sea of microtonal flux, like waves lapping against the shoreline of just intonation. Eschewing an overarching formal structure, these shifting undulations are the primary perceptual object of the work. Harmony is staged as the means, not the end, to the production of post-cochlear polyrhythms. -->
+<!-- {.project-grid-item-full} -->
+
+
 
 <!-- August afternoon in a church in France in 2022. Following historical convention, meantone temperament has been adopted over equal temperament as the baseline from which binaural beating is calculated. -->
 
 <!-- Unda Maris performs an eponymous generative composition based on four-part organum. Notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. The resulting harmonies are perceptually consonant but subject to perpetual microtonal flux. The melodic and harmonic structure of the composition is based on a fragment of an unknown composition I heard one summer afternoon in a church in France in 2022. Following historical convention, meantone temperament has been adopted over equal temperament as the baseline from which binaural beating is calculated. -->
-
-Pools of oscillators drift in a sea of microtonal flux, like waves lapping against the shoreline of just intonation. Eschewing an overarching formal structure, these shifting undulations are the primary perceptual object of the work. Harmony is staged as the means, not the end, to the production of post-cochlear polyrhythms.
-{.project-grid-item-full}
 
 <!-- . Despite perpetual microtonal flux, the sense of harmony remains consonant and serves as substrate for the production of post-cochlear polyrhythms. -->
 
@@ -94,11 +109,6 @@ Pools of oscillators drift in a sea of microtonal flux, like waves lapping again
 <!-- Each moment proceeds like the last, without overarching form or structure, far into the horizon that never arrives. These undulations are the primary perceptual object of the work, in which harmony serves as substrate for generating post-cochlear polyrhythms.
 {.project-grid-item-full} -->
 
-When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate in the medial superior olive, a specialized region in the brainstem responsible for the spatial perception of sound. You are listening to yourself hearing, though what you hear is not properly a sound, but spatial distortions through the interpenetration of background and foreground. This hybrid perceptual state is also translated to the surface of the sculpture, in which three "rhythmical lines" [^5] divide the ground plane into four distinct but interlocking electrodes. At once ornamental and functional, this design provides an affordance of physical computation, in which touch can be tracked continuously across the longer axis due to the touch of a fingertip activating 2-3 electrodes at once in different proportions.
-{.project-grid-item-full}
-
-While most binaural music today is marketed as a wellness tool, and has an older history as a means of inducing out of body experiences [^8], Unda Maris makes claims to neither of these categories of experience.
-{.project-grid-item-full}
 
 <!-- Unda Maris presents a post-cochlear audio environment in which the spatial artifact of hearing is the primary perceptual object. Like a shell held to the ear, sound is the sea by other means, a Heraclitian gateway to the archetypal and the paranormal. -->
 
@@ -169,10 +179,10 @@ The superposition of beating frequencies is produced exclusively in the brainste
 
 {.project-grid-item-full}
 
-<!-- <ul class="project-grid-item-full"> -->
-<!-- <header>Technical Specifications</header> -->
+### Technical Specifications {.project-grid-item-full}
 
-### Technical Specifiations {.project-grid-item-full}
+What you hear is not properly a sound, but spatial distortions through the interpenetration of background and foreground. This hybrid perceptual state is also translated to the surface of the sculpture, in which three "rhythmical lines" [^5] divide the ground plane into four distinct but interlocking electrodes. At once ornamental and functional, this design provides an affordance of physical computation, in which touch can be tracked continuously across the longer axis due to the touch of a fingertip activating 2-3 electrodes at once in different proportions.
+{.project-grid-item-full}
 
 <ul class="project-grid-item-full">
 
@@ -199,3 +209,4 @@ The superposition of beating frequencies is produced exclusively in the brainste
 [^6]: The tradition of _musica speculativa_ is a post-Pythagorean philosophy of music in which the music of the spheres is both a mathematical abstraction and a physical phenomenon, which together provide grounds for a speculative political economy describing social harmony.
 [^7]: The word margin first appears in English meaning "edge of a sea or lake".
 [^8]: The Gateway process is means of training to have controlled experiences of astral projection. It consists of a set of listening and breathing exercises utilized binaural beats as part of a technique of modifying patterns of brain activity. It was developed by the Monroe Institute with financial support from the CIA, and later influenced the development of the I-Doser software that produced the genre of affective media known as Audio Drugs in the 2010s.
+[^10]: The medial superior olive takes nerve impulses from each of the ears and compares them to determine which ear the sound arrived at earlier (and therefore is closer).
