@@ -74,6 +74,7 @@ Unda Maris takes its name from pipe organs of the 1600s in which the unda maris 
 {.project-grid-item-full}
 
 The composition of _Unda Maris_ is based on an unknown fragment of music I heard a church organist rehearsing during a trip to France in 2022. Movement through the harmonic space of this fragment is adapted from medieval four-part organum, which allows for each voice to naturally meander through harmonic permutations. Through this polyphonic movement, each pitch produces a different binaural beat (lower pitches are slower, higher pitches are faster), so as the harmonic arrangement of sound changes, so does the corresponding psychoacoustic undulations.
+{.project-grid-item-full}
 
 When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate in specialized region of the brainstem responsible for the spatial perception of sound [10]. What you hear, then, is not properly a sound, but an epiphenomenon of hearing, like listening to yourself hearing. _Unda Maris_ is then a literally 'immersive' music, in the sense that the perception of space is fundamentally disoriented past the point of distinction between foreground and background. The resulting undulations produced in the brainstem could be considered the primary perceptual object of the work, in which harmony is staged as the means, and not the end, to the production of post-cochlear polyrhythms.
 {.project-grid-item-full}
@@ -86,13 +87,11 @@ This also touches on the affective valences of music and infrasound. Most binaur
 <!-- The immersive audio environment of Unda Maris expresses the Heraclitian impulse in music as water by other means, an erosive _musica speculativa_ [^6] at the margins of harmony. -->
 <!-- {.project-grid-item-full} -->
 
-<!-- , and notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. This detuning is where 
+<!-- , and notes are articulated as gradual swells, in which the degree of binaural detuning is determined by both the amplitude and pitch of the voice. This detuning is where
 {.project-grid-item-full} -->
 
 <!-- Pools of oscillators drift in a sea of microtonal flux, like waves lapping against the shoreline of just intonation. Eschewing an overarching formal structure, these shifting undulations are the primary perceptual object of the work. Harmony is staged as the means, not the end, to the production of post-cochlear polyrhythms. -->
 <!-- {.project-grid-item-full} -->
-
-
 
 <!-- August afternoon in a church in France in 2022. Following historical convention, meantone temperament has been adopted over equal temperament as the baseline from which binaural beating is calculated. -->
 
@@ -108,7 +107,6 @@ This also touches on the affective valences of music and infrasound. Most binaur
 
 <!-- Each moment proceeds like the last, without overarching form or structure, far into the horizon that never arrives. These undulations are the primary perceptual object of the work, in which harmony serves as substrate for generating post-cochlear polyrhythms.
 {.project-grid-item-full} -->
-
 
 <!-- Unda Maris presents a post-cochlear audio environment in which the spatial artifact of hearing is the primary perceptual object. Like a shell held to the ear, sound is the sea by other means, a Heraclitian gateway to the archetypal and the paranormal. -->
 
