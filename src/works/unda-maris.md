@@ -75,6 +75,7 @@ The composition is based on an unknown fragment of music I heard a church organi
 {.project-grid-item-full}
 
 When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate in specialized region of the brainstem responsible for the spatial perception of sound [10]. What you hear, then, is not properly a sound, but an epiphenomenon of hearing. You hear yourself hearing.
+{.project-grid-item-full}
 
 _Unda Maris_ is then a literally 'immersive' music, in the sense that the perception of space is fundamentally disoriented past the point of distinction between foreground and background. The undulations produced in the brainstem could be considered the primary perceptual object of the work, in which harmony is staged as the means, and not the end, to the production of post-cochlear polyrhythms.
 {.project-grid-item-full}
