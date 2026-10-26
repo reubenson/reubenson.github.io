@@ -9,10 +9,10 @@ year: coming soon (Nov 2026)
 **Unda Maris** is a psychoacoustic audio sculpture built around polyphonic binaural beating.
 {.project-grid-item-full}
 
-Unda Maris is a work of generative electronic music in the form of a touch-responsive audio device, featuring standard audio outputs and powered by USB-C. Its music builds on the psychoacoustic phenomenon of binaural beating [^1], in which two slightly different pitches produce the perception of a single undulating note. Using compositional methods adapted from early European polyphony, these notes are arranged algorithmically into slowly shifting harmonies that express many beating frequencies at once, like overlapping waves against the shoreline.
+It is a work of generative electronic music in the form of a touch-responsive audio device, featuring standard audio outputs and powered by USB-C. Its music builds on the psychoacoustic phenomenon of binaural beating [^1], in which two slightly different pitches produce the perception of a single undulating note. Using compositional methods adapted from early European polyphony, these notes are arranged algorithmically into slowly shifting harmonies that express many beating frequencies at once, like overlapping waves against the shoreline.
 \
 \
-_Unda Maris_ is comprised of two printed circuit boards packaged inside a standard cassette case, as both a nod to the eternal return of physical media and that cassette tapes are a medium for both recording and playback. _Unda Maris_ expresses a similar ambivalence of being both a music and a means: connecting a MIDI source switches off the self-playing composition and allows the underlying binaural synthesizer to be played as a standalone instrument.
+_Unda Maris_ is comprised of two printed circuit boards packaged inside a standard cassette case, as both a nod to the eternal return of physical media and that cassette tapes are a medium for both recording and playback. Accordingly, connecting a MIDI source switches off the self-playing composition and allows the underlying binaural synthesizer to be played as a standalone instrument.
 \
 \
 Self-published on _Edition Ultramarine_, first pressing of twenty-five numbered copies. Jacket hand-stamped and printed on paper from Hook Pottery Paper.
@@ -38,13 +38,13 @@ _Unda Maris_ (wave of the sea) takes its name from a pipe organ stop common to c
 The composition is based on an unknown fragment of music I heard a church organist rehearsing during a trip to the Loire Valley in 2022. Movement through the tonal space of this fragment is adapted from medieval four-part organum, which allows for each voice to indpendently ebb and flow through harmonic permutations. Within this polyphony, each pitch produces a different binaural beat (lower pitches are slower, higher pitches are faster). As the harmonies evolve, so do the corresponding psychoacoustic undulations. The harmonic range and density of the music is controlled via the touch-responsive surface of the device.
 {.project-grid-item-full}
 
-When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate from a specialized region of the brainstem responsible for the spatial perception of sound [^10]. What you hear, then, is not properly a sound, but an epiphenomenon of hearing. You hear yourself hearing.
+When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate from a specialized region of the brainstem responsible for the spatial perception of sound [^10]. What you hear, then, is not properly a sound, but an epiphenomenon of hearing. You are hearing yourself hearing.
 {.project-grid-item-full}
 
 _Unda Maris_ is then a literally 'immersive' music, in the sense that the perception of space is fundamentally disoriented past the point of distinction between foreground and background. The undulations produced in the brainstem could be considered the primary perceptual object of the work, in which harmony is staged as the means, and not the end, to the production of post-cochlear polyrhythms.
 {.project-grid-item-full}
 
-Beyond auditory hallucinations, there are also affective and paranormal valences to endogenous infrasound. Binaural music today is marketed as a wellness tool, and a longer history as a means of inducing astral projection and out of body experiences [^8]. While _Unda Maris_ makes claims to neither of these categories of experience, it explores a Heraclitian metaphysics of sound as water by other means.
+Beyond auditory hallucinations, there are also affective and paranormal valences to endogenous infrasound. Binaural music today is marketed as a wellness tool, and has a longer history as a means of inducing astral projection and out-of-body experiences [^8]. While _Unda Maris_ makes claims to neither of these categories of experience, it explores a Heraclitian poetics of sound as water by other means.
 {.project-grid-item-full}
 
 ### Touch Interface {.project-grid-item-full}
