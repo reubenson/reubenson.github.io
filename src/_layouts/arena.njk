@@ -28,6 +28,8 @@ html, body {
   inset: 0;
   background: #000;
   overflow: hidden;
+  /* No double-tap zoom, so quick taps each advance a slide. */
+  touch-action: manipulation;
 }
 
 #stage.idle { cursor: none; }
@@ -615,6 +617,20 @@ function wake() {
   clearTimeout(idleTimer);
   idleTimer = setTimeout(() => stage.classList.add('idle'), IDLE_MS);
 }
+
+// On touch screens there are no keys, so a tap anywhere outside the panel
+// steps forward. Only touch, and only a tap — a drag that moved is ignored.
+let tapStart = null;
+stage.addEventListener('pointerdown', (e) => {
+  tapStart = e.pointerType === 'touch' && !panel.contains(e.target) ? { x: e.clientX, y: e.clientY } : null;
+});
+stage.addEventListener('pointerup', (e) => {
+  if (!tapStart || e.pointerType !== 'touch') return;
+  const moved = Math.hypot(e.clientX - tapStart.x, e.clientY - tapStart.y);
+  tapStart = null;
+  if (moved < 10) advance(1);
+});
+stage.addEventListener('pointercancel', () => { tapStart = null; });
 
 document.addEventListener('mousemove', wake);
 document.addEventListener('mousedown', wake);
