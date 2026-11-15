@@ -968,7 +968,10 @@ nav.main-nav .active {
   .project * {
     position: static !important;
   }
-  .project .project-more {
+  .project .project-more,
+  .project nav.main-nav,
+  .project .top-spacer,
+  .project .chop-container {
     display: none;
   }
   .project header {

@@ -357,7 +357,10 @@
       position: static !important;
     }
 
-    .project-more {
+    .project-more,
+    nav.main-nav,
+    .top-spacer,
+    .chop-container {
       display: none;
     }
 
