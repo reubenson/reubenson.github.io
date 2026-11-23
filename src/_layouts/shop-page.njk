@@ -29,8 +29,8 @@ description: Shop description
       {% include "nav.njk" %}
       <header>
         <nav>
-          <a href="#travel-vases">Travel Vases</a>
           <a href="#incense-trays">Incense Trays</a>
+          <a href="#travel-vases">Travel Vases</a>
           <a href="#misc">Misc</a>
         </nav>
       </header>
@@ -38,23 +38,23 @@ description: Shop description
         <div class="shop-top">
           {{ content | safe }}
         </div>
-        <section class="shop-collection" id="travel-vases">
-          <div class="project-grid-item-full">
-            {{ imageSequence("/public/ceramics/travel-vase-series", "photo of a travel vase on a windowsill", false, "Travel Vases", "Pocket-sized vases — perfect for collecting tiny wildflowers on your travels", "height: approx 2 in") }}
-          </div>
-          <div class="shopify-container project-grid-item-full">
-            <div class="shop-listings" data-collection-id="278257860680" data-show-title="false">
-              {{ productGrid(shopCollectionsById["278257860680"], false) }}
-            </div>
-          </div>
-        </section>
         <section class="shop-collection" id="incense-trays">
           <div class="project-grid-item-full">
-            {{ imageSequence("/public/ceramics/incense-tray-series", "photo of an incense tray", false, "Incense Trays", "Thin floating forms inspired by speaker cones with a small aperture for incense sticks", "width: approx 6 in") }}
+            {{ imageSequence("/public/ceramics/incense-tray-series", "photo of an incense tray", false, "Incense Trays", "Thin floating forms inspired by speaker cones with a small aperture for incense sticks", "width: 5-6 in", false) }}
           </div>
           <div class="shopify-container project-grid-item-full">
             <div class="shop-listings" data-collection-id="282400391240" data-show-title="false">
               {{ productGrid(shopCollectionsById["282400391240"], false) }}
+            </div>
+          </div>
+        </section>
+        <section class="shop-collection" id="travel-vases">
+          <div class="project-grid-item-full">
+            {{ imageSequence("/public/ceramics/travel-vase-series", "photo of a travel vase on a windowsill", false, "Travel Vases", "Pocket-sized vases — perfect for collecting tiny wildflowers on your travels", "height: approx 2 in", false) }}
+          </div>
+          <div class="shopify-container project-grid-item-full">
+            <div class="shop-listings" data-collection-id="278257860680" data-show-title="false">
+              {{ productGrid(shopCollectionsById["278257860680"], false) }}
             </div>
           </div>
         </section>
@@ -162,10 +162,11 @@ description: Shop description
            const navLinks = document.querySelectorAll('header nav a');
            navLinks.forEach(link => link.classList.remove('selected'));
            
-           // Get current hash or default to first section
-           const currentHash = window.location.hash || '#travel-vases';
-           
-           const activeLink = document.querySelector(`header nav a[href="${currentHash}"]`);
+           // Get current hash or default to the first nav link
+           const currentHash = window.location.hash;
+           const activeLink =
+             (currentHash && document.querySelector(`header nav a[href="${currentHash}"]`)) ||
+             navLinks[0];
            if (activeLink) {
              activeLink.classList.add('selected');
            }

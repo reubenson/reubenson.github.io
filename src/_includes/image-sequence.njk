@@ -15,26 +15,14 @@
   sequence advances linearly through the images in alphabetical order.
 
   `title` (optional) is overlaid on top of the rotating images, with
-  `description` and then `dimensions` (both optional) rendered beneath it.
-
-  `cutout` (default true) builds a layered cut-out: the first image is a static
-  bottom layer, the .sequence-title-container sits directly on top of it, and the
-  *remaining* images cross-fade above the two with a centered square hole punched
-  through them — so the hole reveals the title over the first image. See
-  `.sequence-base` / `.sequence-image` in styles/layouts/_shop.scss.
+  `description` and then `dimensions` (both optional) rendered beneath it. A
+  blurred backdrop sits between the title and the images for legibility.
 #}
 {% from "displace-filter.njk" import displaceFilter %}
-{% macro imageSequence(dirPath, alt="", randomize=true, title="", description="", dimensions="", cutout=true) %}
+{% macro imageSequence(dirPath, alt="", randomize=true, title="", description="", dimensions="") %}
 {%- set images = dirPath | sequenceImages -%}
 {%- if images | length -%}
-{#- In cut-out mode images[0] is the fixed base layer, so only images[1..] are
-   animated over it. With a single image (or no cut-out) animate them all. -#}
-{%- set animImages = images.slice(1) if (cutout and images | length > 1) else images -%}
-<div class="image-sequence{% if cutout %} image-sequence--cutout{% endif %}" data-alt="{{ alt }}" data-randomize="{{ randomize | dump }}" data-images="{{ animImages | dump | escape }}">
-  {%- if cutout %}
-  {#- Static bottom layer: the first image, always visible beneath everything. -#}
-  <img src="{{ images[0] }}" alt="{{ alt }}" class="sequence-base">
-  {% endif -%}
+<div class="image-sequence" data-alt="{{ alt }}" data-randomize="{{ randomize | dump }}" data-images="{{ images | dump | escape }}">
   {%- if title %}{%- set slug = title | slugify -%}
   <div class="sequence-title-container" style="--sequence-title-filter:url(#sequence-title-displace-{{ slug }})">
     <div class="sequence-title-backdrop" aria-hidden="true"></div>
@@ -45,18 +33,7 @@
     </div>
   </div>
   {% endif -%}
-  {%- if cutout %}
-  {#- The cross-fading images live in this wrapper so the cut-out hole can be
-     masked on the wrapper (which is never transformed) rather than on the images
-     themselves — the per-section `transform: scale()` zoom would otherwise scale
-     and shift the hole out of alignment with the title. The JS appends new
-     frames here (see .sequence-frames lookup in image-sequence.js). -#}
-  <div class="sequence-frames">
-    <img src="{{ animImages[0] }}" alt="{{ alt }}" class="sequence-image" style="opacity: 1.0;">
-  </div>
-  {%- else %}
-  <img src="{{ animImages[0] }}" alt="{{ alt }}" class="sequence-image" style="opacity: 1.0;">
-  {% endif -%}
+  <img src="{{ images[0] }}" alt="{{ alt }}" class="sequence-image" style="opacity: 1.0;">
 </div>
 {#-
   Per-instance displacement filter for .sequence-title, warped by this

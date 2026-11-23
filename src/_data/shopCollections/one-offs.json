@@ -6,8 +6,61 @@
   "descriptionHtml": "",
   "currencyCode": "USD",
   "productCount": 9,
-  "generatedAt": "2026-08-16T17:42:06.853Z",
+  "generatedAt": "2026-11-23T14:59:11.418Z",
   "products": [
+    {
+      "id": "gid://shopify/Product/15793132077128",
+      "legacyId": "15793132077128",
+      "handle": "candlestick-tray",
+      "title": "Candlestick Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/candlestick-tray",
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0060451.jpg?v=1795445636",
+        "altText": null,
+        "width": 1771,
+        "height": 1771
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0060451.jpg?v=1795445636",
+          "altText": "",
+          "width": 1771,
+          "height": 1771
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0050450.jpg?v=1795445641",
+          "altText": "",
+          "width": 1742,
+          "height": 1742
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/57659057340488",
+          "legacyId": "57659057340488",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
     {
       "id": "gid://shopify/Product/7113225273416",
       "legacyId": "7113225273416",
@@ -49,59 +102,6 @@
           "legacyId": "41314069774408",
           "title": "Default Title",
           "price": "80.00",
-          "availableForSale": true,
-          "inventoryQuantity": 1,
-          "selectedOptions": [
-            {
-              "name": "Title",
-              "value": "Default Title"
-            }
-          ],
-          "imageUrl": null
-        }
-      ]
-    },
-    {
-      "id": "gid://shopify/Product/7113220489288",
-      "legacyId": "7113220489288",
-      "handle": "tray",
-      "title": "Tray",
-      "status": "ACTIVE",
-      "onlineStoreUrl": "https://shop.reubenson.com/products/tray",
-      "availableForSale": true,
-      "description": "Incense tray (without hole) height approx. 5 in",
-      "descriptionHtml": "<p>Incense tray (without hole) height approx. 5 in</p>",
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/DEE9C651-6A47-4729-87D1-8AAAEBFC5AF0_1_201_a.jpg?v=1786899544",
-        "altText": null,
-        "width": 2014,
-        "height": 2014
-      },
-      "images": [
-        {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/DEE9C651-6A47-4729-87D1-8AAAEBFC5AF0_1_201_a.jpg?v=1786899544",
-          "altText": "",
-          "width": 2014,
-          "height": 2014
-        },
-        {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/F4FA5ABA-0ED8-450B-86EA-6955907B83C4_1_201_a.jpg?v=1786899544",
-          "altText": "",
-          "width": 2041,
-          "height": 2041
-        }
-      ],
-      "price": {
-        "min": "30.0",
-        "max": "30.0",
-        "currencyCode": "USD"
-      },
-      "variants": [
-        {
-          "id": "gid://shopify/ProductVariant/41314061025352",
-          "legacyId": "41314061025352",
-          "title": "Default Title",
-          "price": "30.00",
           "availableForSale": true,
           "inventoryQuantity": 1,
           "selectedOptions": [
@@ -198,8 +198,8 @@
         }
       ],
       "price": {
-        "min": "80.0",
-        "max": "80.0",
+        "min": "40.0",
+        "max": "40.0",
         "currencyCode": "USD"
       },
       "variants": [
@@ -207,7 +207,7 @@
           "id": "gid://shopify/ProductVariant/41314058010696",
           "legacyId": "41314058010696",
           "title": "Default Title",
-          "price": "80.00",
+          "price": "40.00",
           "availableForSale": true,
           "inventoryQuantity": 1,
           "selectedOptions": [
@@ -251,8 +251,8 @@
         }
       ],
       "price": {
-        "min": "60.0",
-        "max": "60.0",
+        "min": "40.0",
+        "max": "40.0",
         "currencyCode": "USD"
       },
       "variants": [
@@ -260,7 +260,7 @@
           "id": "gid://shopify/ProductVariant/41309385719880",
           "legacyId": "41309385719880",
           "title": "Default Title",
-          "price": "60.00",
+          "price": "40.00",
           "availableForSale": true,
           "inventoryQuantity": 1,
           "selectedOptions": [
@@ -280,7 +280,7 @@
       "title": "Bottle vase",
       "status": "ACTIVE",
       "onlineStoreUrl": "https://shop.reubenson.com/products/bottle-vase",
-      "availableForSale": true,
+      "availableForSale": false,
       "description": "Bottle — height approx. 8 in",
       "descriptionHtml": "<p>Bottle — height approx. 8 in</p>",
       "featuredImage": {
@@ -314,8 +314,8 @@
           "legacyId": "41309384671304",
           "title": "Default Title",
           "price": "60.00",
-          "availableForSale": true,
-          "inventoryQuantity": 1,
+          "availableForSale": false,
+          "inventoryQuantity": 0,
           "selectedOptions": [
             {
               "name": "Title",
@@ -439,7 +439,7 @@
       "title": "Weedpot",
       "status": "ACTIVE",
       "onlineStoreUrl": "https://shop.reubenson.com/products/weedpot",
-      "availableForSale": true,
+      "availableForSale": false,
       "description": "Weedpot — height approx. 5 in",
       "descriptionHtml": "<p>Weedpot — height approx. 5 in</p>",
       "featuredImage": {
@@ -473,8 +473,8 @@
           "legacyId": "41309378871368",
           "title": "Default Title",
           "price": "80.00",
-          "availableForSale": true,
-          "inventoryQuantity": 1,
+          "availableForSale": false,
+          "inventoryQuantity": 0,
           "selectedOptions": [
             {
               "name": "Title",

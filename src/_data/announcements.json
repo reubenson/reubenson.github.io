@@ -1,9 +1,10 @@
 [
   {
-    "content": "Coming out to close the gate I end up listening to frogs",
-    "footer": "Masaoka Shiki (1866-1902)",
-    "width": "110px",
-    "frog": true
+    "header": "UNDA MARIS",
+    "content": "<a href='https://ultramarine.metalabel.com/unda-maris' target='_blank'>Unda Maris</a> is a psychoacoustic audio sculpture and synthesizer in the form of a touch-responsive audio device packaged inside a cassette tape case.",
+    "footer": "Available in an edition of twenty-five at <a href='https://ultramarine.metalabel.com/unda-maris' target='_blank'>Metalabel</a>",
+    "width": "300px",
+    "expiryDate": ""
   },
   {
     "header": "<a href='https://www.instagram.com/p/DNjChA9u1d9/' target='_blank'>In Good Company</a>",
@@ -86,6 +87,12 @@
     "hoverImage": "/public/frog-chorus-vernal-equinox-2024-mobile.jpg",
     "width": "190px",
     "expiryDate": "March 2024"
+  },
+  {
+    "content": "Coming out to close the gate I end up listening to frogs",
+    "footer": "Masaoka Shiki (1866-1902)",
+    "width": "110px",
+    "frog": true
   },
   {
     "content": "Left blank for a work expressing modern feeling.",

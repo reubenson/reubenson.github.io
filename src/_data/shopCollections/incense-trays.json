@@ -5,97 +5,50 @@
   "title": "Incense Trays",
   "descriptionHtml": "<p>incense trays</p>",
   "currencyCode": "USD",
-  "productCount": 4,
-  "generatedAt": "2026-08-16T17:42:06.547Z",
+  "productCount": 7,
+  "generatedAt": "2026-11-23T14:59:11.237Z",
   "products": [
     {
-      "id": "gid://shopify/Product/7099292745800",
-      "legacyId": "7099292745800",
-      "handle": "incense-tray",
+      "id": "gid://shopify/Product/15793131454536",
+      "legacyId": "15793131454536",
+      "handle": "incense-tray-9",
       "title": "Incense Tray",
       "status": "ACTIVE",
-      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray",
-      "availableForSale": false,
-      "description": "",
-      "descriptionHtml": "",
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/702FEBB5-5611-4144-A4DF-6B271D2823B7_1_201_a_a7d4d41f-87d6-4ffa-bc99-dd97c13a3ce5.jpg?v=1786554288",
-        "altText": null,
-        "width": 1687,
-        "height": 1687
-      },
-      "images": [
-        {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/702FEBB5-5611-4144-A4DF-6B271D2823B7_1_201_a_a7d4d41f-87d6-4ffa-bc99-dd97c13a3ce5.jpg?v=1786554288",
-          "altText": "",
-          "width": 1687,
-          "height": 1687
-        }
-      ],
-      "price": {
-        "min": "35.0",
-        "max": "35.0",
-        "currencyCode": "USD"
-      },
-      "variants": [
-        {
-          "id": "gid://shopify/ProductVariant/41256653389896",
-          "legacyId": "41256653389896",
-          "title": "Default Title",
-          "price": "35.00",
-          "availableForSale": false,
-          "inventoryQuantity": 0,
-          "selectedOptions": [
-            {
-              "name": "Title",
-              "value": "Default Title"
-            }
-          ],
-          "imageUrl": null
-        }
-      ]
-    },
-    {
-      "id": "gid://shopify/Product/7110763085896",
-      "legacyId": "7110763085896",
-      "handle": "incense-tray-2",
-      "title": "Incense Tray",
-      "status": "ACTIVE",
-      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-2",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-9",
       "availableForSale": true,
       "description": "",
       "descriptionHtml": "",
       "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6723E009-BD34-4898-B3A4-EC0FA781CCED_1_201_a_fd6e9e3e-b1cf-4e05-8db2-cfd4fb793ce1.jpg?v=1786554016",
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0080453.jpg?v=1795445601",
         "altText": null,
-        "width": 1650,
-        "height": 1650
+        "width": 1589,
+        "height": 1589
       },
       "images": [
         {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/6723E009-BD34-4898-B3A4-EC0FA781CCED_1_201_a_fd6e9e3e-b1cf-4e05-8db2-cfd4fb793ce1.jpg?v=1786554016",
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0080453.jpg?v=1795445601",
           "altText": "",
-          "width": 1650,
-          "height": 1650
+          "width": 1589,
+          "height": 1589
         },
         {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/9C6CD94D-B3F8-4DA4-A475-97CD6489DA80_1_201_a.jpg?v=1786901313",
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0070452.jpg?v=1795445601",
           "altText": "",
-          "width": 1867,
-          "height": 1867
+          "width": 1522,
+          "height": 1522
         }
       ],
       "price": {
-        "min": "35.0",
-        "max": "35.0",
+        "min": "40.0",
+        "max": "40.0",
         "currencyCode": "USD"
       },
       "variants": [
         {
-          "id": "gid://shopify/ProductVariant/41304809406536",
-          "legacyId": "41304809406536",
+          "id": "gid://shopify/ProductVariant/57659055603784",
+          "legacyId": "57659055603784",
           "title": "Default Title",
-          "price": "35.00",
+          "price": "40.00",
           "availableForSale": true,
           "inventoryQuantity": 1,
           "selectedOptions": [
@@ -109,46 +62,46 @@
       ]
     },
     {
-      "id": "gid://shopify/Product/7110762922056",
-      "legacyId": "7110762922056",
-      "handle": "incense-tray-copy",
+      "id": "gid://shopify/Product/15793130766408",
+      "legacyId": "15793130766408",
+      "handle": "incense-tray-8",
       "title": "Incense Tray",
       "status": "ACTIVE",
-      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-copy",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-8",
       "availableForSale": true,
       "description": "",
       "descriptionHtml": "",
       "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/1EE33EC4-E082-450C-9B0F-4D4DACEBA520_1_201_a_198a9fe4-edff-41cf-a91b-6f272ddba0fb.jpg?v=1786554253",
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0200443.jpg?v=1795445667",
         "altText": null,
-        "width": 1703,
-        "height": 1703
+        "width": 1588,
+        "height": 1588
       },
       "images": [
         {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/1EE33EC4-E082-450C-9B0F-4D4DACEBA520_1_201_a_198a9fe4-edff-41cf-a91b-6f272ddba0fb.jpg?v=1786554253",
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0200443.jpg?v=1795445667",
           "altText": "",
-          "width": 1703,
-          "height": 1703
+          "width": 1588,
+          "height": 1588
         },
         {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/C206A0E9-D21C-4888-967B-A83B9BAA6DCD_1_201_a.jpg?v=1786901337",
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0190442.jpg?v=1795445667",
           "altText": "",
-          "width": 1967,
-          "height": 1967
+          "width": 1743,
+          "height": 1743
         }
       ],
       "price": {
-        "min": "35.0",
-        "max": "35.0",
+        "min": "40.0",
+        "max": "40.0",
         "currencyCode": "USD"
       },
       "variants": [
         {
-          "id": "gid://shopify/ProductVariant/41304809242696",
-          "legacyId": "41304809242696",
+          "id": "gid://shopify/ProductVariant/57659054882888",
+          "legacyId": "57659054882888",
           "title": "Default Title",
-          "price": "35.00",
+          "price": "40.00",
           "availableForSale": true,
           "inventoryQuantity": 1,
           "selectedOptions": [
@@ -162,46 +115,258 @@
       ]
     },
     {
-      "id": "gid://shopify/Product/7110762692680",
-      "legacyId": "7110762692680",
-      "handle": "incense-tray-1",
+      "id": "gid://shopify/Product/15793130242120",
+      "legacyId": "15793130242120",
+      "handle": "incense-tray-7",
       "title": "Incense Tray",
       "status": "ACTIVE",
-      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-1",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-7",
       "availableForSale": true,
       "description": "",
       "descriptionHtml": "",
       "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/3DA10B62-728B-4A81-BF6D-26752F9A042B_1_201_a_5f6a78ae-3960-475a-b2ee-da50f232eb99.jpg?v=1786554270",
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0170440.jpg?v=1795445827",
         "altText": null,
-        "width": 1567,
-        "height": 1567
+        "width": 1611,
+        "height": 1611
       },
       "images": [
         {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/3DA10B62-728B-4A81-BF6D-26752F9A042B_1_201_a_5f6a78ae-3960-475a-b2ee-da50f232eb99.jpg?v=1786554270",
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0170440.jpg?v=1795445827",
           "altText": "",
-          "width": 1567,
-          "height": 1567
+          "width": 1611,
+          "height": 1611
         },
         {
-          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/EB64017C-390E-4E02-A58E-ED6FB3DFAFED_1_201_a.jpg?v=1786901225",
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0180441.jpg?v=1795445827",
           "altText": "",
-          "width": 2039,
-          "height": 2039
+          "width": 1659,
+          "height": 1659
         }
       ],
       "price": {
-        "min": "35.0",
-        "max": "35.0",
+        "min": "40.0",
+        "max": "40.0",
         "currencyCode": "USD"
       },
       "variants": [
         {
-          "id": "gid://shopify/ProductVariant/41304809013320",
-          "legacyId": "41304809013320",
+          "id": "gid://shopify/ProductVariant/57659054358600",
+          "legacyId": "57659054358600",
           "title": "Default Title",
-          "price": "35.00",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/15793128800328",
+      "legacyId": "15793128800328",
+      "handle": "incense-tray-6",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-6",
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0130436.jpg?v=1795445844",
+        "altText": null,
+        "width": 1808,
+        "height": 1808
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0130436.jpg?v=1795445844",
+          "altText": "",
+          "width": 1808,
+          "height": 1808
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0140437.jpg?v=1795445844",
+          "altText": "",
+          "width": 1678,
+          "height": 1678
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/57659051442248",
+          "legacyId": "57659051442248",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/15793128439880",
+      "legacyId": "15793128439880",
+      "handle": "incense-tray-5",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-5",
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0110434.jpg?v=1795445870",
+        "altText": null,
+        "width": 1718,
+        "height": 1718
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0110434.jpg?v=1795445870",
+          "altText": "",
+          "width": 1718,
+          "height": 1718
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0100433.jpg?v=1795445870",
+          "altText": "",
+          "width": 1913,
+          "height": 1913
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/57659050950728",
+          "legacyId": "57659050950728",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/15793127784520",
+      "legacyId": "15793127784520",
+      "handle": "incense-tray-4",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-4",
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0070430.jpg?v=1795445905",
+        "altText": null,
+        "width": 1673,
+        "height": 1673
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0070430.jpg?v=1795445905",
+          "altText": "",
+          "width": 1673,
+          "height": 1673
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0060429.jpg?v=1795445896",
+          "altText": "",
+          "width": 1634,
+          "height": 1634
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/57659050262600",
+          "legacyId": "57659050262600",
+          "title": "Default Title",
+          "price": "40.00",
+          "availableForSale": true,
+          "inventoryQuantity": 1,
+          "selectedOptions": [
+            {
+              "name": "Title",
+              "value": "Default Title"
+            }
+          ],
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/15793123721288",
+      "legacyId": "15793123721288",
+      "handle": "incense-tray-3",
+      "title": "Incense Tray",
+      "status": "ACTIVE",
+      "onlineStoreUrl": "https://shop.reubenson.com/products/incense-tray-3",
+      "availableForSale": true,
+      "description": "",
+      "descriptionHtml": "",
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0010424.jpg?v=1795445926",
+        "altText": null,
+        "width": 1842,
+        "height": 1842
+      },
+      "images": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0010424.jpg?v=1795445926",
+          "altText": "",
+          "width": 1842,
+          "height": 1842
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0567/0915/2840/files/S0030426.jpg?v=1795445926",
+          "altText": "",
+          "width": 1938,
+          "height": 1938
+        }
+      ],
+      "price": {
+        "min": "40.0",
+        "max": "40.0",
+        "currencyCode": "USD"
+      },
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/57659045150792",
+          "legacyId": "57659045150792",
+          "title": "Default Title",
+          "price": "40.00",
           "availableForSale": true,
           "inventoryQuantity": 1,
           "selectedOptions": [

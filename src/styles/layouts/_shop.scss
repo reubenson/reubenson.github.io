@@ -288,28 +288,6 @@ $shop-max-width: 1280px;
     aspect-ratio: 3/4;
     border-radius: 2px;
     overflow: hidden;
-    // Fixed side length of the cut-out square. Both the hole punched in the
-    // images and the title-container revealed through it use this exact value
-    // (as a centered square), so they line up regardless of container size.
-    // --cutout-size: 240px;
-    --cutout-width: 260px;
-    --cutout-height: 140px;
-    --cutout-top: 10px;
-
-
-
-    // Static bottom layer (the first image) in cut-out mode: never masked,
-    // always visible beneath the title and the cross-fading images above it.
-    // First in the DOM, so it paints below its siblings at the same stacking
-    // level.
-    .sequence-base {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     .sequence-image {
       position: absolute;
@@ -341,60 +319,27 @@ $shop-max-width: 1280px;
       // mask-composite: intersect;
     }
 
-    // Wrapper holding the cross-fading images in cut-out mode. It fills the
-    // container and is never transformed, so the cut-out hole masked onto it
-    // stays put — unlike the images inside, which the per-section
-    // `transform: scale()` zoom scales and shifts.
-    .sequence-frames {
-      position: absolute;
-      inset: 0;
-    }
-
-    // Punch the rectangular hole through the (un-transformed) frames wrapper so
-    // the .sequence-title-container stacked beneath shows through, like a layered
-    // cut-out. Two opaque mask layers — one filling the wrapper, one the window —
-    // combined with `exclude` (webkit `xor`) cancel where they overlap, leaving
-    // a hole. The window sits 20px from the top, centered horizontally, matching
-    // the .sequence-title-container below.
-    &--cutout .sequence-frames {
-      $hole-width: var(--cutout-width);
-      $hole-height: var(--cutout-height);
-      -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
-      -webkit-mask-repeat: no-repeat, no-repeat;
-      -webkit-mask-position: center, center var(--cutout-top);
-      -webkit-mask-size: 100% 100%, #{$hole-width} #{$hole-height};
-      -webkit-mask-composite: xor;
-      mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
-      mask-repeat: no-repeat, no-repeat;
-      mask-position: center, center var(--cutout-top);
-      mask-size: 100% 100%, #{$hole-width} #{$hole-height};
-      mask-composite: exclude;
-    }
-
+    // Title box: sized to its content, centered horizontally near the top,
+    // above the images (z-index 2) with a blurred backdrop beneath the text.
     .sequence-title-container {
       position: absolute;
       z-index: 2;
-      top: 0;
-      right: 0;
+      top: 10px;
       left: 0;
-      // margin: 10px auto;
+      right: 0;
+      margin: 0 auto;
+      width: fit-content;
+      max-width: calc(100% - 20px);
       text-align: center;
-      // border: solid black 1px;
-      // padding: 10px;
-      width: --cutout-width;
-      height: --cutout-height;
       padding: 4px;
-      // width: calc(100% - 20px);
-      // max-width: 400px;
       // NOTE: no `filter` here — a filter on this container would isolate the
       // backdrop root and stop .sequence-title-backdrop from blurring the image
       // below. The displacement filter lives on .sequence-title-content instead.
     }
 
-    // Blur layer that fills the container and blurs the image showing through,
-    // so the text on top reads distinctly from the photo below.
+    // Blur layer between the title and the images: fills the container and
+    // blurs the photo behind it so the text reads distinctly.
     .sequence-title-backdrop {
-      display: none;
       position: absolute;
       inset: 0;
       z-index: 0;
@@ -411,39 +356,14 @@ $shop-max-width: 1280px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100%;
       // Per-instance displacement filter (set via the --sequence-title-filter
       // custom property on the container); sits above the blur layer.
       filter: var(--sequence-title-filter);
       border: solid black 1px;
-      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
-      padding: 10px;
-    }
-
-    // In cut-out mode the title is the layer revealed through the hole: it sits
-    // BELOW the images (it precedes them in the DOM, so an equal stacking level
-    // paints it behind) and is a centered square of the exact same size as the
-    // hole, so the two line up precisely. These come AFTER the base
-    // .sequence-title-container / -content rules above so they win on source
-    // order (same specificity), overriding the top-anchored full-width layout.
-    &--cutout .sequence-title-container {
-      z-index: 0;
-      top: var(--cutout-top);
-      right: auto;
-      bottom: auto;
-      left: 50%;
-      margin: 0;
-      width: var(--cutout-width);
-      max-width: var(--cutout-width);
-      height: var(--cutout-height);
-      transform: translateX(-50%);
-    }
-
-    // Fill the square window and center the title within it.
-    &--cutout .sequence-title-content {
-      box-sizing: border-box;
-      // height: 100%;
-      justify-content: center;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+      // padding: 10px;
+      width: 330px;
+      max-width: 100%;
     }
 
     .sequence-title {
@@ -472,13 +392,18 @@ $shop-max-width: 1280px;
 
     .sequence-title-description {
       flex: 1 1 auto;
+      // Don't let the description widen the box: zero intrinsic width, then
+      // stretch to whatever width the title sets, wrapping within it.
+      width: 0;
+      min-width: 100%;
       border-top: solid black 1px;
       // font-size: 16px;
       // font-weight: 400;
       // color: black;
       // white-space: nowrap;
       // pointer-events: none;
-      margin: 4px 0 0;
+      margin: 6px 0 0;
+      padding: 4px;
       font-size: 16px;
     }
 
@@ -738,7 +663,7 @@ $cart-cream: #f0f0e6;
   // and pan the visible crop toward the right side via object-position's x%.
   transform: scale(1.1) translate(0, 0%);
   object-position: 49% 54%;
-  filter: brightness(1.4);
+  filter: brightness(1.2);
   
   @media screen and (max-width: 600px) {
     transform: scale(1) translate(0, 0);

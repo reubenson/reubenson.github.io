@@ -4,6 +4,7 @@
     "dev": "npx @11ty/eleventy --serve",
     "arena": "node scripts/arena-sync.mjs",
     "fetch-shop":"node scripts/fetch-shop-collections.mjs",
+    "photos": "node scripts/normalize-photos.mjs",
     "lint": "eslint \"**/*.ts\"",
     "lint-fix": "eslint \"**/*.ts\" --fix",
     "upload-to-s3": "aws s3 cp ./assets s3://reubenson-portfolio/assets --recursive",
