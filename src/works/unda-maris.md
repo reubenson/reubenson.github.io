@@ -25,7 +25,7 @@ Orders will begin shipping December 7th, 2026
     class="project-grid-item-full"
 >
     <img src="/public/unda-maris/unda-maris-cover.jpg" style="padding: 2px; width: 50%;" />
-    <img src="/public/unda-maris/unda-maris-inside.jpg" style="padding: 2px; width: 50%;" />
+    <img src="/public/unda-maris/main.jpg" style="padding: 2px; width: 50%;" />
 </figure>
 
 <div class="project-grid-item-full">

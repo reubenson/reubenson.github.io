@@ -1,0 +1,32 @@
+---
+permalink: /newsletter/feed.xml
+eleventyExcludeFromCollections: true
+feed:
+  title: Reuben's Newsletter
+  subtitle: Occasional dispatches from Reuben Son
+  url: https://reubenson.com/newsletter/
+  feedUrl: https://reubenson.com/newsletter/feed.xml
+  author: Reuben Son
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ feed.url }}">
+  <title>{{ feed.title }}</title>
+  <subtitle>{{ feed.subtitle }}</subtitle>
+  <link href="{{ feed.feedUrl }}" rel="self"/>
+  <link href="{{ feed.url }}"/>
+  <updated>{{ collections.newsletter | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ feed.url }}</id>
+  <author>
+    <name>{{ feed.author }}</name>
+  </author>
+  {%- for issue in collections.newsletter | reverse %}
+  {%- set absoluteIssueUrl = issue.url | absoluteUrl(feed.url) %}
+  <entry>
+    <title>{{ issue.data.header }}</title>
+    <link href="{{ absoluteIssueUrl }}"/>
+    <updated>{{ issue.date | dateToRfc3339 }}</updated>
+    <id>{{ absoluteIssueUrl }}</id>
+    <content type="html">{{ issue.templateContent | htmlToAbsoluteUrls(absoluteIssueUrl) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

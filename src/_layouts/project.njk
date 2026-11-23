@@ -31,6 +31,9 @@ title: Project Title
     {% if cssUrl %}
       <link rel="stylesheet" href="{{ cssUrl | safe }}">
     {% endif %}
+    {% if feedUrl %}
+      <link rel="alternate" type="application/atom+xml" title="{{ feedTitle or title }}" href="{{ feedUrl }}">
+    {% endif %}
     {# <script async src="/bundle.js"></script> #}
   </head>
   <body class="project {{ layoutType }}">

@@ -3,9 +3,12 @@ layout: project.njk
 title: Reuben's Newsletter
 hideSeeMore: true
 noGrid: true
+feedUrl: /newsletter/feed.xml
 meta:
   - label: 'Subscribe'
     value: 'Hosted on Mailchimp'
+  - label: 'RSS'
+    value: "<a href='/newsletter/feed.xml'>Feed</a>"
   - label: 'Newsletter 03'
     value: "<a href='/newsletter/03'>November 23, 2026</a>"
   - label: 'Newsletter 02'

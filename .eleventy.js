@@ -156,6 +156,14 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/_styles/**/*.scss");
   });
 
+  // Newsletter issues (src/newsletter/01.md, 02.md, ...), oldest first.
+  // Excludes index.md and unsubscribe.md. Feeds off each issue's `date`.
+  eleventyConfig.addCollection("newsletter", function (collectionApi) {
+    return collectionApi
+      .getFilteredByGlob("src/newsletter/[0-9]*.md")
+      .sort((a, b) => a.date - b.date);
+  });
+
   // Projects collection sorted reverse-chronologically by year
   eleventyConfig.addCollection("projects", function (collectionApi) {
     const projects = collectionApi.getFilteredByGlob("src/works/*.md");
