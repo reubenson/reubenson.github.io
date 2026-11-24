@@ -1,15 +1,80 @@
 ---
 layout: project.njk
 title: Unda Maris
-hideSeeMore: true
 media: audio sculpture
-year: coming soon (Nov 2026)
+year: 2026
+selected: true
+tagline: Psychoacoustic audio sculpture & synthesizer
+meta:
+  - label: purchase
+    value: "<a href='https://ultramarine.metalabel.com/unda-maris'>https://ultramarine.metalabel.com/unda-maris</a>"
+relatedProjects:
+  - airs
+  - frog-chorus
 ---
 
-<!-- **Unda Maris** is a psychoacoustic audio sculpture built around polyphonic binaural beating. -->
-<!-- {.project-grid-item-full} -->
+_Unda Maris_ is a work of generative electronic music in the form of a touch-responsive audio device with standard audio outputs. The music builds on the psychoacoustic phenomenon of [**binaural beating**](<https://en.wikipedia.org/wiki/Beat_(acoustics)#Binaural_beats>), in which two slightly different pitches produce the perception of a single undulating note. Using compositional methods adapted from early European polyphony, notes are arranged algorithmically into shifting harmonies that express many beating frequencies at once, like overlapping waves in an infrasonic sea. A call to oceanic feeling and a Heraclitian poetics of sound, _Unda Maris_ explores sound as water by other means.
+{.project-grid-item-full}
 
-**Unda Maris** is a work of generative electronic music in the form of a touch-responsive audio device with standard audio outputs. The music builds on the psychoacoustic phenomenon of binaural beating [^1], in which two slightly different pitches produce the perception of a single undulating note. Using compositional methods adapted from early European polyphony, notes are arranged algorithmically into shifting harmonies that express many beating frequencies at once, like overlapping waves in an infrasonic sea. A call to oceanic feeling and a Heraclitian poetics of sound, Unda Maris explores sound as water by other means.
+The electronic device is comprised of two printed circuit boards powered by USB-C. It is packaged inside a standard cassette case, a nod to the eternal return of physical media. And like cassette tapes, which provide affordances for both recording and playback, connecting a MIDI source to _Unda Maris_ switches off the self-playing composition and allows the underlying binaural synthesizer to be played as a standalone instrument.
+\
+\
+First edition of twenty-five numbered copies. Composed, designed, developed, and produced by Reuben Son in Brooklyn, NY. Circuit boards printed at JLCPCB, jacket printed with pen-plotter on handmade paper from Hook Pottery Paper.
+{.project-grid-item-3}
+
+<figure
+    class="project-grid-item-3"
+>
+    <img src="/public/unda-maris/main.jpg" style="margin-top: 0px; padding: 2px" />
+</figure>
+
+_Audio excerpt_: **[https://soundcloud.com/reubenson/unda-maris](https://soundcloud.com/reubenson/unda-maris)**
+{.project-grid-item-full}
+
+**COMPOSITION**
+{.project-grid-item-full}
+
+_Unda Maris_ ([**wave of the sea**](https://en.wikipedia.org/wiki/Voix_c%C3%A9leste)) takes its name from a pipe organ stop popularized by church organs of the 1600s, in which a pair of pipes, tuned slightly apart, produce an undulating shimmer.
+{.project-grid-item-full}
+
+The composition is based on an unknown fragment of music I heard a church organist rehearsing during a trip to the Loire Valley in 2022. Movement through the tonal space of this fragment is adapted from medieval four-part organum, which allows for each voice to independently ebb and flow through harmonic permutations. Within this polyphony, each pitch produces a different binaural beat (lower pitches are slower, higher pitches are faster). As the harmonies evolve, so do the beating frequencies. The harmonic range and density of the music is controlled through the touch-responsive surface of the device.
+{.project-grid-item-full}
+
+When listening on headphones, these undulations are produced in neither the air nor the ears. Instead they originate from a specialized region of the brainstem responsible for the [**spatial perception of sound**](https://en.wikipedia.org/wiki/Binaural_fusion). What you hear, then, is not properly a sound, but a psychoacoustic phenomenon of hearing. You are hearing yourself hearing. This could be considered the primary perceptual object of the work, in which harmony is staged as the means, and not the end, to the production of post-cochlear polyrhythms.
+{.project-grid-item-full}
+
+Beyond auditory hallucinations, there are also affective and paranormal valences to the binaural infrasound produced by this work. Most binaural music today is marketed as a wellness tool, and has an older history as a means of inducing [**out of body experiences**](https://en.wikisource.org/wiki/Analysis_and_Assessment_of_Gateway_Process). While _Unda Maris_ makes claims to neither of these categories of experience, the listener may find themselves in unexpected states within the folds of consciousness between waking and dreaming.
+{.project-grid-item-full}
+
+**TOUCH INTERFACE**
+{.project-grid-item-full}
+
+The capacitive touch interface uses an unconventional approach in dividing the ground plane into four distinct but interlocking electrodes. While the interface appears to be constructed from a single contiguous line, the copper fill is separated into four sensors by [**rhythmical lines**](https://miguelabreugallery.com/artists/estate-waclaw-szpakowski/) adapted from a system of drawings by the early twentieth century architect Wacław Szpakowski. This design provides an affordance of physical computation where the touch of a fingertip activates multiple electrodes at once in different proportions, allowing position to be tracked continuously along the length of the device.
+{.project-grid-item-full}
+
+At once ornamental and functional, the surface echoes various non-dualist orientations within this work: the interpenetrations of consonance and dissonance, music and instrument, interior and exterior, foreground and background, object and the immaterial, self and environment.
+{.project-grid-item-full}
+
+**TECHNICAL SPECIFICATIONS**
+{.project-grid-item-full}
+
+A PDF manual and future firmware updates will be available online, but do note that _Unda Maris_ is not a work of professional electrical or audio engineering. You may also flash your own firmware to the [**Daisy Seed 3**](https://daisy.audio/) chip that this work incorporates.
+{.project-grid-item-full}
+
+♩ Twelve-voice polyphonic synthesizer architecture
+\
+♩ Binaural sine-wave voicing
+\
+♩ Gold-plated capacitive touch interface
+\
+♩ 3.5mm line and headphone outputs
+\
+♩ 3.5mm MIDI input and output
+\
+♩ USB-C power input
+{.project-grid-item-full}
+
+<!-- **Unda Maris** is a work of generative electronic music in the form of a touch-responsive audio device with standard audio outputs. The music builds on the psychoacoustic phenomenon of binaural beating [^1], in which two slightly different pitches produce the perception of a single undulating note. Using compositional methods adapted from early European polyphony, notes are arranged algorithmically into shifting harmonies that express many beating frequencies at once, like overlapping waves in an infrasonic sea. A call to oceanic feeling and a Heraclitian poetics of sound, Unda Maris explores sound as water by other means.
 \
 \
 The electronic device is comprised of two printed circuit boards powered by USB-C. It is packaged inside a standard cassette case, a nod to the eternal return of physical media. And like cassette tapes, which provide affordances for both recording and playback, connecting a MIDI source to Unda Maris switches off the self-playing composition and allows the underlying binaural synthesizer to be played as a standalone instrument.
@@ -66,24 +131,21 @@ A PDF manual and future firmware updates will be available online, but do note t
 - 3.5mm MIDI input and output
 - USB-C power input
 - Built using the Daisy Seed platform (32 bit, 192 kHz processing)
-  </ul>
+  </ul> -->
 
-    <!-- <header>Composition</header>
-            <p>The generative composition executes a slowly meandering organum; descant voices ebb and flow over a wavering tenor, detuning as they emerge and returning to unison as they recede. Harmony is held in place only by wavering gossamer threads of intonation, and sound gathers in pools of perpetual flux.</p> -->
-    <!-- </ul> -->
-
+<!--
 [^1]: This phenomenon was first reported in the scientific literature in the early 19th century, in which sounds of slightly different frequencies presented respectively to each ear results in the auditory perception of an undulating tone of a single pitch. The beating that is heard is distinct from wave interference, a parallel, and quite similar, operation in the familiar medium of air.
 [^2]: From the 1600s onwards, European church organs commonly included a voicing comprised of detuned pipes, resulting in a shimmering and resounding vibrato. This voicing was given the name _unda maris_, or wave of the sea.
 [^3]: A musical instrument invented by Benjamin Franklin, made of spinning glass bowls, in which imperfections inevitably result in an undulating resonance comprised of two separate modes of vibration. Reported to be Franklin's favorite invention, it took on a life of its own in Europe, where it was composed for by Mozart and Beethoven, played by Marie Antoinette, and used in theatrical healing workshops by Franz Mesmer. It was soon to also carry the reputation of melancholy, nervous breakdown, and death. After over a century of neglect, the harmonica was revived by Gerhard Finkenbeier, a scientific glassmaker in Massachussetts who began producing new glass harmonicas at scale. In an odd reprisal of the harmonica's earlier reputation, he was last seen flying south from Boston in May 1999 without return, and neither his body nor his single-engine aircraft were recovered from the Atlantic.
-[^4]: First published in 1983, this body of work throughly explores the non-psychoacoustic phenomena of interference waves between sinewaves and acoustic instruments.
+[^4]: First published in 1983, this body of work throughly explores the non-psychoacoustic phenomena of interference waves between sinewaves and acoustic instruments. -->
 
 <!-- And like water itself, it has its attendant risks. The first few decades of the glass harmonica were troubled by assertions of melancholy, nervous breakdown, and death. -->
 
-[^5]: Szapkowski's _rhythmical lines_ drawings belong to a minor canon of proto-Minimalism. In his account of these drawings he traces back to the wind-blown harmonics of long fencing wire that delineated property lines of his childhood home.
+<!-- [^5]: Szapkowski's _rhythmical lines_ drawings belong to a minor canon of proto-Minimalism. In his account of these drawings he traces back to the wind-blown harmonics of long fencing wire that delineated property lines of his childhood home.
 [^6]: The tradition of _musica speculativa_ is a post-Pythagorean philosophy of music in which the music of the spheres is both a mathematical abstraction and a physical phenomenon, which together provide grounds for a speculative political economy describing social harmony.
 [^7]: The word margin first appears in English meaning "edge of a sea or lake".
 [^8]: The Gateway process is means of training to have controlled experiences of astral projection. It consists of a set of listening and breathing exercises utilized binaural beats as part of a technique of modifying patterns of brain activity. It was developed by the Monroe Institute with financial support from the CIA, and later influenced the development of the I-Doser software that produced the genre of affective media known as Audio Drugs in the 2010s.
-[^10]: The medial superior olive takes nerve impulses from each of the ears and compares them to determine which ear the sound arrived at earlier (and therefore is closer).
+[^10]: The medial superior olive takes nerve impulses from each of the ears and compares them to determine which ear the sound arrived at earlier (and therefore is closer). -->
 
 <!-- Unda Maris is a psychoacoustic audio device. It is designed for the polyphonic expression of the phenomenon known as binaural beating, and can be listened to as a self-generating composition or played with an external MIDI keyboard as an instrument. -->
 
@@ -215,3 +277,9 @@ The superposition of beating frequencies is produced exclusively in the brainste
 <!-- {.project-grid-item-full} -->
 
 <!-- A still body of water has the feeling of stagnancy, you throw in a rock to deny your death. If just intonation is a placid lake, the condition of living music is like the sea, waves of constant doing and undoing, tuning and detuning. -->
+
+<!-- **Unda Maris** is a psychoacoustic audio sculpture built around polyphonic binaural beating. -->
+<!-- {.project-grid-item-full} -->
+
+<!-- <header>Composition</header>
+            <p>The generative composition executes a slowly meandering organum; descant voices ebb and flow over a wavering tenor, detuning as they emerge and returning to unison as they recede. Harmony is held in place only by wavering gossamer threads of intonation, and sound gathers in pools of perpetual flux.</p> -->

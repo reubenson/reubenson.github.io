@@ -3,18 +3,16 @@ layout: project.njk
 title: Reuben's Newsletter
 hideSeeMore: true
 noGrid: true
-feedUrl: /newsletter/feed.xml
+feedUrl: /rss
 meta:
-  - label: 'Subscribe'
-    value: 'Hosted on Mailchimp'
-  - label: 'RSS'
-    value: "<a href='/newsletter/feed.xml'>Feed</a>"
   - label: 'Newsletter 03'
     value: "<a href='/newsletter/03'>November 23, 2026</a>"
   - label: 'Newsletter 02'
     value: "<a href='/newsletter/02'>August 21, 2025</a>"
   - label: 'Newsletter 01'
     value: "<a href='/newsletter/01'>April 12, 2025</a>"
+  - label: 'RSS Feed'
+    value: "<a href='/rss'>reubenson.com/rss</a>"
 ---
 
 {% include "newsletter-signup.njk" %}

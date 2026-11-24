@@ -67,7 +67,8 @@ title: Project Title
               </span>
             </span>
           {% endif %}
-        {% elif meta %}
+        {% endif %}
+        {% if meta %}
           {% for item in meta %}
             <span class="project-meta-item">
               <span class="project-meta-label">{{ item.label | safe }}</span> 

@@ -7,7 +7,7 @@ year: 2025
 dimensions: 9" x 9" x 14"
 id: udu
 tagline: Egg-shaped udu instrument made with the moon jar technique
-selected: true
+selected: false
 categories: []
 relatedProjects:
   - echea

@@ -910,6 +910,7 @@ nav.main-nav .active {
   opacity: 1;
   padding-right: 10px;
   align-self: start;
+  text-transform: uppercase;
 }
 .project .project-meta-value {
   border-left: solid grey 1px;
